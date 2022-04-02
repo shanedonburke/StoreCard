@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -19,12 +20,13 @@ namespace StoreCard
             {
                 _searchText = value;
                 OnPropertyChanged("SearchText");
+                OnPropertyChanged("FilteredItems");
             }
         }
 
         public IEnumerable<SavedItem> FilteredItems
         {
-            get => _savedItems;
+            get => _savedItems.Where(item => item.Name.ToUpper().StartsWith(_searchText.ToUpper()));
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -56,6 +58,10 @@ namespace StoreCard
         void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
+            if (ItemListBox != null && ItemListBox.Items.Count > 0)
+            {
+                ItemListBox.SelectedIndex = 0;
+            }
         }
 
         private void AddApplication_Click(object sender, RoutedEventArgs e)
