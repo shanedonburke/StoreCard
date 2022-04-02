@@ -46,6 +46,17 @@ namespace StoreCard
                 ItemListBox.SelectedIndex = 0;
             }
 
+            Activate();
+            SearchBox.Focus();
+
+            if (Application.Current.Windows
+                .Cast<Window>()
+                .Where(w => w is TaskbarIconWindow)
+                .Count() == 0)
+            {
+                new TaskbarIconWindow().Show();
+            }
+
             DataContext = this;
         }
 
@@ -139,8 +150,18 @@ namespace StoreCard
         {
             if (e.Key == Key.Escape)
             {
-                Close();
+                Deactivate();
             }
+        }
+
+        private void Window_Deactivated(object sender, EventArgs e)
+        {
+            Deactivate();
+        }
+
+        private void Deactivate()
+        {
+            Close();
         }
     }
 }
