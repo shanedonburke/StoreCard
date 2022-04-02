@@ -364,7 +364,7 @@
                             </Grid.ColumnDefinitions>
                             <Image Margin="5,5,10,5"
                                    Grid.Column="0"
-                                   Source="{Binding Icon}"
+                                   Source="{Binding BitmapIcon}"
                                    Width="24"
                                    Height="24" />
                             <TextBlock Margin="3"

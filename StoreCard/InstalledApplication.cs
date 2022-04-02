@@ -10,12 +10,12 @@ namespace StoreCard
         {
             Name = name;
             AppUserModelId = appUserModelId;
-            Icon = icon;
+            BitmapIcon = icon;
         }
 
         public string Name { get; private set; }
         public string AppUserModelId { get; private set; }
-        public BitmapSource Icon { get; private set; }
+        public BitmapSource BitmapIcon { get; private set; }
 
         public int CompareTo(InstalledApplication? other)
         {

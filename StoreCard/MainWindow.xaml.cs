@@ -66,5 +66,15 @@ namespace StoreCard
         {
 
         }
+
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            (ItemListBox.SelectedItem as SavedItem)?.Open();
+        }
+
+        private void SearchBox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+
+        }
     }
 }

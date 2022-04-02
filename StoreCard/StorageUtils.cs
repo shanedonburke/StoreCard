@@ -15,6 +15,7 @@ namespace StoreCard
             var json = System.IO.File.ReadAllText(filePath);
             if (json != null)
             {
+                // TODO: try-catch
                 List<SavedItem>? savedItems = JsonConvert.DeserializeObject<List<SavedItem>>(json, new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.All

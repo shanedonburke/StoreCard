@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,14 +25,15 @@ namespace StoreCard
 
         public SavedApplication(InstalledApplication installedApplication) : base(
             installedApplication.Name,
-            ImageUtils.ImageToBase64(installedApplication.Icon))
+            ImageUtils.ImageToBase64(installedApplication.BitmapIcon))
         {
             AppUserModelId = installedApplication.AppUserModelId;
         }
 
         public override void Open()
         {
-            throw new NotImplementedException();
+            // From https://stackoverflow.com/a/57195200
+            Process.Start("explorer.exe", @" shell:appsFolder\" + AppUserModelId);
         }
     }
 }
