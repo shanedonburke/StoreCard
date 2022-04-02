@@ -20,6 +20,7 @@
         Width="500"
         Background="Transparent">
     <Window.Resources>
+        <local:ShowMainWindowCommand x:Key="ShowMainWindowCommand" />
         <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
             <StackPanel Margin="0,0,0,0"
                         Background="White" />
@@ -64,6 +65,10 @@
             </MenuItem>
         </ContextMenu>
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{StaticResource ShowMainWindowCommand}"
+                    Gesture="CTRL+R" />
+    </Window.InputBindings>
     <Border CornerRadius="5"
             Padding="10"
             Background="#FF222222">

@@ -15,6 +15,10 @@
     <Window.Resources>
         <local:ShowMainWindowCommand x:Key="ShowMainWindowCommand" />
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{StaticResource ShowMainWindowCommand}"
+                    Gesture="CTRL+R" />
+    </Window.InputBindings>
     <tb:TaskbarIcon x:Name="TaskbarIcon"
                     Visibility="Visible"
                     ToolTipText="Fallback ToolTip for Windows xp"

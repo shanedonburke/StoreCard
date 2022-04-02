@@ -161,7 +161,14 @@ namespace StoreCard
 
         private void Deactivate()
         {
-            Close();
+            try
+            {
+                Close();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
         }
     }
 }
