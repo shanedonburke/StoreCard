@@ -158,7 +158,7 @@
                      Grid.Row="1"
                      ItemsSource="{Binding FilteredItems}"
                      Grid.ColumnSpan="2"
-                     KeyboardNavigation.TabNavigation="Once"
+                     IsTabStop="False"
                      Background="#002A2A2A"
                      BorderBrush="#00000000"
                      Foreground="White"
@@ -172,6 +172,8 @@
                                 Value="Stretch" />
                         <Setter Property="SnapsToDevicePixels"
                                 Value="True" />
+                        <Setter Property="IsTabStop"
+                                Value="False" />
                         <!-- Override mouse-over/selection style (from https://stackoverflow.com/a/66207005) -->
                         <Setter Property="Template">
                             <Setter.Value>
