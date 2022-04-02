@@ -161,9 +161,7 @@ namespace StoreCard
 
         private void Deactivate()
         {
-            //Close();
-            SearchText = "";
-            WindowState = WindowState.Minimized;
+            Close();
         }
     }
 }
