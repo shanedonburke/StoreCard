@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 
 namespace StoreCard
 {
@@ -38,6 +39,11 @@ namespace StoreCard
 
             _savedItems = StorageUtils.ReadItemsFromFile();
 
+            if (_savedItems.Count > 0)
+            {
+                ItemListBox.SelectedIndex = 0;
+            }
+
             DataContext = this;
         }
 
@@ -69,12 +75,58 @@ namespace StoreCard
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
-            (ItemListBox.SelectedItem as SavedItem)?.Open();
+            OpenSelectedItem();
         }
 
         private void SearchBox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            switch (e.Key)
+            {
+                case Key.Up:
+                    if (ItemListBox.Items.Count == 0) return;
+                    switch (ItemListBox.SelectedIndex)
+                    {
+                        case 0:
+                        case -1:
+                            ItemListBox.SelectedIndex = ItemListBox.Items.Count - 1;
+                            break;
+                        default:
+                            ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex - 1) % ItemListBox.Items.Count;
+                            break;
+                    }
+                    ItemListBox.ScrollIntoView(ItemListBox.SelectedItem);
+                    break;
+                case Key.Down:
+                    if (ItemListBox.Items.Count == 0) return;
+                    if (ItemListBox.SelectedIndex == -1)
+                    {
+                        ItemListBox.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex + 1) % ItemListBox.Items.Count;
+                    }
+                    ItemListBox.ScrollIntoView(ItemListBox.SelectedItem);
+                    break;
+                case Key.Enter:
+                    OpenSelectedItem();
+                    e.Handled = true;
+                    break;
+            }
+        }
 
+        private void OpenSelectedItem()
+        {
+            (ItemListBox.SelectedItem as SavedItem)?.Open();
+        }
+
+        private void ItemListBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                OpenSelectedItem();
+                e.Handled = true;
+            }
         }
     }
 }

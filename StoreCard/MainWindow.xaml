@@ -5,6 +5,7 @@
         xmlns:local="clr-namespace:StoreCard"
         xmlns:Collections="clr-namespace:System.Collections;assembly=System.Runtime"
         x:Class="StoreCard.MainWindow"
+        FocusManager.FocusedElement="{Binding ElementName=SearchBox}"
         mc:Ignorable="d"
         Title="StoreCard"
         Height="450"
@@ -140,6 +141,7 @@
         </Grid>
         <ListBox Margin="10,10,10,10"
                  Name="ItemListBox"
+                 PreviewKeyDown="ItemListBox_PreviewKeyDown"
                  Grid.Row="1"
                  ItemsSource="{Binding FilteredItems}"
                  Grid.ColumnSpan="2"
