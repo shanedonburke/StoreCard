@@ -134,5 +134,10 @@ namespace StoreCard
                 e.Handled = true;
             }
         }
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            Close();
+        }
     }
 }

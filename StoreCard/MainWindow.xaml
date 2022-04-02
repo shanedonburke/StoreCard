@@ -6,6 +6,7 @@
         xmlns:Collections="clr-namespace:System.Collections;assembly=System.Runtime"
         x:Class="StoreCard.MainWindow"
         FocusManager.FocusedElement="{Binding ElementName=SearchBox}"
+        PreviewKeyDown="Window_PreviewKeyDown"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="StoreCard"
