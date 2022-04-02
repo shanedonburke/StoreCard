@@ -182,6 +182,7 @@
                                             Padding="{TemplateBinding Control.Padding}"
                                             BorderBrush="{TemplateBinding Border.BorderBrush}"
                                             Background="{TemplateBinding Panel.Background}"
+                                            CornerRadius="5"
                                             Name="Bd"
                                             SnapsToDevicePixels="True">
                                         <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
@@ -275,32 +276,17 @@
                                        FontSize="12"
                                        VerticalAlignment="Center" />
                             <!-- "Open" button -->
-                            <Button Grid.Column="2"
-                                    Click="OpenButton_Click"
-                                    IsTabStop="False"
+                            <Border Grid.Column="2"
                                     HorizontalAlignment="Right"
+                                    CornerRadius="5"
                                     Margin="5,0,5,0"
-                                    BorderThickness="0,0,0,0"
-                                    Foreground="White"
                                     Width="60"
                                     Height="26">
-                                <Button.Style>
+                                <Border.Style>
                                     <!-- Must use template here for button background to be overridden -->
-                                    <Style TargetType="{x:Type Button}">
-                                        <Setter Property="Content"
-                                                Value="Open" />
+                                    <Style TargetType="{x:Type Border}">
                                         <Setter Property="Background"
                                                 Value="#FF2DA65F" />
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Border Background="{TemplateBinding Background}">
-                                                        <ContentPresenter HorizontalAlignment="Center"
-                                                                          VerticalAlignment="Center" />
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
                                         <Setter Property="Visibility"
                                                 Value="Hidden" />
                                         <Style.Triggers>
@@ -310,11 +296,11 @@
                                                 <Setter Property="Background"
                                                         Value="#FF268C51" />
                                             </Trigger>
-                                            <Trigger Property="IsPressed"
-                                                     Value="True">
+                                            <DataTrigger Binding="{Binding ElementName=OpenButton, Path=IsPressed}"
+                                                         Value="True">
                                                 <Setter Property="Background"
                                                         Value="#FF228049" />
-                                            </Trigger>
+                                            </DataTrigger>
                                             <!-- Only show when the list item is selected -->
                                             <DataTrigger Value="True"
                                                          Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}">
@@ -323,8 +309,38 @@
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
-                                </Button.Style>
-                            </Button>
+                                </Border.Style>
+                                <Button Click="OpenButton_Click"
+                                        Name="OpenButton"
+                                        IsTabStop="False"
+                                        BorderThickness="0,0,0,0"
+                                        Content="Open"
+                                        Foreground="White">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background"
+                                                    Value="Transparent" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Center"
+                                                                              VerticalAlignment="Center" />
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver"
+                                                         Value="True">
+                                                    <Setter Property="Background"
+                                                            Value="Transparent" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </Border>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
