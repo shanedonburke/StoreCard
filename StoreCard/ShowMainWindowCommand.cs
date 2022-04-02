@@ -22,11 +22,16 @@ namespace StoreCard
                 .FirstOrDefault() as MainWindow;
             if (mainWindow != null)
             {
-                mainWindow.Close();
+                //mainWindow.Close();
+                mainWindow.WindowState = WindowState.Normal;
+                mainWindow.Activate();
             }
-            var newWindow = new MainWindow();
-            newWindow.Show();
-            newWindow.Activate();
+            else
+            {
+                var newWindow = new MainWindow();
+                newWindow.Show();
+                newWindow.Activate();
+            }
         }
     }
 }
