@@ -137,7 +137,10 @@ namespace StoreCard
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            Close();
+            if (e.Key == Key.Escape)
+            {
+                Close();
+            }
         }
     }
 }
