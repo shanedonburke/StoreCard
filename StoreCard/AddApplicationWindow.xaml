@@ -271,6 +271,8 @@
                                 Value="Stretch" />
                         <Setter Property="SnapsToDevicePixels"
                                 Value="True" />
+                        <Setter Property="IsTabStop"
+                                Value="False" />
                         <!-- Override mouse-over/selection style (from https://stackoverflow.com/a/66207005) -->
                         <Setter Property="Template">
                             <Setter.Value>
