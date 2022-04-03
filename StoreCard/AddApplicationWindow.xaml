@@ -243,7 +243,6 @@
                     VerticalAlignment="Stretch"
                     Background="#FF444444">
                 <TextBox Name="SearchBox"
-                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                          PreviewKeyDown="SearchBox_PreviewKeyDown"
                          FontFamily="Segoe UI"
                          FontSize="14"
@@ -252,9 +251,33 @@
                          TextWrapping="NoWrap"
                          Background="#FF444444"
                          SelectionBrush="#65FFFFFF"
-                         Foreground="White"
                          BorderBrush="#00000000"
-                         BorderThickness="0,0,0,0" />
+                         BorderThickness="0,0,0,0">
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="Text"
+                                    Value="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                            <Setter Property="Foreground"
+                                    Value="White" />
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding ElementName=SearchBox, Path=IsFocused}"
+                                                   Value="False" />
+                                        <Condition Binding="{Binding SearchText}"
+                                                   Value="" />
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.Setters>
+                                        <Setter Property="Text"
+                                                Value="Search..." />
+                                        <Setter Property="Foreground"
+                                                Value="#FFAAAAAA" />
+                                    </MultiDataTrigger.Setters>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
             </Border>
             <!-- Application list -->
             <ListBox Margin="10,10,10,10"
