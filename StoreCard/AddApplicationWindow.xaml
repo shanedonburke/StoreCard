@@ -532,6 +532,8 @@
                 </Border>
                 <!-- "Browse" button -->
                 <Button Grid.Column="1"
+                        Name="BrowseButton"
+                        Click="BrowseButton_Click"
                         Content="Browse"
                         Width="80"
                         BorderBrush="#00000000"

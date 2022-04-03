@@ -1,8 +1,10 @@
-﻿using Microsoft.WindowsAPICodePack.Shell;
+﻿using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Shell;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -145,6 +147,19 @@ namespace StoreCard
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             AddSelectedApplication();
+        }
+
+        private void BrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Executables|*.exe|All Files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.ExpandEnvironmentVariables("%ProgramW6432%");
+            openFileDialog.Title = "Select Executable";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ExecutablePath = openFileDialog.FileName;
+            }
         }
 
         private void ApplicationListBox_PreviewKeyDown(object sender, KeyEventArgs e)
