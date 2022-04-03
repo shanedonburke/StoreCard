@@ -334,7 +334,7 @@
                                             <Trigger Property="IsMouseOver"
                                                      Value="True">
                                                 <Setter Property="Background"
-                                                        Value="#FF3BD97D" />
+                                                        Value="#FF37CC75" />
                                             </Trigger>
                                             <DataTrigger Binding="{Binding ElementName=OpenButton, Path=IsPressed}"
                                                          Value="True">

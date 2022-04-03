@@ -35,6 +35,16 @@ namespace StoreCard
             }
         }
 
+        public string ExecutablePath
+        {
+            get => _executablePath;
+            set
+            {
+                _executablePath = value;
+                OnPropertyChanged("ExecutablePath");
+            }
+        }
+
         public IEnumerable<InstalledApplication> FilteredApps
         {
             get => InstalledApps.Where(app => app.Name.ToUpper().StartsWith(_searchText.ToUpper()));
@@ -43,6 +53,8 @@ namespace StoreCard
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private string _searchText = "";
+
+        private string _executablePath = "";
 
         public AddApplicationWindow()
         {

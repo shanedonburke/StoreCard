@@ -236,7 +236,6 @@
             </Grid.RowDefinitions>
             <!-- Application search bar -->
             <Border CornerRadius="5"
-                    Grid.Column="1"
                     HorizontalAlignment="Stretch"
                     Padding="5,0,5,0"
                     Margin="10,10,10,0"
@@ -422,7 +421,7 @@
                                             <Trigger Property="IsMouseOver"
                                                      Value="True">
                                                 <Setter Property="Background"
-                                                        Value="#FF3BD97D" />
+                                                        Value="#FF37CC75" />
                                             </Trigger>
                                             <DataTrigger Binding="{Binding ElementName=AddButton, Path=IsPressed}"
                                                          Value="True">
@@ -473,6 +472,106 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+        </Grid>
+        <!-- "Other executable" content -->
+        <Grid Grid.Row="1"
+              VerticalAlignment="Top"
+              Visibility="{Binding IsChecked, ElementName=OtherExecutableRadioButton, Converter={StaticResource ControlVisibility}}">
+            <Grid Margin="15,10,15,10"
+                  VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0"
+                        CornerRadius="5"
+                        HorizontalAlignment="Stretch"
+                        Padding="5,0,5,0"
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Stretch"
+                        Background="#FF444444">
+                    <TextBox Name="ExecutablePathBox"
+                             FontFamily="Segoe UI"
+                             FontSize="14"
+                             MaxLines="1"
+                             VerticalContentAlignment="Stretch"
+                             HorizontalAlignment="Stretch"
+                             TextWrapping="NoWrap"
+                             Background="#FF444444"
+                             SelectionBrush="#65FFFFFF"
+                             BorderBrush="#00000000"
+                             BorderThickness="0,0,0,0">
+                        <TextBox.Style>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Text"
+                                        Value="{Binding ExecutablePath, UpdateSourceTrigger=PropertyChanged}" />
+                                <Setter Property="Foreground"
+                                        Value="White" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding ElementName=ExecutablePathBox, Path=IsFocused}"
+                                                       Value="False" />
+                                            <Condition Binding="{Binding ExecutablePath}"
+                                                       Value="" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter Property="Text"
+                                                    Value="Enter path to executable..." />
+                                            <Setter Property="Foreground"
+                                                    Value="#FFAAAAAA" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </Border>
+                <Button Grid.Column="1"
+                        Content="Browse"
+                        Width="80"
+                        BorderBrush="#00000000"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Foreground="White"
+                        FontSize="14"
+                        VerticalContentAlignment="Center"
+                        FontFamily="Arial"
+                        BorderThickness="0,0,0,0">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background"
+                                    Value="#FF2DA65F" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}"
+                                                CornerRadius="5">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            Value="#FF37CC75" />
+                                </Trigger>
+                                <Trigger Property="IsPressed"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            Value="#FF34BF6E" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
