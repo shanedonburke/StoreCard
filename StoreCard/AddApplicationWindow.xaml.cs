@@ -156,5 +156,10 @@ namespace StoreCard
                 Close();
             }
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            new ShowMainWindowCommand().Execute(null);
+        }
     }
 }

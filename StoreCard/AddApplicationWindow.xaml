@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:StoreCard"
         mc:Ignorable="d"
         Title="Add Application"
+        Closed="Window_Closed"
         WindowStartupLocation="CenterScreen"
         Height="600"
         Width="800"
