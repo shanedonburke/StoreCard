@@ -43,7 +43,32 @@ namespace StoreCard
             set
             {
                 _executablePath = value;
+                DoesExecutableExist = File.Exists(value);
+                if (DoesExecutableExist)
+                {
+                    ExecutableName = value.Split(@"\").Last();
+                }
                 OnPropertyChanged("ExecutablePath");
+            }
+        }
+
+        public string ExecutableName
+        {
+            get => _executableName;
+            set
+            {
+                _executableName = value;
+                OnPropertyChanged("ExecutableName");
+            }
+        }
+
+        public bool DoesExecutableExist
+        {
+            get => _doesExecutableExist;
+            set
+            {
+                _doesExecutableExist = value;
+                OnPropertyChanged("DoesExecutableExist");
             }
         }
 
@@ -57,6 +82,10 @@ namespace StoreCard
         private string _searchText = "";
 
         private string _executablePath = "";
+
+        private string _executableName = "";
+
+        private bool _doesExecutableExist = false;
 
         public AddApplicationWindow()
         {
