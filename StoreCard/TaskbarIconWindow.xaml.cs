@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -34,12 +35,14 @@ namespace StoreCard
             [In] IntPtr hWnd,
             [In] int id);
 
-        private HwndSource _source;
+        private HwndSource? _source;
         private const int HOTKEY_ID = 9000;
 
         public TaskbarIconWindow()
         {
             InitializeComponent();
+
+            TaskbarIcon.Icon = new Icon(@"Icons\StoreCard.ico");
 
             DataContext = this;
         }
@@ -55,7 +58,7 @@ namespace StoreCard
 
         protected override void OnClosed(EventArgs e)
         {
-            _source.RemoveHook(HwndHook);
+            _source?.RemoveHook(HwndHook);
             _source = null;
             UnregisterHotKey();
             base.OnClosed(e);
@@ -106,6 +109,16 @@ namespace StoreCard
         private void OnHotKeyPressed()
         {
             new ShowMainWindowCommand().Execute(null);
+        }
+
+        private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            new ShowMainWindowCommand().Execute(null);
+        }
+
+        private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

@@ -20,10 +20,7 @@ namespace StoreCard
                 .Cast<Window>()
                 .Where(w => w is MainWindow)
                 .FirstOrDefault() as MainWindow;
-            if (mainWindow != null)
-            {
-                mainWindow.Close();
-            }
+            mainWindow?.Close();
             var newWindow = new MainWindow();
             newWindow.Show();
             newWindow.Activate();

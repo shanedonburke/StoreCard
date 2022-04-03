@@ -52,6 +52,15 @@ namespace StoreCard
             InstalledApps.Sort();
             ApplicationListBox.SelectedIndex = 0;
 
+
+            MainWindow? mainWindow = Application.Current.Windows
+                .Cast<Window>()
+                .Where(w => w is MainWindow)
+                .FirstOrDefault() as MainWindow;
+            mainWindow?.Close();
+
+            Activate();
+
             this.DataContext = this;
         }
 

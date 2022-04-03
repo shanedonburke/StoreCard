@@ -14,15 +14,41 @@
         Title="TaskbarIconWindow">
     <Window.Resources>
         <local:ShowMainWindowCommand x:Key="ShowMainWindowCommand" />
+        <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
+            <StackPanel Margin="0,0,0,0"
+                        Background="White" />
+        </ItemsPanelTemplate>
     </Window.Resources>
-    <Window.InputBindings>
-        <KeyBinding Command="{StaticResource ShowMainWindowCommand}"
-                    Gesture="CTRL+R" />
-    </Window.InputBindings>
     <tb:TaskbarIcon x:Name="TaskbarIcon"
                     Visibility="Visible"
-                    ToolTipText="Fallback ToolTip for Windows xp"
-                    MenuActivation="LeftOrRightClick"
+                    ToolTipText="StoreCard"
+                    MenuActivation="RightClick"
                     LeftClickCommand="{StaticResource ShowMainWindowCommand}"
-                    PopupActivation="DoubleClick" />
+                    PopupActivation="DoubleClick">
+        <tb:TaskbarIcon.ContextMenu>
+            <ContextMenu>
+                <ContextMenu.Style>
+                    <Style TargetType="{x:Type ContextMenu}">
+                        <Setter Property="ItemsPanel"
+                                Value="{StaticResource MenuItemPanelTemplate}" />
+                    </Style>
+                </ContextMenu.Style>
+                <MenuItem x:Name="OpenMenuItem"
+                          Click="OpenMenuItem_Click"
+                          InputGestureText="Win+Shift+X">
+                    <MenuItem.Header>
+                        <TextBlock Text="Open"
+                                   Margin="-20,0,0,0" />
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem x:Name="ExitMenuItem"
+                          Click="ExitMenuItem_Click">
+                    <MenuItem.Header>
+                        <TextBlock Text="Exit"
+                                   Margin="-20,0,0,0" />
+                    </MenuItem.Header>
+                </MenuItem>
+            </ContextMenu>
+        </tb:TaskbarIcon.ContextMenu>
+    </tb:TaskbarIcon>
 </Window>

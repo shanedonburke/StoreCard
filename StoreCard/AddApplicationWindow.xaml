@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StoreCard"
         mc:Ignorable="d"
-        Title="AddApplicationWindow"
+        Title="Add Application"
+        WindowStartupLocation="CenterScreen"
         Height="450"
         Width="800"
         Background="#FF222222">
