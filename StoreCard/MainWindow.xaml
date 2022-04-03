@@ -105,7 +105,8 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}">
+                                        <Border Background="{TemplateBinding Background}"
+                                                CornerRadius="5">
                                             <ContentPresenter HorizontalAlignment="Center"
                                                               VerticalAlignment="Center" />
                                         </Border>
@@ -117,6 +118,11 @@
                                          Value="True">
                                     <Setter Property="Background"
                                             Value="#FF444444" />
+                                </Trigger>
+                                <Trigger Property="IsPressed"
+                                         Value="True">
+                                    <Setter Property="Background"
+                                            Value="#FF333333" />
                                 </Trigger>
                                 <EventTrigger RoutedEvent="Click">
                                     <EventTrigger.Actions>
