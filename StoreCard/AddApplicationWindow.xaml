@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Add Application"
         WindowStartupLocation="CenterScreen"
-        Height="450"
+        Height="600"
         Width="800"
         Background="#FF222222">
     <Window.Resources>
@@ -230,28 +230,31 @@
         <Grid Grid.Row="1"
               Visibility="{Binding IsChecked, ElementName=InstalledApplicationRadioButton, Converter={StaticResource ControlVisibility}}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <!-- Application search bar -->
-            <TextBox Grid.Row="0"
-                     PreviewKeyDown="SearchBox_PreviewKeyDown"
-                     Name="SearchBox"
-                     Padding="5,0,5,0"
-                     FontFamily="Segoe UI"
-                     FontSize="14"
-                     Height="30"
-                     Margin="10"
-                     MaxLines="1"
-                     VerticalContentAlignment="Center"
-                     HorizontalAlignment="Stretch"
-                     TextWrapping="NoWrap"
-                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                     VerticalAlignment="Stretch"
-                     Background="#FF444444"
-                     BorderThickness="0,0,0,0"
-                     Foreground="White"
-                     SelectionBrush="#65FFFFFF" />
+            <Border CornerRadius="5"
+                    Grid.Column="1"
+                    HorizontalAlignment="Stretch"
+                    Padding="5,0,5,0"
+                    Margin="10,10,10,0"
+                    VerticalAlignment="Stretch"
+                    Background="#FF444444">
+                <TextBox Name="SearchBox"
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                         PreviewKeyDown="SearchBox_PreviewKeyDown"
+                         FontFamily="Segoe UI"
+                         FontSize="14"
+                         MaxLines="1"
+                         VerticalContentAlignment="Stretch"
+                         TextWrapping="NoWrap"
+                         Background="#FF444444"
+                         SelectionBrush="#65FFFFFF"
+                         Foreground="White"
+                         BorderBrush="#00000000"
+                         BorderThickness="0,0,0,0" />
+            </Border>
             <!-- Application list -->
             <ListBox Grid.Row="1"
                      x:Name="ApplicationListBox"
