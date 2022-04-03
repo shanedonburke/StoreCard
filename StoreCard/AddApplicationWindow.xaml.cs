@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,7 +47,17 @@ namespace StoreCard
                 DoesExecutableExist = File.Exists(value);
                 if (DoesExecutableExist)
                 {
-                    ExecutableName = value.Split(@"\").Last();
+                    // Take file name without '.exe'
+                    ExecutableName = value.Split(@"\").Last().Split(".")[0];
+
+                    Icon? icon = System.Drawing.Icon.ExtractAssociatedIcon(value);
+                    if (icon != null)
+                    {
+                        ExecutableIcon = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
+                            icon.Handle,
+                            System.Windows.Int32Rect.Empty,
+                            System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
+                    }
                 }
                 OnPropertyChanged("ExecutablePath");
             }
@@ -72,6 +83,16 @@ namespace StoreCard
             }
         }
 
+        public ImageSource? ExecutableIcon
+        {
+            get => _executableIcon;
+            set
+            {
+                _executableIcon = value;
+                OnPropertyChanged("ExecutableIcon");
+            }
+        }
+
         public IEnumerable<InstalledApplication> FilteredApps
         {
             get => InstalledApps.Where(app => app.Name.ToUpper().StartsWith(_searchText.ToUpper()));
@@ -86,6 +107,8 @@ namespace StoreCard
         private string _executableName = "";
 
         private bool _doesExecutableExist = false;
+
+        private ImageSource? _executableIcon = null;
 
         public AddApplicationWindow()
         {
