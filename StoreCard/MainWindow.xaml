@@ -298,12 +298,12 @@
                                             <Trigger Property="IsMouseOver"
                                                      Value="True">
                                                 <Setter Property="Background"
-                                                        Value="#FF268C51" />
+                                                        Value="#FF3BD97D" />
                                             </Trigger>
                                             <DataTrigger Binding="{Binding ElementName=OpenButton, Path=IsPressed}"
                                                          Value="True">
                                                 <Setter Property="Background"
-                                                        Value="#FF228049" />
+                                                        Value="#FF34BF6E" />
                                             </DataTrigger>
                                             <!-- Only show when the list item is selected -->
                                             <DataTrigger Value="True"
