@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace StoreCard
@@ -174,6 +175,18 @@ namespace StoreCard
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             AddButtonContextMenu.IsOpen = true;
+        }
+
+        private void DeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (ItemListBox.SelectedIndex == -1)
+            {
+                return;
+            }
+            List<SavedItem> savedItems = StorageUtils.ReadItemsFromFile();
+            savedItems.RemoveAt(ItemListBox.SelectedIndex);
+            StorageUtils.SaveItemsToFile(savedItems);
+            RefreshSavedItems();
         }
     }
 }
