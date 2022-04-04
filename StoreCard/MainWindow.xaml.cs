@@ -79,6 +79,7 @@ namespace StoreCard
         private void AddApplication_Click(object sender, RoutedEventArgs e)
         {
             new AddApplicationWindow().Show();
+            Close();
         }
 
         private void AddFile_Click(object sender, RoutedEventArgs e)
