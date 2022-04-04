@@ -15,8 +15,6 @@ namespace StoreCard
     {
         public string AppUserModelId { get; private set; }
 
-        public override ImageSource BitmapIcon => ImageUtils.Base64ToImage(Base64Icon);
-
         [JsonConstructor]
         public SavedApplication(string name, string base64Icon, string appUserModelId) : base(name, base64Icon)
         {

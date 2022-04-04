@@ -13,12 +13,12 @@ namespace StoreCard
     {
         public string Name { get; protected set; }
 
-        public string Base64Icon { get; protected set; }
+        public string? Base64Icon { get; protected set; }
 
         [JsonIgnore]
-        public abstract ImageSource BitmapIcon { get; }
+        public ImageSource? BitmapIcon => Base64Icon != null ? ImageUtils.Base64ToImage(Base64Icon) : null;
 
-        protected SavedItem(string name, string base64Icon)
+        protected SavedItem(string name, string? base64Icon)
         {
             Name = name;
             Base64Icon = base64Icon;

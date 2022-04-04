@@ -673,6 +673,7 @@
                     <!-- "Save" button -->
                     <Button Grid.Row="2"
                             Name="SaveButton"
+                            Click="SaveButton_Click"
                             Content="Save"
                             Margin="50,0,0,0"
                             BorderBrush="#00000000"

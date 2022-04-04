@@ -214,6 +214,15 @@ namespace StoreCard
             }
         }
 
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            string? base64Icon = ExecutableIcon != null ? ImageUtils.ImageToBase64((BitmapSource)ExecutableIcon) : null;
+            List<SavedItem> savedItems = StorageUtils.ReadItemsFromFile();
+            savedItems.Add(new SavedExecutable(ExecutableName, base64Icon, ExecutablePath));
+            StorageUtils.SaveItemsToFile(savedItems);
+            Close();
+        }
+
         private void ApplicationListBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -231,7 +240,6 @@ namespace StoreCard
                 List<SavedItem> savedItems = StorageUtils.ReadItemsFromFile();
                 savedItems.Add(new SavedApplication(installedApplication));
                 StorageUtils.SaveItemsToFile(savedItems);
-                (Application.Current.MainWindow as MainWindow)?.RefreshSavedItems();
                 Close();
             }
         }
