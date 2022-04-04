@@ -33,6 +33,13 @@
                             Value="{StaticResource MenuItemPanelTemplate}" />
                 </Style>
             </ContextMenu.Style>
+            <MenuItem x:Name="ContextMenuOpenItem"
+                      Click="ContextMenuOpenItem_Click">
+                <MenuItem.Header>
+                    <TextBlock Text="Open"
+                               Margin="-20,0,0,0" />
+                </MenuItem.Header>
+            </MenuItem>
             <MenuItem x:Name="DeleteItem"
                       Click="DeleteItem_Click">
                 <MenuItem.Header>

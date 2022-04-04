@@ -136,6 +136,7 @@ namespace StoreCard
         private void OpenSelectedItem()
         {
             (ItemListBox.SelectedItem as SavedItem)?.Open();
+            Close();
         }
 
         private void ItemListBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -175,6 +176,11 @@ namespace StoreCard
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             AddButtonContextMenu.IsOpen = true;
+        }
+
+        private void ContextMenuOpenItem_Click(object sender, RoutedEventArgs e)
+        {
+            OpenSelectedItem();
         }
 
         private void DeleteItem_Click(object sender, RoutedEventArgs e)
