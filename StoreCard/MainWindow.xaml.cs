@@ -194,5 +194,13 @@ namespace StoreCard
             StorageUtils.SaveItemsToFile(savedItems);
             RefreshSavedItems();
         }
+
+        private void ListBoxItem_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                OpenSelectedItem();
+            }
+        }
     }
 }
