@@ -60,6 +60,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Grid.ColumnSpan="2">
@@ -207,11 +208,118 @@
                     </TextBox>
                 </Border>
             </Grid>
+            <Border Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,10,0,0"
+                    Padding="10,0,10,0">
+                <StackPanel 
+                            Orientation="Horizontal"
+                            VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch">
+                    <TextBlock Text="All"
+                               FontFamily="Segoe UI"
+                               FontSize="18"
+                               Margin="0,0,15,0"
+                               VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground"
+                                        Value="#FFAAAAAA" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ItemCategory}"
+                                                 Value="All">
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="Apps"
+                               FontFamily="Segoe UI"
+                               FontSize="18"
+                               Margin="0,0,15,0"
+                               VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground"
+                                        Value="#FFAAAAAA" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ItemCategory}"
+                                                 Value="Apps">
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="Folders"
+                               FontFamily="Segoe UI"
+                               FontSize="18"
+                               Margin="0,0,15,0"
+                               VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground"
+                                        Value="#FFAAAAAA" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ItemCategory}"
+                                                 Value="Folders">
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="Files"
+                               FontFamily="Segoe UI"
+                               FontSize="18"
+                               Margin="0,0,15,0"
+                               VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground"
+                                        Value="#FFAAAAAA" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ItemCategory}"
+                                                 Value="Files">
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Text="Links"
+                               FontFamily="Segoe UI"
+                               FontSize="18"
+                               VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground"
+                                        Value="#FFAAAAAA" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ItemCategory}"
+                                                 Value="Links">
+                                        <Setter Property="Foreground"
+                                                Value="White" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
             <!-- Saved items -->
             <ListBox Margin="10,10,10,10"
                      Name="ItemListBox"
                      PreviewKeyDown="ItemListBox_PreviewKeyDown"
-                     Grid.Row="1"
+                     Grid.Row="2"
                      ItemsSource="{Binding FilteredItems}"
                      Grid.ColumnSpan="2"
                      Background="#002A2A2A"

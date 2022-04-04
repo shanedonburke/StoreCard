@@ -14,6 +14,15 @@ namespace StoreCard
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        private static string[] ITEM_CATEGORIES = new string[]
+        {
+            "All",
+            "Apps",
+            "Folders",
+            "Files",
+            "Links"
+        };
+
         public string SearchText
         {
             get => _searchText;
@@ -30,11 +39,18 @@ namespace StoreCard
             get => _savedItems.Where(item => item.Name.ToUpper().StartsWith(_searchText.ToUpper()));
         }
 
+        public string ItemCategory
+        {
+            get => ITEM_CATEGORIES[_itemCategoryIndex];
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private string _searchText = "";
 
         private List<SavedItem> _savedItems = new List<SavedItem>();
+
+        private int _itemCategoryIndex = 0;
 
         public MainWindow()
         {
