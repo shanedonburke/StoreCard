@@ -170,5 +170,10 @@ namespace StoreCard
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddButtonContextMenu.IsOpen = true;
+        }
     }
 }

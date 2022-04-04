@@ -25,42 +25,17 @@
             <StackPanel Margin="0,0,0,0"
                         Background="White" />
         </ItemsPanelTemplate>
-        <!-- "+" button context menu -->
-        <ContextMenu x:Key="AddItemMenuKey">
+        <!-- Item context menu -->
+        <ContextMenu x:Key="ItemMenuKey">
             <ContextMenu.Style>
                 <Style TargetType="{x:Type ContextMenu}">
                     <Setter Property="ItemsPanel"
                             Value="{StaticResource MenuItemPanelTemplate}" />
                 </Style>
             </ContextMenu.Style>
-            <!--<Separator>
-                <Separator.Template>
-                    <ControlTemplate TargetType="Separator">
-                        <StackPanel>
-                            <TextBlock Text="Test!!!" />
-                            <Separator/>
-                        </StackPanel>
-                    </ControlTemplate>
-                </Separator.Template>
-            </Separator>-->
-            <MenuItem x:Name="AddApplication"
-                      Click="AddApplication_Click">
+            <MenuItem x:Name="DeleteItem">
                 <MenuItem.Header>
-                    <TextBlock Text="Add Application"
-                               Margin="-20,0,0,0" />
-                </MenuItem.Header>
-            </MenuItem>
-            <MenuItem Name="AddFile"
-                      Click="AddFile_Click">
-                <MenuItem.Header>
-                    <TextBlock Text="Add File"
-                               Margin="-20,0,0,0" />
-                </MenuItem.Header>
-            </MenuItem>
-            <MenuItem x:Name="AddLink"
-                      Click="AddLink_Click">
-                <MenuItem.Header>
-                    <TextBlock Text="Add Link"
+                    <TextBlock Text="Delete"
                                Margin="-20,0,0,0" />
                 </MenuItem.Header>
             </MenuItem>
@@ -89,6 +64,8 @@
                 </Grid.ColumnDefinitions>
                 <!-- "+" button -->
                 <Button Content="+"
+                        Name="AddButton"
+                        Click="AddButton_Click"
                         BorderBrush="#00000000"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
@@ -101,8 +78,6 @@
                         BorderThickness="0,0,0,0">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
-                            <Setter Property="ContextMenu"
-                                    Value="{StaticResource AddItemMenuKey}" />
                             <Setter Property="Background"
                                     Value="Transparent" />
                             <Setter Property="Template">
@@ -127,22 +102,56 @@
                                     <Setter Property="Background"
                                             Value="#FF333333" />
                                 </Trigger>
-                                <!-- Open context menu on click -->
-                                <EventTrigger RoutedEvent="Click">
-                                    <EventTrigger.Actions>
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="ContextMenu.IsOpen">
-                                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0"
-                                                                             Value="True" />
-                                                </BooleanAnimationUsingKeyFrames>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger.Actions>
-                                </EventTrigger>
+                                <DataTrigger Binding="{Binding ElementName=AddButtonContextMenu, Path=IsOpen}"
+                                             Value="True">
+                                    <Setter Property="Background"
+                                            Value="Transparent" />
+                                </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
+                    <!-- "+" button context menu -->
+                    <Button.ContextMenu>
+                        <ContextMenu Name="AddButtonContextMenu">
+                            <ContextMenu.Style>
+                                <Style TargetType="{x:Type ContextMenu}">
+                                    <Setter Property="ItemsPanel"
+                                            Value="{StaticResource MenuItemPanelTemplate}" />
+                                </Style>
+                            </ContextMenu.Style>
+                            <!--<Separator>
+                            <Separator.Template>
+                                <ControlTemplate TargetType="Separator">
+                                    <StackPanel>
+                                        <TextBlock Text="Test!!!" />
+                                        <Separator/>
+                                    </StackPanel>
+                                </ControlTemplate>
+                            </Separator.Template>
+                        </Separator>-->
+                            <MenuItem x:Name="AddApplication"
+                                      Click="AddApplication_Click">
+                                <MenuItem.Header>
+                                    <TextBlock Text="Add Application"
+                                               Margin="-20,0,0,0" />
+                                </MenuItem.Header>
+                            </MenuItem>
+                            <MenuItem Name="AddFile"
+                                      Click="AddFile_Click">
+                                <MenuItem.Header>
+                                    <TextBlock Text="Add File"
+                                               Margin="-20,0,0,0" />
+                                </MenuItem.Header>
+                            </MenuItem>
+                            <MenuItem x:Name="AddLink"
+                                      Click="AddLink_Click">
+                                <MenuItem.Header>
+                                    <TextBlock Text="Add Link"
+                                               Margin="-20,0,0,0" />
+                                </MenuItem.Header>
+                            </MenuItem>
+                        </ContextMenu>
+                    </Button.ContextMenu>
                 </Button>
                 <!-- Search box -->
                 <Border CornerRadius="5"
@@ -218,6 +227,7 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
                                     <Border BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                            ContextMenu="{StaticResource ItemMenuKey}"
                                             Padding="{TemplateBinding Control.Padding}"
                                             BorderBrush="{TemplateBinding Border.BorderBrush}"
                                             Background="{TemplateBinding Panel.Background}"
