@@ -14,15 +14,6 @@ namespace StoreCard
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private static string[] ITEM_CATEGORIES = new string[]
-        {
-            "All",
-            "Apps",
-            "Folders",
-            "Files",
-            "Links"
-        };
-
         public string SearchText
         {
             get => _searchText;
