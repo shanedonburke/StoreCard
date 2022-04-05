@@ -36,12 +36,30 @@ namespace StoreCard
 
         public IEnumerable<SavedItem> FilteredItems
         {
-            get => _savedItems.Where(item => item.Name.ToUpper().StartsWith(_searchText.ToUpper()));
+            get
+            {
+                IEnumerable<SavedItem> items = Category == ItemCategory.None
+                    ? _savedItems
+                    : _savedItems.Where(item => item.Category == Category);
+                items = items.Where(item => item.Name.ToUpper().StartsWith(_searchText.ToUpper()));
+                items.Concat(_savedItems.Where(item =>
+                {
+                    return !items.Contains(item)
+                           && item.Name.ToUpper().Contains(_searchText.ToUpper());
+                }));
+                return items;
+            }
         }
 
         public ItemCategory Category
         {
-            get => (ItemCategory)_categoryIndex;
+            get => _category;
+            set
+            {
+                _category = value;
+                OnPropertyChanged("Category");
+                OnPropertyChanged("FilteredItems");
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -50,7 +68,7 @@ namespace StoreCard
 
         private List<SavedItem> _savedItems = new List<SavedItem>();
 
-        private int _categoryIndex = 0;
+        private ItemCategory _category = ItemCategory.None;
 
         public MainWindow()
         {
@@ -167,9 +185,17 @@ namespace StoreCard
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Escape)
+            switch (e.Key)
             {
-                Deactivate();
+                case Key.Escape:
+                    Deactivate();
+                    break;
+                case Key.Left:
+                    Category = (ItemCategory)Nfmod((int)Category - 1, Enum.GetNames(typeof(ItemCategory)).Length);
+                    break;
+                case Key.Right:
+                    Category = (ItemCategory)Nfmod((int)Category + 1, Enum.GetNames(typeof(ItemCategory)).Length);
+                    break;
             }
         }
 
@@ -218,6 +244,11 @@ namespace StoreCard
             {
                 OpenSelectedItem();
             }
+        }
+
+        private static uint Nfmod(float a, float b)
+        {
+            return (uint)(a - b * Math.Floor(a / b));
         }
     }
 }

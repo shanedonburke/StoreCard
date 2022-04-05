@@ -305,7 +305,7 @@
                                         Value="#FFAAAAAA" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding Category}"
-                                                 Value="Links">
+                                                 Value="4">
                                         <Setter Property="Foreground"
                                                 Value="White" />
                                     </DataTrigger>

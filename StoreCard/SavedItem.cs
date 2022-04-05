@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace StoreCard
 {
-    public enum ItemCategory
+    public enum ItemCategory : uint
     {
         None,
         App,
