@@ -9,11 +9,22 @@ using System.Windows.Media.Imaging;
 
 namespace StoreCard
 {
+    public enum ItemCategory
+    {
+        None,
+        App,
+        Folder,
+        File,
+        Link
+    }
+
     public abstract class SavedItem
     {
         public string Name { get; protected set; }
 
         public string? Base64Icon { get; protected set; }
+
+        public abstract ItemCategory Category { get; }
 
         [JsonIgnore]
         public ImageSource? BitmapIcon => Base64Icon != null ? ImageUtils.Base64ToImage(Base64Icon) : null;

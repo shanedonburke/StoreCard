@@ -39,9 +39,9 @@ namespace StoreCard
             get => _savedItems.Where(item => item.Name.ToUpper().StartsWith(_searchText.ToUpper()));
         }
 
-        public string ItemCategory
+        public ItemCategory Category
         {
-            get => ITEM_CATEGORIES[_itemCategoryIndex];
+            get => (ItemCategory)_categoryIndex;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -50,7 +50,7 @@ namespace StoreCard
 
         private List<SavedItem> _savedItems = new List<SavedItem>();
 
-        private int _itemCategoryIndex = 0;
+        private int _categoryIndex = 0;
 
         public MainWindow()
         {

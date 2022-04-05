@@ -229,8 +229,8 @@
                                 <Setter Property="Foreground"
                                         Value="#FFAAAAAA" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ItemCategory}"
-                                                 Value="All">
+                                    <DataTrigger Binding="{Binding Category}"
+                                                 Value="0">
                                         <Setter Property="Foreground"
                                                 Value="White" />
                                     </DataTrigger>
@@ -248,8 +248,8 @@
                                 <Setter Property="Foreground"
                                         Value="#FFAAAAAA" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ItemCategory}"
-                                                 Value="Apps">
+                                    <DataTrigger Binding="{Binding Category}"
+                                                 Value="1">
                                         <Setter Property="Foreground"
                                                 Value="White" />
                                     </DataTrigger>
@@ -267,8 +267,8 @@
                                 <Setter Property="Foreground"
                                         Value="#FFAAAAAA" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ItemCategory}"
-                                                 Value="Folders">
+                                    <DataTrigger Binding="{Binding Category}"
+                                                 Value="2">
                                         <Setter Property="Foreground"
                                                 Value="White" />
                                     </DataTrigger>
@@ -286,8 +286,8 @@
                                 <Setter Property="Foreground"
                                         Value="#FFAAAAAA" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ItemCategory}"
-                                                 Value="Files">
+                                    <DataTrigger Binding="{Binding Category}"
+                                                 Value="3">
                                         <Setter Property="Foreground"
                                                 Value="White" />
                                     </DataTrigger>
@@ -304,7 +304,7 @@
                                 <Setter Property="Foreground"
                                         Value="#FFAAAAAA" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding ItemCategory}"
+                                    <DataTrigger Binding="{Binding Category}"
                                                  Value="Links">
                                         <Setter Property="Foreground"
                                                 Value="White" />

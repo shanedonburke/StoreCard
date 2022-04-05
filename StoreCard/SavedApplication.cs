@@ -15,6 +15,8 @@ namespace StoreCard
     {
         public string AppUserModelId { get; private set; }
 
+        public override ItemCategory Category => ItemCategory.App;
+
         [JsonConstructor]
         public SavedApplication(string name, string base64Icon, string appUserModelId) : base(name, base64Icon)
         {

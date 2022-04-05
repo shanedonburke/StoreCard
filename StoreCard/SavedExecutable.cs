@@ -12,6 +12,8 @@ namespace StoreCard
     {
         public string Path { get; private set; }
 
+        public override ItemCategory Category => ItemCategory.App;
+
         public SavedExecutable(string name, string? base64Icon, string path) : base(name, base64Icon)
         {
             Path = path;
