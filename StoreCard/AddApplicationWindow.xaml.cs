@@ -3,6 +3,7 @@ using Microsoft.WindowsAPICodePack.Shell;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -25,7 +26,16 @@ namespace StoreCard
     /// </summary>
     public partial class AddApplicationWindow : Window, INotifyPropertyChanged
     {
-        private List<InstalledApplication> InstalledApps;
+        private List<InstalledApplication> InstalledApps
+        {
+            get => _installedApps;
+            set
+            {
+                _installedApps = value;
+                _installedApps.Sort();
+                AreAppsLoaded = true;
+            }
+        }
 
         public string SearchText
         {
@@ -55,8 +65,8 @@ namespace StoreCard
                     {
                         ExecutableIcon = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
                             icon.Handle,
-                            System.Windows.Int32Rect.Empty,
-                            System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
+                            Int32Rect.Empty,
+                            BitmapSizeOptions.FromEmptyOptions());
                     }
                 }
                 OnPropertyChanged("ExecutablePath");
@@ -93,12 +103,28 @@ namespace StoreCard
             }
         }
 
+        public bool AreAppsLoaded
+        {
+            get => _areAppsLoaded;
+            set
+            {
+                _areAppsLoaded = value;
+                OnPropertyChanged("AreAppsLoaded");
+                OnPropertyChanged("FilteredApps");
+                ApplicationListBox.SelectedIndex = 0;
+            }
+        }
+
         public IEnumerable<InstalledApplication> FilteredApps
         {
             get => InstalledApps.Where(app => app.Name.ToUpper().StartsWith(_searchText.ToUpper()));
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        private List<InstalledApplication> _installedApps = new List<InstalledApplication>();
+
+        private List<InstalledApplication> _installedAppsFromTask = new List<InstalledApplication>();
 
         private string _searchText = "";
 
@@ -110,13 +136,13 @@ namespace StoreCard
 
         private ImageSource? _executableIcon = null;
 
+        private bool _areAppsLoaded = false;
+
+        private static object _itemsLock = new object();
+
         public AddApplicationWindow()
         {
             InitializeComponent();
-
-            InstalledApps = GetInstalledApplications();
-            InstalledApps.Sort();
-            ApplicationListBox.SelectedIndex = 0;
 
             Activate();
 
@@ -124,7 +150,7 @@ namespace StoreCard
         }
 
         // From https://stackoverflow.com/a/57195200
-        public static List<InstalledApplication> GetInstalledApplications()
+        async Task<List<InstalledApplication>> GetInstalledApplications()
         {
             var installedApps = new List<InstalledApplication>();
             var appsFolderId = new Guid("{1e87508d-89c2-42f0-8a7e-645a0f50ca58}");
@@ -137,6 +163,7 @@ namespace StoreCard
                 // The ParsingName property is the AppUserModelID
                 string appUserModelId = app.ParsingName;
                 BitmapSource icon = app.Thumbnail.ExtraLargeBitmapSource;
+                icon.Freeze();
 
                 installedApps.Add(new InstalledApplication(name, appUserModelId, icon));
             }
@@ -242,6 +269,13 @@ namespace StoreCard
         private void Window_Closed(object sender, EventArgs e)
         {
             new ShowMainWindowCommand().Execute(null);
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var installedApps = await Task.Run(() => GetInstalledApplications());
+            InstalledApps = installedApps;
+            ApplicationListBox.SelectedIndex = 0;
         }
     }
 }
