@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Gameloop.Vdf;
+using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Shell;
 using Newtonsoft.Json;
 using System;
@@ -282,9 +283,9 @@ namespace StoreCard
             if (steamInstallFolder != null)
             {
                 string steamAppsFolder = $"{steamInstallFolder}\\steamapps";
+                dynamic libraryFolders = VdfConvert.Deserialize(File.ReadAllText($"{steamAppsFolder}\\libraryfolders.vdf"));
+                System.Diagnostics.Debug.WriteLine((string)libraryFolders.Value.abc.ToString());
             }
-
-            System.Diagnostics.Debug.WriteLine(steamInstallFolder);
         }
         private void Window_Closed(object sender, EventArgs e)
         {
