@@ -276,6 +276,15 @@ namespace StoreCard
 
             var installedApps = await Task.Run(() => GetInstalledApplications());
             InstalledApps = installedApps;
+
+            string? steamInstallFolder = (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam", "InstallPath", null) as string)
+                ?? Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "InstallPath", null) as string;
+            if (steamInstallFolder != null)
+            {
+                string steamAppsFolder = $"{steamInstallFolder}\\steamapps";
+            }
+
+            System.Diagnostics.Debug.WriteLine(steamInstallFolder);
         }
         private void Window_Closed(object sender, EventArgs e)
         {
