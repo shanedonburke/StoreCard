@@ -14,7 +14,8 @@
         Width="800"
         Background="#FF222222">
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="ControlVisibility" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <local:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
 
         <!-- Not currently used... but later? -->
         <LinearGradientBrush x:Key="MenuPopupBrush"
@@ -83,7 +84,7 @@
         </StackPanel>
         <!-- "Installed application" content -->
         <Grid Grid.Row="1"
-              Visibility="{Binding IsChecked, ElementName=InstalledApplicationRadioButton, Converter={StaticResource ControlVisibility}}">
+              Visibility="{Binding IsChecked, ElementName=InstalledApplicationRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
@@ -132,8 +133,19 @@
                     </TextBox.Style>
                 </TextBox>
             </Border>
+            <!-- Application list spinner -->
+            <Grid Visibility="{Binding AreAppsLoaded, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="2">
+                <fa:ImageAwesome Icon="Refresh"
+                                 Spin="True"
+                                 Foreground="#FF2DA65F"
+                                 Height="64"
+                                 Width="64" />
+            </Grid>
             <!-- Application list -->
             <ListBox Margin="15,10,15,10"
+                     Visibility="{Binding AreAppsLoaded, Converter={StaticResource BooleanToVisibilityConverter}}"
                      Name="ApplicationListBox"
                      PreviewKeyDown="ApplicationListBox_PreviewKeyDown"
                      Grid.Row="1"
@@ -327,7 +339,7 @@
         <!-- "Other executable" content -->
         <Grid Grid.Row="1"
               VerticalAlignment="Top"
-              Visibility="{Binding IsChecked, ElementName=OtherExecutableRadioButton, Converter={StaticResource ControlVisibility}}">
+              Visibility="{Binding IsChecked, ElementName=OtherExecutableRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid Margin="15,10,15,10"
                   VerticalAlignment="Center">
                 <Grid.RowDefinitions>
@@ -437,7 +449,7 @@
                     </Button.Style>
                 </Button>
                 <!-- Name and other elements shown if path is valid -->
-                <Grid Visibility="{Binding DoesExecutableExist, Converter={StaticResource ControlVisibility}}"
+                <Grid Visibility="{Binding DoesExecutableExist, Converter={StaticResource BooleanToVisibilityConverter}}"
                       Grid.Row="1"
                       Grid.Column="0"
                       Grid.ColumnSpan="3"

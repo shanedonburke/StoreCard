@@ -34,6 +34,8 @@ namespace StoreCard
                 _installedApps = value;
                 _installedApps.Sort();
                 AreAppsLoaded = true;
+                OnPropertyChanged("FilteredApps");
+                ApplicationListBox.SelectedIndex = 0;
             }
         }
 
@@ -110,8 +112,6 @@ namespace StoreCard
             {
                 _areAppsLoaded = value;
                 OnPropertyChanged("AreAppsLoaded");
-                OnPropertyChanged("FilteredApps");
-                ApplicationListBox.SelectedIndex = 0;
             }
         }
 
@@ -123,8 +123,6 @@ namespace StoreCard
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private List<InstalledApplication> _installedApps = new List<InstalledApplication>();
-
-        private List<InstalledApplication> _installedAppsFromTask = new List<InstalledApplication>();
 
         private string _searchText = "";
 
@@ -138,8 +136,6 @@ namespace StoreCard
 
         private bool _areAppsLoaded = false;
 
-        private static object _itemsLock = new object();
-
         public AddApplicationWindow()
         {
             InitializeComponent();
@@ -150,7 +146,7 @@ namespace StoreCard
         }
 
         // From https://stackoverflow.com/a/57195200
-        async Task<List<InstalledApplication>> GetInstalledApplications()
+        List<InstalledApplication> GetInstalledApplications()
         {
             var installedApps = new List<InstalledApplication>();
             var appsFolderId = new Guid("{1e87508d-89c2-42f0-8a7e-645a0f50ca58}");
@@ -275,7 +271,6 @@ namespace StoreCard
         {
             var installedApps = await Task.Run(() => GetInstalledApplications());
             InstalledApps = installedApps;
-            ApplicationListBox.SelectedIndex = 0;
         }
     }
 }
