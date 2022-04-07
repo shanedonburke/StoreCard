@@ -39,6 +39,21 @@ namespace StoreCard
             }
         }
 
+        public IEnumerable<InstalledApplication> FilteredApps
+        {
+            get
+            {
+                IEnumerable<InstalledApplication> apps = _installedApps
+                    .Where(app => app.Name.ToUpper().StartsWith(_searchText.ToUpper()));
+                apps = apps.Concat(_installedApps.Where(app =>
+                {
+                    return !app.Name.ToUpper().StartsWith(_searchText.ToUpper()) &&
+                        app.Name.ToUpper().Contains(_searchText.ToUpper());
+                }));
+                return apps;
+            }
+        }
+
         public string SearchText
         {
             get => _searchText;
@@ -113,11 +128,6 @@ namespace StoreCard
                 _areAppsLoaded = value;
                 OnPropertyChanged("AreAppsLoaded");
             }
-        }
-
-        public IEnumerable<InstalledApplication> FilteredApps
-        {
-            get => InstalledApps.Where(app => app.Name.ToUpper().StartsWith(_searchText.ToUpper()));
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
