@@ -33,10 +33,10 @@ namespace StoreCard
                     ? _savedItems
                     : _savedItems.Where(item => item.Category == Category);
                 items = items.Where(item => item.Name.ToUpper().StartsWith(_searchText.ToUpper()));
-                items.Concat(_savedItems.Where(item =>
+                items = items.Concat(_savedItems.Where(item =>
                 {
-                    return !items.Contains(item)
-                           && item.Name.ToUpper().Contains(_searchText.ToUpper());
+                    return !item.Name.ToUpper().StartsWith(_searchText.ToUpper()) &&
+                        item.Name.ToUpper().Contains(_searchText.ToUpper());
                 }));
                 return items;
             }
