@@ -150,9 +150,7 @@ namespace StoreCard
         {
             InitializeComponent();
 
-            Activate();
-
-            this.DataContext = this;
+            DataContext = this;
         }
 
         // From https://stackoverflow.com/a/57195200
@@ -272,15 +270,24 @@ namespace StoreCard
             }
         }
 
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Activate();
+
+            var installedApps = await Task.Run(() => GetInstalledApplications());
+            InstalledApps = installedApps;
+        }
         private void Window_Closed(object sender, EventArgs e)
         {
             new ShowMainWindowCommand().Execute(null);
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            var installedApps = await Task.Run(() => GetInstalledApplications());
-            InstalledApps = installedApps;
+            if (e.Key == Key.Escape)
+            {
+                Close();
+            }
         }
     }
 }

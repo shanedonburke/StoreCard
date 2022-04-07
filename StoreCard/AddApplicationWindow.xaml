@@ -9,6 +9,7 @@
         Title="Add Application"
         Loaded="Window_Loaded"
         Closed="Window_Closed"
+        PreviewKeyDown="Window_PreviewKeyDown"
         WindowStartupLocation="CenterScreen"
         Height="600"
         Width="800"
