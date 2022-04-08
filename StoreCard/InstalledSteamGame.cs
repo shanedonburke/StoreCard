@@ -9,15 +9,6 @@ namespace StoreCard
 {
     public class InstalledSteamGame : InstalledGame
     {
-        private static readonly BitmapSource _platformIcon;
-
-        static InstalledSteamGame()
-        {
-            _platformIcon = new BitmapImage(
-                new Uri("pack://application:,,,/Icons/steam_icon.png"));
-            _platformIcon.Freeze();
-        }
-
         public InstalledSteamGame(
             string name,
             string appId,
@@ -28,7 +19,7 @@ namespace StoreCard
 
         public string AppId { get; private set; }
 
-        public override BitmapSource PlatformIcon => _platformIcon;
+        public override BitmapSource PlatformIcon => GamePlatformIcons.SteamIcon;
 
         public override SavedItem SavedItem => new SavedSteamGame(this);
     }
