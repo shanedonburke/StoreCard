@@ -297,7 +297,7 @@ namespace StoreCard
             }
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void AddAppButton_Click(object sender, RoutedEventArgs e)
         {
             AddSelectedApplication();
         }
