@@ -432,6 +432,7 @@
                     Icon="Refresh"
                     Spin="True" />
             </Grid>
+            <!--  Game list box  -->
             <ListBox
                 Name="GameListBox"
                 Grid.Row="1"
@@ -554,10 +555,12 @@
                         </Setter>
                     </Style>
                 </ListBox.ItemContainerStyle>
+                <!--  Game list box item template  -->
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalAlignment="Stretch">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -567,16 +570,22 @@
                                 Width="24"
                                 Height="24"
                                 Margin="5,5,10,5"
+                                Source="{Binding PlatformIcon}" />
+                            <Image
+                                Grid.Column="1"
+                                Width="24"
+                                Height="24"
+                                Margin="5,5,10,5"
                                 Source="{Binding BitmapIcon}" />
                             <TextBlock
-                                Grid.Column="1"
+                                Grid.Column="2"
                                 Margin="3"
                                 VerticalAlignment="Center"
                                 FontSize="12"
                                 Text="{Binding Name}" />
                             <!--  "Add" button  -->
                             <Border
-                                Grid.Column="2"
+                                Grid.Column="3"
                                 Width="60"
                                 Height="26"
                                 Margin="5,0,5,0"

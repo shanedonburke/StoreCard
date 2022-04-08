@@ -12,6 +12,9 @@
     <Content Include="Icons\StoreCard.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+	  <Content Include="Icons\steam_icon.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -18,6 +18,7 @@ namespace StoreCard
         public string Name { get; private set; }
         public BitmapSource BitmapIcon { get; private set; }
 
+        public abstract BitmapSource PlatformIcon { get; }
         public abstract SavedItem SavedItem { get; }
 
         public int CompareTo(InstalledGame? other)
