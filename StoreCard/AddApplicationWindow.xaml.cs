@@ -46,22 +46,22 @@ namespace StoreCard
             get
             {
                 IEnumerable<InstalledApplication> apps = _installedApps
-                    .Where(app => app.Name.ToUpper().StartsWith(_searchText.ToUpper()));
+                    .Where(app => app.Name.ToUpper().StartsWith(_appSearchText.ToUpper()));
                 apps = apps.Concat(_installedApps.Where(app =>
                 {
-                    return !app.Name.ToUpper().StartsWith(_searchText.ToUpper()) &&
-                        app.Name.ToUpper().Contains(_searchText.ToUpper());
+                    return !app.Name.ToUpper().StartsWith(_appSearchText.ToUpper()) &&
+                        app.Name.ToUpper().Contains(_appSearchText.ToUpper());
                 }));
                 return apps;
             }
         }
 
-        public string SearchText
+        public string AppSearchText
         {
-            get => _searchText;
+            get => _appSearchText;
             set
             {
-                _searchText = value;
+                _appSearchText = value;
                 OnPropertyChanged("SearchText");
                 OnPropertyChanged("FilteredApps");
             }
@@ -148,7 +148,7 @@ namespace StoreCard
 
         private List<InstalledSteamGame> _installedSteamGames = new List<InstalledSteamGame>();
 
-        private string _searchText = "";
+        private string _appSearchText = "";
 
         private string _executablePath = "";
 
@@ -258,7 +258,7 @@ namespace StoreCard
             }
         }
 
-        private void SearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void AppSearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
