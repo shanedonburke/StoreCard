@@ -1,11 +1,12 @@
-﻿using Gameloop.Vdf;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Shell;
 using Newtonsoft.Json;
+using SteamKit2;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -27,16 +28,16 @@ namespace StoreCard
     /// </summary>
     public partial class AddApplicationWindow : Window, INotifyPropertyChanged
     {
-        private List<InstalledApplication> InstalledApps
+        public IEnumerable<InstalledSteamGame> InstalledSteamGames
         {
-            get => _installedApps;
+            get => _installedSteamGames;
             set
             {
-                _installedApps = value;
-                _installedApps.Sort();
-                AreAppsLoaded = true;
-                OnPropertyChanged("FilteredApps");
-                ApplicationListBox.SelectedIndex = 0;
+                _installedSteamGames = value.ToList();
+                _installedSteamGames.Sort();
+                AreSteamGamesLoaded = true;
+                OnPropertyChanged("InstalledSteamGames");
+                GameListBox.SelectedIndex = 0;
             }
         }
 
@@ -131,9 +132,21 @@ namespace StoreCard
             }
         }
 
+        public bool AreSteamGamesLoaded
+        {
+            get => _areSteamGamesLoaded;
+            set
+            {
+                _areSteamGamesLoaded = value;
+                OnPropertyChanged("AreSteamGamesLoaded");
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private List<InstalledApplication> _installedApps = new List<InstalledApplication>();
+
+        private List<InstalledSteamGame> _installedSteamGames = new List<InstalledSteamGame>();
 
         private string _searchText = "";
 
@@ -146,6 +159,8 @@ namespace StoreCard
         private ImageSource? _executableIcon = null;
 
         private bool _areAppsLoaded = false;
+
+        private bool _areSteamGamesLoaded = false;
 
         public AddApplicationWindow()
         {
@@ -175,10 +190,69 @@ namespace StoreCard
             return installedApps;
         }
 
+        List<InstalledSteamGame> GetInstalledSteamGames()
+        {
+            List<InstalledSteamGame> installedGames = new List<InstalledSteamGame>();
+
+            string? steamInstallFolder = (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam", "InstallPath", null)
+                                          as string)
+               ?? Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "InstallPath", null) as string;
+
+            if (steamInstallFolder == null) return installedGames;
+
+
+            string libraryCacheFolder = $"{steamInstallFolder}\\appcache\\librarycache";
+            string steamAppsFolder = $"{steamInstallFolder}\\steamapps";
+
+            KeyValue? libraryFolders = KeyValue.LoadFromString(File.ReadAllText($"{steamAppsFolder}\\libraryfolders.vdf"));
+            if (libraryFolders == null) return installedGames;
+
+            List<string> steamAppsFolderPaths = libraryFolders.Children
+                    .Where(child => int.TryParse(child.Name, out int i))
+                    .Select(kv => $"{kv["path"].Value}\\steamapps")
+                    .ToList();
+            foreach (string appsFolderPath in steamAppsFolderPaths)
+            {
+                string[] appManifestPaths = Directory.GetFiles(appsFolderPath, "*.acf", SearchOption.AllDirectories);
+                foreach (string manifestPath in appManifestPaths)
+                {
+                    KeyValue? manifest = KeyValue.LoadFromString(File.ReadAllText(manifestPath));
+                    if (manifest == null) continue;
+
+                    string name = manifest["name"].Value.ToString();
+                    string appId = manifest["appid"].Value.ToString();
+
+                    Stream imageStreamSource = new FileStream($"{libraryCacheFolder}\\{appId}_icon.jpg",
+                                                              FileMode.Open,
+                                                              FileAccess.Read,
+                                                              FileShare.Read);
+                    JpegBitmapDecoder decoder = new JpegBitmapDecoder(imageStreamSource,
+                                                                      BitmapCreateOptions.PreservePixelFormat,
+                                                                      BitmapCacheOption.Default);
+                    BitmapSource bitmapIcon = decoder.Frames[0];
+                    bitmapIcon.Freeze();
+                    installedGames.Add(new InstalledSteamGame(name, appId, bitmapIcon));
+                }
+            }
+            return installedGames;
+        }
+
         void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
             if (ApplicationListBox != null && ApplicationListBox.Items.Count > 0)
+            {
+                ApplicationListBox.SelectedIndex = 0;
+            }
+        }
+
+        private void SetInstalledApps(List<InstalledApplication> value)
+        {
+            _installedApps = value;
+            _installedApps.Sort();
+            AreAppsLoaded = true;
+            OnPropertyChanged("FilteredApps");
+            if (_installedApps.Count > 0)
             {
                 ApplicationListBox.SelectedIndex = 0;
             }
@@ -276,16 +350,10 @@ namespace StoreCard
             Activate();
 
             var installedApps = await Task.Run(() => GetInstalledApplications());
-            InstalledApps = installedApps;
+            SetInstalledApps(installedApps);
 
-            string? steamInstallFolder = (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam", "InstallPath", null) as string)
-                ?? Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "InstallPath", null) as string;
-            if (steamInstallFolder != null)
-            {
-                string steamAppsFolder = $"{steamInstallFolder}\\steamapps";
-                dynamic libraryFolders = VdfConvert.Deserialize(File.ReadAllText($"{steamAppsFolder}\\libraryfolders.vdf"));
-                System.Diagnostics.Debug.WriteLine((string)libraryFolders.Value.abc.ToString());
-            }
+            var installedSteamGames = await Task.Run(() => GetInstalledSteamGames());
+            InstalledSteamGames = installedSteamGames;
         }
         private void Window_Closed(object sender, EventArgs e)
         {

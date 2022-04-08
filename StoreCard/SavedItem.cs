@@ -13,6 +13,7 @@ namespace StoreCard
     {
         None,
         App,
+        Game,
         Folder,
         File,
         Link
