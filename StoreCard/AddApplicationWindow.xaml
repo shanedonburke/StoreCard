@@ -424,7 +424,7 @@
             <Grid
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
-                Visibility="{Binding AreSteamGamesLoaded, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                Visibility="{Binding AreGamesLoaded, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
                 <fa:ImageAwesome
                     Width="64"
                     Height="64"
@@ -441,9 +441,9 @@
                 BorderBrush="#00000000"
                 BorderThickness="0,0,0,0"
                 Foreground="White"
-                ItemsSource="{Binding InstalledSteamGames}"
+                ItemsSource="{Binding InstalledGames}"
                 PreviewKeyDown="ApplicationListBox_PreviewKeyDown"
-                Visibility="{Binding AreSteamGamesLoaded, Converter={StaticResource BooleanToVisibilityConverter}}">
+                Visibility="{Binding AreGamesLoaded, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <!--  Style items to take up whole horizontal space  -->
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">

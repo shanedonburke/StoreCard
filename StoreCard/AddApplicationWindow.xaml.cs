@@ -28,15 +28,15 @@ namespace StoreCard
     /// </summary>
     public partial class AddApplicationWindow : Window, INotifyPropertyChanged
     {
-        public IEnumerable<InstalledSteamGame> InstalledSteamGames
+        public IEnumerable<InstalledGame> InstalledGames
         {
-            get => _installedSteamGames;
+            get => _installedGames;
             set
             {
-                _installedSteamGames = value.ToList();
-                _installedSteamGames.Sort();
-                AreSteamGamesLoaded = true;
-                OnPropertyChanged("InstalledSteamGames");
+                _installedGames = value.ToList();
+                _installedGames.Sort();
+                AreGamesLoaded = true;
+                OnPropertyChanged("InstalledGames");
                 GameListBox.SelectedIndex = 0;
             }
         }
@@ -132,13 +132,13 @@ namespace StoreCard
             }
         }
 
-        public bool AreSteamGamesLoaded
+        public bool AreGamesLoaded
         {
-            get => _areSteamGamesLoaded;
+            get => _areGamesLoaded;
             set
             {
-                _areSteamGamesLoaded = value;
-                OnPropertyChanged("AreSteamGamesLoaded");
+                _areGamesLoaded = value;
+                OnPropertyChanged("AreGamesLoaded");
             }
         }
 
@@ -146,7 +146,7 @@ namespace StoreCard
 
         private List<InstalledApplication> _installedApps = new List<InstalledApplication>();
 
-        private List<InstalledSteamGame> _installedSteamGames = new List<InstalledSteamGame>();
+        private List<InstalledGame> _installedGames = new List<InstalledGame>();
 
         private string _appSearchText = "";
 
@@ -160,7 +160,7 @@ namespace StoreCard
 
         private bool _areAppsLoaded = false;
 
-        private bool _areSteamGamesLoaded = false;
+        private bool _areGamesLoaded = false;
 
         public AddApplicationWindow()
         {
@@ -353,7 +353,7 @@ namespace StoreCard
             SetInstalledApps(installedApps);
 
             var installedSteamGames = await Task.Run(() => GetInstalledSteamGames());
-            InstalledSteamGames = installedSteamGames;
+            InstalledGames = installedSteamGames;
         }
         private void Window_Closed(object sender, EventArgs e)
         {
