@@ -610,7 +610,7 @@
                                                     Value="#FF37CC75" />
                                             </Trigger>
                                             <DataTrigger
-                                                Binding="{Binding ElementName=AddAppButton, Path=IsPressed}"
+                                                Binding="{Binding ElementName=AddGameButton, Path=IsPressed}"
                                                 Value="True">
                                                 <Setter
                                                     Property="Background"
@@ -628,9 +628,9 @@
                                     </Style>
                                 </Border.Style>
                                 <Button
-                                    Name="AddAppButton"
+                                    Name="AddGameButton"
                                     BorderThickness="0,0,0,0"
-                                    Click="AddAppButton_Click"
+                                    Click="AddGameButton_Click"
                                     Content="Add"
                                     Foreground="White"
                                     IsTabStop="False">

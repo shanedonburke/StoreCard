@@ -1,9 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 
 namespace StoreCard
 {
@@ -12,6 +16,8 @@ namespace StoreCard
         public string AppId { get; private set; }
 
         public override ItemCategory Category => ItemCategory.Game;
+
+        public override ImageSource? PrefixIcon => GamePlatformIcons.SteamIcon;
 
         [JsonConstructor]
         public SavedSteamGame(
@@ -32,7 +38,13 @@ namespace StoreCard
 
         public override void Open()
         {
-            throw new NotImplementedException();
+            if (Paths.SteamInstallFolder == null)
+            {
+                MessageBox.Show("The Steam installation folder could not be found.");
+                return;
+            }
+            string steamExecPath = Path.Combine(Paths.SteamInstallFolder, "steam.exe");
+            Process.Start(steamExecPath, $"steam://rungameid/{AppId}");
         }
     }
 }

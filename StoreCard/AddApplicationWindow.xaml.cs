@@ -194,15 +194,11 @@ namespace StoreCard
         {
             List<InstalledSteamGame> installedGames = new List<InstalledSteamGame>();
 
-            string? steamInstallFolder = (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam", "InstallPath", null)
-                                          as string)
-               ?? Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "InstallPath", null) as string;
-
-            if (steamInstallFolder == null) return installedGames;
+            if (Paths.SteamInstallFolder == null) return installedGames;
 
 
-            string libraryCacheFolder = $"{steamInstallFolder}\\appcache\\librarycache";
-            string steamAppsFolder = $"{steamInstallFolder}\\steamapps";
+            string libraryCacheFolder = $"{Paths.SteamInstallFolder}\\appcache\\librarycache";
+            string steamAppsFolder = $"{Paths.SteamInstallFolder}\\steamapps";
 
             KeyValue? libraryFolders = KeyValue.LoadFromString(File.ReadAllText($"{steamAppsFolder}\\libraryfolders.vdf"));
             if (libraryFolders == null) return installedGames;
@@ -219,8 +215,9 @@ namespace StoreCard
                     KeyValue? manifest = KeyValue.LoadFromString(File.ReadAllText(manifestPath));
                     if (manifest == null) continue;
 
-                    string name = manifest["name"].Value.ToString();
-                    string appId = manifest["appid"].Value.ToString();
+                    string? name = manifest["name"].Value;
+                    string? appId = manifest["appid"].Value;
+                    if (name == null || appId == null) continue;
 
                     Stream imageStreamSource = new FileStream($"{libraryCacheFolder}\\{appId}_icon.jpg",
                                                               FileMode.Open,
@@ -230,8 +227,15 @@ namespace StoreCard
                                                                       BitmapCreateOptions.PreservePixelFormat,
                                                                       BitmapCacheOption.Default);
                     BitmapSource bitmapIcon = decoder.Frames[0];
-                    bitmapIcon.Freeze();
-                    installedGames.Add(new InstalledSteamGame(name, appId, bitmapIcon));
+
+                    // From https://stackoverflow.com/a/61681670
+                    CachedBitmap cached = new CachedBitmap(
+                        bitmapIcon,
+                        BitmapCreateOptions.None,
+                        BitmapCacheOption.OnLoad);
+                    cached.Freeze();
+
+                    installedGames.Add(new InstalledSteamGame(name, appId, cached));
                 }
             }
             return installedGames;
@@ -302,6 +306,11 @@ namespace StoreCard
             AddSelectedApplication();
         }
 
+        private void AddGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddSelectedGame();
+        }
+
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -340,6 +349,18 @@ namespace StoreCard
             {
                 List<SavedItem> savedItems = StorageUtils.ReadItemsFromFile();
                 savedItems.Add(new SavedApplication(installedApplication));
+                StorageUtils.SaveItemsToFile(savedItems);
+                Close();
+            }
+        }
+
+        private void AddSelectedGame()
+        {
+            InstalledGame? installedGame = GameListBox.SelectedItem as InstalledGame;
+            if (installedGame != null)
+            {
+                List<SavedItem> savedItems = StorageUtils.ReadItemsFromFile();
+                savedItems.Add(installedGame.SavedItem);
                 StorageUtils.SaveItemsToFile(savedItems);
                 Close();
             }

@@ -30,6 +30,9 @@ namespace StoreCard
         [JsonIgnore]
         public ImageSource? BitmapIcon => Base64Icon != null ? ImageUtils.Base64ToImage(Base64Icon) : null;
 
+        [JsonIgnore]
+        public virtual ImageSource? PrefixIcon { get; } = null;
+
         protected SavedItem(string name, string? base64Icon)
         {
             Name = name;
