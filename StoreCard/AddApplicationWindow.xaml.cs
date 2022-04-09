@@ -28,31 +28,37 @@ namespace StoreCard
     /// </summary>
     public partial class AddApplicationWindow : Window, INotifyPropertyChanged
     {
-        public IEnumerable<InstalledGame> InstalledGames
+        public IEnumerable<InstalledApplication> FilteredApps
         {
-            get => _installedGames;
+            get => _filteredApps;
             set
             {
-                _installedGames = value.ToList();
-                _installedGames.Sort();
-                AreGamesLoaded = true;
-                OnPropertyChanged("InstalledGames");
-                GameListBox.SelectedIndex = 0;
+                _filteredApps = value;
+                OnPropertyChanged("FilteredApps");
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    if (_filteredApps.Count() > 0)
+                    {
+                        ApplicationListBox.SelectedIndex = 0;
+                    }
+                });
             }
         }
 
-        public IEnumerable<InstalledApplication> FilteredApps
+        public IEnumerable<InstalledGame> FilteredGames
         {
-            get
+            get => _filteredGames;
+            set
             {
-                IEnumerable<InstalledApplication> apps = _installedApps
-                    .Where(app => app.Name.ToUpper().StartsWith(_appSearchText.ToUpper()));
-                apps = apps.Concat(_installedApps.Where(app =>
+                _filteredGames = value;
+                OnPropertyChanged("FilteredGames");
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    return !app.Name.ToUpper().StartsWith(_appSearchText.ToUpper()) &&
-                        app.Name.ToUpper().Contains(_appSearchText.ToUpper());
-                }));
-                return apps;
+                    if (_filteredGames.Count() > 0)
+                    {
+                        GameListBox.SelectedIndex = 0;
+                    }
+                });
             }
         }
 
@@ -62,8 +68,19 @@ namespace StoreCard
             set
             {
                 _appSearchText = value;
-                OnPropertyChanged("SearchText");
-                OnPropertyChanged("FilteredApps");
+                OnPropertyChanged("AppSearchText");
+                FilteredApps = FilterApps();
+            }
+        }
+
+        public string GameSearchText
+        {
+            get => _gameSearchText;
+            set
+            {
+                _gameSearchText = value;
+                OnPropertyChanged("GameSearchText");
+                FilteredGames = FilterGames();
             }
         }
 
@@ -148,7 +165,13 @@ namespace StoreCard
 
         private List<InstalledGame> _installedGames = new List<InstalledGame>();
 
+        private IEnumerable<InstalledApplication> _filteredApps = new List<InstalledApplication>();
+
+        private IEnumerable<InstalledGame> _filteredGames = new List<InstalledGame>();
+
         private string _appSearchText = "";
+
+        private string _gameSearchText = "";
 
         private string _executablePath = "";
 
@@ -170,7 +193,7 @@ namespace StoreCard
         }
 
         // From https://stackoverflow.com/a/57195200
-        List<InstalledApplication> GetInstalledApplications()
+        void LoadInstalledApplications()
         {
             var installedApps = new List<InstalledApplication>();
             var appsFolderId = new Guid("{1e87508d-89c2-42f0-8a7e-645a0f50ca58}");
@@ -187,21 +210,21 @@ namespace StoreCard
 
                 installedApps.Add(new InstalledApplication(name, appUserModelId, icon));
             }
-            return installedApps;
+            SetInstalledApps(installedApps);
         }
 
-        List<InstalledSteamGame> GetInstalledSteamGames()
+        void LoadInstalledSteamGames()
         {
             List<InstalledSteamGame> installedGames = new List<InstalledSteamGame>();
 
-            if (Paths.SteamInstallFolder == null) return installedGames;
+            if (Paths.SteamInstallFolder == null) return;
 
 
             string libraryCacheFolder = $"{Paths.SteamInstallFolder}\\appcache\\librarycache";
             string steamAppsFolder = $"{Paths.SteamInstallFolder}\\steamapps";
 
             KeyValue? libraryFolders = KeyValue.LoadFromString(File.ReadAllText($"{steamAppsFolder}\\libraryfolders.vdf"));
-            if (libraryFolders == null) return installedGames;
+            if (libraryFolders == null) return;
 
             List<string> steamAppsFolderPaths = libraryFolders.Children
                     .Where(child => int.TryParse(child.Name, out int i))
@@ -238,16 +261,12 @@ namespace StoreCard
                     installedGames.Add(new InstalledSteamGame(name, appId, cached));
                 }
             }
-            return installedGames;
+            SetInstalledGames(installedGames.Cast<InstalledGame>().ToList());
         }
 
         void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
-            if (ApplicationListBox != null && ApplicationListBox.Items.Count > 0)
-            {
-                ApplicationListBox.SelectedIndex = 0;
-            }
         }
 
         private void SetInstalledApps(List<InstalledApplication> value)
@@ -255,11 +274,29 @@ namespace StoreCard
             _installedApps = value;
             _installedApps.Sort();
             AreAppsLoaded = true;
-            OnPropertyChanged("FilteredApps");
-            if (_installedApps.Count > 0)
+            FilteredApps = FilterApps();
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                ApplicationListBox.SelectedIndex = 0;
-            }
+                if (_installedApps.Count > 0)
+                {
+                    ApplicationListBox.SelectedIndex = 0;
+                }
+            });
+        }
+
+        private void SetInstalledGames(List<InstalledGame> value)
+        {
+            _installedGames = value;
+            _installedGames.Sort();
+            AreGamesLoaded = true;
+            FilteredGames = FilterGames();
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                if (_installedGames.Count > 0)
+                {
+                    GameListBox.SelectedIndex = 0;
+                }
+            });
         }
 
         private void AppSearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -294,6 +331,45 @@ namespace StoreCard
                     break;
                 case Key.Enter:
                     AddSelectedApplication();
+                    e.Handled = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void GameSearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Up:
+                    if (GameListBox.Items.Count == 0) return;
+                    switch (GameListBox.SelectedIndex)
+                    {
+                        case 0:
+                        case -1:
+                            GameListBox.SelectedIndex = GameListBox.Items.Count - 1;
+                            break;
+                        default:
+                            GameListBox.SelectedIndex = (GameListBox.SelectedIndex - 1) % GameListBox.Items.Count;
+                            break;
+                    }
+                    GameListBox.ScrollIntoView(GameListBox.SelectedItem);
+                    break;
+                case Key.Down:
+                    if (GameListBox.Items.Count == 0) return;
+                    if (GameListBox.SelectedIndex == -1)
+                    {
+                        GameListBox.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        GameListBox.SelectedIndex = (GameListBox.SelectedIndex + 1) % GameListBox.Items.Count;
+                    }
+                    GameListBox.ScrollIntoView(GameListBox.SelectedItem);
+                    break;
+                case Key.Enter:
+                    AddSelectedGame();
                     e.Handled = true;
                     break;
                 default:
@@ -366,15 +442,12 @@ namespace StoreCard
             }
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Activate();
 
-            var installedApps = await Task.Run(() => GetInstalledApplications());
-            SetInstalledApps(installedApps);
-
-            var installedSteamGames = await Task.Run(() => GetInstalledSteamGames());
-            InstalledGames = installedSteamGames;
+            Task.Run(() => LoadInstalledApplications());
+            Task.Run(() => LoadInstalledSteamGames());
         }
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -387,6 +460,30 @@ namespace StoreCard
             {
                 Close();
             }
+        }
+
+        private IEnumerable<InstalledApplication> FilterApps()
+        {
+            IEnumerable<InstalledApplication> apps = _installedApps
+                    .Where(app => app.Name.ToUpper().StartsWith(_appSearchText.ToUpper()));
+            apps = apps.Concat(_installedApps.Where(app =>
+            {
+                return !app.Name.ToUpper().StartsWith(_appSearchText.ToUpper()) &&
+                    app.Name.ToUpper().Contains(_appSearchText.ToUpper());
+            }));
+            return apps;
+        }
+
+        private IEnumerable<InstalledGame> FilterGames()
+        {
+            IEnumerable<InstalledGame> games = _installedGames
+                    .Where(app => app.Name.ToUpper().StartsWith(_gameSearchText.ToUpper()));
+            games = games.Concat(_installedGames.Where(game =>
+            {
+                return !game.Name.ToUpper().StartsWith(_gameSearchText.ToUpper()) &&
+                    game.Name.ToUpper().Contains(_gameSearchText.ToUpper());
+            }));
+            return games;
         }
     }
 }
