@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 
 namespace StoreCard
@@ -13,9 +17,7 @@ namespace StoreCard
 
         static GamePlatformIcons()
         {
-            SteamIcon = new BitmapImage(
-                new Uri("pack://application:,,,/Icons/steam_icon.png"));
-            SteamIcon.Freeze();
+            SteamIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.SteamIcon);
         }
     }
 }
