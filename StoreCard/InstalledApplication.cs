@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using static System.String;
 
 namespace StoreCard
 {
@@ -19,7 +19,7 @@ namespace StoreCard
 
         public int CompareTo(InstalledApplication? other)
         {
-            return Name.CompareTo(other?.Name);
+            return Compare(Name, other?.Name, StringComparison.Ordinal);
         }
     }
 }

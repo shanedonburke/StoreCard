@@ -1,57 +1,44 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-namespace StoreCard
+namespace StoreCard;
+
+internal class StorageUtils
 {
-    internal class StorageUtils
+    public static List<SavedItem> ReadItemsFromFile()
     {
-        public static List<SavedItem> ReadItemsFromFile()
+        var filePath = GetFilePath();
+
+        if (!File.Exists(filePath)) return new List<SavedItem>();
+
+        var json = File.ReadAllText(filePath);
         {
-            string filePath = GetFilePath();
-
-            if (!File.Exists(filePath))
-            { 
-                return new List<SavedItem>();
-            }
-
-            var json = File.ReadAllText(filePath);
-            if (json != null)
-            {
-                // TODO: try-catch
-                List<SavedItem>? savedItems = JsonConvert.DeserializeObject<List<SavedItem>>(json, new JsonSerializerSettings
-                {
-                    TypeNameHandling = TypeNameHandling.All
-                });
-                return savedItems ?? new List<SavedItem>();
-            }
-            return new List<SavedItem>();
-        }
-
-        public static bool SaveItemsToFile(List<SavedItem> items)
-        {
-            var filePath = GetFilePath();
-            var json = JsonConvert.SerializeObject(items, new JsonSerializerSettings
+            // TODO: try-catch
+            var savedItems = JsonConvert.DeserializeObject<List<SavedItem>>(json, new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.All
             });
-            if (json != null)
-            {
-                System.IO.File.WriteAllText(filePath, json);
-                return true;
-            }
-            return false;
+            return savedItems ?? new List<SavedItem>();
         }
+    }
 
-        private static string GetFilePath()
+    public static bool SaveItemsToFile(List<SavedItem> items)
+    {
+        var filePath = GetFilePath();
+        var json = JsonConvert.SerializeObject(items, new JsonSerializerSettings
         {
-            return System.IO.Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "StoreCard.json");
-        }
+            TypeNameHandling = TypeNameHandling.All
+        });
+        File.WriteAllText(filePath, json);
+        return true;
+    }
+
+    private static string GetFilePath()
+    {
+        return Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "StoreCard.json");
     }
 }

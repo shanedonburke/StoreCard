@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
+﻿using System.Diagnostics;
 
 namespace StoreCard
 {
     internal class SavedExecutable : SavedItem
     {
-        public string Path { get; private set; }
+        public string Path { get; }
 
         public override ItemCategory Category => ItemCategory.App;
 

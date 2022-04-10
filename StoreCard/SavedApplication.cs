@@ -1,39 +1,30 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+﻿using System.Diagnostics;
+using Newtonsoft.Json;
 
-namespace StoreCard
+namespace StoreCard;
+
+internal class SavedApplication : SavedItem
 {
-    internal class SavedApplication : SavedItem
+    [JsonConstructor]
+    public SavedApplication(string name, string base64Icon, string appUserModelId) : base(name, base64Icon)
     {
-        public string AppUserModelId { get; private set; }
+        AppUserModelId = appUserModelId;
+    }
 
-        public override ItemCategory Category => ItemCategory.App;
+    public SavedApplication(InstalledApplication installedApplication) : base(
+        installedApplication.Name,
+        ImageUtils.ImageToBase64(installedApplication.BitmapIcon))
+    {
+        AppUserModelId = installedApplication.AppUserModelId;
+    }
 
-        [JsonConstructor]
-        public SavedApplication(string name, string base64Icon, string appUserModelId) : base(name, base64Icon)
-        {
-            AppUserModelId = appUserModelId;
-        }
+    public string AppUserModelId { get; }
 
-        public SavedApplication(InstalledApplication installedApplication) : base(
-            installedApplication.Name,
-            ImageUtils.ImageToBase64(installedApplication.BitmapIcon))
-        {
-            AppUserModelId = installedApplication.AppUserModelId;
-        }
+    public override ItemCategory Category => ItemCategory.App;
 
-        public override void Open()
-        {
-            // From https://stackoverflow.com/a/57195200
-            Process.Start("explorer.exe", @" shell:appsFolder\" + AppUserModelId);
-        }
+    public override void Open()
+    {
+        // From https://stackoverflow.com/a/57195200
+        Process.Start("explorer.exe", @" shell:appsFolder\" + AppUserModelId);
     }
 }

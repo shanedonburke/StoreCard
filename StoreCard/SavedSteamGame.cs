@@ -1,50 +1,45 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using Newtonsoft.Json;
 
-namespace StoreCard
+namespace StoreCard;
+
+public class SavedSteamGame : SavedItem
 {
-    public class SavedSteamGame : SavedItem
+    [JsonConstructor]
+    public SavedSteamGame(
+        string name,
+        string base64Icon,
+        string appId) : base(name, base64Icon)
     {
-        public string AppId { get; private set; }
+        AppId = appId;
+    }
 
-        public override ItemCategory Category => ItemCategory.Game;
+    public SavedSteamGame(InstalledSteamGame game) : base(
+        game.Name,
+        ImageUtils.ImageToBase64(game.BitmapIcon)
+    )
+    {
+        AppId = game.AppId;
+    }
 
-        public override ImageSource? PrefixIcon => GamePlatformIcons.SteamIcon;
+    public string AppId { get; }
 
-        [JsonConstructor]
-        public SavedSteamGame(
-            string name,
-            string base64Icon,
-            string appId) : base(name, base64Icon)
+    public override ItemCategory Category => ItemCategory.Game;
+
+    public override ImageSource PrefixIcon => GamePlatformIcons.SteamIcon;
+
+    public override void Open()
+    {
+        if (Paths.SteamInstallFolder == null)
         {
-            AppId = appId;
+            MessageBox.Show("The Steam installation folder could not be found.");
+            return;
         }
 
-        public SavedSteamGame(InstalledSteamGame game) : base(
-            game.Name,
-            ImageUtils.ImageToBase64(game.BitmapIcon)
-        )
-        {
-            AppId = game.AppId;
-        }
-
-        public override void Open()
-        {
-            if (Paths.SteamInstallFolder == null)
-            {
-                MessageBox.Show("The Steam installation folder could not be found.");
-                return;
-            }
-            string steamExecPath = Path.Combine(Paths.SteamInstallFolder, "steam.exe");
-            Process.Start(steamExecPath, $"steam://rungameid/{AppId}");
-        }
+        var steamExecPath = Path.Combine(Paths.SteamInstallFolder, "steam.exe");
+        Process.Start(steamExecPath, $"steam://rungameid/{AppId}");
     }
 }

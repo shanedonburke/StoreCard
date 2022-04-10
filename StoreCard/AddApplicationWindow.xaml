@@ -18,44 +18,6 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <local:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
-
-        <!--  Not currently used... but later?  -->
-        <LinearGradientBrush
-            x:Key="MenuPopupBrush"
-            StartPoint="0.5,0"
-            EndPoint="0.5,1">
-            <GradientStop
-                Offset="0"
-                Color="{DynamicResource ControlLightColor}" />
-            <GradientStop
-                Offset="0.5"
-                Color="{DynamicResource ControlMediumColor}" />
-            <GradientStop
-                Offset="1"
-                Color="{DynamicResource ControlLightColor}" />
-        </LinearGradientBrush>
-
-        <LinearGradientBrush
-            x:Key="ProgressBarIndicatorAnimatedFill"
-            StartPoint="0,0"
-            EndPoint="1,0">
-            <LinearGradientBrush.GradientStops>
-                <GradientStopCollection>
-                    <GradientStop
-                        Offset="0"
-                        Color="#000000FF" />
-                    <GradientStop
-                        Offset="0.4"
-                        Color="#600000FF" />
-                    <GradientStop
-                        Offset="0.6"
-                        Color="#600000FF" />
-                    <GradientStop
-                        Offset="1"
-                        Color="#000000FF" />
-                </GradientStopCollection>
-            </LinearGradientBrush.GradientStops>
-        </LinearGradientBrush>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -314,7 +276,7 @@
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate DataType="local:InstalledApplication">
                         <Grid HorizontalAlignment="Stretch">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -616,7 +578,7 @@
                 </ListBox.ItemContainerStyle>
                 <!--  Game list box item template  -->
                 <ListBox.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate DataType="local:InstalledGame">
                         <Grid HorizontalAlignment="Stretch">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using static System.String;
 
 namespace StoreCard
 {
@@ -15,15 +12,15 @@ namespace StoreCard
             BitmapIcon = bitmapIcon;
         }
 
-        public string Name { get; private set; }
-        public BitmapSource BitmapIcon { get; private set; }
+        public string Name { get; }
+        public BitmapSource BitmapIcon { get; }
 
         public abstract BitmapSource PlatformIcon { get; }
         public abstract SavedItem SavedItem { get; }
 
         public int CompareTo(InstalledGame? other)
         {
-            return Name.CompareTo(other?.Name);
+            return Compare(Name, other?.Name, StringComparison.Ordinal);
         }
     }
 }

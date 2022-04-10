@@ -1,125 +1,113 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace StoreCard
+namespace StoreCard;
+
+/// <summary>
+///     Interaction logic for TaskbarIconWindow.xaml
+/// </summary>
+public partial class TaskbarIconWindow
 {
-    /// <summary>
-    /// Interaction logic for TaskbarIconWindow.xaml
-    /// </summary>
-    public partial class TaskbarIconWindow : Window
+    private const int HotkeyId = 9000;
+
+    private HwndSource? _source;
+
+    public TaskbarIconWindow()
     {
-        // Hotkey solution from https://stackoverflow.com/a/11378213
-        [DllImport("User32.dll")]
-        private static extern bool RegisterHotKey(
+        InitializeComponent();
+
+        TaskbarIcon.Icon = Properties.Resources.StoreCardIcon;
+
+        DataContext = this;
+    }
+
+    // Hotkey solution from https://stackoverflow.com/a/11378213
+    [DllImport("User32.dll")]
+    private static extern bool RegisterHotKey(
         [In] IntPtr hWnd,
         [In] int id,
         [In] uint fsModifiers,
         [In] uint vk);
 
-        [DllImport("User32.dll")]
-        private static extern bool UnregisterHotKey(
-            [In] IntPtr hWnd,
-            [In] int id);
+    [DllImport("User32.dll")]
+    private static extern bool UnregisterHotKey(
+        [In] IntPtr hWnd,
+        [In] int id);
 
-        private HwndSource? _source;
-        private const int HOTKEY_ID = 9000;
+    protected override void OnSourceInitialized(EventArgs e)
+    {
+        base.OnSourceInitialized(e);
+        var helper = new WindowInteropHelper(this);
+        _source = HwndSource.FromHwnd(helper.Handle);
+        _source?.AddHook(HwndHook);
+        RegisterHotKey();
+    }
 
-        public TaskbarIconWindow()
+    protected override void OnClosed(EventArgs e)
+    {
+        _source?.RemoveHook(HwndHook);
+        _source = null;
+        UnregisterHotKey();
+        base.OnClosed(e);
+    }
+
+    // See https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerhotkey
+    // and https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+    // for key codes
+    private void RegisterHotKey()
+    {
+        var helper = new WindowInteropHelper(this);
+        const uint vkX = 0x58;
+        const uint modWinShift = 0x000C;
+        if (!RegisterHotKey(helper.Handle, HotkeyId, modWinShift, vkX))
+            Debug.WriteLine("Failed to register hotkey.");
+    }
+
+    private void UnregisterHotKey()
+    {
+        var helper = new WindowInteropHelper(this);
+        UnregisterHotKey(helper.Handle, HotkeyId);
+    }
+
+    private IntPtr HwndHook(IntPtr hwnd,
+        int msg,
+        IntPtr wParam,
+        IntPtr lParam,
+        ref bool handled)
+    {
+        const int wmHotkey = 0x0312;
+        switch (msg)
         {
-            InitializeComponent();
+            case wmHotkey:
+                switch (wParam.ToInt32())
+                {
+                    case HotkeyId:
+                        OnHotKeyPressed();
+                        handled = true;
+                        break;
+                }
 
-            TaskbarIcon.Icon = Properties.Resources.StoreCardIcon;
-
-            DataContext = this;
+                break;
         }
 
-        protected override void OnSourceInitialized(EventArgs e)
-        {
-            base.OnSourceInitialized(e);
-            var helper = new WindowInteropHelper(this);
-            _source = HwndSource.FromHwnd(helper.Handle);
-            _source.AddHook(HwndHook);
-            RegisterHotKey();
-        }
+        return IntPtr.Zero;
+    }
 
-        protected override void OnClosed(EventArgs e)
-        {
-            _source?.RemoveHook(HwndHook);
-            _source = null;
-            UnregisterHotKey();
-            base.OnClosed(e);
-        }
+    private void OnHotKeyPressed()
+    {
+        new ShowMainWindowCommand().Execute(null);
+    }
 
-        // See https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerhotkey
-        // and https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
-        // for key codes
-        private void RegisterHotKey()
-        {
-            var helper = new WindowInteropHelper(this);
-            const uint VK_X = 0x58;
-            const uint MOD_WIN_SHIFT = 0x000C;
-            if (!RegisterHotKey(helper.Handle, HOTKEY_ID, MOD_WIN_SHIFT, VK_X))
-            {
-                System.Diagnostics.Debug.WriteLine("Failed to register hotkey.");
-            }
-        }
+    private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        new ShowMainWindowCommand().Execute(null);
+    }
 
-        private void UnregisterHotKey()
-        {
-            var helper = new WindowInteropHelper(this);
-            UnregisterHotKey(helper.Handle, HOTKEY_ID);
-        }
-
-        private IntPtr HwndHook(IntPtr hwnd,
-                                int msg,
-                                IntPtr wParam,
-                                IntPtr lParam,
-                                ref bool handled)
-        {
-            const int WM_HOTKEY = 0x0312;
-            switch (msg)
-            {
-                case WM_HOTKEY:
-                    switch (wParam.ToInt32())
-                    {
-                        case HOTKEY_ID:
-                            OnHotKeyPressed();
-                            handled = true;
-                            break;
-                    }
-                    break;
-            }
-            return IntPtr.Zero;
-        }
-
-        private void OnHotKeyPressed()
-        {
-            new ShowMainWindowCommand().Execute(null);
-        }
-
-        private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            new ShowMainWindowCommand().Execute(null);
-        }
-
-        private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
+    private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        Application.Current.Shutdown();
     }
 }
