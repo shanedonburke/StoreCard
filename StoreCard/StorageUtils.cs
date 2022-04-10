@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,12 @@ namespace StoreCard
         public static List<SavedItem> ReadItemsFromFile()
         {
             string filePath = GetFilePath();
+
+            if (!File.Exists(filePath))
+            { 
+                return new List<SavedItem>();
+            }
+
             var json = System.IO.File.ReadAllText(filePath);
             if (json != null)
             {
