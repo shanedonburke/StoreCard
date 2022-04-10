@@ -242,7 +242,10 @@ namespace StoreCard
                     string? appId = manifest["appid"].Value;
                     if (name == null || appId == null) continue;
 
-                    Stream imageStreamSource = new FileStream($"{libraryCacheFolder}\\{appId}_icon.jpg",
+                    string iconPath = $"{libraryCacheFolder}\\{appId}_icon.jpg";
+                    if (!File.Exists(iconPath)) continue;
+
+                    Stream imageStreamSource = new FileStream(iconPath,
                                                               FileMode.Open,
                                                               FileAccess.Read,
                                                               FileShare.Read);

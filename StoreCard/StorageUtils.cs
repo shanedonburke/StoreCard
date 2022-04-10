@@ -19,7 +19,7 @@ namespace StoreCard
                 return new List<SavedItem>();
             }
 
-            var json = System.IO.File.ReadAllText(filePath);
+            var json = File.ReadAllText(filePath);
             if (json != null)
             {
                 // TODO: try-catch
