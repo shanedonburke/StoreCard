@@ -190,7 +190,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
             var name = app.Name;
             // The ParsingName property is the AppUserModelID
             var appUserModelId = app.ParsingName;
-            var icon = app.Thumbnail.ExtraLargeBitmapSource;
+            var icon = app.Thumbnail.SmallBitmapSource;
             icon.Freeze();
 
             installedApps.Add(new InstalledApplication(name, appUserModelId, icon));

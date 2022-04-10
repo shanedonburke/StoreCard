@@ -21,7 +21,7 @@
     mc:Ignorable="d">
     <Window.Resources>
         <local:NullVisibilityConverter x:Key="NullVisibilityConverter" />
-        
+
         <!--  Template for context menu  -->
         <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
             <StackPanel
@@ -306,7 +306,7 @@
                         VerticalAlignment="Center"
                         FontFamily="Segoe UI"
                         FontSize="18"
-                        Text="Folders">
+                        Text="Games">
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter
@@ -329,7 +329,7 @@
                         VerticalAlignment="Center"
                         FontFamily="Segoe UI"
                         FontSize="18"
-                        Text="Files">
+                        Text="Folders">
                         <TextBlock.Style>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter
@@ -339,6 +339,29 @@
                                     <DataTrigger
                                         Binding="{Binding Category}"
                                         Value="3">
+                                        <Setter
+                                            Property="Foreground"
+                                            Value="White" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock
+                        Margin="0,0,15,0"
+                        VerticalAlignment="Center"
+                        FontFamily="Segoe UI"
+                        FontSize="18"
+                        Text="Files">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter
+                                    Property="Foreground"
+                                    Value="#FF777777" />
+                                <Style.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Category}"
+                                        Value="4">
                                         <Setter
                                             Property="Foreground"
                                             Value="White" />
@@ -360,7 +383,7 @@
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category}"
-                                        Value="4">
+                                        Value="5">
                                         <Setter
                                             Property="Foreground"
                                             Value="White" />
