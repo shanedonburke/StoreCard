@@ -1,0 +1,76 @@
+﻿<Window x:Class="StoreCard.FileOptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StoreCard"
+        mc:Ignorable="d"
+        Width="800"
+        Height="600"
+        Background="#FF222222"
+        WindowStartupLocation="CenterScreen"
+        Title="File Options">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!--  "Open with" adio buttons  -->
+        <StackPanel
+            Grid.Row="0"
+            Margin="10">
+            <Label
+                Margin="0,0,0,10"
+                FontSize="14"
+                Foreground="White">
+                Choose which program should be used to open this item:
+            </Label>
+            <!--  "Default" radio button  -->
+            <StackPanel
+                Margin="5,0,0,10"
+                Orientation="Horizontal">
+                <RadioButton
+                    Name="DefaultRadioButton"
+                    GroupName="OpenWith"
+                    IsChecked="True" />
+                <TextBlock
+                    Height="20"
+                    VerticalAlignment="Stretch"
+                    FontSize="14"
+                    Foreground="White">
+                    Default
+                </TextBlock>
+            </StackPanel>
+            <!--  "Installed application" radio button  -->
+            <StackPanel
+                Margin="5,0,0,10"
+                Orientation="Horizontal">
+                <RadioButton
+                    Name="InstalledAppRadioButton"
+                    GroupName="OpenWith" />
+                <TextBlock
+                    Height="20"
+                    VerticalAlignment="Stretch"
+                    FontSize="14"
+                    Foreground="White">
+                    Installed application
+                </TextBlock>
+            </StackPanel>
+            <!--  "Other executable" radio button  -->
+            <StackPanel
+                Margin="5,0,0,10"
+                Orientation="Horizontal">
+                <RadioButton
+                    Name="OtherExecutableRadioButton"
+                    GroupName="OpenWith" />
+                <TextBlock
+                    Height="20"
+                    VerticalAlignment="Stretch"
+                    FontSize="14"
+                    Foreground="White">
+                    Other executable
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

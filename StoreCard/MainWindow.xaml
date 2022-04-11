@@ -47,6 +47,36 @@
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem
+                x:Name="ContextMenuFileOptionsItem">
+                <MenuItem.Style>
+                    <Style TargetType="{x:Type MenuItem}">
+                        <Setter Property="Visibility"
+                                Value="Collapsed" />
+                        <Style.Triggers>
+                            <!--  Show if selected item is folder  -->
+                            <DataTrigger Binding="{Binding Category}"
+                                         Value="3">
+                                <Setter
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            </DataTrigger>
+                            <!--  Show if selected item is file  -->
+                            <DataTrigger Binding="{Binding Category}"
+                                         Value="4">
+                                <Setter
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+                <MenuItem.Header>
+                    <TextBlock
+                        Margin="-20,0,0,0"
+                        Text="Options" />
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem
                 x:Name="DeleteItem"
                 Click="DeleteItem_Click">
                 <MenuItem.Header>
