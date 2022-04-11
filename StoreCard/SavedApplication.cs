@@ -28,9 +28,9 @@ internal class SavedApplication : SavedItem
 
     public override void Open()
     {
-        // From https://stackoverflow.com/a/57195200
         if (ExecutablePath == null)
         {
+            // From https://stackoverflow.com/a/57195200
             Process.Start("explorer.exe", @"shell:appsFolder\" + AppUserModelId);
         }
         else
