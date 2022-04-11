@@ -38,8 +38,10 @@ namespace StoreCard
             public IntPtr hIcon;
             public int iIcon;
             public uint dwAttributes;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
             public string szDisplayName;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
             public string szTypeName;
         };
@@ -50,11 +52,14 @@ namespace StoreCard
 
         // Import SHGetFileInfo function
         [DllImport("shell32.dll")]
-        public static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi, uint cbSizeFileInfo, uint uFlags);
+        public static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi,
+            uint cbSizeFileInfo, uint uFlags);
 
-        public string FilePath {
+        public string FilePath
+        {
             get => _filePath;
-            set {
+            set
+            {
                 _filePath = value;
 
                 DoesFileExist = File.Exists(value);
@@ -68,9 +73,11 @@ namespace StoreCard
             }
         }
 
-        public string FolderPath {
+        public string FolderPath
+        {
             get => _folderPath;
-            set {
+            set
+            {
                 _folderPath = value;
 
                 DoesFolderExist = Directory.Exists(value);
@@ -78,6 +85,7 @@ namespace StoreCard
                 {
                     FolderIcon = GetFolderIconByPath(value);
                 }
+
                 OnPropertyChanged("FolderPath");
                 OnPropertyChanged("FolderName");
             }
@@ -97,9 +105,11 @@ namespace StoreCard
             }
         }
 
-        public bool DoesFolderExist {
+        public bool DoesFolderExist
+        {
             get => _doesFolderExist;
-            set {
+            set
+            {
                 _doesFolderExist = value;
                 OnPropertyChanged("DoesFolderExist");
             }
@@ -115,9 +125,11 @@ namespace StoreCard
             }
         }
 
-        public ImageSource? FolderIcon {
+        public ImageSource? FolderIcon
+        {
             get => _folderIcon;
-            set {
+            set
+            {
                 _folderIcon = value;
                 OnPropertyChanged("FolderIcon");
             }
@@ -125,7 +137,8 @@ namespace StoreCard
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public AddFileWindow() {
+        public AddFileWindow()
+        {
             InitializeComponent();
             DataContext = this;
         }
@@ -158,7 +171,7 @@ namespace StoreCard
 
         private void SaveFileButton_Click(object sender, RoutedEventArgs e)
         {
-            var base64Icon = FileIcon != null ? ImageUtils.ImageToBase64((BitmapSource)FileIcon) : null;
+            var base64Icon = FileIcon != null ? ImageUtils.ImageToBase64((BitmapSource) FileIcon) : null;
             var savedItems = StorageUtils.ReadItemsFromFile();
             savedItems.Add(new SavedFile(FileName, base64Icon, FilePath));
             StorageUtils.SaveItemsToFile(savedItems);
@@ -167,7 +180,7 @@ namespace StoreCard
 
         private void SaveFolderButton_Click(object sender, RoutedEventArgs e)
         {
-            var base64Icon = FolderIcon != null ? ImageUtils.ImageToBase64((BitmapSource)FolderIcon) : null;
+            var base64Icon = FolderIcon != null ? ImageUtils.ImageToBase64((BitmapSource) FolderIcon) : null;
             var savedItems = StorageUtils.ReadItemsFromFile();
             savedItems.Add(new SavedFolder(FolderName, base64Icon, FolderPath));
             StorageUtils.SaveItemsToFile(savedItems);
@@ -193,7 +206,7 @@ namespace StoreCard
                 path,
                 0,
                 ref shinfo,
-                (uint)Marshal.SizeOf(shinfo),
+                (uint) Marshal.SizeOf(shinfo),
                 SHGFI_ICON | SHGFI_LARGEICON);
 
             using Icon i = System.Drawing.Icon.FromHandle(shinfo.hIcon);
