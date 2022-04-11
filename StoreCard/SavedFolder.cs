@@ -3,19 +3,17 @@ using System.Diagnostics;
 
 namespace StoreCard
 {
-    internal class SavedFile : SavedItem
+    internal class SavedFolder : SavedItem
     {
         public string Path { get; }
 
-        public SavedFile(string name, string? base64Icon, string path) : base(name, base64Icon)
-        {
+        public SavedFolder(string name, string? base64Icon, string path) : base(name, base64Icon) {
             Path = path;
         }
 
         public override ItemCategory Category => ItemCategory.File;
 
-        public override void Open()
-        {
+        public override void Open() {
             ProcessUtils.OpenInDefaultProgram(Path);
         }
     }

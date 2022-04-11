@@ -158,15 +158,20 @@ namespace StoreCard
 
         private void SaveFileButton_Click(object sender, RoutedEventArgs e)
         {
+            var base64Icon = FileIcon != null ? ImageUtils.ImageToBase64((BitmapSource)FileIcon) : null;
             var savedItems = StorageUtils.ReadItemsFromFile();
-            // savedItems.Add(new SavedFile());
+            savedItems.Add(new SavedFile(FileName, base64Icon, FilePath));
             StorageUtils.SaveItemsToFile(savedItems);
             Close();
         }
 
         private void SaveFolderButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var base64Icon = FolderIcon != null ? ImageUtils.ImageToBase64((BitmapSource)FolderIcon) : null;
+            var savedItems = StorageUtils.ReadItemsFromFile();
+            savedItems.Add(new SavedFolder(FolderName, base64Icon, FolderPath));
+            StorageUtils.SaveItemsToFile(savedItems);
+            Close();
         }
 
         private static ImageSource? GetFileIconByPath(string path)
