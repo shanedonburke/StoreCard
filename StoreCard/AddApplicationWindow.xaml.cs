@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -189,12 +190,14 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         {
             // The friendly app name
             var name = app.Name;
+            // Path to executable
+            var path = app.Properties.System.Link.TargetParsingPath.Value;
             // The ParsingName property is the AppUserModelID
             var appUserModelId = app.ParsingName;
             var icon = app.Thumbnail.SmallBitmapSource;
             icon.Freeze();
 
-            installedApps.Add(new InstalledApplication(name, appUserModelId, icon));
+            installedApps.Add(new InstalledApplication(name, appUserModelId, path, icon));
         }
 
         SetInstalledApps(installedApps);
