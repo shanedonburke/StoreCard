@@ -11,7 +11,7 @@
         public override ItemCategory Category => ItemCategory.Folder;
 
         public override void Open() {
-            ProcessUtils.OpenInDefaultProgram(Path);
+            SystemUtils.OpenInDefaultProgram(Path);
         }
     }
 }

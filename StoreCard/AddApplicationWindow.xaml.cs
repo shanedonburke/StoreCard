@@ -179,30 +179,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    // From https://stackoverflow.com/a/57195200
-    private void LoadInstalledApplications()
-    {
-        var installedApps = new List<InstalledApplication>();
-        var appsFolderId = new Guid("{1e87508d-89c2-42f0-8a7e-645a0f50ca58}");
-        var appsFolder = (ShellObject) KnownFolderHelper.FromKnownFolderId(appsFolderId);
-
-        foreach (var app in (IKnownFolder) appsFolder)
-        {
-            // The friendly app name
-            var name = app.Name;
-            // Path to executable
-            var path = app.Properties.System.Link.TargetParsingPath.Value;
-            // The ParsingName property is the AppUserModelID
-            var appUserModelId = app.ParsingName;
-            var icon = app.Thumbnail.SmallBitmapSource;
-            icon.Freeze();
-
-            installedApps.Add(new InstalledApplication(name, appUserModelId, path, icon));
-        }
-
-        SetInstalledApps(installedApps);
-    }
-
     private void LoadInstalledSteamGames()
     {
         var installedGames = new List<InstalledSteamGame>();
@@ -417,7 +393,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     {
         Activate();
 
-        Task.Run(LoadInstalledApplications);
+        Task.Run(() => SetInstalledApps(SystemUtils.GetInstalledApplications()));
         Task.Run(LoadInstalledSteamGames);
     }
 

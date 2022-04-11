@@ -16,7 +16,7 @@ namespace StoreCard
 
         public override void Open()
         {
-            ProcessUtils.OpenInDefaultProgram(Path);
+            SystemUtils.OpenInDefaultProgram(Path);
         }
     }
 }
