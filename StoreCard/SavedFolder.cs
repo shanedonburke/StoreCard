@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-
-namespace StoreCard
+﻿namespace StoreCard
 {
     internal class SavedFolder : SavedItem
     {
