@@ -165,7 +165,7 @@
                                 <MenuItem.Header>
                                     <TextBlock
                                         Margin="-20,0,0,0"
-                                        Text="Add Application" />
+                                        Text="Add App or Game" />
                                 </MenuItem.Header>
                             </MenuItem>
                             <MenuItem
@@ -174,7 +174,7 @@
                                 <MenuItem.Header>
                                     <TextBlock
                                         Margin="-20,0,0,0"
-                                        Text="Add File" />
+                                        Text="Add File or Folder" />
                                 </MenuItem.Header>
                             </MenuItem>
                             <MenuItem
