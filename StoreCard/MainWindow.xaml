@@ -73,7 +73,7 @@
                 <MenuItem.Header>
                     <TextBlock
                         Margin="-20,0,0,0"
-                        Text="Options" />
+                        Text="Options..." />
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem
@@ -195,7 +195,7 @@
                                 <MenuItem.Header>
                                     <TextBlock
                                         Margin="-20,0,0,0"
-                                        Text="Add App or Game" />
+                                        Text="Add App or Game..." />
                                 </MenuItem.Header>
                             </MenuItem>
                             <MenuItem
@@ -204,7 +204,7 @@
                                 <MenuItem.Header>
                                     <TextBlock
                                         Margin="-20,0,0,0"
-                                        Text="Add File or Folder" />
+                                        Text="Add File or Folder..." />
                                 </MenuItem.Header>
                             </MenuItem>
                             <MenuItem
@@ -213,7 +213,7 @@
                                 <MenuItem.Header>
                                     <TextBlock
                                         Margin="-20,0,0,0"
-                                        Text="Add Link" />
+                                        Text="Add Link..." />
                                 </MenuItem.Header>
                             </MenuItem>
                         </ContextMenu>
