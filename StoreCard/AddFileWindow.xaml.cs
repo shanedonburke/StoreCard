@@ -204,5 +204,10 @@ namespace StoreCard
                 new Int32Rect(0, 0, i.Width, i.Height),
                 BitmapSizeOptions.FromEmptyOptions());
         }
+
+        private void Window_Closed(object? sender, EventArgs e)
+        {
+            new ShowMainWindowCommand().Execute(null);
+        }
     }
 }
