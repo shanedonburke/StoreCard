@@ -403,8 +403,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void AddSelectedGame()
     {
-        var installedGame = GameListBox.SelectedItem as InstalledGame;
-        if (installedGame == null) return;
+        if (GameListBox.SelectedItem is not InstalledGame installedGame) return;
         var savedItems = StorageUtils.ReadItemsFromFile();
         savedItems.Add(installedGame.SavedItem);
         StorageUtils.SaveItemsToFile(savedItems);
