@@ -831,7 +831,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="30" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <!--  Name field  -->
                     <Grid Grid.Row="0">
@@ -902,7 +902,7 @@
                     <!--  Icon/name preview  -->
                     <StackPanel
                         Grid.Row="1"
-                        Margin="50,15,0,15"
+                        Margin="50,30,0,30"
                         Orientation="Horizontal">
                         <Image
                             Width="40"
@@ -922,10 +922,11 @@
                     <Button
                         Name="SaveButton"
                         Grid.Row="2"
+                        Height="30"
                         Margin="50,0,0,0"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch"
-                        VerticalContentAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        VerticalContentAlignment="Bottom"
                         BorderBrush="#00000000"
                         BorderThickness="0,0,0,0"
                         Click="SaveButton_Click"

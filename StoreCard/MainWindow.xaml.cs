@@ -25,6 +25,14 @@ public partial class MainWindow : INotifyPropertyChanged
 
         _savedItems = StorageUtils.ReadItemsFromFile();
 
+
+        // Without this, opening the context menu for the first time results
+        // in a small delay that looks strange; the button's BG color flashes
+        // to the "mouse over" state before the menu opens.
+        AddButtonContextMenu.Visibility = Visibility.Collapsed;
+        AddButtonContextMenu.IsOpen = true;
+        AddButtonContextMenu.IsOpen = false;
+
         if (_savedItems.Count > 0) ItemListBox.SelectedIndex = 0;
 
         Activate();
@@ -98,6 +106,8 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void AddFile_Click(object sender, RoutedEventArgs e)
     {
+        new AddFileWindow().Show();
+        Close();
     }
 
     private void AddLink_Click(object sender, RoutedEventArgs e)
@@ -193,6 +203,7 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void AddButton_Click(object sender, RoutedEventArgs e)
     {
+        AddButtonContextMenu.Visibility = Visibility.Visible;
         AddButtonContextMenu.IsOpen = true;
     }
 

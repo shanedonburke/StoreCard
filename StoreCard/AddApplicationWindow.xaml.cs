@@ -107,6 +107,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         set
         {
             _executablePath = value;
+
             DoesExecutableExist = File.Exists(value);
             if (DoesExecutableExist)
             {
@@ -365,10 +366,12 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void BrowseButton_Click(object sender, RoutedEventArgs e)
     {
-        var openFileDialog = new OpenFileDialog();
-        openFileDialog.Filter = "Executables|*.exe|All Files (*.*)|*.*";
-        openFileDialog.InitialDirectory = Environment.ExpandEnvironmentVariables("%ProgramW6432%");
-        openFileDialog.Title = "Select Executable";
+        var openFileDialog = new OpenFileDialog
+        {
+            Filter = "Executables|*.exe|All Files (*.*)|*.*",
+            InitialDirectory = Environment.ExpandEnvironmentVariables("%ProgramW6432%"),
+            Title = "Select Executable"
+        };
 
         if (openFileDialog.ShowDialog() == true) ExecutablePath = openFileDialog.FileName;
     }
@@ -384,43 +387,36 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void ApplicationListBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Enter)
-        {
-            AddSelectedApplication();
-            e.Handled = true;
-        }
+        if (e.Key != Key.Enter) return;
+        AddSelectedApplication();
+        e.Handled = true;
     }
 
     private void AddSelectedApplication()
     {
-        var installedApplication = ApplicationListBox.SelectedItem as InstalledApplication;
-        if (installedApplication != null)
-        {
-            var savedItems = StorageUtils.ReadItemsFromFile();
-            savedItems.Add(new SavedApplication(installedApplication));
-            StorageUtils.SaveItemsToFile(savedItems);
-            Close();
-        }
+        if (ApplicationListBox.SelectedItem is not InstalledApplication installedApplication) return;
+        var savedItems = StorageUtils.ReadItemsFromFile();
+        savedItems.Add(new SavedApplication(installedApplication));
+        StorageUtils.SaveItemsToFile(savedItems);
+        Close();
     }
 
     private void AddSelectedGame()
     {
         var installedGame = GameListBox.SelectedItem as InstalledGame;
-        if (installedGame != null)
-        {
-            var savedItems = StorageUtils.ReadItemsFromFile();
-            savedItems.Add(installedGame.SavedItem);
-            StorageUtils.SaveItemsToFile(savedItems);
-            Close();
-        }
+        if (installedGame == null) return;
+        var savedItems = StorageUtils.ReadItemsFromFile();
+        savedItems.Add(installedGame.SavedItem);
+        StorageUtils.SaveItemsToFile(savedItems);
+        Close();
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         Activate();
 
-        Task.Run(() => LoadInstalledApplications());
-        Task.Run(() => LoadInstalledSteamGames());
+        Task.Run(LoadInstalledApplications);
+        Task.Run(LoadInstalledSteamGames);
     }
 
     private void Window_Closed(object sender, EventArgs e)
