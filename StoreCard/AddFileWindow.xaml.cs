@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -63,6 +64,7 @@ namespace StoreCard
                 }
 
                 OnPropertyChanged("FilePath");
+                OnPropertyChanged("FileName");
             }
         }
 
@@ -77,8 +79,13 @@ namespace StoreCard
                     FolderIcon = GetFolderIconByPath(value);
                 }
                 OnPropertyChanged("FolderPath");
+                OnPropertyChanged("FolderName");
             }
         }
+
+        public string FileName => FilePath.Split(@"\").Last();
+
+        public string FolderName => FolderPath.Split(@"\").Last();
 
         public bool DoesFileExist
         {
@@ -151,7 +158,10 @@ namespace StoreCard
 
         private void SaveFileButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var savedItems = StorageUtils.ReadItemsFromFile();
+            // savedItems.Add(new SavedFile());
+            StorageUtils.SaveItemsToFile(savedItems);
+            Close();
         }
 
         private void SaveFolderButton_Click(object sender, RoutedEventArgs e)

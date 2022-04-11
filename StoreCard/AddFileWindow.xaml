@@ -217,7 +217,7 @@
                         FontSize="14"
                         FontWeight="Bold"
                         Foreground="White"
-                        Text="{Binding FilePath}" />
+                        Text="{Binding FileName}" />
                 </StackPanel>
                 <!--  "Save" button for files  -->
                 <Button
@@ -431,7 +431,7 @@
                         FontSize="14"
                         FontWeight="Bold"
                         Foreground="White"
-                        Text="{Binding FolderPath}" />
+                        Text="{Binding FolderName}" />
                 </StackPanel>
                 <!--  "Save" button for files  -->
                 <Button
