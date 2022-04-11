@@ -354,12 +354,12 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         }
     }
 
-    private void AddAppButton_Click(object sender, RoutedEventArgs e)
+    private void SaveAppButton_Click(object sender, RoutedEventArgs e)
     {
         AddSelectedApplication();
     }
 
-    private void AddGameButton_Click(object sender, RoutedEventArgs e)
+    private void SaveGameButton_Click(object sender, RoutedEventArgs e)
     {
         AddSelectedGame();
     }

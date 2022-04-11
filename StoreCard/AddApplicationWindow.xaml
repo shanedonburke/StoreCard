@@ -295,7 +295,7 @@
                                 VerticalAlignment="Center"
                                 FontSize="12"
                                 Text="{Binding Name}" />
-                            <!--  "Add" button  -->
+                            <!--  "Save" button  -->
                             <Border
                                 Grid.Column="2"
                                 Width="60"
@@ -322,7 +322,7 @@
                                                     Value="#FF37CC75" />
                                             </Trigger>
                                             <DataTrigger
-                                                Binding="{Binding ElementName=AddAppButton, Path=IsPressed}"
+                                                Binding="{Binding ElementName=SaveAppButton, Path=IsPressed}"
                                                 Value="True">
                                                 <Setter
                                                     Property="Background"
@@ -340,10 +340,10 @@
                                     </Style>
                                 </Border.Style>
                                 <Button
-                                    Name="AddAppButton"
+                                    Name="SaveAppButton"
                                     BorderThickness="0,0,0,0"
-                                    Click="AddAppButton_Click"
-                                    Content="Add"
+                                    Click="SaveAppButton_Click"
+                                    Content="Save"
                                     Foreground="White"
                                     IsTabStop="False">
                                     <Button.Style>
@@ -604,7 +604,7 @@
                                 VerticalAlignment="Center"
                                 FontSize="12"
                                 Text="{Binding Name}" />
-                            <!--  "Add" button  -->
+                            <!--  "Save" button  -->
                             <Border
                                 Grid.Column="3"
                                 Width="60"
@@ -631,7 +631,7 @@
                                                     Value="#FF37CC75" />
                                             </Trigger>
                                             <DataTrigger
-                                                Binding="{Binding ElementName=AddGameButton, Path=IsPressed}"
+                                                Binding="{Binding ElementName=SaveGameButton, Path=IsPressed}"
                                                 Value="True">
                                                 <Setter
                                                     Property="Background"
@@ -649,10 +649,10 @@
                                     </Style>
                                 </Border.Style>
                                 <Button
-                                    Name="AddGameButton"
+                                    Name="SaveGameButton"
                                     BorderThickness="0,0,0,0"
-                                    Click="AddGameButton_Click"
-                                    Content="Add"
+                                    Click="SaveGameButton_Click"
+                                    Content="Save"
                                     Foreground="White"
                                     IsTabStop="False">
                                     <Button.Style>
