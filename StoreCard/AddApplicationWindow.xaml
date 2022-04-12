@@ -922,14 +922,14 @@
         <!--  "Other executable" content  -->
         <Grid
             Grid.Row="1"
-            VerticalAlignment="Top"
+            VerticalAlignment="Stretch"
             Visibility="{Binding IsChecked, ElementName=OtherExecutableRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid
-                Margin="15,10,15,10"
-                VerticalAlignment="Center">
+                Margin="15,10,15,0"
+                VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50" />
@@ -1057,6 +1057,7 @@
                     Grid.ColumnSpan="3"
                     Margin="0,15,0,0"
                     HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
                     Visibility="{Binding DoesExecutableExist, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30" />
@@ -1148,59 +1149,158 @@
                             Foreground="White"
                             Text="{Binding ExecutableName}" />
                     </StackPanel>
-                    <!--  "Save" button  -->
-                    <Button
-                        Name="SaveButton"
+                    <Grid
                         Grid.Row="2"
-                        Height="30"
-                        Margin="50,0,0,0"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Bottom"
-                        VerticalContentAlignment="Bottom"
-                        BorderBrush="#00000000"
-                        BorderThickness="0,0,0,0"
-                        Click="SaveButton_Click"
-                        Content="Save"
-                        FontFamily="Segoe UI"
-                        FontSize="14"
-                        Foreground="White">
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF2DA65F" />
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border
-                                                Background="{TemplateBinding Background}"
-                                                CornerRadius="5">
-                                                <ContentPresenter
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger
-                                        Property="IsMouseOver"
-                                        Value="True">
+                        VerticalAlignment="Bottom">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <!--  "Save" button for executables  -->
+                        <Border
+                            Grid.Column="2"
+                            Height="30"
+                            Margin="0,15,0,15"
+                            HorizontalAlignment="Stretch"
+                            CornerRadius="5">
+                            <Border.Style>
+                                <!--  Must use template here for button background to be overridden  -->
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter
+                                        Property="Background"
+                                        Value="#FF2DA65F" />
+                                    <Style.Triggers>
+                                        <!--  Hover/press styling  -->
+                                        <Trigger
+                                            Property="IsMouseOver"
+                                            Value="True">
+                                            <Setter
+                                                Property="Background"
+                                                Value="#FF37CC75" />
+                                        </Trigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=SaveExecutableButton, Path=IsPressed}"
+                                            Value="True">
+                                            <Setter
+                                                Property="Background"
+                                                Value="#FF34BF6E" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Button
+                                Name="SaveExecutableButton"
+                                BorderThickness="0,0,0,0"
+                                Click="SaveExecutableButton_Click"
+                                FontSize="14"
+                                Foreground="White"
+                                IsTabStop="False">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
                                         <Setter
                                             Property="Background"
-                                            Value="#FF37CC75" />
-                                    </Trigger>
-                                    <Trigger
-                                        Property="IsPressed"
-                                        Value="True">
+                                            Value="Transparent" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <TextBlock
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"
+                                                            TextAlignment="Center"
+                                                            LineHeight="20"
+                                                            Text="Save" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger
+                                                Property="IsMouseOver"
+                                                Value="True">
+                                                <Setter
+                                                    Property="Background"
+                                                    Value="Transparent" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Border>
+                        <!--  "Cancel" button for executables  -->
+                        <Border
+                            Grid.Column="3"
+                            Height="30"
+                            HorizontalAlignment="Stretch"
+                            Margin="10,15,0,15"
+                            CornerRadius="5">
+                            <Border.Style>
+                                <!--  Must use template here for button background to be overridden  -->
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter
+                                        Property="Background"
+                                        Value="#888888" />
+                                    <Style.Triggers>
+                                        <!--  Hover/press styling  -->
+                                        <Trigger
+                                            Property="IsMouseOver"
+                                            Value="True">
+                                            <Setter
+                                                Property="Background"
+                                                Value="#A8A8A8" />
+                                        </Trigger>
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=CancelExecutableButton, Path=IsPressed}"
+                                            Value="True">
+                                            <Setter
+                                                Property="Background"
+                                                Value="#989898" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Button
+                                Name="CancelExecutableButton"
+                                BorderThickness="0,0,0,0"
+                                Click="CancelButton_Click"
+                                FontSize="14"
+                                Foreground="White"
+                                IsTabStop="False">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
                                         <Setter
                                             Property="Background"
-                                            Value="#FF34BF6E" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                                            Value="Transparent" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}">
+                                                        <TextBlock
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"
+                                                            TextAlignment="Center"
+                                                            LineHeight="20"
+                                                            Text="Cancel" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger
+                                                Property="IsMouseOver"
+                                                Value="True">
+                                                <Setter
+                                                    Property="Background"
+                                                    Value="Transparent" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Border>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

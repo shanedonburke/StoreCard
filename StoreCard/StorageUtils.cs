@@ -26,6 +26,7 @@ internal class StorageUtils
 
     public static bool SaveItemsToFile(List<SavedItem> items)
     {
+        items.Sort();
         var filePath = GetFilePath();
         var json = JsonConvert.SerializeObject(items, new JsonSerializerSettings
         {

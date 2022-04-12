@@ -366,7 +366,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         if (openFileDialog.ShowDialog() == true) ExecutablePath = openFileDialog.FileName;
     }
 
-    private void SaveButton_Click(object sender, RoutedEventArgs e)
+    private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
     {
         var base64Icon = ExecutableIcon != null ? ImageUtils.ImageToBase64((BitmapSource) ExecutableIcon) : null;
         var savedItems = StorageUtils.ReadItemsFromFile();

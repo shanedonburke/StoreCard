@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using System.Windows.Media;
+using static System.String;
 
 namespace StoreCard
 {
@@ -13,7 +15,7 @@ namespace StoreCard
         Link
     }
 
-    public abstract class SavedItem
+    public abstract class SavedItem : IComparable<SavedItem>
     {
         public string Name { get; protected set; }
 
@@ -34,5 +36,10 @@ namespace StoreCard
         }
 
         public abstract void Open();
+
+        public int CompareTo(SavedItem? other)
+        {
+            return Compare(Name, other?.Name, StringComparison.Ordinal);
+        }
     }
 }
