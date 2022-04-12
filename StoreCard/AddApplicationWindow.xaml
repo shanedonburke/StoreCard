@@ -310,6 +310,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <!--  Selected app preview  -->
                 <StackPanel
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
@@ -421,7 +422,7 @@
                         </Button.Style>
                     </Button>
                 </Border>
-                <!--  "Cancel" button for appplications  -->
+                <!--  "Cancel" button for applications  -->
                 <Border
                     Grid.Column="3"
                     Height="30"
@@ -734,6 +735,31 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <!--  Selected game preview  -->
+                <StackPanel
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Visibility="{Binding Path=ShouldEnableSaveGameButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Margin="0,0,10,0"
+                        Text="Selected:"
+                        FontSize="12"
+                        VerticalAlignment="Center"
+                        FontFamily="Segoe UI"
+                        Foreground="#AAAAAA" />
+                    <Image
+                        Width="24"
+                        Height="24"
+                        Margin="0,0,10,0"
+                        Source="{Binding Path=SelectedGameIcon}" />
+                    <TextBlock
+                        Text="{Binding Path=SelectedGameName}"
+                        FontSize="12"
+                        VerticalAlignment="Center"
+                        Foreground="White" />
+                </StackPanel>
                 <!--  "Save" button for games  -->
                 <Border
                     Grid.Column="2"

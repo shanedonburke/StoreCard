@@ -184,6 +184,10 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     public ImageSource? SelectedAppIcon => (ApplicationListBox.SelectedItem as InstalledApplication)?.BitmapIcon;
 
+    public string? SelectedGameName => (GameListBox.SelectedItem as InstalledGame)?.Name;
+
+    public ImageSource? SelectedGameIcon => (GameListBox.SelectedItem as InstalledGame)?.BitmapIcon;
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
     private void LoadInstalledSteamGames()
@@ -453,5 +457,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     private void GameListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         OnPropertyChanged("ShouldEnableSaveGameButton");
+        OnPropertyChanged("SelectedGameName");
+        OnPropertyChanged("SelectedGameIcon");
     }
 }
