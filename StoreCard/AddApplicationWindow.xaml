@@ -431,7 +431,7 @@
                     <Button
                         Name="CancelAppButton"
                         BorderThickness="0,0,0,0"
-                        Click="CancelAppButton_Click"
+                        Click="CancelButton_Click"
                         FontSize="14"
                         Foreground="White"
                         IsTabStop="False">
@@ -476,6 +476,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="60" />
             </Grid.RowDefinitions>
             <!--  Game search bar  -->
             <Border
@@ -554,6 +555,7 @@
                 Foreground="White"
                 ItemsSource="{Binding FilteredGames}"
                 PreviewKeyDown="ApplicationListBox_PreviewKeyDown"
+                SelectionChanged="GameListBox_SelectionChanged"
                 Visibility="{Binding AreGamesLoaded, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <!--  Style items to take up whole horizontal space  -->
                 <ListBox.ItemContainerStyle>
@@ -694,90 +696,177 @@
                                 VerticalAlignment="Center"
                                 FontSize="12"
                                 Text="{Binding Name}" />
-                            <!--  "Save" button  -->
-                            <Border
-                                Grid.Column="3"
-                                Width="60"
-                                Height="26"
-                                Margin="5,0,5,0"
-                                HorizontalAlignment="Right"
-                                CornerRadius="5">
-                                <Border.Style>
-                                    <!--  Must use template here for button background to be overridden  -->
-                                    <Style TargetType="{x:Type Border}">
-                                        <Setter
-                                            Property="Background"
-                                            Value="#FF2DA65F" />
-                                        <Setter
-                                            Property="Visibility"
-                                            Value="Hidden" />
-                                        <Style.Triggers>
-                                            <!--  Hover/press styling  -->
-                                            <Trigger
-                                                Property="IsMouseOver"
-                                                Value="True">
-                                                <Setter
-                                                    Property="Background"
-                                                    Value="#FF37CC75" />
-                                            </Trigger>
-                                            <DataTrigger
-                                                Binding="{Binding ElementName=SaveGameButton, Path=IsPressed}"
-                                                Value="True">
-                                                <Setter
-                                                    Property="Background"
-                                                    Value="#FF34BF6E" />
-                                            </DataTrigger>
-                                            <!--  Only show when the list item is selected  -->
-                                            <DataTrigger
-                                                Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}"
-                                                Value="True">
-                                                <Setter
-                                                    Property="Visibility"
-                                                    Value="Visible" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Border.Style>
-                                <Button
-                                    Name="SaveGameButton"
-                                    BorderThickness="0,0,0,0"
-                                    Click="SaveGameButton_Click"
-                                    Content="Save"
-                                    Foreground="White"
-                                    IsTabStop="False">
-                                    <Button.Style>
-                                        <Style TargetType="{x:Type Button}">
-                                            <Setter
-                                                Property="Background"
-                                                Value="Transparent" />
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="{x:Type Button}">
-                                                        <Border Background="{TemplateBinding Background}">
-                                                            <ContentPresenter
-                                                                HorizontalAlignment="Center"
-                                                                VerticalAlignment="Center" />
-                                                        </Border>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Style.Triggers>
-                                                <Trigger
-                                                    Property="IsMouseOver"
-                                                    Value="True">
-                                                    <Setter
-                                                        Property="Background"
-                                                        Value="Transparent" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                </Button>
-                            </Border>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Grid
+                Grid.Row="2"
+                Margin="15,15,15,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <!--  "Save" button for applications  -->
+                <Border
+                    Grid.Column="2"
+                    Height="30"
+                    HorizontalAlignment="Stretch"
+                    CornerRadius="5">
+                    <Border.Style>
+                        <!--  Must use template here for button background to be overridden  -->
+                        <Style TargetType="{x:Type Border}">
+                            <Setter
+                                Property="Background"
+                                Value="#505050" />
+                            <Style.Triggers>
+                                <!--  Show green background when enabled  -->
+                                <DataTrigger
+                                    Binding="{Binding ElementName=SaveGameButton ,Path=IsEnabled}"
+                                    Value="True">
+                                    <Setter
+                                        Property="Background"
+                                        Value="#FF2DA65F" />
+                                </DataTrigger>
+                                <!--  Hover/press styling  -->
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition
+                                            Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}"
+                                            Value="True" />
+                                        <Condition
+                                            Binding="{Binding ElementName=SaveGameButton ,Path=IsEnabled}"
+                                            Value="True" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter
+                                        Property="Background"
+                                        Value="#FF37CC75" />
+                                </MultiDataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding ElementName=SaveGameButton, Path=IsPressed}"
+                                    Value="True">
+                                    <Setter
+                                        Property="Background"
+                                        Value="#FF34BF6E" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Button
+                        Name="SaveGameButton"
+                        BorderThickness="0,0,0,0"
+                        Click="SaveAppButton_Click"
+                        FontSize="14"
+                        Foreground="White"
+                        IsTabStop="False">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent" />
+                                <Setter Property="IsEnabled"
+                                        Value="{Binding ShouldEnableSaveGameButton}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <TextBlock
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    TextAlignment="Center"
+                                                    LineHeight="20"
+                                                    Text="Save" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger
+                                        Property="IsMouseOver"
+                                        Value="True">
+                                        <Setter
+                                            Property="Background"
+                                            Value="Transparent" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Border>
+                <!--  "Cancel" button for appplications  -->
+                <Border
+                    Grid.Column="3"
+                    Height="30"
+                    HorizontalAlignment="Stretch"
+                    Margin="10,0,0,0"
+                    CornerRadius="5">
+                    <Border.Style>
+                        <!--  Must use template here for button background to be overridden  -->
+                        <Style TargetType="{x:Type Border}">
+                            <Setter
+                                Property="Background"
+                                Value="#888888" />
+                            <Style.Triggers>
+                                <!--  Hover/press styling  -->
+                                <Trigger
+                                    Property="IsMouseOver"
+                                    Value="True">
+                                    <Setter
+                                        Property="Background"
+                                        Value="#A8A8A8" />
+                                </Trigger>
+                                <DataTrigger
+                                    Binding="{Binding ElementName=CancelGameButton, Path=IsPressed}"
+                                    Value="True">
+                                    <Setter
+                                        Property="Background"
+                                        Value="#989898" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Button
+                        Name="CancelGameButton"
+                        BorderThickness="0,0,0,0"
+                        Click="CancelButton_Click"
+                        FontSize="14"
+                        Foreground="White"
+                        IsTabStop="False">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <TextBlock
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    TextAlignment="Center"
+                                                    LineHeight="20"
+                                                    Text="Cancel" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger
+                                        Property="IsMouseOver"
+                                        Value="True">
+                                        <Setter
+                                            Property="Background"
+                                            Value="Transparent" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Border>
+            </Grid>
         </Grid>
         <!--  "Other executable" content  -->
         <Grid
