@@ -387,7 +387,7 @@
                         Click="SaveAppButton_Click"
                         FontSize="14"
                         Foreground="White"
-                        IsTabStop="False">
+                        IsTabStop="True">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter
@@ -460,7 +460,7 @@
                         Click="CancelButton_Click"
                         FontSize="14"
                         Foreground="White"
-                        IsTabStop="False">
+                        IsTabStop="True">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter
@@ -812,7 +812,7 @@
                         Click="SaveGameButton_Click"
                         FontSize="14"
                         Foreground="White"
-                        IsTabStop="False">
+                        IsTabStop="True">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter
@@ -885,7 +885,7 @@
                         Click="CancelButton_Click"
                         FontSize="14"
                         Foreground="White"
-                        IsTabStop="False">
+                        IsTabStop="True">
                         <Button.Style>
                             <Style TargetType="{x:Type Button}">
                                 <Setter

@@ -196,8 +196,7 @@
                 Grid.ColumnSpan="3"
                 Margin="0,15,0,0"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Visibility="{Binding DoesFileExist, Converter={StaticResource BooleanToVisibilityConverter}}">
+                VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="30" />
@@ -205,6 +204,7 @@
                 <!--  Icon/name preview  -->
                 <StackPanel
                     Grid.Row="0"
+                    Visibility="{Binding DoesFileExist, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Margin="50,15,0,30"
                     VerticalAlignment="Top"
                     Orientation="Horizontal">
@@ -222,6 +222,7 @@
                         Foreground="White"
                         Text="{Binding FileName}" />
                 </StackPanel>
+                <!--  Save/Cancel controls  -->
                 <Grid
                     Grid.Row="1"
                     Margin="50,0,0,0"
@@ -243,23 +244,37 @@
                             <!--  Must use template here for button background to be overridden  -->
                             <Style TargetType="{x:Type Border}">
                                 <Setter
-                                    Property="Background"
-                                    Value="#FF2DA65F" />
+                                Property="Background"
+                                Value="#505050" />
                                 <Style.Triggers>
-                                    <!--  Hover/press styling  -->
-                                    <Trigger
-                                        Property="IsMouseOver"
-                                        Value="True">
-                                        <Setter
-                                            Property="Background"
-                                            Value="#FF37CC75" />
-                                    </Trigger>
+                                    <!--  Show green background when enabled  -->
                                     <DataTrigger
-                                        Binding="{Binding ElementName=SaveFileButton, Path=IsPressed}"
-                                        Value="True">
+                                    Binding="{Binding ElementName=SaveFileButton ,Path=IsEnabled}"
+                                    Value="True">
                                         <Setter
-                                            Property="Background"
-                                            Value="#FF34BF6E" />
+                                        Property="Background"
+                                        Value="#FF2DA65F" />
+                                    </DataTrigger>
+                                    <!--  Hover/press styling  -->
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition
+                                            Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}"
+                                            Value="True" />
+                                            <Condition
+                                            Binding="{Binding ElementName=SaveFileButton ,Path=IsEnabled}"
+                                            Value="True" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter
+                                        Property="Background"
+                                        Value="#FF37CC75" />
+                                    </MultiDataTrigger>
+                                    <DataTrigger
+                                    Binding="{Binding ElementName=SaveFileButton, Path=IsPressed}"
+                                    Value="True">
+                                        <Setter
+                                        Property="Background"
+                                        Value="#FF34BF6E" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -270,12 +285,14 @@
                             Click="SaveFileButton_Click"
                             FontSize="14"
                             Foreground="White"
-                            IsTabStop="False">
+                            IsTabStop="True">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter
                                         Property="Background"
                                         Value="Transparent" />
+                                    <Setter Property="IsEnabled"
+                                            Value="{Binding DoesFileExist}" />
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type Button}">
@@ -341,7 +358,7 @@
                             Click="CancelButton_Click"
                             FontSize="14"
                             Foreground="White"
-                            IsTabStop="False">
+                            IsTabStop="True">
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Setter
@@ -382,10 +399,10 @@
             Visibility="{Binding IsChecked, ElementName=FolderRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}"
             Grid.Row="1"
             Margin="15,0,15,15"
-            VerticalAlignment="Top">
+            VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
@@ -513,15 +530,17 @@
                 Grid.ColumnSpan="3"
                 Margin="0,15,0,0"
                 HorizontalAlignment="Stretch"
-                Visibility="{Binding DoesFolderExist, Converter={StaticResource BooleanToVisibilityConverter}}">
+                VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <!--  Icon/name preview  -->
                 <StackPanel
                     Grid.Row="0"
+                    Visibility="{Binding DoesFolderExist, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Margin="50,15,0,30"
+                    VerticalAlignment="Top"
                     Orientation="Horizontal">
                     <Image
                         Width="40"
@@ -537,58 +556,175 @@
                         Foreground="White"
                         Text="{Binding FolderName}" />
                 </StackPanel>
-                <!--  "Save" button for files  -->
-                <Button
-                    Name="SaveFolderButton"
+                <Grid
                     Grid.Row="1"
                     Margin="50,0,0,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    VerticalContentAlignment="Center"
-                    BorderBrush="#00000000"
-                    BorderThickness="0,0,0,0"
-                    Click="SaveFolderButton_Click"
-                    Content="Save"
-                    FontFamily="Segoe UI"
-                    FontSize="14"
-                    Foreground="White">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter
+                    VerticalAlignment="Bottom">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <!--  "Save" button for folders  -->
+                    <Border
+                        Grid.Column="2"
+                        Height="30"
+                        HorizontalAlignment="Stretch"
+                        Margin="0,0,5,0"
+                        CornerRadius="5">
+                        <Border.Style>
+                            <!--  Must use template here for button background to be overridden  -->
+                            <Style TargetType="{x:Type Border}">
+                                <Setter
                                 Property="Background"
-                                Value="#FF2DA65F" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border
-                                            Background="{TemplateBinding Background}"
-                                            CornerRadius="5">
-                                            <ContentPresenter
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger
-                                    Property="IsMouseOver"
+                                Value="#505050" />
+                                <Style.Triggers>
+                                    <!--  Show green background when enabled  -->
+                                    <DataTrigger
+                                    Binding="{Binding ElementName=SaveFolderButton ,Path=IsEnabled}"
                                     Value="True">
-                                    <Setter
+                                        <Setter
+                                        Property="Background"
+                                        Value="#FF2DA65F" />
+                                    </DataTrigger>
+                                    <!--  Hover/press styling  -->
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition
+                                            Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}"
+                                            Value="True" />
+                                            <Condition
+                                            Binding="{Binding ElementName=SaveFolderButton ,Path=IsEnabled}"
+                                            Value="True" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter
                                         Property="Background"
                                         Value="#FF37CC75" />
-                                </Trigger>
-                                <Trigger
-                                    Property="IsPressed"
+                                    </MultiDataTrigger>
+                                    <DataTrigger
+                                    Binding="{Binding ElementName=SaveFolderButton, Path=IsPressed}"
                                     Value="True">
-                                    <Setter
+                                        <Setter
                                         Property="Background"
                                         Value="#FF34BF6E" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Button
+                            Name="SaveFolderButton"
+                            BorderThickness="0,0,0,0"
+                            Click="SaveFolderButton_Click"
+                            FontSize="14"
+                            Foreground="White"
+                            IsTabStop="True">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter
+                                        Property="Background"
+                                        Value="Transparent" />
+                                    <Setter Property="IsEnabled"
+                                            Value="{Binding DoesFolderExist}" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <TextBlock
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        TextAlignment="Center"
+                                                        LineHeight="20"
+                                                        Text="Save" />
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger
+                                            Property="IsMouseOver"
+                                            Value="True">
+                                            <Setter
+                                                Property="Background"
+                                                Value="Transparent" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Border>
+                    <!--  "Cancel" button for folders  -->
+                    <Border
+                        Grid.Column="3"
+                        Height="30"
+                        HorizontalAlignment="Stretch"
+                        Margin="5,0,0,0"
+                        CornerRadius="5">
+                        <Border.Style>
+                            <!--  Must use template here for button background to be overridden  -->
+                            <Style TargetType="{x:Type Border}">
+                                <Setter
+                                    Property="Background"
+                                    Value="#888888" />
+                                <Style.Triggers>
+                                    <!--  Hover/press styling  -->
+                                    <Trigger
+                                        Property="IsMouseOver"
+                                        Value="True">
+                                        <Setter
+                                            Property="Background"
+                                            Value="#A8A8A8" />
+                                    </Trigger>
+                                    <DataTrigger
+                                        Binding="{Binding ElementName=CancelFolderButton, Path=IsPressed}"
+                                        Value="True">
+                                        <Setter
+                                            Property="Background"
+                                            Value="#989898" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Button
+                            Name="CancelFolderButton"
+                            BorderThickness="0,0,0,0"
+                            Click="CancelButton_Click"
+                            FontSize="14"
+                            Foreground="White"
+                            IsTabStop="True">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter
+                                        Property="Background"
+                                        Value="Transparent" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <TextBlock
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        TextAlignment="Center"
+                                                        LineHeight="20"
+                                                        Text="Cancel" />
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger
+                                            Property="IsMouseOver"
+                                            Value="True">
+                                            <Setter
+                                                Property="Background"
+                                                Value="Transparent" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Border>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>
