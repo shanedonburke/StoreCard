@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -174,6 +175,8 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
             OnPropertyChanged("AreGamesLoaded");
         }
     }
+
+    public bool ShouldEnableSaveAppButton => ApplicationListBox.SelectedIndex != -1;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -427,5 +430,15 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
                    game.Name.ToUpper().Contains(_gameSearchText.ToUpper());
         }));
         return games;
+    }
+
+    private void CancelAppButton_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
+
+    private void ApplicationListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        OnPropertyChanged("ShouldEnableSaveAppButton");
     }
 }
