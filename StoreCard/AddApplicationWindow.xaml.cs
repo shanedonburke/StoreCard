@@ -180,6 +180,10 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     public bool ShouldEnableSaveGameButton => GameListBox.SelectedIndex != -1;
 
+    public string? SelectedAppName => (ApplicationListBox.SelectedItem as InstalledApplication)?.Name;
+
+    public ImageSource? SelectedAppIcon => (ApplicationListBox.SelectedItem as InstalledApplication)?.BitmapIcon;
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
     private void LoadInstalledSteamGames()
@@ -442,6 +446,8 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     private void ApplicationListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         OnPropertyChanged("ShouldEnableSaveAppButton");
+        OnPropertyChanged("SelectedAppName");
+        OnPropertyChanged("SelectedAppIcon");
     }
 
     private void GameListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
