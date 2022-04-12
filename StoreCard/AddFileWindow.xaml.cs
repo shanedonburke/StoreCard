@@ -221,5 +221,10 @@ namespace StoreCard
         {
             new ShowMainWindowCommand().Execute(null);
         }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
