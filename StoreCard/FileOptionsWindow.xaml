@@ -10,67 +10,105 @@
         Background="#FF222222"
         WindowStartupLocation="CenterScreen"
         Title="File Options">
-    <Grid>
+    <Grid
+        Margin="15,15,15,15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <!--  "Open with" adio buttons  -->
-        <StackPanel
-            Grid.Row="0"
-            Margin="10">
-            <Label
-                Margin="0,0,0,10"
+        <StackPanel>
+            <TextBlock
+                Text="Open with:"
+                Foreground="White"
                 FontSize="14"
-                Foreground="White">
-                Choose which program should be used to open this item:
-            </Label>
-            <!--  "Default" radio button  -->
+                LineHeight="20"
+                VerticalAlignment="Center" />
             <StackPanel
-                Margin="5,0,0,10"
-                Orientation="Horizontal">
-                <RadioButton
-                    Name="DefaultRadioButton"
-                    GroupName="OpenWith"
-                    IsChecked="True" />
-                <TextBlock
-                    Height="20"
-                    VerticalAlignment="Stretch"
-                    FontSize="14"
-                    Foreground="White">
-                    Default
-                </TextBlock>
+                DockPanel.Dock="Left">
+                <StackPanel
+                    Orientation="Horizontal"
+                    Margin="0,10,0,10">
+                    <Image
+                        Source="{Binding ExecutableIcon}"
+                        Margin="0,0,5,0"
+                        Height="24"
+                        Width="24" />
+                    <TextBlock
+                        Text="{Binding ExecutableName}"
+                        Foreground="White"
+                        FontSize="14"
+                        LineHeight="20"
+                        VerticalAlignment="Center" />
+                </StackPanel>
             </StackPanel>
-            <!--  "Installed application" radio button  -->
-            <StackPanel
-                Margin="5,0,0,10"
-                Orientation="Horizontal">
-                <RadioButton
-                    Name="InstalledAppRadioButton"
-                    GroupName="OpenWith" />
-                <TextBlock
-                    Height="20"
-                    VerticalAlignment="Stretch"
+            <Border
+                Height="30"
+                HorizontalAlignment="Left"
+                Width="80"
+                CornerRadius="5">
+                <Border.Style>
+                    <!--  Must use template here for button background to be overridden  -->
+                    <Style TargetType="{x:Type Border}">
+                        <Setter
+                            Property="Background"
+                            Value="#FF2DA65F" />
+                        <Style.Triggers>
+                            <!--  Hover/press styling  -->
+                            <Trigger
+                                Property="IsMouseOver"
+                                Value="True">
+                                <Setter
+                                    Property="Background"
+                                    Value="#FF37CC75" />
+                            </Trigger>
+                            <DataTrigger
+                                Binding="{Binding ElementName=ChangeExecutableButton, Path=IsPressed}"
+                                Value="True">
+                                <Setter
+                                    Property="Background"
+                                    Value="#FF34BF6E" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <Button
+                    Name="ChangeExecutableButton"
+                    BorderThickness="0,0,0,0"
+                    Click="ChangeExecutableButton_Click"
                     FontSize="14"
-                    Foreground="White">
-                    Installed application
-                </TextBlock>
-            </StackPanel>
-            <!--  "Other executable" radio button  -->
-            <StackPanel
-                Margin="5,0,0,10"
-                Orientation="Horizontal">
-                <RadioButton
-                    Name="OtherExecutableRadioButton"
-                    GroupName="OpenWith" />
-                <TextBlock
-                    Height="20"
-                    VerticalAlignment="Stretch"
-                    FontSize="14"
-                    Foreground="White">
-                    Other executable
-                </TextBlock>
-            </StackPanel>
+                    Foreground="White"
+                    IsTabStop="True">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter
+                                Property="Background"
+                                Value="Transparent" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                TextAlignment="Center"
+                                                LineHeight="20"
+                                                Text="Change" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger
+                                    Property="IsMouseOver"
+                                    Value="True">
+                                    <Setter
+                                        Property="Background"
+                                        Value="Transparent" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Border>
         </StackPanel>
     </Grid>
 </Window>

@@ -172,7 +172,7 @@ namespace StoreCard
         {
             var base64Icon = FileIcon != null ? ImageUtils.ImageToBase64((BitmapSource) FileIcon) : null;
             var savedItems = StorageUtils.ReadItemsFromFile();
-            savedItems.Add(new SavedFile(FileName, base64Icon, FilePath));
+            savedItems.Add(new SavedFile(FileName, base64Icon, FilePath, SavedFileSystemItem.DEFAULT_EXECUTABLE));
             StorageUtils.SaveItemsToFile(savedItems);
             Close();
         }
@@ -181,7 +181,7 @@ namespace StoreCard
         {
             var base64Icon = FolderIcon != null ? ImageUtils.ImageToBase64((BitmapSource) FolderIcon) : null;
             var savedItems = StorageUtils.ReadItemsFromFile();
-            savedItems.Add(new SavedFolder(FolderName, base64Icon, FolderPath));
+            savedItems.Add(new SavedFolder(FolderName, base64Icon, FolderPath, SavedFileSystemItem.DEFAULT_EXECUTABLE));
             StorageUtils.SaveItemsToFile(savedItems);
             Close();
         }

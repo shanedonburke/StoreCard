@@ -11,7 +11,7 @@ namespace StoreCard
         {
             using Process openProcess = new Process();
 
-            openProcess.StartInfo.FileName = "explorer";
+            openProcess.StartInfo.FileName = "explorer.exe";
             openProcess.StartInfo.Arguments = $"\"{path}\"";
             openProcess.Start();
         }

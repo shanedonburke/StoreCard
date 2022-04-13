@@ -47,7 +47,8 @@
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem
-                x:Name="ContextMenuFileOptionsItem">
+                x:Name="ContextMenuFileOptionsItem"
+                Click="ContextMenuFileOptionsItem_Click">
                 <MenuItem.Style>
                     <Style TargetType="{x:Type MenuItem}">
                         <Setter Property="Visibility"

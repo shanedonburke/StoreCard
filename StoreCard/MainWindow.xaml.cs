@@ -231,4 +231,17 @@ public partial class MainWindow : INotifyPropertyChanged
     {
         return (uint) (a - b * Math.Floor(a / b));
     }
+
+    private void ContextMenuFileOptionsItem_Click(object sender, RoutedEventArgs e)
+    {
+        if (ItemListBox.SelectedItem is SavedFileSystemItem item)
+        {
+            new FileOptionsWindow(item).Show();
+            Close();
+        }
+        else
+        {
+            Debug.WriteLine("Tried to open file options menu for non-file item.");
+        }
+    }
 }

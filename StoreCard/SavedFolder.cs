@@ -1,17 +1,12 @@
 ﻿namespace StoreCard
 {
-    internal class SavedFolder : SavedItem
+    internal class SavedFolder : SavedFileSystemItem
     {
-        public string Path { get; }
-
-        public SavedFolder(string name, string? base64Icon, string path) : base(name, base64Icon) {
-            Path = path;
+        public SavedFolder(string name, string? base64Icon, string path, string executablePath)
+            : base(name, base64Icon, path, executablePath)
+        {
         }
 
         public override ItemCategory Category => ItemCategory.Folder;
-
-        public override void Open() {
-            SystemUtils.OpenInDefaultProgram(Path);
-        }
     }
 }
