@@ -370,7 +370,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     {
         var base64Icon = ExecutableIcon != null ? ImageUtils.ImageToBase64((BitmapSource) ExecutableIcon) : null;
         var savedItems = StorageUtils.ReadItemsFromFile();
-        savedItems.Add(new SavedExecutable(ExecutableName, base64Icon, ExecutablePath));
+        savedItems.Add(new SavedExecutable(Guid.NewGuid().ToString(), ExecutableName, base64Icon, ExecutablePath));
         StorageUtils.SaveItemsToFile(savedItems);
         Close();
     }

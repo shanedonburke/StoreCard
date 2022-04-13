@@ -15,7 +15,8 @@ namespace StoreCard
         public string ExecutableName =>
             ExecutablePath == DEFAULT_EXECUTABLE ? "Default" : ExecutablePath.Split("/").Last();
 
-        protected SavedFileSystemItem(string name, string? base64Icon, string path, string executablePath) : base(name, base64Icon)
+        protected SavedFileSystemItem(string id, string name, string? base64Icon, string path, string executablePath)
+            : base(id, name, base64Icon)
         {
             Path = path;
             ExecutablePath = executablePath;

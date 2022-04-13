@@ -17,6 +17,8 @@ namespace StoreCard
 
     public abstract class SavedItem : IComparable<SavedItem>
     {
+        public readonly string Id;
+
         public string Name { get; protected set; }
 
         public string? Base64Icon { get; protected set; }
@@ -29,8 +31,9 @@ namespace StoreCard
         [JsonIgnore]
         public virtual ImageSource? PrefixIcon => null;
 
-        protected SavedItem(string name, string? base64Icon)
+        protected SavedItem(string id, string name, string? base64Icon)
         {
+            Id = id;
             Name = name;
             Base64Icon = base64Icon;
         }

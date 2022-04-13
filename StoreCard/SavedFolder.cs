@@ -2,8 +2,8 @@
 {
     internal class SavedFolder : SavedFileSystemItem
     {
-        public SavedFolder(string name, string? base64Icon, string path, string executablePath)
-            : base(name, base64Icon, path, executablePath)
+        public SavedFolder(string id, string name, string? base64Icon, string path, string executablePath)
+            : base(id, name, base64Icon, path, executablePath)
         {
         }
 

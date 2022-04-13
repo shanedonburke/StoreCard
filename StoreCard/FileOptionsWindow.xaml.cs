@@ -52,7 +52,7 @@ namespace StoreCard
 
         private void ChangeExecutableButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            new ChangeExecutableWindow().ShowDialog();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
@@ -10,14 +11,16 @@ public class SavedSteamGame : SavedItem
 {
     [JsonConstructor]
     public SavedSteamGame(
+        string id,
         string name,
         string base64Icon,
-        string appId) : base(name, base64Icon)
+        string appId) : base(id, name, base64Icon)
     {
         AppId = appId;
     }
 
     public SavedSteamGame(InstalledSteamGame game) : base(
+        Guid.NewGuid().ToString(),
         game.Name,
         ImageUtils.ImageToBase64(game.BitmapIcon)
     )
