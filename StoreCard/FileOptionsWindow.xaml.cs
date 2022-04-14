@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -20,17 +21,17 @@ namespace StoreCard
     /// <summary>
     /// Interaction logic for FileOptionsWindow.xaml
     /// </summary>
-    public partial class FileOptionsWindow
+    public partial class FileOptionsWindow : INotifyPropertyChanged
     {
-        public readonly SavedFileSystemItem Item;
+        private SavedFileSystemItem _item;
 
-        public string ExecutableName => Item.ExecutableName;
+        public string ExecutableName => _item.ExecutableName;
 
         public ImageSource ExecutableIcon
         {
             get
             {
-                var execPath = Item.ExecutablePath;
+                var execPath = _item.ExecutablePath;
                 if (!File.Exists(execPath))
                 {
                     execPath = SavedFileSystemItem.DEFAULT_EXECUTABLE;
@@ -45,14 +46,31 @@ namespace StoreCard
         }
 
         public FileOptionsWindow(SavedFileSystemItem item) {
-            Item = item;
+            _item = item;
             DataContext = this;
             InitializeComponent();
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         private void ChangeExecutableButton_Click(object sender, RoutedEventArgs e)
         {
-            new ChangeExecutableWindow().ShowDialog();
+            if (new ChangeExecutableWindow(_item).ShowDialog() == true)
+            {
+                List<SavedItem> savedItems = StorageUtils.ReadItemsFromFile();
+                var matchingItem = savedItems.Find(i => i.Id == _item.Id) as SavedFileSystemItem;
+                if (matchingItem == null)
+                {
+                    Debug.WriteLine("Failed to find matching item for file options window.");
+                    return;
+                }
+                _item = matchingItem;
+                OnPropertyChanged("ExecutableName");
+                OnPropertyChanged("ExecutableIcon");
+            }
+        }
+        private void OnPropertyChanged(string name) {
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
     }
 }

@@ -60,7 +60,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
             OnPropertyChanged("FilteredApps");
             Application.Current.Dispatcher.Invoke(() =>
             {
-                if (_filteredApps.Any()) ApplicationListBox.SelectedIndex = 0;
+                if (_filteredApps.Any()) AppListBox.SelectedIndex = 0;
             });
         }
     }
@@ -176,13 +176,13 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         }
     }
 
-    public bool ShouldEnableSaveAppButton => ApplicationListBox.SelectedIndex != -1;
+    public bool ShouldEnableSaveAppButton => AppListBox.SelectedIndex != -1;
 
     public bool ShouldEnableSaveGameButton => GameListBox.SelectedIndex != -1;
 
-    public string? SelectedAppName => (ApplicationListBox.SelectedItem as InstalledApplication)?.Name;
+    public string? SelectedAppName => (AppListBox.SelectedItem as InstalledApplication)?.Name;
 
-    public ImageSource? SelectedAppIcon => (ApplicationListBox.SelectedItem as InstalledApplication)?.BitmapIcon;
+    public ImageSource? SelectedAppIcon => (AppListBox.SelectedItem as InstalledApplication)?.BitmapIcon;
 
     public string? SelectedGameName => (GameListBox.SelectedItem as InstalledGame)?.Name;
 
@@ -258,7 +258,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         FilteredApps = FilterApps();
         Application.Current.Dispatcher.Invoke(() =>
         {
-            if (_installedApps.Count > 0) ApplicationListBox.SelectedIndex = 0;
+            if (_installedApps.Count > 0) AppListBox.SelectedIndex = 0;
         });
     }
 
@@ -279,29 +279,29 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         switch (e.Key)
         {
             case Key.Up:
-                if (ApplicationListBox.Items.Count == 0) return;
-                switch (ApplicationListBox.SelectedIndex)
+                if (AppListBox.Items.Count == 0) return;
+                switch (AppListBox.SelectedIndex)
                 {
                     case 0:
                     case -1:
-                        ApplicationListBox.SelectedIndex = ApplicationListBox.Items.Count - 1;
+                        AppListBox.SelectedIndex = AppListBox.Items.Count - 1;
                         break;
                     default:
-                        ApplicationListBox.SelectedIndex =
-                            (ApplicationListBox.SelectedIndex - 1) % ApplicationListBox.Items.Count;
+                        AppListBox.SelectedIndex =
+                            (AppListBox.SelectedIndex - 1) % AppListBox.Items.Count;
                         break;
                 }
 
-                ApplicationListBox.ScrollIntoView(ApplicationListBox.SelectedItem);
+                AppListBox.ScrollIntoView(AppListBox.SelectedItem);
                 break;
             case Key.Down:
-                if (ApplicationListBox.Items.Count == 0) return;
-                if (ApplicationListBox.SelectedIndex == -1)
-                    ApplicationListBox.SelectedIndex = 0;
+                if (AppListBox.Items.Count == 0) return;
+                if (AppListBox.SelectedIndex == -1)
+                    AppListBox.SelectedIndex = 0;
                 else
-                    ApplicationListBox.SelectedIndex =
-                        (ApplicationListBox.SelectedIndex + 1) % ApplicationListBox.Items.Count;
-                ApplicationListBox.ScrollIntoView(ApplicationListBox.SelectedItem);
+                    AppListBox.SelectedIndex =
+                        (AppListBox.SelectedIndex + 1) % AppListBox.Items.Count;
+                AppListBox.ScrollIntoView(AppListBox.SelectedItem);
                 break;
             case Key.Enter:
                 AddSelectedApplication();
@@ -375,7 +375,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         Close();
     }
 
-    private void ApplicationListBox_PreviewKeyDown(object sender, KeyEventArgs e)
+    private void AppListBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key != Key.Enter) return;
         AddSelectedApplication();
@@ -384,7 +384,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void AddSelectedApplication()
     {
-        if (ApplicationListBox.SelectedItem is not InstalledApplication installedApplication) return;
+        if (AppListBox.SelectedItem is not InstalledApplication installedApplication) return;
         var savedItems = StorageUtils.ReadItemsFromFile();
         savedItems.Add(new SavedApplication(installedApplication));
         StorageUtils.SaveItemsToFile(savedItems);
@@ -447,7 +447,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         Close();
     }
 
-    private void ApplicationListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void AppListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         OnPropertyChanged("ShouldEnableSaveAppButton");
         OnPropertyChanged("SelectedAppName");

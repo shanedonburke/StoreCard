@@ -3,14 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:StoreCard"
         mc:Ignorable="d"
         Width="800"
         Height="600"
         Background="#FF222222"
         WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
         Title="Open With">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <local:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+    </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <!--  Radio buttons  -->
         <StackPanel Margin="10">
             <Label
@@ -25,6 +35,7 @@
                 Orientation="Horizontal">
                 <RadioButton
                     Name="DefaultRadioButton"
+                    IsChecked="True"
                     GroupName="ExecutableType" />
                 <TextBlock
                     Height="20"
@@ -65,5 +76,421 @@
                 </TextBlock>
             </StackPanel>
         </StackPanel>
+        <!--  "Installed application" content  -->
+        <Grid
+            x:Name="InstalledApplicationContent"
+            Grid.Row="1"
+            Visibility="{Binding IsChecked, ElementName=InstalledApplicationRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="60" />
+            </Grid.RowDefinitions>
+            <!--  Application search bar  -->
+            <Border
+                Grid.Row="0"
+                Margin="15,10,15,0"
+                Padding="5,0,5,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="#FF444444"
+                CornerRadius="5">
+                <TextBox
+                    Name="AppSearchBox"
+                    VerticalContentAlignment="Stretch"
+                    Background="#FF444444"
+                    BorderBrush="#00000000"
+                    BorderThickness="0,0,0,0"
+                    FontFamily="Segoe UI"
+                    FontSize="14"
+                    MaxLines="1"
+                    PreviewKeyDown="AppSearchBox_PreviewKeyDown"
+                    SelectionBrush="#65FFFFFF"
+                    TextWrapping="NoWrap">
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter
+                                Property="Text"
+                                Value="{Binding AppSearchText, UpdateSourceTrigger=PropertyChanged}" />
+                            <Setter
+                                Property="Foreground"
+                                Value="White" />
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition
+                                            Binding="{Binding ElementName=AppSearchBox, Path=IsFocused}"
+                                            Value="False" />
+                                        <Condition
+                                            Binding="{Binding AppSearchText}"
+                                            Value="" />
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.Setters>
+                                        <Setter
+                                            Property="Text"
+                                            Value="Search..." />
+                                        <Setter
+                                            Property="Foreground"
+                                            Value="#FFAAAAAA" />
+                                    </MultiDataTrigger.Setters>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            </Border>
+            <Grid
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Visibility="{Binding AreAppsLoaded, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+                <fa:ImageAwesome
+                    Width="64"
+                    Height="64"
+                    Foreground="#FF2DA65F"
+                    Icon="Refresh"
+                    Spin="True" />
+            </Grid>
+            <!--  Application list  -->
+            <ListBox
+                Name="AppListBox"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="15,10,15,10"
+                Background="#002A2A2A"
+                BorderBrush="#00000000"
+                BorderThickness="0,0,0,0"
+                Foreground="White"
+                ItemsSource="{Binding FilteredApps}"
+                SelectionChanged="AppListBox_SelectionChanged"
+                Visibility="{Binding AreAppsLoaded, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <!--  Style items to take up whole horizontal space  -->
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter
+                            Property="HorizontalAlignment"
+                            Value="Stretch" />
+                        <Setter
+                            Property="HorizontalContentAlignment"
+                            Value="Stretch" />
+                        <Setter
+                            Property="SnapsToDevicePixels"
+                            Value="True" />
+                        <!--  Override mouse-over/selection style (from https://stackoverflow.com/a/66207005)  -->
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border
+                                        Name="Bd"
+                                        Padding="{TemplateBinding Control.Padding}"
+                                        Background="{TemplateBinding Panel.Background}"
+                                        BorderBrush="{TemplateBinding Border.BorderBrush}"
+                                        BorderThickness="{TemplateBinding Border.BorderThickness}"
+                                        CornerRadius="5"
+                                        SnapsToDevicePixels="True">
+                                        <ContentPresenter
+                                            HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
+                                            Content="{TemplateBinding ContentControl.Content}"
+                                            ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
+                                            ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
+                                            SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <!--  Mouse over item  -->
+                                        <Trigger
+                                            Property="UIElement.IsMouseOver"
+                                            Value="True">
+                                            <Setter
+                                                TargetName="Bd"
+                                                Property="Panel.Background"
+                                                Value="#FF3A3A3A" />
+                                            <Setter
+                                                TargetName="Bd"
+                                                Property="Border.BorderBrush">
+                                                <Setter.Value>
+                                                    <SolidColorBrush>Transparent</SolidColorBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                        <!--  Active selected item  -->
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition
+                                                    Property="Selector.IsSelectionActive"
+                                                    Value="True" />
+                                                <Condition
+                                                    Property="Selector.IsSelected"
+                                                    Value="True" />
+                                            </MultiTrigger.Conditions>
+                                            <Setter
+                                                TargetName="Bd"
+                                                Property="Panel.Background"
+                                                Value="#80417356" />
+                                            <Setter
+                                                TargetName="Bd"
+                                                Property="Border.BorderBrush">
+                                                <Setter.Value>
+                                                    <SolidColorBrush>#FF3BD97D</SolidColorBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </MultiTrigger>
+                                        <!--  Inactive selected item  -->
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition
+                                                    Property="Selector.IsSelectionActive"
+                                                    Value="False" />
+                                                <Condition
+                                                    Property="Selector.IsSelected"
+                                                    Value="True" />
+                                            </MultiTrigger.Conditions>
+                                            <Setter
+                                                TargetName="Bd"
+                                                Property="Panel.Background"
+                                                Value="#80417356" />
+                                            <Setter
+                                                TargetName="Bd"
+                                                Property="Border.BorderBrush">
+                                                <Setter.Value>
+                                                    <SolidColorBrush>#FF3BD97D</SolidColorBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </MultiTrigger>
+                                        <Trigger
+                                            Property="UIElement.IsEnabled"
+                                            Value="False">
+                                            <Setter
+                                                TargetName="Bd"
+                                                Property="TextElement.Foreground">
+                                                <Setter.Value>
+                                                    <DynamicResource
+                                                        ResourceKey="{x:Static SystemColors.GrayTextBrushKey}" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="local:InstalledApplication">
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                Grid.Column="0"
+                                Width="24"
+                                Height="24"
+                                Margin="5,5,10,5"
+                                Source="{Binding BitmapIcon}" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="3"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Text="{Binding Name}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid
+                Grid.Row="2"
+                Margin="15,0,15,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <!--  Selected app preview  -->
+                <StackPanel
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Visibility="{Binding Path=ShouldEnableSaveAppButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+                    <TextBlock
+                        Margin="0,0,10,0"
+                        Text="Selected:"
+                        FontSize="12"
+                        VerticalAlignment="Center"
+                        FontFamily="Segoe UI"
+                        Foreground="#AAAAAA" />
+                    <Image
+                        Width="24"
+                        Height="24"
+                        Margin="0,0,10,0"
+                        Source="{Binding Path=SelectedAppIcon}" />
+                    <TextBlock
+                        Text="{Binding Path=SelectedAppName}"
+                        FontSize="12"
+                        VerticalAlignment="Center"
+                        Foreground="White" />
+                </StackPanel>
+                <!--  "Save" button for applications  -->
+                <Border
+                    Grid.Column="2"
+                    Height="30"
+                    Margin="0,15,5,15"
+                    HorizontalAlignment="Stretch"
+                    CornerRadius="5">
+                    <Border.Style>
+                        <!--  Must use template here for button background to be overridden  -->
+                        <Style TargetType="{x:Type Border}">
+                            <Setter
+                                Property="Background"
+                                Value="#505050" />
+                            <Style.Triggers>
+                                <!--  Show green background when enabled  -->
+                                <DataTrigger
+                                    Binding="{Binding ElementName=SaveAppButton ,Path=IsEnabled}"
+                                    Value="True">
+                                    <Setter
+                                        Property="Background"
+                                        Value="#FF2DA65F" />
+                                </DataTrigger>
+                                <!--  Hover/press styling  -->
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition
+                                            Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}"
+                                            Value="True" />
+                                        <Condition
+                                            Binding="{Binding ElementName=SaveAppButton ,Path=IsEnabled}"
+                                            Value="True" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter
+                                        Property="Background"
+                                        Value="#FF37CC75" />
+                                </MultiDataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding ElementName=SaveAppButton, Path=IsPressed}"
+                                    Value="True">
+                                    <Setter
+                                        Property="Background"
+                                        Value="#FF34BF6E" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Button
+                        Name="SaveAppButton"
+                        BorderThickness="0,0,0,0"
+                        Click="SaveAppButton_Click"
+                        FontSize="14"
+                        Foreground="White"
+                        IsTabStop="True">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent" />
+                                <Setter Property="IsEnabled"
+                                        Value="{Binding ShouldEnableSaveAppButton}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <TextBlock
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    TextAlignment="Center"
+                                                    LineHeight="20"
+                                                    Text="Save" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger
+                                        Property="IsMouseOver"
+                                        Value="True">
+                                        <Setter
+                                            Property="Background"
+                                            Value="Transparent" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Border>
+                <!--  "Cancel" button for applications  -->
+                <Border
+                    Grid.Column="3"
+                    Height="30"
+                    HorizontalAlignment="Stretch"
+                    Margin="5,15,0,15"
+                    CornerRadius="5">
+                    <Border.Style>
+                        <!--  Must use template here for button background to be overridden  -->
+                        <Style TargetType="{x:Type Border}">
+                            <Setter
+                                Property="Background"
+                                Value="#888888" />
+                            <Style.Triggers>
+                                <!--  Hover/press styling  -->
+                                <Trigger
+                                    Property="IsMouseOver"
+                                    Value="True">
+                                    <Setter
+                                        Property="Background"
+                                        Value="#A8A8A8" />
+                                </Trigger>
+                                <DataTrigger
+                                    Binding="{Binding ElementName=CancelAppButton, Path=IsPressed}"
+                                    Value="True">
+                                    <Setter
+                                        Property="Background"
+                                        Value="#989898" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Button
+                        Name="CancelAppButton"
+                        BorderThickness="0,0,0,0"
+                        Click="CancelButton_Click"
+                        FontSize="14"
+                        Foreground="White"
+                        IsTabStop="True">
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <TextBlock
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    TextAlignment="Center"
+                                                    LineHeight="20"
+                                                    Text="Cancel" />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger
+                                        Property="IsMouseOver"
+                                        Value="True">
+                                        <Setter
+                                            Property="Background"
+                                            Value="Transparent" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

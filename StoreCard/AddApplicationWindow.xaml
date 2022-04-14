@@ -81,6 +81,7 @@
         </StackPanel>
         <!--  "Installed application" content  -->
         <Grid
+            x:Name="InstalledApplicationContent"
             Grid.Row="1"
             Visibility="{Binding IsChecked, ElementName=InstalledApplicationRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
@@ -154,7 +155,7 @@
             </Grid>
             <!--  Application list  -->
             <ListBox
-                Name="ApplicationListBox"
+                Name="AppListBox"
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
                 Margin="15,10,15,10"
@@ -163,8 +164,8 @@
                 BorderThickness="0,0,0,0"
                 Foreground="White"
                 ItemsSource="{Binding FilteredApps}"
-                PreviewKeyDown="ApplicationListBox_PreviewKeyDown"
-                SelectionChanged="ApplicationListBox_SelectionChanged"
+                PreviewKeyDown="AppListBox_PreviewKeyDown"
+                SelectionChanged="AppListBox_SelectionChanged"
                 Visibility="{Binding AreAppsLoaded, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <!--  Style items to take up whole horizontal space  -->
                 <ListBox.ItemContainerStyle>
@@ -580,7 +581,7 @@
                 BorderThickness="0,0,0,0"
                 Foreground="White"
                 ItemsSource="{Binding FilteredGames}"
-                PreviewKeyDown="ApplicationListBox_PreviewKeyDown"
+                PreviewKeyDown="AppListBox_PreviewKeyDown"
                 SelectionChanged="GameListBox_SelectionChanged"
                 Visibility="{Binding AreGamesLoaded, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <!--  Style items to take up whole horizontal space  -->
