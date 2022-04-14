@@ -154,6 +154,19 @@ namespace StoreCard
             DialogResult = true;
             Close();
         }
+        private void SaveDefaultButton_Click(object sender, RoutedEventArgs e) {
+            List<SavedItem> savedItems = StorageUtils.ReadItemsFromFile();
+            var matchingItem = savedItems.Find(i => i.Id == _item.Id) as SavedFileSystemItem;
+            if (matchingItem == null) {
+                Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
+                return;
+            }
+
+            matchingItem.SetExecutablePath(SavedFileSystemItem.DEFAULT_EXECUTABLE);
+            StorageUtils.SaveItemsToFile(savedItems);
+            DialogResult = true;
+            Close();
+        }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
