@@ -3,18 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace StoreCard
 {
@@ -69,8 +61,9 @@ namespace StoreCard
                 OnPropertyChanged("ExecutableIcon");
             }
         }
-        private void OnPropertyChanged(string name) {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
+        private void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         private void Window_Closed(object? sender, EventArgs e)
