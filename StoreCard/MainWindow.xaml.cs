@@ -113,6 +113,8 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void AddLink_Click(object sender, RoutedEventArgs e)
     {
+        new AddLinkWindow().Show();
+        Close();
     }
 
     private void OpenButton_Click(object sender, RoutedEventArgs e)
