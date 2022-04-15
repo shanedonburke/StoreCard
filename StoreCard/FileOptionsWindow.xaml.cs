@@ -47,19 +47,16 @@ namespace StoreCard
 
         private void ChangeExecutableButton_Click(object sender, RoutedEventArgs e)
         {
-            if (new ChangeExecutableWindow(_item).ShowDialog() == true)
+            if (new ChangeExecutableWindow(_item).ShowDialog() != true) return;
+            var savedItems = StorageUtils.ReadItemsFromFile();
+            if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem)
             {
-                List<SavedItem> savedItems = StorageUtils.ReadItemsFromFile();
-                var matchingItem = savedItems.Find(i => i.Id == _item.Id) as SavedFileSystemItem;
-                if (matchingItem == null)
-                {
-                    Debug.WriteLine("Failed to find matching item for file options window.");
-                    return;
-                }
-                _item = matchingItem;
-                OnPropertyChanged("ExecutableName");
-                OnPropertyChanged("ExecutableIcon");
+                Debug.WriteLine("Failed to find matching item for file options window.");
+                return;
             }
+            _item = matchingItem;
+            OnPropertyChanged("ExecutableName");
+            OnPropertyChanged("ExecutableIcon");
         }
         private void OnPropertyChanged(string name)
         {
