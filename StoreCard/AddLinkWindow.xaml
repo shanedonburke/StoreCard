@@ -11,7 +11,79 @@
         WindowStartupLocation="CenterScreen"
         Closed="Window_Closed"
         Title="Add Link">
-    <Grid>
-        
+    <Grid
+        Margin="15,15,15,150">
+        <Grid
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                FontFamily="Segoe UI"
+                FontSize="14"
+                Foreground="White"
+                Text="URL:" />
+            <!--  Name box  -->
+            <Border
+                Grid.Row="0"
+                Grid.Column="1"
+                Padding="5,0,5,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="#FF444444"
+                CornerRadius="5">
+                <TextBox
+                    Name="UrlBox"
+                    HorizontalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    Background="#FF444444"
+                    BorderBrush="#00000000"
+                    BorderThickness="0,0,0,0"
+                    FontFamily="Segoe UI"
+                    FontSize="14"
+                    MaxLines="1"
+                    SelectionBrush="#65FFFFFF"
+                    TextWrapping="NoWrap">
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter
+                                Property="Text"
+                                Value="{Binding Url, UpdateSourceTrigger=PropertyChanged}" />
+                            <Setter
+                                Property="Foreground"
+                                Value="White" />
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition
+                                            Binding="{Binding ElementName=UrlBox, Path=IsFocused}"
+                                            Value="False" />
+                                        <Condition
+                                            Binding="{Binding Url}"
+                                            Value="" />
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.Setters>
+                                        <Setter
+                                            Property="Text"
+                                            Value="Enter URL..." />
+                                        <Setter
+                                            Property="Foreground"
+                                            Value="#FFAAAAAA" />
+                                    </MultiDataTrigger.Setters>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

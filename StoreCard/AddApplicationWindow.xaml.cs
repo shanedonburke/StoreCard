@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using SteamKit2;
+using StoreCard.Annotations;
 
 namespace StoreCard;
 
@@ -57,7 +59,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         set
         {
             _filteredApps = value;
-            OnPropertyChanged("FilteredApps");
+            OnPropertyChanged(nameof(FilteredApps));
             Application.Current.Dispatcher.Invoke(() =>
             {
                 if (_filteredApps.Any()) AppListBox.SelectedIndex = 0;
@@ -71,7 +73,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         set
         {
             _filteredGames = value;
-            OnPropertyChanged("FilteredGames");
+            OnPropertyChanged(nameof(FilteredGames));
             Application.Current.Dispatcher.Invoke(() =>
             {
                 if (_filteredGames.Any()) GameListBox.SelectedIndex = 0;
@@ -85,7 +87,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         set
         {
             _appSearchText = value;
-            OnPropertyChanged("AppSearchText");
+            OnPropertyChanged(nameof(AppSearchText));
             FilteredApps = FilterApps();
         }
     }
@@ -96,7 +98,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         set
         {
             _gameSearchText = value;
-            OnPropertyChanged("GameSearchText");
+            OnPropertyChanged(nameof(GameSearchText));
             FilteredGames = FilterGames();
         }
     }
@@ -122,7 +124,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
                         BitmapSizeOptions.FromEmptyOptions());
             }
 
-            OnPropertyChanged("ExecutablePath");
+            OnPropertyChanged(nameof(ExecutablePath));
         }
     }
 
@@ -132,7 +134,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         set
         {
             _executableName = value;
-            OnPropertyChanged("ExecutableName");
+            OnPropertyChanged(nameof(ExecutableName));
         }
     }
 
@@ -142,7 +144,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         set
         {
             _doesExecutableExist = value;
-            OnPropertyChanged("DoesExecutableExist");
+            OnPropertyChanged(nameof(DoesExecutableExist));
         }
     }
 
@@ -152,7 +154,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         set
         {
             _executableIcon = value;
-            OnPropertyChanged("ExecutableIcon");
+            OnPropertyChanged(nameof(ExecutableIcon));
         }
     }
 
@@ -162,7 +164,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         set
         {
             _areAppsLoaded = value;
-            OnPropertyChanged("AreAppsLoaded");
+            OnPropertyChanged(nameof(AreAppsLoaded));
         }
     }
 
@@ -172,7 +174,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         set
         {
             _areGamesLoaded = value;
-            OnPropertyChanged("AreGamesLoaded");
+            OnPropertyChanged(nameof(AreGamesLoaded));
         }
     }
 
@@ -245,9 +247,9 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         SetInstalledGames(installedGames.Cast<InstalledGame>().ToList());
     }
 
-    private void OnPropertyChanged(string name)
-    {
-        if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
+    [NotifyPropertyChangedInvocator]
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     private void SetInstalledApps(List<InstalledApplication> value)

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
+using StoreCard.Annotations;
 
 namespace StoreCard;
 
@@ -52,8 +53,8 @@ public partial class MainWindow : INotifyPropertyChanged
         set
         {
             _searchText = value;
-            OnPropertyChanged("SearchText");
-            OnPropertyChanged("FilteredItems");
+            OnPropertyChanged(nameof(SearchText));
+            OnPropertyChanged(nameof(FilteredItems));
         }
     }
 
@@ -80,8 +81,8 @@ public partial class MainWindow : INotifyPropertyChanged
         set
         {
             _category = value;
-            OnPropertyChanged("Category");
-            OnPropertyChanged("FilteredItems");
+            OnPropertyChanged(nameof(Category));
+            OnPropertyChanged(nameof(FilteredItems));
         }
     }
 
@@ -93,10 +94,9 @@ public partial class MainWindow : INotifyPropertyChanged
         OnPropertyChanged("FilteredItems");
     }
 
-    private void OnPropertyChanged(string name)
-    {
-        if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
-        if (ItemListBox != null && ItemListBox.Items.Count > 0) ItemListBox.SelectedIndex = 0;
+    [NotifyPropertyChangedInvocator]
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     private void AddApplication_Click(object sender, RoutedEventArgs e)
