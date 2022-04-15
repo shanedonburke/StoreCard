@@ -91,7 +91,7 @@ public partial class MainWindow : INotifyPropertyChanged
     public void RefreshSavedItems()
     {
         _savedItems = StorageUtils.ReadItemsFromFile();
-        OnPropertyChanged("FilteredItems");
+        OnPropertyChanged(nameof(FilteredItems));
     }
 
     [NotifyPropertyChangedInvocator]

@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using StoreCard.Annotations;
 
 namespace StoreCard
 {
@@ -55,12 +56,13 @@ namespace StoreCard
                 return;
             }
             _item = matchingItem;
-            OnPropertyChanged("ExecutableName");
-            OnPropertyChanged("ExecutableIcon");
+            OnPropertyChanged(nameof(ExecutableName));
+            OnPropertyChanged(nameof(ExecutableIcon));
         }
-        private void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void Window_Closed(object? sender, EventArgs e)
