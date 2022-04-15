@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using StoreCard.Annotations;
 
 namespace StoreCard
 {
@@ -44,7 +46,7 @@ namespace StoreCard
             set
             {
                 _filteredApps = value;
-                OnPropertyChanged("FilteredApps");
+                OnPropertyChanged(nameof(FilteredApps));
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     if (_filteredApps.Any()) AppListBox.SelectedIndex = 0;
@@ -58,7 +60,7 @@ namespace StoreCard
             set
             {
                 _appSearchText = value;
-                OnPropertyChanged("AppSearchText");
+                OnPropertyChanged(nameof(AppSearchText));
                 FilteredApps = FilterApps();
             }
         }
@@ -69,7 +71,7 @@ namespace StoreCard
             set
             {
                 _areAppsLoaded = value;
-                OnPropertyChanged("AreAppsLoaded");
+                OnPropertyChanged(nameof(AreAppsLoaded));
             }
         }
 
@@ -97,7 +99,7 @@ namespace StoreCard
                             BitmapSizeOptions.FromEmptyOptions());
                 }
 
-                OnPropertyChanged("ExecutablePath");
+                OnPropertyChanged(nameof(ExecutablePath));
             }
         }
 
@@ -105,7 +107,7 @@ namespace StoreCard
             get => _executableName;
             set {
                 _executableName = value;
-                OnPropertyChanged("ExecutableName");
+                OnPropertyChanged(nameof(ExecutableName));
             }
         }
 
@@ -113,7 +115,7 @@ namespace StoreCard
             get => _doesExecutableExist;
             set {
                 _doesExecutableExist = value;
-                OnPropertyChanged("DoesExecutableExist");
+                OnPropertyChanged(nameof(DoesExecutableExist));
             }
         }
 
@@ -121,7 +123,7 @@ namespace StoreCard
             get => _executableIcon;
             set {
                 _executableIcon = value;
-                OnPropertyChanged("ExecutableIcon");
+                OnPropertyChanged(nameof(ExecutableIcon));
             }
         }
 
@@ -192,9 +194,9 @@ namespace StoreCard
 
         private void AppListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            OnPropertyChanged("ShouldEnableSaveAppButton");
-            OnPropertyChanged("SelectedAppName");
-            OnPropertyChanged("SelectedAppIcon");
+            OnPropertyChanged(nameof(ShouldEnableSaveAppButton));
+            OnPropertyChanged(nameof(SelectedAppName));
+            OnPropertyChanged(nameof(SelectedAppIcon));
         }
 
         private void SaveAppButton_Click(object sender, RoutedEventArgs e)
@@ -233,9 +235,9 @@ namespace StoreCard
             Close();
         }
 
-        private void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

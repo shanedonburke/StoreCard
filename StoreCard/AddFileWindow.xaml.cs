@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -10,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using Ookii.Dialogs.Wpf;
+using StoreCard.Annotations;
 
 namespace StoreCard
 {
@@ -67,8 +69,8 @@ namespace StoreCard
                     FileIcon = GetFileIconByPath(value);
                 }
 
-                OnPropertyChanged("FilePath");
-                OnPropertyChanged("FileName");
+                OnPropertyChanged(nameof(FilePath));
+                OnPropertyChanged(nameof(FileName));
             }
         }
 
@@ -85,8 +87,8 @@ namespace StoreCard
                     FolderIcon = GetFolderIconByPath(value);
                 }
 
-                OnPropertyChanged("FolderPath");
-                OnPropertyChanged("FolderName");
+                OnPropertyChanged(nameof(FolderPath));
+                OnPropertyChanged(nameof(FolderName));
             }
         }
 
@@ -100,7 +102,7 @@ namespace StoreCard
             set
             {
                 _doesFileExist = value;
-                OnPropertyChanged("DoesFileExist");
+                OnPropertyChanged(nameof(DoesFileExist));
             }
         }
 
@@ -110,7 +112,7 @@ namespace StoreCard
             set
             {
                 _doesFolderExist = value;
-                OnPropertyChanged("DoesFolderExist");
+                OnPropertyChanged(nameof(DoesFolderExist));
             }
         }
 
@@ -120,7 +122,7 @@ namespace StoreCard
             set
             {
                 _fileIcon = value;
-                OnPropertyChanged("FileIcon");
+                OnPropertyChanged(nameof(FileIcon));
             }
         }
 
@@ -130,7 +132,7 @@ namespace StoreCard
             set
             {
                 _folderIcon = value;
-                OnPropertyChanged("FolderIcon");
+                OnPropertyChanged(nameof(FolderIcon));
             }
         }
 
@@ -142,9 +144,9 @@ namespace StoreCard
             DataContext = this;
         }
 
-        private void OnPropertyChanged(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void BrowseFileButton_Click(object sender, RoutedEventArgs e)

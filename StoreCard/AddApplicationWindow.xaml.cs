@@ -451,15 +451,15 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void AppListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        OnPropertyChanged("ShouldEnableSaveAppButton");
-        OnPropertyChanged("SelectedAppName");
-        OnPropertyChanged("SelectedAppIcon");
+        OnPropertyChanged(nameof(ShouldEnableSaveAppButton));
+        OnPropertyChanged(nameof(SelectedAppName));
+        OnPropertyChanged(nameof(SelectedAppIcon));
     }
 
     private void GameListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        OnPropertyChanged("ShouldEnableSaveGameButton");
-        OnPropertyChanged("SelectedGameName");
-        OnPropertyChanged("SelectedGameIcon");
+        OnPropertyChanged(nameof(ShouldEnableSaveGameButton));
+        OnPropertyChanged(nameof(SelectedGameName));
+        OnPropertyChanged(nameof(SelectedGameIcon));
     }
 }
