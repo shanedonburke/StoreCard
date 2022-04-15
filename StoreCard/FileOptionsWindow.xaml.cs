@@ -72,5 +72,10 @@ namespace StoreCard
         private void OnPropertyChanged(string name) {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
+
+        private void Window_Closed(object? sender, EventArgs e)
+        {
+            new ShowMainWindowCommand().Execute(null);
+        }
     }
 }
