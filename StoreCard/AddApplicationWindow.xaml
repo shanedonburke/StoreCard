@@ -498,6 +498,7 @@
         </Grid>
         <!--  "Installed game" content  -->
         <Grid
+            x:Name="InstalledGameContent"
             Grid.Row="1"
             Visibility="{Binding IsChecked, ElementName=InstalledGameRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
@@ -923,6 +924,7 @@
         </Grid>
         <!--  "Other executable" content  -->
         <Grid
+            x:Name="OtherExecutableContent"
             Grid.Row="1"
             VerticalAlignment="Stretch"
             Visibility="{Binding IsChecked, ElementName=OtherExecutableRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -1059,15 +1061,16 @@
                     Grid.ColumnSpan="3"
                     Margin="0,15,0,0"
                     HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Visibility="{Binding DoesExecutableExist, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <!--  Name field  -->
-                    <Grid Grid.Row="0">
+                    <Grid
+                        Grid.Row="0"
+                        Visibility="{Binding DoesExecutableExist, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="*" />
@@ -1135,6 +1138,7 @@
                     <!--  Icon/name preview  -->
                     <StackPanel
                         Grid.Row="1"
+                        Visibility="{Binding DoesExecutableExist, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Margin="50,30,0,30"
                         Orientation="Horizontal">
                         <Image
@@ -1172,16 +1176,30 @@
                                 <Style TargetType="{x:Type Border}">
                                     <Setter
                                         Property="Background"
-                                        Value="#FF2DA65F" />
+                                        Value="#505050" />
                                     <Style.Triggers>
-                                        <!--  Hover/press styling  -->
-                                        <Trigger
-                                            Property="IsMouseOver"
+                                        <!--  Show green background when enabled  -->
+                                        <DataTrigger
+                                            Binding="{Binding ElementName=SaveExecutableButton, Path=IsEnabled}"
                                             Value="True">
                                             <Setter
                                                 Property="Background"
+                                                Value="#FF2DA65F" />
+                                        </DataTrigger>
+                                        <!--  Hover/press styling  -->
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition
+                                                    Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}"
+                                                    Value="True" />
+                                                <Condition
+                                                    Binding="{Binding ElementName=SaveExecutableButton, Path=IsEnabled}"
+                                                    Value="True" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter
+                                                Property="Background"
                                                 Value="#FF37CC75" />
-                                        </Trigger>
+                                        </MultiDataTrigger>
                                         <DataTrigger
                                             Binding="{Binding ElementName=SaveExecutableButton, Path=IsPressed}"
                                             Value="True">
@@ -1198,12 +1216,14 @@
                                 Click="SaveExecutableButton_Click"
                                 FontSize="14"
                                 Foreground="White"
-                                IsTabStop="False">
+                                IsTabStop="True">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
                                         <Setter
                                             Property="Background"
                                             Value="Transparent" />
+                                        <Setter Property="IsEnabled"
+                                                Value="{Binding DoesExecutableExist}" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="{x:Type Button}">

@@ -1,12 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Microsoft.Win32;
 
 namespace StoreCard
 {
@@ -15,6 +20,8 @@ namespace StoreCard
     /// </summary>
     public partial class ChangeExecutableWindow : INotifyPropertyChanged
     {
+        private readonly SavedFileSystemItem _item;
+
         private string _appSearchText = "";
 
         private bool _areAppsLoaded;
@@ -23,7 +30,13 @@ namespace StoreCard
 
         private IEnumerable<InstalledApplication> _filteredApps = new List<InstalledApplication>();
 
-        private readonly SavedFileSystemItem _item;
+        private bool _doesExecutableExist;
+
+        private ImageSource? _executableIcon;
+
+        private string _executableName = "";
+
+        private string _executablePath = "";
 
         public IEnumerable<InstalledApplication> FilteredApps
         {
@@ -65,6 +78,52 @@ namespace StoreCard
         public string? SelectedAppName => (AppListBox.SelectedItem as InstalledApplication)?.Name;
 
         public ImageSource? SelectedAppIcon => (AppListBox.SelectedItem as InstalledApplication)?.BitmapIcon;
+
+        public string ExecutablePath {
+            get => _executablePath;
+            set {
+                _executablePath = value;
+
+                DoesExecutableExist = File.Exists(value);
+                if (DoesExecutableExist) {
+                    // Take file name without '.exe'
+                    ExecutableName = value.Split(@"\").Last();
+
+                    var icon = System.Drawing.Icon.ExtractAssociatedIcon(value);
+                    if (icon != null)
+                        ExecutableIcon = Imaging.CreateBitmapSourceFromHIcon(
+                            icon.Handle,
+                            Int32Rect.Empty,
+                            BitmapSizeOptions.FromEmptyOptions());
+                }
+
+                OnPropertyChanged("ExecutablePath");
+            }
+        }
+
+        public string ExecutableName {
+            get => _executableName;
+            set {
+                _executableName = value;
+                OnPropertyChanged("ExecutableName");
+            }
+        }
+
+        public bool DoesExecutableExist {
+            get => _doesExecutableExist;
+            set {
+                _doesExecutableExist = value;
+                OnPropertyChanged("DoesExecutableExist");
+            }
+        }
+
+        public ImageSource? ExecutableIcon {
+            get => _executableIcon;
+            set {
+                _executableIcon = value;
+                OnPropertyChanged("ExecutableIcon");
+            }
+        }
 
         public ChangeExecutableWindow(SavedFileSystemItem item)
         {
@@ -182,6 +241,31 @@ namespace StoreCard
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Task.Run(() => SetInstalledApps(SystemUtils.GetInstalledApplications()));
+        }
+
+        private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
+        {
+            var savedItems = StorageUtils.ReadItemsFromFile();
+            var matchingItem = savedItems.Find(i => i.Id == _item.Id) as SavedFileSystemItem;
+            if (matchingItem == null) {
+                Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
+                return;
+            }
+            matchingItem.SetExecutablePath(ExecutablePath);
+            StorageUtils.SaveItemsToFile(savedItems);
+            DialogResult = true;
+            Close();
+        }
+
+        private void BrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog {
+                Filter = "Executables|*.exe|All Files (*.*)|*.*",
+                InitialDirectory = Environment.ExpandEnvironmentVariables("%ProgramW6432%"),
+                Title = "Select Executable"
+            };
+
+            if (openFileDialog.ShowDialog() == true) ExecutablePath = openFileDialog.FileName;
         }
     }
 }
