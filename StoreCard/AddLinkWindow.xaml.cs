@@ -24,6 +24,8 @@ namespace StoreCard
     {
         private string _url = "";
 
+        private string _linkTitle = "";
+
         public string Url {
             get => _url;
             set {
@@ -32,8 +34,19 @@ namespace StoreCard
             }
         }
 
+        public string LinkTitle
+        {
+            get => _linkTitle;
+            set
+            {
+                _linkTitle = value;
+                OnPropertyChanged(nameof(LinkTitle));
+            }
+        }
+
         public AddLinkWindow() {
             InitializeComponent();
+            DataContext = this;
         }
 
         private void Window_Closed(object? sender, EventArgs e)

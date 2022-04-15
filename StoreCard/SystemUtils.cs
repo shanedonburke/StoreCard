@@ -1,21 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Microsoft.WindowsAPICodePack.Shell;
 
 namespace StoreCard
 {
     internal class SystemUtils
     {
-        public static void OpenInDefaultProgram(string path)
-        {
-            using Process openProcess = new Process();
-
-            openProcess.StartInfo.FileName = "explorer.exe";
-            openProcess.StartInfo.Arguments = $"\"{path}\"";
-            openProcess.Start();
-        }
-
         public static List<InstalledApplication> GetInstalledApplications()
         {
             // From https://stackoverflow.com/a/57195200

@@ -18,6 +18,7 @@
             VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
+                <RowDefinition Height="15" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -25,13 +26,14 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <TextBlock
+                x:Name="UrlLabel"
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 FontFamily="Segoe UI"
                 FontSize="14"
                 Foreground="White"
                 Text="URL:" />
-            <!--  Name box  -->
+            <!--  URL box  -->
             <Border
                 Grid.Row="0"
                 Grid.Column="1"
@@ -74,6 +76,68 @@
                                         <Setter
                                             Property="Text"
                                             Value="Enter URL..." />
+                                        <Setter
+                                            Property="Foreground"
+                                            Value="#FFAAAAAA" />
+                                    </MultiDataTrigger.Setters>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            </Border>
+            <TextBlock
+                x:Name="TitleLabel"
+                Grid.Row="2"
+                Grid.Column="0"
+                VerticalAlignment="Center"
+                FontFamily="Segoe UI"
+                FontSize="14"
+                Foreground="White"
+                Text="Title:" />
+            <!-- Title box  -->
+            <Border
+                Grid.Row="2"
+                Grid.Column="1"
+                Padding="5,0,5,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="#FF444444"
+                CornerRadius="5">
+                <TextBox
+                    Name="LinkTitleBox"
+                    HorizontalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    Background="#FF444444"
+                    BorderBrush="#00000000"
+                    BorderThickness="0,0,0,0"
+                    FontFamily="Segoe UI"
+                    FontSize="14"
+                    MaxLines="1"
+                    SelectionBrush="#65FFFFFF"
+                    TextWrapping="NoWrap">
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter
+                                Property="Text"
+                                Value="{Binding LinkTitle, UpdateSourceTrigger=PropertyChanged}" />
+                            <Setter
+                                Property="Foreground"
+                                Value="White" />
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition
+                                            Binding="{Binding ElementName=LinkTitleBox, Path=IsFocused}"
+                                            Value="False" />
+                                        <Condition
+                                            Binding="{Binding LinkTitle}"
+                                            Value="" />
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.Setters>
+                                        <Setter
+                                            Property="Text"
+                                            Value="Enter title..." />
                                         <Setter
                                             Property="Foreground"
                                             Value="#FFAAAAAA" />
