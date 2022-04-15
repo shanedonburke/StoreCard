@@ -31,6 +31,7 @@ namespace StoreCard
             set {
                 _url = value;
                 OnPropertyChanged(nameof(Url));
+                GetWebsiteDetails();
             }
         }
 
@@ -47,6 +48,16 @@ namespace StoreCard
         public AddLinkWindow() {
             InitializeComponent();
             DataContext = this;
+        }
+
+        private async void GetWebsiteDetails()
+        {
+            var title = await HttpUtils.GetWebsiteTitle(Url);
+            if (title != string.Empty)
+            {
+                LinkTitle = title;
+            }
+
         }
 
         private void Window_Closed(object? sender, EventArgs e)
