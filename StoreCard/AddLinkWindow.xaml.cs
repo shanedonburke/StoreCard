@@ -47,15 +47,7 @@ namespace StoreCard
             }
         }
 
-        public ImageSource? Favicon
-        {
-            get => _favicon;
-            set
-            {
-                _favicon = value;
-                OnPropertyChanged(nameof(Favicon));
-            }
-        }
+        public ImageSource? LinkIcon => _favicon ?? Icons.LinkIcon;
 
         public AddLinkWindow() {
             InitializeComponent();
@@ -70,7 +62,8 @@ namespace StoreCard
                 LinkTitle = title;
             }
 
-            Favicon = await HttpUtils.GetWebsiteIcon(Url);
+            _favicon = await HttpUtils.GetWebsiteIcon(Url);
+            OnPropertyChanged(nameof(LinkIcon));
         }
 
         private void Window_Closed(object? sender, EventArgs e)

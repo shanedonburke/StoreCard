@@ -2,13 +2,16 @@
 
 namespace StoreCard
 {
-    internal class GamePlatformIcons
+    internal class Icons
     {
         public static readonly BitmapSource SteamIcon;
 
-        static GamePlatformIcons()
+        public static readonly BitmapSource LinkIcon;
+
+        static Icons()
         {
             SteamIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.SteamIcon);
+            LinkIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.LinkIcon);
         }
     }
 }

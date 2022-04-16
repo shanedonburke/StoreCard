@@ -317,7 +317,7 @@
                     Width="64"
                     Height="64"
                     Foreground="#FF2DA65F"
-                    Icon="Refresh"
+                    Icon="CircleOutlineNotch"
                     Spin="True" />
             </Grid>
             <!--  Application list  -->

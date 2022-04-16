@@ -32,7 +32,7 @@ public class SavedSteamGame : SavedItem
 
     public override ItemCategory Category => ItemCategory.Game;
 
-    public override ImageSource PrefixIcon => GamePlatformIcons.SteamIcon;
+    public override ImageSource PrefixIcon => Icons.SteamIcon;
 
     public override void Open()
     {
