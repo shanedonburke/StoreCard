@@ -33,6 +33,7 @@ namespace StoreCard
             set {
                 _url = value;
                 OnPropertyChanged(nameof(Url));
+                OnPropertyChanged(nameof(ShouldEnableSaveButton));
                 GetWebsiteDetails();
             }
         }
@@ -44,10 +45,13 @@ namespace StoreCard
             {
                 _linkTitle = value;
                 OnPropertyChanged(nameof(LinkTitle));
+                OnPropertyChanged(nameof(ShouldEnableSaveButton));
             }
         }
 
         public ImageSource? LinkIcon => _favicon ?? Icons.LinkIcon;
+
+        public bool ShouldEnableSaveButton => Url != string.Empty && LinkTitle != string.Empty;
 
         public AddLinkWindow() {
             InitializeComponent();
@@ -77,6 +81,16 @@ namespace StoreCard
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

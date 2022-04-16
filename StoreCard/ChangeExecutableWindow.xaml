@@ -94,7 +94,7 @@
                 Foreground="White"
                 FontSize="14" />
             <Grid
-                Grid.Row="2"
+                Grid.Row="1"
                 Margin="15,0,15,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

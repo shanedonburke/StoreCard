@@ -17,7 +17,9 @@ namespace StoreCard
 
         public static async Task<string> GetWebsiteTitle(string url)
         {
-            var fullUrl = url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ? url : $"http://{url}";
+            var includesScheme = url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                                 url.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
+            var fullUrl = includesScheme ? url : $"http://{url}";
             var title = string.Empty;
             if (!_urlRegex.Match(fullUrl).Success) return title;
             try
