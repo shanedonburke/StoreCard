@@ -46,4 +46,11 @@ internal class ImageUtils
 
         return bitmapImage;
     }
+
+    public static BitmapImage BytesToBitmapImage(byte[] bytes)
+    {
+        var ms = new MemoryStream(bytes);
+        var bitmap = new Bitmap(ms);
+        return BitmapToBitmapImage(bitmap);
+    }
 }

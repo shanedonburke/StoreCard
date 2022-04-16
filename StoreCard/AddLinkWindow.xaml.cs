@@ -26,6 +26,8 @@ namespace StoreCard
 
         private string _linkTitle = "";
 
+        private ImageSource? _favicon;
+
         public string Url {
             get => _url;
             set {
@@ -45,6 +47,16 @@ namespace StoreCard
             }
         }
 
+        public ImageSource? Favicon
+        {
+            get => _favicon;
+            set
+            {
+                _favicon = value;
+                OnPropertyChanged(nameof(Favicon));
+            }
+        }
+
         public AddLinkWindow() {
             InitializeComponent();
             DataContext = this;
@@ -58,6 +70,7 @@ namespace StoreCard
                 LinkTitle = title;
             }
 
+            Favicon = await HttpUtils.GetWebsiteIcon(Url);
         }
 
         private void Window_Closed(object? sender, EventArgs e)
