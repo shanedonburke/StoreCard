@@ -202,26 +202,33 @@
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <!--  Icon/name preview  -->
-                <StackPanel
+                <Grid
                     Grid.Row="0"
                     Visibility="{Binding DoesFileExist, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Margin="50,15,0,30"
-                    VerticalAlignment="Top"
-                    Orientation="Horizontal">
+                    VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
                     <Image
+                        Grid.Column="0"
                         Width="40"
                         Height="40"
                         Margin="0,0,15,0"
                         HorizontalAlignment="Left"
                         Source="{Binding FileIcon}" />
                     <TextBlock
+                        Grid.Column="1"
                         VerticalAlignment="Center"
                         FontFamily="Segoe UI"
                         FontSize="14"
                         FontWeight="Bold"
                         Foreground="White"
+                        TextTrimming="CharacterEllipsis"
+                        TextWrapping="NoWrap"
                         Text="{Binding FileName}" />
-                </StackPanel>
+                </Grid>
                 <!--  Save/Cancel controls  -->
                 <Grid
                     Grid.Row="1"
@@ -536,12 +543,15 @@
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <!--  Icon/name preview  -->
-                <StackPanel
+                <Grid
                     Grid.Row="0"
                     Visibility="{Binding DoesFolderExist, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Margin="50,15,0,30"
-                    VerticalAlignment="Top"
-                    Orientation="Horizontal">
+                    VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
                     <Image
                         Width="40"
                         Height="40"
@@ -554,8 +564,10 @@
                         FontSize="14"
                         FontWeight="Bold"
                         Foreground="White"
+                        TextTrimming="CharacterEllipsis"
+                        TextWrapping="NoWrap"
                         Text="{Binding FolderName}" />
-                </StackPanel>
+                </Grid>
                 <Grid
                     Grid.Row="1"
                     Margin="50,0,0,0"

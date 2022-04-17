@@ -1212,25 +1212,32 @@
                         </Border>
                     </Grid>
                     <!--  Icon/name preview  -->
-                    <StackPanel
+                    <Grid
                         Grid.Row="1"
                         Visibility="{Binding DoesExecutableExist, Converter={StaticResource BooleanToVisibilityConverter}}"
-                        Margin="50,30,0,30"
-                        Orientation="Horizontal">
+                        Margin="50,30,0,30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
                         <Image
+                            Grid.Column="0"
                             Width="40"
                             Height="40"
                             Margin="0,0,15,0"
                             HorizontalAlignment="Left"
                             Source="{Binding ExecutableIcon}" />
                         <TextBlock
+                            Grid.Column="1"
                             VerticalAlignment="Center"
                             FontFamily="Segoe UI"
                             FontSize="14"
                             FontWeight="Bold"
                             Foreground="White"
+                            TextTrimming="CharacterEllipsis"
+                            TextWrapping="NoWrap"
                             Text="{Binding ExecutableName}" />
-                    </StackPanel>
+                    </Grid>
                     <Grid
                         Grid.Row="2"
                         VerticalAlignment="Bottom">
