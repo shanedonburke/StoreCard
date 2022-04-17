@@ -12,6 +12,7 @@
         Closed="SettingsWindow_Closed"
         Title="Settings">
     <Grid>
-        
+        <TextBlock
+            Text="{Binding HotKeyString}" />
     </Grid>
 </Window>

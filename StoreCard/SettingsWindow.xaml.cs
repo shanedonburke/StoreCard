@@ -17,14 +17,22 @@ namespace StoreCard
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
     /// </summary>
-    public partial class SettingsWindow : Window
+    public partial class SettingsWindow
     {
+
+        private readonly UserConfig _config;
+
+        public string HotKeyString => HotKeyUtils.KeyStringFromConfig(_config);
+
         public SettingsWindow() {
             InitializeComponent();
+            _config = StorageUtils.ReadConfigFromFile();
+            DataContext = this;
         }
 
         private void SettingsWindow_Closed(object? sender, EventArgs e)
         {
+            StorageUtils.SaveConfigToFile(_config);
             new ShowMainWindowCommand().Execute(null);
             Close();
         }

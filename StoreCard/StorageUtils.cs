@@ -15,7 +15,6 @@ internal class StorageUtils
 
         var json = File.ReadAllText(filePath);
         {
-            // TODO: try-catch
             var savedItems = JsonConvert.DeserializeObject<List<SavedItem>>(json, new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.All
@@ -24,10 +23,25 @@ internal class StorageUtils
         }
     }
 
+    public static UserConfig ReadConfigFromFile()
+    {
+        var filePath = GetConfigFilePath();
+
+        if (!File.Exists(filePath)) return new UserConfig();
+
+        var json = File.ReadAllText(filePath);
+        return JsonConvert.DeserializeObject<UserConfig>(json) ?? new UserConfig();
+    }
+
     public static void SaveItemsToFile(List<SavedItem> items)
     {
         items.Sort();
         SerializeObjectToFile(items, GetItemsFilePath());
+    }
+
+    public static void SaveConfigToFile(UserConfig config)
+    {
+        SerializeObjectToFile(config, GetConfigFilePath());
     }
 
     private static void SerializeObjectToFile(object objectToSave, string filePath)
