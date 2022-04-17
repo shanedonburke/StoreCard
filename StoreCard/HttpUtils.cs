@@ -18,9 +18,7 @@ namespace StoreCard
 
         public static async Task<string> GetWebsiteTitle(string url)
         {
-            var includesScheme = url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
-                                 url.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
-            var fullUrl = includesScheme ? url : $"http://{url}";
+            var fullUrl = NormalizeUrl(url);
             var title = string.Empty;
             if (!_urlRegex.Match(fullUrl).Success) return title;
             try
@@ -57,6 +55,13 @@ namespace StoreCard
                 // Ignored
             }
             return image;
+        }
+
+        public static string NormalizeUrl(string url)
+        {
+            var includesScheme = url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                                 url.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
+            return includesScheme ? url : $"http://{url}";
         }
     }
 }
