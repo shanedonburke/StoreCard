@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Media.Imaging;
 
 namespace StoreCard
@@ -35,7 +36,7 @@ namespace StoreCard
             {
                 // Ignored
             }
-            return title;
+            return HttpUtility.HtmlDecode(title);
         }
 
         public static async Task<BitmapImage?> GetWebsiteIcon(string url)
