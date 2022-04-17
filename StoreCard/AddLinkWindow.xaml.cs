@@ -49,7 +49,7 @@ namespace StoreCard
             }
         }
 
-        public ImageSource? LinkIcon => _favicon ?? Icons.LinkIcon;
+        public ImageSource LinkIcon => _favicon ?? Icons.LinkIcon;
 
         public bool ShouldEnableSaveButton => Url != string.Empty && LinkTitle != string.Empty;
 
@@ -85,7 +85,11 @@ namespace StoreCard
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var base64Icon = ImageUtils.ImageToBase64((BitmapSource) LinkIcon);
+            var savedItems = StorageUtils.ReadItemsFromFile();
+            // savedItems.Add(new SavedFile(Guid.NewGuid().ToString(), FileName, base64Icon, FilePath, SavedFileSystemItem.DEFAULT_EXECUTABLE));
+            StorageUtils.SaveItemsToFile(savedItems);
+            Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
