@@ -471,6 +471,7 @@
                 BorderBrush="#00000000"
                 BorderThickness="0,0,0,0"
                 Foreground="White"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ItemsSource="{Binding FilteredItems}"
                 PreviewKeyDown="ItemListBox_PreviewKeyDown">
                 <!--  Style items to take up whole horizontal space  -->
@@ -593,8 +594,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <Image
                                 Grid.Column="0"
@@ -612,8 +613,11 @@
                             <TextBlock
                                 Grid.Column="2"
                                 Margin="3"
+                                HorizontalAlignment="Stretch"
                                 VerticalAlignment="Center"
                                 FontSize="12"
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="NoWrap"
                                 Text="{Binding Name}" />
                             <!--  "Open" button  -->
                             <Border
