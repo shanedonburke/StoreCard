@@ -246,4 +246,10 @@ public partial class MainWindow : INotifyPropertyChanged
             Debug.WriteLine("Tried to open edit file window for non-file item.");
         }
     }
+
+    private void SettingsButton_Click(object sender, RoutedEventArgs e)
+    {
+        new SettingsWindow().Show();
+        Close();
+    }
 }

@@ -9,7 +9,7 @@ internal class StorageUtils
 {
     public static List<SavedItem> ReadItemsFromFile()
     {
-        var filePath = GetFilePath();
+        var filePath = GetItemsFilePath();
 
         if (!File.Exists(filePath)) return new List<SavedItem>();
 
@@ -24,22 +24,36 @@ internal class StorageUtils
         }
     }
 
-    public static bool SaveItemsToFile(List<SavedItem> items)
+    public static void SaveItemsToFile(List<SavedItem> items)
     {
         items.Sort();
-        var filePath = GetFilePath();
-        var json = JsonConvert.SerializeObject(items, new JsonSerializerSettings
+        SerializeObjectToFile(items, GetItemsFilePath());
+    }
+
+    private static void SerializeObjectToFile(object objectToSave, string filePath)
+    {
+        Directory.CreateDirectory(Path.GetDirectoryName(filePath) ??
+                                  throw new InvalidOperationException($"Could not get directory name for {filePath}"));
+        var json = JsonConvert.SerializeObject(objectToSave, new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.All
         });
         File.WriteAllText(filePath, json);
-        return true;
     }
 
-    private static string GetFilePath()
+    private static string GetItemsFilePath()
     {
         return Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "StoreCard.json");
+            "StoreCard",
+            "Items.json");
+    }
+
+    private static string GetConfigFilePath()
+    {
+        return Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "StoreCard",
+            "Config.json");
     }
 }
