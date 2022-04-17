@@ -234,16 +234,16 @@ public partial class MainWindow : INotifyPropertyChanged
         return (uint) (a - b * Math.Floor(a / b));
     }
 
-    private void ContextMenuFileOptionsItem_Click(object sender, RoutedEventArgs e)
+    private void ContextMenuEditFileItem_Click(object sender, RoutedEventArgs e)
     {
         if (ItemListBox.SelectedItem is SavedFileSystemItem item)
         {
-            new FileOptionsWindow(item).Show();
+            new EditFileWindow(item).Show();
             Close();
         }
         else
         {
-            Debug.WriteLine("Tried to open file options menu for non-file item.");
+            Debug.WriteLine("Tried to open edit file window for non-file item.");
         }
     }
 }

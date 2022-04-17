@@ -12,9 +12,9 @@ using StoreCard.Annotations;
 namespace StoreCard
 {
     /// <summary>
-    /// Interaction logic for FileOptionsWindow.xaml
+    /// Interaction logic for EditFileWindow.xaml
     /// </summary>
-    public partial class FileOptionsWindow : INotifyPropertyChanged
+    public partial class EditFileWindow : INotifyPropertyChanged
     {
         private SavedFileSystemItem _item;
 
@@ -38,7 +38,7 @@ namespace StoreCard
             }
         }
 
-        public FileOptionsWindow(SavedFileSystemItem item) {
+        public EditFileWindow(SavedFileSystemItem item) {
             _item = item;
             DataContext = this;
             InitializeComponent();
@@ -52,7 +52,7 @@ namespace StoreCard
             var savedItems = StorageUtils.ReadItemsFromFile();
             if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem)
             {
-                Debug.WriteLine("Failed to find matching item for file options window.");
+                Debug.WriteLine("Failed to find matching item for edit file window.");
                 return;
             }
             _item = matchingItem;

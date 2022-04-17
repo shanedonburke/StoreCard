@@ -47,8 +47,8 @@
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem
-                x:Name="ContextMenuFileOptionsItem"
-                Click="ContextMenuFileOptionsItem_Click">
+                x:Name="ContextMenuEditFileItem"
+                Click="ContextMenuEditFileItem_Click">
                 <MenuItem.Style>
                     <Style TargetType="{x:Type MenuItem}">
                         <Setter Property="Visibility"
@@ -74,7 +74,7 @@
                 <MenuItem.Header>
                     <TextBlock
                         Margin="-20,0,0,0"
-                        Text="Options..." />
+                        Text="Edit..." />
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem
