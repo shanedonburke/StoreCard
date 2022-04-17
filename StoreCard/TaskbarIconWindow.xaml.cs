@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interop;
 
 namespace StoreCard;
@@ -11,7 +12,11 @@ namespace StoreCard;
 /// </summary>
 public partial class TaskbarIconWindow
 {
-    private const int HotkeyId = 9000;
+    private const uint MOD_ALT = 0x0001;
+    private const uint MOD_CONTROL = 0x0002;
+    private const uint MOD_SHIFT = 0x0004;
+    private const uint MOD_WIN = 0x0008;
+    private const int HOTKEY_ID = 9000;
 
     private HwndSource? _source;
 
@@ -60,16 +65,16 @@ public partial class TaskbarIconWindow
     private void RegisterHotKey()
     {
         var helper = new WindowInteropHelper(this);
-        const uint vkX = 0x58;
-        const uint modWinShift = 0x000C;
-        if (!RegisterHotKey(helper.Handle, HotkeyId, modWinShift, vkX))
+        var vkX = (uint) KeyInterop.VirtualKeyFromKey(Key.X);
+        var modWinShift = MOD_WIN | MOD_SHIFT;
+        if (!RegisterHotKey(helper.Handle, HOTKEY_ID, modWinShift, vkX))
             Debug.WriteLine("Failed to register hotkey.");
     }
 
     private void UnregisterHotKey()
     {
         var helper = new WindowInteropHelper(this);
-        UnregisterHotKey(helper.Handle, HotkeyId);
+        UnregisterHotKey(helper.Handle, HOTKEY_ID);
     }
 
     private IntPtr HwndHook(IntPtr hwnd,
@@ -84,7 +89,7 @@ public partial class TaskbarIconWindow
             case wmHotkey:
                 switch (wParam.ToInt32())
                 {
-                    case HotkeyId:
+                    case HOTKEY_ID:
                         OnHotKeyPressed();
                         handled = true;
                         break;
