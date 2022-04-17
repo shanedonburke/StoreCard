@@ -198,6 +198,7 @@
                 BorderBrush="#00000000"
                 BorderThickness="0,0,0,0"
                 Foreground="White"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ItemsSource="{Binding FilteredApps}"
                 PreviewKeyDown="AppListBox_PreviewKeyDown"
                 SelectionChanged="AppListBox_SelectionChanged"
@@ -332,6 +333,8 @@
                                 Margin="3"
                                 VerticalAlignment="Center"
                                 FontSize="12"
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="NoWrap"
                                 Text="{Binding Name}" />
                         </Grid>
                     </DataTemplate>
@@ -651,6 +654,7 @@
                 BorderBrush="#00000000"
                 BorderThickness="0,0,0,0"
                 Foreground="White"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ItemsSource="{Binding FilteredGames}"
                 PreviewKeyDown="AppListBox_PreviewKeyDown"
                 SelectionChanged="GameListBox_SelectionChanged"
@@ -793,6 +797,8 @@
                                 Margin="3"
                                 VerticalAlignment="Center"
                                 FontSize="12"
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="NoWrap"
                                 Text="{Binding Name}" />
                         </Grid>
                     </DataTemplate>

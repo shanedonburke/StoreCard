@@ -365,6 +365,7 @@
                 BorderBrush="#00000000"
                 BorderThickness="0,0,0,0"
                 Foreground="White"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ItemsSource="{Binding FilteredApps}"
                 SelectionChanged="AppListBox_SelectionChanged"
                 Visibility="{Binding AreAppsLoaded, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -498,6 +499,8 @@
                                 Margin="3"
                                 VerticalAlignment="Center"
                                 FontSize="12"
+                                TextTrimming="CharacterEllipsis"
+                                TextWrapping="NoWrap"
                                 Text="{Binding Name}" />
                         </Grid>
                     </DataTemplate>
