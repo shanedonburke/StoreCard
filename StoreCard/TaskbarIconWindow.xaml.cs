@@ -66,7 +66,7 @@ public partial class TaskbarIconWindow
     {
         var helper = new WindowInteropHelper(this);
         var vkX = (uint) KeyInterop.VirtualKeyFromKey(Key.X);
-        var modWinShift = MOD_WIN | MOD_SHIFT;
+        const uint modWinShift = MOD_WIN | MOD_SHIFT;
         if (!RegisterHotKey(helper.Handle, HOTKEY_ID, modWinShift, vkX))
             Debug.WriteLine("Failed to register hotkey.");
     }
