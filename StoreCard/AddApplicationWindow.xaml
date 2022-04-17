@@ -98,49 +98,84 @@
                 VerticalAlignment="Stretch"
                 Background="#FF444444"
                 CornerRadius="5">
-                <TextBox
-                    Name="AppSearchBox"
-                    VerticalContentAlignment="Stretch"
-                    Background="#FF444444"
-                    BorderBrush="#00000000"
-                    BorderThickness="0,0,0,0"
-                    FontFamily="Segoe UI"
-                    FontSize="14"
-                    MaxLines="1"
-                    PreviewKeyDown="AppSearchBox_PreviewKeyDown"
-                    SelectionBrush="#65FFFFFF"
-                    TextWrapping="NoWrap">
-                    <TextBox.Style>
-                        <Style TargetType="{x:Type TextBox}">
-                            <Setter
-                                Property="Text"
-                                Value="{Binding AppSearchText, UpdateSourceTrigger=PropertyChanged}" />
-                            <Setter
-                                Property="Foreground"
-                                Value="White" />
-                            <Style.Triggers>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition
-                                            Binding="{Binding ElementName=AppSearchBox, Path=IsFocused}"
-                                            Value="False" />
-                                        <Condition
-                                            Binding="{Binding AppSearchText}"
-                                            Value="" />
-                                    </MultiDataTrigger.Conditions>
-                                    <MultiDataTrigger.Setters>
-                                        <Setter
-                                            Property="Text"
-                                            Value="Search..." />
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="#FFAAAAAA" />
-                                    </MultiDataTrigger.Setters>
-                                </MultiDataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
+                <Grid
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+                    <TextBlock
+                        FontSize="14"
+                        Foreground="#AAAAAA"
+                        Padding="2,0,0,0"
+                        VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition
+                                                Binding="{Binding ElementName=AppSearchBox, Path=IsFocused}"
+                                                Value="True" />
+                                            <Condition
+                                                Binding="{Binding AppSearchText}"
+                                                Value="" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter
+                                                Property="Text"
+                                                Value="Start typing to search..." />
+                                            <Setter
+                                                Property="Foreground"
+                                                Value="#FFAAAAAA" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBox
+                        Name="AppSearchBox"
+                        VerticalContentAlignment="Stretch"
+                        Background="Transparent"
+                        BorderBrush="#00000000"
+                        BorderThickness="0,0,0,0"
+                        CaretBrush="White"
+                        FontFamily="Segoe UI"
+                        FontSize="14"
+                        MaxLines="1"
+                        PreviewKeyDown="AppSearchBox_PreviewKeyDown"
+                        SelectionBrush="#65FFFFFF"
+                        TextWrapping="NoWrap">
+                        <TextBox.Style>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter
+                                    Property="Text"
+                                    Value="{Binding AppSearchText, UpdateSourceTrigger=PropertyChanged}" />
+                                <Setter
+                                    Property="Foreground"
+                                    Value="White" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition
+                                                Binding="{Binding ElementName=AppSearchBox, Path=IsFocused}"
+                                                Value="False" />
+                                            <Condition
+                                                Binding="{Binding AppSearchText}"
+                                                Value="" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter
+                                                Property="Text"
+                                                Value="Click to search..." />
+                                            <Setter
+                                                Property="Foreground"
+                                                Value="#FFAAAAAA" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </Grid>
             </Border>
             <Grid
                 Grid.Row="1"
@@ -515,49 +550,84 @@
                 VerticalAlignment="Stretch"
                 Background="#FF444444"
                 CornerRadius="5">
-                <TextBox
-                    Name="GameSearchBox"
-                    VerticalContentAlignment="Stretch"
-                    Background="#FF444444"
-                    BorderBrush="#00000000"
-                    BorderThickness="0,0,0,0"
-                    FontFamily="Segoe UI"
-                    FontSize="14"
-                    MaxLines="1"
-                    PreviewKeyDown="GameSearchBox_PreviewKeyDown"
-                    SelectionBrush="#65FFFFFF"
-                    TextWrapping="NoWrap">
-                    <TextBox.Style>
-                        <Style TargetType="{x:Type TextBox}">
-                            <Setter
-                                Property="Text"
-                                Value="{Binding GameSearchText, UpdateSourceTrigger=PropertyChanged}" />
-                            <Setter
-                                Property="Foreground"
-                                Value="White" />
-                            <Style.Triggers>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition
-                                            Binding="{Binding ElementName=GameSearchBox, Path=IsFocused}"
-                                            Value="False" />
-                                        <Condition
-                                            Binding="{Binding GameSearchText}"
-                                            Value="" />
-                                    </MultiDataTrigger.Conditions>
-                                    <MultiDataTrigger.Setters>
-                                        <Setter
-                                            Property="Text"
-                                            Value="Search..." />
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="#FFAAAAAA" />
-                                    </MultiDataTrigger.Setters>
-                                </MultiDataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
+                <Grid
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+                    <TextBlock
+                        FontSize="14"
+                        Foreground="#AAAAAA"
+                        Padding="2,0,0,0"
+                        VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition
+                                                Binding="{Binding ElementName=GameSearchBox, Path=IsFocused}"
+                                                Value="True" />
+                                            <Condition
+                                                Binding="{Binding GameSearchText}"
+                                                Value="" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter
+                                                Property="Text"
+                                                Value="Start typing to search..." />
+                                            <Setter
+                                                Property="Foreground"
+                                                Value="#FFAAAAAA" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBox
+                        Name="GameSearchBox"
+                        VerticalContentAlignment="Stretch"
+                        Background="Transparent"
+                        BorderBrush="#00000000"
+                        BorderThickness="0,0,0,0"
+                        CaretBrush="White"
+                        FontFamily="Segoe UI"
+                        FontSize="14"
+                        MaxLines="1"
+                        PreviewKeyDown="GameSearchBox_PreviewKeyDown"
+                        SelectionBrush="#65FFFFFF"
+                        TextWrapping="NoWrap">
+                        <TextBox.Style>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter
+                                    Property="Text"
+                                    Value="{Binding GameSearchText, UpdateSourceTrigger=PropertyChanged}" />
+                                <Setter
+                                    Property="Foreground"
+                                    Value="White" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition
+                                                Binding="{Binding ElementName=GameSearchBox, Path=IsFocused}"
+                                                Value="False" />
+                                            <Condition
+                                                Binding="{Binding GameSearchText}"
+                                                Value="" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter
+                                                Property="Text"
+                                                Value="Click to search..." />
+                                            <Setter
+                                                Property="Foreground"
+                                                Value="#FFAAAAAA" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </Grid>
             </Border>
             <!--  Game list spinner  -->
             <Grid
