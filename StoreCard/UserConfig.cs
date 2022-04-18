@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace StoreCard
 {
@@ -15,7 +10,7 @@ namespace StoreCard
         public UserConfig()
         {
             HotKeyModifiers = HotKeyUtils.ModifiersToHotKeyByte(Key.LWin, Key.LeftShift);
-            VirtualHotKey = HotKeyUtils.KeyToVirtualKey(Key.X);
+            VirtualHotKey = HotKeyUtils.KeyToVirtualKey(Key.Z);
         }
 
         public UserConfig(uint hotKeyModifiers, uint virtualHotKey)

@@ -36,5 +36,10 @@ namespace StoreCard
             new ShowMainWindowCommand().Execute(null);
             Close();
         }
+
+        private void RecordHotKeyButton_Click(object sender, RoutedEventArgs e)
+        {
+            new RecordHotKeyWindow().ShowDialog();
+        }
     }
 }

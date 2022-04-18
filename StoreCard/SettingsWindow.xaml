@@ -29,6 +29,8 @@
                 FontSize="14"
                 Foreground="#AAAAAA" />
             <Button
+                Name="RecordHotKeyButton"
+                Click="RecordHotKeyButton_Click"
                 Width="16"
                 Height="16"
                 Background="Transparent"
