@@ -75,7 +75,7 @@ internal class HotKeyUtils
         return string.Join("+", allKeys.Select(KeyToString));
     }
 
-    private static string KeyToString(Key key)
+    public static string KeyToString(Key key)
     {
         return key switch
         {
@@ -83,12 +83,12 @@ internal class HotKeyUtils
             Key.LeftAlt => "Alt",
             Key.LWin => "Win",
             Key.LeftShift => "Shift",
-            _ => key.ToString()
+            _ => ToAscii(key).ToString()
         };
     }
 
     // From https://stackoverflow.com/a/736509
-    public static char ToAscii(Key key)
+    private static char ToAscii(Key key)
     {
         var outputBuilder = new StringBuilder(2);
         var result = ToAscii(KeyToVirtualKey(key), 0, new byte[256],

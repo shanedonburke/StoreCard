@@ -55,7 +55,7 @@ namespace StoreCard
                 text.Append("Shift+");
             }
 
-            text.Append(HotKeyUtils.ToAscii(key));
+            text.Append(HotKeyUtils.KeyToString(key));
             HotKeyText = text.ToString();
         }
 
