@@ -94,7 +94,6 @@ namespace StoreCard
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            new ShowMainWindowCommand().Execute(null);
             DialogResult = false;
             Close();
         }

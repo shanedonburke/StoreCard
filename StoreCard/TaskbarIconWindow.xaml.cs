@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
@@ -98,6 +99,10 @@ public partial class TaskbarIconWindow
 
     private void OnHotKeyPressed()
     {
+        if (Application.Current.Windows.Cast<Window>().Any(w => w is RecordHotKeyWindow))
+        {
+            return;
+        }
         new ShowMainWindowCommand().Execute(null);
     }
 
