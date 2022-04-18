@@ -36,6 +36,7 @@
                     Text="{Binding Path=HotKeyText}"/>
                 <Button
                     Name="ClearButton"
+                    Click="ClearButton_Click"
                     HorizontalAlignment="Center"
                     VerticalContentAlignment="Center"
                     BorderBrush="#00000000"

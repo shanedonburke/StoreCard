@@ -83,7 +83,7 @@ internal class HotKeyUtils
             Key.LeftAlt => "Alt",
             Key.LWin => "Win",
             Key.LeftShift => "Shift",
-            _ => ToAscii(key).ToString()
+            _ => ToAscii(key).ToString().ToUpper()
         };
     }
 

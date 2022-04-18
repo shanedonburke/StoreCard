@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
 using StoreCard.Annotations;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -13,7 +14,7 @@ namespace StoreCard
     public partial class RecordHotKeyWindow : INotifyPropertyChanged
     {
         private string _hotKeyText = "";
-        private readonly string _hotKeyTextFromConfig = "";
+        private readonly UserConfig _config;
 
         public string HotKeyText
         {
@@ -26,8 +27,8 @@ namespace StoreCard
         }
         public RecordHotKeyWindow() {
             InitializeComponent();
-            _hotKeyTextFromConfig = HotKeyUtils.KeyStringFromConfig(StorageUtils.ReadConfigFromFile());
-            HotKeyText = _hotKeyTextFromConfig;
+            _config = StorageUtils.ReadConfigFromFile();
+            HotKeyText = HotKeyUtils.KeyStringFromConfig(_config);
             DataContext = this;
         }
 
@@ -65,6 +66,11 @@ namespace StoreCard
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            HotKeyText = HotKeyUtils.KeyStringFromConfig(_config);
         }
     }
 }
