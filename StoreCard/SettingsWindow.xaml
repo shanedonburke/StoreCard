@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StoreCard"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Width="600"
         Height="400"
@@ -11,8 +12,38 @@
         WindowStartupLocation="CenterScreen"
         Closed="SettingsWindow_Closed"
         Title="Settings">
-    <Grid>
-        <TextBlock
-            Text="{Binding HotKeyString}" />
+    <Grid
+        Margin="15,15,15,15">
+        <StackPanel
+            Orientation="Horizontal"
+            Height="20"
+            VerticalAlignment="Top">
+            <TextBlock
+                Text="Shortcut:"
+                Margin="0,0,10,0"
+                FontSize="14"
+                Foreground="White" />
+            <TextBlock
+                Text="{Binding HotKeyString}"
+                Margin="0,0,10,0"
+                FontSize="14"
+                Foreground="#AAAAAA" />
+            <Button
+                Width="16"
+                Height="16"
+                Background="Transparent"
+                VerticalAlignment="Center">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <fa:ImageAwesome
+                            Width="14"
+                            Height="14"
+                            Foreground="Red"
+                            Cursor="Hand"
+                            Icon="Circle" />
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>
