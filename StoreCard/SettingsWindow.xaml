@@ -24,7 +24,7 @@
                 FontSize="14"
                 Foreground="White" />
             <TextBlock
-                Text="{Binding HotKeyString}"
+                Text="{Binding HotKeyText}"
                 Margin="0,0,10,0"
                 FontSize="14"
                 Foreground="#AAAAAA" />

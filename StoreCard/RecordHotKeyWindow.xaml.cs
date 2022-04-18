@@ -88,12 +88,14 @@ namespace StoreCard
             _config.HotKeyModifiers = _modifiers;
             _config.VirtualHotKey = _virtualKey;
             StorageUtils.SaveConfigToFile(_config);
+            DialogResult = true;
             Close();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             new ShowMainWindowCommand().Execute(null);
+            DialogResult = false;
             Close();
         }
     }
