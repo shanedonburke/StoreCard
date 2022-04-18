@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Newtonsoft.Json;
 
 namespace StoreCard
 {
@@ -13,6 +14,7 @@ namespace StoreCard
             VirtualHotKey = HotKeyUtils.KeyToVirtualKey(Key.Z);
         }
 
+        [JsonConstructor]
         public UserConfig(uint hotKeyModifiers, uint virtualHotKey)
         {
             HotKeyModifiers = hotKeyModifiers;

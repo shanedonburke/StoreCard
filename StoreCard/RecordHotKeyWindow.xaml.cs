@@ -13,8 +13,10 @@ namespace StoreCard
     /// </summary>
     public partial class RecordHotKeyWindow : INotifyPropertyChanged
     {
-        private string _hotKeyText = "";
         private readonly UserConfig _config;
+        private uint _modifiers = 0;
+        private uint _virtualKey = 0;
+        private string _hotKeyText = "";
 
         public string HotKeyText
         {
@@ -42,20 +44,28 @@ namespace StoreCard
                 return;
             }
 
+            _modifiers = 0;
+            _virtualKey = 0;
+
             StringBuilder text = new();
             if ((Keyboard.Modifiers & ModifierKeys.Control) != 0) {
                 text.Append("Ctrl+");
+                _modifiers |= (uint) ModifierKeys.Control;
             }
             if ((Keyboard.Modifiers & ModifierKeys.Alt) != 0) {
                 text.Append("Alt+");
+                _modifiers |= (uint)ModifierKeys.Alt;
             }
             if ((Keyboard.Modifiers & ModifierKeys.Windows) != 0 || Keyboard.IsKeyDown(Key.LWin) || Keyboard.IsKeyDown(Key.RWin)) {
                 text.Append("Win+");
+                _modifiers |= (uint)ModifierKeys.Windows;
             }
             if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0) {
                 text.Append("Shift+");
+                _modifiers |= (uint)ModifierKeys.Shift;
             }
 
+            _virtualKey = HotKeyUtils.KeyToVirtualKey(key);
             text.Append(HotKeyUtils.KeyToString(key));
             HotKeyText = text.ToString();
         }
@@ -71,6 +81,20 @@ namespace StoreCard
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             HotKeyText = HotKeyUtils.KeyStringFromConfig(_config);
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            _config.HotKeyModifiers = _modifiers;
+            _config.VirtualHotKey = _virtualKey;
+            StorageUtils.SaveConfigToFile(_config);
+            Close();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            new ShowMainWindowCommand().Execute(null);
+            Close();
         }
     }
 }
