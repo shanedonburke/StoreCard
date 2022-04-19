@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
@@ -14,8 +15,8 @@ namespace StoreCard
     public partial class RecordHotKeyWindow : INotifyPropertyChanged
     {
         private readonly UserConfig _config;
-        private uint _modifiers = 0;
-        private uint _virtualKey = 0;
+        private uint _modifiers;
+        private uint _virtualKey;
         private string _hotKeyText = "";
 
         public string HotKeyText
@@ -27,7 +28,9 @@ namespace StoreCard
                 OnPropertyChanged(nameof(HotKeyText));
             }
         }
-        public RecordHotKeyWindow() {
+
+        public RecordHotKeyWindow()
+        {
             InitializeComponent();
             _config = StorageUtils.ReadConfigFromFile();
             HotKeyText = HotKeyUtils.KeyStringFromConfig(_config);
@@ -40,7 +43,9 @@ namespace StoreCard
             var key = e.Key == Key.System ? e.SystemKey : e.Key;
 
             // Ignore modifier keys.
-            if (key is Key.LeftShift or Key.RightShift or Key.LeftCtrl or Key.RightCtrl or Key.LeftAlt or Key.RightAlt or Key.LWin or Key.RWin) {
+            if (key is Key.LeftShift or Key.RightShift or Key.LeftCtrl or Key.RightCtrl or Key.LeftAlt or Key.RightAlt
+                or Key.LWin or Key.RWin)
+            {
                 return;
             }
 
@@ -48,21 +53,29 @@ namespace StoreCard
             _virtualKey = 0;
 
             StringBuilder text = new();
-            if ((Keyboard.Modifiers & ModifierKeys.Control) != 0) {
+            if ((Keyboard.Modifiers & ModifierKeys.Control) != 0)
+            {
                 text.Append("Ctrl+");
                 _modifiers |= (uint) ModifierKeys.Control;
             }
-            if ((Keyboard.Modifiers & ModifierKeys.Alt) != 0) {
+
+            if ((Keyboard.Modifiers & ModifierKeys.Alt) != 0)
+            {
                 text.Append("Alt+");
-                _modifiers |= (uint)ModifierKeys.Alt;
+                _modifiers |= (uint) ModifierKeys.Alt;
             }
-            if ((Keyboard.Modifiers & ModifierKeys.Windows) != 0 || Keyboard.IsKeyDown(Key.LWin) || Keyboard.IsKeyDown(Key.RWin)) {
+
+            if ((Keyboard.Modifiers & ModifierKeys.Windows) != 0 || Keyboard.IsKeyDown(Key.LWin) ||
+                Keyboard.IsKeyDown(Key.RWin))
+            {
                 text.Append("Win+");
-                _modifiers |= (uint)ModifierKeys.Windows;
+                _modifiers |= (uint) ModifierKeys.Windows;
             }
-            if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0) {
+
+            if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0)
+            {
                 text.Append("Shift+");
-                _modifiers |= (uint)ModifierKeys.Shift;
+                _modifiers |= (uint) ModifierKeys.Shift;
             }
 
             _virtualKey = HotKeyUtils.KeyToVirtualKey(key);
@@ -88,6 +101,8 @@ namespace StoreCard
             _config.HotKeyModifiers = _modifiers;
             _config.VirtualHotKey = _virtualKey;
             StorageUtils.SaveConfigToFile(_config);
+            (Application.Current.Windows.Cast<Window>().First(w => w is TaskbarIconWindow) as TaskbarIconWindow)
+                ?.UpdateHotKey();
             DialogResult = true;
             Close();
         }

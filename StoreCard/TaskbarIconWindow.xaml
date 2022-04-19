@@ -35,7 +35,7 @@
                 </ContextMenu.Style>
                 <MenuItem x:Name="OpenMenuItem"
                           Click="OpenMenuItem_Click"
-                          InputGestureText="Win+Shift+X">
+                          InputGestureText="{Binding Path=HotKeyText}">
                     <MenuItem.Header>
                         <TextBlock Text="Open"
                                    Margin="-20,0,0,0" />
