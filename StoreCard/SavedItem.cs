@@ -19,7 +19,7 @@ namespace StoreCard
     {
         public readonly string Id;
 
-        public string Name { get; protected set; }
+        public string Name { get; set; }
 
         public string? Base64Icon { get; protected set; }
 

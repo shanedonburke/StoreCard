@@ -22,7 +22,7 @@ namespace StoreCard
         }
 
         public override void Open() {
-            using Process openProcess = new Process();
+            using var openProcess = new Process();
 
             openProcess.StartInfo.FileName = ExecutablePath;
             openProcess.StartInfo.Arguments = $"\"{Path}\"";

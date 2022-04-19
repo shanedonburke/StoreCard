@@ -18,6 +18,23 @@ namespace StoreCard
     {
         private SavedFileSystemItem _item;
 
+        private string _itemName = "";
+
+        public string Path => _item.Path;
+
+        public string ItemName
+        {
+            get => _itemName;
+            set
+            {
+                _itemName = value;
+                OnPropertyChanged(nameof(ItemName));
+                OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
+            }
+        }
+
+        public bool ShouldEnableSaveNameButton => ItemName.Trim() != "" && ItemName != _item.Name;
+
         public string ExecutableName => _item.ExecutableName;
 
         public ImageSource ExecutableIcon
@@ -40,6 +57,8 @@ namespace StoreCard
 
         public EditFileWindow(SavedFileSystemItem item) {
             _item = item;
+            ItemName = item.Name;
+
             DataContext = this;
             InitializeComponent();
         }
@@ -68,6 +87,23 @@ namespace StoreCard
         private void Window_Closed(object? sender, EventArgs e)
         {
             new ShowMainWindowCommand().Execute(null);
+        }
+
+        private void SaveNameButton_Click(object sender, RoutedEventArgs e)
+        {
+            _item.Name = ItemName;
+            var savedItems = StorageUtils.ReadItemsFromFile();
+            var matchingItem = savedItems.Find(i => i.Id == _item.Id);
+            if (matchingItem != null)
+            {
+                matchingItem.Name = ItemName;
+                StorageUtils.SaveItemsToFile(savedItems);
+                OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
+            }
+            else
+            {
+                Debug.WriteLine("Tried to change item name, but no matching stored item was found.");
+            }
         }
     }
 }

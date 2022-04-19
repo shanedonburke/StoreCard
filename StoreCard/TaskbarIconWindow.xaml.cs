@@ -34,11 +34,11 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
 
     public TaskbarIconWindow()
     {
+        DataContext = this;
+
         InitializeComponent();
 
         TaskbarIcon.Icon = Properties.Resources.StoreCardIcon;
-
-        DataContext = this;
     }
 
     public void UpdateHotKey()
