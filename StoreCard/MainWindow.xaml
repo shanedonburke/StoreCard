@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:StoreCard"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     Title="StoreCard"
     Width="500"
     Height="600"
@@ -211,11 +211,7 @@
                             </MenuItem>
                         </ContextMenu>
                     </Button.ContextMenu>
-                    <fa:ImageAwesome
-                        Width="14"
-                        Height="14"
-                        Foreground="White"
-                        Icon="Plus" />
+                    <fa:IconBlock Icon="Plus" Foreground="White" FontSize="18" />
                 </Button>
                 <!--  Search box  -->
                 <Border
@@ -318,7 +314,6 @@
                     BorderThickness="0,0,0,0"
                     FontFamily="Arial"
                     FontSize="24"
-                    FontWeight="Bold"
                     Foreground="White">
                     <Button.Style>
                         <Style TargetType="{x:Type Button}">
@@ -356,11 +351,7 @@
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
-                    <fa:ImageAwesome
-                        Width="14"
-                        Height="14"
-                        Foreground="White"
-                        Icon="Bars" />
+                    <fa:IconBlock Icon="Wrench" Foreground="White" FontSize="18" />
                 </Button>
             </Grid>
             <Border

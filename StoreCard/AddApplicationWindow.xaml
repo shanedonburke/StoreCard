@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:local="clr-namespace:StoreCard"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Add Application"
@@ -181,12 +181,11 @@
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
                 Visibility="{Binding AreAppsLoaded, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
-                <fa:ImageAwesome
-                    Width="64"
-                    Height="64"
+                <fa:IconBlock
+                    Icon="CircleNotch"
+                    fa:Awesome.Spin="True"
                     Foreground="#FF2DA65F"
-                    Icon="CircleOutlineNotch"
-                    Spin="True" />
+                    FontSize="80" />
             </Grid>
             <!--  Application list  -->
             <ListBox
@@ -637,12 +636,11 @@
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
                 Visibility="{Binding AreGamesLoaded, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
-                <fa:ImageAwesome
-                    Width="64"
-                    Height="64"
+                <fa:IconBlock
+                    Icon="CircleNotch"
+                    fa:Awesome.Spin="True"
                     Foreground="#FF2DA65F"
-                    Icon="CircleOutlineNotch"
-                    Spin="True" />
+                    FontSize="80" />
             </Grid>
             <!--  Game list box  -->
             <ListBox

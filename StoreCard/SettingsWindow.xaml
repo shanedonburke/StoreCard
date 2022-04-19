@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StoreCard"
-        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
         Width="600"
         Height="400"
@@ -22,11 +22,13 @@
                 Text="Shortcut:"
                 Margin="0,0,10,0"
                 FontSize="14"
+                LineHeight="20"
                 Foreground="White" />
             <TextBlock
                 Text="{Binding HotKeyText}"
                 Margin="0,0,10,0"
                 FontSize="14"
+                LineHeight="20"
                 Foreground="#AAAAAA" />
             <Button
                 Name="RecordHotKeyButton"
@@ -37,10 +39,10 @@
                 VerticalAlignment="Center">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <fa:ImageAwesome
-                            Width="14"
-                            Height="14"
+                        <fa:IconBlock
+                            FontSize="15"
                             Foreground="Red"
+                            IconFont="Solid"
                             Cursor="Hand"
                             Icon="Circle" />
                     </ControlTemplate>
