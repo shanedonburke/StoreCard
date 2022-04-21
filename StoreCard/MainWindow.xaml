@@ -215,97 +215,13 @@
                     <fa:IconBlock Icon="Plus" Foreground="White" FontSize="18" />
                 </Button>
                 <!--  Search box  -->
-                <Border
-                    Grid.Column="1"
-                    Margin="10,10,10,0"
-                    Padding="5,0,5,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Background="#FF444444"
-                    Visibility="Collapsed"
-                    CornerRadius="5">
-                    <Grid
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch">
-                        <TextBlock
-                            FontSize="14"
-                            Foreground="#AAAAAA"
-                            Padding="2,0,0,0"
-                            VerticalAlignment="Center">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Style.Triggers>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition
-                                                    Binding="{Binding ElementName=SearchBox, Path=IsFocused}"
-                                                    Value="False" />
-                                                <Condition
-                                                    Binding="{Binding SearchText}"
-                                                    Value="" />
-                                            </MultiDataTrigger.Conditions>
-                                            <MultiDataTrigger.Setters>
-                                                <Setter
-                                                    Property="Text"
-                                                    Value="Click to search..." />
-                                                <Setter
-                                                    Property="Foreground"
-                                                    Value="#FFAAAAAA" />
-                                            </MultiDataTrigger.Setters>
-                                        </MultiDataTrigger>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition
-                                                    Binding="{Binding ElementName=SearchBox, Path=IsFocused}"
-                                                    Value="True" />
-                                                <Condition
-                                                    Binding="{Binding SearchText}"
-                                                    Value="" />
-                                            </MultiDataTrigger.Conditions>
-                                            <MultiDataTrigger.Setters>
-                                                <Setter
-                                                    Property="Text"
-                                                    Value="Start typing to search..." />
-                                                <Setter
-                                                    Property="Foreground"
-                                                    Value="#FFAAAAAA" />
-                                            </MultiDataTrigger.Setters>
-                                        </MultiDataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <TextBox
-                            Name="SearchBox"
-                            VerticalContentAlignment="Stretch"
-                            Background="Transparent"
-                            CaretBrush="White"
-                            BorderBrush="#00000000"
-                            BorderThickness="0,0,0,0"
-                            FontFamily="Segoe UI"
-                            FontSize="14"
-                            MaxLines="1"
-                            PreviewKeyDown="SearchBox_PreviewKeyDown"
-                            SelectionBrush="#65FFFFFF"
-                            TextWrapping="NoWrap">
-                            <TextBox.Style>
-                                <Style TargetType="{x:Type TextBox}">
-                                    <Setter
-                                        Property="Text"
-                                        Value="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Setter
-                                        Property="Foreground"
-                                        Value="White" />
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
-                    </Grid>
-                </Border>
                 <local:StoreCardTextBox
+                    x:Name="SearchBox"
                     Grid.Column="1"
                     Margin="10,10,10,0"
                     InactivePlaceholder="Click to search..."
-                    ActivePlaceholder="Start typing to search..." />
+                    ActivePlaceholder="Start typing to search..."
+                    TextChanged="SearchBox_TextChanged" />
                 <!--  Settings button  -->
                 <Button
                     Name="SettingsButton"

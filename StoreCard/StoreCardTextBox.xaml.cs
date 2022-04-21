@@ -41,6 +41,12 @@ namespace StoreCard
             typeof(KeyEventHandler),
             typeof(StoreCardTextBox));
 
+        public static readonly RoutedEvent TextChangedEvent = EventManager.RegisterRoutedEvent(
+            nameof(TextChanged),
+            RoutingStrategy.Bubble,
+            typeof(TextChangedEventHandler),
+            typeof(StoreCardTextBox));
+
         private string _text = "";
 
         public string Text
@@ -65,12 +71,20 @@ namespace StoreCard
             set => SetValue(InactivePlaceholderProperty, value);
         }
 
-        public new event KeyEventHandler PreviewKeyDown {
+        public new event KeyEventHandler PreviewKeyDown
+        {
             add => AddHandler(PreviewKeyDownEvent, value);
             remove => RemoveHandler(PreviewKeyDownEvent, value);
         }
 
-        public StoreCardTextBox() {
+        public event TextChangedEventHandler TextChanged
+        {
+            add => AddHandler(TextChangedEvent, value);
+            remove => RemoveHandler(TextChangedEvent, value);
+        }
+
+        public StoreCardTextBox()
+        {
             InitializeComponent();
             DataContext = this;
         }
@@ -85,7 +99,13 @@ namespace StoreCard
 
         private void CustomTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key) { RoutedEvent = PreviewKeyDownEvent });
+            RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key)
+                {RoutedEvent = PreviewKeyDownEvent});
+        }
+
+        private void CustomTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            RaiseEvent(new TextChangedEventArgs(TextChangedEvent, e.UndoAction));
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using StoreCard.Annotations;
 
@@ -18,8 +19,6 @@ public partial class MainWindow : INotifyPropertyChanged
     private ItemCategory _category = ItemCategory.None;
 
     private List<SavedItem> _savedItems;
-
-    private string _searchText = "";
 
     public MainWindow()
     {
@@ -48,21 +47,6 @@ public partial class MainWindow : INotifyPropertyChanged
         SearchBox.Focus();
     }
 
-    public string SearchText
-    {
-        get => _searchText;
-        set
-        {
-            _searchText = value;
-            OnPropertyChanged(nameof(SearchText));
-            OnPropertyChanged(nameof(FilteredItems));
-            if (FilteredItems.Any() && ItemListBox.SelectedIndex == -1)
-            {
-                ItemListBox.SelectedIndex = 0;
-            }
-        }
-    }
-
     public IEnumerable<SavedItem> FilteredItems
     {
         get
@@ -70,11 +54,11 @@ public partial class MainWindow : INotifyPropertyChanged
             var items = Category == ItemCategory.None
                 ? _savedItems
                 : _savedItems.Where(item => item.Category == Category);
-            items = items.Where(item => item.Name.ToUpper().StartsWith(_searchText.ToUpper()));
+            items = items.Where(item => item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()));
             items = items.Concat(_savedItems.Where(item =>
             {
-                return !item.Name.ToUpper().StartsWith(_searchText.ToUpper()) &&
-                       item.Name.ToUpper().Contains(_searchText.ToUpper());
+                return !item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()) &&
+                       item.Name.ToUpper().Contains(SearchBox.Text.ToUpper());
             }));
             return items;
         }
@@ -256,5 +240,14 @@ public partial class MainWindow : INotifyPropertyChanged
     {
         new SettingsWindow().Show();
         Close();
+    }
+
+    private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        OnPropertyChanged(nameof(FilteredItems));
+        if (FilteredItems.Any() && ItemListBox.SelectedIndex == -1)
+        {
+            ItemListBox.SelectedIndex = 0;
+        }
     }
 }

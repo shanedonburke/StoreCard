@@ -75,6 +75,7 @@
                 FontSize="14"
                 MaxLines="1"
                 PreviewKeyDown="CustomTextBox_PreviewKeyDown"
+                TextChanged="CustomTextBox_TextChanged"
                 SelectionBrush="#65FFFFFF"
                 TextWrapping="NoWrap">
                 <TextBox.Style>
