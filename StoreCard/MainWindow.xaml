@@ -505,8 +505,15 @@
                     </TextBlock>
                 </StackPanel>
             </Border>
+            <local:StoreCardListBox
+                x:Name="ItemListBox"
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Items="{Binding FilteredItems}"
+                ItemDoubleClick="ListBoxItem_DoubleClick"/>
             <!--  Saved items  -->
-            <ListBox
+            <!--<ListBox
                 Name="ItemListBox"
                 Grid.Row="2"
                 Grid.Column="0"
@@ -519,7 +526,7 @@
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ItemsSource="{Binding FilteredItems}"
                 PreviewKeyDown="ItemListBox_PreviewKeyDown">
-                <!--  Style items to take up whole horizontal space  -->
+                --><!--  Style items to take up whole horizontal space  --><!--
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter
@@ -531,7 +538,7 @@
                         <Setter
                             Property="SnapsToDevicePixels"
                             Value="True" />
-                        <!--  Override mouse-over/selection style (from https://stackoverflow.com/a/66207005)  -->
+                        --><!--  Override mouse-over/selection style (from https://stackoverflow.com/a/66207005)  --><!--
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
@@ -554,7 +561,7 @@
                                             SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
                                     </Border>
                                     <ControlTemplate.Triggers>
-                                        <!--  Mouse over item  -->
+                                        --><!--  Mouse over item  --><!--
                                         <Trigger
                                             Property="UIElement.IsMouseOver"
                                             Value="True">
@@ -570,7 +577,7 @@
                                                 </Setter.Value>
                                             </Setter>
                                         </Trigger>
-                                        <!--  Active selected item  -->
+                                        --><!--  Active selected item  --><!--
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition
@@ -592,7 +599,7 @@
                                                 </Setter.Value>
                                             </Setter>
                                         </MultiTrigger>
-                                        <!--  Inactive selected item  -->
+                                        --><!--  Inactive selected item  --><!--
                                         <MultiTrigger>
                                             <MultiTrigger.Conditions>
                                                 <Condition
@@ -632,7 +639,7 @@
                         </Setter>
                     </Style>
                 </ListBox.ItemContainerStyle>
-                <!--  List box item template  -->
+                --><!--  List box item template  --><!--
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="local:SavedItem">
                         <Grid HorizontalAlignment="Stretch">
@@ -664,7 +671,7 @@
                                 TextTrimming="CharacterEllipsis"
                                 TextWrapping="NoWrap"
                                 Text="{Binding Name}" />
-                            <!--  "Open" button  -->
+                            --><!--  "Open" button  --><!--
                             <Border
                                 Grid.Column="3"
                                 Width="60"
@@ -673,7 +680,7 @@
                                 HorizontalAlignment="Right"
                                 CornerRadius="5">
                                 <Border.Style>
-                                    <!--  Must use template here for button background to be overridden  -->
+                                    --><!--  Must use template here for button background to be overridden  --><!--
                                     <Style TargetType="{x:Type Border}">
                                         <Setter
                                             Property="Background"
@@ -682,7 +689,7 @@
                                             Property="Visibility"
                                             Value="Hidden" />
                                         <Style.Triggers>
-                                            <!--  Hover/press styling  -->
+                                            --><!--  Hover/press styling  --><!--
                                             <Trigger
                                                 Property="IsMouseOver"
                                                 Value="True">
@@ -697,7 +704,7 @@
                                                     Property="Background"
                                                     Value="#FF34BF6E" />
                                             </DataTrigger>
-                                            <!--  Only show when the list item is selected  -->
+                                            --><!--  Only show when the list item is selected  --><!--
                                             <DataTrigger
                                                 Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}"
                                                 Value="True">
@@ -747,7 +754,7 @@
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox>
+            </ListBox>-->
         </Grid>
     </Border>
 </Window>

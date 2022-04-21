@@ -127,26 +127,26 @@ public partial class MainWindow : INotifyPropertyChanged
         switch (e.Key)
         {
             case Key.Up:
-                if (ItemListBox.Items.Count == 0) return;
+                if (!ItemListBox.Items.Any()) return;
                 switch (ItemListBox.SelectedIndex)
                 {
                     case 0:
                     case -1:
-                        ItemListBox.SelectedIndex = ItemListBox.Items.Count - 1;
+                        ItemListBox.SelectedIndex = ItemListBox.Items.Count() - 1;
                         break;
                     default:
-                        ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex - 1) % ItemListBox.Items.Count;
+                        ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex - 1) % ItemListBox.Items.Count();
                         break;
                 }
 
                 ItemListBox.ScrollIntoView(ItemListBox.SelectedItem);
                 break;
             case Key.Down:
-                if (ItemListBox.Items.Count == 0) return;
+                if (!ItemListBox.Items.Any()) return;
                 if (ItemListBox.SelectedIndex == -1)
                     ItemListBox.SelectedIndex = 0;
                 else
-                    ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex + 1) % ItemListBox.Items.Count;
+                    ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex + 1) % ItemListBox.Items.Count();
                 ItemListBox.ScrollIntoView(ItemListBox.SelectedItem);
                 break;
             case Key.Enter:
@@ -224,9 +224,9 @@ public partial class MainWindow : INotifyPropertyChanged
         RefreshSavedItems();
     }
 
-    private void ListBoxItem_MouseDown(object sender, MouseButtonEventArgs e)
+    private void ListBoxItem_DoubleClick(object sender, MouseButtonEventArgs e)
     {
-        if (e.ClickCount == 2) OpenSelectedItem();
+        OpenSelectedItem();
     }
 
     private static uint Nfmod(float a, float b)

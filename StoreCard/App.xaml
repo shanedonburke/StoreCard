@@ -234,12 +234,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <DataTemplate x:Key="ListBoxTemplate">
+        <ControlTemplate x:Key="ListBoxTemplate">
             <ListBox
                 Name="ItemListBox"
-                Grid.Row="2"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
                 Margin="10,10,10,10"
                 Background="#002A2A2A"
                 BorderBrush="#00000000"
@@ -478,6 +475,6 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </DataTemplate>
+        </ControlTemplate>
     </Application.Resources>
 </Application>
