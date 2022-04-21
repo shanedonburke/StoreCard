@@ -216,7 +216,7 @@
                         <Button
                             Name="ActionButton"
                             BorderThickness="0,0,0,0"
-                            Content="Open"
+                            Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardListBox}}, Path=ActionButtonText}"
                             Foreground="White"
                             IsTabStop="False">
                             <Button.Style>

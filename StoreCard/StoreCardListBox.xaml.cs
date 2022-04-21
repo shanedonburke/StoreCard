@@ -38,6 +38,12 @@ namespace StoreCard
             typeof(StoreCardListBox),
             new FrameworkPropertyMetadata(false));
 
+        public static readonly DependencyProperty ActionButtonTextProperty = DependencyProperty.Register(
+            nameof(ActionButtonText),
+            typeof(string),
+            typeof(StoreCardListBox),
+            new FrameworkPropertyMetadata("Open"));
+
         public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(
             nameof(Items),
             typeof(IEnumerable<object>),
@@ -66,13 +72,19 @@ namespace StoreCard
             set => SetValue(ShowActionButtonProperty, value);
         }
 
+        public string ActionButtonText
+        {
+            get => (string) GetValue(ActionButtonTextProperty);
+            set => SetValue(ActionButtonTextProperty, value);
+        }
+
         public event MouseButtonEventHandler ItemDoubleClick
         {
             add => AddHandler(ItemDoubleClickEvent, value);
             remove => RemoveHandler(ItemDoubleClickEvent, value);
         }
 
-        public event KeyEventHandler PreviewKeyDown
+        public new event KeyEventHandler PreviewKeyDown
         {
             add => AddHandler(PreviewKeyDownEvent, value);
             remove => RemoveHandler(PreviewKeyDownEvent, value);

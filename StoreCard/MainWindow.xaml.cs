@@ -55,6 +55,10 @@ public partial class MainWindow : INotifyPropertyChanged
             _searchText = value;
             OnPropertyChanged(nameof(SearchText));
             OnPropertyChanged(nameof(FilteredItems));
+            if (FilteredItems.Any() && ItemListBox.SelectedIndex == -1)
+            {
+                ItemListBox.SelectedIndex = 0;
+            }
         }
     }
 

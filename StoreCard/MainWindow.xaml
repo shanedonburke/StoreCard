@@ -514,7 +514,8 @@
                 ItemDoubleClick="ListBoxItem_DoubleClick"
                 ItemContextMenu="{StaticResource ItemMenuKey}"
                 PreviewKeyDown="ItemListBox_PreviewKeyDown"
-                ShowActionButton="True" />
+                ShowActionButton="True"
+                ActionButtonText="Open" />
             <!--  Saved items  -->
             <!--<ListBox
                 Name="ItemListBox"
