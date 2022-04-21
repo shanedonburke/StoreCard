@@ -14,7 +14,8 @@
     Loaded="Window_Loaded"
     PreviewKeyDown="Window_PreviewKeyDown"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=local:AddApplicationWindow, IsDesignTimeCreatable=False}">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <local:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />

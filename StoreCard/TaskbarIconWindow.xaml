@@ -11,7 +11,8 @@
         Width="0"
         Height="0"
         WindowStyle="None"
-        Title="TaskbarIconWindow">
+        Title="TaskbarIconWindow"
+        d:DataContext="{d:DesignInstance Type=local:TaskbarIconWindow, IsDesignTimeCreatable=False}">
     <Window.Resources>
         <local:ShowMainWindowCommand x:Key="ShowMainWindowCommand" />
         <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">

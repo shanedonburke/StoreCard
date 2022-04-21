@@ -10,7 +10,8 @@
         Background="#FF222222"
         WindowStartupLocation="CenterScreen"
         Title="Record Shortcut"
-        KeyDown="RecordHotKeyWindow_PreviewKeyDown">
+        KeyDown="RecordHotKeyWindow_PreviewKeyDown"
+        d:DataContext="{d:DesignInstance Type=local:RecordHotKeyWindow, IsDesignTimeCreatable=False}">
     <Grid
         Margin="15">
         <Grid.RowDefinitions>
