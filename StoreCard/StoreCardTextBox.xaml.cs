@@ -24,7 +24,7 @@ namespace StoreCard
     public partial class StoreCardTextBox : INotifyPropertyChanged
     {
         public static readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
-            "PreviewKeyDown",
+            nameof(PreviewKeyDown),
             RoutingStrategy.Bubble,
             typeof(KeyEventHandler),
             typeof(StoreCardTextBox));

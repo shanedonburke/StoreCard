@@ -43,19 +43,19 @@ namespace StoreCard
             typeof(StoreCardListBox));
 
         public static readonly RoutedEvent ItemDoubleClickEvent = EventManager.RegisterRoutedEvent(
-            "ItemDoubleClick",
+            nameof(ItemDoubleClick),
             RoutingStrategy.Bubble,
             typeof(MouseButtonEventHandler),
             typeof(StoreCardListBox));
 
         public new static readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
-            "PreviewKeyDown",
+            nameof(PreviewKeyDown),
             RoutingStrategy.Bubble,
             typeof(KeyEventHandler),
             typeof(StoreCardListBox));
 
         public static readonly RoutedEvent ActionButtonClickEvent = EventManager.RegisterRoutedEvent(
-            "ActionButtonClick",
+            nameof(ActionButtonClick),
             RoutingStrategy.Bubble,
             typeof(RoutedEventHandler),
             typeof(StoreCardListBox));
