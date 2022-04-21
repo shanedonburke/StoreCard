@@ -23,7 +23,19 @@ namespace StoreCard
     /// </summary>
     public partial class StoreCardTextBox : INotifyPropertyChanged
     {
-        public static readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
+        public static readonly DependencyProperty ActivePlaceholderProperty = DependencyProperty.Register(
+            nameof(ActivePlaceholder),
+            typeof(string),
+            typeof(StoreCardTextBox),
+            new FrameworkPropertyMetadata(""));
+
+        public static readonly DependencyProperty InactivePlaceholderProperty = DependencyProperty.Register(
+            nameof(InactivePlaceholder),
+            typeof(string),
+            typeof(StoreCardTextBox),
+            new FrameworkPropertyMetadata(""));
+
+        public new static readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
             nameof(PreviewKeyDown),
             RoutingStrategy.Bubble,
             typeof(KeyEventHandler),
@@ -41,6 +53,18 @@ namespace StoreCard
             }
         }
 
+        public string ActivePlaceholder
+        {
+            get => (string) GetValue(ActivePlaceholderProperty);
+            set => SetValue(ActivePlaceholderProperty, value);
+        }
+
+        public string InactivePlaceholder
+        {
+            get => (string) GetValue(InactivePlaceholderProperty);
+            set => SetValue(InactivePlaceholderProperty, value);
+        }
+
         public new event KeyEventHandler PreviewKeyDown {
             add => AddHandler(PreviewKeyDownEvent, value);
             remove => RemoveHandler(PreviewKeyDownEvent, value);
@@ -48,6 +72,7 @@ namespace StoreCard
 
         public StoreCardTextBox() {
             InitializeComponent();
+            DataContext = this;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

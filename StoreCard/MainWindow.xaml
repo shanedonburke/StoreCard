@@ -222,6 +222,7 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Background="#FF444444"
+                    Visibility="Collapsed"
                     CornerRadius="5">
                     <Grid
                         HorizontalAlignment="Stretch"
@@ -300,6 +301,11 @@
                         </TextBox>
                     </Grid>
                 </Border>
+                <local:StoreCardTextBox
+                    Grid.Column="1"
+                    Margin="10,10,10,0"
+                    InactivePlaceholder="Click to search..."
+                    ActivePlaceholder="Start typing to search..." />
                 <!--  Settings button  -->
                 <Button
                     Name="SettingsButton"

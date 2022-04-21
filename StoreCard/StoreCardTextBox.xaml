@@ -36,7 +36,7 @@
                                 <MultiDataTrigger.Setters>
                                     <Setter
                                         Property="Text"
-                                        Value="Click to search..." />
+                                        Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardTextBox}}, Path=InactivePlaceholder}" />
                                     <Setter
                                         Property="Foreground"
                                         Value="#FFAAAAAA" />
@@ -54,7 +54,7 @@
                                 <MultiDataTrigger.Setters>
                                     <Setter
                                         Property="Text"
-                                        Value="Start typing to search..." />
+                                        Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardTextBox}}, Path=ActivePlaceholder}" />
                                     <Setter
                                         Property="Foreground"
                                         Value="#FFAAAAAA" />
