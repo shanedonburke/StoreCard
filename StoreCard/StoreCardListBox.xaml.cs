@@ -26,6 +26,12 @@ namespace StoreCard
             typeof(MouseButtonEventHandler),
             typeof(StoreCardListBox));
 
+        public static readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
+            "PreviewKeyDown",
+            RoutingStrategy.Bubble,
+            typeof(KeyEventHandler),
+            typeof(StoreCardListBox));
+
 
         public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(
             nameof(Items),
@@ -55,6 +61,12 @@ namespace StoreCard
             remove => RemoveHandler(ItemDoubleClickEvent, value);
         }
 
+        public event KeyEventHandler PreviewKeyDown
+        {
+            add => AddHandler(PreviewKeyDownEvent, value);
+            remove => RemoveHandler(PreviewKeyDownEvent, value);
+        }
+
         public int SelectedIndex
         {
             get => ItemListBox.SelectedIndex;
@@ -71,12 +83,6 @@ namespace StoreCard
             InitializeComponent();
         }
 
-        public event RoutedEventHandler PreviewKeyDown
-        {
-            add => ItemListBox.AddHandler(PreviewKeyDownEvent, value);
-            remove => ItemListBox.AddHandler(PreviewKeyDownEvent, value);
-        }
-
         public void ScrollIntoView(object item)
         {
             ItemListBox.ScrollIntoView(item);
@@ -88,6 +94,11 @@ namespace StoreCard
             {
                 RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, Environment.TickCount, MouseButton.Left) { RoutedEvent = ItemDoubleClickEvent });
             }
+        }
+
+        private void ItemListBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key) { RoutedEvent = PreviewKeyDownEvent });
         }
     }
 }
