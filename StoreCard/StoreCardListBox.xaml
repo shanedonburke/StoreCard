@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <ListBox
-        Name="ItemListBox"
+        Name="CustomListBox"
         Margin="10,10,10,10"
         Background="#002A2A2A"
         BorderBrush="#00000000"
@@ -15,7 +15,7 @@
         Foreground="White"
         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
         ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardListBox}}, Path=Items}"
-        PreviewKeyDown="ItemListBox_PreviewKeyDown">
+        PreviewKeyDown="CustomListBox_PreviewKeyDown">
         <!--  Style items to take up whole horizontal space  -->
         <ListBox.ItemContainerStyle>
             <Style TargetType="ListBoxItem">

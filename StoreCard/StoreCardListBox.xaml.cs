@@ -104,14 +104,14 @@ namespace StoreCard
 
         public int SelectedIndex
         {
-            get => ItemListBox.SelectedIndex;
-            set => ItemListBox.SelectedIndex = value;
+            get => CustomListBox.SelectedIndex;
+            set => CustomListBox.SelectedIndex = value;
         }
 
         public object SelectedItem
         {
-            get => ItemListBox.SelectedItem;
-            set => ItemListBox.SelectedItem = value;
+            get => CustomListBox.SelectedItem;
+            set => CustomListBox.SelectedItem = value;
         }
 
         public StoreCardListBox() {
@@ -120,7 +120,7 @@ namespace StoreCard
 
         public void ScrollIntoView(object item)
         {
-            ItemListBox.ScrollIntoView(item);
+            CustomListBox.ScrollIntoView(item);
         }
 
         private void Item_MouseDown(object sender, MouseButtonEventArgs e)
@@ -131,7 +131,7 @@ namespace StoreCard
             }
         }
 
-        private void ItemListBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void CustomListBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key) { RoutedEvent = PreviewKeyDownEvent });
         }

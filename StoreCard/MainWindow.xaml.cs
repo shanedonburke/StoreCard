@@ -23,10 +23,18 @@ public partial class MainWindow : INotifyPropertyChanged
 
     public MainWindow()
     {
-        InitializeComponent();
-
         _savedItems = StorageUtils.ReadItemsFromFile();
 
+        if (!Application.Current.Windows
+                .Cast<Window>().Any(w => w is TaskbarIconWindow))
+        {
+            new TaskbarIconWindow().Show();
+        }
+
+        InitializeComponent();
+        DataContext = this;
+
+        Activate();
 
         // Without this, opening the context menu for the first time results
         // in a small delay that looks strange; the button's BG color flashes
@@ -37,14 +45,7 @@ public partial class MainWindow : INotifyPropertyChanged
 
         if (_savedItems.Count > 0) ItemListBox.SelectedIndex = 0;
 
-        Activate();
         SearchBox.Focus();
-
-        if (!Application.Current.Windows
-                .Cast<Window>().Any(w => w is TaskbarIconWindow))
-            new TaskbarIconWindow().Show();
-
-        DataContext = this;
     }
 
     public string SearchText

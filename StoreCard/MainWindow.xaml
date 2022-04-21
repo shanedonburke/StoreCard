@@ -19,7 +19,8 @@
     Topmost="True"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=local:MainWindow, IsDesignTimeCreatable=False}">
     <Window.Resources>
         <local:NullVisibilityConverter x:Key="NullVisibilityConverter" />
 
