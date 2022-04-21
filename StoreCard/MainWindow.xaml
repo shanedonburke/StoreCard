@@ -510,12 +510,13 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
+                PreviewKeyDown="ItemListBox_PreviewKeyDown"
                 Items="{Binding FilteredItems}"
                 ItemDoubleClick="ListBoxItem_DoubleClick"
                 ItemContextMenu="{StaticResource ItemMenuKey}"
-                PreviewKeyDown="ItemListBox_PreviewKeyDown"
                 ShowActionButton="True"
-                ActionButtonText="Open" />
+                ActionButtonText="Open"
+                ActionButtonClick="OpenButton_Click" />
             <!--  Saved items  -->
             <!--<ListBox
                 Name="ItemListBox"

@@ -20,18 +20,6 @@ namespace StoreCard
     /// </summary>
     public partial class StoreCardListBox
     {
-        public static readonly RoutedEvent ItemDoubleClickEvent = EventManager.RegisterRoutedEvent(
-            "ItemDoubleClick",
-            RoutingStrategy.Bubble,
-            typeof(MouseButtonEventHandler),
-            typeof(StoreCardListBox));
-
-        public new static readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
-            "PreviewKeyDown",
-            RoutingStrategy.Bubble,
-            typeof(KeyEventHandler),
-            typeof(StoreCardListBox));
-
         public static readonly DependencyProperty ShowActionButtonProperty = DependencyProperty.Register(
             nameof(ShowActionButton),
             typeof(bool),
@@ -52,6 +40,24 @@ namespace StoreCard
         public static readonly DependencyProperty ItemContextMenuProperty = DependencyProperty.Register(
             nameof(ItemContextMenu),
             typeof(ContextMenu),
+            typeof(StoreCardListBox));
+
+        public static readonly RoutedEvent ItemDoubleClickEvent = EventManager.RegisterRoutedEvent(
+            "ItemDoubleClick",
+            RoutingStrategy.Bubble,
+            typeof(MouseButtonEventHandler),
+            typeof(StoreCardListBox));
+
+        public new static readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
+            "PreviewKeyDown",
+            RoutingStrategy.Bubble,
+            typeof(KeyEventHandler),
+            typeof(StoreCardListBox));
+
+        public static readonly RoutedEvent ActionButtonClickEvent = EventManager.RegisterRoutedEvent(
+            "ActionButtonClick",
+            RoutingStrategy.Bubble,
+            typeof(RoutedEventHandler),
             typeof(StoreCardListBox));
 
         public IEnumerable<object> Items
@@ -90,6 +96,12 @@ namespace StoreCard
             remove => RemoveHandler(PreviewKeyDownEvent, value);
         }
 
+        public event RoutedEventHandler ActionButtonClick
+        {
+            add => AddHandler(ActionButtonClickEvent, value);
+            remove => RemoveHandler(ActionButtonClickEvent, value);
+        }
+
         public int SelectedIndex
         {
             get => ItemListBox.SelectedIndex;
@@ -122,6 +134,11 @@ namespace StoreCard
         private void ItemListBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key) { RoutedEvent = PreviewKeyDownEvent });
+        }
+
+        private void ActionButton_Click(object sender, RoutedEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs(ActionButtonClickEvent));
         }
     }
 }

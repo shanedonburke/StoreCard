@@ -215,6 +215,7 @@
                         </Border.Style>
                         <Button
                             Name="ActionButton"
+                            Click="ActionButton_Click"
                             BorderThickness="0,0,0,0"
                             Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardListBox}}, Path=ActionButtonText}"
                             Foreground="White"
