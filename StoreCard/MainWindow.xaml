@@ -237,6 +237,24 @@
                                             <MultiDataTrigger.Conditions>
                                                 <Condition
                                                     Binding="{Binding ElementName=SearchBox, Path=IsFocused}"
+                                                    Value="False" />
+                                                <Condition
+                                                    Binding="{Binding SearchText}"
+                                                    Value="" />
+                                            </MultiDataTrigger.Conditions>
+                                            <MultiDataTrigger.Setters>
+                                                <Setter
+                                                    Property="Text"
+                                                    Value="Click to search..." />
+                                                <Setter
+                                                    Property="Foreground"
+                                                    Value="#FFAAAAAA" />
+                                            </MultiDataTrigger.Setters>
+                                        </MultiDataTrigger>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition
+                                                    Binding="{Binding ElementName=SearchBox, Path=IsFocused}"
                                                     Value="True" />
                                                 <Condition
                                                     Binding="{Binding SearchText}"
@@ -276,26 +294,6 @@
                                     <Setter
                                         Property="Foreground"
                                         Value="White" />
-                                    <Style.Triggers>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition
-                                                    Binding="{Binding ElementName=SearchBox, Path=IsFocused}"
-                                                    Value="False" />
-                                                <Condition
-                                                    Binding="{Binding SearchText}"
-                                                    Value="" />
-                                            </MultiDataTrigger.Conditions>
-                                            <MultiDataTrigger.Setters>
-                                                <Setter
-                                                    Property="Text"
-                                                    Value="Click to search..." />
-                                                <Setter
-                                                    Property="Foreground"
-                                                    Value="#FFAAAAAA" />
-                                            </MultiDataTrigger.Setters>
-                                        </MultiDataTrigger>
-                                    </Style.Triggers>
                                 </Style>
                             </TextBox.Style>
                         </TextBox>
@@ -306,7 +304,7 @@
                     Name="SettingsButton"
                     Grid.Column="2"
                     Click="SettingsButton_Click"
-                    Margin="00,10,10,0"
+                    Margin="0,10,10,0"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     VerticalContentAlignment="Center"
@@ -505,6 +503,7 @@
                     </TextBlock>
                 </StackPanel>
             </Border>
+            <!--  Saved items  -->
             <local:StoreCardListBox
                 x:Name="ItemListBox"
                 Grid.Row="2"
@@ -517,249 +516,6 @@
                 ShowActionButton="True"
                 ActionButtonText="Open"
                 ActionButtonClick="OpenButton_Click" />
-            <!--  Saved items  -->
-            <!--<ListBox
-                Name="ItemListBox"
-                Grid.Row="2"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Margin="10,10,10,10"
-                Background="#002A2A2A"
-                BorderBrush="#00000000"
-                BorderThickness="0,0,0,0"
-                Foreground="White"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                ItemsSource="{Binding FilteredItems}"
-                PreviewKeyDown="ItemListBox_PreviewKeyDown">
-                --><!--  Style items to take up whole horizontal space  --><!--
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter
-                            Property="HorizontalAlignment"
-                            Value="Stretch" />
-                        <Setter
-                            Property="HorizontalContentAlignment"
-                            Value="Stretch" />
-                        <Setter
-                            Property="SnapsToDevicePixels"
-                            Value="True" />
-                        --><!--  Override mouse-over/selection style (from https://stackoverflow.com/a/66207005)  --><!--
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBoxItem">
-                                    <Border
-                                        Name="Bd"
-                                        Padding="{TemplateBinding Control.Padding}"
-                                        Background="{TemplateBinding Panel.Background}"
-                                        BorderBrush="{TemplateBinding Border.BorderBrush}"
-                                        BorderThickness="{TemplateBinding Border.BorderThickness}"
-                                        ContextMenu="{StaticResource ItemMenuKey}"
-                                        CornerRadius="5"
-                                        MouseDown="ListBoxItem_MouseDown"
-                                        SnapsToDevicePixels="True">
-                                        <ContentPresenter
-                                            HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
-                                            VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"
-                                            Content="{TemplateBinding ContentControl.Content}"
-                                            ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
-                                            ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
-                                            SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}" />
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        --><!--  Mouse over item  --><!--
-                                        <Trigger
-                                            Property="UIElement.IsMouseOver"
-                                            Value="True">
-                                            <Setter
-                                                TargetName="Bd"
-                                                Property="Panel.Background"
-                                                Value="#FF3A3A3A" />
-                                            <Setter
-                                                TargetName="Bd"
-                                                Property="Border.BorderBrush">
-                                                <Setter.Value>
-                                                    <SolidColorBrush>Transparent</SolidColorBrush>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Trigger>
-                                        --><!--  Active selected item  --><!--
-                                        <MultiTrigger>
-                                            <MultiTrigger.Conditions>
-                                                <Condition
-                                                    Property="Selector.IsSelectionActive"
-                                                    Value="True" />
-                                                <Condition
-                                                    Property="Selector.IsSelected"
-                                                    Value="True" />
-                                            </MultiTrigger.Conditions>
-                                            <Setter
-                                                TargetName="Bd"
-                                                Property="Panel.Background"
-                                                Value="#80417356" />
-                                            <Setter
-                                                TargetName="Bd"
-                                                Property="Border.BorderBrush">
-                                                <Setter.Value>
-                                                    <SolidColorBrush>#FF3BD97D</SolidColorBrush>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </MultiTrigger>
-                                        --><!--  Inactive selected item  --><!--
-                                        <MultiTrigger>
-                                            <MultiTrigger.Conditions>
-                                                <Condition
-                                                    Property="Selector.IsSelectionActive"
-                                                    Value="False" />
-                                                <Condition
-                                                    Property="Selector.IsSelected"
-                                                    Value="True" />
-                                            </MultiTrigger.Conditions>
-                                            <Setter
-                                                TargetName="Bd"
-                                                Property="Panel.Background"
-                                                Value="#80417356" />
-                                            <Setter
-                                                TargetName="Bd"
-                                                Property="Border.BorderBrush">
-                                                <Setter.Value>
-                                                    <SolidColorBrush>#FF3BD97D</SolidColorBrush>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </MultiTrigger>
-                                        <Trigger
-                                            Property="UIElement.IsEnabled"
-                                            Value="False">
-                                            <Setter
-                                                TargetName="Bd"
-                                                Property="TextElement.Foreground">
-                                                <Setter.Value>
-                                                    <DynamicResource
-                                                        ResourceKey="{x:Static SystemColors.GrayTextBrushKey}" />
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                --><!--  List box item template  --><!--
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="local:SavedItem">
-                        <Grid HorizontalAlignment="Stretch">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Image
-                                Grid.Column="0"
-                                Width="24"
-                                Height="24"
-                                Margin="5,5,10,5"
-                                Visibility="{Binding PrefixIcon, Converter={StaticResource NullVisibilityConverter}}"
-                                Source="{Binding PrefixIcon}" />
-                            <Image
-                                Grid.Column="1"
-                                Width="24"
-                                Height="24"
-                                Margin="5,5,10,5"
-                                Source="{Binding BitmapIcon}" />
-                            <TextBlock
-                                Grid.Column="2"
-                                Margin="3"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Center"
-                                FontSize="12"
-                                TextTrimming="CharacterEllipsis"
-                                TextWrapping="NoWrap"
-                                Text="{Binding Name}" />
-                            --><!--  "Open" button  --><!--
-                            <Border
-                                Grid.Column="3"
-                                Width="60"
-                                Height="26"
-                                Margin="5,0,5,0"
-                                HorizontalAlignment="Right"
-                                CornerRadius="5">
-                                <Border.Style>
-                                    --><!--  Must use template here for button background to be overridden  --><!--
-                                    <Style TargetType="{x:Type Border}">
-                                        <Setter
-                                            Property="Background"
-                                            Value="#FF2DA65F" />
-                                        <Setter
-                                            Property="Visibility"
-                                            Value="Hidden" />
-                                        <Style.Triggers>
-                                            --><!--  Hover/press styling  --><!--
-                                            <Trigger
-                                                Property="IsMouseOver"
-                                                Value="True">
-                                                <Setter
-                                                    Property="Background"
-                                                    Value="#FF37CC75" />
-                                            </Trigger>
-                                            <DataTrigger
-                                                Binding="{Binding ElementName=OpenButton, Path=IsPressed}"
-                                                Value="True">
-                                                <Setter
-                                                    Property="Background"
-                                                    Value="#FF34BF6E" />
-                                            </DataTrigger>
-                                            --><!--  Only show when the list item is selected  --><!--
-                                            <DataTrigger
-                                                Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}"
-                                                Value="True">
-                                                <Setter
-                                                    Property="Visibility"
-                                                    Value="Visible" />
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Border.Style>
-                                <Button
-                                    Name="OpenButton"
-                                    BorderThickness="0,0,0,0"
-                                    Click="OpenButton_Click"
-                                    Content="Open"
-                                    Foreground="White"
-                                    IsTabStop="False">
-                                    <Button.Style>
-                                        <Style TargetType="{x:Type Button}">
-                                            <Setter
-                                                Property="Background"
-                                                Value="Transparent" />
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="{x:Type Button}">
-                                                        <Border Background="{TemplateBinding Background}">
-                                                            <ContentPresenter
-                                                                HorizontalAlignment="Center"
-                                                                VerticalAlignment="Center" />
-                                                        </Border>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Style.Triggers>
-                                                <Trigger
-                                                    Property="IsMouseOver"
-                                                    Value="True">
-                                                    <Setter
-                                                        Property="Background"
-                                                        Value="Transparent" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                </Button>
-                            </Border>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>-->
         </Grid>
     </Border>
 </Window>

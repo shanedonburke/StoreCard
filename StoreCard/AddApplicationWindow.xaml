@@ -783,7 +783,7 @@
                                 Width="24"
                                 Height="24"
                                 Margin="5,5,10,5"
-                                Source="{Binding PlatformIcon}" />
+                                Source="{Binding PrefixIcon}" />
                             <Image
                                 Grid.Column="1"
                                 Width="24"

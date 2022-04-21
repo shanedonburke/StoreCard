@@ -19,7 +19,7 @@ namespace StoreCard
 
         public string AppId { get; private set; }
 
-        public override BitmapSource PlatformIcon => Icons.SteamIcon;
+        public override BitmapSource PrefixIcon => Icons.SteamIcon;
 
         public override SavedItem SavedItem => new SavedSteamGame(this);
     }
