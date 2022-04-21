@@ -32,10 +32,21 @@ namespace StoreCard
             typeof(IEnumerable<object>),
             typeof(StoreCardListBox));
 
+        public static readonly DependencyProperty ItemContextMenuProperty = DependencyProperty.Register(
+            nameof(ItemContextMenu),
+            typeof(ContextMenu),
+            typeof(StoreCardListBox));
+
         public IEnumerable<object> Items
         {
             get => (IEnumerable<object>) GetValue(ItemsProperty);
             set => SetValue(ItemsProperty, value);
+        }
+
+        public ContextMenu ItemContextMenu
+        {
+            get => (ContextMenu) GetValue(ItemContextMenuProperty);
+            set => SetValue(ItemContextMenuProperty, value);
         }
 
         public event MouseButtonEventHandler ItemDoubleClick

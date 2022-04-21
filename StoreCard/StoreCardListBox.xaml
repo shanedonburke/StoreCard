@@ -37,7 +37,7 @@
                                 Background="{TemplateBinding Panel.Background}"
                                 BorderBrush="{TemplateBinding Border.BorderBrush}"
                                 BorderThickness="{TemplateBinding Border.BorderThickness}"
-                                ContextMenu="{Binding Path=ItemContextMenu}"
+                                ContextMenu="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardListBox}}, Path=ItemContextMenu}"
                                 CornerRadius="5"
                                 MouseDown="Item_MouseDown"
                                 SnapsToDevicePixels="True">
