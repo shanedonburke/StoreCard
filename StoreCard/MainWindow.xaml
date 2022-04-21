@@ -513,7 +513,8 @@
                 Items="{Binding FilteredItems}"
                 ItemDoubleClick="ListBoxItem_DoubleClick"
                 ItemContextMenu="{StaticResource ItemMenuKey}"
-                PreviewKeyDown="ItemListBox_PreviewKeyDown"/>
+                PreviewKeyDown="ItemListBox_PreviewKeyDown"
+                ShowActionButton="True" />
             <!--  Saved items  -->
             <!--<ListBox
                 Name="ItemListBox"

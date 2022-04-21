@@ -26,12 +26,17 @@ namespace StoreCard
             typeof(MouseButtonEventHandler),
             typeof(StoreCardListBox));
 
-        public static readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
+        public new static readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
             "PreviewKeyDown",
             RoutingStrategy.Bubble,
             typeof(KeyEventHandler),
             typeof(StoreCardListBox));
 
+        public static readonly DependencyProperty ShowActionButtonProperty = DependencyProperty.Register(
+            nameof(ShowActionButton),
+            typeof(bool),
+            typeof(StoreCardListBox),
+            new FrameworkPropertyMetadata(false));
 
         public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(
             nameof(Items),
@@ -53,6 +58,12 @@ namespace StoreCard
         {
             get => (ContextMenu) GetValue(ItemContextMenuProperty);
             set => SetValue(ItemContextMenuProperty, value);
+        }
+
+        public bool ShowActionButton
+        {
+            get => (bool) GetValue(ShowActionButtonProperty);
+            set => SetValue(ShowActionButtonProperty, value);
         }
 
         public event MouseButtonEventHandler ItemDoubleClick
