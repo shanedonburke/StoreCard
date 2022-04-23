@@ -76,6 +76,12 @@ namespace StoreCard
 
         public IListBoxItem? SelectedItem => CustomListBox.SelectedItem as IListBoxItem;
 
+        public int SelectedIndex
+        {
+            get => CustomListBox.SelectedIndex;
+            set => CustomListBox.SelectedIndex = value;
+        }
+
         public SearchableListBox() {
             InitializeComponent();
         }
@@ -130,7 +136,7 @@ namespace StoreCard
             }
         }
 
-        private void SearchBox_OnPreviewKeyDown_PreviewKeyDown(object sender, KeyEventArgs e) {
+        private void SearchBox_PreviewKeyDown(object sender, KeyEventArgs e) {
             switch (e.Key) {
                 case Key.Up:
                     if (!CustomListBox.Items.Any()) return;
@@ -156,23 +162,29 @@ namespace StoreCard
                             (CustomListBox.SelectedIndex + 1) % CustomListBox.Items.Count();
                     CustomListBox.ScrollIntoView(CustomListBox.SelectedItem);
                     break;
-                case Key.Enter:
-                    ActivateSelectedItem();
-                    e.Handled = true;
-                    break;
             }
-        }
-
-        private void CustomListBox_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key != Key.Enter) return;
-            ActivateSelectedItem();
-            e.Handled = true;
         }
 
         private void CustomListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RaiseEvent(new SelectionChangedEventArgs(SelectionChangedEvent, e.RemovedItems, e.AddedItems));
+        }
+
+        private void SearchBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            HandleKeyUpEvent(e);
+        }
+
+        private void CustomListBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            HandleKeyUpEvent(e);
+        }
+
+        private void HandleKeyUpEvent(KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter) return;
+            ActivateSelectedItem();
+            e.Handled = true;
         }
     }
 

@@ -18,7 +18,8 @@
             Grid.Row="0"
             Margin="15,10,15,0"
             TextChanged="SearchBox_TextChanged"
-            PreviewKeyDown="SearchBox_OnPreviewKeyDown_PreviewKeyDown"
+            PreviewKeyDown="SearchBox_PreviewKeyDown"
+            KeyUp="SearchBox_KeyUp"
             ActivePlaceholder="Start typing to search..."
             InactivePlaceholder="Click to search..." />
         <Grid
@@ -36,8 +37,8 @@
             Grid.Row="1"
             Margin="15,10,15,10"
             Items="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SearchableListBox}}, Path=FilteredItems}"
-            PreviewKeyDown="CustomListBox_PreviewKeyDown"
             SelectionChanged="CustomListBox_SelectionChanged"
+            KeyUp="CustomListBox_KeyUp"
             Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SearchableListBox}}, Path=AreItemsLoaded, Converter={StaticResource BooleanToVisibilityConverter}}"/>
     </Grid>
 </UserControl>

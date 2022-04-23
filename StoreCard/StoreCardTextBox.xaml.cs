@@ -41,6 +41,12 @@ namespace StoreCard
             typeof(KeyEventHandler),
             typeof(StoreCardTextBox));
 
+        public new static readonly RoutedEvent KeyUpEvent = EventManager.RegisterRoutedEvent(
+            nameof(KeyUpEvent),
+            RoutingStrategy.Bubble,
+            typeof(KeyEventHandler),
+            typeof(StoreCardTextBox));
+
         public static readonly RoutedEvent TextChangedEvent = EventManager.RegisterRoutedEvent(
             nameof(TextChanged),
             RoutingStrategy.Bubble,
@@ -77,6 +83,12 @@ namespace StoreCard
             remove => RemoveHandler(PreviewKeyDownEvent, value);
         }
 
+        public new event KeyEventHandler KeyUp
+        {
+            add => AddHandler(KeyUpEvent, value);
+            remove => RemoveHandler(KeyUpEvent, value);
+        }
+
         public event TextChangedEventHandler TextChanged
         {
             add => AddHandler(TextChangedEvent, value);
@@ -106,6 +118,14 @@ namespace StoreCard
         private void CustomTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             RaiseEvent(new TextChangedEventArgs(TextChangedEvent, e.UndoAction));
+        }
+
+        private void CustomTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key) { RoutedEvent = KeyUpEvent });
+            }
         }
     }
 }

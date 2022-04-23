@@ -16,6 +16,7 @@
         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
         ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardListBox}}, Path=Items}"
         PreviewKeyDown="CustomListBox_PreviewKeyDown"
+        KeyUp="CustomListBox_KeyUp"
         SelectionChanged="CustomListBox_SelectionChanged">
         <!--  Style items to take up whole horizontal space  -->
         <ListBox.ItemContainerStyle>

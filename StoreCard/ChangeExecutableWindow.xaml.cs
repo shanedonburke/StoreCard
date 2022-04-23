@@ -24,12 +24,6 @@ namespace StoreCard
     {
         private readonly SavedFileSystemItem _item;
 
-        private string _appSearchText = "";
-
-        private bool _areAppsLoaded;
-
-        private List<InstalledApplication> _installedApps = new();
-
         private IEnumerable<InstalledApplication> _filteredApps = new List<InstalledApplication>();
 
         private bool _doesExecutableExist;
@@ -54,28 +48,7 @@ namespace StoreCard
             }
         }
 
-        public string AppSearchText
-        {
-            get => _appSearchText;
-            set
-            {
-                _appSearchText = value;
-                OnPropertyChanged(nameof(AppSearchText));
-                FilteredApps = FilterApps();
-            }
-        }
-
-        public bool AreAppsLoaded
-        {
-            get => _areAppsLoaded;
-            set
-            {
-                _areAppsLoaded = value;
-                OnPropertyChanged(nameof(AreAppsLoaded));
-            }
-        }
-
-        public bool ShouldEnableSaveAppButton => AppListBox.SelectedIndex != -1;
+        public bool ShouldEnableSaveAppButton => AppListBox.SelectedItem != null;
 
         public string? SelectedAppName => (AppListBox.SelectedItem as InstalledApplication)?.Name;
 
@@ -136,62 +109,6 @@ namespace StoreCard
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void SetInstalledApps(List<InstalledApplication> value)
-        {
-            _installedApps = value;
-            _installedApps.Sort();
-            AreAppsLoaded = true;
-            FilteredApps = FilterApps();
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                if (_installedApps.Count > 0) AppListBox.SelectedIndex = 0;
-            });
-        }
-
-        private IEnumerable<InstalledApplication> FilterApps()
-        {
-            var apps = _installedApps
-                .Where(app => app.Name.ToUpper().StartsWith(_appSearchText.ToUpper()));
-            apps = apps.Concat(_installedApps.Where(app =>
-            {
-                return !app.Name.ToUpper().StartsWith(_appSearchText.ToUpper()) &&
-                       app.Name.ToUpper().Contains(_appSearchText.ToUpper());
-            }));
-            return apps;
-        }
-
-        private void AppSearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.Key)
-            {
-                case Key.Up:
-                    if (AppListBox.Items.Count == 0) return;
-                    switch (AppListBox.SelectedIndex)
-                    {
-                        case 0:
-                        case -1:
-                            AppListBox.SelectedIndex = AppListBox.Items.Count - 1;
-                            break;
-                        default:
-                            AppListBox.SelectedIndex =
-                                (AppListBox.SelectedIndex - 1) % AppListBox.Items.Count;
-                            break;
-                    }
-
-                    AppListBox.ScrollIntoView(AppListBox.SelectedItem);
-                    break;
-                case Key.Down:
-                    if (AppListBox.Items.Count == 0) return;
-                    if (AppListBox.SelectedIndex == -1)
-                        AppListBox.SelectedIndex = 0;
-                    else
-                        AppListBox.SelectedIndex =
-                            (AppListBox.SelectedIndex + 1) % AppListBox.Items.Count;
-                    AppListBox.ScrollIntoView(AppListBox.SelectedItem);
-                    break;
-            }
-        }
-
         private void AppListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             OnPropertyChanged(nameof(ShouldEnableSaveAppButton));
@@ -199,26 +116,20 @@ namespace StoreCard
             OnPropertyChanged(nameof(SelectedAppIcon));
         }
 
+
+        private void AppListBox_ItemActivated(object sender, ItemActivatedEventArgs e) {
+            SaveSelectedAppAndClose();
+            e.Handled = true;
+        }
+
         private void SaveAppButton_Click(object sender, RoutedEventArgs e)
         {
-            List<SavedItem> savedItems = StorageUtils.ReadItemsFromFile();
-            var matchingItem = savedItems.Find(i => i.Id == _item.Id) as SavedFileSystemItem;
-            if (matchingItem == null)
-            {
-                Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
-                return;
-            }
-
-            matchingItem.SetExecutablePath((AppListBox.SelectedItem as InstalledApplication)?.ExecutablePath
-                                           ?? SavedFileSystemItem.DEFAULT_EXECUTABLE);
-            StorageUtils.SaveItemsToFile(savedItems);
-            DialogResult = true;
-            Close();
+            SaveSelectedAppAndClose();
         }
+
         private void SaveDefaultButton_Click(object sender, RoutedEventArgs e) {
-            List<SavedItem> savedItems = StorageUtils.ReadItemsFromFile();
-            var matchingItem = savedItems.Find(i => i.Id == _item.Id) as SavedFileSystemItem;
-            if (matchingItem == null) {
+            var savedItems = StorageUtils.ReadItemsFromFile();
+            if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem) {
                 Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
                 return;
             }
@@ -242,7 +153,7 @@ namespace StoreCard
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Task.Run(() => SetInstalledApps(SystemUtils.GetInstalledApplications()));
+            Task.Run(() => AppListBox.Items = SystemUtils.GetInstalledApplications());
         }
 
         private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
@@ -268,6 +179,20 @@ namespace StoreCard
             };
 
             if (openFileDialog.ShowDialog() == true) ExecutablePath = openFileDialog.FileName;
+        }
+
+        private void SaveSelectedAppAndClose() {
+            var savedItems = StorageUtils.ReadItemsFromFile();
+            if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem) {
+                Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
+                return;
+            }
+
+            matchingItem.SetExecutablePath((AppListBox.SelectedItem as InstalledApplication)?.ExecutablePath
+                                           ?? SavedFileSystemItem.DEFAULT_EXECUTABLE);
+            StorageUtils.SaveItemsToFile(savedItems);
+            DialogResult = true;
+            Close();
         }
     }
 }

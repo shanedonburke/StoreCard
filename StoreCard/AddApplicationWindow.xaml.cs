@@ -257,7 +257,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void SaveAppButton_Click(object sender, RoutedEventArgs e)
     {
-        AddAppAndClose((AppListBox.SelectedItem as InstalledApplication)!);
+        SaveSelectedAppAndClose();
     }
 
     private void SaveGameButton_Click(object sender, RoutedEventArgs e)
@@ -286,10 +286,10 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         Close();
     }
 
-    private void AddAppAndClose(InstalledApplication app)
+    private void SaveSelectedAppAndClose()
     {
         var savedItems = StorageUtils.ReadItemsFromFile();
-        savedItems.Add(new SavedApplication(app));
+        savedItems.Add(new SavedApplication((AppListBox.SelectedItem as InstalledApplication)!));
         StorageUtils.SaveItemsToFile(savedItems);
         Close();
     }
@@ -354,6 +354,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void AppListBox_ItemActivated(object sender, ItemActivatedEventArgs e)
     {
-        AddAppAndClose((InstalledApplication) e.Item);
+        SaveSelectedAppAndClose();
+        e.Handled = true;
     }
 }

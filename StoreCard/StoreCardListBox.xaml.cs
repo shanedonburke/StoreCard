@@ -55,6 +55,12 @@ namespace StoreCard
             typeof(KeyEventHandler),
             typeof(StoreCardListBox));
 
+        public new static readonly RoutedEvent KeyUpEvent = EventManager.RegisterRoutedEvent(
+            nameof(KeyUpEvent),
+            RoutingStrategy.Bubble,
+            typeof(KeyEventHandler),
+            typeof(StoreCardListBox));
+
         public static readonly RoutedEvent ActionButtonClickEvent = EventManager.RegisterRoutedEvent(
             nameof(ActionButtonClick),
             RoutingStrategy.Bubble,
@@ -101,6 +107,11 @@ namespace StoreCard
         {
             add => AddHandler(PreviewKeyDownEvent, value);
             remove => RemoveHandler(PreviewKeyDownEvent, value);
+        }
+
+        public new event KeyEventHandler KeyUp {
+            add => AddHandler(KeyUpEvent, value);
+            remove => RemoveHandler(KeyUpEvent, value);
         }
 
         public event RoutedEventHandler ActionButtonClick
@@ -157,6 +168,11 @@ namespace StoreCard
         private void CustomListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RaiseEvent(new SelectionChangedEventArgs(SelectionChangedEvent, e.RemovedItems, e.AddedItems));
+        }
+
+        private void CustomListBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key) { RoutedEvent = KeyUpEvent });
         }
     }
 }
