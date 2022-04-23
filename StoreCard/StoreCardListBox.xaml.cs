@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -60,6 +61,12 @@ namespace StoreCard
             typeof(RoutedEventHandler),
             typeof(StoreCardListBox));
 
+        public static readonly RoutedEvent SelectionChangedEvent = EventManager.RegisterRoutedEvent(
+            nameof(SelectionChanged),
+            RoutingStrategy.Bubble,
+            typeof(SelectionChangedEventHandler),
+            typeof(StoreCardListBox));
+
         public IEnumerable<object> Items
         {
             get => (IEnumerable<object>) GetValue(ItemsProperty);
@@ -102,6 +109,12 @@ namespace StoreCard
             remove => RemoveHandler(ActionButtonClickEvent, value);
         }
 
+        public event SelectionChangedEventHandler SelectionChanged
+        {
+            add => AddHandler(SelectionChangedEvent, value);
+            remove => RemoveHandler(SelectionChangedEvent, value);
+        }
+
         public int SelectedIndex
         {
             get => CustomListBox.SelectedIndex;
@@ -139,6 +152,11 @@ namespace StoreCard
         private void ActionButton_Click(object sender, RoutedEventArgs e)
         {
             RaiseEvent(new RoutedEventArgs(ActionButtonClickEvent));
+        }
+
+        private void CustomListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RaiseEvent(new SelectionChangedEventArgs(e.RoutedEvent, e.RemovedItems, e.AddedItems) { RoutedEvent = SelectionChangedEvent });
         }
     }
 }
