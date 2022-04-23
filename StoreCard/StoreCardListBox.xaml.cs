@@ -156,7 +156,7 @@ namespace StoreCard
 
         private void CustomListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RaiseEvent(new SelectionChangedEventArgs(e.RoutedEvent, e.RemovedItems, e.AddedItems) { RoutedEvent = SelectionChangedEvent });
+            RaiseEvent(new SelectionChangedEventArgs(SelectionChangedEvent, e.RemovedItems, e.AddedItems));
         }
     }
 }

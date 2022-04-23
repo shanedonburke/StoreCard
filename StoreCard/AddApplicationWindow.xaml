@@ -86,40 +86,15 @@
             Grid.Row="1"
             Visibility="{Binding IsChecked, ElementName=InstalledApplicationRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="60" />
             </Grid.RowDefinitions>
-            <!--  Application search bar  -->
-            <local:StoreCardTextBox
-                x:Name="AppSearchBox"
-                Grid.Row="0"
-                Margin="15,10,15,0"
-                TextChanged="AppSearchBox_TextChanged"
-                ActivePlaceholder="Start typing to search..."
-                InactivePlaceholder="Click to search..." />
-            <Grid
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Visibility="{Binding AreAppsLoaded, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
-                <fa:IconBlock
-                    Icon="CircleNotch"
-                    fa:Awesome.Spin="True"
-                    Foreground="#FF2DA65F"
-                    FontSize="80" />
-            </Grid>
-            <!--  Application list  -->
-            <local:StoreCardListBox
+            <local:SearchableListBox
                 x:Name="AppListBox"
-                Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Margin="15,10,15,10"
-                Items="{Binding Path=FilteredApps}"
-                PreviewKeyDown="AppListBox_PreviewKeyDown"
                 SelectionChanged="AppListBox_SelectionChanged"
-                Visibility="{Binding AreAppsLoaded, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                ItemActivated="AppListBox_ItemActivated" />
             <Grid
-                Grid.Row="2"
+                Grid.Row="1"
                 Margin="15,0,15,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -433,7 +408,6 @@
                 Foreground="White"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ItemsSource="{Binding FilteredGames}"
-                PreviewKeyDown="AppListBox_PreviewKeyDown"
                 SelectionChanged="GameListBox_SelectionChanged"
                 Visibility="{Binding AreGamesLoaded, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <!--  Style items to take up whole horizontal space  -->

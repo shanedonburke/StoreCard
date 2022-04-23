@@ -22,8 +22,6 @@ namespace StoreCard;
 /// </summary>
 public partial class AddApplicationWindow : INotifyPropertyChanged
 {
-    private bool _areAppsLoaded;
-
     private bool _areGamesLoaded;
 
     private bool _doesExecutableExist;
@@ -34,13 +32,9 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private string _executablePath = "";
 
-    private IEnumerable<InstalledApplication> _filteredApps = new List<InstalledApplication>();
-
     private IEnumerable<InstalledGame> _filteredGames = new List<InstalledGame>();
 
     private string _gameSearchText = "";
-
-    private List<InstalledApplication> _installedApps = new();
 
     private List<InstalledGame> _installedGames = new();
 
@@ -49,20 +43,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         InitializeComponent();
 
         DataContext = this;
-    }
-
-    public IEnumerable<InstalledApplication> FilteredApps
-    {
-        get => _filteredApps;
-        set
-        {
-            _filteredApps = value;
-            OnPropertyChanged(nameof(FilteredApps));
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                if (_filteredApps.Any()) AppListBox.SelectedIndex = 0;
-            });
-        }
     }
 
     public IEnumerable<InstalledGame> FilteredGames
@@ -145,16 +125,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         }
     }
 
-    public bool AreAppsLoaded
-    {
-        get => _areAppsLoaded;
-        set
-        {
-            _areAppsLoaded = value;
-            OnPropertyChanged(nameof(AreAppsLoaded));
-        }
-    }
-
     public bool AreGamesLoaded
     {
         get => _areGamesLoaded;
@@ -165,7 +135,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         }
     }
 
-    public bool ShouldEnableSaveAppButton => AppListBox.SelectedIndex != -1;
+    public bool ShouldEnableSaveAppButton => AppListBox.SelectedItem != null;
 
     public bool ShouldEnableSaveGameButton => GameListBox.SelectedIndex != -1;
 
@@ -239,18 +209,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    private void SetInstalledApps(List<InstalledApplication> value)
-    {
-        _installedApps = value;
-        _installedApps.Sort();
-        AreAppsLoaded = true;
-        FilteredApps = FilterApps();
-        Application.Current.Dispatcher.Invoke(() =>
-        {
-            if (_installedApps.Count > 0) AppListBox.SelectedIndex = 0;
-        });
-    }
-
     private void SetInstalledGames(List<InstalledGame> value)
     {
         _installedGames = value;
@@ -261,42 +219,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         {
             if (_installedGames.Count > 0) GameListBox.SelectedIndex = 0;
         });
-    }
-
-    private void AppSearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
-    {
-        switch (e.Key)
-        {
-            case Key.Up:
-                if (!AppListBox.Items.Any()) return;
-                switch (AppListBox.SelectedIndex)
-                {
-                    case 0:
-                    case -1:
-                        AppListBox.SelectedIndex = AppListBox.Items.Count() - 1;
-                        break;
-                    default:
-                        AppListBox.SelectedIndex =
-                            (AppListBox.SelectedIndex - 1) % AppListBox.Items.Count();
-                        break;
-                }
-
-                AppListBox.ScrollIntoView(AppListBox.SelectedItem);
-                break;
-            case Key.Down:
-                if (!AppListBox.Items.Any()) return;
-                if (AppListBox.SelectedIndex == -1)
-                    AppListBox.SelectedIndex = 0;
-                else
-                    AppListBox.SelectedIndex =
-                        (AppListBox.SelectedIndex + 1) % AppListBox.Items.Count();
-                AppListBox.ScrollIntoView(AppListBox.SelectedItem);
-                break;
-            case Key.Enter:
-                AddSelectedApplication();
-                e.Handled = true;
-                break;
-        }
     }
 
     private void GameSearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -335,7 +257,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void SaveAppButton_Click(object sender, RoutedEventArgs e)
     {
-        AddSelectedApplication();
+        AddAppAndClose((AppListBox.SelectedItem as InstalledApplication)!);
     }
 
     private void SaveGameButton_Click(object sender, RoutedEventArgs e)
@@ -364,18 +286,10 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         Close();
     }
 
-    private void AppListBox_PreviewKeyDown(object sender, KeyEventArgs e)
+    private void AddAppAndClose(InstalledApplication app)
     {
-        if (e.Key != Key.Enter) return;
-        AddSelectedApplication();
-        e.Handled = true;
-    }
-
-    private void AddSelectedApplication()
-    {
-        if (AppListBox.SelectedItem is not InstalledApplication installedApplication) return;
         var savedItems = StorageUtils.ReadItemsFromFile();
-        savedItems.Add(new SavedApplication(installedApplication));
+        savedItems.Add(new SavedApplication(app));
         StorageUtils.SaveItemsToFile(savedItems);
         Close();
     }
@@ -393,7 +307,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     {
         Activate();
 
-        Task.Run(() => SetInstalledApps(SystemUtils.GetInstalledApplications()));
+        Task.Run(() => AppListBox.Items = SystemUtils.GetInstalledApplications());
         Task.Run(LoadInstalledSteamGames);
     }
 
@@ -405,18 +319,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key == Key.Escape) Close();
-    }
-
-    private IEnumerable<InstalledApplication> FilterApps()
-    {
-        var apps = _installedApps
-            .Where(app => app.Name.ToUpper().StartsWith(AppSearchBox.Text.ToUpper()));
-        apps = apps.Concat(_installedApps.Where(app =>
-        {
-            return !app.Name.ToUpper().StartsWith(AppSearchBox.Text.ToUpper()) &&
-                   app.Name.ToUpper().Contains(AppSearchBox.Text.ToUpper());
-        }));
-        return apps;
     }
 
     private IEnumerable<InstalledGame> FilterGames()
@@ -450,8 +352,8 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         OnPropertyChanged(nameof(SelectedGameIcon));
     }
 
-    private void AppSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+    private void AppListBox_ItemActivated(object sender, ItemActivatedEventArgs e)
     {
-        FilteredApps = FilterApps();
+        AddAppAndClose((InstalledApplication) e.Item);
     }
 }
