@@ -22,8 +22,6 @@ namespace StoreCard;
 /// </summary>
 public partial class AddApplicationWindow : INotifyPropertyChanged
 {
-    private string _appSearchText = "";
-
     private bool _areAppsLoaded;
 
     private bool _areGamesLoaded;
@@ -78,17 +76,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
             {
                 if (_filteredGames.Any()) GameListBox.SelectedIndex = 0;
             });
-        }
-    }
-
-    public string AppSearchText
-    {
-        get => _appSearchText;
-        set
-        {
-            _appSearchText = value;
-            OnPropertyChanged(nameof(AppSearchText));
-            FilteredApps = FilterApps();
         }
     }
 
@@ -423,11 +410,11 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     private IEnumerable<InstalledApplication> FilterApps()
     {
         var apps = _installedApps
-            .Where(app => app.Name.ToUpper().StartsWith(_appSearchText.ToUpper()));
+            .Where(app => app.Name.ToUpper().StartsWith(AppSearchBox.Text.ToUpper()));
         apps = apps.Concat(_installedApps.Where(app =>
         {
-            return !app.Name.ToUpper().StartsWith(_appSearchText.ToUpper()) &&
-                   app.Name.ToUpper().Contains(_appSearchText.ToUpper());
+            return !app.Name.ToUpper().StartsWith(AppSearchBox.Text.ToUpper()) &&
+                   app.Name.ToUpper().Contains(AppSearchBox.Text.ToUpper());
         }));
         return apps;
     }
@@ -461,5 +448,10 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         OnPropertyChanged(nameof(ShouldEnableSaveGameButton));
         OnPropertyChanged(nameof(SelectedGameName));
         OnPropertyChanged(nameof(SelectedGameIcon));
+    }
+
+    private void AppSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        FilteredApps = FilterApps();
     }
 }
