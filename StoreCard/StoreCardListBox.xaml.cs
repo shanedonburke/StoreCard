@@ -35,7 +35,7 @@ namespace StoreCard
 
         public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(
             nameof(Items),
-            typeof(IEnumerable<object>),
+            typeof(IEnumerable<IListBoxItem>),
             typeof(StoreCardListBox));
 
         public static readonly DependencyProperty ItemContextMenuProperty = DependencyProperty.Register(
@@ -67,9 +67,9 @@ namespace StoreCard
             typeof(SelectionChangedEventHandler),
             typeof(StoreCardListBox));
 
-        public IEnumerable<object> Items
+        public IEnumerable<IListBoxItem> Items
         {
-            get => (IEnumerable<object>) GetValue(ItemsProperty);
+            get => (IEnumerable<IListBoxItem>) GetValue(ItemsProperty);
             set => SetValue(ItemsProperty, value);
         }
 

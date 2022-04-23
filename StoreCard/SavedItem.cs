@@ -15,7 +15,7 @@ namespace StoreCard
         Link
     }
 
-    public abstract class SavedItem : IComparable<SavedItem>
+    public abstract class SavedItem : IComparable<SavedItem>, IListBoxItem
     {
         public readonly string Id;
 

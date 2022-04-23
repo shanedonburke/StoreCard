@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 
 namespace StoreCard;
@@ -15,7 +16,7 @@ internal class SavedApplication : SavedItem
     public SavedApplication(InstalledApplication installedApplication) : base(
         Guid.NewGuid().ToString(),
         installedApplication.Name,
-        ImageUtils.ImageToBase64(installedApplication.BitmapIcon))
+        ImageUtils.ImageToBase64((BitmapSource) installedApplication.BitmapIcon))
     {
         AppUserModelId = installedApplication.AppUserModelId;
     }

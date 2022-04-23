@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 
 namespace StoreCard;
@@ -22,7 +23,7 @@ public class SavedSteamGame : SavedItem
     public SavedSteamGame(InstalledSteamGame game) : base(
         Guid.NewGuid().ToString(),
         game.Name,
-        ImageUtils.ImageToBase64(game.BitmapIcon)
+        ImageUtils.ImageToBase64((BitmapSource) game.BitmapIcon)
     )
     {
         AppId = game.AppId;

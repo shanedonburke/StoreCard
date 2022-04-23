@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using static System.String;
 
 namespace StoreCard
 {
-    public abstract class InstalledGame : IComparable<InstalledGame>
+    public abstract class InstalledGame : IComparable<InstalledGame>, IListBoxItem
     {
         protected InstalledGame(string name, BitmapSource bitmapIcon)
         {
@@ -13,9 +14,11 @@ namespace StoreCard
         }
 
         public string Name { get; }
-        public BitmapSource BitmapIcon { get; }
 
-        public abstract BitmapSource PrefixIcon { get; }
+        public ImageSource BitmapIcon { get; }
+
+        public abstract ImageSource? PrefixIcon { get; }
+
         public abstract SavedItem SavedItem { get; }
 
         public int CompareTo(InstalledGame? other)

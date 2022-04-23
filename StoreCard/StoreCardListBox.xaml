@@ -132,7 +132,7 @@
         </ListBox.ItemContainerStyle>
         <!--  List box item template  -->
         <ListBox.ItemTemplate>
-            <DataTemplate DataType="local:SavedItem">
+            <DataTemplate DataType="local:IListBoxItem">
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
