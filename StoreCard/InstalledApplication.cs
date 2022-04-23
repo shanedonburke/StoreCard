@@ -14,10 +14,10 @@ namespace StoreCard
             BitmapIcon = icon;
         }
 
-        public string Name { get; private set; }
-        public string AppUserModelId { get; private set; }
-        public string? ExecutablePath { get; private set; }
-        public BitmapSource BitmapIcon { get; private set; }
+        public string Name { get; }
+        public string AppUserModelId { get; }
+        public string? ExecutablePath { get; }
+        public BitmapSource BitmapIcon { get; }
 
         public int CompareTo(InstalledApplication? other)
         {

@@ -433,6 +433,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
+                Margin="10,10,10,10"
                 PreviewKeyDown="ItemListBox_PreviewKeyDown"
                 Items="{Binding FilteredItems}"
                 ItemDoubleClick="ListBoxItem_DoubleClick"

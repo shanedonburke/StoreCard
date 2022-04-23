@@ -281,28 +281,28 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         switch (e.Key)
         {
             case Key.Up:
-                if (AppListBox.Items.Count == 0) return;
+                if (!AppListBox.Items.Any()) return;
                 switch (AppListBox.SelectedIndex)
                 {
                     case 0:
                     case -1:
-                        AppListBox.SelectedIndex = AppListBox.Items.Count - 1;
+                        AppListBox.SelectedIndex = AppListBox.Items.Count() - 1;
                         break;
                     default:
                         AppListBox.SelectedIndex =
-                            (AppListBox.SelectedIndex - 1) % AppListBox.Items.Count;
+                            (AppListBox.SelectedIndex - 1) % AppListBox.Items.Count();
                         break;
                 }
 
                 AppListBox.ScrollIntoView(AppListBox.SelectedItem);
                 break;
             case Key.Down:
-                if (AppListBox.Items.Count == 0) return;
+                if (!AppListBox.Items.Any()) return;
                 if (AppListBox.SelectedIndex == -1)
                     AppListBox.SelectedIndex = 0;
                 else
                     AppListBox.SelectedIndex =
-                        (AppListBox.SelectedIndex + 1) % AppListBox.Items.Count;
+                        (AppListBox.SelectedIndex + 1) % AppListBox.Items.Count();
                 AppListBox.ScrollIntoView(AppListBox.SelectedItem);
                 break;
             case Key.Enter:

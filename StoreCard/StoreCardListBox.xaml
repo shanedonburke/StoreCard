@@ -9,7 +9,6 @@
              d:DataContext="{d:DesignInstance Type=local:StoreCardListBox, IsDesignTimeCreatable=False}">
     <ListBox
         Name="CustomListBox"
-        Margin="10,10,10,10"
         Background="#002A2A2A"
         BorderBrush="#00000000"
         BorderThickness="0,0,0,0"
@@ -145,7 +144,7 @@
                         Width="24"
                         Height="24"
                         Margin="5,5,10,5"
-                        Visibility="{Binding PrefixIcon, Converter={StaticResource NullVisibilityConverter}}"
+                        Visibility="{Binding PrefixIcon, Converter={StaticResource NullVisibilityConverter}, FallbackValue=Collapsed}"
                         Source="{Binding PrefixIcon}" />
                     <Image
                         Grid.Column="1"
