@@ -130,9 +130,13 @@ public partial class MainWindow : INotifyPropertyChanged
             case Key.Down:
                 if (!ItemListBox.Items.Any()) return;
                 if (ItemListBox.SelectedIndex == -1)
+                {
                     SelectFirstItem();
+                }
                 else
+                {
                     ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex + 1) % ItemListBox.Items.Count();
+                }
                 ItemListBox.ScrollIntoView(ItemListBox.SelectedItem);
                 break;
             case Key.Enter:
