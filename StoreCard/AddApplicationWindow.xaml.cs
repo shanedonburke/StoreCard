@@ -22,8 +22,6 @@ namespace StoreCard;
 /// </summary>
 public partial class AddApplicationWindow : INotifyPropertyChanged
 {
-    private bool _areGamesLoaded;
-
     private bool _doesExecutableExist;
 
     private ImageSource? _executableIcon;
@@ -32,42 +30,11 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private string _executablePath = "";
 
-    private IEnumerable<InstalledGame> _filteredGames = new List<InstalledGame>();
-
-    private string _gameSearchText = "";
-
-    private List<InstalledGame> _installedGames = new();
-
     public AddApplicationWindow()
     {
         InitializeComponent();
 
         DataContext = this;
-    }
-
-    public IEnumerable<InstalledGame> FilteredGames
-    {
-        get => _filteredGames;
-        set
-        {
-            _filteredGames = value;
-            OnPropertyChanged(nameof(FilteredGames));
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                if (_filteredGames.Any()) GameListBox.SelectedIndex = 0;
-            });
-        }
-    }
-
-    public string GameSearchText
-    {
-        get => _gameSearchText;
-        set
-        {
-            _gameSearchText = value;
-            OnPropertyChanged(nameof(GameSearchText));
-            FilteredGames = FilterGames();
-        }
     }
 
     public string ExecutablePath
@@ -125,16 +92,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         }
     }
 
-    public bool AreGamesLoaded
-    {
-        get => _areGamesLoaded;
-        set
-        {
-            _areGamesLoaded = value;
-            OnPropertyChanged(nameof(AreGamesLoaded));
-        }
-    }
-
     public bool ShouldEnableSaveAppButton => AppListBox.SelectedItem != null;
 
     public bool ShouldEnableSaveGameButton => GameListBox.SelectedIndex != -1;
@@ -149,18 +106,17 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    private void LoadInstalledSteamGames()
+    private IEnumerable<InstalledGame> GetInstalledSteamGames()
     {
-        var installedGames = new List<InstalledSteamGame>();
+        var installedGames = new List<InstalledGame>();
 
-        if (Paths.SteamInstallFolder == null) return;
-
+        if (Paths.SteamInstallFolder == null) return installedGames;
 
         var libraryCacheFolder = $"{Paths.SteamInstallFolder}\\appcache\\librarycache";
         var steamAppsFolder = $"{Paths.SteamInstallFolder}\\steamapps";
 
         var libraryFolders = KeyValue.LoadFromString(File.ReadAllText($"{steamAppsFolder}\\libraryfolders.vdf"));
-        if (libraryFolders == null) return;
+        if (libraryFolders == null) return installedGames;
 
         var steamAppsFolderPaths = libraryFolders.Children
             .Where(child => int.TryParse(child.Name, out _))
@@ -201,58 +157,12 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
             }
         }
 
-        SetInstalledGames(installedGames.Cast<InstalledGame>().ToList());
+        return installedGames;
     }
 
     [NotifyPropertyChangedInvocator]
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    private void SetInstalledGames(List<InstalledGame> value)
-    {
-        _installedGames = value;
-        _installedGames.Sort();
-        AreGamesLoaded = true;
-        FilteredGames = FilterGames();
-        Application.Current.Dispatcher.Invoke(() =>
-        {
-            if (_installedGames.Count > 0) GameListBox.SelectedIndex = 0;
-        });
-    }
-
-    private void GameSearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
-    {
-        switch (e.Key)
-        {
-            case Key.Up:
-                if (GameListBox.Items.Count == 0) return;
-                switch (GameListBox.SelectedIndex)
-                {
-                    case 0:
-                    case -1:
-                        GameListBox.SelectedIndex = GameListBox.Items.Count - 1;
-                        break;
-                    default:
-                        GameListBox.SelectedIndex = (GameListBox.SelectedIndex - 1) % GameListBox.Items.Count;
-                        break;
-                }
-
-                GameListBox.ScrollIntoView(GameListBox.SelectedItem);
-                break;
-            case Key.Down:
-                if (GameListBox.Items.Count == 0) return;
-                if (GameListBox.SelectedIndex == -1)
-                    GameListBox.SelectedIndex = 0;
-                else
-                    GameListBox.SelectedIndex = (GameListBox.SelectedIndex + 1) % GameListBox.Items.Count;
-                GameListBox.ScrollIntoView(GameListBox.SelectedItem);
-                break;
-            case Key.Enter:
-                AddSelectedGame();
-                e.Handled = true;
-                break;
-        }
     }
 
     private void SaveAppButton_Click(object sender, RoutedEventArgs e)
@@ -262,7 +172,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void SaveGameButton_Click(object sender, RoutedEventArgs e)
     {
-        AddSelectedGame();
+        SaveSelectedGameAndClose();
     }
 
     private void BrowseButton_Click(object sender, RoutedEventArgs e)
@@ -294,11 +204,10 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         Close();
     }
 
-    private void AddSelectedGame()
+    private void SaveSelectedGameAndClose()
     {
-        if (GameListBox.SelectedItem is not InstalledGame installedGame) return;
         var savedItems = StorageUtils.ReadItemsFromFile();
-        savedItems.Add(installedGame.SavedItem);
+        savedItems.Add((GameListBox.SelectedItem as InstalledGame)!.SavedItem);
         StorageUtils.SaveItemsToFile(savedItems);
         Close();
     }
@@ -308,7 +217,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         Activate();
 
         Task.Run(() => AppListBox.Items = SystemUtils.GetInstalledApplications());
-        Task.Run(LoadInstalledSteamGames);
+        Task.Run(() => GameListBox.Items = GetInstalledSteamGames());
     }
 
     private void Window_Closed(object sender, EventArgs e)
@@ -319,18 +228,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
     {
         if (e.Key == Key.Escape) Close();
-    }
-
-    private IEnumerable<InstalledGame> FilterGames()
-    {
-        var games = _installedGames
-            .Where(app => app.Name.ToUpper().StartsWith(_gameSearchText.ToUpper()));
-        games = games.Concat(_installedGames.Where(game =>
-        {
-            return !game.Name.ToUpper().StartsWith(_gameSearchText.ToUpper()) &&
-                   game.Name.ToUpper().Contains(_gameSearchText.ToUpper());
-        }));
-        return games;
     }
 
     private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -355,6 +252,12 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     private void AppListBox_ItemActivated(object sender, ItemActivatedEventArgs e)
     {
         SaveSelectedAppAndClose();
+        e.Handled = true;
+    }
+
+    private void GameListBox_ItemActivated(object sender, ItemActivatedEventArgs e)
+    {
+        SaveSelectedGameAndClose();
         e.Handled = true;
     }
 }
