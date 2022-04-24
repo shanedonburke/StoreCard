@@ -128,92 +128,10 @@
                         Foreground="White" />
                 </StackPanel>
                 <!--  "Save" button for applications  -->
-                <Border
+                <local:PrimaryButton
                     Grid.Column="2"
-                    Height="30"
-                    Margin="0,15,5,15"
-                    HorizontalAlignment="Stretch"
-                    CornerRadius="5">
-                    <Border.Style>
-                        <!--  Must use template here for button background to be overridden  -->
-                        <Style TargetType="{x:Type Border}">
-                            <Setter
-                                Property="Background"
-                                Value="#505050" />
-                            <Style.Triggers>
-                                <!--  Show green background when enabled  -->
-                                <DataTrigger
-                                    Binding="{Binding ElementName=SaveAppButton ,Path=IsEnabled}"
-                                    Value="True">
-                                    <Setter
-                                        Property="Background"
-                                        Value="#FF2DA65F" />
-                                </DataTrigger>
-                                <!--  Hover/press styling  -->
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition
-                                            Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}"
-                                            Value="True" />
-                                        <Condition
-                                            Binding="{Binding ElementName=SaveAppButton ,Path=IsEnabled}"
-                                            Value="True" />
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter
-                                        Property="Background"
-                                        Value="#FF37CC75" />
-                                </MultiDataTrigger>
-                                <DataTrigger
-                                    Binding="{Binding ElementName=SaveAppButton, Path=IsPressed}"
-                                    Value="True">
-                                    <Setter
-                                        Property="Background"
-                                        Value="#FF34BF6E" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <Button
-                        Name="SaveAppButton"
-                        BorderThickness="0,0,0,0"
-                        Click="SaveAppButton_Click"
-                        FontSize="14"
-                        Foreground="White"
-                        IsTabStop="True">
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter
-                                    Property="Background"
-                                    Value="Transparent" />
-                                <Setter Property="IsEnabled"
-                                        Value="{Binding ShouldEnableSaveAppButton}" />
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <TextBlock
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
-                                                    TextAlignment="Center"
-                                                    LineHeight="20"
-                                                    Text="Save" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger
-                                        Property="IsMouseOver"
-                                        Value="True">
-                                        <Setter
-                                            Property="Background"
-                                            Value="Transparent" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </Border>
+                    IsEnabled="{Binding Path=ShouldEnableSaveAppButton}"
+                    Click="SaveAppButton_Click" />
                 <!--  "Cancel" button for applications  -->
                 <Border
                     Grid.Column="3"
