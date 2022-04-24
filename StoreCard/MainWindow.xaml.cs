@@ -42,7 +42,7 @@ public partial class MainWindow : INotifyPropertyChanged
         AddButtonContextMenu.IsOpen = true;
         AddButtonContextMenu.IsOpen = false;
 
-        if (_savedItems.Count > 0) ItemListBox.SelectedIndex = 0;
+        SelectFirstItem();
 
         SearchBox.Focus();
     }
@@ -133,7 +133,7 @@ public partial class MainWindow : INotifyPropertyChanged
             case Key.Down:
                 if (!ItemListBox.Items.Any()) return;
                 if (ItemListBox.SelectedIndex == -1)
-                    ItemListBox.SelectedIndex = 0;
+                    SelectFirstItem();
                 else
                     ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex + 1) % ItemListBox.Items.Count();
                 ItemListBox.ScrollIntoView(ItemListBox.SelectedItem);
@@ -169,9 +169,11 @@ public partial class MainWindow : INotifyPropertyChanged
                 break;
             case Key.Left:
                 Category = (ItemCategory) Nfmod((int) Category - 1, Enum.GetNames(typeof(ItemCategory)).Length);
+                SelectFirstItem();
                 break;
             case Key.Right:
                 Category = (ItemCategory) Nfmod((int) Category + 1, Enum.GetNames(typeof(ItemCategory)).Length);
+                SelectFirstItem();
                 break;
         }
     }
@@ -245,9 +247,14 @@ public partial class MainWindow : INotifyPropertyChanged
     private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         OnPropertyChanged(nameof(FilteredItems));
-        if (FilteredItems.Any() && ItemListBox.SelectedIndex == -1)
+        if (ItemListBox.SelectedIndex == -1)
         {
-            ItemListBox.SelectedIndex = 0;
+            SelectFirstItem();
         }
+    }
+
+    private void SelectFirstItem()
+    {
+        if (FilteredItems.Any()) ItemListBox.SelectedIndex = 0;
     }
 }
