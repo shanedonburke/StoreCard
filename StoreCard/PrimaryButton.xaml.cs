@@ -10,7 +10,8 @@ namespace StoreCard
         public new static readonly DependencyProperty IsEnabledProperty = DependencyProperty.Register(
             nameof(IsEnabled),
             typeof(bool),
-            typeof(PrimaryButton));
+            typeof(PrimaryButton),
+            new FrameworkPropertyMetadata(true));
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
             nameof(Text),
