@@ -95,6 +95,7 @@
                 FontSize="14" />
             <Grid
                 Grid.Row="1"
+                Height="30"
                 Margin="15,0,15,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -162,12 +163,14 @@
                         Foreground="White" />
                 </StackPanel>
                 <local:PrimaryButton
+                    Height="30"
                     Grid.Column="2"
                     Margin="0,0,5,0"
                     Text="Save"
                     IsEnabled="{Binding Path=ShouldEnableSaveAppButton}"
                     Click="SaveAppButton_Click" />
                 <local:SecondaryButton
+                    Height="30"
                     Grid.Column="3"
                     Margin="5,0,0,0"
                     Text="Cancel"
@@ -314,7 +317,7 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="30" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <!--  Icon/name preview  -->
@@ -355,6 +358,7 @@
                         </Grid.ColumnDefinitions>
                         <local:PrimaryButton
                             Grid.Column="2"
+                            Height="30"
                             Margin="0,15,5,15"
                             Text="Save"
                             IsEnabled="{Binding Path=DoesExecutableExist}"
@@ -362,6 +366,7 @@
                         <local:SecondaryButton
                             Grid.Column="3"
                             Margin="5,15,0,15"
+                            Height="30"
                             Text="Cancel"
                             Click="CancelButton_Click" />
                     </Grid>
