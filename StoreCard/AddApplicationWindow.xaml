@@ -15,10 +15,6 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:AddApplicationWindow, IsDesignTimeCreatable=False}">
-    <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <local:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -228,59 +224,14 @@
                     Foreground="White"
                     Text="Path:" />
                 <!--  Path box  -->
-                <Border
+                <local:StoreCardTextBox
+                    x:Name="ExecutablePathBox"
                     Grid.Row="0"
                     Grid.Column="1"
                     Margin="0,0,10,0"
-                    Padding="5,0,5,0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Background="#FF444444"
-                    CornerRadius="5">
-                    <TextBox
-                        Name="ExecutablePathBox"
-                        HorizontalAlignment="Stretch"
-                        VerticalContentAlignment="Stretch"
-                        Background="#FF444444"
-                        BorderBrush="#00000000"
-                        BorderThickness="0,0,0,0"
-                        FontFamily="Segoe UI"
-                        FontSize="14"
-                        MaxLines="1"
-                        SelectionBrush="#65FFFFFF"
-                        TextWrapping="NoWrap">
-                        <TextBox.Style>
-                            <Style TargetType="{x:Type TextBox}">
-                                <Setter
-                                    Property="Text"
-                                    Value="{Binding ExecutablePath, UpdateSourceTrigger=PropertyChanged}" />
-                                <Setter
-                                    Property="Foreground"
-                                    Value="White" />
-                                <Style.Triggers>
-                                    <MultiDataTrigger>
-                                        <MultiDataTrigger.Conditions>
-                                            <Condition
-                                                Binding="{Binding ElementName=ExecutablePathBox, Path=IsFocused}"
-                                                Value="False" />
-                                            <Condition
-                                                Binding="{Binding ExecutablePath}"
-                                                Value="" />
-                                        </MultiDataTrigger.Conditions>
-                                        <MultiDataTrigger.Setters>
-                                            <Setter
-                                                Property="Text"
-                                                Value="Enter path to executable..." />
-                                            <Setter
-                                                Property="Foreground"
-                                                Value="#FFAAAAAA" />
-                                        </MultiDataTrigger.Setters>
-                                    </MultiDataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBox.Style>
-                    </TextBox>
-                </Border>
+                    ActivePlaceholder="Enter path to executable..."
+                    InactivePlaceholder="Enter path to executable..."
+                    TextChanged="ExecutablePathBox_TextChanged" />
                 <!--  "Browse" button  -->
                 <Button
                     Name="BrowseButton"
@@ -363,57 +314,12 @@
                             Foreground="White"
                             Text="Name:" />
                         <!--  Name box  -->
-                        <Border
+                        <local:StoreCardTextBox
+                            x:Name="ExecutableNameBox"
                             Grid.Column="1"
-                            Padding="5,0,5,0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Background="#FF444444"
-                            CornerRadius="5">
-                            <TextBox
-                                Name="ExecutableNameBox"
-                                HorizontalAlignment="Stretch"
-                                VerticalContentAlignment="Stretch"
-                                Background="#FF444444"
-                                BorderBrush="#00000000"
-                                BorderThickness="0,0,0,0"
-                                FontFamily="Segoe UI"
-                                FontSize="14"
-                                MaxLines="1"
-                                SelectionBrush="#65FFFFFF"
-                                TextWrapping="NoWrap">
-                                <TextBox.Style>
-                                    <Style TargetType="{x:Type TextBox}">
-                                        <Setter
-                                            Property="Text"
-                                            Value="{Binding ExecutableName, UpdateSourceTrigger=PropertyChanged}" />
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="White" />
-                                        <Style.Triggers>
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition
-                                                        Binding="{Binding ElementName=ExecutableNameBox, Path=IsFocused}"
-                                                        Value="False" />
-                                                    <Condition
-                                                        Binding="{Binding ExecutableName}"
-                                                        Value="" />
-                                                </MultiDataTrigger.Conditions>
-                                                <MultiDataTrigger.Setters>
-                                                    <Setter
-                                                        Property="Text"
-                                                        Value="Enter a name for the executable..." />
-                                                    <Setter
-                                                        Property="Foreground"
-                                                        Value="#FFAAAAAA" />
-                                                </MultiDataTrigger.Setters>
-                                            </MultiDataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBox.Style>
-                            </TextBox>
-                        </Border>
+                            ActivePlaceholder="Enter a name for the executable..."
+                            InactivePlaceholder="Enter a name for the executable..."
+                            TextChanged="ExecutableNameBox_TextChanged" />
                     </Grid>
                     <!--  Icon/name preview  -->
                     <Grid

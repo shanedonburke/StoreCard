@@ -28,38 +28,10 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private string _executableName = "";
 
-    private string _executablePath = "";
-
     public AddApplicationWindow()
     {
         InitializeComponent();
-
         DataContext = this;
-    }
-
-    public string ExecutablePath
-    {
-        get => _executablePath;
-        set
-        {
-            _executablePath = value;
-
-            DoesExecutableExist = File.Exists(value);
-            if (DoesExecutableExist)
-            {
-                // Take file name without '.exe'
-                ExecutableName = value.Split(@"\").Last().Split(".")[0];
-
-                var icon = System.Drawing.Icon.ExtractAssociatedIcon(value);
-                if (icon != null)
-                    ExecutableIcon = Imaging.CreateBitmapSourceFromHIcon(
-                        icon.Handle,
-                        Int32Rect.Empty,
-                        BitmapSizeOptions.FromEmptyOptions());
-            }
-
-            OnPropertyChanged(nameof(ExecutablePath));
-        }
     }
 
     public string ExecutableName
@@ -184,14 +156,14 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
             Title = "Select Executable"
         };
 
-        if (openFileDialog.ShowDialog() == true) ExecutablePath = openFileDialog.FileName;
+        if (openFileDialog.ShowDialog() == true) ExecutablePathBox.Text = openFileDialog.FileName;
     }
 
     private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
     {
         var base64Icon = ExecutableIcon != null ? ImageUtils.ImageToBase64((BitmapSource) ExecutableIcon) : null;
         var savedItems = StorageUtils.ReadItemsFromFile();
-        savedItems.Add(new SavedExecutable(Guid.NewGuid().ToString(), ExecutableName, base64Icon, ExecutablePath));
+        savedItems.Add(new SavedExecutable(Guid.NewGuid().ToString(), ExecutableName, base64Icon, ExecutablePathBox.Text));
         StorageUtils.SaveItemsToFile(savedItems);
         Close();
     }
@@ -259,5 +231,26 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     {
         SaveSelectedGameAndClose();
         e.Handled = true;
+    }
+
+    private void ExecutablePathBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var text = ExecutablePathBox.Text;
+        DoesExecutableExist = File.Exists(text);
+        if (!DoesExecutableExist) return;
+        // Take file name without '.exe'
+        ExecutableName = text.Split(@"\").Last().Split(".")[0];
+
+        var icon = System.Drawing.Icon.ExtractAssociatedIcon(text);
+        if (icon != null)
+            ExecutableIcon = Imaging.CreateBitmapSourceFromHIcon(
+                icon.Handle,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
+    }
+
+    private void ExecutableNameBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        ExecutableName = ExecutableNameBox.Text;
     }
 }

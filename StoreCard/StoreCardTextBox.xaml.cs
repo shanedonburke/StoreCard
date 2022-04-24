@@ -124,7 +124,7 @@ namespace StoreCard
         {
             if (e.Key == Key.Enter)
             {
-                RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key) { RoutedEvent = KeyUpEvent });
+                RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key) {RoutedEvent = KeyUpEvent});
             }
         }
     }
