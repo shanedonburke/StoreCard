@@ -73,7 +73,7 @@
                                         VerticalAlignment="Center"
                                         TextAlignment="Center"
                                         LineHeight="20"
-                                        Text="Save" />
+                                        Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PrimaryButton}}, Path=Text}" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>

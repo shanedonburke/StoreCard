@@ -130,6 +130,7 @@
                 <!--  "Save" button for applications  -->
                 <local:PrimaryButton
                     Grid.Column="2"
+                    Text="Save"
                     IsEnabled="{Binding Path=ShouldEnableSaveAppButton}"
                     Click="SaveAppButton_Click" />
                 <!--  "Cancel" button for applications  -->
