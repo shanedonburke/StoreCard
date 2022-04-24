@@ -164,38 +164,22 @@
                         TextWrapping="NoWrap"
                         Text="{Binding Name}" />
                     <!--  Optional button  -->
-                    <Border
+                    <local:PrimaryButton
+                        x:Name="ActionButton"
                         Grid.Column="3"
                         Width="60"
                         Height="26"
                         Margin="5,0,5,0"
-                        HorizontalAlignment="Right"
-                        CornerRadius="5">
-                        <Border.Style>
-                            <!--  Must use template here for button background to be overridden  -->
-                            <Style TargetType="{x:Type Border}">
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF2DA65F" />
+                        FontSize="12"
+                        Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardListBox}}, Path=ActionButtonText}"
+                        Click="ActionButton_Click"
+                        IsTabStop="False">
+                        <local:PrimaryButton.Style>
+                            <Style TargetType="local:PrimaryButton">
                                 <Setter
                                     Property="Visibility"
                                     Value="Hidden" />
                                 <Style.Triggers>
-                                    <!--  Hover/press styling  -->
-                                    <Trigger
-                                        Property="IsMouseOver"
-                                        Value="True">
-                                        <Setter
-                                            Property="Background"
-                                            Value="#FF37CC75" />
-                                    </Trigger>
-                                    <DataTrigger
-                                        Binding="{Binding ElementName=ActionButton, Path=IsPressed}"
-                                        Value="True">
-                                        <Setter
-                                            Property="Background"
-                                            Value="#FF34BF6E" />
-                                    </DataTrigger>
                                     <!--  Only show when the list item is selected  -->
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
@@ -214,43 +198,8 @@
                                     </MultiDataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Border.Style>
-                        <Button
-                            Name="ActionButton"
-                            Click="ActionButton_Click"
-                            BorderThickness="0,0,0,0"
-                            Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardListBox}}, Path=ActionButtonText}"
-                            Foreground="White"
-                            IsTabStop="False">
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter
-                                        Property="Background"
-                                        Value="Transparent" />
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border Background="{TemplateBinding Background}">
-                                                    <ContentPresenter
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Center" />
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger
-                                            Property="IsMouseOver"
-                                            Value="True">
-                                            <Setter
-                                                Property="Background"
-                                                Value="Transparent" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </Border>
+                        </local:PrimaryButton.Style>
+                    </local:PrimaryButton>
                 </Grid>
             </DataTemplate>
         </ListBox.ItemTemplate>

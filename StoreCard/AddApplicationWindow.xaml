@@ -129,14 +129,14 @@
                 <!--  "Save" button for applications  -->
                 <local:PrimaryButton
                     Grid.Column="2"
-                    Margin="0,0,5,0"
+                    Margin="0,15,5,15"
                     Text="Save"
                     IsEnabled="{Binding Path=ShouldEnableSaveAppButton}"
                     Click="SaveAppButton_Click" />
                 <!--  "Cancel" button for applications  -->
                 <local:SecondaryButton
                     Grid.Column="3"
-                    Margin="5,0,0,0"
+                    Margin="5,15,0,15"
                     Text="Cancel"
                     Click="CancelButton_Click" />
             </Grid>
@@ -444,171 +444,29 @@
                     </Grid>
                     <Grid
                         Grid.Row="2"
+                        Margin="0,0,0,15"
                         VerticalAlignment="Bottom">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <!--  "Save" button for executables  -->
-                        <Border
+                        <local:PrimaryButton
                             Grid.Column="2"
-                            Height="30"
-                            Margin="0,15,5,15"
-                            HorizontalAlignment="Stretch"
-                            CornerRadius="5">
-                            <Border.Style>
-                                <!--  Must use template here for button background to be overridden  -->
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter
-                                        Property="Background"
-                                        Value="#505050" />
-                                    <Style.Triggers>
-                                        <!--  Show green background when enabled  -->
-                                        <DataTrigger
-                                            Binding="{Binding ElementName=SaveExecutableButton, Path=IsEnabled}"
-                                            Value="True">
-                                            <Setter
-                                                Property="Background"
-                                                Value="#FF2DA65F" />
-                                        </DataTrigger>
-                                        <!--  Hover/press styling  -->
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition
-                                                    Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}"
-                                                    Value="True" />
-                                                <Condition
-                                                    Binding="{Binding ElementName=SaveExecutableButton, Path=IsEnabled}"
-                                                    Value="True" />
-                                            </MultiDataTrigger.Conditions>
-                                            <Setter
-                                                Property="Background"
-                                                Value="#FF37CC75" />
-                                        </MultiDataTrigger>
-                                        <DataTrigger
-                                            Binding="{Binding ElementName=SaveExecutableButton, Path=IsPressed}"
-                                            Value="True">
-                                            <Setter
-                                                Property="Background"
-                                                Value="#FF34BF6E" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                            <Button
-                                Name="SaveExecutableButton"
-                                BorderThickness="0,0,0,0"
-                                Click="SaveExecutableButton_Click"
-                                FontSize="14"
-                                Foreground="White"
-                                IsTabStop="True">
-                                <Button.Style>
-                                    <Style TargetType="{x:Type Button}">
-                                        <Setter
-                                            Property="Background"
-                                            Value="Transparent" />
-                                        <Setter Property="IsEnabled"
-                                                Value="{Binding DoesExecutableExist}" />
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Border Background="{TemplateBinding Background}">
-                                                        <TextBlock
-                                                            HorizontalAlignment="Center"
-                                                            VerticalAlignment="Center"
-                                                            TextAlignment="Center"
-                                                            LineHeight="20"
-                                                            Text="Save" />
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Style.Triggers>
-                                            <Trigger
-                                                Property="IsMouseOver"
-                                                Value="True">
-                                                <Setter
-                                                    Property="Background"
-                                                    Value="Transparent" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                        </Border>
-                        <!--  "Cancel" button for executables  -->
-                        <Border
+                            Margin="0,0,5,0"
+                            Text="Save"
+                            IsEnabled="{Binding Path=DoesExecutableExist}"
+                            Click="SaveExecutableButton_Click" />
+                        <!--  "Cancel" button for applications  -->
+                        <local:SecondaryButton
                             Grid.Column="3"
-                            Height="30"
-                            HorizontalAlignment="Stretch"
-                            Margin="5,15,0,15"
-                            CornerRadius="5">
-                            <Border.Style>
-                                <!--  Must use template here for button background to be overridden  -->
-                                <Style TargetType="{x:Type Border}">
-                                    <Setter
-                                        Property="Background"
-                                        Value="#888888" />
-                                    <Style.Triggers>
-                                        <!--  Hover/press styling  -->
-                                        <Trigger
-                                            Property="IsMouseOver"
-                                            Value="True">
-                                            <Setter
-                                                Property="Background"
-                                                Value="#A8A8A8" />
-                                        </Trigger>
-                                        <DataTrigger
-                                            Binding="{Binding ElementName=CancelExecutableButton, Path=IsPressed}"
-                                            Value="True">
-                                            <Setter
-                                                Property="Background"
-                                                Value="#989898" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
-                            <Button
-                                Name="CancelExecutableButton"
-                                BorderThickness="0,0,0,0"
-                                Click="CancelButton_Click"
-                                FontSize="14"
-                                Foreground="White"
-                                IsTabStop="False">
-                                <Button.Style>
-                                    <Style TargetType="{x:Type Button}">
-                                        <Setter
-                                            Property="Background"
-                                            Value="Transparent" />
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type Button}">
-                                                    <Border Background="{TemplateBinding Background}">
-                                                        <TextBlock
-                                                            HorizontalAlignment="Center"
-                                                            VerticalAlignment="Center"
-                                                            TextAlignment="Center"
-                                                            LineHeight="20"
-                                                            Text="Cancel" />
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Style.Triggers>
-                                            <Trigger
-                                                Property="IsMouseOver"
-                                                Value="True">
-                                                <Setter
-                                                    Property="Background"
-                                                    Value="Transparent" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                        </Border>
+                            Margin="5,0,0,0"
+                            Text="Cancel"
+                            Click="CancelButton_Click" />
                     </Grid>
                 </Grid>
             </Grid>

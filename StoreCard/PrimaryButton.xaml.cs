@@ -18,6 +18,12 @@ namespace StoreCard
             typeof(string),
             typeof(PrimaryButton));
 
+        public new static readonly DependencyProperty FontSizeProperty = DependencyProperty.Register(
+            nameof(FontSize),
+            typeof(int),
+            typeof(PrimaryButton),
+            new FrameworkPropertyMetadata(14));
+
         public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
             nameof(Click),
             RoutingStrategy.Bubble,
@@ -34,6 +40,12 @@ namespace StoreCard
         {
             get => (string) GetValue(TextProperty);
             set => SetValue(TextProperty, value);
+        }
+
+        public new int FontSize
+        {
+            get => (int) GetValue(FontSizeProperty);
+            set => SetValue(FontSizeProperty, value);
         }
 
         public event RoutedEventHandler Click

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StoreCard"
         mc:Ignorable="d"
-        Width="800"
-        Height="600"
+        Width="600"
+        Height="400"
         Background="#FF222222"
         WindowStartupLocation="CenterScreen"
         Closed="Window_Closed"
@@ -33,18 +33,19 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="65" />
+                <ColumnDefinition Width="70" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBlock
-                x:Name="UrlLabel"
+            <Label
                 Grid.Column="0"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
                 VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Foreground="White"
                 FontFamily="Segoe UI"
                 FontSize="14"
-                LineHeight="20"
-                Foreground="White"
-                Text="URL:" />
+                Content="URL:" />
             <!--  URL box  -->
             <Border
                 Grid.Row="0"
@@ -98,16 +99,17 @@
                     </TextBox.Style>
                 </TextBox>
             </Border>
-            <TextBlock
-                x:Name="TitleLabel"
+            <Label
                 Grid.Row="2"
                 Grid.Column="0"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
                 VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Foreground="White"
                 FontFamily="Segoe UI"
                 FontSize="14"
-                LineHeight="20"
-                Foreground="White"
-                Text="Title:" />
+                Content="Title:" />
             <!-- Title box  -->
             <Border
                 Grid.Row="2"
@@ -161,17 +163,18 @@
                     </TextBox.Style>
                 </TextBox>
             </Border>
-            <TextBlock
-                x:Name="PreviewLabel"
+            <Label
                 Grid.Row="3"
                 Grid.Column="0"
                 Visibility="{Binding LinkTitle, Converter={StaticResource NotBlankVisibilityConverter}}"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
                 VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Foreground="White"
                 FontFamily="Segoe UI"
                 FontSize="14"
-                Foreground="White"
-                LineHeight="20"
-                Text="Preview:" />
+                Content="Preview:" />
             <Grid
                 Grid.Row="3"
                 Grid.Column="1"
@@ -193,7 +196,8 @@
                     FontSize="14"
                     Foreground="White"
                     FontWeight="Bold"
-                    LineHeight="20"
+                    Padding="0"
+                    Margin="0"
                     TextTrimming="CharacterEllipsis"
                     TextWrapping="NoWrap"
                     VerticalAlignment="Center" />
@@ -201,171 +205,25 @@
         </Grid>
         <!--  Save/cancel buttons  -->
         <Grid
-            Grid.Row="1">
+            Grid.Row="1"
+            Height="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <!--  "Save" button  -->
-            <Border
+            <local:PrimaryButton
                 Grid.Column="2"
-                Height="30"
                 Margin="0,0,5,0"
-                HorizontalAlignment="Stretch"
-                CornerRadius="5">
-                <Border.Style>
-                    <!--  Must use template here for button background to be overridden  -->
-                    <Style TargetType="{x:Type Border}">
-                        <Setter
-                            Property="Background"
-                            Value="#505050" />
-                        <Style.Triggers>
-                            <!--  Show green background when enabled  -->
-                            <DataTrigger
-                                Binding="{Binding ElementName=SaveButton ,Path=IsEnabled}"
-                                Value="True">
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF2DA65F" />
-                            </DataTrigger>
-                            <!--  Hover/press styling  -->
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition
-                                        Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}"
-                                        Value="True" />
-                                    <Condition
-                                        Binding="{Binding ElementName=SaveButton ,Path=IsEnabled}"
-                                        Value="True" />
-                                </MultiDataTrigger.Conditions>
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF37CC75" />
-                            </MultiDataTrigger>
-                            <DataTrigger
-                                Binding="{Binding ElementName=SaveButton, Path=IsPressed}"
-                                Value="True">
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF34BF6E" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
-                <Button
-                    Name="SaveButton"
-                    BorderThickness="0,0,0,0"
-                    Click="SaveButton_Click"
-                    FontSize="14"
-                    Foreground="White"
-                    IsTabStop="True">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter
-                                Property="Background"
-                                Value="Transparent" />
-                            <Setter Property="IsEnabled"
-                                    Value="{Binding ShouldEnableSaveButton}" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}">
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                TextAlignment="Center"
-                                                LineHeight="20"
-                                                Text="Save" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger
-                                    Property="IsMouseOver"
-                                    Value="True">
-                                    <Setter
-                                        Property="Background"
-                                        Value="Transparent" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </Border>
-            <!--  "Cancel" button for applications  -->
-            <Border
+                Text="Save"
+                IsEnabled="{Binding Path=ShouldEnableSaveButton}"
+                Click="SaveButton_Click" />
+            <local:SecondaryButton
                 Grid.Column="3"
-                Height="30"
-                HorizontalAlignment="Stretch"
                 Margin="5,0,0,0"
-                CornerRadius="5">
-                <Border.Style>
-                    <!--  Must use template here for button background to be overridden  -->
-                    <Style TargetType="{x:Type Border}">
-                        <Setter
-                            Property="Background"
-                            Value="#888888" />
-                        <Style.Triggers>
-                            <!--  Hover/press styling  -->
-                            <Trigger
-                                Property="IsMouseOver"
-                                Value="True">
-                                <Setter
-                                    Property="Background"
-                                    Value="#A8A8A8" />
-                            </Trigger>
-                            <DataTrigger
-                                Binding="{Binding ElementName=CancelButton, Path=IsPressed}"
-                                Value="True">
-                                <Setter
-                                    Property="Background"
-                                    Value="#989898" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
-                <Button
-                    Name="CancelButton"
-                    BorderThickness="0,0,0,0"
-                    Click="CancelButton_Click"
-                    FontSize="14"
-                    Foreground="White"
-                    IsTabStop="True">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter
-                                Property="Background"
-                                Value="Transparent" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}">
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                TextAlignment="Center"
-                                                LineHeight="20"
-                                                Text="Cancel" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger
-                                    Property="IsMouseOver"
-                                    Value="True">
-                                    <Setter
-                                        Property="Background"
-                                        Value="Transparent" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </Border>
+                Text="Cancel"
+                Click="CancelButton_Click" />
         </Grid>
     </Grid>
 </Window>
