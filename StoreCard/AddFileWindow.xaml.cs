@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -20,8 +21,6 @@ namespace StoreCard
     /// </summary>
     public partial class AddFileWindow : INotifyPropertyChanged
     {
-        private string _filePath = "";
-
         private string _folderPath = "";
 
         private bool _doesFileExist;
@@ -56,45 +55,9 @@ namespace StoreCard
         public static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes, ref SHFILEINFO psfi,
             uint cbSizeFileInfo, uint uFlags);
 
-        public string FilePath
-        {
-            get => _filePath;
-            set
-            {
-                _filePath = value;
+        public string FileName => FilePathBox.Text.Split(@"\").Last();
 
-                DoesFileExist = File.Exists(value);
-                if (DoesFileExist)
-                {
-                    FileIcon = GetFileIconByPath(value);
-                }
-
-                OnPropertyChanged(nameof(FilePath));
-                OnPropertyChanged(nameof(FileName));
-            }
-        }
-
-        public string FolderPath
-        {
-            get => _folderPath;
-            set
-            {
-                _folderPath = value;
-
-                DoesFolderExist = Directory.Exists(value);
-                if (DoesFolderExist)
-                {
-                    FolderIcon = GetFolderIconByPath(value);
-                }
-
-                OnPropertyChanged(nameof(FolderPath));
-                OnPropertyChanged(nameof(FolderName));
-            }
-        }
-
-        public string FileName => FilePath.Split(@"\").Last();
-
-        public string FolderName => FolderPath.Split(@"\").Last();
+        public string FolderName => FolderPathBox.Text.Split(@"\").Last();
 
         public bool DoesFileExist
         {
@@ -158,7 +121,7 @@ namespace StoreCard
                 Title = "Select File"
             };
 
-            if (dialog.ShowDialog() == true) FilePath = dialog.FileName;
+            if (dialog.ShowDialog() == true) FilePathBox.Text = dialog.FileName;
         }
 
         private void BrowseFolderButton_Click(object sender, RoutedEventArgs e)
@@ -167,14 +130,14 @@ namespace StoreCard
             {
                 RootFolder = Environment.SpecialFolder.UserProfile
             };
-            if (dialog.ShowDialog() == true) FolderPath = dialog.SelectedPath;
+            if (dialog.ShowDialog() == true) FolderPathBox.Text = dialog.SelectedPath;
         }
 
         private void SaveFileButton_Click(object sender, RoutedEventArgs e)
         {
             var base64Icon = FileIcon != null ? ImageUtils.ImageToBase64((BitmapSource) FileIcon) : null;
             var savedItems = StorageUtils.ReadItemsFromFile();
-            savedItems.Add(new SavedFile(Guid.NewGuid().ToString(), FileName, base64Icon, FilePath, SavedFileSystemItem.DEFAULT_EXECUTABLE));
+            savedItems.Add(new SavedFile(Guid.NewGuid().ToString(), FileName, base64Icon, FilePathBox.Text, SavedFileSystemItem.DEFAULT_EXECUTABLE));
             StorageUtils.SaveItemsToFile(savedItems);
             Close();
         }
@@ -183,7 +146,7 @@ namespace StoreCard
         {
             var base64Icon = FolderIcon != null ? ImageUtils.ImageToBase64((BitmapSource) FolderIcon) : null;
             var savedItems = StorageUtils.ReadItemsFromFile();
-            savedItems.Add(new SavedFolder(Guid.NewGuid().ToString(), FolderName, base64Icon, FolderPath, SavedFileSystemItem.DEFAULT_EXECUTABLE));
+            savedItems.Add(new SavedFolder(Guid.NewGuid().ToString(), FolderName, base64Icon, FolderPathBox.Text, SavedFileSystemItem.DEFAULT_EXECUTABLE));
             StorageUtils.SaveItemsToFile(savedItems);
             Close();
         }
@@ -227,6 +190,26 @@ namespace StoreCard
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void FilePathBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var text = FilePathBox.Text;
+            DoesFileExist = File.Exists(text);
+            if (DoesFileExist) {
+                FileIcon = GetFileIconByPath(text);
+            }
+            OnPropertyChanged(nameof(FileName));
+        }
+
+        private void FolderPathBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var text = FolderPathBox.Text;
+            DoesFolderExist = Directory.Exists(text);
+            if (DoesFolderExist) {
+                FolderIcon = GetFolderIconByPath(text);
+            }
+            OnPropertyChanged(nameof(FolderName));
         }
     }
 }
