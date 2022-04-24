@@ -130,80 +130,16 @@
                 <!--  "Save" button for applications  -->
                 <local:PrimaryButton
                     Grid.Column="2"
+                    Margin="0,0,5,0"
                     Text="Save"
                     IsEnabled="{Binding Path=ShouldEnableSaveAppButton}"
                     Click="SaveAppButton_Click" />
                 <!--  "Cancel" button for applications  -->
-                <Border
+                <local:SecondaryButton
                     Grid.Column="3"
-                    Height="30"
-                    HorizontalAlignment="Stretch"
-                    Margin="5,15,0,15"
-                    CornerRadius="5">
-                    <Border.Style>
-                        <!--  Must use template here for button background to be overridden  -->
-                        <Style TargetType="{x:Type Border}">
-                            <Setter
-                                Property="Background"
-                                Value="#888888" />
-                            <Style.Triggers>
-                                <!--  Hover/press styling  -->
-                                <Trigger
-                                    Property="IsMouseOver"
-                                    Value="True">
-                                    <Setter
-                                        Property="Background"
-                                        Value="#A8A8A8" />
-                                </Trigger>
-                                <DataTrigger
-                                    Binding="{Binding ElementName=CancelAppButton, Path=IsPressed}"
-                                    Value="True">
-                                    <Setter
-                                        Property="Background"
-                                        Value="#989898" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
-                    <Button
-                        Name="CancelAppButton"
-                        BorderThickness="0,0,0,0"
-                        Click="CancelButton_Click"
-                        FontSize="14"
-                        Foreground="White"
-                        IsTabStop="True">
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter
-                                    Property="Background"
-                                    Value="Transparent" />
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <TextBlock
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Center"
-                                                    TextAlignment="Center"
-                                                    LineHeight="20"
-                                                    Text="Cancel" />
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger
-                                        Property="IsMouseOver"
-                                        Value="True">
-                                        <Setter
-                                            Property="Background"
-                                            Value="Transparent" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </Border>
+                    Margin="5,0,0,0"
+                    Text="Cancel"
+                    Click="CancelButton_Click" />
             </Grid>
         </Grid>
         <!--  "Installed game" content  -->

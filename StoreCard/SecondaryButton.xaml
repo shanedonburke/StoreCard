@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="StoreCard.PrimaryButton"
+﻿<UserControl x:Class="StoreCard.SecondaryButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:StoreCard"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance Type=local:PrimaryButton, IsDesignTimeCreatable=False}">
+             d:DataContext="{d:DesignInstance Type=local:SecondaryButton, IsDesignTimeCreatable=False}">
     <Border
         Height="30"
         HorizontalAlignment="Stretch"
@@ -24,7 +24,7 @@
                         Value="True">
                         <Setter
                             Property="Background"
-                            Value="#2DA65F" />
+                            Value="#888888" />
                     </DataTrigger>
                     <!--  Hover/press styling  -->
                     <MultiDataTrigger>
@@ -38,14 +38,14 @@
                         </MultiDataTrigger.Conditions>
                         <Setter
                             Property="Background"
-                            Value="#37CC75" />
+                            Value="#A8A8A8" />
                     </MultiDataTrigger>
                     <DataTrigger
                         Binding="{Binding ElementName=CustomButton, Path=IsPressed}"
                         Value="True">
                         <Setter
                             Property="Background"
-                            Value="#34BF6E" />
+                            Value="#989898" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
@@ -63,7 +63,7 @@
                         Property="Background"
                         Value="Transparent" />
                     <Setter Property="IsEnabled"
-                            Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PrimaryButton}}, Path=IsEnabled}" />
+                            Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SecondaryButton}}, Path=IsEnabled}" />
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Button}">
@@ -73,7 +73,7 @@
                                         VerticalAlignment="Center"
                                         TextAlignment="Center"
                                         LineHeight="20"
-                                        Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PrimaryButton}}, Path=Text}" />
+                                        Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SecondaryButton}}, Path=Text}" />
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
