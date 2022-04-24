@@ -36,55 +36,11 @@
                     FontWeight="Bold"
                     Margin="0,0,0,10"
                     Text="{Binding Path=HotKeyText}" />
-                <Button
-                    Name="ClearButton"
+                <local:SecondaryButton
                     Click="ClearButton_Click"
-                    HorizontalAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    BorderBrush="#00000000"
-                    BorderThickness="0,0,0,0"
-                    FontSize="14"
-                    Foreground="White"
-                    Height="25"
-                    Width="100">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter
-                                Property="Background"
-                                Value="#FF444444" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border
-                                            Background="{TemplateBinding Background}"
-                                            CornerRadius="5">
-                                            <ContentPresenter
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger
-                                    Property="IsMouseOver"
-                                    Value="True">
-                                    <Setter
-                                        Property="Background"
-                                        Value="#FF666666" />
-                                </Trigger>
-                                <Trigger
-                                    Property="IsPressed"
-                                    Value="True">
-                                    <Setter
-                                        Property="Background"
-                                        Value="#FF555555" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                    Clear
-                </Button>
+                    Text="Clear"
+                    Height="26"
+                    Width="100" />
             </StackPanel>
         </Grid>
         <Grid

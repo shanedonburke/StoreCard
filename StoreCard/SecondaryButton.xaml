@@ -17,13 +17,12 @@
                     Property="Background"
                     Value="#505050" />
                 <Style.Triggers>
-                    <!--  Show green background when enabled  -->
                     <DataTrigger
                         Binding="{Binding ElementName=CustomButton ,Path=IsEnabled}"
                         Value="True">
                         <Setter
                             Property="Background"
-                            Value="#888888" />
+                            Value="#444444" />
                     </DataTrigger>
                     <!--  Hover/press styling  -->
                     <MultiDataTrigger>
@@ -37,14 +36,14 @@
                         </MultiDataTrigger.Conditions>
                         <Setter
                             Property="Background"
-                            Value="#A8A8A8" />
+                            Value="#666666" />
                     </MultiDataTrigger>
                     <DataTrigger
                         Binding="{Binding ElementName=CustomButton, Path=IsPressed}"
                         Value="True">
                         <Setter
                             Property="Background"
-                            Value="#989898" />
+                            Value="#555555" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
@@ -54,7 +53,6 @@
             BorderThickness="0,0,0,0"
             Click="CustomButton_Click"
             FontSize="14"
-            Foreground="White"
             IsTabStop="True">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
@@ -73,9 +71,31 @@
                                         HorizontalContentAlignment="Center"
                                         VerticalAlignment="Stretch"
                                         VerticalContentAlignment="Center"
-                                        Foreground="White"
                                         FontFamily="Segoe UI"
-                                        Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SecondaryButton}}, Path=Text}" />
+                                        Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SecondaryButton}}, Path=Text}">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Style.Triggers>
+                                                    <DataTrigger
+                                                        Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}"
+                                                        Value="False">
+                                                        <!--  Font color when disabled  -->
+                                                        <Setter
+                                                            Property="Foreground"
+                                                            Value="#6F6F6F" />
+                                                    </DataTrigger>
+                                                    <DataTrigger
+                                                        Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}"
+                                                        Value="True">
+                                                        <!--  Font color when enabled  -->
+                                                        <Setter
+                                                            Property="Foreground"
+                                                            Value="White" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>

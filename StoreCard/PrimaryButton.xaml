@@ -15,7 +15,7 @@
             <Style TargetType="{x:Type Border}">
                 <Setter
                     Property="Background"
-                    Value="#505050" />
+                    Value="#363636" />
                 <Style.Triggers>
                     <!--  Show green background when enabled  -->
                     <DataTrigger
@@ -54,7 +54,6 @@
             BorderThickness="0,0,0,0"
             Click="CustomButton_Click"
             FontSize="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PrimaryButton}}, Path=FontSize}"
-            Foreground="White"
             IsTabStop="True">
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
@@ -73,9 +72,31 @@
                                         HorizontalContentAlignment="Center"
                                         VerticalAlignment="Stretch"
                                         VerticalContentAlignment="Center"
-                                        Foreground="White"
                                         FontFamily="Segoe UI"
-                                        Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PrimaryButton}}, Path=Text}" />
+                                        Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PrimaryButton}}, Path=Text}">
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Style.Triggers>
+                                                    <DataTrigger
+                                                        Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}"
+                                                        Value="False">
+                                                        <!--  Font color when disabled  -->
+                                                        <Setter
+                                                            Property="Foreground"
+                                                            Value="#6F6F6F" />
+                                                    </DataTrigger>
+                                                    <DataTrigger
+                                                        Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}"
+                                                        Value="True">
+                                                        <!--  Font color when enabled  -->
+                                                        <Setter
+                                                            Property="Foreground"
+                                                            Value="White" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
