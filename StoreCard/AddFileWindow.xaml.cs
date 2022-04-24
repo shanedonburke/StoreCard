@@ -21,8 +21,6 @@ namespace StoreCard
     /// </summary>
     public partial class AddFileWindow : INotifyPropertyChanged
     {
-        private string _folderPath = "";
-
         private bool _doesFileExist;
 
         private bool _doesFolderExist;
