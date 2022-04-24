@@ -55,11 +55,8 @@ public partial class MainWindow : INotifyPropertyChanged
                 ? _savedItems
                 : _savedItems.Where(item => item.Category == Category);
             items = items.Where(item => item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()));
-            items = items.Concat(_savedItems.Where(item =>
-            {
-                return !item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()) &&
-                       item.Name.ToUpper().Contains(SearchBox.Text.ToUpper());
-            }));
+            items = items.Concat(_savedItems.Where(item => !item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()) &&
+                                                           item.Name.ToUpper().Contains(SearchBox.Text.ToUpper())));
             return items;
         }
     }
@@ -153,11 +150,9 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void ItemListBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Enter)
-        {
-            OpenSelectedItem();
-            e.Handled = true;
-        }
+        if (e.Key != Key.Enter) return;
+        OpenSelectedItem();
+        e.Handled = true;
     }
 
     private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
