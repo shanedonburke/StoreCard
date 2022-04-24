@@ -19,18 +19,28 @@
             Orientation="Horizontal"
             Height="20"
             VerticalAlignment="Top">
-            <TextBlock
-                Text="Shortcut:"
+            <Label
+                Padding="0"
                 Margin="0,0,10,0"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Top"
+                VerticalContentAlignment="Center"
+                Foreground="White"
+                FontFamily="Segoe UI"
                 FontSize="14"
-                LineHeight="20"
-                Foreground="White" />
-            <TextBlock
-                Text="{Binding HotKeyText}"
+                Content="Shortcut" />
+            <Label
+                Padding="0"
                 Margin="0,0,10,0"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Top"
+                VerticalContentAlignment="Center"
+                Foreground="#AAAAAA"
+                FontFamily="Segoe UI"
                 FontSize="14"
-                LineHeight="20"
-                Foreground="#AAAAAA" />
+                Content="{Binding HotKeyText}" />
             <Button
                 Name="RecordHotKeyButton"
                 Click="RecordHotKeyButton_Click"
@@ -41,7 +51,7 @@
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <fa:IconBlock
-                            FontSize="15"
+                            FontSize="16"
                             Foreground="Red"
                             IconFont="Solid"
                             Cursor="Hand"

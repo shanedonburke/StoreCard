@@ -16,35 +16,43 @@
         Margin="15,15,15,15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="40" />
+            <RowDefinition Height="45" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid
             Grid.Row="0"
-            Margin="0,0,0,10">
+            Margin="0,0,0,15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBlock
+            <Label
                 Grid.Column="0"
-                Text="Path:"
+                Padding="0"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Top"
+                VerticalContentAlignment="Center"
                 Foreground="White"
+                FontFamily="Segoe UI"
                 FontSize="14"
-                LineHeight="20"
-                Margin="0,0,5,0" />
-            <TextBlock
-                Margin="5,0,0,0"
+                Content="Path:" />
+            <Label
                 Grid.Column="1"
-                Text="{Binding Path=Path}"
-                FontWeight="Bold"
+                Padding="0"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Top"
+                VerticalContentAlignment="Center"
                 Foreground="White"
+                FontFamily="Segoe UI"
                 FontSize="14"
-                LineHeight="20" />
+                FontWeight="Bold"
+                Content="{Binding Path=Path}" />
         </Grid>
         <Grid
             Grid.Row="1"
-            Margin="0,0,0,10"
+            Margin="0,0,0,15"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
@@ -52,13 +60,17 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock
-                VerticalAlignment="Center"
-                FontSize="14"
+            <Label
+                Grid.Column="0"
+                Padding="0"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Stretch"
+                VerticalContentAlignment="Center"
                 Foreground="White"
-                LineHeight="20"
-                Margin="0,0,10,0"
-                Text="Name:" />
+                FontFamily="Segoe UI"
+                FontSize="14"
+                Content="Name:" />
             <Border
                 Grid.Column="1"
                 Padding="5,0,5,0"
@@ -110,104 +122,30 @@
                     </TextBox.Style>
                 </TextBox>
             </Border>
-            <Border
+            <local:PrimaryButton
                 Grid.Column="2"
                 Height="30"
                 Margin="10,0,0,0"
                 HorizontalAlignment="Stretch"
                 Width="50"
-                CornerRadius="5">
-                <Border.Style>
-                    <!--  Must use template here for button background to be overridden  -->
-                    <Style TargetType="{x:Type Border}">
-                        <Setter
-                            Property="Background"
-                            Value="#505050" />
-                        <Style.Triggers>
-                            <!--  Show green background when enabled  -->
-                            <DataTrigger
-                                Binding="{Binding ElementName=SaveNameButton ,Path=IsEnabled}"
-                                Value="True">
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF2DA65F" />
-                            </DataTrigger>
-                            <!--  Hover/press styling  -->
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition
-                                        Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}"
-                                        Value="True" />
-                                    <Condition
-                                        Binding="{Binding ElementName=SaveNameButton ,Path=IsEnabled}"
-                                        Value="True" />
-                                </MultiDataTrigger.Conditions>
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF37CC75" />
-                            </MultiDataTrigger>
-                            <DataTrigger
-                                Binding="{Binding ElementName=SaveNameButton, Path=IsPressed}"
-                                Value="True">
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF34BF6E" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
-                <Button
-                    Name="SaveNameButton"
-                    BorderThickness="0,0,0,0"
-                    Click="SaveNameButton_Click"
-                    FontSize="14"
-                    Foreground="White"
-                    IsTabStop="True">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter
-                                Property="Background"
-                                Value="Transparent" />
-                            <Setter
-                                Property="IsEnabled"
-                                Value="{Binding Path=ShouldEnableSaveNameButton}" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}">
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                TextAlignment="Center"
-                                                LineHeight="20"
-                                                Text="Save" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger
-                                    Property="IsMouseOver"
-                                    Value="True">
-                                    <Setter
-                                        Property="Background"
-                                        Value="Transparent" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </Border>
+                IsEnabled="{Binding Path=ShouldEnableSaveNameButton}"
+                Text="Save"
+                Click="SaveNameButton_Click" />
         </Grid>
         <StackPanel Grid.Row="2">
-            <TextBlock
-                Text="Open with:"
+            <Label
+                Padding="0"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Stretch"
+                VerticalContentAlignment="Center"
                 Foreground="White"
+                FontFamily="Segoe UI"
                 FontSize="14"
-                LineHeight="20"
-                VerticalAlignment="Center" />
+                Content="Open with:" />
             <Grid
-                Margin="0,10,0,10">
+                Margin="0,10,0,10"
+                Height="30">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -218,85 +156,24 @@
                     Margin="0,0,10,0"
                     Height="24"
                     Width="24" />
-                <TextBlock
+                <Label
                     Grid.Column="1"
-                    Text="{Binding ExecutableName}"
+                    Padding="0"
+                    HorizontalAlignment="Left"
+                    HorizontalContentAlignment="Left"
+                    VerticalAlignment="Stretch"
+                    VerticalContentAlignment="Center"
                     Foreground="White"
+                    FontFamily="Segoe UI"
                     FontSize="14"
-                    LineHeight="20"
-                    TextTrimming="CharacterEllipsis"
-                    TextWrapping="NoWrap"
-                    VerticalAlignment="Center" />
+                    Content="{Binding ExecutableName}" />
             </Grid>
-            <Border
+            <local:PrimaryButton
                 Height="30"
-                HorizontalAlignment="Left"
                 Width="80"
-                CornerRadius="5">
-                <Border.Style>
-                    <!--  Must use template here for button background to be overridden  -->
-                    <Style TargetType="{x:Type Border}">
-                        <Setter
-                            Property="Background"
-                            Value="#FF2DA65F" />
-                        <Style.Triggers>
-                            <!--  Hover/press styling  -->
-                            <Trigger
-                                Property="IsMouseOver"
-                                Value="True">
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF37CC75" />
-                            </Trigger>
-                            <DataTrigger
-                                Binding="{Binding ElementName=ChangeExecutableButton, Path=IsPressed}"
-                                Value="True">
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF34BF6E" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
-                <Button
-                    Name="ChangeExecutableButton"
-                    BorderThickness="0,0,0,0"
-                    Click="ChangeExecutableButton_Click"
-                    FontSize="14"
-                    Foreground="White"
-                    IsTabStop="True">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter
-                                Property="Background"
-                                Value="Transparent" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}">
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                TextAlignment="Center"
-                                                LineHeight="20"
-                                                Text="Change" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger
-                                    Property="IsMouseOver"
-                                    Value="True">
-                                    <Setter
-                                        Property="Background"
-                                        Value="Transparent" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
-            </Border>
+                HorizontalAlignment="Left"
+                Text="Change"
+                Click="ChangeExecutableButton_Click" />
         </StackPanel>
     </Grid>
 </Window>

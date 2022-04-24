@@ -68,9 +68,10 @@
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border Background="{TemplateBinding Background}">
                                     <Label
+                                        Padding="0"
                                         HorizontalAlignment="Center"
                                         HorizontalContentAlignment="Center"
-                                        VerticalAlignment="Center"
+                                        VerticalAlignment="Stretch"
                                         VerticalContentAlignment="Center"
                                         Foreground="White"
                                         FontFamily="Segoe UI"
