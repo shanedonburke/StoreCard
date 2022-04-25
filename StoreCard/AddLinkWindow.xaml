@@ -79,7 +79,7 @@
                 Visibility="{Binding LinkTitle, Converter={StaticResource NotBlankVisibilityConverter}}"
                 HorizontalAlignment="Left"
                 HorizontalContentAlignment="Left"
-                VerticalAlignment="Top"
+                VerticalAlignment="Stretch"
                 VerticalContentAlignment="Center"
                 Foreground="White"
                 FontFamily="Segoe UI"

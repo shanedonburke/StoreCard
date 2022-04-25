@@ -14,21 +14,9 @@ namespace StoreCard
     /// </summary>
     public partial class AddLinkWindow : INotifyPropertyChanged
     {
-        private string _url = "";
-
         private string _linkTitle = "";
 
         private ImageSource? _favicon;
-
-        public string Url {
-            get => _url;
-            set {
-                _url = value;
-                OnPropertyChanged(nameof(Url));
-                OnPropertyChanged(nameof(ShouldEnableSaveButton));
-                GetWebsiteDetails();
-            }
-        }
 
         public string LinkTitle
         {
@@ -43,7 +31,7 @@ namespace StoreCard
 
         public ImageSource LinkIcon => _favicon ?? Icons.LinkIcon;
 
-        public bool ShouldEnableSaveButton => Url != string.Empty && LinkTitle != string.Empty;
+        public bool ShouldEnableSaveButton => UrlBox.Text != string.Empty && LinkTitle != string.Empty;
 
         public AddLinkWindow() {
             InitializeComponent();
@@ -52,13 +40,13 @@ namespace StoreCard
 
         private async void GetWebsiteDetails()
         {
-            var title = await HttpUtils.GetWebsiteTitle(Url);
+            var title = await HttpUtils.GetWebsiteTitle(UrlBox.Text);
             if (title != string.Empty)
             {
                 LinkTitle = title;
             }
 
-            _favicon = await HttpUtils.GetWebsiteIcon(Url);
+            _favicon = await HttpUtils.GetWebsiteIcon(UrlBox.Text);
             OnPropertyChanged(nameof(LinkIcon));
         }
 
@@ -79,7 +67,7 @@ namespace StoreCard
         {
             var base64Icon = ImageUtils.ImageToBase64((BitmapSource) LinkIcon);
             var savedItems = StorageUtils.ReadItemsFromFile();
-            savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon, HttpUtils.NormalizeUrl(Url)));
+            savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon, HttpUtils.NormalizeUrl(UrlBox.Text)));
             StorageUtils.SaveItemsToFile(savedItems);
             Close();
         }
@@ -91,7 +79,8 @@ namespace StoreCard
 
         private void StoreCardTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Url = UrlBox.Text;
+            OnPropertyChanged(nameof(ShouldEnableSaveButton));
+            GetWebsiteDetails();
         }
 
         private void LinkTitleBox_TextChanged(object sender, TextChangedEventArgs e)
