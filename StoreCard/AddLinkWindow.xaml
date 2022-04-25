@@ -47,58 +47,13 @@
                 FontSize="14"
                 Content="URL:" />
             <!--  URL box  -->
-            <Border
+            <local:StoreCardTextBox
+                x:Name="UrlBox"
                 Grid.Row="0"
                 Grid.Column="1"
-                Padding="5,0,5,0"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="#FF444444"
-                CornerRadius="5">
-                <TextBox
-                    Name="UrlBox"
-                    HorizontalAlignment="Stretch"
-                    VerticalContentAlignment="Stretch"
-                    Background="#FF444444"
-                    BorderBrush="#00000000"
-                    BorderThickness="0,0,0,0"
-                    FontFamily="Segoe UI"
-                    FontSize="14"
-                    MaxLines="1"
-                    SelectionBrush="#65FFFFFF"
-                    TextWrapping="NoWrap">
-                    <TextBox.Style>
-                        <Style TargetType="{x:Type TextBox}">
-                            <Setter
-                                Property="Text"
-                                Value="{Binding Url, UpdateSourceTrigger=PropertyChanged}" />
-                            <Setter
-                                Property="Foreground"
-                                Value="White" />
-                            <Style.Triggers>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition
-                                            Binding="{Binding ElementName=UrlBox, Path=IsFocused}"
-                                            Value="False" />
-                                        <Condition
-                                            Binding="{Binding Url}"
-                                            Value="" />
-                                    </MultiDataTrigger.Conditions>
-                                    <MultiDataTrigger.Setters>
-                                        <Setter
-                                            Property="Text"
-                                            Value="Enter URL..." />
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="#FFAAAAAA" />
-                                    </MultiDataTrigger.Setters>
-                                </MultiDataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
-            </Border>
+                TextChanged="StoreCardTextBox_TextChanged"
+                InactivePlaceholder="Enter URL..."
+                ActivePlaceholder="Enter URL..." />
             <Label
                 Grid.Row="2"
                 Grid.Column="0"
@@ -111,58 +66,13 @@
                 FontSize="14"
                 Content="Title:" />
             <!-- Title box  -->
-            <Border
+            <local:StoreCardTextBox
+                x:Name="LinkTitleBox"
                 Grid.Row="2"
                 Grid.Column="1"
-                Padding="5,0,5,0"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="#FF444444"
-                CornerRadius="5">
-                <TextBox
-                    Name="LinkTitleBox"
-                    HorizontalAlignment="Stretch"
-                    VerticalContentAlignment="Stretch"
-                    Background="#FF444444"
-                    BorderBrush="#00000000"
-                    BorderThickness="0,0,0,0"
-                    FontFamily="Segoe UI"
-                    FontSize="14"
-                    MaxLines="1"
-                    SelectionBrush="#65FFFFFF"
-                    TextWrapping="NoWrap">
-                    <TextBox.Style>
-                        <Style TargetType="{x:Type TextBox}">
-                            <Setter
-                                Property="Text"
-                                Value="{Binding LinkTitle, UpdateSourceTrigger=PropertyChanged}" />
-                            <Setter
-                                Property="Foreground"
-                                Value="White" />
-                            <Style.Triggers>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition
-                                            Binding="{Binding ElementName=LinkTitleBox, Path=IsFocused}"
-                                            Value="False" />
-                                        <Condition
-                                            Binding="{Binding LinkTitle}"
-                                            Value="" />
-                                    </MultiDataTrigger.Conditions>
-                                    <MultiDataTrigger.Setters>
-                                        <Setter
-                                            Property="Text"
-                                            Value="Enter title..." />
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="#FFAAAAAA" />
-                                    </MultiDataTrigger.Setters>
-                                </MultiDataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
-            </Border>
+                TextChanged="LinkTitleBox_TextChanged"
+                InactivePlaceholder="Enter title..."
+                ActivePlaceholder="Enter title..." />
             <Label
                 Grid.Row="3"
                 Grid.Column="0"

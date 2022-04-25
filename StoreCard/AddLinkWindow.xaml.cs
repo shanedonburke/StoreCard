@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using StoreCard.Annotations;
 
 namespace StoreCard
@@ -95,6 +87,16 @@ namespace StoreCard
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void StoreCardTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Url = UrlBox.Text;
+        }
+
+        private void LinkTitleBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LinkTitle = LinkTitleBox.Text;
         }
     }
 }
