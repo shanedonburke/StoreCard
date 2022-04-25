@@ -36,7 +36,7 @@
                             <Border.Style>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="Background"
-                                            Value="#2F2F2F" />
+                                            Value="#444444" />
                                 </Style>
                             </Border.Style>
                         </Border>
@@ -45,13 +45,13 @@
                                      Value="true">
                                 <Setter Property="Background"
                                         TargetName="ThumbBorder"
-                                        Value="#444444" />
+                                        Value="#666666" />
                             </Trigger>
                             <Trigger Property="IsDragging"
                                      Value="true">
                                 <Setter Property="Background"
                                         TargetName="ThumbBorder"
-                                        Value="#4F4F4F" />
+                                        Value="#555555" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
