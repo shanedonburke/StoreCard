@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -8,7 +7,6 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -24,57 +22,17 @@ namespace StoreCard
     {
         private readonly SavedFileSystemItem _item;
 
-        private IEnumerable<InstalledApplication> _filteredApps = new List<InstalledApplication>();
-
         private bool _doesExecutableExist;
 
         private ImageSource? _executableIcon;
 
         private string _executableName = "";
 
-        private string _executablePath = "";
-
-        public IEnumerable<InstalledApplication> FilteredApps
-        {
-            get => _filteredApps;
-            set
-            {
-                _filteredApps = value;
-                OnPropertyChanged(nameof(FilteredApps));
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    if (_filteredApps.Any()) AppListBox.SelectedIndex = 0;
-                });
-            }
-        }
-
         public bool ShouldEnableSaveAppButton => AppListBox.SelectedItem != null;
 
         public string? SelectedAppName => (AppListBox.SelectedItem as InstalledApplication)?.Name;
 
         public ImageSource? SelectedAppIcon => (AppListBox.SelectedItem as InstalledApplication)?.BitmapIcon;
-
-        public string ExecutablePath {
-            get => _executablePath;
-            set {
-                _executablePath = value;
-
-                DoesExecutableExist = File.Exists(value);
-                if (DoesExecutableExist) {
-                    // Take file name without '.exe'
-                    ExecutableName = value.Split(@"\").Last();
-
-                    var icon = System.Drawing.Icon.ExtractAssociatedIcon(value);
-                    if (icon != null)
-                        ExecutableIcon = Imaging.CreateBitmapSourceFromHIcon(
-                            icon.Handle,
-                            Int32Rect.Empty,
-                            BitmapSizeOptions.FromEmptyOptions());
-                }
-
-                OnPropertyChanged(nameof(ExecutablePath));
-            }
-        }
 
         public string ExecutableName {
             get => _executableName;
@@ -164,7 +122,7 @@ namespace StoreCard
                 Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
                 return;
             }
-            matchingItem.SetExecutablePath(ExecutablePath);
+            matchingItem.SetExecutablePath(ExecutablePathBox.Text);
             StorageUtils.SaveItemsToFile(savedItems);
             DialogResult = true;
             Close();
@@ -178,7 +136,7 @@ namespace StoreCard
                 Title = "Select Executable"
             };
 
-            if (openFileDialog.ShowDialog() == true) ExecutablePath = openFileDialog.FileName;
+            if (openFileDialog.ShowDialog() == true) ExecutablePathBox.Text = openFileDialog.FileName;
         }
 
         private void SaveSelectedAppAndClose() {
@@ -193,6 +151,22 @@ namespace StoreCard
             StorageUtils.SaveItemsToFile(savedItems);
             DialogResult = true;
             Close();
+        }
+
+        private void ExecutablePathBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var text = ExecutablePathBox.Text;
+            DoesExecutableExist = File.Exists(text);
+            if (!DoesExecutableExist) return;
+            // Take file name without '.exe'
+            ExecutableName = text.Split(@"\").Last();
+
+            var icon = System.Drawing.Icon.ExtractAssociatedIcon(text);
+            if (icon != null)
+                ExecutableIcon = Imaging.CreateBitmapSourceFromHIcon(
+                    icon.Handle,
+                    Int32Rect.Empty,
+                    BitmapSizeOptions.FromEmptyOptions());
         }
     }
 }
