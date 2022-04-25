@@ -28,7 +28,7 @@
             <fa:IconBlock
                 Icon="CircleNotch"
                 fa:Awesome.Spin="True"
-                Foreground="#FF2DA65F"
+                Foreground="#2DA65F"
                 FontSize="80" />
         </Grid>
         <!--  Application list  -->

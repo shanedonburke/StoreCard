@@ -13,9 +13,11 @@
         <Border.Style>
             <!--  Must use template here for button background to be overridden  -->
             <Style TargetType="{x:Type Border}">
-                <Setter
-                    Property="Background"
-                    Value="#363636" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="{StaticResource ButtonDisabledBackgroundColor}" />
+                    </Setter.Value>
+                </Setter>
                 <Style.Triggers>
                     <!--  Show green background when enabled  -->
                     <DataTrigger
@@ -81,9 +83,11 @@
                                                         Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}"
                                                         Value="False">
                                                         <!--  Font color when disabled  -->
-                                                        <Setter
-                                                            Property="Foreground"
-                                                            Value="#6F6F6F" />
+                                                        <Setter Property="Foreground">
+                                                            <Setter.Value>
+                                                                <SolidColorBrush Color="{StaticResource ButtonDisabledTextColor}" />
+                                                            </Setter.Value>
+                                                        </Setter>
                                                     </DataTrigger>
                                                     <DataTrigger
                                                         Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}"

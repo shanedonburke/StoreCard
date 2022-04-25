@@ -13,6 +13,8 @@
         <Color x:Key="ControlLightColor">#444444</Color>
         <Color x:Key="ControlLightColor_Hover">#666666</Color>
         <Color x:Key="ControlLightColor_Pressed">#555555</Color>
+        <Color x:Key="ButtonDisabledBackgroundColor">#363636</Color>
+        <Color x:Key="ButtonDisabledTextColor">#6F6F6F</Color>
 
         <!-- Scroll bar -->
         <Style x:Key="ScrollBarThumb"
@@ -20,11 +22,11 @@
             <Setter Property="SnapsToDevicePixels"
                     Value="True" />
             <Setter Property="OverridesDefaultStyle"
-                    Value="true" />
+                    Value="True" />
             <Setter Property="IsTabStop"
-                    Value="false" />
+                    Value="False" />
             <Setter Property="Focusable"
-                    Value="false" />
+                    Value="False" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Thumb}">
@@ -34,23 +36,34 @@
                                 BorderThickness="1">
                             <Border.Style>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="Background"
-                                            Value="#444444" />
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <SolidColorBrush Color="{StaticResource ControlLightColor}" />
+                                        </Setter.Value>
+                                    </Setter>
                                 </Style>
                             </Border.Style>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver"
-                                     Value="true">
-                                <Setter Property="Background"
-                                        TargetName="ThumbBorder"
-                                        Value="#666666" />
+                                     Value="True">
+                                <Setter
+                                    Property="Background"
+                                    TargetName="ThumbBorder">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource ControlLightColor_Hover}" />
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                             <Trigger Property="IsDragging"
-                                     Value="true">
-                                <Setter Property="Background"
-                                        TargetName="ThumbBorder"
-                                        Value="#555555" />
+                                     Value="True">
+                                <Setter
+                                    Property="Background"
+                                    TargetName="ThumbBorder">
+                                    <Setter.Value>
+                                        <SolidColorBrush Color="{StaticResource ControlLightColor_Pressed}" />
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -67,7 +80,7 @@
                         Background="Transparent" />
                 <Track x:Name="PART_Track"
                        Grid.Row="0"
-                       IsDirectionReversed="true">
+                       IsDirectionReversed="True">
                     <Track.Thumb>
                         <Thumb Style="{StaticResource ScrollBarThumb}"
                                Margin="2,0,2,0"
@@ -82,7 +95,7 @@
             <Setter Property="SnapsToDevicePixels"
                     Value="True" />
             <Setter Property="OverridesDefaultStyle"
-                    Value="true" />
+                    Value="True" />
             <Style.Triggers>
                 <Trigger Property="Orientation"
                          Value="Vertical">
@@ -149,7 +162,7 @@
                                                 <LinearGradientBrush.GradientStops>
                                                     <GradientStopCollection>
                                                         <GradientStop Color="White" />
-                                                        <GradientStop Color="{DynamicResource ControlLightColor_Hover}"
+                                                        <GradientStop Color="{StaticResource ControlLightColor_Hover}"
                                                                       Offset="1.0" />
                                                     </GradientStopCollection>
                                                 </LinearGradientBrush.GradientStops>
@@ -175,7 +188,7 @@
                                                                           Storyboard.TargetProperty="(Shape.Fill).
                                                                           (GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                                 <EasingColorKeyFrame KeyTime="0"
-                                                                     Value="{DynamicResource ControlLightColor_Hover}" />
+                                                                     Value="{StaticResource ControlLightColor_Hover}" />
                                             </ColorAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -185,7 +198,7 @@
                                                                           Storyboard.TargetProperty="(Shape.Fill).
                                                                           (GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                                 <EasingColorKeyFrame KeyTime="0"
-                                                                     Value="{DynamicResource ControlLightColor_Pressed}" />
+                                                                     Value="{StaticResource ControlLightColor_Pressed}" />
                                             </ColorAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -195,7 +208,7 @@
                                                                           Storyboard.TargetProperty="(Shape.Fill).
                                                                           (GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                                 <EasingColorKeyFrame KeyTime="0"
-                                                                     Value="{DynamicResource ControlLightColor}" />
+                                                                     Value="{StaticResource ControlLightColor}" />
                                             </ColorAnimationUsingKeyFrames>
                                             <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
                                                                           Storyboard.TargetProperty="(Shape.Stroke).

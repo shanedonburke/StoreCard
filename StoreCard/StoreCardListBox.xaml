@@ -87,7 +87,7 @@
                                         TargetName="ItemTemplateInner"
                                         Property="Border.BorderBrush">
                                         <Setter.Value>
-                                            <SolidColorBrush>#FF3BD97D</SolidColorBrush>
+                                            <SolidColorBrush>#3BD97D</SolidColorBrush>
                                         </Setter.Value>
                                     </Setter>
                                 </MultiTrigger>
@@ -109,7 +109,7 @@
                                         TargetName="ItemTemplateInner"
                                         Property="Border.BorderBrush">
                                         <Setter.Value>
-                                            <SolidColorBrush>#FF3BD97D</SolidColorBrush>
+                                            <SolidColorBrush>#3BD97D</SolidColorBrush>
                                         </Setter.Value>
                                     </Setter>
                                 </MultiTrigger>
@@ -120,7 +120,7 @@
                                         TargetName="ItemTemplateInner"
                                         Property="TextElement.Foreground">
                                         <Setter.Value>
-                                            <DynamicResource
+                                            <StaticResource
                                                 ResourceKey="{x:Static SystemColors.GrayTextBrushKey}" />
                                         </Setter.Value>
                                     </Setter>

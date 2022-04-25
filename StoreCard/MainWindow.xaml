@@ -154,14 +154,14 @@
                                     Value="True">
                                     <Setter
                                         Property="Background"
-                                        Value="#FF444444" />
+                                        Value="#444444" />
                                 </Trigger>
                                 <Trigger
                                     Property="IsPressed"
                                     Value="True">
                                     <Setter
                                         Property="Background"
-                                        Value="#FF333333" />
+                                        Value="#333333" />
                                 </Trigger>
                                 <DataTrigger
                                     Binding="{Binding ElementName=AddButtonContextMenu, Path=IsOpen}"
@@ -261,14 +261,14 @@
                                     Value="True">
                                     <Setter
                                         Property="Background"
-                                        Value="#FF444444" />
+                                        Value="#444444" />
                                 </Trigger>
                                 <Trigger
                                     Property="IsPressed"
                                     Value="True">
                                     <Setter
                                         Property="Background"
-                                        Value="#FF333333" />
+                                        Value="#333333" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
