@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -18,22 +19,9 @@ namespace StoreCard
     {
         private SavedFileSystemItem _item;
 
-        private string _itemName = "";
-
         public string Path => _item.Path;
 
-        public string ItemName
-        {
-            get => _itemName;
-            set
-            {
-                _itemName = value;
-                OnPropertyChanged(nameof(ItemName));
-                OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
-            }
-        }
-
-        public bool ShouldEnableSaveNameButton => ItemName.Trim() != "" && ItemName != _item.Name;
+        public bool ShouldEnableSaveNameButton => NameBox.Text.Trim() != "" && NameBox.Text != _item.Name;
 
         public string ExecutableName => _item.ExecutableName;
 
@@ -57,10 +45,11 @@ namespace StoreCard
 
         public EditFileWindow(SavedFileSystemItem item) {
             _item = item;
-            ItemName = item.Name;
 
             DataContext = this;
             InitializeComponent();
+
+            NameBox.Text = item.Name;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -91,12 +80,13 @@ namespace StoreCard
 
         private void SaveNameButton_Click(object sender, RoutedEventArgs e)
         {
-            _item.Name = ItemName;
+            var name = NameBox.Text;
+            _item.Name = name;
             var savedItems = StorageUtils.ReadItemsFromFile();
             var matchingItem = savedItems.Find(i => i.Id == _item.Id);
             if (matchingItem != null)
             {
-                matchingItem.Name = ItemName;
+                matchingItem.Name = name;
                 StorageUtils.SaveItemsToFile(savedItems);
                 OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
             }
@@ -104,6 +94,11 @@ namespace StoreCard
             {
                 Debug.WriteLine("Tried to change item name, but no matching stored item was found.");
             }
+        }
+
+        private void StoreCardTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
         }
     }
 }

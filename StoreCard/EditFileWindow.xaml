@@ -71,57 +71,12 @@
                 FontFamily="Segoe UI"
                 FontSize="14"
                 Content="Name:" />
-            <Border
+            <local:StoreCardTextBox
+                x:Name="NameBox"
                 Grid.Column="1"
-                Padding="5,0,5,0"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="#FF444444"
-                CornerRadius="5">
-                <TextBox
-                    Name="NameBox"
-                    HorizontalAlignment="Stretch"
-                    VerticalContentAlignment="Stretch"
-                    Background="#FF444444"
-                    BorderBrush="#00000000"
-                    BorderThickness="0,0,0,0"
-                    FontFamily="Segoe UI"
-                    FontSize="14"
-                    MaxLines="1"
-                    SelectionBrush="#65FFFFFF"
-                    TextWrapping="NoWrap">
-                    <TextBox.Style>
-                        <Style TargetType="{x:Type TextBox}">
-                            <Setter
-                                Property="Text"
-                                Value="{Binding ItemName, UpdateSourceTrigger=PropertyChanged}" />
-                            <Setter
-                                Property="Foreground"
-                                Value="White" />
-                            <Style.Triggers>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition
-                                            Binding="{Binding ElementName=NameBox, Path=IsFocused}"
-                                            Value="False" />
-                                        <Condition
-                                            Binding="{Binding ItemName}"
-                                            Value="" />
-                                    </MultiDataTrigger.Conditions>
-                                    <MultiDataTrigger.Setters>
-                                        <Setter
-                                            Property="Text"
-                                            Value="Enter a name..." />
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="#FFAAAAAA" />
-                                    </MultiDataTrigger.Setters>
-                                </MultiDataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
-            </Border>
+                ActivePlaceholder="Enter a name..."
+                InactivePlaceholder="Enter a name..."
+                TextChanged="StoreCardTextBox_TextChanged"/>
             <local:PrimaryButton
                 Grid.Column="2"
                 Height="30"
