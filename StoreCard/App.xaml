@@ -138,9 +138,13 @@
                                     <Grid Width="15"
                                           Height="15">
                                         <!-- Margins...??? -->
-                                        <Ellipse Stroke="#2DA65F"
-                                                 Margin="-3.5,-1,0.5,-1"
-                                                 StrokeThickness="1.5" />
+                                        <Ellipse
+                                            Margin="-3.5,-1,0.5,-1"
+                                            StrokeThickness="1.5">
+                                            <Ellipse.Stroke>
+                                                <SolidColorBrush Color="{StaticResource ControlPrimaryColor}" />
+                                            </Ellipse.Stroke>
+                                        </Ellipse>
                                     </Grid>
                                 </ControlTemplate>
                             </Setter.Value>

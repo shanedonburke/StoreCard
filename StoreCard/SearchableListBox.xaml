@@ -28,8 +28,11 @@
             <fa:IconBlock
                 Icon="CircleNotch"
                 fa:Awesome.Spin="True"
-                Foreground="#2DA65F"
-                FontSize="80" />
+                FontSize="80">
+                <fa:IconBlock.Foreground>
+                    <SolidColorBrush Color="{StaticResource ControlPrimaryColor}" />
+                </fa:IconBlock.Foreground>
+            </fa:IconBlock>
         </Grid>
         <!--  Application list  -->
         <local:StoreCardListBox
