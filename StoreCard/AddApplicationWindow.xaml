@@ -233,58 +233,13 @@
                     InactivePlaceholder="Enter path to executable..."
                     TextChanged="ExecutablePathBox_TextChanged" />
                 <!--  "Browse" button  -->
-                <Button
-                    Name="BrowseButton"
+                <local:PrimaryButton
+                    x:Name="BrowseButton"
                     Grid.Row="0"
                     Grid.Column="2"
                     Width="80"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    VerticalContentAlignment="Center"
-                    BorderBrush="#00000000"
-                    BorderThickness="0,0,0,0"
                     Click="BrowseButton_Click"
-                    Content="Browse"
-                    FontFamily="Segoe UI"
-                    FontSize="14"
-                    Foreground="White">
-                    <Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter
-                                Property="Background"
-                                Value="#FF2DA65F" />
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border
-                                            Background="{TemplateBinding Background}"
-                                            CornerRadius="5">
-                                            <ContentPresenter
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center" />
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger
-                                    Property="IsMouseOver"
-                                    Value="True">
-                                    <Setter
-                                        Property="Background"
-                                        Value="#FF37CC75" />
-                                </Trigger>
-                                <Trigger
-                                    Property="IsPressed"
-                                    Value="True">
-                                    <Setter
-                                        Property="Background"
-                                        Value="#FF34BF6E" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                    Text="Browse" />
                 <!--  Name and other elements shown if path is valid  -->
                 <Grid
                     Grid.Row="1"

@@ -10,6 +10,9 @@
         <local:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
 
         <!-- Control colors -->
+        <Color x:Key="ControlPrimaryColor">#2DA65F</Color>
+        <Color x:Key="ControlPrimaryColor_Hover">#37CC75</Color>
+        <Color x:Key="ControlPrimaryColor_Pressed">#34BF6E</Color>
         <Color x:Key="ControlLightColor">#444444</Color>
         <Color x:Key="ControlLightColor_Hover">#666666</Color>
         <Color x:Key="ControlLightColor_Pressed">#555555</Color>

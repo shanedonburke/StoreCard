@@ -23,9 +23,11 @@
                     <DataTrigger
                         Binding="{Binding ElementName=CustomButton ,Path=IsEnabled}"
                         Value="True">
-                        <Setter
-                            Property="Background"
-                            Value="#2DA65F" />
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="{StaticResource ControlPrimaryColor}" />
+                            </Setter.Value>
+                        </Setter>
                     </DataTrigger>
                     <!--  Hover/press styling  -->
                     <MultiDataTrigger>
@@ -37,16 +39,20 @@
                                 Binding="{Binding ElementName=CustomButton ,Path=IsEnabled}"
                                 Value="True" />
                         </MultiDataTrigger.Conditions>
-                        <Setter
-                            Property="Background"
-                            Value="#37CC75" />
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="{StaticResource ControlPrimaryColor_Hover}" />
+                            </Setter.Value>
+                        </Setter>
                     </MultiDataTrigger>
                     <DataTrigger
                         Binding="{Binding ElementName=CustomButton, Path=IsPressed}"
                         Value="True">
-                        <Setter
-                            Property="Background"
-                            Value="#34BF6E" />
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <SolidColorBrush Color="{StaticResource ControlPrimaryColor_Pressed}" />
+                            </Setter.Value>
+                        </Setter>
                     </DataTrigger>
                 </Style.Triggers>
             </Style>

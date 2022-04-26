@@ -94,58 +94,13 @@
                 ActivePlaceholder="Enter path to file..."
                 TextChanged="FilePathBox_TextChanged" />
             <!--  "Browse" button for files  -->
-            <Button
-                Name="BrowseFileButton"
+            <local:PrimaryButton
+                x:Name="BrowseFileButton"
                 Grid.Row="0"
                 Grid.Column="2"
                 Width="80"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                VerticalContentAlignment="Center"
-                BorderBrush="#00000000"
-                BorderThickness="0,0,0,0"
-                Click="BrowseFileButton_Click"
-                Content="Browse"
-                FontFamily="Segoe UI"
-                FontSize="14"
-                Foreground="White">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter
-                            Property="Background"
-                            Value="#FF2DA65F" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border
-                                        Background="{TemplateBinding Background}"
-                                        CornerRadius="5">
-                                        <ContentPresenter
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger
-                                Property="IsMouseOver"
-                                Value="True">
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF37CC75" />
-                            </Trigger>
-                            <Trigger
-                                Property="IsPressed"
-                                Value="True">
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF34BF6E" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
+                Text="Browse"
+                Click="BrowseFileButton_Click" />
             <!--  Name and other elements shown if path is valid  -->
             <Grid
                 Grid.Row="1"
@@ -244,58 +199,13 @@
                 ActivePlaceholder="Enter path to folder..."
                 TextChanged="FolderPathBox_TextChanged" />
             <!--  "Browse" button for folders  -->
-            <Button
-                Name="BrowseFolderButton"
+            <local:PrimaryButton
+                x:Name="BrowseFolderButton"
                 Grid.Row="0"
                 Grid.Column="2"
                 Width="80"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                VerticalContentAlignment="Center"
-                BorderBrush="#00000000"
-                BorderThickness="0,0,0,0"
-                Click="BrowseFolderButton_Click"
-                Content="Browse"
-                FontFamily="Segoe UI"
-                FontSize="14"
-                Foreground="White">
-                <Button.Style>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter
-                            Property="Background"
-                            Value="#FF2DA65F" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Button}">
-                                    <Border
-                                        Background="{TemplateBinding Background}"
-                                        CornerRadius="5">
-                                        <ContentPresenter
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Style.Triggers>
-                            <Trigger
-                                Property="IsMouseOver"
-                                Value="True">
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF37CC75" />
-                            </Trigger>
-                            <Trigger
-                                Property="IsPressed"
-                                Value="True">
-                                <Setter
-                                    Property="Background"
-                                    Value="#FF34BF6E" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
+                Text="Browse"
+                Click="BrowseFolderButton_Click" />
             <!--  Name and other elements shown if path is valid  -->
             <Grid
                 Grid.Row="1"
