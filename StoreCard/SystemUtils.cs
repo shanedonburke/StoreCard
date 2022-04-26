@@ -25,7 +25,7 @@ namespace StoreCard
 
                 installedApps.Add(new InstalledApplication(name, appUserModelId, path, icon));
             }
-
+            installedApps.Sort();
             return installedApps;
         }
     }

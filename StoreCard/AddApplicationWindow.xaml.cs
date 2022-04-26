@@ -128,7 +128,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
                 installedGames.Add(new InstalledSteamGame(name, appId, cached));
             }
         }
-
+        installedGames.Sort();
         return installedGames;
     }
 
