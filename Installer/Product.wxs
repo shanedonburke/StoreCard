@@ -10,6 +10,8 @@
 		<Icon Id="StoreCard.ico" SourceFile="$(var.StoreCard.ProjectDir)Icons/StoreCard.ico" />
 		<Property Id="ARPPRODUCTICON" Value="StoreCard.ico" />
 
+		<WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="APPLICATIONROOTDIRECTORY" Name="StoreCard" />
