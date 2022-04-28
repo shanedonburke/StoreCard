@@ -45,6 +45,8 @@ public partial class MainWindow : INotifyPropertyChanged
         SelectFirstItem();
 
         SearchBox.Focus();
+
+        SystemUtils.CreateStartupShortcut();
     }
 
     public IEnumerable<SavedItem> FilteredItems

@@ -15,9 +15,30 @@
         d:DataContext="{d:DesignInstance Type=local:SettingsWindow, IsDesignTimeCreatable=False}">
     <Grid
         Margin="15,15,15,15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <CheckBox
+            Grid.Row="0"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center">
+            <Label
+                Padding="5,0,0,2"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Foreground="White"
+                FontFamily="Segoe UI"
+                FontSize="14"
+                Content="Run on startup" />
+        </CheckBox>
         <StackPanel
+            Grid.Row="1"
             Orientation="Horizontal"
             Height="20"
+            Margin="0,5,0,0"
             VerticalAlignment="Top">
             <Label
                 Padding="0"

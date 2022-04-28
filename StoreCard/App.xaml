@@ -111,6 +111,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
         <!-- Radio button -->
         <Style x:Key="{x:Type RadioButton}"
                TargetType="{x:Type RadioButton}">
@@ -247,6 +248,66 @@
                                     <VisualState x:Name="Indeterminate" />
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter Margin="4,0,0,0"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"
+                                              RecognizesAccessKey="True" />
+                        </BulletDecorator>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="{x:Type CheckBox}"
+               TargetType="{x:Type CheckBox}">
+            <Setter Property="SnapsToDevicePixels"
+                    Value="true" />
+            <Setter Property="OverridesDefaultStyle"
+                    Value="true" />
+            <Setter Property="FocusVisualStyle"
+                    Value="{DynamicResource CheckBoxFocusVisual}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Border x:Name="Border"
+                                        Width="16"
+                                        Height="16"
+                                        CornerRadius="2"
+                                        BorderBrush="#777777"
+                                        BorderThickness="1.5">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter
+                                                Property="Background"
+                                                Value="#333333" />
+                                            <Style.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=CheckBox}, Path=IsMouseOver}"
+                                                    Value="True">
+                                                    <Setter
+                                                        Property="Background"
+                                                        Value="#444444" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <Grid>
+                                        <Path Width="12"
+                                              Height="12"
+                                              x:Name="CheckMark"
+                                              SnapsToDevicePixels="False"
+                                              StrokeThickness="2"
+                                              Data="M 1.5 5 L 5.5 10.5 M 5.5 10.5 L 11 1"
+                                              Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=CheckBox}, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <Path.Stroke>
+                                                <SolidColorBrush Color="{StaticResource ControlPrimaryColor}" />
+                                            </Path.Stroke>
+                                        </Path>
+                                    </Grid>
+                                </Border>
+                            </BulletDecorator.Bullet>
                             <ContentPresenter Margin="4,0,0,0"
                                               VerticalAlignment="Center"
                                               HorizontalAlignment="Left"

@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Windows.Forms;
+using IWshRuntimeLibrary;
+using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Shell;
 
 namespace StoreCard
@@ -27,6 +31,31 @@ namespace StoreCard
             }
             installedApps.Sort();
             return installedApps;
+        }
+
+        public static void CreateDesktopShortcut()
+        {
+            CreateShortcut("Desktop");
+        }
+
+        public static void CreateStartupShortcut()
+        {
+            CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.Startup));
+        }
+
+        private static void CreateShortcut(string folder)
+        {
+            var wshShell = new WshShell();
+
+            // Create the shortcut
+            var shortcut = (IWshShortcut)wshShell.CreateShortcut(
+                folder + "\\" +
+                Application.ProductName + ".lnk");
+
+            shortcut.TargetPath = Application.ExecutablePath;
+            shortcut.WorkingDirectory = Application.StartupPath;
+            shortcut.Description = "Launch My Application";
+            shortcut.Save();
         }
     }
 }
