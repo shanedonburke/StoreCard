@@ -15,6 +15,8 @@ namespace StoreCard
         private static string StartupFolderPath => Environment.GetFolderPath(
             Environment.SpecialFolder.Startup);
 
+        private static string StartupShortcutPath => Path.Join(StartupFolderPath, "StoreCard.lnk");
+
         public static List<InstalledApplication> GetInstalledApplications()
         {
             // From https://stackoverflow.com/a/57195200
@@ -50,11 +52,28 @@ namespace StoreCard
 
         public static void RemoveStartupShortcut()
         {
-            var shortcutPath = Path.Join(StartupFolderPath, "StoreCard.lnk");
-            if (System.IO.File.Exists(shortcutPath))
+            if (System.IO.File.Exists(StartupShortcutPath))
             {
-                System.IO.File.Delete(shortcutPath);
+                System.IO.File.Delete(StartupShortcutPath);
             }
+        }
+
+        public static bool? IsStartupShortcutEnabled()
+        {
+            if (!System.IO.File.Exists(StartupShortcutPath))
+            {
+                return null;
+            }
+
+            var regKey = Registry.CurrentUser.OpenSubKey
+                (@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder", true);
+
+            if (regKey?.GetValue("StoreCard.lnk") is byte[] { Length: > 0 } regValue)
+            {
+                return regValue[0] == 0x2;
+            }
+
+            return null;
         }
 
         private static void CreateShortcut(string folder)

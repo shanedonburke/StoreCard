@@ -16,10 +16,14 @@ namespace StoreCard
 
         public string HotKeyText => HotKeyUtils.KeyStringFromConfig(_config);
 
+        public bool IsStartupShortcutDisabled => SystemUtils.IsStartupShortcutEnabled() == false;
+
         public SettingsWindow() {
             InitializeComponent();
             _config = StorageUtils.ReadConfigFromFile();
             DataContext = this;
+
+            RunOnStartupCheckBox.IsChecked = SystemUtils.IsStartupShortcutEnabled() != null;
         }
 
         private void SettingsWindow_Closed(object? sender, EventArgs e)
@@ -44,14 +48,16 @@ namespace StoreCard
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        private void RunOnStartupCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             SystemUtils.CreateStartupShortcut();
+            OnPropertyChanged(nameof(IsStartupShortcutDisabled));
         }
 
-        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        private void RunOnStartupCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             SystemUtils.RemoveStartupShortcut();
+            OnPropertyChanged(nameof(IsStartupShortcutDisabled));
         }
     }
 }
