@@ -47,7 +47,7 @@
                     Installed application
                 </TextBlock>
             </StackPanel>
-            <!--  "Installed game"  -->
+            <!--  "Other installed game"  -->
             <StackPanel
                 Margin="5,0,0,10"
                 Orientation="Horizontal">
@@ -59,7 +59,7 @@
                     VerticalAlignment="Stretch"
                     FontSize="14"
                     Foreground="White">
-                    Installed game
+                    Other installed game
                 </TextBlock>
             </StackPanel>
             <!--  "Other executable"  -->

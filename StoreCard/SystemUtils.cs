@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using IWshRuntimeLibrary;
@@ -68,6 +69,18 @@ namespace StoreCard
             }
 
             return null;
+        }
+
+        public static void KillOtherStoreCardProcesses()
+        {
+            var otherProcesses = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
+            foreach (var process in otherProcesses)
+            {
+                if (process.Id != Environment.ProcessId)
+                {
+                    process.Kill();
+                }
+            }
         }
 
         private static void CreateShortcut(string folder, string arguments = "")
