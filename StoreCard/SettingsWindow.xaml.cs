@@ -43,5 +43,15 @@ namespace StoreCard
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            SystemUtils.CreateStartupShortcut();
+        }
+
+        private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SystemUtils.RemoveStartupShortcut();
+        }
     }
 }

@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 using IWshRuntimeLibrary;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Shell;
+using File = IWshRuntimeLibrary.File;
 
 namespace StoreCard
 {
     internal class SystemUtils
     {
+        private static string StartupFolderPath => Environment.GetFolderPath(
+            Environment.SpecialFolder.Startup);
+
         public static List<InstalledApplication> GetInstalledApplications()
         {
             // From https://stackoverflow.com/a/57195200
@@ -40,7 +45,16 @@ namespace StoreCard
 
         public static void CreateStartupShortcut()
         {
-            CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.Startup));
+            CreateShortcut(StartupFolderPath);
+        }
+
+        public static void RemoveStartupShortcut()
+        {
+            var shortcutPath = Path.Join(StartupFolderPath, "StoreCard.lnk");
+            if (System.IO.File.Exists(shortcutPath))
+            {
+                System.IO.File.Delete(shortcutPath);
+            }
         }
 
         private static void CreateShortcut(string folder)
@@ -49,12 +63,11 @@ namespace StoreCard
 
             // Create the shortcut
             var shortcut = (IWshShortcut)wshShell.CreateShortcut(
-                folder + "\\" +
-                Application.ProductName + ".lnk");
+                Path.Join(folder, Application.ProductName + ".lnk"));
 
             shortcut.TargetPath = Application.ExecutablePath;
             shortcut.WorkingDirectory = Application.StartupPath;
-            shortcut.Description = "Launch My Application";
+            shortcut.Description = "Launch StoreCard";
             shortcut.Save();
         }
     }

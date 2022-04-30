@@ -25,7 +25,9 @@
         <CheckBox
             Grid.Row="0"
             VerticalAlignment="Center"
-            VerticalContentAlignment="Center">
+            VerticalContentAlignment="Center"
+            Checked="ToggleButton_Checked"
+            Unchecked="ToggleButton_Unchecked">
             <Label
                 Padding="5,0,0,2"
                 HorizontalAlignment="Left"
