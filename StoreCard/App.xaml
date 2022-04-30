@@ -10,6 +10,7 @@
         <local:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
 
         <!-- Control colors -->
+        <Color x:Key="AppBackgroundColor">#222222</Color>
         <Color x:Key="ControlPrimaryColor">#2DA65F</Color>
         <Color x:Key="ControlPrimaryColor_Hover">#37CC75</Color>
         <Color x:Key="ControlPrimaryColor_Pressed">#34BF6E</Color>
@@ -18,6 +19,12 @@
         <Color x:Key="ControlLightColor_Pressed">#555555</Color>
         <Color x:Key="ButtonDisabledBackgroundColor">#363636</Color>
         <Color x:Key="ButtonDisabledTextColor">#6F6F6F</Color>
+
+        <SolidColorBrush x:Key="AppBackgroundColor_Brush" Color="{StaticResource AppBackgroundColor}" />
+        <SolidColorBrush x:Key="ControlPrimaryColor_Brush" Color="{StaticResource ControlPrimaryColor}" />
+        <SolidColorBrush x:Key="ControlLightColor_Brush" Color="{StaticResource ControlLightColor}" />
+        <SolidColorBrush x:Key="ControlLightColor_Hover_Brush" Color="{StaticResource ControlLightColor_Hover}" />
+        <SolidColorBrush x:Key="ControlLightColor_Pressed_Brush" Color="{StaticResource ControlLightColor_Pressed}" />
 
         <!-- Scroll bar -->
         <Style x:Key="ScrollBarThumb"
@@ -39,11 +46,9 @@
                                 BorderThickness="1">
                             <Border.Style>
                                 <Style TargetType="{x:Type Border}">
-                                    <Setter Property="Background">
-                                        <Setter.Value>
-                                            <SolidColorBrush Color="{StaticResource ControlLightColor}" />
-                                        </Setter.Value>
-                                    </Setter>
+                                    <Setter
+                                        Property="Background"
+                                        Value="{StaticResource ControlLightColor_Brush}" />
                                 </Style>
                             </Border.Style>
                         </Border>
@@ -52,21 +57,15 @@
                                      Value="True">
                                 <Setter
                                     Property="Background"
-                                    TargetName="ThumbBorder">
-                                    <Setter.Value>
-                                        <SolidColorBrush Color="{StaticResource ControlLightColor_Hover}" />
-                                    </Setter.Value>
-                                </Setter>
+                                    TargetName="ThumbBorder"
+                                    Value="{StaticResource ControlLightColor_Hover_Brush}" />
                             </Trigger>
                             <Trigger Property="IsDragging"
                                      Value="True">
                                 <Setter
                                     Property="Background"
-                                    TargetName="ThumbBorder">
-                                    <Setter.Value>
-                                        <SolidColorBrush Color="{StaticResource ControlLightColor_Pressed}" />
-                                    </Setter.Value>
-                                </Setter>
+                                    TargetName="ThumbBorder"
+                                    Value="{StaticResource ControlLightColor_Pressed_Brush}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -116,9 +115,9 @@
         <Style x:Key="{x:Type RadioButton}"
                TargetType="{x:Type RadioButton}">
             <Setter Property="SnapsToDevicePixels"
-                    Value="true" />
+                    Value="True" />
             <Setter Property="OverridesDefaultStyle"
-                    Value="true" />
+                    Value="True" />
             <Setter Property="Margin"
                     Value="0,0,5,0" />
             <Setter Property="BorderThickness"
@@ -141,11 +140,8 @@
                                         <!-- Margins...??? -->
                                         <Ellipse
                                             Margin="-3.5,-1,0.5,-1"
-                                            StrokeThickness="1.5">
-                                            <Ellipse.Stroke>
-                                                <SolidColorBrush Color="{StaticResource ControlPrimaryColor}" />
-                                            </Ellipse.Stroke>
-                                        </Ellipse>
+                                            Stroke="{StaticResource ControlPrimaryColor_Brush}"
+                                            StrokeThickness="1.5" />
                                     </Grid>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -261,9 +257,9 @@
         <Style x:Key="{x:Type CheckBox}"
                TargetType="{x:Type CheckBox}">
             <Setter Property="SnapsToDevicePixels"
-                    Value="true" />
+                    Value="True" />
             <Setter Property="OverridesDefaultStyle"
-                    Value="true" />
+                    Value="True" />
             <Setter Property="FocusVisualStyle"
                     Value="{DynamicResource CheckBoxFocusVisual}" />
             <Setter Property="Template">
@@ -274,14 +270,16 @@
                                 <Border x:Name="Border"
                                         Width="16"
                                         Height="16"
-                                        CornerRadius="2"
-                                        BorderBrush="#777777"
-                                        BorderThickness="1.5">
+                                        CornerRadius="1"
+                                        BorderThickness="1">
                                     <Border.Style>
                                         <Style TargetType="Border">
                                             <Setter
                                                 Property="Background"
                                                 Value="#333333" />
+                                            <Setter
+                                                Property="BorderBrush"
+                                                Value="#777777" />
                                             <Style.Triggers>
                                                 <DataTrigger
                                                     Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=CheckBox}, Path=IsMouseOver}"
@@ -300,10 +298,8 @@
                                               SnapsToDevicePixels="False"
                                               StrokeThickness="2"
                                               Data="M 1.5 5 L 5.5 10.5 M 5.5 10.5 L 11 1"
+                                              Stroke="{StaticResource ControlPrimaryColor_Brush}"
                                               Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=CheckBox}, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                            <Path.Stroke>
-                                                <SolidColorBrush Color="{StaticResource ControlPrimaryColor}" />
-                                            </Path.Stroke>
                                         </Path>
                                     </Grid>
                                 </Border>
