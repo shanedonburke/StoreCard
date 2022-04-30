@@ -11,7 +11,16 @@ namespace StoreCard
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
+        private void App_Startup(object sender, StartupEventArgs e)
+        {
+            new TaskbarIconWindow().Show();
+
+            if (!Environment.GetCommandLineArgs().Contains(CommandLineArgs.StartMinimized))
+            {
+                new MainWindow().Show();
+            }
+        }
     }
 }

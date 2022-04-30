@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using IWshRuntimeLibrary;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Shell;
-using File = IWshRuntimeLibrary.File;
+using File = System.IO.File;
 
 namespace StoreCard
 {
@@ -40,27 +39,22 @@ namespace StoreCard
             return installedApps;
         }
 
-        public static void CreateDesktopShortcut()
-        {
-            CreateShortcut("Desktop");
-        }
-
         public static void CreateStartupShortcut()
         {
-            CreateShortcut(StartupFolderPath);
+            CreateShortcut(StartupFolderPath, CommandLineArgs.StartMinimized);
         }
 
         public static void RemoveStartupShortcut()
         {
-            if (System.IO.File.Exists(StartupShortcutPath))
+            if (File.Exists(StartupShortcutPath))
             {
-                System.IO.File.Delete(StartupShortcutPath);
+                File.Delete(StartupShortcutPath);
             }
         }
 
         public static bool? IsStartupShortcutEnabled()
         {
-            if (!System.IO.File.Exists(StartupShortcutPath))
+            if (!File.Exists(StartupShortcutPath))
             {
                 return null;
             }
@@ -76,7 +70,7 @@ namespace StoreCard
             return null;
         }
 
-        private static void CreateShortcut(string folder)
+        private static void CreateShortcut(string folder, string arguments = "")
         {
             var wshShell = new WshShell();
 
@@ -85,6 +79,7 @@ namespace StoreCard
                 Path.Join(folder, Application.ProductName + ".lnk"));
 
             shortcut.TargetPath = Application.ExecutablePath;
+            shortcut.Arguments = arguments;
             shortcut.WorkingDirectory = Application.StartupPath;
             shortcut.Description = "Launch StoreCard";
             shortcut.Save();

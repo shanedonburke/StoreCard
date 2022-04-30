@@ -24,12 +24,6 @@ public partial class MainWindow : INotifyPropertyChanged
     {
         _savedItems = StorageUtils.ReadItemsFromFile();
 
-        if (!Application.Current.Windows
-                .Cast<Window>().Any(w => w is TaskbarIconWindow))
-        {
-            new TaskbarIconWindow().Show();
-        }
-
         InitializeComponent();
         DataContext = this;
 
