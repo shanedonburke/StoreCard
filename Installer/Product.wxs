@@ -52,9 +52,6 @@
 					Id="ApplicationProgramsFolder"
 					Name="StoreCard" />
 			</Directory>
-			<Directory
-				Id="DesktopFolder"
-				SourceName="Desktop" />
 		</Directory>
 		<DirectoryRef Id="ApplicationProgramsFolder">
 			<Component
@@ -69,26 +66,6 @@
 				<RemoveFolder
 					Id="CleanUpApplicationShortcut"
 					Directory="ApplicationProgramsFolder"
-					On="uninstall" />
-				<RegistryValue
-					Root="HKCU"
-					Key="Software\StoreCard"
-					Name="installed"
-					Type="integer"
-					Value="1"
-					KeyPath="yes" />
-			</Component>
-		</DirectoryRef>
-		<DirectoryRef Id="DesktopFolder">
-			<Component Id="ApplicationDesktopShortcut">
-				<Shortcut
-					Id="DesktopShortcut"
-					Name="StoreCard"
-					Description="Launch StoreCard"
-					Target="[#StoreCard.exe]"
-					WorkingDirectory="APPLICATIONROOTDIRECTORY" />
-				<RemoveFolder
-					Id="CleanUpDesktopShortcut"
 					On="uninstall" />
 				<RegistryValue
 					Root="HKCU"
@@ -209,7 +186,6 @@
 			Level="1">
 			<ComponentRef Id="StoreCard.exe" />
 			<ComponentGroupRef Id="Dlls" />
-			<ComponentRef Id="ApplicationDesktopShortcut" />
 			<ComponentRef Id="ApplicationStartMenuShortcut" />
 		</Feature>
 
