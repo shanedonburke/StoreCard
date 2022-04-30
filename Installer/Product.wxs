@@ -1,87 +1,231 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<?define StoreCard_TargetDir=$(var.StoreCard.TargetDir)?>
-	<Product Id="94bf342a-e07b-4432-8c6b-7282eb8b6c4e" Name="StoreCard" Language="1033" Version="1.0.0.0" Manufacturer="Shane Burke" UpgradeCode="fd8f19fd-9010-4b35-a713-05fbd8cf18b0">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
-
+	<Product
+		Id="94bf342a-e07b-4432-8c6b-7282eb8b6c4e"
+		Name="StoreCard"
+		Language="1033"
+		Version="1.0.0.0"
+		Manufacturer="Shane Burke"
+		UpgradeCode="fd8f19fd-9010-4b35-a713-05fbd8cf18b0">
+		<Package
+			InstallerVersion="200"
+			Compressed="yes"
+			InstallScope="perMachine" />
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
 		<MediaTemplate />
 
-		<Icon Id="StoreCard.ico" SourceFile="$(var.StoreCard.ProjectDir)Icons/StoreCard.ico" />
-		<Property Id="ARPPRODUCTICON" Value="StoreCard.ico" />
+		<Property
+			Id="ARPPRODUCTICON"
+			Value="StoreCard.ico" />
+		<Property Id="INSTALLDESKTOPSHORTCUT" />
+		<Property
+			Id="WIXUI_INSTALLDIR"
+			Value="APPLICATIONROOTDIRECTORY" />
+		<Property
+			Id="WixShellExecTarget"
+			Value="[#StoreCard.exe]" />
+		<Property
+			Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT"
+			Value="Launch StoreCard" />
 
-		<WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+		<WixVariable
+			Id="WixUILicenseRtf"
+			Value="License.rtf" />
 
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="DesktopFolder" SourceName="Desktop" />
+		<Icon
+			Id="StoreCard.ico"
+			SourceFile="$(var.StoreCard.ProjectDir)Icons/StoreCard.ico" />
+
+		<Directory
+			Id="TARGETDIR"
+			Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
-				<Directory Id="APPLICATIONROOTDIRECTORY" Name="StoreCard" />
+				<Directory
+					Id="APPLICATIONROOTDIRECTORY"
+					Name="StoreCard" />
 			</Directory>
 			<Directory Id="ProgramMenuFolder">
-				<Directory Id="ApplicationProgramsFolder" Name="StoreCard"/>
+				<Directory
+					Id="ApplicationProgramsFolder"
+					Name="StoreCard" />
 			</Directory>
+			<Directory
+				Id="DesktopFolder"
+				SourceName="Desktop" />
 		</Directory>
-
 		<DirectoryRef Id="ApplicationProgramsFolder">
-			<Component Id="ApplicationShortcut" Guid="2eaf7e7f-f118-41c9-8168-3db8ab51e2fe">
-				<Shortcut Id="ApplicationStartMenuShortcut"
-				          Name="StoreCard"
-				          Description="StoreCard"
-				          Target="[#StoreCard.exe]"
-				          WorkingDirectory="APPLICATIONROOTDIRECTORY" />
-				<RemoveFolder Id="CleanUpApplicationShortcut" Directory="ApplicationProgramsFolder" On="uninstall"/>
-				<RegistryValue Root="HKCU" Key="Software\StoreCard" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+			<Component
+				Id="ApplicationStartMenuShortcut"
+				Guid="2eaf7e7f-f118-41c9-8168-3db8ab51e2fe">
+				<Shortcut
+					Id="StartMenuShortcut"
+					Name="StoreCard"
+					Description="StoreCard"
+					Target="[#StoreCard.exe]"
+					WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+				<RemoveFolder
+					Id="CleanUpApplicationShortcut"
+					Directory="ApplicationProgramsFolder"
+					On="uninstall" />
+				<RegistryValue
+					Root="HKCU"
+					Key="Software\StoreCard"
+					Name="installed"
+					Type="integer"
+					Value="1"
+					KeyPath="yes" />
+			</Component>
+		</DirectoryRef>
+		<DirectoryRef Id="DesktopFolder">
+			<Component Id="ApplicationDesktopShortcut">
+				<Shortcut
+					Id="DesktopShortcut"
+					Name="StoreCard"
+					Description="Launch StoreCard"
+					Target="[#StoreCard.exe]"
+					WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+				<RemoveFolder
+					Id="CleanUpDesktopShortcut"
+					On="uninstall" />
+				<RegistryValue
+					Root="HKCU"
+					Key="Software\StoreCard"
+					Name="installed"
+					Type="integer"
+					Value="1"
+					KeyPath="yes" />
 			</Component>
 		</DirectoryRef>
 
-		<Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONROOTDIRECTORY" />
-		<UIRef Id="WixUI_InstallDir" />
-
-		<Component Id="StoreCard.exe" Directory="APPLICATIONROOTDIRECTORY" Guid="aa867eb6-4a96-48f1-b43f-3eefb3392241">
-			<File Id="StoreCard.exe" Name="StoreCard.exe" Source="$(var.StoreCard_TargetDir)StoreCard.exe" />
+		<Component
+			Id="StoreCard.exe"
+			Directory="APPLICATIONROOTDIRECTORY"
+			Guid="aa867eb6-4a96-48f1-b43f-3eefb3392241">
+			<File
+				Id="StoreCard.exe"
+				Name="StoreCard.exe"
+				Source="$(var.StoreCard_TargetDir)StoreCard.exe" />
 		</Component>
-
-		<ComponentGroup Id="Dlls" Directory="APPLICATIONROOTDIRECTORY" Source="$(var.StoreCard_TargetDir)">
-			<Component Id="protobuf.Core.dll" Guid="4ceff80b-bbe0-4533-9ae8-780c721ef2a2">
-				<File Id="protobuf.Core.dll" Name="protobuf-net.Core.dll" Source="$(var.StoreCard_TargetDir)protobuf-net.Core.dll" />
+		<ComponentGroup
+			Id="Dlls"
+			Directory="APPLICATIONROOTDIRECTORY"
+			Source="$(var.StoreCard_TargetDir)">
+			<Component
+				Id="protobuf.Core.dll"
+				Guid="4ceff80b-bbe0-4533-9ae8-780c721ef2a2">
+				<File
+					Id="protobuf.Core.dll"
+					Name="protobuf-net.Core.dll"
+					Source="$(var.StoreCard_TargetDir)protobuf-net.Core.dll" />
 			</Component>
-			<Component Id="protobuf.dll" Guid="774a7995-2a06-4dbc-91a9-fd83bf595d86">
-				<File Id="protobuf.dll" Name="protobuf-net.dll" Source="$(var.StoreCard_TargetDir)protobuf-net.dll" />
+			<Component
+				Id="protobuf.dll"
+				Guid="774a7995-2a06-4dbc-91a9-fd83bf595d86">
+				<File
+					Id="protobuf.dll"
+					Name="protobuf-net.dll"
+					Source="$(var.StoreCard_TargetDir)protobuf-net.dll" />
 			</Component>
-			<Component Id="Microsoft.WindowsAPICodePack.dll" Guid="42624746-ca79-456e-84c0-c12cbb90d2c0">
-				<File Id="Microsoft.WindowsAPICodePack.dll" Name="Microsoft.WindowsAPICodePack.dll" Source="$(var.StoreCard_TargetDir)Microsoft.WindowsAPICodePack.dll" />
+			<Component
+				Id="Microsoft.WindowsAPICodePack.dll"
+				Guid="42624746-ca79-456e-84c0-c12cbb90d2c0">
+				<File
+					Id="Microsoft.WindowsAPICodePack.dll"
+					Name="Microsoft.WindowsAPICodePack.dll"
+					Source="$(var.StoreCard_TargetDir)Microsoft.WindowsAPICodePack.dll" />
 			</Component>
-			<Component Id="Microsoft.WindowsAPICodePack.Shell.dll" Guid="9f7ea26c-e582-4f4a-9c99-9234b24192e5">
-				<File Id="Microsoft.WindowsAPICodePack.Shell.dll" Name="Microsoft.WindowsAPICodePack.Shell.dll" Source="$(var.StoreCard_TargetDir)Microsoft.WindowsAPICodePack.Shell.dll" />
+			<Component
+				Id="Microsoft.WindowsAPICodePack.Shell.dll"
+				Guid="9f7ea26c-e582-4f4a-9c99-9234b24192e5">
+				<File
+					Id="Microsoft.WindowsAPICodePack.Shell.dll"
+					Name="Microsoft.WindowsAPICodePack.Shell.dll"
+					Source="$(var.StoreCard_TargetDir)Microsoft.WindowsAPICodePack.Shell.dll" />
 			</Component>
-			<Component Id="Newtonsoft.Json.dll" Guid="c247f1b5-0157-45fc-9004-ae28a01254aa">
-				<File Id="Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.StoreCard_TargetDir)Newtonsoft.Json.dll" />
+			<Component
+				Id="Newtonsoft.Json.dll"
+				Guid="c247f1b5-0157-45fc-9004-ae28a01254aa">
+				<File
+					Id="Newtonsoft.Json.dll"
+					Name="Newtonsoft.Json.dll"
+					Source="$(var.StoreCard_TargetDir)Newtonsoft.Json.dll" />
 			</Component>
-			<Component Id="Ookii.Dialogs.Wpf.dll" Guid="5228df2c-1a69-43be-9ef7-eec33a6bc828">
-				<File Id="Ookii.Dialogs.Wpf.dll" Name="Ookii.Dialogs.Wpf.dll" Source="$(var.StoreCard_TargetDir)Ookii.Dialogs.Wpf.dll" />
+			<Component
+				Id="Ookii.Dialogs.Wpf.dll"
+				Guid="5228df2c-1a69-43be-9ef7-eec33a6bc828">
+				<File
+					Id="Ookii.Dialogs.Wpf.dll"
+					Name="Ookii.Dialogs.Wpf.dll"
+					Source="$(var.StoreCard_TargetDir)Ookii.Dialogs.Wpf.dll" />
 			</Component>
-			<Component Id="SteamKit2.dll" Guid="bfb72fd0-fc4b-4d00-928f-776b5aa613d4">
-				<File Id="SteamKit2.dll" Name="SteamKit2.dll" Source="$(var.StoreCard_TargetDir)SteamKit2.dll" />
+			<Component
+				Id="SteamKit2.dll"
+				Guid="bfb72fd0-fc4b-4d00-928f-776b5aa613d4">
+				<File
+					Id="SteamKit2.dll"
+					Name="SteamKit2.dll"
+					Source="$(var.StoreCard_TargetDir)SteamKit2.dll" />
 			</Component>
-			<Component Id="Hardcodet.NotifyIcon.Wpf.dll" Guid="912037ef-a045-4596-bd21-e740c8d715ca">
-				<File Id="Hardcodet.NotifyIcon.Wpf.dll" Name="Hardcodet.NotifyIcon.Wpf.dll" Source="$(var.StoreCard_TargetDir)Hardcodet.NotifyIcon.Wpf.dll" />
+			<Component
+				Id="Hardcodet.NotifyIcon.Wpf.dll"
+				Guid="912037ef-a045-4596-bd21-e740c8d715ca">
+				<File
+					Id="Hardcodet.NotifyIcon.Wpf.dll"
+					Name="Hardcodet.NotifyIcon.Wpf.dll"
+					Source="$(var.StoreCard_TargetDir)Hardcodet.NotifyIcon.Wpf.dll" />
 			</Component>
-			<Component Id="FontAwesome.Sharp.dll" Guid="d6d9a3d0-e5b5-4869-828c-77243638516b">
-				<File Id="FontAwesome.Sharp.dll" Name="FontAwesome.Sharp.dll" Source="$(var.StoreCard_TargetDir)FontAwesome.Sharp.dll" />
+			<Component
+				Id="FontAwesome.Sharp.dll"
+				Guid="d6d9a3d0-e5b5-4869-828c-77243638516b">
+				<File
+					Id="FontAwesome.Sharp.dll"
+					Name="FontAwesome.Sharp.dll"
+					Source="$(var.StoreCard_TargetDir)FontAwesome.Sharp.dll" />
 			</Component>
-			<Component Id="StoreCard.dll" Guid="f8181d51-56b0-4ae5-93dd-645bb48529c1">
-				<File Id="StoreCard.dll" Name="StoreCard.dll" Source="$(var.StoreCard_TargetDir)StoreCard.dll" />
+			<Component
+				Id="StoreCard.dll"
+				Guid="f8181d51-56b0-4ae5-93dd-645bb48529c1">
+				<File
+					Id="StoreCard.dll"
+					Name="StoreCard.dll"
+					Source="$(var.StoreCard_TargetDir)StoreCard.dll" />
 			</Component>
-			<Component Id="StoreCard.runtimeconfig.json" Guid="548948bb-64fd-4b68-8e5a-83342ebedabb">
-				<File Id="StoreCard.runtimeconfig.json" Name="StoreCard.runtimeconfig.json" Source="$(var.StoreCard_TargetDir)StoreCard.runtimeconfig.json" />
+			<Component
+				Id="StoreCard.runtimeconfig.json"
+				Guid="548948bb-64fd-4b68-8e5a-83342ebedabb">
+				<File
+					Id="StoreCard.runtimeconfig.json"
+					Name="StoreCard.runtimeconfig.json"
+					Source="$(var.StoreCard_TargetDir)StoreCard.runtimeconfig.json" />
 			</Component>
 		</ComponentGroup>
 
-		<!-- Step 3: Tell WiX to install the files -->
-		<Feature Id="MainApplication" Title="StoreCard" Level="1">
+		<Feature
+			Id="MainApplication"
+			Title="StoreCard"
+			Level="1">
 			<ComponentRef Id="StoreCard.exe" />
 			<ComponentGroupRef Id="Dlls" />
-			<ComponentRef Id="ApplicationShortcut" />
+			<ComponentRef Id="ApplicationDesktopShortcut" />
+			<ComponentRef Id="ApplicationStartMenuShortcut" />
 		</Feature>
+
+		<UI>
+			<UIRef Id="WixUI_InstallDir" />
+			<Publish
+				Dialog="ExitDialog"
+				Control="Finish"
+				Event="DoAction"
+				Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+		</UI>
+
+		<CustomAction
+			Id="LaunchApplication"
+			BinaryKey="WixCA"
+			DllEntry="WixShellExec"
+			Impersonate="yes" />
 	</Product>
 </Wix>
