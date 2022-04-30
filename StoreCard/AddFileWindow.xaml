@@ -9,7 +9,7 @@
         Title="Add File"
         Width="600"
         Height="400"
-        Background="#FF222222"
+        Background="{DynamicResource AppBackgroundColor_Brush}"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=local:AddFileWindow, IsDesignTimeCreatable=False}">
     <Window.Resources>

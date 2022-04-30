@@ -94,7 +94,7 @@
     <!--  Main content  -->
     <Border
         Padding="10"
-        Background="#FF222222"
+        Background="{DynamicResource AppBackgroundColor_Brush}"
         CornerRadius="5">
         <Grid>
             <Grid.ColumnDefinitions>

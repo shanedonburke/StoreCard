@@ -63,11 +63,8 @@
                                         Value="#FF3A3A3A" />
                                     <Setter
                                         TargetName="ItemTemplateInner"
-                                        Property="Border.BorderBrush">
-                                        <Setter.Value>
-                                            <SolidColorBrush>Transparent</SolidColorBrush>
-                                        </Setter.Value>
-                                    </Setter>
+                                        Property="Border.BorderBrush"
+                                        Value="Transparent" />
                                 </Trigger>
                                 <!--  Active selected item  -->
                                 <MultiTrigger>
@@ -85,11 +82,8 @@
                                         Value="#80417356" />
                                     <Setter
                                         TargetName="ItemTemplateInner"
-                                        Property="Border.BorderBrush">
-                                        <Setter.Value>
-                                            <SolidColorBrush>#3BD97D</SolidColorBrush>
-                                        </Setter.Value>
-                                    </Setter>
+                                        Property="Border.BorderBrush"
+                                        Value="#3BD97D" />
                                 </MultiTrigger>
                                 <!--  Inactive selected item  -->
                                 <MultiTrigger>
@@ -107,11 +101,8 @@
                                         Value="#80417356" />
                                     <Setter
                                         TargetName="ItemTemplateInner"
-                                        Property="Border.BorderBrush">
-                                        <Setter.Value>
-                                            <SolidColorBrush>#3BD97D</SolidColorBrush>
-                                        </Setter.Value>
-                                    </Setter>
+                                        Property="Border.BorderBrush"
+                                        Value="#3BD97D" />
                                 </MultiTrigger>
                                 <Trigger
                                     Property="UIElement.IsEnabled"

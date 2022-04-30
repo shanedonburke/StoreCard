@@ -20,11 +20,15 @@
         <Color x:Key="ButtonDisabledBackgroundColor">#363636</Color>
         <Color x:Key="ButtonDisabledTextColor">#6F6F6F</Color>
 
-        <SolidColorBrush x:Key="AppBackgroundColor_Brush" Color="{StaticResource AppBackgroundColor}" />
-        <SolidColorBrush x:Key="ControlPrimaryColor_Brush" Color="{StaticResource ControlPrimaryColor}" />
-        <SolidColorBrush x:Key="ControlLightColor_Brush" Color="{StaticResource ControlLightColor}" />
-        <SolidColorBrush x:Key="ControlLightColor_Hover_Brush" Color="{StaticResource ControlLightColor_Hover}" />
-        <SolidColorBrush x:Key="ControlLightColor_Pressed_Brush" Color="{StaticResource ControlLightColor_Pressed}" />
+        <SolidColorBrush x:Key="AppBackgroundColor_Brush" Color="{DynamicResource AppBackgroundColor}" />
+        <SolidColorBrush x:Key="ControlPrimaryColor_Brush" Color="{DynamicResource ControlPrimaryColor}" />
+        <SolidColorBrush x:Key="ControlPrimaryColor_Hover_Brush" Color="{DynamicResource ControlPrimaryColor_Hover}" />
+        <SolidColorBrush x:Key="ControlPrimaryColor_Pressed_Brush" Color="{DynamicResource ControlPrimaryColor_Pressed}" />
+        <SolidColorBrush x:Key="ControlLightColor_Brush" Color="{DynamicResource ControlLightColor}" />
+        <SolidColorBrush x:Key="ControlLightColor_Hover_Brush" Color="{DynamicResource ControlLightColor_Hover}" />
+        <SolidColorBrush x:Key="ControlLightColor_Pressed_Brush" Color="{DynamicResource ControlLightColor_Pressed}" />
+        <SolidColorBrush x:Key="ButtonDisabledBackgroundColor_Brush" Color="{DynamicResource ButtonDisabledBackgroundColor}" />
+        <SolidColorBrush x:Key="ButtonDisabledTextColor_Brush" Color="{DynamicResource ButtonDisabledTextColor}" />
 
         <!-- Scroll bar -->
         <Style x:Key="ScrollBarThumb"
@@ -48,7 +52,7 @@
                                 <Style TargetType="{x:Type Border}">
                                     <Setter
                                         Property="Background"
-                                        Value="{StaticResource ControlLightColor_Brush}" />
+                                        Value="{DynamicResource ControlLightColor_Brush}" />
                                 </Style>
                             </Border.Style>
                         </Border>
@@ -58,14 +62,14 @@
                                 <Setter
                                     Property="Background"
                                     TargetName="ThumbBorder"
-                                    Value="{StaticResource ControlLightColor_Hover_Brush}" />
+                                    Value="{DynamicResource ControlLightColor_Hover_Brush}" />
                             </Trigger>
                             <Trigger Property="IsDragging"
                                      Value="True">
                                 <Setter
                                     Property="Background"
                                     TargetName="ThumbBorder"
-                                    Value="{StaticResource ControlLightColor_Pressed_Brush}" />
+                                    Value="{DynamicResource ControlLightColor_Pressed_Brush}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -140,7 +144,7 @@
                                         <!-- Margins...??? -->
                                         <Ellipse
                                             Margin="-3.5,-1,0.5,-1"
-                                            Stroke="{StaticResource ControlPrimaryColor_Brush}"
+                                            Stroke="{DynamicResource ControlPrimaryColor_Brush}"
                                             StrokeThickness="1.5" />
                                     </Grid>
                                 </ControlTemplate>
@@ -166,7 +170,7 @@
                                                 <LinearGradientBrush.GradientStops>
                                                     <GradientStopCollection>
                                                         <GradientStop Color="White" />
-                                                        <GradientStop Color="{StaticResource ControlLightColor_Hover}"
+                                                        <GradientStop Color="{DynamicResource ControlLightColor_Hover}"
                                                                       Offset="1.0" />
                                                     </GradientStopCollection>
                                                 </LinearGradientBrush.GradientStops>
@@ -192,7 +196,7 @@
                                                                           Storyboard.TargetProperty="(Shape.Fill).
                                                                           (GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                                 <EasingColorKeyFrame KeyTime="0"
-                                                                     Value="{StaticResource ControlLightColor_Hover}" />
+                                                                     Value="{DynamicResource ControlLightColor_Hover}" />
                                             </ColorAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -202,7 +206,7 @@
                                                                           Storyboard.TargetProperty="(Shape.Fill).
                                                                           (GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                                 <EasingColorKeyFrame KeyTime="0"
-                                                                     Value="{StaticResource ControlLightColor_Pressed}" />
+                                                                     Value="{DynamicResource ControlLightColor_Pressed}" />
                                             </ColorAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </VisualState>
@@ -212,7 +216,7 @@
                                                                           Storyboard.TargetProperty="(Shape.Fill).
                                                                           (GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                                 <EasingColorKeyFrame KeyTime="0"
-                                                                     Value="{StaticResource ControlLightColor}" />
+                                                                     Value="{DynamicResource ControlLightColor}" />
                                             </ColorAnimationUsingKeyFrames>
                                             <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
                                                                           Storyboard.TargetProperty="(Shape.Stroke).
@@ -298,7 +302,7 @@
                                               SnapsToDevicePixels="False"
                                               StrokeThickness="2"
                                               Data="M 1.5 5 L 5.5 10.5 M 5.5 10.5 L 11 1"
-                                              Stroke="{StaticResource ControlPrimaryColor_Brush}"
+                                              Stroke="{DynamicResource ControlPrimaryColor_Brush}"
                                               Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=CheckBox}, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
                                         </Path>
                                     </Grid>

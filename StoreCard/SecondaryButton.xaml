@@ -13,20 +13,16 @@
         <Border.Style>
             <!--  Must use template here for button background to be overridden  -->
             <Style TargetType="{x:Type Border}">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="{StaticResource ButtonDisabledBackgroundColor}" />
-                    </Setter.Value>
-                </Setter>
+                <Setter
+                    Property="Background"
+                    Value="{DynamicResource ButtonDisabledBackgroundColor_Brush}" />
                 <Style.Triggers>
                     <DataTrigger
                         Binding="{Binding ElementName=CustomButton, Path=IsEnabled}"
                         Value="True">
-                        <Setter Property="Background">
-                            <Setter.Value>
-                                <SolidColorBrush Color="{StaticResource ControlLightColor}" />
-                            </Setter.Value>
-                        </Setter>
+                        <Setter
+                            Property="Background"
+                            Value="{DynamicResource ControlLightColor_Brush}" />
                     </DataTrigger>
                     <!--  Hover/press styling  -->
                     <MultiDataTrigger>
@@ -38,20 +34,16 @@
                                 Binding="{Binding ElementName=CustomButton ,Path=IsEnabled}"
                                 Value="True" />
                         </MultiDataTrigger.Conditions>
-                        <Setter Property="Background">
-                            <Setter.Value>
-                                <SolidColorBrush Color="{StaticResource ControlLightColor_Hover}" />
-                            </Setter.Value>
-                        </Setter>
+                        <Setter
+                            Property="Background"
+                            Value="{DynamicResource ControlLightColor_Hover_Brush}" />
                     </MultiDataTrigger>
                     <DataTrigger
                         Binding="{Binding ElementName=CustomButton, Path=IsPressed}"
                         Value="True">
-                        <Setter Property="Background">
-                            <Setter.Value>
-                                <SolidColorBrush Color="{StaticResource ControlLightColor_Pressed}" />
-                            </Setter.Value>
-                        </Setter>
+                        <Setter
+                            Property="Background"
+                            Value="{DynamicResource ControlLightColor_Pressed_Brush}" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
@@ -88,11 +80,9 @@
                                                         Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}"
                                                         Value="False">
                                                         <!--  Font color when disabled  -->
-                                                        <Setter Property="Foreground">
-                                                            <Setter.Value>
-                                                                <SolidColorBrush Color="{StaticResource ButtonDisabledTextColor}" />
-                                                            </Setter.Value>
-                                                        </Setter>
+                                                        <Setter
+                                                            Property="Foreground"
+                                                            Value="{DynamicResource ButtonDisabledTextColor_Brush}" />
                                                     </DataTrigger>
                                                     <DataTrigger
                                                         Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}"

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Width="400"
         Height="400"
-        Background="#FF222222"
+        Background="{DynamicResource AppBackgroundColor_Brush}"
         WindowStartupLocation="CenterScreen"
         Title="Record Shortcut"
         KeyDown="RecordHotKeyWindow_PreviewKeyDown"

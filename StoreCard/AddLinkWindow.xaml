@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Width="600"
         Height="400"
-        Background="#FF222222"
+        Background="{DynamicResource AppBackgroundColor_Brush}"
         WindowStartupLocation="CenterScreen"
         Closed="Window_Closed"
         Title="Add Link"
