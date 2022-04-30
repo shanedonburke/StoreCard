@@ -17,11 +17,14 @@
     d:DataContext="{d:DesignInstance Type=local:AddApplicationWindow, IsDesignTimeCreatable=False}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
         </Grid.RowDefinitions>
         <!--  Radio buttons  -->
-        <StackPanel Margin="10">
+        <StackPanel
+            Margin="10">
             <Label
                 Margin="0,0,0,10"
                 FontSize="14"
@@ -81,8 +84,10 @@
             Grid.Row="1"
             Visibility="{Binding IsChecked, ElementName=InstalledApplicationRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="60" />
+                <RowDefinition
+                    Height="*" />
+                <RowDefinition
+                    Height="60" />
             </Grid.RowDefinitions>
             <local:SearchableListBox
                 x:Name="AppListBox"
@@ -92,10 +97,14 @@
                 Grid.Row="1"
                 Margin="15,0,15,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="*" />
                 </Grid.ColumnDefinitions>
                 <!--  Selected app preview  -->
                 <StackPanel
@@ -143,8 +152,10 @@
             Grid.Row="1"
             Visibility="{Binding IsChecked, ElementName=InstalledGameRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="60" />
+                <RowDefinition
+                    Height="*" />
+                <RowDefinition
+                    Height="60" />
             </Grid.RowDefinitions>
             <local:SearchableListBox
                 x:Name="GameListBox"
@@ -154,10 +165,14 @@
                 Grid.Row="1"
                 Margin="15,15,15,15">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="*" />
                 </Grid.ColumnDefinitions>
                 <!--  Selected game preview  -->
                 <StackPanel
@@ -208,13 +223,18 @@
                 Margin="15,10,15,0"
                 VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition
+                        Height="30" />
+                    <RowDefinition
+                        Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition
+                        Width="50" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock
                     Grid.Column="0"
@@ -249,17 +269,22 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition
+                            Height="30" />
+                        <RowDefinition
+                            Height="Auto" />
+                        <RowDefinition
+                            Height="*" />
                     </Grid.RowDefinitions>
                     <!--  Name field  -->
                     <Grid
                         Grid.Row="0"
                         Visibility="{Binding DoesExecutableExist, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition
+                                Width="50" />
+                            <ColumnDefinition
+                                Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock
                             Grid.Column="0"
@@ -282,8 +307,10 @@
                         Visibility="{Binding DoesExecutableExist, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Margin="50,30,0,30">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition
+                                Width="Auto" />
+                            <ColumnDefinition
+                                Width="*" />
                         </Grid.ColumnDefinitions>
                         <Image
                             Grid.Column="0"
@@ -308,13 +335,18 @@
                         Margin="0,0,0,15"
                         VerticalAlignment="Bottom">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
+                            <RowDefinition
+                                Height="30" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition
+                                Width="*" />
+                            <ColumnDefinition
+                                Width="*" />
+                            <ColumnDefinition
+                                Width="*" />
+                            <ColumnDefinition
+                                Width="*" />
                         </Grid.ColumnDefinitions>
                         <local:PrimaryButton
                             Grid.Column="2"

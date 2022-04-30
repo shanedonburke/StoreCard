@@ -1,52 +1,63 @@
-﻿<Window x:Class="StoreCard.TaskbarIconWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:tb="http://www.hardcodet.net/taskbar"
-        xmlns:local="clr-namespace:StoreCard"
-        mc:Ignorable="d"
-        ShowActivated="True"
-        ShowInTaskbar="False"
-        Width="0"
-        Height="0"
-        WindowStyle="None"
-        Title="TaskbarIconWindow"
-        d:DataContext="{d:DesignInstance Type=local:TaskbarIconWindow, IsDesignTimeCreatable=False}">
+﻿<Window
+    x:Class="StoreCard.TaskbarIconWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:tb="http://www.hardcodet.net/taskbar"
+    xmlns:local="clr-namespace:StoreCard"
+    mc:Ignorable="d"
+    ShowActivated="True"
+    ShowInTaskbar="False"
+    Width="0"
+    Height="0"
+    WindowStyle="None"
+    Title="TaskbarIconWindow"
+    d:DataContext="{d:DesignInstance Type=local:TaskbarIconWindow, IsDesignTimeCreatable=False}">
     <Window.Resources>
-        <local:ShowMainWindowCommand x:Key="ShowMainWindowCommand" />
-        <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
-            <StackPanel Margin="0,0,0,0"
-                        Background="White" />
+        <local:ShowMainWindowCommand
+            x:Key="ShowMainWindowCommand" />
+        <ItemsPanelTemplate
+            x:Key="MenuItemPanelTemplate">
+            <StackPanel
+                Margin="0,0,0,0"
+                Background="White" />
         </ItemsPanelTemplate>
     </Window.Resources>
-    <tb:TaskbarIcon x:Name="TaskbarIcon"
-                    Visibility="Visible"
-                    ToolTipText="StoreCard"
-                    MenuActivation="RightClick"
-                    LeftClickCommand="{StaticResource ShowMainWindowCommand}"
-                    PopupActivation="DoubleClick">
+    <tb:TaskbarIcon
+        x:Name="TaskbarIcon"
+        Visibility="Visible"
+        ToolTipText="StoreCard"
+        MenuActivation="RightClick"
+        LeftClickCommand="{StaticResource ShowMainWindowCommand}"
+        PopupActivation="DoubleClick">
         <tb:TaskbarIcon.ContextMenu>
             <ContextMenu>
                 <ContextMenu.Style>
-                    <Style TargetType="{x:Type ContextMenu}">
-                        <Setter Property="ItemsPanel"
-                                Value="{StaticResource MenuItemPanelTemplate}" />
+                    <Style
+                        TargetType="{x:Type ContextMenu}">
+                        <Setter
+                            Property="ItemsPanel"
+                            Value="{StaticResource MenuItemPanelTemplate}" />
                     </Style>
                 </ContextMenu.Style>
-                <MenuItem x:Name="OpenMenuItem"
-                          Click="OpenMenuItem_Click"
-                          InputGestureText="{Binding Path=HotKeyText}">
+                <MenuItem
+                    x:Name="OpenMenuItem"
+                    Click="OpenMenuItem_Click"
+                    InputGestureText="{Binding Path=HotKeyText}">
                     <MenuItem.Header>
-                        <TextBlock Text="Open"
-                                   Margin="-20,0,0,0" />
+                        <TextBlock
+                            Text="Open"
+                            Margin="-20,0,0,0" />
                     </MenuItem.Header>
                 </MenuItem>
-                <MenuItem x:Name="ExitMenuItem"
-                          Click="ExitMenuItem_Click">
+                <MenuItem
+                    x:Name="ExitMenuItem"
+                    Click="ExitMenuItem_Click">
                     <MenuItem.Header>
-                        <TextBlock Text="Exit"
-                                   Margin="-20,0,0,0" />
+                        <TextBlock
+                            Text="Exit"
+                            Margin="-20,0,0,0" />
                     </MenuItem.Header>
                 </MenuItem>
             </ContextMenu>

@@ -22,18 +22,22 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:MainWindow, IsDesignTimeCreatable=False}">
     <Window.Resources>
-        <local:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+        <local:NullVisibilityConverter
+            x:Key="NullVisibilityConverter" />
 
         <!--  Template for context menu  -->
-        <ItemsPanelTemplate x:Key="MenuItemPanelTemplate">
+        <ItemsPanelTemplate
+            x:Key="MenuItemPanelTemplate">
             <StackPanel
                 Margin="0,0,0,0"
                 Background="White" />
         </ItemsPanelTemplate>
         <!--  Item context menu  -->
-        <ContextMenu x:Key="ItemMenuKey">
+        <ContextMenu
+            x:Key="ItemMenuKey">
             <ContextMenu.Style>
-                <Style TargetType="{x:Type ContextMenu}">
+                <Style
+                    TargetType="{x:Type ContextMenu}">
                     <Setter
                         Property="ItemsPanel"
                         Value="{StaticResource MenuItemPanelTemplate}" />
@@ -52,20 +56,24 @@
                 x:Name="ContextMenuEditFileItem"
                 Click="ContextMenuEditFileItem_Click">
                 <MenuItem.Style>
-                    <Style TargetType="{x:Type MenuItem}">
-                        <Setter Property="Visibility"
-                                Value="Collapsed" />
+                    <Style
+                        TargetType="{x:Type MenuItem}">
+                        <Setter
+                            Property="Visibility"
+                            Value="Collapsed" />
                         <Style.Triggers>
                             <!--  Show if selected item is folder  -->
-                            <DataTrigger Binding="{Binding Category}"
-                                         Value="3">
+                            <DataTrigger
+                                Binding="{Binding Category}"
+                                Value="3">
                                 <Setter
                                     Property="Visibility"
                                     Value="Visible" />
                             </DataTrigger>
                             <!--  Show if selected item is file  -->
-                            <DataTrigger Binding="{Binding Category}"
-                                         Value="4">
+                            <DataTrigger
+                                Binding="{Binding Category}"
+                                Value="4">
                                 <Setter
                                     Property="Visibility"
                                     Value="Visible" />
@@ -98,22 +106,32 @@
         CornerRadius="5">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="*" />
+                <RowDefinition
+                    Height="40" />
+                <RowDefinition
+                    Height="40" />
+                <RowDefinition
+                    Height="*" />
             </Grid.RowDefinitions>
-            <Grid Grid.ColumnSpan="2">
+            <Grid
+                Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
+                    <RowDefinition
+                        Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition
+                        Width="40" />
+                    <ColumnDefinition
+                        Width="*" />
+                    <ColumnDefinition
+                        Width="40" />
                 </Grid.ColumnDefinitions>
                 <!--  "+" button  -->
                 <Button
@@ -131,13 +149,16 @@
                     FontWeight="Bold"
                     Foreground="White">
                     <Button.Style>
-                        <Style TargetType="{x:Type Button}">
+                        <Style
+                            TargetType="{x:Type Button}">
                             <Setter
                                 Property="Background"
                                 Value="Transparent" />
-                            <Setter Property="Template">
+                            <Setter
+                                Property="Template">
                                 <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
+                                    <ControlTemplate
+                                        TargetType="{x:Type Button}">
                                         <Border
                                             Background="{TemplateBinding Background}"
                                             CornerRadius="5">
@@ -175,9 +196,11 @@
                     </Button.Style>
                     <!--  "+" button context menu  -->
                     <Button.ContextMenu>
-                        <ContextMenu Name="AddButtonContextMenu">
+                        <ContextMenu
+                            Name="AddButtonContextMenu">
                             <ContextMenu.Style>
-                                <Style TargetType="{x:Type ContextMenu}">
+                                <Style
+                                    TargetType="{x:Type ContextMenu}">
                                     <Setter
                                         Property="ItemsPanel"
                                         Value="{StaticResource MenuItemPanelTemplate}" />
@@ -212,7 +235,10 @@
                             </MenuItem>
                         </ContextMenu>
                     </Button.ContextMenu>
-                    <fa:IconBlock Icon="Plus" Foreground="White" FontSize="18" />
+                    <fa:IconBlock
+                        Icon="Plus"
+                        Foreground="White"
+                        FontSize="18" />
                 </Button>
                 <!--  Search box  -->
                 <local:StoreCardTextBox
@@ -238,13 +264,16 @@
                     FontSize="24"
                     Foreground="White">
                     <Button.Style>
-                        <Style TargetType="{x:Type Button}">
+                        <Style
+                            TargetType="{x:Type Button}">
                             <Setter
                                 Property="Background"
                                 Value="Transparent" />
-                            <Setter Property="Template">
+                            <Setter
+                                Property="Template">
                                 <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
+                                    <ControlTemplate
+                                        TargetType="{x:Type Button}">
                                         <Border
                                             Background="{TemplateBinding Background}"
                                             CornerRadius="5">
@@ -273,7 +302,10 @@
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
-                    <fa:IconBlock Icon="Wrench" Foreground="White" FontSize="18" />
+                    <fa:IconBlock
+                        Icon="Wrench"
+                        Foreground="White"
+                        FontSize="18" />
                 </Button>
             </Grid>
             <Border
@@ -295,7 +327,8 @@
                         FontSize="18"
                         Text="All">
                         <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}">
+                            <Style
+                                TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
                                     Value="#FF777777" />
@@ -318,7 +351,8 @@
                         FontSize="18"
                         Text="Apps">
                         <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}">
+                            <Style
+                                TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
                                     Value="#FF777777" />
@@ -341,7 +375,8 @@
                         FontSize="18"
                         Text="Games">
                         <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}">
+                            <Style
+                                TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
                                     Value="#FF777777" />
@@ -364,7 +399,8 @@
                         FontSize="18"
                         Text="Folders">
                         <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}">
+                            <Style
+                                TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
                                     Value="#FF777777" />
@@ -387,7 +423,8 @@
                         FontSize="18"
                         Text="Files">
                         <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}">
+                            <Style
+                                TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
                                     Value="#FF777777" />
@@ -409,7 +446,8 @@
                         FontSize="18"
                         Text="Links">
                         <TextBlock.Style>
-                            <Style TargetType="{x:Type TextBlock}">
+                            <Style
+                                TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
                                     Value="#FF777777" />

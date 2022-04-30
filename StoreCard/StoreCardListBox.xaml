@@ -1,12 +1,14 @@
-﻿<UserControl x:Class="StoreCard.StoreCardListBox"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:StoreCard"
-             mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance Type=local:StoreCardListBox, IsDesignTimeCreatable=False}">
+﻿<UserControl
+    x:Class="StoreCard.StoreCardListBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:StoreCard"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    d:DataContext="{d:DesignInstance Type=local:StoreCardListBox, IsDesignTimeCreatable=False}">
     <ListBox
         Name="CustomListBox"
         Background="#002A2A2A"
@@ -20,7 +22,8 @@
         SelectionChanged="CustomListBox_SelectionChanged">
         <!--  Style items to take up whole horizontal space  -->
         <ListBox.ItemContainerStyle>
-            <Style TargetType="ListBoxItem">
+            <Style
+                TargetType="ListBoxItem">
                 <Setter
                     Property="HorizontalAlignment"
                     Value="Stretch" />
@@ -31,9 +34,11 @@
                     Property="SnapsToDevicePixels"
                     Value="True" />
                 <!--  Override mouse-over/selection style (from https://stackoverflow.com/a/66207005)  -->
-                <Setter Property="Template">
+                <Setter
+                    Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="ListBoxItem">
+                        <ControlTemplate
+                            TargetType="ListBoxItem">
                             <Border
                                 Name="ItemTemplateInner"
                                 Padding="{TemplateBinding Control.Padding}"
@@ -124,13 +129,19 @@
         </ListBox.ItemContainerStyle>
         <!--  List box item template  -->
         <ListBox.ItemTemplate>
-            <DataTemplate DataType="local:IListBoxItem">
-                <Grid HorizontalAlignment="Stretch">
+            <DataTemplate
+                DataType="local:IListBoxItem">
+                <Grid
+                    HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition
+                            Width="Auto" />
+                        <ColumnDefinition
+                            Width="Auto" />
+                        <ColumnDefinition
+                            Width="*" />
+                        <ColumnDefinition
+                            Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Image
                         Grid.Column="0"
@@ -166,7 +177,8 @@
                         Click="ActionButton_Click"
                         IsTabStop="False">
                         <local:PrimaryButton.Style>
-                            <Style TargetType="local:PrimaryButton">
+                            <Style
+                                TargetType="local:PrimaryButton">
                                 <Setter
                                     Property="Visibility"
                                     Value="Hidden" />
