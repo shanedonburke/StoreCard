@@ -8,6 +8,6 @@ namespace StoreCard
 {
     internal class CommandLineArgs
     {
-        public static readonly string StartMinimized = "--start-minimized";
+        public static readonly string StartMinimized = "-startminimized";
     }
 }
