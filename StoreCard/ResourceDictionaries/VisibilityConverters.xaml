@@ -1,0 +1,11 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:storeCard="clr-namespace:StoreCard">
+    <storeCard:NullVisibilityConverter
+        x:Key="NullVisibilityConverter" />
+    <BooleanToVisibilityConverter
+        x:Key="BooleanToVisibilityConverter" />
+    <storeCard:InverseBooleanToVisibilityConverter
+        x:Key="InverseBooleanToVisibilityConverter" />
+</ResourceDictionary>

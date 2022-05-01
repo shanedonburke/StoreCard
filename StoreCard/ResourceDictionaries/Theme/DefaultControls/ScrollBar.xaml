@@ -1,0 +1,110 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style
+        x:Key="ScrollBarThumb"
+        TargetType="{x:Type Thumb}">
+        <Setter
+            Property="SnapsToDevicePixels"
+            Value="True" />
+        <Setter
+            Property="OverridesDefaultStyle"
+            Value="True" />
+        <Setter
+            Property="IsTabStop"
+            Value="False" />
+        <Setter
+            Property="Focusable"
+            Value="False" />
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="{x:Type Thumb}">
+                    <Border
+                        CornerRadius="2"
+                        x:Name="ThumbBorder"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1">
+                        <Border.Style>
+                            <Style
+                                TargetType="{x:Type Border}">
+                                <Setter
+                                    Property="Background"
+                                    Value="{DynamicResource ControlLightColor_Brush}" />
+                            </Style>
+                        </Border.Style>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger
+                            Property="IsMouseOver"
+                            Value="True">
+                            <Setter
+                                Property="Background"
+                                TargetName="ThumbBorder"
+                                Value="{DynamicResource ControlLightColor_Hover_Brush}" />
+                        </Trigger>
+                        <Trigger
+                            Property="IsDragging"
+                            Value="True">
+                            <Setter
+                                Property="Background"
+                                TargetName="ThumbBorder"
+                                Value="{DynamicResource ControlLightColor_Pressed_Brush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate
+        x:Key="VerticalScrollBar"
+        TargetType="{x:Type ScrollBar}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="*" />
+            </Grid.RowDefinitions>
+            <Border
+                CornerRadius="2"
+                Background="Transparent" />
+            <Track
+                x:Name="PART_Track"
+                Grid.Row="0"
+                IsDirectionReversed="True">
+                <Track.Thumb>
+                    <Thumb
+                        Style="{StaticResource ScrollBarThumb}"
+                        Margin="2,0,2,0"
+                        BorderBrush="Transparent">
+                    </Thumb>
+                </Track.Thumb>
+            </Track>
+        </Grid>
+    </ControlTemplate>
+    <Style
+        x:Key="{x:Type ScrollBar}"
+        TargetType="{x:Type ScrollBar}">
+        <Setter
+            Property="SnapsToDevicePixels"
+            Value="True" />
+        <Setter
+            Property="OverridesDefaultStyle"
+            Value="True" />
+        <Style.Triggers>
+            <Trigger
+                Property="Orientation"
+                Value="Vertical">
+                <Setter
+                    Property="Width"
+                    Value="18" />
+                <Setter
+                    Property="Height"
+                    Value="Auto" />
+                <Setter
+                    Property="Template"
+                    Value="{StaticResource VerticalScrollBar}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
