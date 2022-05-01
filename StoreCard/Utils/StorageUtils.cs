@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json;
+using StoreCard.Models;
+using StoreCard.Models.Items.Saved;
 
-namespace StoreCard;
+namespace StoreCard.Utils;
 
 internal class StorageUtils
 {
@@ -15,10 +18,19 @@ internal class StorageUtils
 
         var json = File.ReadAllText(filePath);
         {
-            var savedItems = JsonConvert.DeserializeObject<List<SavedItem>>(json, new JsonSerializerSettings
+            List<SavedItem>? savedItems = null;
+            try
             {
-                TypeNameHandling = TypeNameHandling.All
-            });
+                savedItems = JsonConvert.DeserializeObject<List<SavedItem>>(json, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                });
+            }
+            catch (JsonSerializationException ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
             return savedItems ?? new List<SavedItem>();
         }
     }

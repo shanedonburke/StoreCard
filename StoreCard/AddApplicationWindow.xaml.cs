@@ -13,7 +13,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using SteamKit2;
-using StoreCard.Annotations;
+using StoreCard.Commands;
+using StoreCard.Models.Items.Installed;
+using StoreCard.Models.Items.Saved;
+using StoreCard.Properties;
+using StoreCard.Static;
+using StoreCard.Utils;
 
 namespace StoreCard;
 
@@ -91,7 +96,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         if (libraryFolders == null) return installedGames;
 
         var steamAppsFolderPaths = libraryFolders.Children
-            .Where(child => int.TryParse(child.Name, out _))
+            .Where(child => int.TryParse((string?) child.Name, out _))
             .Select(kv => $"{kv["path"].Value}\\steamapps")
             .ToList();
         foreach (var appsFolderPath in steamAppsFolderPaths)

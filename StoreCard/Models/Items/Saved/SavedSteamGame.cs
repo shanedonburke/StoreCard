@@ -5,8 +5,11 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
+using StoreCard.Models.Items.Installed;
+using StoreCard.Static;
+using StoreCard.Utils;
 
-namespace StoreCard;
+namespace StoreCard.Models.Items.Saved;
 
 public class SavedSteamGame : SavedItem
 {

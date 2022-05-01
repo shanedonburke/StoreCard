@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-namespace StoreCard;
+namespace StoreCard.Commands;
 
 public class ShowMainWindowCommand : ICommand
 {

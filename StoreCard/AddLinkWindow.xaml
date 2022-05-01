@@ -13,10 +13,6 @@
     Closed="Window_Closed"
     Title="Add Link"
     d:DataContext="{d:DesignInstance Type=local:AddLinkWindow, IsDesignTimeCreatable=False}">
-    <Window.Resources>
-        <local:NotBlankVisibilityConverter
-            x:Key="NotBlankVisibilityConverter" />
-    </Window.Resources>
     <Grid
         Margin="15,15,15,15"
         VerticalAlignment="Stretch">

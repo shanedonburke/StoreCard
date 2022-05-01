@@ -44,4 +44,9 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UserControls\" />
+    <Folder Include="Windows\" />
+  </ItemGroup>
+
 </Project>

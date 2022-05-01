@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tb="http://www.hardcodet.net/taskbar"
     xmlns:local="clr-namespace:StoreCard"
+    xmlns:commands="clr-namespace:StoreCard.Commands"
     mc:Ignorable="d"
     ShowActivated="True"
     ShowInTaskbar="False"
@@ -15,7 +16,7 @@
     Title="TaskbarIconWindow"
     d:DataContext="{d:DesignInstance Type=local:TaskbarIconWindow, IsDesignTimeCreatable=False}">
     <Window.Resources>
-        <local:ShowMainWindowCommand
+        <commands:ShowMainWindowCommand
             x:Key="ShowMainWindowCommand" />
         <ItemsPanelTemplate
             x:Key="MenuItemPanelTemplate">

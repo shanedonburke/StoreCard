@@ -4,8 +4,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Input;
+using StoreCard.Models;
 
-namespace StoreCard;
+namespace StoreCard.Utils;
 
 internal class HotKeyUtils
 {

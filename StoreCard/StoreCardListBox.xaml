@@ -5,6 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:StoreCard"
+    xmlns:items="clr-namespace:StoreCard.Models.Items"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -130,7 +131,7 @@
         <!--  List box item template  -->
         <ListBox.ItemTemplate>
             <DataTemplate
-                DataType="local:IListBoxItem">
+                DataType="items:IListBoxItem">
                 <Grid
                     HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
@@ -155,6 +156,7 @@
                         Width="24"
                         Height="24"
                         Margin="5,5,10,5"
+                        Visibility="{Binding BitmapIcon, Converter={StaticResource NullVisibilityConverter}, FallbackValue=Collapsed}"
                         Source="{Binding BitmapIcon}" />
                     <TextBlock
                         Grid.Column="2"

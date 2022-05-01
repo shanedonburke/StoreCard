@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace StoreCard;
+namespace StoreCard.Utils;
 
 internal class ImageUtils
 {

@@ -7,7 +7,9 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using StoreCard.Annotations;
+using StoreCard.Models.Items.Saved;
+using StoreCard.Properties;
+using StoreCard.Utils;
 
 namespace StoreCard;
 

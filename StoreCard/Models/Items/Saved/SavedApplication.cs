@@ -2,8 +2,10 @@
 using System.Diagnostics;
 using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
+using StoreCard.Models.Items.Installed;
+using StoreCard.Utils;
 
-namespace StoreCard;
+namespace StoreCard.Models.Items.Saved;
 
 internal class SavedApplication : SavedItem
 {

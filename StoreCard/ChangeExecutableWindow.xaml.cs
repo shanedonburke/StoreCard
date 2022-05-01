@@ -11,7 +11,10 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
-using StoreCard.Annotations;
+using StoreCard.Models.Items.Installed;
+using StoreCard.Models.Items.Saved;
+using StoreCard.Properties;
+using StoreCard.Utils;
 
 namespace StoreCard
 {

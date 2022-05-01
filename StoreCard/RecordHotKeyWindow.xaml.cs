@@ -4,7 +4,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
-using StoreCard.Annotations;
+using StoreCard.Models;
+using StoreCard.Properties;
+using StoreCard.Utils;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
 namespace StoreCard

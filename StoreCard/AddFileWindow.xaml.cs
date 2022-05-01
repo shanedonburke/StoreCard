@@ -12,7 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using Ookii.Dialogs.Wpf;
-using StoreCard.Annotations;
+using StoreCard.Commands;
+using StoreCard.Models.Items.Saved;
+using StoreCard.Properties;
+using StoreCard.Utils;
 
 namespace StoreCard
 {
