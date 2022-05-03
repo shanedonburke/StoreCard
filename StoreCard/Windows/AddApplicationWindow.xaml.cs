@@ -20,9 +20,10 @@ using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
 using StoreCard.Static;
+using StoreCard.UserControls;
 using StoreCard.Utils;
 
-namespace StoreCard;
+namespace StoreCard.Windows;
 
 /// <summary>
 ///     Interaction logic for AddApplicationWindow.xaml

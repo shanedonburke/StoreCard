@@ -1,15 +1,16 @@
 ﻿<UserControl
-    x:Class="StoreCard.SearchableListBox"
+    x:Class="StoreCard.UserControls.SearchableListBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:StoreCard"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:userControls="clr-namespace:StoreCard.UserControls"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    d:DataContext="{d:DesignInstance Type=local:SearchableListBox, IsDesignTimeCreatable=False}">
+    d:DataContext="{d:DesignInstance Type=userControls:SearchableListBox, IsDesignTimeCreatable=False}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
@@ -17,7 +18,7 @@
             <RowDefinition
                 Height="*" />
         </Grid.RowDefinitions>
-        <local:StoreCardTextBox
+        <userControls:StoreCardTextBox
             x:Name="SearchBox"
             Grid.Row="0"
             Margin="15,10,15,0"
@@ -28,7 +29,7 @@
             InactivePlaceholder="Click to search..." />
         <Grid
             Grid.Row="1"
-            Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SearchableListBox}}, Path=AreItemsLoaded, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
+            Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:SearchableListBox}}, Path=AreItemsLoaded, Converter={StaticResource InverseBooleanToVisibilityConverter}}">
             <fa:IconBlock
                 Icon="CircleNotch"
                 fa:Awesome.Spin="True"
@@ -36,14 +37,14 @@
                 FontSize="80" />
         </Grid>
         <!--  Application list  -->
-        <local:StoreCardListBox
+        <userControls:StoreCardListBox
             x:Name="CustomListBox"
             Grid.Row="1"
             Margin="15,10,15,10"
-            Items="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SearchableListBox}}, Path=FilteredItems}"
+            Items="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:SearchableListBox}}, Path=FilteredItems}"
             SelectionChanged="CustomListBox_SelectionChanged"
             KeyUp="CustomListBox_KeyUp"
-            Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SearchableListBox}}, Path=AreItemsLoaded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:SearchableListBox}}, Path=AreItemsLoaded, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>
 

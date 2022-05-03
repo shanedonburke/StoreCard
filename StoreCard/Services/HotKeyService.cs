@@ -7,8 +7,9 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using StoreCard.Models;
+using StoreCard.Utils;
 
-namespace StoreCard.Utils;
+namespace StoreCard.Services;
 
 internal class HotKeyService
 {

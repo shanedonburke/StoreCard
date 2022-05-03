@@ -1,10 +1,12 @@
 ﻿<Window
-    x:Class="StoreCard.ChangeExecutableWindow"
+    x:Class="StoreCard.Windows.ChangeExecutableWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:StoreCard"
+    xmlns:windows="clr-namespace:StoreCard.Windows"
+    xmlns:userControls="clr-namespace:StoreCard.UserControls"
     mc:Ignorable="d"
     Width="800"
     Height="600"
@@ -12,7 +14,7 @@
     WindowStartupLocation="CenterScreen"
     Loaded="Window_Loaded"
     Title="Open With"
-    d:DataContext="{d:DesignInstance Type=local:ChangeExecutableWindow, IsDesignTimeCreatable=False}">
+    d:DataContext="{d:DesignInstance Type=windows:ChangeExecutableWindow, IsDesignTimeCreatable=False}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition
@@ -132,7 +134,7 @@
                 <RowDefinition
                     Height="60" />
             </Grid.RowDefinitions>
-            <local:SearchableListBox
+            <userControls:SearchableListBox
                 x:Name="AppListBox"
                 SelectionChanged="AppListBox_SelectionChanged"
                 ItemActivated="AppListBox_ItemActivated" />
@@ -219,7 +221,7 @@
                     Foreground="White"
                     Text="Path:" />
                 <!--  Path box  -->
-                <local:StoreCardTextBox
+                <userControls:StoreCardTextBox
                     x:Name="ExecutablePathBox"
                     Grid.Row="0"
                     Grid.Column="1"

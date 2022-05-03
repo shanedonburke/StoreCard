@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using StoreCard.Commands;
 using StoreCard.Properties;
-using StoreCard.Utils;
+using StoreCard.Services;
 
 namespace StoreCard.Windows;
 

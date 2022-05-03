@@ -5,8 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tb="http://www.hardcodet.net/taskbar"
-    xmlns:local="clr-namespace:StoreCard"
     xmlns:commands="clr-namespace:StoreCard.Commands"
+    xmlns:windows="clr-namespace:StoreCard.Windows"
     mc:Ignorable="d"
     ShowActivated="True"
     ShowInTaskbar="False"
@@ -14,7 +14,7 @@
     Height="0"
     WindowStyle="None"
     Title="TaskbarIconWindow"
-    d:DataContext="{d:DesignInstance Type=local:TaskbarIconWindow, IsDesignTimeCreatable=False}">
+    d:DataContext="{d:DesignInstance Type=windows:TaskbarIconWindow, IsDesignTimeCreatable=False}">
     <Window.Resources>
         <commands:ShowMainWindowCommand
             x:Key="ShowMainWindowCommand" />

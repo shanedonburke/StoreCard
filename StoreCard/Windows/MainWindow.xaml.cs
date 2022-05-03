@@ -11,7 +11,7 @@ using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
 using StoreCard.Utils;
 
-namespace StoreCard;
+namespace StoreCard.Windows;
 
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
@@ -83,7 +83,7 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void AddApplication_Click(object sender, RoutedEventArgs e)
     {
-        new AddApplicationWindow().Show();
+        new Windows.AddApplicationWindow().Show();
         Close();
     }
 

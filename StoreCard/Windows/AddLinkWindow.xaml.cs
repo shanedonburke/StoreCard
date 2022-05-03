@@ -11,7 +11,7 @@ using StoreCard.Properties;
 using StoreCard.Static;
 using StoreCard.Utils;
 
-namespace StoreCard
+namespace StoreCard.Windows
 {
     /// <summary>
     /// Interaction logic for AddLinkWindow.xaml

@@ -13,7 +13,7 @@ using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
 using StoreCard.Utils;
 
-namespace StoreCard
+namespace StoreCard.Windows
 {
     /// <summary>
     /// Interaction logic for EditFileWindow.xaml

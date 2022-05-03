@@ -1,15 +1,16 @@
 ﻿<UserControl
-    x:Class="StoreCard.StoreCardListBox"
+    x:Class="StoreCard.UserControls.StoreCardListBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:StoreCard"
     xmlns:items="clr-namespace:StoreCard.Models.Items"
+    xmlns:userControls="clr-namespace:StoreCard.UserControls"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    d:DataContext="{d:DesignInstance Type=local:StoreCardListBox, IsDesignTimeCreatable=False}">
+    d:DataContext="{d:DesignInstance Type=userControls:StoreCardListBox, IsDesignTimeCreatable=False}">
     <ListBox
         Name="CustomListBox"
         Background="#002A2A2A"
@@ -17,7 +18,7 @@
         BorderThickness="0,0,0,0"
         Foreground="White"
         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-        ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardListBox}}, Path=Items}"
+        ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=Items}"
         PreviewKeyDown="CustomListBox_PreviewKeyDown"
         KeyUp="CustomListBox_KeyUp"
         SelectionChanged="CustomListBox_SelectionChanged">
@@ -46,7 +47,7 @@
                                 Background="{TemplateBinding Panel.Background}"
                                 BorderBrush="{TemplateBinding Border.BorderBrush}"
                                 BorderThickness="{TemplateBinding Border.BorderThickness}"
-                                ContextMenu="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardListBox}}, Path=ItemContextMenu}"
+                                ContextMenu="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=ItemContextMenu}"
                                 CornerRadius="5"
                                 MouseDown="Item_MouseDown"
                                 SnapsToDevicePixels="True">
@@ -175,7 +176,7 @@
                         Height="26"
                         Margin="5,0,5,0"
                         FontSize="12"
-                        Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardListBox}}, Path=ActionButtonText}"
+                        Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=ActionButtonText}"
                         Click="ActionButton_Click"
                         IsTabStop="False">
                         <local:PrimaryButton.Style>
@@ -192,7 +193,7 @@
                                                 Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}"
                                                 Value="True" />
                                             <Condition
-                                                Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:StoreCardListBox}}, Path=ShowActionButton}"
+                                                Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=ShowActionButton}"
                                                 Value="True" />
                                         </MultiDataTrigger.Conditions>
                                         <MultiDataTrigger.Setters>

@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:StoreCard"
+    xmlns:userControls="clr-namespace:StoreCard.UserControls"
     Closed="Window_Closed"
     WindowStartupLocation="CenterScreen"
     Title="Add File"
@@ -94,7 +95,7 @@
                 Foreground="White"
                 Text="Path:" />
             <!--  Path box  -->
-            <local:StoreCardTextBox
+            <userControls:StoreCardTextBox
                 x:Name="FilePathBox"
                 Grid.Row="0"
                 Grid.Column="1"
@@ -212,7 +213,7 @@
                 Foreground="White"
                 Text="Path:" />
             <!--  Path box  -->
-            <local:StoreCardTextBox
+            <userControls:StoreCardTextBox
                 x:Name="FolderPathBox"
                 Grid.Row="0"
                 Grid.Column="1"

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -10,7 +8,7 @@ using System.Windows.Input;
 using StoreCard.Models.Items;
 using StoreCard.Properties;
 
-namespace StoreCard
+namespace StoreCard.UserControls
 {
     /// <summary>
     /// Interaction logic for SearchableListBox.xaml

@@ -5,7 +5,9 @@ using System.Windows;
 using StoreCard.Commands;
 using StoreCard.Models;
 using StoreCard.Properties;
+using StoreCard.Services;
 using StoreCard.Utils;
+using StoreCard.Windows;
 
 namespace StoreCard
 {

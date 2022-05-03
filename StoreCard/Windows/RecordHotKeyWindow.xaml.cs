@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using StoreCard.Models;
 using StoreCard.Properties;
+using StoreCard.Services;
 using StoreCard.Utils;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 
-namespace StoreCard
+namespace StoreCard.Windows
 {
     /// <summary>
     /// Interaction logic for RecordHotKeyWindow.xaml
