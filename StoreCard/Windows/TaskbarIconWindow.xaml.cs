@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Interop;
 using StoreCard.Commands;
 using StoreCard.Properties;
 using StoreCard.Utils;
@@ -15,9 +14,18 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class TaskbarIconWindow : INotifyPropertyChanged
 {
-    private HwndSource? _source;
+    private static void OnHotKeyPressed() {
+        if (Application.Current.Windows.Cast<Window>().Any(w => w is RecordHotKeyWindow)) {
+            return;
+        }
+        new ShowMainWindowCommand().Execute(null);
+    }
 
-    private string _hotKeyText = "";
+    public TaskbarIconWindow() {
+        DataContext = this;
+        InitializeComponent();
+        TaskbarIcon.Icon = Properties.Resources.StoreCardIcon;
+    }
 
     public string HotKeyText
     {
@@ -29,18 +37,12 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
         }
     }
 
-    public TaskbarIconWindow()
-    {
-        DataContext = this;
-
-        InitializeComponent();
-
-        TaskbarIcon.Icon = Properties.Resources.StoreCardIcon;
-    }
+    private string _hotKeyText = "";
 
     protected override void OnSourceInitialized(EventArgs e)
     {
         base.OnSourceInitialized(e);
+        HotKeyService.Instance.HotKeyRegistered += OnHotKeyRegistered;
         HotKeyService.Instance.RegisterHotKey(this, OnHotKeyPressed);
     }
 
@@ -50,13 +52,9 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
         base.OnClosed(e);
     }
 
-    private void OnHotKeyPressed()
+    private void OnHotKeyRegistered(string hotKeyText)
     {
-        if (Application.Current.Windows.Cast<Window>().Any(w => w is RecordHotKeyWindow))
-        {
-            return;
-        }
-        new ShowMainWindowCommand().Execute(null);
+        HotKeyText = hotKeyText;
     }
 
     private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
