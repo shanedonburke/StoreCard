@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using StoreCard.Models.Items.Saved;
+using StoreCard.Static;
 using static System.String;
 
 namespace StoreCard.Models.Items.Installed;
@@ -17,7 +19,7 @@ public abstract class InstalledGame : IComparable<InstalledGame>, IListBoxItem
 
     public ImageSource BitmapIcon { get; }
 
-    public abstract ImageSource? PrefixIcon { get; }
+    public ImageSource PrefixIcon => Icons.GameIcon;
 
     public abstract SavedItem SavedItem { get; }
 

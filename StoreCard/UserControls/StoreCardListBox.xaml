@@ -146,14 +146,6 @@
                             Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Image
-                        Grid.Column="0"
-                        Width="24"
-                        Height="24"
-                        Margin="5,5,10,5"
-                        RenderOptions.BitmapScalingMode="HighQuality"
-                        Visibility="{Binding PrefixIcon, Converter={StaticResource NullVisibilityConverter}, FallbackValue=Collapsed}"
-                        Source="{Binding PrefixIcon}" />
-                    <Image
                         Grid.Column="1"
                         Width="24"
                         Height="24"

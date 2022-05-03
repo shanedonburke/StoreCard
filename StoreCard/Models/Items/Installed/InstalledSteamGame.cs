@@ -17,7 +17,5 @@ public class InstalledSteamGame : InstalledGame
 
     public string AppId { get; }
 
-    public override BitmapSource PrefixIcon => Icons.SteamIcon;
-
     public override SavedItem SavedItem => new SavedSteamGame(this);
 }

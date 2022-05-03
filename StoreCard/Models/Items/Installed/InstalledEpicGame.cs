@@ -17,7 +17,5 @@ internal class InstalledEpicGame : InstalledGame
 
     public string AppName { get;  }
 
-    public override BitmapSource PrefixIcon => Icons.EpicIcon;
-
     public override SavedItem SavedItem => new SavedEpicGame(this);
 }

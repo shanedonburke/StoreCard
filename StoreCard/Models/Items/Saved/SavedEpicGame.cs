@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
@@ -37,7 +34,7 @@ internal class SavedEpicGame : SavedItem
 
     public override ItemCategory Category => ItemCategory.Game;
 
-    public override ImageSource PrefixIcon => Icons.EpicIcon;
+    public override ImageSource PrefixIcon => Icons.GameIcon;
 
     public override void Open()
     {
