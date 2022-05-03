@@ -5,19 +5,19 @@ using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Installed;
 
-public class InstalledSteamGame : InstalledGame
+internal class InstalledEpicGame : InstalledGame
 {
-    public InstalledSteamGame(
+    public InstalledEpicGame(
         string name,
         ImageSource bitmapIcon,
-        string appId) : base(name, bitmapIcon)
+        string appName) : base(name, bitmapIcon)
     {
-        AppId = appId;
+        AppName = appName;
     }
 
-    public string AppId { get; }
+    public string AppName { get;  }
 
     public override BitmapSource PrefixIcon => Icons.SteamIcon;
 
-    public override SavedItem SavedItem => new SavedSteamGame(this);
+    public override SavedItem SavedItem => new SavedEpicGame(this);
 }

@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace StoreCard.Models.Games.Epic;
 
-public class LauncherInstalled
+public class EpicLauncherInstalled
 {
     public class InstalledApp
     {
-        public string InstallLocation;
-
-        public string NamespaceId;
-
-        public string ItemId;
-
-        public string ArtifactId;
-
-        public string AppVersion;
-
         public string AppName;
+
+        public InstalledApp(string appName)
+        {
+            AppName = appName;
+        }
     }
 
     public List<InstalledApp> InstallationList;
+
+    public EpicLauncherInstalled(List<InstalledApp> installationList)
+    {
+        InstallationList = installationList;
+    }
 }

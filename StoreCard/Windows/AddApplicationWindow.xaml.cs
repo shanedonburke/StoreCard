@@ -86,6 +86,11 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    private IEnumerable<InstalledGame> GetInstalledGames()
+    {
+        return GetInstalledSteamGames().Concat(GetInstalledEpicGames());
+    }
+
     private IEnumerable<InstalledGame> GetInstalledSteamGames()
     {
         var installedGames = new List<InstalledGame>();
@@ -99,7 +104,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         if (libraryFolders == null) return installedGames;
 
         var steamAppsFolderPaths = libraryFolders.Children
-            .Where(child => int.TryParse((string?) child.Name, out _))
+            .Where(child => int.TryParse(child.Name, out _))
             .Select(kv => $"{kv["path"].Value}\\steamapps")
             .ToList();
         foreach (var appsFolderPath in steamAppsFolderPaths)
@@ -133,7 +138,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
                     BitmapCacheOption.OnLoad);
                 cached.Freeze();
 
-                installedGames.Add(new InstalledSteamGame(name, appId, cached));
+                installedGames.Add(new InstalledSteamGame(name, cached, appId));
             }
         }
         installedGames.Sort();
@@ -155,18 +160,41 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
             return installedGames;
         }
 
-        if (JsonConvert.DeserializeObject(File.ReadAllText(launcherInstalledPath)) is not LauncherInstalled launcherInstalled)
+        if (JsonConvert.DeserializeObject<EpicLauncherInstalled>(File.ReadAllText(launcherInstalledPath)) is not { } launcherInstalled)
         {
             return installedGames;
         }
 
-        var appNames = launcherInstalled.InstallationList.Select(app => app.AppName);
+        var appNames = launcherInstalled.InstallationList.Select(app => app.AppName).ToList();
 
         var manifestPaths = Directory.GetFiles(manifestFolderPath, "*.item");
 
+        foreach (var manifestPath in manifestPaths)
+        {
+            if (JsonConvert.DeserializeObject<EpicManifest>(File.ReadAllText(manifestPath)) is not { } manifest)
+            {
+                return installedGames;
+            }
+
+            if (!appNames.Contains(manifest.AppName)) continue;
+
+            var execPath = Path.Combine(manifest.InstallLocation, manifest.LaunchExecutable);
+            if (!File.Exists(execPath)) continue;
+
+            var hIcon = System.Drawing.Icon.ExtractAssociatedIcon(execPath);
+            var icon = Imaging.CreateBitmapSourceFromHIcon(
+                hIcon!.Handle,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
+
+            icon.Freeze();
+
+            installedGames.Add(new InstalledEpicGame(manifest.DisplayName, icon, manifest.AppName));
+        }
+
         return installedGames;
     }
-
+    
     [NotifyPropertyChangedInvocator]
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -224,7 +252,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         Activate();
 
         Task.Run(() => AppListBox.Items = SystemUtils.GetInstalledApplications());
-        Task.Run(() => GameListBox.Items = GetInstalledSteamGames());
+        Task.Run(() => GameListBox.Items = GetInstalledGames());
     }
 
     private void Window_Closed(object sender, EventArgs e)
