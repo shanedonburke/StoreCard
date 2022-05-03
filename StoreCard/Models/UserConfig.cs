@@ -11,8 +11,8 @@ internal class UserConfig
 
     public UserConfig()
     {
-        HotKeyModifiers = HotKeyUtils.ModifiersToHotKeyByte(Key.LWin, Key.LeftShift);
-        VirtualHotKey = HotKeyUtils.KeyToVirtualKey(Key.Z);
+        HotKeyModifiers = HotKeyService.ModifiersToHotKeyByte(Key.LWin, Key.LeftShift);
+        VirtualHotKey = HotKeyService.KeyToVirtualKey(Key.Z);
     }
 
     [JsonConstructor]

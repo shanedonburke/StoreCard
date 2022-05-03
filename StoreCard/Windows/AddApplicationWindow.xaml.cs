@@ -12,8 +12,10 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 using SteamKit2;
 using StoreCard.Commands;
+using StoreCard.Models.Games.Epic;
 using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
@@ -134,6 +136,33 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
             }
         }
         installedGames.Sort();
+        return installedGames;
+    }
+
+    private IEnumerable<InstalledGame> GetInstalledEpicGames()
+    {
+        var installedGames = new List<InstalledGame>();
+
+        var programDataFolder = Environment.ExpandEnvironmentVariables("%ProgramData%");
+
+        var launcherInstalledPath = Path.Combine(programDataFolder,
+            @"Epic\UnrealEngineLauncher\LauncherInstalled.dat");
+        var manifestFolderPath = Path.Combine(programDataFolder, @"Epic\EpicGamesLauncher\Data\Manifests");
+
+        if (!File.Exists(launcherInstalledPath) || !Directory.Exists(manifestFolderPath))
+        {
+            return installedGames;
+        }
+
+        if (JsonConvert.DeserializeObject(File.ReadAllText(launcherInstalledPath)) is not LauncherInstalled launcherInstalled)
+        {
+            return installedGames;
+        }
+
+        var appNames = launcherInstalled.InstallationList.Select(app => app.AppName);
+
+        var manifestPaths = Directory.GetFiles(manifestFolderPath, "*.item");
+
         return installedGames;
     }
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using StoreCard.Static;
 using StoreCard.Utils;
+using StoreCard.Windows;
 
 namespace StoreCard
 {

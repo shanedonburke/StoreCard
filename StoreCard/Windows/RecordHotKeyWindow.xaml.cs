@@ -35,7 +35,7 @@ namespace StoreCard
         {
             InitializeComponent();
             _config = StorageUtils.ReadConfigFromFile();
-            HotKeyText = HotKeyUtils.KeyStringFromConfig(_config);
+            HotKeyText = HotKeyService.KeyStringFromConfig(_config);
             DataContext = this;
         }
 
@@ -80,8 +80,8 @@ namespace StoreCard
                 _modifiers |= (uint) ModifierKeys.Shift;
             }
 
-            _virtualKey = HotKeyUtils.KeyToVirtualKey(key);
-            text.Append(HotKeyUtils.KeyToString(key));
+            _virtualKey = HotKeyService.KeyToVirtualKey(key);
+            text.Append(HotKeyService.KeyToString(key));
             HotKeyText = text.ToString();
         }
 
@@ -95,7 +95,7 @@ namespace StoreCard
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            HotKeyText = HotKeyUtils.KeyStringFromConfig(_config);
+            HotKeyText = HotKeyService.KeyStringFromConfig(_config);
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -103,8 +103,7 @@ namespace StoreCard
             _config.HotKeyModifiers = _modifiers;
             _config.VirtualHotKey = _virtualKey;
             StorageUtils.SaveConfigToFile(_config);
-            (Application.Current.Windows.Cast<Window>().First(w => w is TaskbarIconWindow) as TaskbarIconWindow)
-                ?.UpdateHotKey();
+            HotKeyService.Instance.UpdateHotKey();
             DialogResult = true;
             Close();
         }

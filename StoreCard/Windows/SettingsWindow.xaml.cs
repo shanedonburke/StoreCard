@@ -17,7 +17,7 @@ namespace StoreCard
 
         private UserConfig _config;
 
-        public string HotKeyText => HotKeyUtils.KeyStringFromConfig(_config);
+        public string HotKeyText => HotKeyService.KeyStringFromConfig(_config);
 
         public bool IsStartupShortcutDisabled => SystemUtils.IsStartupShortcutEnabled() == false;
 
