@@ -1,4 +1,5 @@
-﻿using System.Windows.Media.Imaging;
+﻿using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Static;
 
@@ -9,7 +10,7 @@ public class InstalledSteamGame : InstalledGame
     public InstalledSteamGame(
         string name,
         string appId,
-        BitmapSource bitmapIcon) : base(name, bitmapIcon)
+        ImageSource bitmapIcon) : base(name, bitmapIcon)
     {
         AppId = appId;
     }
