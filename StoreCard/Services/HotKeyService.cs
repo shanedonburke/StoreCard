@@ -21,9 +21,9 @@ internal class HotKeyService
     {
     }
 
-    public const int HotKeyId = 9000;
-
     public static HotKeyService Instance { get; } = new();
+
+    private const int HotKeyId = 9000;
 
     public static uint ModifiersToHotKeyByte(params Key[] modifiers) {
         return modifiers.Aggregate<Key, uint>(0, (current, key) => current | ModifierToHotKeyByte(key));

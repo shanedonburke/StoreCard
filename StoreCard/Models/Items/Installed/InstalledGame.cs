@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using StoreCard.Models.Items.Saved;
 using static System.String;
 
@@ -8,7 +7,7 @@ namespace StoreCard.Models.Items.Installed;
 
 public abstract class InstalledGame : IComparable<InstalledGame>, IListBoxItem
 {
-    protected InstalledGame(string name, BitmapSource bitmapIcon)
+    protected InstalledGame(string name, ImageSource bitmapIcon)
     {
         Name = name;
         BitmapIcon = bitmapIcon;
