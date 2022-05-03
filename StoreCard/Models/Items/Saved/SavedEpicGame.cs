@@ -37,7 +37,7 @@ internal class SavedEpicGame : SavedItem
 
     public override ItemCategory Category => ItemCategory.Game;
 
-    public override ImageSource PrefixIcon => Icons.SteamIcon;
+    public override ImageSource PrefixIcon => Icons.EpicIcon;
 
     public override void Open()
     {

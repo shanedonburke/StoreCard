@@ -150,6 +150,7 @@
                         Width="24"
                         Height="24"
                         Margin="5,5,10,5"
+                        RenderOptions.BitmapScalingMode="HighQuality"
                         Visibility="{Binding PrefixIcon, Converter={StaticResource NullVisibilityConverter}, FallbackValue=Collapsed}"
                         Source="{Binding PrefixIcon}" />
                     <Image
@@ -157,6 +158,7 @@
                         Width="24"
                         Height="24"
                         Margin="5,5,10,5"
+                        RenderOptions.BitmapScalingMode="HighQuality"
                         Visibility="{Binding BitmapIcon, Converter={StaticResource NullVisibilityConverter}, FallbackValue=Collapsed}"
                         Source="{Binding BitmapIcon}" />
                     <TextBlock
