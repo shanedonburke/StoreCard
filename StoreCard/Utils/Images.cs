@@ -6,7 +6,7 @@ using System.Windows.Media.Imaging;
 
 namespace StoreCard.Utils;
 
-internal class ImageUtils
+internal class Images
 {
     public static string ImageToBase64(BitmapSource bitmap)
     {

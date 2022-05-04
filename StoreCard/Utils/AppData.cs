@@ -8,7 +8,7 @@ using StoreCard.Models.Items.Saved;
 
 namespace StoreCard.Utils;
 
-internal class StorageUtils
+internal class AppData
 {
     public static List<SavedItem> ReadItemsFromFile()
     {

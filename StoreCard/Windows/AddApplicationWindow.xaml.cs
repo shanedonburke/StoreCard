@@ -224,26 +224,26 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
     {
-        var base64Icon = ExecutableIcon != null ? ImageUtils.ImageToBase64((BitmapSource) ExecutableIcon) : null;
-        var savedItems = StorageUtils.ReadItemsFromFile();
+        var base64Icon = ExecutableIcon != null ? Images.ImageToBase64((BitmapSource) ExecutableIcon) : null;
+        var savedItems = AppData.ReadItemsFromFile();
         savedItems.Add(new SavedExecutable(Guid.NewGuid().ToString(), ExecutableName, base64Icon, ExecutablePathBox.Text));
-        StorageUtils.SaveItemsToFile(savedItems);
+        AppData.SaveItemsToFile(savedItems);
         Close();
     }
 
     private void SaveSelectedAppAndClose()
     {
-        var savedItems = StorageUtils.ReadItemsFromFile();
+        var savedItems = AppData.ReadItemsFromFile();
         savedItems.Add(new SavedApplication((AppListBox.SelectedItem as InstalledApplication)!));
-        StorageUtils.SaveItemsToFile(savedItems);
+        AppData.SaveItemsToFile(savedItems);
         Close();
     }
 
     private void SaveSelectedGameAndClose()
     {
-        var savedItems = StorageUtils.ReadItemsFromFile();
+        var savedItems = AppData.ReadItemsFromFile();
         savedItems.Add((GameListBox.SelectedItem as InstalledGame)!.SavedItem);
-        StorageUtils.SaveItemsToFile(savedItems);
+        AppData.SaveItemsToFile(savedItems);
         Close();
     }
 
@@ -251,7 +251,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     {
         Activate();
 
-        Task.Run(() => AppListBox.Items = SystemUtils.GetInstalledApplications());
+        Task.Run(() => AppListBox.Items = Applications.GetInstalledApplications());
         Task.Run(() => GameListBox.Items = GetInstalledGames());
     }
 

@@ -19,19 +19,19 @@ public partial class SettingsWindow : INotifyPropertyChanged
 
     public string HotKeyText => HotKeys.KeyStringFromConfig(_config);
 
-    public bool IsStartupShortcutDisabled => SystemUtils.IsStartupShortcutEnabled() == false;
+    public bool IsStartupShortcutDisabled => Shortcuts.IsStartupShortcutEnabled() == false;
 
     public SettingsWindow() {
         InitializeComponent();
-        _config = StorageUtils.ReadConfigFromFile();
+        _config = AppData.ReadConfigFromFile();
         DataContext = this;
 
-        RunOnStartupCheckBox.IsChecked = SystemUtils.IsStartupShortcutEnabled() != null;
+        RunOnStartupCheckBox.IsChecked = Shortcuts.IsStartupShortcutEnabled() != null;
     }
 
     private void SettingsWindow_Closed(object? sender, EventArgs e)
     {
-        StorageUtils.SaveConfigToFile(_config);
+        AppData.SaveConfigToFile(_config);
         new ShowMainWindowCommand().Execute(null);
         Close();
     }
@@ -39,7 +39,7 @@ public partial class SettingsWindow : INotifyPropertyChanged
     private void RecordHotKeyButton_Click(object sender, RoutedEventArgs e)
     {
         if (new RecordHotKeyWindow().ShowDialog() != true) return;
-        _config = StorageUtils.ReadConfigFromFile();
+        _config = AppData.ReadConfigFromFile();
         OnPropertyChanged(nameof(HotKeyText));
     }
 
@@ -53,13 +53,13 @@ public partial class SettingsWindow : INotifyPropertyChanged
 
     private void RunOnStartupCheckBox_Checked(object sender, RoutedEventArgs e)
     {
-        SystemUtils.CreateStartupShortcut();
+        Shortcuts.CreateStartupShortcut();
         OnPropertyChanged(nameof(IsStartupShortcutDisabled));
     }
 
     private void RunOnStartupCheckBox_Unchecked(object sender, RoutedEventArgs e)
     {
-        SystemUtils.RemoveStartupShortcut();
+        Shortcuts.RemoveStartupShortcut();
         OnPropertyChanged(nameof(IsStartupShortcutDisabled));
     }
 }

@@ -26,7 +26,7 @@ public class SavedSteamGame : SavedItem
     public SavedSteamGame(InstalledSteamGame game) : base(
         Guid.NewGuid().ToString(),
         game.Name,
-        ImageUtils.ImageToBase64((BitmapSource) game.BitmapIcon)
+        Images.ImageToBase64((BitmapSource) game.BitmapIcon)
     )
     {
         AppId = game.AppId;

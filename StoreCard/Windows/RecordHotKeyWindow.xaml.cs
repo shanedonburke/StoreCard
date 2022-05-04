@@ -34,7 +34,7 @@ namespace StoreCard.Windows
         public RecordHotKeyWindow()
         {
             InitializeComponent();
-            _config = StorageUtils.ReadConfigFromFile();
+            _config = AppData.ReadConfigFromFile();
             HotKeyText = HotKeys.KeyStringFromConfig(_config);
             DataContext = this;
         }
@@ -102,7 +102,7 @@ namespace StoreCard.Windows
         {
             _config.HotKeyModifiers = _modifiers;
             _config.VirtualHotKey = _virtualKey;
-            StorageUtils.SaveConfigToFile(_config);
+            AppData.SaveConfigToFile(_config);
             HotKeyService.Instance.UpdateHotKey();
             DialogResult = true;
             Close();

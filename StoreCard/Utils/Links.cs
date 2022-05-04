@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 
 namespace StoreCard.Utils;
 
-internal class HttpUtils
+internal class Links
 {
     private static readonly HttpClient _httpClient = new();
 
@@ -16,11 +16,13 @@ internal class HttpUtils
 
     private static readonly Regex _titleRegex = new(@"<title>(.+)</title>");
 
-    public static async Task<string> GetWebsiteTitle(string url)
+    public static async Task<string> GetPageTitle(string url)
     {
-        var fullUrl = NormalizeUrl(url);
         var title = string.Empty;
+
+        var fullUrl = NormalizeUrl(url);
         if (!_urlRegex.Match(fullUrl).Success) return title;
+
         try
         {
             var responseBody = await _httpClient.GetStringAsync(fullUrl);
@@ -32,34 +34,38 @@ internal class HttpUtils
         }
         catch
         {
-            // Ignored
+            return title;
         }
+
         return HttpUtility.HtmlDecode(title);
     }
 
-    public static async Task<BitmapImage?> GetWebsiteIcon(string url)
+    public static async Task<BitmapImage?> GetPageIcon(string url)
     {
         BitmapImage? image = null;
+
         var m = _urlRegex.Match(url);
         if (!m.Success) return image;
+
         var domain = m.Groups[4].Captures[0].ToString();
         try
         {
             var bytes =
                 await _httpClient.GetByteArrayAsync(@"https://icons.duckduckgo.com/ip3/" + domain + ".ico");
-            image = ImageUtils.BytesToBitmapImage(bytes);
+            image = Images.BytesToBitmapImage(bytes);
             image.Freeze();
         }
         catch
         {
             // Ignored
         }
+
         return image;
     }
 
     public static string NormalizeUrl(string url)
     {
-        var includesScheme = url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+        var includesScheme = url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) || 
                              url.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
         return includesScheme ? url : $"http://{url}";
     }

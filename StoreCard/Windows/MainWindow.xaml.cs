@@ -24,7 +24,7 @@ public partial class MainWindow : INotifyPropertyChanged
 
     public MainWindow()
     {
-        _savedItems = StorageUtils.ReadItemsFromFile();
+        _savedItems = AppData.ReadItemsFromFile();
 
         InitializeComponent();
         DataContext = this;
@@ -72,7 +72,7 @@ public partial class MainWindow : INotifyPropertyChanged
 
     public void RefreshSavedItems()
     {
-        _savedItems = StorageUtils.ReadItemsFromFile();
+        _savedItems = AppData.ReadItemsFromFile();
         OnPropertyChanged(nameof(FilteredItems));
     }
 
@@ -204,9 +204,9 @@ public partial class MainWindow : INotifyPropertyChanged
     private void DeleteItem_Click(object sender, RoutedEventArgs e)
     {
         if (ItemListBox.SelectedIndex == -1) return;
-        var savedItems = StorageUtils.ReadItemsFromFile();
+        var savedItems = AppData.ReadItemsFromFile();
         savedItems.RemoveAt(ItemListBox.SelectedIndex);
-        StorageUtils.SaveItemsToFile(savedItems);
+        AppData.SaveItemsToFile(savedItems);
         RefreshSavedItems();
     }
 

@@ -11,7 +11,7 @@ internal class Icons
 
     static Icons()
     {
-        LinkIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.LinkIcon);
-        GameIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.GameIcon);
+        LinkIcon = Images.BitmapToBitmapImage(Properties.Resources.LinkIcon);
+        GameIcon = Images.BitmapToBitmapImage(Properties.Resources.GameIcon);
     }
 }

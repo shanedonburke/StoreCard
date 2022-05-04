@@ -26,7 +26,7 @@ public abstract class SavedItem : IComparable<SavedItem>, IListBoxItem
 
     public abstract ItemCategory Category { get; }
 
-    [JsonIgnore] public ImageSource? BitmapIcon => Base64Icon != null ? ImageUtils.Base64ToImage(Base64Icon) : null;
+    [JsonIgnore] public ImageSource? BitmapIcon => Base64Icon != null ? Images.Base64ToImage(Base64Icon) : null;
 
     [JsonIgnore] public virtual ImageSource? PrefixIcon => null;
 

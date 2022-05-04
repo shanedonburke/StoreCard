@@ -44,13 +44,13 @@ namespace StoreCard.Windows
 
         private async void GetWebsiteDetails()
         {
-            var title = await HttpUtils.GetWebsiteTitle(UrlBox.Text);
+            var title = await Links.GetPageTitle(UrlBox.Text);
             if (title != string.Empty)
             {
                 LinkTitle = title;
             }
 
-            _favicon = await HttpUtils.GetWebsiteIcon(UrlBox.Text);
+            _favicon = await Links.GetPageIcon(UrlBox.Text);
             OnPropertyChanged(nameof(LinkIcon));
         }
 
@@ -69,10 +69,10 @@ namespace StoreCard.Windows
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            var base64Icon = ImageUtils.ImageToBase64((BitmapSource) LinkIcon);
-            var savedItems = StorageUtils.ReadItemsFromFile();
-            savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon, HttpUtils.NormalizeUrl(UrlBox.Text)));
-            StorageUtils.SaveItemsToFile(savedItems);
+            var base64Icon = Images.ImageToBase64((BitmapSource) LinkIcon);
+            var savedItems = AppData.ReadItemsFromFile();
+            savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon, Links.NormalizeUrl(UrlBox.Text)));
+            AppData.SaveItemsToFile(savedItems);
             Close();
         }
 

@@ -90,14 +90,14 @@ namespace StoreCard.Windows
         }
 
         private void SaveDefaultButton_Click(object sender, RoutedEventArgs e) {
-            var savedItems = StorageUtils.ReadItemsFromFile();
+            var savedItems = AppData.ReadItemsFromFile();
             if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem) {
                 Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
                 return;
             }
 
             matchingItem.SetExecutablePath(SavedFileSystemItem.DEFAULT_EXECUTABLE);
-            StorageUtils.SaveItemsToFile(savedItems);
+            AppData.SaveItemsToFile(savedItems);
             DialogResult = true;
             Close();
         }
@@ -115,19 +115,19 @@ namespace StoreCard.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Task.Run(() => AppListBox.Items = SystemUtils.GetInstalledApplications());
+            Task.Run(() => AppListBox.Items = Applications.GetInstalledApplications());
         }
 
         private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
         {
-            var savedItems = StorageUtils.ReadItemsFromFile();
+            var savedItems = AppData.ReadItemsFromFile();
             var matchingItem = savedItems.Find(i => i.Id == _item.Id) as SavedFileSystemItem;
             if (matchingItem == null) {
                 Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
                 return;
             }
             matchingItem.SetExecutablePath(ExecutablePathBox.Text);
-            StorageUtils.SaveItemsToFile(savedItems);
+            AppData.SaveItemsToFile(savedItems);
             DialogResult = true;
             Close();
         }
@@ -144,7 +144,7 @@ namespace StoreCard.Windows
         }
 
         private void SaveSelectedAppAndClose() {
-            var savedItems = StorageUtils.ReadItemsFromFile();
+            var savedItems = AppData.ReadItemsFromFile();
             if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem) {
                 Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
                 return;
@@ -152,7 +152,7 @@ namespace StoreCard.Windows
 
             matchingItem.SetExecutablePath((AppListBox.SelectedItem as InstalledApplication)?.ExecutablePath
                                            ?? SavedFileSystemItem.DEFAULT_EXECUTABLE);
-            StorageUtils.SaveItemsToFile(savedItems);
+            AppData.SaveItemsToFile(savedItems);
             DialogResult = true;
             Close();
         }
