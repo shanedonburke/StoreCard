@@ -35,7 +35,7 @@ namespace StoreCard.Windows
         {
             InitializeComponent();
             _config = StorageUtils.ReadConfigFromFile();
-            HotKeyText = HotKeyService.KeyStringFromConfig(_config);
+            HotKeyText = HotKeys.KeyStringFromConfig(_config);
             DataContext = this;
         }
 
@@ -80,8 +80,8 @@ namespace StoreCard.Windows
                 _modifiers |= (uint) ModifierKeys.Shift;
             }
 
-            _virtualKey = HotKeyService.KeyToVirtualKey(key);
-            text.Append(HotKeyService.KeyToString(key));
+            _virtualKey = HotKeys.KeyToVirtualKey(key);
+            text.Append(HotKeys.KeyToString(key));
             HotKeyText = text.ToString();
         }
 
@@ -95,7 +95,7 @@ namespace StoreCard.Windows
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
-            HotKeyText = HotKeyService.KeyStringFromConfig(_config);
+            HotKeyText = HotKeys.KeyStringFromConfig(_config);
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)

@@ -9,10 +9,10 @@ internal class Paths
     static Paths()
     {
         // Try 64-bit key, then 32-bit
-        SteamInstallFolder = (Registry.GetValue(
+        SteamInstallFolder = Registry.GetValue(
                                  @"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam",
                                  "InstallPath",
-                                 null) as string)
+                                 null) as string 
                              ?? Registry.GetValue(
                                  @"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam",
                                  "InstallPath",

@@ -1,6 +1,5 @@
 ﻿using System.Windows.Input;
 using Newtonsoft.Json;
-using StoreCard.Services;
 using StoreCard.Utils;
 
 namespace StoreCard.Models;
@@ -12,8 +11,8 @@ internal class UserConfig
 
     public UserConfig()
     {
-        HotKeyModifiers = HotKeyService.ModifiersToHotKeyByte(Key.LWin, Key.LeftShift);
-        VirtualHotKey = HotKeyService.KeyToVirtualKey(Key.Z);
+        HotKeyModifiers = HotKeys.ModifiersToHotKeyByte(Key.LWin, Key.LeftShift);
+        VirtualHotKey = HotKeys.KeyToVirtualKey(Key.Z);
     }
 
     [JsonConstructor]
