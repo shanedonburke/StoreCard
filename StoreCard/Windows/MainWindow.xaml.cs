@@ -39,10 +39,6 @@ public partial class MainWindow : INotifyPropertyChanged
         RefreshItems();
 
         SelectFirstItem();
-
-        Debug.WriteLine(Activate());
-
-        SearchBox.Focus();
     }
 
     public ItemCategory Category
@@ -174,6 +170,10 @@ public partial class MainWindow : INotifyPropertyChanged
                 SelectFirstItem();
                 break;
         }
+    }
+
+    private void MainWindow_Activated(object? sender, EventArgs e) {
+        SearchBox.Focus();
     }
 
     private void Window_Deactivated(object sender, EventArgs e)

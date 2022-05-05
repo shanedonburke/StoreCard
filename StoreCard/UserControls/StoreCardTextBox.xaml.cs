@@ -92,6 +92,11 @@ namespace StoreCard.UserControls
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        public new bool Focus()
+        {
+            return CustomTextBox.Focus();
+        }
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
