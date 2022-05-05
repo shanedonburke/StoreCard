@@ -1,8 +1,9 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 
 namespace StoreCard.Models.Items;
 
-public interface IListBoxItem
+public interface IListBoxItem : IComparable<IListBoxItem>
 {
     public string Name { get; }
 

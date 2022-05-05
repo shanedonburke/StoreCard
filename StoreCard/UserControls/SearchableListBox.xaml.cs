@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -27,25 +29,25 @@ namespace StoreCard.UserControls
             typeof(SelectionChangedEventHandler),
             typeof(SearchableListBox));
 
-        public SearchableListBox() {
+        public SearchableListBox()
+        {
             InitializeComponent();
+            CustomListBox.ItemsSource = _filteredItems;
         }
 
-        private IEnumerable<IListBoxItem> _filteredItems = new List<IListBoxItem>();
+        private List<IListBoxItem> _items = new();
+        private ObservableCollection<IListBoxItem> _filteredItems = new();
 
         private bool _areItemsLoaded;
 
-        public IEnumerable<IListBoxItem> Items
+        public IEnumerable<IListBoxItem> ItemsSource
         {
-            get => CustomListBox.Items;
+            get => CustomListBox.ItemsSource;
             set
             {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    CustomListBox.Items = value;
-                    FilteredItems = FilterItems();
-                    AreItemsLoaded = true;
-                });
+                _items = value.ToList();
+                _items.Sort();
+                FilterItems();
             }
         }
 
@@ -56,23 +58,6 @@ namespace StoreCard.UserControls
             {
                 _areItemsLoaded = value;
                 OnPropertyChanged(nameof(AreItemsLoaded));
-            }
-        }
-
-        public IEnumerable<IListBoxItem> FilteredItems
-        {
-            get => _filteredItems;
-            set
-            {
-                _filteredItems = value;
-                OnPropertyChanged(nameof(FilteredItems));
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    if (_filteredItems.Any())
-                    {
-                        CustomListBox.SelectedIndex = 0;
-                    }
-                });
             }
         }
 
@@ -104,10 +89,25 @@ namespace StoreCard.UserControls
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                CustomListBox.AddItem(item);
-                FilteredItems = FilterItems();
+                _filteredItems.Add(item);
+                _items.Add(item);
+                _items.Sort();
+
+                for (var i = 0; i < _items.Count; i++) {
+                    _filteredItems.Move(_filteredItems.IndexOf(_items[i]), i);
+                }
+
                 AreItemsLoaded = true;
+                if (_items.Any())
+                {
+                    SelectedIndex = 0;
+                }
             });
+        }
+
+        public void FinishAddingItems()
+        {
+            FilterItems();
         }
 
         [NotifyPropertyChangedInvocator]
@@ -116,16 +116,31 @@ namespace StoreCard.UserControls
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private IEnumerable<IListBoxItem> FilterItems() {
-            var items = Items
+        public void FilterItems()
+        {
+            var items = _items
                 .Where(DoesItemNameStartWithSearchText);
-            items = items.Concat(Items.Where(item => !DoesItemNameStartWithSearchText(item) &&
-                                                     DoesItemNameContainSearchText(item)));
-            return items;
+            items = items.Concat(ItemsSource.Where(item =>
+                !DoesItemNameStartWithSearchText(item) && DoesItemNameContainSearchText(item)));
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                _filteredItems.Clear();
+                foreach (var item in items)
+                {
+                    _filteredItems.Add(item);
+                }
+
+                if (_filteredItems.Any())
+                {
+                    SelectedIndex = 0;
+                }
+            });
         }
+
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            FilteredItems = FilterItems();
+            FilterItems();
         }
 
         private bool DoesItemNameStartWithSearchText(IListBoxItem item)
@@ -138,36 +153,42 @@ namespace StoreCard.UserControls
             return item.Name.ToUpper().Contains(SearchBox.Text.ToUpper());
         }
 
-        private void ActivateSelectedItem() {
-            if (CustomListBox.SelectedIndex != -1) {
-                RaiseEvent(new ItemActivatedEventArgs((IListBoxItem)CustomListBox.SelectedItem) { RoutedEvent = ItemActivatedEvent });
+        private void ActivateSelectedItem()
+        {
+            if (CustomListBox.SelectedIndex != -1)
+            {
+                RaiseEvent(new ItemActivatedEventArgs((IListBoxItem) CustomListBox.SelectedItem)
+                    {RoutedEvent = ItemActivatedEvent});
             }
         }
 
-        private void SearchBox_PreviewKeyDown(object sender, KeyEventArgs e) {
-            switch (e.Key) {
+        private void SearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
                 case Key.Up:
-                    if (!CustomListBox.Items.Any()) return;
-                    switch (CustomListBox.SelectedIndex) {
+                    if (!CustomListBox.ItemsSource.Any()) return;
+                    switch (CustomListBox.SelectedIndex)
+                    {
                         case 0:
                         case -1:
-                            CustomListBox.SelectedIndex = CustomListBox.Items.Count() - 1;
+                            CustomListBox.SelectedIndex = CustomListBox.ItemsSource.Count() - 1;
                             break;
                         default:
                             CustomListBox.SelectedIndex =
-                                (CustomListBox.SelectedIndex - 1) % CustomListBox.Items.Count();
+                                (CustomListBox.SelectedIndex - 1) % CustomListBox.ItemsSource.Count();
                             break;
                     }
 
                     CustomListBox.ScrollIntoView(CustomListBox.SelectedItem);
                     break;
                 case Key.Down:
-                    if (!CustomListBox.Items.Any()) return;
+                    if (!CustomListBox.ItemsSource.Any()) return;
                     if (CustomListBox.SelectedIndex == -1)
                         CustomListBox.SelectedIndex = 0;
                     else
                         CustomListBox.SelectedIndex =
-                            (CustomListBox.SelectedIndex + 1) % CustomListBox.Items.Count();
+                            (CustomListBox.SelectedIndex + 1) % CustomListBox.ItemsSource.Count();
                     CustomListBox.ScrollIntoView(CustomListBox.SelectedItem);
                     break;
             }

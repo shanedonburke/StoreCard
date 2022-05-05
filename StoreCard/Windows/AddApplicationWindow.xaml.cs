@@ -141,6 +141,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         {
             AppListBox.AddItem(app);
         }
+        AppListBox.FinishAddingItems();
     }
 
     private void LoadGames()
@@ -151,6 +152,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         foreach (var game in new EpicLibrary().GetInstalledGames()) {
             GameListBox.AddItem(game);
         }
+        GameListBox.FinishAddingItems();
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)

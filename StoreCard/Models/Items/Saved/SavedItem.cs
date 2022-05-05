@@ -16,7 +16,7 @@ public enum ItemCategory : uint
     Link
 }
 
-public abstract class SavedItem : IComparable<SavedItem>, IListBoxItem
+public abstract class SavedItem : IListBoxItem
 {
     public readonly string Id;
 
@@ -39,7 +39,7 @@ public abstract class SavedItem : IComparable<SavedItem>, IListBoxItem
 
     public abstract void Open();
 
-    public int CompareTo(SavedItem? other)
+    public int CompareTo(IListBoxItem? other)
     {
         return Compare(Name, other?.Name, StringComparison.Ordinal);
     }

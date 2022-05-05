@@ -77,7 +77,7 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void RefreshItems()
     {
-        ItemListBox.Items = FilterItems();
+        ItemListBox.ItemsSource = FilterItems();
     }
 
     private void AddApplication_Click(object sender, RoutedEventArgs e)
@@ -108,29 +108,29 @@ public partial class MainWindow : INotifyPropertyChanged
         switch (e.Key)
         {
             case Key.Up:
-                if (!ItemListBox.Items.Any()) return;
+                if (!ItemListBox.ItemsSource.Any()) return;
                 switch (ItemListBox.SelectedIndex)
                 {
                     case 0:
                     case -1:
-                        ItemListBox.SelectedIndex = ItemListBox.Items.Count() - 1;
+                        ItemListBox.SelectedIndex = ItemListBox.ItemsSource.Count() - 1;
                         break;
                     default:
-                        ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex - 1) % ItemListBox.Items.Count();
+                        ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex - 1) % ItemListBox.ItemsSource.Count();
                         break;
                 }
 
                 ItemListBox.ScrollIntoView(ItemListBox.SelectedItem);
                 break;
             case Key.Down:
-                if (!ItemListBox.Items.Any()) return;
+                if (!ItemListBox.ItemsSource.Any()) return;
                 if (ItemListBox.SelectedIndex == -1)
                 {
                     SelectFirstItem();
                 }
                 else
                 {
-                    ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex + 1) % ItemListBox.Items.Count();
+                    ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex + 1) % ItemListBox.ItemsSource.Count();
                 }
                 ItemListBox.ScrollIntoView(ItemListBox.SelectedItem);
                 break;
@@ -253,6 +253,6 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void SelectFirstItem()
     {
-        if (ItemListBox.Items.Any()) ItemListBox.SelectedIndex = 0;
+        if (ItemListBox.ItemsSource.Any()) ItemListBox.SelectedIndex = 0;
     }
 }

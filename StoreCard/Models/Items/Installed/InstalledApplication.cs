@@ -5,7 +5,7 @@ using static System.String;
 
 namespace StoreCard.Models.Items.Installed;
 
-public class InstalledApplication : IComparable<InstalledApplication>, IListBoxItem
+public class InstalledApplication : IListBoxItem
 {
     public InstalledApplication(string name, string appUserModelId, string? executablePath, BitmapSource icon)
     {
@@ -21,8 +21,7 @@ public class InstalledApplication : IComparable<InstalledApplication>, IListBoxI
     public ImageSource BitmapIcon { get; }
     public ImageSource? PrefixIcon => null;
 
-    public int CompareTo(InstalledApplication? other)
-    {
+    public int CompareTo(IListBoxItem? other) {
         return Compare(Name, other?.Name, StringComparison.Ordinal);
     }
 }

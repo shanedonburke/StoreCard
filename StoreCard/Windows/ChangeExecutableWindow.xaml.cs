@@ -115,12 +115,10 @@ namespace StoreCard.Windows
         }
 
         private void LoadApps() {
-            var installedApps = new List<InstalledApplication>();
             foreach (var app in Applications.GetInstalledApplications()) {
-                installedApps.Add(app);
-                installedApps.Sort();
-                AppListBox.Items = installedApps;
+                AppListBox.AddItem(app);
             }
+            AppListBox.FinishAddingItems();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

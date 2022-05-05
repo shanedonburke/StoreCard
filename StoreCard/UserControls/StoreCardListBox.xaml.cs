@@ -60,10 +60,16 @@ namespace StoreCard.UserControls
             typeof(SelectionChangedEventHandler),
             typeof(StoreCardListBox));
 
-        public IEnumerable<IListBoxItem> Items
+        public IEnumerable<IListBoxItem> ItemsSource
         {
-            get => CustomListBox.Items.Cast<IListBoxItem>();
-            set => CustomListBox.ItemsSource = value;
+            get => CustomListBox.ItemsSource?.Cast<IListBoxItem>() ?? new List<IListBoxItem>();
+            set
+            {
+                CustomListBox.ItemsSource = value;
+                if (value.Any()) {
+                    SelectedIndex = 0;
+                }
+            }
         }
 
         public ContextMenu ItemContextMenu
@@ -127,18 +133,6 @@ namespace StoreCard.UserControls
 
         public StoreCardListBox() {
             InitializeComponent();
-        }
-
-        public void AddItem(IListBoxItem item)
-        {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                var prevNumItems = CustomListBox.Items.Count;
-                CustomListBox.Items.Add(item);
-                if (prevNumItems == 0) {
-                    CustomListBox.SelectedIndex = 0;
-                }
-            });
         }
 
         public void ScrollIntoView(object item)
