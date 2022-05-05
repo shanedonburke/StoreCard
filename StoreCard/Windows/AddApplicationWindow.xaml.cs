@@ -12,14 +12,11 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
-using Newtonsoft.Json;
-using SteamKit2;
 using StoreCard.Commands;
-using StoreCard.Models.Games.Epic;
+using StoreCard.GameLibraries;
 using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
-using StoreCard.Static;
 using StoreCard.UserControls;
 using StoreCard.Utils;
 
@@ -86,115 +83,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    private IEnumerable<InstalledGame> GetInstalledGames()
-    {
-        return GetInstalledSteamGames().Concat(GetInstalledEpicGames());
-    }
-
-    private IEnumerable<InstalledGame> GetInstalledSteamGames()
-    {
-        var installedGames = new List<InstalledGame>();
-
-        if (Paths.SteamInstallFolder == null) return installedGames;
-
-        var libraryCacheFolder = $"{Paths.SteamInstallFolder}\\appcache\\librarycache";
-        var steamAppsFolder = $"{Paths.SteamInstallFolder}\\steamapps";
-
-        var libraryFolders = KeyValue.LoadFromString(File.ReadAllText($"{steamAppsFolder}\\libraryfolders.vdf"));
-        if (libraryFolders == null) return installedGames;
-
-        var steamAppsFolderPaths = libraryFolders.Children
-            .Where(child => int.TryParse(child.Name, out _))
-            .Select(kv => $"{kv["path"].Value}\\steamapps")
-            .ToList();
-        foreach (var appsFolderPath in steamAppsFolderPaths)
-        {
-            var appManifestPaths = Directory.GetFiles(appsFolderPath, "*.acf", SearchOption.AllDirectories);
-            foreach (var manifestPath in appManifestPaths)
-            {
-                var manifest = KeyValue.LoadFromString(File.ReadAllText(manifestPath));
-                if (manifest == null) continue;
-
-                var name = manifest["name"].Value;
-                var appId = manifest["appid"].Value;
-                if (name == null || appId == null) continue;
-
-                var iconPath = $"{libraryCacheFolder}\\{appId}_icon.jpg";
-                if (!File.Exists(iconPath)) continue;
-
-                Stream imageStreamSource = new FileStream(iconPath,
-                    FileMode.Open,
-                    FileAccess.Read,
-                    FileShare.Read);
-                var decoder = new JpegBitmapDecoder(imageStreamSource,
-                    BitmapCreateOptions.PreservePixelFormat,
-                    BitmapCacheOption.Default);
-                BitmapSource bitmapIcon = decoder.Frames[0];
-
-                // From https://stackoverflow.com/a/61681670
-                var cached = new CachedBitmap(
-                    bitmapIcon,
-                    BitmapCreateOptions.None,
-                    BitmapCacheOption.OnLoad);
-                cached.Freeze();
-
-                installedGames.Add(new InstalledSteamGame(name, cached, appId));
-            }
-        }
-        installedGames.Sort();
-        return installedGames;
-    }
-
-    private IEnumerable<InstalledGame> GetInstalledEpicGames()
-    {
-        var installedGames = new List<InstalledGame>();
-
-        var programDataFolder = Environment.ExpandEnvironmentVariables("%ProgramData%");
-
-        var launcherInstalledPath = Path.Combine(programDataFolder,
-            @"Epic\UnrealEngineLauncher\LauncherInstalled.dat");
-        var manifestFolderPath = Path.Combine(programDataFolder, @"Epic\EpicGamesLauncher\Data\Manifests");
-
-        if (!File.Exists(launcherInstalledPath) || !Directory.Exists(manifestFolderPath))
-        {
-            return installedGames;
-        }
-
-        if (JsonConvert.DeserializeObject<EpicLauncherInstalled>(File.ReadAllText(launcherInstalledPath)) is not { } launcherInstalled)
-        {
-            return installedGames;
-        }
-
-        var appNames = launcherInstalled.InstallationList.Select(app => app.AppName).ToList();
-
-        var manifestPaths = Directory.GetFiles(manifestFolderPath, "*.item");
-
-        foreach (var manifestPath in manifestPaths)
-        {
-            if (JsonConvert.DeserializeObject<EpicManifest>(File.ReadAllText(manifestPath)) is not { } manifest)
-            {
-                return installedGames;
-            }
-
-            if (!appNames.Contains(manifest.AppName)) continue;
-
-            var execPath = Path.Combine(manifest.InstallLocation, manifest.LaunchExecutable);
-            if (!File.Exists(execPath)) continue;
-
-            var hIcon = System.Drawing.Icon.ExtractAssociatedIcon(execPath);
-            var icon = Imaging.CreateBitmapSourceFromHIcon(
-                hIcon!.Handle,
-                Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());
-
-            icon.Freeze();
-
-            installedGames.Add(new InstalledEpicGame(manifest.DisplayName, icon, manifest.AppName));
-        }
-
-        return installedGames;
-    }
-    
     [NotifyPropertyChangedInvocator]
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -247,12 +135,38 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         Close();
     }
 
+    private void LoadApps()
+    {
+        var installedApps = new List<InstalledApplication>();
+        foreach (var app in Applications.GetInstalledApplications())
+        {
+            installedApps.Add(app);
+            installedApps.Sort();
+            AppListBox.Items = installedApps;
+        }
+    }
+
+    private void LoadGames()
+    {
+        var installedGames = new List<InstalledGame>();
+        foreach (var game in new SteamLibrary().GetInstalledGames()) {
+            installedGames.Add(game);
+            installedGames.Sort();
+            GameListBox.Items = installedGames;
+        }
+        foreach (var game in new EpicLibrary().GetInstalledGames()) {
+            installedGames.Add(game);
+            installedGames.Sort();
+            GameListBox.Items = installedGames;
+        }
+    }
+
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         Activate();
 
-        Task.Run(() => AppListBox.Items = Applications.GetInstalledApplications());
-        Task.Run(() => GameListBox.Items = GetInstalledGames());
+        Task.Run(LoadApps);
+        Task.Run(LoadGames);
     }
 
     private void Window_Closed(object sender, EventArgs e)

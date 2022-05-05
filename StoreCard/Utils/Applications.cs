@@ -7,9 +7,8 @@ namespace StoreCard.Utils;
 
 internal class Applications
 {
-    public static List<InstalledApplication> GetInstalledApplications() {
+    public static IEnumerable<InstalledApplication> GetInstalledApplications() {
         // From https://stackoverflow.com/a/57195200
-        var installedApps = new List<InstalledApplication>();
         var appsFolderId = new Guid("{1e87508d-89c2-42f0-8a7e-645a0f50ca58}");
         var appsFolder = (ShellObject)KnownFolderHelper.FromKnownFolderId(appsFolderId);
 
@@ -23,9 +22,7 @@ internal class Applications
             var icon = app.Thumbnail.SmallBitmapSource;
             icon.Freeze();
 
-            installedApps.Add(new InstalledApplication(name, appUserModelId, path, icon));
+            yield return new InstalledApplication(name, appUserModelId, path, icon);
         }
-        installedApps.Sort();
-        return installedApps;
     }
 }

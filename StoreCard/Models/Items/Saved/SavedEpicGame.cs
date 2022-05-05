@@ -9,7 +9,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
 
-internal class SavedEpicGame : SavedItem
+internal class SavedEpicGame : SavedGame
 {
     [JsonConstructor]
     public SavedEpicGame(
@@ -30,11 +30,7 @@ internal class SavedEpicGame : SavedItem
         AppName = game.AppName;
     }
 
-    public string AppName { get;  }
-
-    public override ItemCategory Category => ItemCategory.Game;
-
-    public override ImageSource PrefixIcon => Icons.GameIcon;
+    public string AppName { get; }
 
     public override void Open()
     {
