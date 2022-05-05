@@ -29,8 +29,6 @@ public partial class MainWindow : INotifyPropertyChanged
         InitializeComponent();
         DataContext = this;
 
-        Activate();
-
         // Without this, opening the context menu for the first time results
         // in a small delay that looks strange; the button's BG color flashes
         // to the "mouse over" state before the menu opens.
@@ -41,6 +39,8 @@ public partial class MainWindow : INotifyPropertyChanged
         RefreshItems();
 
         SelectFirstItem();
+
+        Debug.WriteLine(Activate());
 
         SearchBox.Focus();
     }
