@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -113,9 +114,18 @@ namespace StoreCard.Windows
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void LoadApps() {
+            var installedApps = new List<InstalledApplication>();
+            foreach (var app in Applications.GetInstalledApplications()) {
+                installedApps.Add(app);
+                installedApps.Sort();
+                AppListBox.Items = installedApps;
+            }
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Task.Run(() => AppListBox.Items = Applications.GetInstalledApplications());
+            Task.Run(LoadApps);
         }
 
         private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
