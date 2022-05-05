@@ -476,7 +476,6 @@
                 Grid.ColumnSpan="2"
                 Margin="10,10,10,10"
                 PreviewKeyDown="ItemListBox_PreviewKeyDown"
-                Items="{Binding FilteredItems}"
                 ItemDoubleClick="ListBoxItem_DoubleClick"
                 ItemContextMenu="{StaticResource ItemMenuKey}"
                 ShowActionButton="True"

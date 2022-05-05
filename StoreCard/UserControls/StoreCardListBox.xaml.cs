@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,11 +24,6 @@ namespace StoreCard.UserControls
             typeof(string),
             typeof(StoreCardListBox),
             new FrameworkPropertyMetadata("Open"));
-
-        public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(
-            nameof(Items),
-            typeof(IEnumerable<IListBoxItem>),
-            typeof(StoreCardListBox));
 
         public static readonly DependencyProperty ItemContextMenuProperty = DependencyProperty.Register(
             nameof(ItemContextMenu),
@@ -66,8 +62,8 @@ namespace StoreCard.UserControls
 
         public IEnumerable<IListBoxItem> Items
         {
-            get => (IEnumerable<IListBoxItem>) GetValue(ItemsProperty);
-            set => SetValue(ItemsProperty, value);
+            get => CustomListBox.Items.Cast<IListBoxItem>();
+            set => CustomListBox.ItemsSource = value;
         }
 
         public ContextMenu ItemContextMenu
@@ -131,6 +127,18 @@ namespace StoreCard.UserControls
 
         public StoreCardListBox() {
             InitializeComponent();
+        }
+
+        public void AddItem(IListBoxItem item)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var prevNumItems = CustomListBox.Items.Count;
+                CustomListBox.Items.Add(item);
+                if (prevNumItems == 0) {
+                    CustomListBox.SelectedIndex = 0;
+                }
+            });
         }
 
         public void ScrollIntoView(object item)

@@ -15,11 +15,6 @@ namespace StoreCard.UserControls
     /// </summary>
     public partial class SearchableListBox : INotifyPropertyChanged
     {
-        public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(
-            nameof(Items),
-            typeof(IEnumerable<IListBoxItem>),
-            typeof(SearchableListBox));
-
         public static readonly RoutedEvent ItemActivatedEvent = EventManager.RegisterRoutedEvent(
             nameof(ItemActivated),
             RoutingStrategy.Bubble,
@@ -32,17 +27,22 @@ namespace StoreCard.UserControls
             typeof(SelectionChangedEventHandler),
             typeof(SearchableListBox));
 
+        public SearchableListBox() {
+            InitializeComponent();
+        }
+
         private IEnumerable<IListBoxItem> _filteredItems = new List<IListBoxItem>();
 
         private bool _areItemsLoaded;
 
-        public IEnumerable<IListBoxItem> Items {
-            get => (IEnumerable<IListBoxItem>) GetValue(ItemsProperty);
+        public IEnumerable<IListBoxItem> Items
+        {
+            get => CustomListBox.Items;
             set
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    SetValue(ItemsProperty, value);
+                    CustomListBox.Items = value;
                     FilteredItems = FilterItems();
                     AreItemsLoaded = true;
                 });
@@ -68,7 +68,10 @@ namespace StoreCard.UserControls
                 OnPropertyChanged(nameof(FilteredItems));
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    if (_filteredItems.Any()) CustomListBox.SelectedIndex = 0;
+                    if (_filteredItems.Any())
+                    {
+                        CustomListBox.SelectedIndex = 0;
+                    }
                 });
             }
         }
@@ -79,10 +82,6 @@ namespace StoreCard.UserControls
         {
             get => CustomListBox.SelectedIndex;
             set => CustomListBox.SelectedIndex = value;
-        }
-
-        public SearchableListBox() {
-            InitializeComponent();
         }
 
         public delegate void ItemActivatedEventHandler(object sender, ItemActivatedEventArgs e);
@@ -100,6 +99,16 @@ namespace StoreCard.UserControls
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        public void AddItem(IListBoxItem item)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                CustomListBox.AddItem(item);
+                FilteredItems = FilterItems();
+                AreItemsLoaded = true;
+            });
+        }
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

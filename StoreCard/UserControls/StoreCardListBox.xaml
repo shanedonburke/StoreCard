@@ -18,7 +18,6 @@
         BorderThickness="0,0,0,0"
         Foreground="White"
         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-        ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=Items}"
         PreviewKeyDown="CustomListBox_PreviewKeyDown"
         KeyUp="CustomListBox_KeyUp"
         SelectionChanged="CustomListBox_SelectionChanged">

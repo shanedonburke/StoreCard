@@ -137,27 +137,19 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void LoadApps()
     {
-        var installedApps = new List<InstalledApplication>();
         foreach (var app in Applications.GetInstalledApplications())
         {
-            installedApps.Add(app);
-            installedApps.Sort();
-            AppListBox.Items = installedApps;
+            AppListBox.AddItem(app);
         }
     }
 
     private void LoadGames()
     {
-        var installedGames = new List<InstalledGame>();
         foreach (var game in new SteamLibrary().GetInstalledGames()) {
-            installedGames.Add(game);
-            installedGames.Sort();
-            GameListBox.Items = installedGames;
+            GameListBox.AddItem(game);
         }
         foreach (var game in new EpicLibrary().GetInstalledGames()) {
-            installedGames.Add(game);
-            installedGames.Sort();
-            GameListBox.Items = installedGames;
+            GameListBox.AddItem(game);
         }
     }
 

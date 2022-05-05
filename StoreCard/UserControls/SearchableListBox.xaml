@@ -41,7 +41,6 @@
             x:Name="CustomListBox"
             Grid.Row="1"
             Margin="15,10,15,10"
-            Items="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:SearchableListBox}}, Path=FilteredItems}"
             SelectionChanged="CustomListBox_SelectionChanged"
             KeyUp="CustomListBox_KeyUp"
             Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:SearchableListBox}}, Path=AreItemsLoaded, Converter={StaticResource BooleanToVisibilityConverter}}" />

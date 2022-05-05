@@ -38,23 +38,11 @@ public partial class MainWindow : INotifyPropertyChanged
         AddButtonContextMenu.IsOpen = true;
         AddButtonContextMenu.IsOpen = false;
 
+        RefreshItems();
+
         SelectFirstItem();
 
         SearchBox.Focus();
-    }
-
-    public IEnumerable<SavedItem> FilteredItems
-    {
-        get
-        {
-            var items = Category == ItemCategory.None
-                ? _savedItems
-                : _savedItems.Where(item => item.Category == Category);
-            items = items.Where(item => item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()));
-            items = items.Concat(_savedItems.Where(item => !item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()) &&
-                                                           item.Name.ToUpper().Contains(SearchBox.Text.ToUpper())));
-            return items;
-        }
     }
 
     public ItemCategory Category
@@ -64,7 +52,7 @@ public partial class MainWindow : INotifyPropertyChanged
         {
             _category = value;
             OnPropertyChanged(nameof(Category));
-            OnPropertyChanged(nameof(FilteredItems));
+            RefreshItems();
         }
     }
 
@@ -73,7 +61,7 @@ public partial class MainWindow : INotifyPropertyChanged
     public void RefreshSavedItems()
     {
         _savedItems = AppData.ReadItemsFromFile();
-        OnPropertyChanged(nameof(FilteredItems));
+        RefreshItems();
     }
 
     [NotifyPropertyChangedInvocator]
@@ -81,9 +69,24 @@ public partial class MainWindow : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
+    private IEnumerable<SavedItem> FilterItems() {
+        var items = Category == ItemCategory.None
+            ? _savedItems
+            : _savedItems.Where(item => item.Category == Category);
+        items = items.Where(item => item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()));
+        items = items.Concat(_savedItems.Where(item => !item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()) &&
+                                                       item.Name.ToUpper().Contains(SearchBox.Text.ToUpper())));
+        return items;
+    }
+
+    private void RefreshItems()
+    {
+        ItemListBox.Items = FilterItems();
+    }
+
     private void AddApplication_Click(object sender, RoutedEventArgs e)
     {
-        new Windows.AddApplicationWindow().Show();
+        new AddApplicationWindow().Show();
         Close();
     }
 
@@ -241,7 +244,7 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        OnPropertyChanged(nameof(FilteredItems));
+        RefreshItems();
         if (ItemListBox.SelectedIndex == -1)
         {
             SelectFirstItem();
@@ -250,6 +253,6 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void SelectFirstItem()
     {
-        if (FilteredItems.Any()) ItemListBox.SelectedIndex = 0;
+        if (ItemListBox.Items.Any()) ItemListBox.SelectedIndex = 0;
     }
 }

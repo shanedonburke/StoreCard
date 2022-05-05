@@ -131,8 +131,7 @@ namespace StoreCard.Windows
         private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
         {
             var savedItems = AppData.ReadItemsFromFile();
-            var matchingItem = savedItems.Find(i => i.Id == _item.Id) as SavedFileSystemItem;
-            if (matchingItem == null) {
+            if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem) {
                 Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
                 return;
             }

@@ -15,7 +15,8 @@ namespace StoreCard.Windows;
 public partial class TaskbarIconWindow : INotifyPropertyChanged
 {
     private static void OnHotKeyPressed() {
-        if (Application.Current.Windows.Cast<Window>().Any(w => w is RecordHotKeyWindow)) {
+        // Don't open if any windows other than this one are open
+        if (Application.Current.Windows.Count > 1) {
             return;
         }
         new ShowMainWindowCommand().Execute(null);
