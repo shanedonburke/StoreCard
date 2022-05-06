@@ -36,7 +36,7 @@ namespace StoreCard.UserControls
         }
 
         private List<IListBoxItem> _items = new();
-        private ObservableCollection<IListBoxItem> _filteredItems = new();
+        private readonly ObservableCollection<IListBoxItem> _filteredItems = new();
 
         private bool _areItemsLoaded;
 
@@ -97,7 +97,6 @@ namespace StoreCard.UserControls
                     _filteredItems.Move(_filteredItems.IndexOf(_items[i]), i);
                 }
 
-                AreItemsLoaded = true;
                 if (_items.Any())
                 {
                     SelectedIndex = 0;
@@ -108,6 +107,7 @@ namespace StoreCard.UserControls
         public void FinishAddingItems()
         {
             FilterItems();
+            AreItemsLoaded = true;
         }
 
         [NotifyPropertyChangedInvocator]

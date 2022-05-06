@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:StoreCard"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
     mc:Ignorable="d"
@@ -42,8 +41,7 @@
             Grid.Row="1"
             Margin="15,10,15,10"
             SelectionChanged="CustomListBox_SelectionChanged"
-            KeyUp="CustomListBox_KeyUp"
-            Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:SearchableListBox}}, Path=AreItemsLoaded, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            KeyUp="CustomListBox_KeyUp" />
     </Grid>
 </UserControl>
 
