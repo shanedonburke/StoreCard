@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:StoreCard"
     xmlns:windows="clr-namespace:StoreCard.Windows"
+    xmlns:buttons="clr-namespace:StoreCard.UserControls.Buttons"
     mc:Ignorable="d"
     Width="400"
     Height="400"
@@ -61,7 +62,7 @@
                 <ColumnDefinition
                     Width="*" />
             </Grid.ColumnDefinitions>
-            <local:PrimaryButton
+            <buttons:PrimaryButton
                 Grid.Column="2"
                 Margin="0,0,5,0"
                 Text="Save"

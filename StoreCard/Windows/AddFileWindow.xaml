@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:StoreCard"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
+    xmlns:buttons="clr-namespace:StoreCard.UserControls.Buttons"
     Closed="Window_Closed"
     WindowStartupLocation="CenterScreen"
     Title="Add File"
@@ -104,7 +105,7 @@
                 ActivePlaceholder="Enter path to file..."
                 TextChanged="FilePathBox_TextChanged" />
             <!--  "Browse" button for files  -->
-            <local:PrimaryButton
+            <buttons:PrimaryButton
                 x:Name="BrowseFileButton"
                 Grid.Row="0"
                 Grid.Column="2"
@@ -171,7 +172,7 @@
                         <ColumnDefinition
                             Width="*" />
                     </Grid.ColumnDefinitions>
-                    <local:PrimaryButton
+                    <buttons:PrimaryButton
                         Grid.Column="2"
                         Margin="0,0,5,0"
                         Text="Save"
@@ -222,7 +223,7 @@
                 ActivePlaceholder="Enter path to folder..."
                 TextChanged="FolderPathBox_TextChanged" />
             <!--  "Browse" button for folders  -->
-            <local:PrimaryButton
+            <buttons:PrimaryButton
                 x:Name="BrowseFolderButton"
                 Grid.Row="0"
                 Grid.Column="2"
@@ -287,7 +288,7 @@
                         <ColumnDefinition
                             Width="*" />
                     </Grid.ColumnDefinitions>
-                    <local:PrimaryButton
+                    <buttons:PrimaryButton
                         Grid.Column="2"
                         Margin="0,0,5,0"
                         Text="Save"

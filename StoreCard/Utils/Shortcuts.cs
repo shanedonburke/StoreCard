@@ -16,7 +16,7 @@ internal class Shortcuts
     private static string StartupShortcutPath => Path.Join(StartupFolderPath, "StoreCard.lnk");
 
     public static void CreateStartupShortcut() {
-        CreateShortcut(StartupFolderPath, CommandLineArgs.StartMinimized);
+        CreateShortcut(StartupFolderPath, CommandLineOptions.StartMinimized);
     }
 
     public static void RemoveStartupShortcut() {

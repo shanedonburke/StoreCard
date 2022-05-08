@@ -7,6 +7,7 @@
     xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:storeCard="clr-namespace:StoreCard"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
+    xmlns:buttons="clr-namespace:StoreCard.UserControls.Buttons"
     mc:Ignorable="d"
     Width="600"
     Height="400"
@@ -137,7 +138,7 @@
                 <ColumnDefinition
                     Width="*" />
             </Grid.ColumnDefinitions>
-            <storeCard:PrimaryButton
+            <buttons:PrimaryButton
                 Grid.Column="2"
                 Margin="0,0,5,0"
                 Text="Save"

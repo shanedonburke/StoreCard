@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:StoreCard"
     xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
+    xmlns:buttons="clr-namespace:StoreCard.UserControls.Buttons"
     mc:Ignorable="d"
     Width="800"
     Height="600"
@@ -88,7 +89,7 @@
                 ActivePlaceholder="Enter a name..."
                 InactivePlaceholder="Enter a name..."
                 TextChanged="StoreCardTextBox_TextChanged" />
-            <local:PrimaryButton
+            <buttons:PrimaryButton
                 Grid.Column="2"
                 Height="30"
                 Margin="10,0,0,0"
@@ -137,7 +138,7 @@
                     FontSize="14"
                     Content="{Binding ExecutableName}" />
             </Grid>
-            <local:PrimaryButton
+            <buttons:PrimaryButton
                 Height="30"
                 Width="80"
                 HorizontalAlignment="Left"

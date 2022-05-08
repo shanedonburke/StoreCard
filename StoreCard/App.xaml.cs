@@ -18,7 +18,7 @@ namespace StoreCard
 
             new TaskbarIconWindow().Show();
 
-            if (!Environment.GetCommandLineArgs().Contains(CommandLineArgs.StartMinimized))
+            if (!Environment.GetCommandLineArgs().Contains(CommandLineOptions.StartMinimized))
             {
                 new MainWindow().Show();
             }

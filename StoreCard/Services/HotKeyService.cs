@@ -3,7 +3,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
-using StoreCard.Interop;
+using StoreCard.Native;
 using StoreCard.Utils;
 
 namespace StoreCard.Services;

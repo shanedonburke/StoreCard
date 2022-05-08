@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:StoreCard"
     xmlns:items="clr-namespace:StoreCard.Models.Items"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
+    xmlns:buttons="clr-namespace:StoreCard.UserControls.Buttons"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -150,7 +151,7 @@
                         Height="24"
                         Margin="5,5,10,5"
                         RenderOptions.BitmapScalingMode="HighQuality"
-                        Visibility="{Binding BitmapIcon, Converter={StaticResource NullVisibilityConverter}, FallbackValue=Collapsed}"
+                        Visibility="{Binding BitmapIcon, Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}"
                         Source="{Binding BitmapIcon}" />
                     <TextBlock
                         Grid.Column="2"
@@ -162,7 +163,7 @@
                         TextWrapping="NoWrap"
                         Text="{Binding Name}" />
                     <!--  Optional button  -->
-                    <local:PrimaryButton
+                    <buttons:PrimaryButton
                         x:Name="ActionButton"
                         Grid.Column="3"
                         Width="60"
@@ -172,9 +173,9 @@
                         Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=ActionButtonText}"
                         Click="ActionButton_Click"
                         IsTabStop="False">
-                        <local:PrimaryButton.Style>
+                        <buttons:PrimaryButton.Style>
                             <Style
-                                TargetType="local:PrimaryButton">
+                                TargetType="buttons:PrimaryButton">
                                 <Setter
                                     Property="Visibility"
                                     Value="Hidden" />
@@ -197,8 +198,8 @@
                                     </MultiDataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </local:PrimaryButton.Style>
-                    </local:PrimaryButton>
+                        </buttons:PrimaryButton.Style>
+                    </buttons:PrimaryButton>
                 </Grid>
             </DataTemplate>
         </ListBox.ItemTemplate>

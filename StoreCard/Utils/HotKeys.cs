@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
-using StoreCard.Interop;
 using StoreCard.Models;
+using StoreCard.Native;
 
 namespace StoreCard.Utils;
 

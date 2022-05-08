@@ -3,8 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:storeCard="clr-namespace:StoreCard"
     xmlns:converters="clr-namespace:StoreCard.Converters">
-    <converters:NullVisibilityConverter
-        x:Key="NullVisibilityConverter" />
+    <converters:NullToVisibilityConverter
+        x:Key="NullToVisibilityConverter" />
     <BooleanToVisibilityConverter
         x:Key="BooleanToVisibilityConverter" />
     <converters:InverseBooleanToVisibilityConverter

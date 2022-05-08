@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:StoreCard"
     xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
+    xmlns:buttons="clr-namespace:StoreCard.UserControls.Buttons"
     mc:Ignorable="d"
     Width="800"
     Height="600"
@@ -111,7 +112,7 @@
                     <ColumnDefinition
                         Width="*" />
                 </Grid.ColumnDefinitions>
-                <local:PrimaryButton
+                <buttons:PrimaryButton
                     Grid.Column="2"
                     Margin="0,0,5,0"
                     Text="Save"
@@ -176,7 +177,7 @@
                         VerticalAlignment="Center"
                         Foreground="White" />
                 </StackPanel>
-                <local:PrimaryButton
+                <buttons:PrimaryButton
                     Height="30"
                     Grid.Column="2"
                     Margin="0,0,5,0"
@@ -230,7 +231,7 @@
                     InactivePlaceholder="Enter path to executable..."
                     ActivePlaceholder="Enter path to executable..." />
                 <!--  "Browse" button  -->
-                <local:PrimaryButton
+                <buttons:PrimaryButton
                     x:Name="BrowseButton"
                     Grid.Row="0"
                     Grid.Column="2"
@@ -293,7 +294,7 @@
                             <ColumnDefinition
                                 Width="*" />
                         </Grid.ColumnDefinitions>
-                        <local:PrimaryButton
+                        <buttons:PrimaryButton
                             Grid.Column="2"
                             Height="30"
                             Margin="0,15,5,15"
