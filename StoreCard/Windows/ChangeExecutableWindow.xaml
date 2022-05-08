@@ -4,10 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:StoreCard"
     xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
-    xmlns:buttons="clr-namespace:StoreCard.UserControls.Buttons"
     mc:Ignorable="d"
     Width="800"
     Height="600"
@@ -112,12 +110,14 @@
                     <ColumnDefinition
                         Width="*" />
                 </Grid.ColumnDefinitions>
-                <buttons:PrimaryButton
+                <userControls:StoreCardButton
+                    Style="{DynamicResource PrimaryButton}"
                     Grid.Column="2"
                     Margin="0,0,5,0"
                     Text="Save"
                     Click="SaveDefaultButton_Click" />
-                <local:SecondaryButton
+                <userControls:StoreCardButton
+                    Style="{DynamicResource SecondaryButton}"
                     Grid.Column="3"
                     Margin="5,0,0,0"
                     Text="Cancel"
@@ -177,14 +177,16 @@
                         VerticalAlignment="Center"
                         Foreground="White" />
                 </StackPanel>
-                <buttons:PrimaryButton
+                <userControls:StoreCardButton
+                    Style="{DynamicResource PrimaryButton}"
                     Height="30"
                     Grid.Column="2"
                     Margin="0,0,5,0"
                     Text="Save"
                     IsEnabled="{Binding Path=ShouldEnableSaveAppButton}"
                     Click="SaveAppButton_Click" />
-                <local:SecondaryButton
+                <userControls:StoreCardButton
+                    Style="{DynamicResource SecondaryButton}"
                     Height="30"
                     Grid.Column="3"
                     Margin="5,0,0,0"
@@ -231,7 +233,8 @@
                     InactivePlaceholder="Enter path to executable..."
                     ActivePlaceholder="Enter path to executable..." />
                 <!--  "Browse" button  -->
-                <buttons:PrimaryButton
+                <userControls:StoreCardButton
+                    Style="{DynamicResource PrimaryButton}"
                     x:Name="BrowseButton"
                     Grid.Row="0"
                     Grid.Column="2"
@@ -294,14 +297,16 @@
                             <ColumnDefinition
                                 Width="*" />
                         </Grid.ColumnDefinitions>
-                        <buttons:PrimaryButton
+                        <userControls:StoreCardButton
+                            Style="{DynamicResource PrimaryButton}"
                             Grid.Column="2"
                             Height="30"
                             Margin="0,15,5,15"
                             Text="Save"
                             IsEnabled="{Binding Path=DoesExecutableExist}"
                             Click="SaveExecutableButton_Click" />
-                        <local:SecondaryButton
+                        <userControls:StoreCardButton
+                            Style="{DynamicResource SecondaryButton}"
                             Grid.Column="3"
                             Margin="5,15,0,15"
                             Height="30"

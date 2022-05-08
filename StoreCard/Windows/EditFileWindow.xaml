@@ -4,10 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:StoreCard"
     xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
-    xmlns:buttons="clr-namespace:StoreCard.UserControls.Buttons"
     mc:Ignorable="d"
     Width="800"
     Height="600"
@@ -89,7 +87,8 @@
                 ActivePlaceholder="Enter a name..."
                 InactivePlaceholder="Enter a name..."
                 TextChanged="StoreCardTextBox_TextChanged" />
-            <buttons:PrimaryButton
+            <userControls:StoreCardButton
+                Style="{DynamicResource PrimaryButton}"
                 Grid.Column="2"
                 Height="30"
                 Margin="10,0,0,0"
@@ -138,7 +137,8 @@
                     FontSize="14"
                     Content="{Binding ExecutableName}" />
             </Grid>
-            <buttons:PrimaryButton
+            <userControls:StoreCardButton
+                Style="{DynamicResource PrimaryButton}"
                 Height="30"
                 Width="80"
                 HorizontalAlignment="Left"

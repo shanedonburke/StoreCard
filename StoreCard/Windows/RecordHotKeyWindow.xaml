@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:StoreCard"
     xmlns:windows="clr-namespace:StoreCard.Windows"
-    xmlns:buttons="clr-namespace:StoreCard.UserControls.Buttons"
+    xmlns:userControls="clr-namespace:StoreCard.UserControls"
     mc:Ignorable="d"
     Width="400"
     Height="400"
@@ -42,7 +42,8 @@
                     FontWeight="Bold"
                     Margin="0,0,0,10"
                     Text="{Binding Path=HotKeyText}" />
-                <local:SecondaryButton
+                <userControls:StoreCardButton
+                    Style="{DynamicResource SecondaryButton}"
                     Click="ClearButton_Click"
                     Text="Clear"
                     Height="26"
@@ -62,13 +63,15 @@
                 <ColumnDefinition
                     Width="*" />
             </Grid.ColumnDefinitions>
-            <buttons:PrimaryButton
+            <userControls:StoreCardButton
+                Style="{DynamicResource PrimaryButton}"
                 Grid.Column="2"
                 Margin="0,0,5,0"
                 Text="Save"
                 Click="SaveButton_Click" />
             <!--  "Cancel" button for applications  -->
-            <local:SecondaryButton
+            <userControls:StoreCardButton
+                Style="{DynamicResource SecondaryButton}"
                 Grid.Column="3"
                 Margin="5,0,0,0"
                 Text="Cancel"

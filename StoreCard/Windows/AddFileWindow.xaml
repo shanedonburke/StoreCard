@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:StoreCard"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
-    xmlns:buttons="clr-namespace:StoreCard.UserControls.Buttons"
     Closed="Window_Closed"
     WindowStartupLocation="CenterScreen"
     Title="Add File"
@@ -105,7 +104,8 @@
                 ActivePlaceholder="Enter path to file..."
                 TextChanged="FilePathBox_TextChanged" />
             <!--  "Browse" button for files  -->
-            <buttons:PrimaryButton
+            <userControls:StoreCardButton
+                Style="{DynamicResource PrimaryButton}"
                 x:Name="BrowseFileButton"
                 Grid.Row="0"
                 Grid.Column="2"
@@ -172,13 +172,15 @@
                         <ColumnDefinition
                             Width="*" />
                     </Grid.ColumnDefinitions>
-                    <buttons:PrimaryButton
+                    <userControls:StoreCardButton
+                        Style="{DynamicResource PrimaryButton}"
                         Grid.Column="2"
                         Margin="0,0,5,0"
                         Text="Save"
                         IsEnabled="{Binding Path=DoesFileExist}"
                         Click="SaveFileButton_Click" />
-                    <local:SecondaryButton
+                    <userControls:StoreCardButton
+                        Style="{DynamicResource SecondaryButton}"
                         Grid.Column="3"
                         Margin="5,0,0,0"
                         Text="Cancel"
@@ -223,7 +225,8 @@
                 ActivePlaceholder="Enter path to folder..."
                 TextChanged="FolderPathBox_TextChanged" />
             <!--  "Browse" button for folders  -->
-            <buttons:PrimaryButton
+            <userControls:StoreCardButton
+                Style="{DynamicResource PrimaryButton}"
                 x:Name="BrowseFolderButton"
                 Grid.Row="0"
                 Grid.Column="2"
@@ -288,14 +291,16 @@
                         <ColumnDefinition
                             Width="*" />
                     </Grid.ColumnDefinitions>
-                    <buttons:PrimaryButton
+                    <userControls:StoreCardButton
+                        Style="{DynamicResource PrimaryButton}"
                         Grid.Column="2"
                         Margin="0,0,5,0"
                         Text="Save"
                         IsEnabled="{Binding Path=DoesFolderExist}"
                         Click="SaveFolderButton_Click" />
                     <!--  "Cancel" button for applications  -->
-                    <local:SecondaryButton
+                    <userControls:StoreCardButton
+                        Style="{DynamicResource SecondaryButton}"
                         Grid.Column="3"
                         Margin="5,0,0,0"
                         Text="Cancel"
