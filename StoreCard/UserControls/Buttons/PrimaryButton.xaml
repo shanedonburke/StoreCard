@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    d:DataContext="{d:DesignInstance Type=local:PrimaryButton, IsDesignTimeCreatable=False}">
+    d:DataContext="{d:DesignInstance Type=buttons:PrimaryButton, IsDesignTimeCreatable=False}">
     <Border
         HorizontalAlignment="Stretch"
         CornerRadius="5">

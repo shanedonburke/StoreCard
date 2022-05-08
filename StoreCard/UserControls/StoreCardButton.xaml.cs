@@ -1,6 +1,5 @@
-﻿using System.Drawing;
-using System.Windows;
-using StoreCard.UserControls.Buttons;
+﻿using System.Windows;
+using System.Windows.Media;
 
 namespace StoreCard.UserControls;
 
@@ -27,17 +26,17 @@ public partial class StoreCardButton
         new FrameworkPropertyMetadata(14));
 
     public static readonly DependencyProperty BackgroundBrushProperty = DependencyProperty.Register(
-        nameof(BackgroundBrushProperty),
+        nameof(BackgroundBrush),
         typeof(Brush),
         typeof(StoreCardButton));
 
     public static readonly DependencyProperty HoverBackgroundBrushProperty = DependencyProperty.Register(
-        nameof(HoverBackgroundBrushProperty),
+        nameof(HoverBackgroundBrush),
         typeof(Brush),
         typeof(StoreCardButton));
 
     public static readonly DependencyProperty PressedBackgroundBrushProperty = DependencyProperty.Register(
-        nameof(PressedBackgroundBrushProperty),
+        nameof(PressedBackgroundBrush),
         typeof(Brush),
         typeof(StoreCardButton));
 

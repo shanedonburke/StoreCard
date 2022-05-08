@@ -45,7 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ResourceDictionaries\Theme\CustomControls\" />
     <Folder Include="Windows\" />
   </ItemGroup>
 

@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:userControls="clr-namespace:StoreCard.UserControls">
+    <Style
+        x:Key="SecondaryButton"
+        TargetType="{x:Type userControls:StoreCardButton}">
+        <Setter
+            Property="BackgroundBrush"
+            Value="{StaticResource ControlLightColor_Brush}" />
+        <Setter
+            Property="HoverBackgroundBrush"
+            Value="{DynamicResource ControlLightColor_Hover_Brush}" />
+        <Setter
+            Property="PressedBackgroundBrush"
+            Value="{DynamicResource ControlLightColor_Pressed_Brush}" />
+    </Style>
+</ResourceDictionary>
