@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Media.Imaging;
@@ -13,6 +15,21 @@ internal class SteamLibrary : GameLibrary
     public static readonly string? SteamInstallFolder =
         Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam", "InstallPath", null) as string ??
         Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "InstallPath", null) as string;
+
+    private static bool IsFileReady(string filename)
+    {
+        // If the file can be opened for exclusive access it means that the file
+        // is no longer locked by another process.
+        try
+        {
+            using var inputStream = File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None);
+            return inputStream.Length > 0;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
@@ -31,39 +48,39 @@ internal class SteamLibrary : GameLibrary
             .Select(kv => $"{kv["path"].Value}\\steamapps")
             .ToList();
 
-        foreach (var appsFolderPath in steamAppsFolderPaths)
+        foreach (var manifestPath in steamAppsFolderPaths
+                     .Select(appsFolderPath =>
+                         Directory.GetFiles(appsFolderPath, "*.acf", SearchOption.TopDirectoryOnly))
+                     .SelectMany(appManifestPaths => appManifestPaths))
         {
-            var appManifestPaths = Directory.GetFiles(appsFolderPath, "*.acf", SearchOption.AllDirectories);
-            foreach (var manifestPath in appManifestPaths)
-            {
-                var manifest = KeyValue.LoadFromString(File.ReadAllText(manifestPath));
-                if (manifest == null) continue;
+            Debug.WriteLine(IsFileReady(manifestPath));
+            var manifest = KeyValue.LoadFromString(File.ReadAllText(manifestPath));
+            if (manifest == null) continue;
 
-                var name = manifest["name"].Value;
-                var appId = manifest["appid"].Value;
-                if (name == null || appId == null) continue;
+            var name = manifest["name"].Value;
+            var appId = manifest["appid"].Value;
+            if (name == null || appId == null) continue;
 
-                var iconPath = $"{libraryCacheFolder}\\{appId}_icon.jpg";
-                if (!File.Exists(iconPath)) continue;
+            var iconPath = $"{libraryCacheFolder}\\{appId}_icon.jpg";
+            if (!File.Exists(iconPath)) continue;
 
-                Stream imageStreamSource = new FileStream(iconPath,
-                    FileMode.Open,
-                    FileAccess.Read,
-                    FileShare.Read);
-                var decoder = new JpegBitmapDecoder(imageStreamSource,
-                    BitmapCreateOptions.PreservePixelFormat,
-                    BitmapCacheOption.Default);
-                BitmapSource bitmapIcon = decoder.Frames[0];
+            Stream imageStreamSource = new FileStream(iconPath,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read);
+            var decoder = new JpegBitmapDecoder(imageStreamSource,
+                BitmapCreateOptions.PreservePixelFormat,
+                BitmapCacheOption.Default);
+            BitmapSource bitmapIcon = decoder.Frames[0];
 
-                // From https://stackoverflow.com/a/61681670
-                var cached = new CachedBitmap(
-                    bitmapIcon,
-                    BitmapCreateOptions.None,
-                    BitmapCacheOption.OnLoad);
-                cached.Freeze();
+            // From https://stackoverflow.com/a/61681670
+            var cached = new CachedBitmap(
+                bitmapIcon,
+                BitmapCreateOptions.None,
+                BitmapCacheOption.OnLoad);
+            cached.Freeze();
 
-                yield return new InstalledSteamGame(name, cached, appId);
-            }
+            yield return new InstalledSteamGame(name, cached, appId);
         }
     }
 }
