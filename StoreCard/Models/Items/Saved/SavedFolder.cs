@@ -1,4 +1,6 @@
-﻿namespace StoreCard.Models.Items.Saved;
+﻿using System.IO;
+
+namespace StoreCard.Models.Items.Saved;
 
 internal class SavedFolder : SavedFileSystemItem
 {
@@ -8,4 +10,8 @@ internal class SavedFolder : SavedFileSystemItem
     }
 
     public override ItemCategory Category => ItemCategory.Folder;
+
+    public override bool Exists() {
+        return Directory.Exists(Path);
+    }
 }

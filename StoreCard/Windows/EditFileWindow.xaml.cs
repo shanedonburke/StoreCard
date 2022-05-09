@@ -21,6 +21,15 @@ namespace StoreCard.Windows
     /// </summary>
     public partial class EditFileWindow : INotifyPropertyChanged
     {
+        public EditFileWindow(SavedFileSystemItem item) {
+            _item = item;
+
+            DataContext = this;
+            InitializeComponent();
+
+            NameBox.Text = item.Name;
+        }
+
         private SavedFileSystemItem _item;
 
         public string Path => _item.Path;
@@ -42,15 +51,6 @@ namespace StoreCard.Windows
                     Int32Rect.Empty,
                     BitmapSizeOptions.FromEmptyOptions());
             }
-        }
-
-        public EditFileWindow(SavedFileSystemItem item) {
-            _item = item;
-
-            DataContext = this;
-            InitializeComponent();
-
-            NameBox.Text = item.Name;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -95,8 +95,7 @@ namespace StoreCard.Windows
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != _item.Id).ToList();
-            AppData.SaveItemsToFile(savedItems);
+            AppData.DeleteItemAndSave(_item);
             Close();
         }
 

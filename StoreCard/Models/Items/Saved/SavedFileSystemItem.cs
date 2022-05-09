@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using StoreCard.Windows;
 
 namespace StoreCard.Models.Items.Saved;
 
@@ -25,6 +26,12 @@ public abstract class SavedFileSystemItem : SavedItem
 
     public override void Open()
     {
+        if (!Exists())
+        {
+            new MissingFileWindow(this).ShowDialog();
+            return;
+        }
+
         using var openProcess = new Process();
 
         openProcess.StartInfo.FileName = ExecutablePath;
@@ -36,4 +43,6 @@ public abstract class SavedFileSystemItem : SavedItem
     {
         ExecutablePath = path.StartsWith("::") ? DEFAULT_EXECUTABLE : path;
     }
+
+    public abstract bool Exists();
 }

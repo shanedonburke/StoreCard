@@ -207,9 +207,7 @@ public partial class MainWindow : INotifyPropertyChanged
     private void DeleteItem_Click(object sender, RoutedEventArgs e)
     {
         if (ItemListBox.SelectedIndex == -1) return;
-        var savedItems = AppData.ReadItemsFromFile();
-        savedItems.RemoveAt(ItemListBox.SelectedIndex);
-        AppData.SaveItemsToFile(savedItems);
+        AppData.DeleteItemAndSave((SavedItem)ItemListBox.SelectedItem);
         RefreshSavedItems();
     }
 

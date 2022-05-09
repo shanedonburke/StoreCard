@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using StoreCard.Models;
 using StoreCard.Models.Items.Saved;
@@ -54,6 +55,12 @@ internal class AppData
     public static void SaveConfigToFile(UserConfig config)
     {
         SerializeObjectToFile(config, GetConfigFilePath());
+    }
+
+    public static void DeleteItemAndSave(SavedItem item)
+    {
+        var newItems = ReadItemsFromFile().Where(i => i.Id != item.Id).ToList();
+        SaveItemsToFile(newItems);
     }
 
     private static void SerializeObjectToFile(object objectToSave, string filePath)
