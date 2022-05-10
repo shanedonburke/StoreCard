@@ -30,6 +30,8 @@ public abstract class SavedItem : IListBoxItem
 
     [JsonIgnore] public virtual ImageSource? PrefixIcon => null;
 
+    [JsonIgnore] public virtual string SecondaryText => Empty;
+
     protected SavedItem(string id, string name, string? base64Icon)
     {
         Id = id;

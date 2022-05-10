@@ -10,4 +10,6 @@ public interface IListBoxItem : IComparable<IListBoxItem>
     public ImageSource? BitmapIcon { get; }
         
     public ImageSource? PrefixIcon { get; }
+
+    public string SecondaryText { get; }
 }

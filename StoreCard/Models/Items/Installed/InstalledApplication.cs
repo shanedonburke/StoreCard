@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using static System.String;
 
 namespace StoreCard.Models.Items.Installed;
 
@@ -15,6 +14,8 @@ public class InstalledApplication : IListBoxItem
         BitmapIcon = icon;
     }
 
+    public string SecondaryText => string.Empty;
+
     public string Name { get; }
     public string AppUserModelId { get; }
     public string? ExecutablePath { get; }
@@ -22,6 +23,6 @@ public class InstalledApplication : IListBoxItem
     public ImageSource? PrefixIcon => null;
 
     public int CompareTo(IListBoxItem? other) {
-        return Compare(Name, other?.Name, StringComparison.Ordinal);
+        return string.Compare(Name, other?.Name, StringComparison.Ordinal);
     }
 }

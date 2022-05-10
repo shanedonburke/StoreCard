@@ -15,6 +15,8 @@ internal class InstalledEpicGame : InstalledGame
         AppName = appName;
     }
 
+    public string SecondaryText => "Epic Games";
+
     public string AppName { get;  }
 
     public override SavedItem SavedItem => new SavedEpicGame(this);
