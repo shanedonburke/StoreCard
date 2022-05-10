@@ -73,18 +73,16 @@
                             <ControlTemplate
                                 TargetType="{x:Type Button}">
                                 <Border
-                                    Background="{TemplateBinding Background}">
-                                    <Label
+                                    Background="{TemplateBinding Background}"
+                                    Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardButton}}, Path=Height}">
+                                    <TextBlock
                                         Padding="0"
                                         HorizontalAlignment="Center"
-                                        HorizontalContentAlignment="Center"
-                                        VerticalAlignment="Stretch"
-                                        VerticalContentAlignment="Center"
-                                        FontFamily="Segoe UI"
-                                        Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardButton}}, Path=Text}">
-                                        <Label.Style>
+                                        VerticalAlignment="Center"
+                                        Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardButton}}, Path=Text}">
+                                        <TextBlock.Style>
                                             <Style
-                                                TargetType="Label">
+                                                TargetType="TextBlock">
                                                 <Style.Triggers>
                                                     <DataTrigger
                                                         Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}"
@@ -104,8 +102,8 @@
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </Label.Style>
-                                    </Label>
+                                        </TextBlock.Style>
+                                    </TextBlock>
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>

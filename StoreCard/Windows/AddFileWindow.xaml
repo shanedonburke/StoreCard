@@ -90,7 +90,6 @@
             <TextBlock
                 Grid.Column="0"
                 VerticalAlignment="Center"
-                FontFamily="Segoe UI"
                 FontSize="14"
                 Foreground="White"
                 Text="Path:" />
@@ -148,7 +147,6 @@
                     <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
-                        FontFamily="Segoe UI"
                         FontSize="14"
                         FontWeight="Bold"
                         Foreground="White"
@@ -211,7 +209,6 @@
             <TextBlock
                 Grid.Column="0"
                 VerticalAlignment="Center"
-                FontFamily="Segoe UI"
                 FontSize="14"
                 Foreground="White"
                 Text="Path:" />
@@ -268,7 +265,6 @@
                     <TextBlock
                         Grid.Column="1"
                         VerticalAlignment="Center"
-                        FontFamily="Segoe UI"
                         FontSize="14"
                         FontWeight="Bold"
                         Foreground="White"

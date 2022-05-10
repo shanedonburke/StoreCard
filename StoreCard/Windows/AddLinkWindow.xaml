@@ -51,7 +51,6 @@
                 VerticalAlignment="Top"
                 VerticalContentAlignment="Center"
                 Foreground="White"
-                FontFamily="Segoe UI"
                 FontSize="14"
                 Content="URL:" />
             <!--  URL box  -->
@@ -70,7 +69,6 @@
                 VerticalAlignment="Top"
                 VerticalContentAlignment="Center"
                 Foreground="White"
-                FontFamily="Segoe UI"
                 FontSize="14"
                 Content="Title:" />
             <!-- Title box  -->
@@ -90,7 +88,6 @@
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Center"
                 Foreground="White"
-                FontFamily="Segoe UI"
                 FontSize="14"
                 Content="Preview:" />
             <Grid

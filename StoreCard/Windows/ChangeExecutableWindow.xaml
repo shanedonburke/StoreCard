@@ -164,7 +164,6 @@
                         Text="Selected:"
                         FontSize="12"
                         VerticalAlignment="Center"
-                        FontFamily="Segoe UI"
                         Foreground="#AAAAAA" />
                     <Image
                         Width="24"
@@ -219,7 +218,6 @@
                 <TextBlock
                     Grid.Column="0"
                     VerticalAlignment="Center"
-                    FontFamily="Segoe UI"
                     FontSize="14"
                     Foreground="White"
                     Text="Path:" />
@@ -276,7 +274,6 @@
                         <TextBlock
                             Grid.Column="1"
                             VerticalAlignment="Center"
-                            FontFamily="Segoe UI"
                             FontSize="14"
                             FontWeight="Bold"
                             Foreground="White"

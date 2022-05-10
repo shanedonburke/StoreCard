@@ -327,7 +327,6 @@
                     <TextBlock
                         Margin="0,0,15,0"
                         VerticalAlignment="Center"
-                        FontFamily="Segoe UI"
                         FontSize="18"
                         Text="All">
                         <TextBlock.Style>
@@ -351,7 +350,6 @@
                     <TextBlock
                         Margin="0,0,15,0"
                         VerticalAlignment="Center"
-                        FontFamily="Segoe UI"
                         FontSize="18"
                         Text="Apps">
                         <TextBlock.Style>
@@ -375,7 +373,6 @@
                     <TextBlock
                         Margin="0,0,15,0"
                         VerticalAlignment="Center"
-                        FontFamily="Segoe UI"
                         FontSize="18"
                         Text="Games">
                         <TextBlock.Style>
@@ -399,7 +396,6 @@
                     <TextBlock
                         Margin="0,0,15,0"
                         VerticalAlignment="Center"
-                        FontFamily="Segoe UI"
                         FontSize="18"
                         Text="Folders">
                         <TextBlock.Style>
@@ -423,7 +419,6 @@
                     <TextBlock
                         Margin="0,0,15,0"
                         VerticalAlignment="Center"
-                        FontFamily="Segoe UI"
                         FontSize="18"
                         Text="Files">
                         <TextBlock.Style>
@@ -446,7 +441,6 @@
                     </TextBlock>
                     <TextBlock
                         VerticalAlignment="Center"
-                        FontFamily="Segoe UI"
                         FontSize="18"
                         Text="Links">
                         <TextBlock.Style>

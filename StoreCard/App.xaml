@@ -8,6 +8,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary
+                    Source="ResourceDictionaries/Fonts.xaml" />
+                <ResourceDictionary
                     Source="ResourceDictionaries/Theme/Colors.xaml" />
                 <ResourceDictionary
                     Source="ResourceDictionaries/VisibilityConverters.xaml" />

@@ -75,7 +75,6 @@
                 CaretBrush="White"
                 BorderBrush="#00000000"
                 BorderThickness="0,0,0,0"
-                FontFamily="Segoe UI"
                 FontSize="14"
                 MaxLines="1"
                 PreviewKeyDown="CustomTextBox_PreviewKeyDown"
