@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using StoreCard.Commands;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Utils;
@@ -6,18 +7,27 @@ using StoreCard.Utils;
 namespace StoreCard.Windows
 {
     /// <summary>
-    /// Interaction logic for MissingFileWindow.xaml
+    /// Interaction logic for MissingItemWindow.xaml
     /// </summary>
-    public partial class MissingFileWindow
+    public partial class MissingItemWindow
     {
-        public MissingFileWindow(SavedFileSystemItem item)
+        public MissingItemWindow(SavedItem item, Action editAction) : this(item)
+        {
+            _editAction = editAction;
+        }
+
+        public MissingItemWindow(SavedItem item)
         {
             _item = item;
             DataContext = this;
             InitializeComponent();
         }
 
-        private readonly SavedFileSystemItem _item;
+        public bool ShowEditButton => _editAction != null;
+
+        private readonly SavedItem _item;
+
+        private readonly Action? _editAction = null;
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
@@ -28,7 +38,7 @@ namespace StoreCard.Windows
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            new EditFileWindow(_item).Show();
+            _editAction?.Invoke();
             Close();
         }
     }

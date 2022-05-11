@@ -28,7 +28,7 @@ public abstract class SavedFileSystemItem : SavedItem
     {
         if (!Exists())
         {
-            new MissingFileWindow(this).ShowDialog();
+            new MissingItemWindow(this, () => new EditFileWindow(this).Show()).ShowDialog();
             return;
         }
 
