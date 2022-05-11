@@ -18,7 +18,7 @@ public class SavedExecutable : SavedItem
     public override void Open()
     {
         if (!File.Exists(Path)) {
-            new MissingItemWindow(this).ShowDialog();
+            new MissingItemWindow(this, () => new EditExecutableWindow(this).Show()).ShowDialog();
             return;
         }
 

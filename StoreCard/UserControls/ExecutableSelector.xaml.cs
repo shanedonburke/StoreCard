@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -20,24 +21,45 @@ namespace StoreCard.UserControls;
 /// </summary>
 public partial class ExecutableSelector : INotifyPropertyChanged
 {
+    public static readonly RoutedEvent FinishedEvent = EventManager.RegisterRoutedEvent(
+        nameof(Finished),
+        RoutingStrategy.Bubble,
+        typeof(RoutedEventHandler),
+        typeof(ExecutableSelector));
+
+    private SavedExecutable? _executable;
+
+    private bool _doesExecutableExist;
+
+    private ImageSource? _executableIcon;
+
+    private string _executableName = "";
+
     public ExecutableSelector()
     {
         DataContext = this;
         InitializeComponent();
     }
 
-    public ExecutableSelector(SavedExecutable executable) : this()
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public event RoutedEventHandler Finished
     {
-        _executable = executable;
-        PathBox.Text = executable.Path;
-        NameBox.Text = executable.Name;
+        add => AddHandler(FinishedEvent, value);
+        remove => RemoveHandler(FinishedEvent, value);
     }
 
-    public static readonly RoutedEvent FinishedEvent = EventManager.RegisterRoutedEvent(
-        nameof(Finished),
-        RoutingStrategy.Bubble,
-        typeof(RoutedEventHandler),
-        typeof(ExecutableSelector));
+    public SavedExecutable? Executable
+    {
+        get => _executable;
+        set
+        {
+            _executable = value;
+            if (value == null) return;
+            PathBox.Text = value.Path;
+            NameBox.Text = value.Name;
+        }
+    }
 
     public string ExecutableName
     {
@@ -69,21 +91,7 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         }
     }
 
-    private readonly SavedExecutable? _executable;
-
-    private bool _doesExecutableExist;
-
-    private ImageSource? _executableIcon;
-
-    private string _executableName = "";
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public event RoutedEventHandler Finished
-    {
-        add => AddHandler(FinishedEvent, value);
-        remove => RemoveHandler(FinishedEvent, value);
-    }
+    public bool ShouldShowDeleteButton => Executable != null;
 
     [NotifyPropertyChangedInvocator]
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
@@ -129,13 +137,32 @@ public partial class ExecutableSelector : INotifyPropertyChanged
     {
         var base64Icon = ExecutableIcon != null ? Images.ImageToBase64((BitmapSource) ExecutableIcon) : null;
         // Don't include the executable we are editing, if there is one
-        var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != _executable?.Id).ToList();
+        var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != Executable?.Id).ToList();
         savedItems.Add(new SavedExecutable(Guid.NewGuid().ToString(), ExecutableName, base64Icon, PathBox.Text));
         AppData.SaveItemsToFile(savedItems);
-        RaiseEvent(new RoutedEventArgs(FinishedEvent));
+        Finish();
     }
 
     private void CancelButton_Click(object sender, RoutedEventArgs e)
+    {
+        Finish();
+    }
+
+    private void DeleteButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (Executable != null)
+        {
+            AppData.DeleteItemAndSave(Executable);
+        }
+        else
+        {
+            Debug.WriteLine("Tried to delete executable, but no executable was being edited.");
+        }
+
+        Finish();
+    }
+
+    private void Finish()
     {
         RaiseEvent(new RoutedEventArgs(FinishedEvent));
     }

@@ -53,7 +53,7 @@
                 Grid.Column="2"
                 HorizontalAlignment="Stretch"
                 Text="Edit"
-                Visibility="{Binding ShowEditButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Visibility="{Binding ShouldShowEditButton, Converter={StaticResource BooleanToVisibilityConverter}}"
                 Click="EditButton_Click" />
         </Grid>
     </Grid>

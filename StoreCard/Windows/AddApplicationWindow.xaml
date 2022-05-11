@@ -219,6 +219,7 @@
         <!--  "Other executable" content  -->
         <userControls:ExecutableSelector
             Grid.Row="1"
+            Margin="15"
             VerticalAlignment="Stretch"
             Visibility="{Binding IsChecked, ElementName=OtherExecutableRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}"
             Finished="ExecutableSelector_Finished"/>

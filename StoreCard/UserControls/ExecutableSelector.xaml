@@ -7,7 +7,6 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=userControls:ExecutableSelector, IsDesignTimeCreatable=False}">
     <Grid
-        Margin="15,10,15,0"
         VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition
@@ -117,7 +116,6 @@
             </Grid>
             <Grid
                 Grid.Row="2"
-                Margin="0,0,0,15"
                 VerticalAlignment="Bottom">
                 <Grid.RowDefinitions>
                     <RowDefinition
@@ -133,6 +131,13 @@
                     <ColumnDefinition
                         Width="*" />
                 </Grid.ColumnDefinitions>
+                <userControls:StoreCardButton
+                    Style="{DynamicResource DeleteButton}"
+                    Grid.Column="0"
+                    Margin="0,0,5,0"
+                    Text="Delete"
+                    Visibility="{Binding ShouldShowDeleteButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Click="DeleteButton_Click" />
                 <userControls:StoreCardButton
                     Style="{DynamicResource PrimaryButton}"
                     Grid.Column="2"
