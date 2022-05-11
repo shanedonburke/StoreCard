@@ -12,6 +12,7 @@
     Background="{DynamicResource AppBackgroundColor_Brush}"
     WindowStartupLocation="CenterScreen"
     Title="Missing Item"
+    Closed="Window_Closed"
     d:DataContext="{d:DesignInstance Type=windows:MissingItemWindow, IsDesignTimeCreatable=False}">
     <Grid
         Margin="15">
@@ -52,6 +53,7 @@
                 Grid.Column="2"
                 HorizontalAlignment="Stretch"
                 Text="Edit"
+                Visibility="{Binding ShowEditButton, Converter={StaticResource BooleanToVisibilityConverter}}"
                 Click="EditButton_Click" />
         </Grid>
     </Grid>

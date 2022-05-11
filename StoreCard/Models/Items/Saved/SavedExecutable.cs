@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.IO;
+using StoreCard.Windows;
 
 namespace StoreCard.Models.Items.Saved;
 
@@ -15,6 +17,11 @@ internal class SavedExecutable : SavedItem
 
     public override void Open()
     {
+        if (!File.Exists(Path)) {
+            new MissingItemWindow(this).ShowDialog();
+            return;
+        }
+
         Process.Start(Path);
     }
 }

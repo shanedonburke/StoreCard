@@ -27,12 +27,11 @@ namespace StoreCard.Windows
 
         private readonly SavedItem _item;
 
-        private readonly Action? _editAction = null;
+        private readonly Action? _editAction;
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             AppData.DeleteItemAndSave(_item);
-            new ShowMainWindowCommand().Execute(null);
             Close();
         }
 
@@ -40,6 +39,11 @@ namespace StoreCard.Windows
         {
             _editAction?.Invoke();
             Close();
+        }
+
+        private void Window_Closed(object? sender, EventArgs e)
+        {
+            new ShowMainWindowCommand().Execute(null);
         }
     }
 }
