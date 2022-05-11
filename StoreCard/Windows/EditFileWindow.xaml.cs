@@ -21,7 +21,8 @@ namespace StoreCard.Windows
     /// </summary>
     public partial class EditFileWindow : INotifyPropertyChanged
     {
-        public EditFileWindow(SavedFileSystemItem item) {
+        public EditFileWindow(SavedFileSystemItem item)
+        {
             _item = item;
 
             DataContext = this;
@@ -38,13 +39,18 @@ namespace StoreCard.Windows
 
         public string ExecutableName => _item.ExecutableName;
 
-        public ImageSource ExecutableIcon {
-            get {
+        public ImageSource ExecutableIcon
+        {
+            get
+            {
                 var execPath = _item.ExecutablePath;
-                if (!File.Exists(execPath)) {
+                if (!File.Exists(execPath))
+                {
                     execPath = SavedFileSystemItem.DEFAULT_EXECUTABLE;
                 }
-                var icon = System.Drawing.Icon.ExtractAssociatedIcon(execPath) ?? System.Drawing.Icon.ExtractAssociatedIcon(SavedFileSystemItem.DEFAULT_EXECUTABLE);
+
+                var icon = System.Drawing.Icon.ExtractAssociatedIcon(execPath) ??
+                           System.Drawing.Icon.ExtractAssociatedIcon(SavedFileSystemItem.DEFAULT_EXECUTABLE);
                 Debug.Assert(icon != null, nameof(icon) + " != null");
                 return Imaging.CreateBitmapSourceFromHIcon(
                     icon.Handle,
@@ -55,51 +61,63 @@ namespace StoreCard.Windows
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void ChangeExecutableButton_Click(object sender, RoutedEventArgs e) {
+        private void ChangeExecutableButton_Click(object sender, RoutedEventArgs e)
+        {
             if (new ChangeExecutableWindow(_item).ShowDialog() != true) return;
             var savedItems = AppData.ReadItemsFromFile();
-            if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem) {
+            if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem)
+            {
                 Debug.WriteLine("Failed to find matching item for edit file window.");
                 return;
             }
+
             _item = matchingItem;
             OnPropertyChanged(nameof(ExecutableName));
             OnPropertyChanged(nameof(ExecutableIcon));
         }
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void Window_Closed(object? sender, EventArgs e) {
+        private void Window_Closed(object? sender, EventArgs e)
+        {
             new ShowMainWindowCommand().Execute(null);
         }
 
-        private void SaveNameButton_Click(object sender, RoutedEventArgs e) {
+        private void SaveNameButton_Click(object sender, RoutedEventArgs e)
+        {
             var name = NameBox.Text;
             _item.Name = name;
             var savedItems = AppData.ReadItemsFromFile();
             var matchingItem = savedItems.Find(i => i.Id == _item.Id);
-            if (matchingItem != null) {
+            if (matchingItem != null)
+            {
                 matchingItem.Name = name;
                 AppData.SaveItemsToFile(savedItems);
                 OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
-            } else {
+            }
+            else
+            {
                 Debug.WriteLine("Tried to change item name, but no matching stored item was found.");
             }
         }
 
-        private void StoreCardTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+        private void StoreCardTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
             OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
         }
 
-        private void DeleteButton_Click(object sender, RoutedEventArgs e) {
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
             AppData.DeleteItemAndSave(_item);
             Close();
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e) {
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
             Close();
         }
     }

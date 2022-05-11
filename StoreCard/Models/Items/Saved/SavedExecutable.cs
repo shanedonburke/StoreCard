@@ -4,7 +4,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Models.Items.Saved;
 
-internal class SavedExecutable : SavedItem
+public class SavedExecutable : SavedItem
 {
     public string Path { get; }
 

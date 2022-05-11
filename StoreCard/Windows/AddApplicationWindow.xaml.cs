@@ -27,12 +27,6 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class AddApplicationWindow : INotifyPropertyChanged
 {
-    private bool _doesExecutableExist;
-
-    private ImageSource? _executableIcon;
-
-    private string _executableName = "";
-
     public AddApplicationWindow()
     {
         InitializeComponent();
@@ -81,6 +75,12 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     public ImageSource? SelectedGameIcon => (GameListBox.SelectedItem as InstalledGame)?.BitmapIcon;
 
+    private bool _doesExecutableExist;
+
+    private ImageSource? _executableIcon;
+
+    private string _executableName = "";
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
     [NotifyPropertyChangedInvocator]
@@ -96,27 +96,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     private void SaveGameButton_Click(object sender, RoutedEventArgs e)
     {
         SaveSelectedGameAndClose();
-    }
-
-    private void BrowseButton_Click(object sender, RoutedEventArgs e)
-    {
-        var openFileDialog = new OpenFileDialog
-        {
-            Filter = "Executables|*.exe|All Files (*.*)|*.*",
-            InitialDirectory = Environment.ExpandEnvironmentVariables("%ProgramW6432%"),
-            Title = "Select Executable"
-        };
-
-        if (openFileDialog.ShowDialog() == true) ExecutablePathBox.Text = openFileDialog.FileName;
-    }
-
-    private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
-    {
-        var base64Icon = ExecutableIcon != null ? Images.ImageToBase64((BitmapSource) ExecutableIcon) : null;
-        var savedItems = AppData.ReadItemsFromFile();
-        savedItems.Add(new SavedExecutable(Guid.NewGuid().ToString(), ExecutableName, base64Icon, ExecutablePathBox.Text));
-        AppData.SaveItemsToFile(savedItems);
-        Close();
     }
 
     private void SaveSelectedAppAndClose()
@@ -204,24 +183,8 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         e.Handled = true;
     }
 
-    private void ExecutablePathBox_TextChanged(object sender, TextChangedEventArgs e)
+    private void ExecutableSelector_Finished(object sender, RoutedEventArgs e)
     {
-        var text = ExecutablePathBox.Text;
-        DoesExecutableExist = File.Exists(text);
-        if (!DoesExecutableExist) return;
-        // Take file name without '.exe'
-        ExecutableName = text.Split(@"\").Last().Split(".")[0];
-
-        var icon = System.Drawing.Icon.ExtractAssociatedIcon(text);
-        if (icon != null)
-            ExecutableIcon = Imaging.CreateBitmapSourceFromHIcon(
-                icon.Handle,
-                Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());
-    }
-
-    private void ExecutableNameBox_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        ExecutableName = ExecutableNameBox.Text;
+        Close();
     }
 }
