@@ -56,9 +56,16 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         {
             _executable = value;
             OnPropertyChanged(nameof(ShouldShowDeleteButton));
-            if (value == null) return;
-            PathBox.Text = value.Path;
-            NameBox.Text = value.Name;
+            if (value != null)
+            {
+                PathBox.Text = value.Path;
+                NameBox.Text = value.Name;
+            }
+            else
+            {
+                PathBox.Text = string.Empty;
+                NameBox.Text = string.Empty;
+            }
         }
     }
 
