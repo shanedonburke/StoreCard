@@ -29,7 +29,7 @@ public partial class ExecutableSelector : INotifyPropertyChanged
 
     private SavedExecutable? _executable;
 
-    private bool _doesExecutableExist;
+    private bool _isExecutableValid;
 
     private ImageSource? _executableIcon;
 
@@ -79,13 +79,13 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         }
     }
 
-    public bool DoesExecutableExist
+    public bool IsExecutableValid
     {
-        get => _doesExecutableExist;
+        get => _isExecutableValid;
         set
         {
-            _doesExecutableExist = value;
-            OnPropertyChanged(nameof(DoesExecutableExist));
+            _isExecutableValid = value;
+            OnPropertyChanged(nameof(IsExecutableValid));
         }
     }
 
@@ -110,8 +110,10 @@ public partial class ExecutableSelector : INotifyPropertyChanged
     private void PathBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         var text = PathBox.Text;
-        DoesExecutableExist = File.Exists(text);
-        if (!DoesExecutableExist) return;
+        
+        IsExecutableValid = File.Exists(text) && text.EndsWith(".exe");
+        if (!IsExecutableValid) return;
+        
         // Take file name without '.exe'
         ExecutableName = text.Split(@"\").Last().Split(".")[0];
         NameBox.Text = ExecutableName;
