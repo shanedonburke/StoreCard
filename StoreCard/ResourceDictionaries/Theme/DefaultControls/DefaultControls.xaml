@@ -6,5 +6,7 @@
             Source="RadioButton.xaml" />
         <ResourceDictionary
             Source="ScrollBar.xaml" />
+        <ResourceDictionary
+            Source="ContextMenu.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

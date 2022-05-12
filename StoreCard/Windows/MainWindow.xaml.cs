@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using StoreCard.Commands;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
 using StoreCard.Utils;
@@ -53,6 +54,10 @@ public partial class MainWindow : INotifyPropertyChanged
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
+
+    private static uint Nfmod(float a, float b) {
+        return (uint)(a - b * Math.Floor(a / b));
+    }
 
     public void RefreshSavedItems()
     {
@@ -220,22 +225,27 @@ public partial class MainWindow : INotifyPropertyChanged
         OpenSelectedItem();
     }
 
-    private static uint Nfmod(float a, float b)
-    {
-        return (uint) (a - b * Math.Floor(a / b));
-    }
-
-    private void ContextMenuEditFileItem_Click(object sender, RoutedEventArgs e)
+    private void EditFileMenuItem_Click(object sender, RoutedEventArgs e)
     {
         if (ItemListBox.SelectedItem is SavedFileSystemItem item)
         {
-            new EditFileWindow(item).Show();
-            Close();
+            new EditFileCommand(item).Execute();
         }
         else
         {
-            Debug.WriteLine("Tried to open edit file window for non-file item.");
+            Debug.WriteLine("Tried to edit the selected item as a file, but the item is not a file or folder.");
         }
+        Close();
+    }
+
+    private void EditExecutableMenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        if (ItemListBox.SelectedItem is SavedExecutable executable) {
+            new EditExecutableCommand(executable).Execute();
+        } else {
+            Debug.WriteLine("Tried to edit the selected item as an executable, but the item is not an executable.");
+        }
+        Close();
     }
 
     private void SettingsButton_Click(object sender, RoutedEventArgs e)
