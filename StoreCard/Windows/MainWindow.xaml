@@ -53,8 +53,8 @@
                 </MenuItem.Header>
             </MenuItem>
             <MenuItem
-                x:Name="ContextMenuEditFileItem"
-                Click="ContextMenuEditFileItem_Click">
+                x:Name="EditFileMenuItem"
+                Click="EditFileMenuItem_Click">
                 <MenuItem.Style>
                     <Style
                         TargetType="{x:Type MenuItem}">
@@ -62,18 +62,45 @@
                             Property="Visibility"
                             Value="Collapsed" />
                         <Style.Triggers>
-                            <!--  Show if selected item is folder  -->
+                            <!--  Show if selected item is a folder  -->
                             <DataTrigger
-                                Binding="{Binding Category}"
-                                Value="3">
+                                Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                Value="Folder">
                                 <Setter
                                     Property="Visibility"
                                     Value="Visible" />
                             </DataTrigger>
-                            <!--  Show if selected item is file  -->
+                            <!--  Show if selected item is a file  -->
                             <DataTrigger
-                                Binding="{Binding Category}"
-                                Value="4">
+                                Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                Value="File">
+                                <Setter
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+                <MenuItem.Header>
+                    <TextBlock
+                        Margin="-20,0,0,0"
+                        Text="Edit..." />
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem
+                x:Name="EditExecutableMenuItem_Click"
+                Click="EditExecutableMenuItem_Click">
+                <MenuItem.Style>
+                    <Style
+                        TargetType="{x:Type MenuItem}">
+                        <Setter
+                            Property="Visibility"
+                            Value="Collapsed" />
+                        <Style.Triggers>
+                            <!--  Show if selected item is an executable  -->
+                            <DataTrigger
+                                Binding="{Binding SpecificCategory, Converter={StaticResource ValueToStringConverter}}"
+                                Value="Executable">
                                 <Setter
                                     Property="Visibility"
                                     Value="Visible" />

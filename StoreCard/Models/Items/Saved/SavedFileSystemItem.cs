@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using StoreCard.Commands;
 using StoreCard.Windows;
 
 namespace StoreCard.Models.Items.Saved;
@@ -28,7 +29,7 @@ public abstract class SavedFileSystemItem : SavedItem
     {
         if (!Exists())
         {
-            new MissingItemWindow(this, () => new EditFileWindow(this).Show()).ShowDialog();
+            new MissingItemWindow(this, () => new EditFileCommand(this).Execute()).ShowDialog();
             return;
         }
 
