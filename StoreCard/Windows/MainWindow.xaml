@@ -7,6 +7,7 @@
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
+    xmlns:saved="clr-namespace:StoreCard.Models.Items.Saved"
     Title="StoreCard"
     Width="500"
     Height="600"
@@ -49,7 +50,7 @@
                         <Style.Triggers>
                             <!--  Show if selected item is a folder  -->
                             <DataTrigger
-                                Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                Binding="{Binding (saved:SavedItem.Category), Converter={StaticResource ValueToStringConverter}}"
                                 Value="Folder">
                                 <Setter
                                     Property="Visibility"
@@ -57,7 +58,7 @@
                             </DataTrigger>
                             <!--  Show if selected item is a file  -->
                             <DataTrigger
-                                Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                Binding="{Binding (saved:SavedItem.Category), Converter={StaticResource ValueToStringConverter}}"
                                 Value="File">
                                 <Setter
                                     Property="Visibility"
@@ -84,7 +85,7 @@
                         <Style.Triggers>
                             <!--  Show if selected item is an executable  -->
                             <DataTrigger
-                                Binding="{Binding SpecificCategory, Converter={StaticResource ValueToStringConverter}}"
+                                Binding="{Binding (saved:SavedItem.SpecificCategory), Converter={StaticResource ValueToStringConverter}}"
                                 Value="Executable">
                                 <Setter
                                     Property="Visibility"
