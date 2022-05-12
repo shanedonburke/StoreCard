@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-    xmlns:converters="clr-namespace:StoreCard.Converters"
     xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
     Title="StoreCard"
@@ -26,9 +25,6 @@
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=windows:MainWindow, IsDesignTimeCreatable=False}">
     <Window.Resources>
-        <converters:NullToVisibilityConverter
-            x:Key="NullToVisibilityConverter" />
-
         <!--  Template for context menu  -->
         <ItemsPanelTemplate
             x:Key="MenuItemPanelTemplate">
@@ -337,8 +333,8 @@
                                     Value="#FF777777" />
                                 <Style.Triggers>
                                     <DataTrigger
-                                        Binding="{Binding Category}"
-                                        Value="0">
+                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                        Value="None">
                                         <Setter
                                             Property="Foreground"
                                             Value="White" />
@@ -360,8 +356,8 @@
                                     Value="#FF777777" />
                                 <Style.Triggers>
                                     <DataTrigger
-                                        Binding="{Binding Category}"
-                                        Value="1">
+                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                        Value="App">
                                         <Setter
                                             Property="Foreground"
                                             Value="White" />
@@ -383,8 +379,8 @@
                                     Value="#FF777777" />
                                 <Style.Triggers>
                                     <DataTrigger
-                                        Binding="{Binding Category}"
-                                        Value="2">
+                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                        Value="Game">
                                         <Setter
                                             Property="Foreground"
                                             Value="White" />
@@ -406,8 +402,8 @@
                                     Value="#FF777777" />
                                 <Style.Triggers>
                                     <DataTrigger
-                                        Binding="{Binding Category}"
-                                        Value="3">
+                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                        Value="Folder">
                                         <Setter
                                             Property="Foreground"
                                             Value="White" />
@@ -429,8 +425,8 @@
                                     Value="#FF777777" />
                                 <Style.Triggers>
                                     <DataTrigger
-                                        Binding="{Binding Category}"
-                                        Value="4">
+                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                        Value="File">
                                         <Setter
                                             Property="Foreground"
                                             Value="White" />
@@ -451,8 +447,8 @@
                                     Value="#FF777777" />
                                 <Style.Triggers>
                                     <DataTrigger
-                                        Binding="{Binding Category}"
-                                        Value="5">
+                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                        Value="Link">
                                         <Setter
                                             Property="Foreground"
                                             Value="White" />

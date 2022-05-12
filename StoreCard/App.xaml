@@ -12,19 +12,11 @@
                 <ResourceDictionary
                     Source="ResourceDictionaries/Theme/Colors.xaml" />
                 <ResourceDictionary
-                    Source="ResourceDictionaries/VisibilityConverters.xaml" />
+                    Source="ResourceDictionaries/Converters.xaml" />
                 <ResourceDictionary
-                    Source="ResourceDictionaries/Theme/DefaultControls/CheckBox.xaml" />
+                    Source="ResourceDictionaries/Theme/DefaultControls/DefaultControls.xaml" />
                 <ResourceDictionary
-                    Source="ResourceDictionaries/Theme/DefaultControls/RadioButton.xaml" />
-                <ResourceDictionary
-                    Source="ResourceDictionaries/Theme/DefaultControls/ScrollBar.xaml" />
-                <ResourceDictionary
-                    Source="ResourceDictionaries/Theme/CustomControls/PrimaryButton.xaml" />
-                <ResourceDictionary
-                    Source="ResourceDictionaries/Theme/CustomControls/SecondaryButton.xaml" />
-                <ResourceDictionary
-                    Source="ResourceDictionaries/Theme/CustomControls/DeleteButton.xaml" />
+                    Source="ResourceDictionaries/Theme/CustomControls/CustomControls.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

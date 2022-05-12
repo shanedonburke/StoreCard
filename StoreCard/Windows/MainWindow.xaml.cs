@@ -61,11 +61,13 @@ public partial class MainWindow : INotifyPropertyChanged
     }
 
     [NotifyPropertyChangedInvocator]
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    private IEnumerable<SavedItem> FilterItems() {
+    private IEnumerable<SavedItem> FilterItems()
+    {
         var items = Category == ItemCategory.None
             ? _savedItems
             : _savedItems.Where(item => item.Category == Category);
@@ -132,6 +134,7 @@ public partial class MainWindow : INotifyPropertyChanged
                 {
                     ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex + 1) % ItemListBox.ItemsSource.Count();
                 }
+
                 ItemListBox.ScrollIntoView(ItemListBox.SelectedItem);
                 break;
             case Key.Enter:
@@ -172,7 +175,8 @@ public partial class MainWindow : INotifyPropertyChanged
         }
     }
 
-    private void MainWindow_Activated(object? sender, EventArgs e) {
+    private void MainWindow_Activated(object? sender, EventArgs e)
+    {
         SearchBox.Focus();
     }
 
@@ -207,7 +211,7 @@ public partial class MainWindow : INotifyPropertyChanged
     private void DeleteItem_Click(object sender, RoutedEventArgs e)
     {
         if (ItemListBox.SelectedIndex == -1) return;
-        AppData.DeleteItemAndSave((SavedItem)ItemListBox.SelectedItem);
+        AppData.DeleteItemAndSave((SavedItem) ItemListBox.SelectedItem);
         RefreshSavedItems();
     }
 

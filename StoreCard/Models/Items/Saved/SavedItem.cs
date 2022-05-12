@@ -16,6 +16,17 @@ public enum ItemCategory : uint
     Link
 }
 
+public enum SpecificItemCategory : uint
+{
+    None,
+    App,
+    Executable,
+    Game,
+    Folder,
+    File,
+    Link
+}
+
 public abstract class SavedItem : IListBoxItem
 {
     public readonly string Id;
