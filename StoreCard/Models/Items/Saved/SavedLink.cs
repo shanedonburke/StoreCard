@@ -12,6 +12,7 @@ internal class SavedLink : SavedItem
     }
 
     public override ItemCategory Category => ItemCategory.Link;
+    public override SpecificItemCategory SpecificCategory => SpecificItemCategory.Link;
 
     public override void Open()
     {

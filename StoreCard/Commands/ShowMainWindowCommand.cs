@@ -15,6 +15,11 @@ public class ShowMainWindowCommand : ICommand
         return true;
     }
 
+    public void Execute()
+    {
+        Execute(null);
+    }
+
     public void Execute(object? parameter)
     {
         var mainWindow = Application.Current.Windows

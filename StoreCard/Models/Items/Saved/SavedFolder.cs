@@ -10,6 +10,7 @@ internal class SavedFolder : SavedFileSystemItem
     }
 
     public override ItemCategory Category => ItemCategory.Folder;
+    public override SpecificItemCategory SpecificCategory => SpecificItemCategory.Folder;
 
     public override bool Exists() {
         return Directory.Exists(Path);

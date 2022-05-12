@@ -21,7 +21,8 @@ public enum SpecificItemCategory : uint
     None,
     App,
     Executable,
-    Game,
+    SteamGame,
+    EpicGame,
     Folder,
     File,
     Link
@@ -36,6 +37,8 @@ public abstract class SavedItem : IListBoxItem
     public string? Base64Icon { get; protected set; }
 
     public abstract ItemCategory Category { get; }
+
+    public abstract SpecificItemCategory SpecificCategory { get; }
 
     [JsonIgnore] public ImageSource? BitmapIcon => Base64Icon != null ? Images.Base64ToImage(Base64Icon) : null;
 

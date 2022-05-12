@@ -32,6 +32,8 @@ internal class SavedEpicGame : SavedGame
 
     public string AppName { get; }
 
+    public override SpecificItemCategory SpecificCategory => SpecificItemCategory.EpicGame;
+
     public override void Open()
     {
         Process.Start("CMD.exe", $"/c START com.epicgames.launcher://apps/{AppName}?action=launch&silent=true ");

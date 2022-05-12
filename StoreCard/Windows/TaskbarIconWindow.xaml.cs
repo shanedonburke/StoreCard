@@ -19,7 +19,7 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
         if (Application.Current.Windows.Count > 2) {
             return;
         }
-        new ShowMainWindowCommand().Execute(null);
+        new ShowMainWindowCommand().Execute();
     }
 
     public TaskbarIconWindow() {
@@ -60,7 +60,7 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
 
     private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
     {
-        new ShowMainWindowCommand().Execute(null);
+        new ShowMainWindowCommand().Execute();
     }
 
     private void ExitMenuItem_Click(object sender, RoutedEventArgs e)

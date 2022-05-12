@@ -56,7 +56,7 @@ namespace StoreCard.Windows
 
         private void Window_Closed(object? sender, EventArgs e)
         {
-            new ShowMainWindowCommand().Execute(null);
+            new ShowMainWindowCommand().Execute();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

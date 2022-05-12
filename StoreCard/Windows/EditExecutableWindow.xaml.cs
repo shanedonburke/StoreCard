@@ -30,6 +30,6 @@ public partial class EditExecutableWindow
 
     private void Window_Closed(object? sender, EventArgs e)
     {
-        new ShowMainWindowCommand().Execute(null);
+        new ShowMainWindowCommand().Execute();
     }
 }

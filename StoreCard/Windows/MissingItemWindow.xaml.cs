@@ -54,7 +54,7 @@ namespace StoreCard.Windows
         {
             if (_shouldShowMainWindowOnClose)
             {
-                new ShowMainWindowCommand().Execute(null);
+                new ShowMainWindowCommand().Execute();
             }
         }
 

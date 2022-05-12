@@ -10,6 +10,7 @@ internal class SavedFile : SavedFileSystemItem
     }
 
     public override ItemCategory Category => ItemCategory.File;
+    public override SpecificItemCategory SpecificCategory => SpecificItemCategory.File;
 
     public override bool Exists()
     {

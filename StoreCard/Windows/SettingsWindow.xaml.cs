@@ -32,7 +32,7 @@ public partial class SettingsWindow : INotifyPropertyChanged
     private void SettingsWindow_Closed(object? sender, EventArgs e)
     {
         AppData.SaveConfigToFile(_config);
-        new ShowMainWindowCommand().Execute(null);
+        new ShowMainWindowCommand().Execute();
         Close();
     }
 

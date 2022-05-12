@@ -185,7 +185,7 @@ namespace StoreCard
 
         private void Window_Closed(object? sender, EventArgs e)
         {
-            new ShowMainWindowCommand().Execute(null);
+            new ShowMainWindowCommand().Execute();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
