@@ -9,6 +9,7 @@ namespace StoreCard.Models.Items.Saved;
 public enum ItemCategory : uint
 {
     None,
+    Recent,
     App,
     Game,
     Folder,
@@ -35,6 +36,16 @@ public abstract class SavedItem : IListBoxItem
 
     public string? Base64Icon { get; protected set; }
 
+    public long LastOpened { get; private set; }
+
+    protected SavedItem(string id, string name, string? base64Icon, long lastOpened)
+    {
+        Id = id;
+        Name = name;
+        Base64Icon = base64Icon;
+        LastOpened = lastOpened;
+    }
+
     public abstract ItemCategory Category { get; }
 
     public abstract SpecificItemCategory SpecificCategory { get; }
@@ -45,17 +56,16 @@ public abstract class SavedItem : IListBoxItem
 
     [JsonIgnore] public virtual string SecondaryText => Empty;
 
-    protected SavedItem(string id, string name, string? base64Icon)
+    public void Open()
     {
-        Id = id;
-        Name = name;
-        Base64Icon = base64Icon;
+        LastOpened = Time.UnixTimeMillis;
+        OpenProtected();
     }
-
-    public abstract void Open();
 
     public int CompareTo(IListBoxItem? other)
     {
         return Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);
     }
+
+    protected abstract void OpenProtected();
 }

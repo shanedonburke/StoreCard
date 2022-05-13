@@ -65,6 +65,27 @@ internal class AppData
         SaveItemsToFile(newItems);
     }
 
+    public static T? UpdateSavedItemById<T>(string id, Action<T> updateAction) where T : SavedItem
+    {
+        var savedItems = ReadItemsFromFile();
+
+        var item = FindSavedItemById<T>(savedItems, id);
+        if (item != null)
+        {
+            updateAction(item);
+            SaveItemsToFile(savedItems);
+            return item;
+        }
+
+        Debug.WriteLine($"Tried to update saved item with ID {id}, but the item was not found.");
+        return null;
+    }
+
+    public static T? FindSavedItemById<T>(List<SavedItem> items, string id) where T : SavedItem
+    {
+        return items.FirstOrDefault(i => i.Id == id) as T;
+    }
+
     private static void SerializeObjectToFile(object objectToSave, string filePath)
     {
         Directory.CreateDirectory(Path.GetDirectoryName(filePath) ??

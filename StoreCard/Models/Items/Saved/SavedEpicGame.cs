@@ -16,7 +16,8 @@ internal class SavedEpicGame : SavedGame
         string id,
         string name,
         string base64Icon,
-        string appName) : base(id, name, base64Icon)
+        string appName,
+        long lastOpened) : base(id, name, base64Icon, lastOpened)
     {
         AppName = appName;
     }
@@ -24,8 +25,8 @@ internal class SavedEpicGame : SavedGame
     public SavedEpicGame(InstalledEpicGame game) : base(
         Guid.NewGuid().ToString(),
         game.Name,
-        Images.ImageToBase64((BitmapSource)game.BitmapIcon)
-    )
+        Images.ImageToBase64((BitmapSource) game.BitmapIcon),
+        Time.UnixTimeMillis)
     {
         AppName = game.AppName;
     }
@@ -36,7 +37,7 @@ internal class SavedEpicGame : SavedGame
 
     public override string SecondaryText => GamePlatformNames.EpicGames;
 
-    public override void Open()
+    protected override void OpenProtected()
     {
         Process.Start("CMD.exe", $"/c START com.epicgames.launcher://apps/{AppName}?action=launch&silent=true ");
     }

@@ -18,14 +18,14 @@ public abstract class SavedFileSystemItem : SavedItem
     public string ExecutableName =>
         ExecutablePath == DEFAULT_EXECUTABLE ? "Default" : ExecutablePath.Split(@"\").Last();
 
-    protected SavedFileSystemItem(string id, string name, string? base64Icon, string path, string executablePath)
-        : base(id, name, base64Icon)
+    protected SavedFileSystemItem(string id, string name, string? base64Icon, string path, string executablePath, long lastOpened)
+        : base(id, name, base64Icon, lastOpened)
     {
         Path = path;
         ExecutablePath = executablePath;
     }
 
-    public override void Open()
+    protected override void OpenProtected()
     {
         if (!Exists())
         {

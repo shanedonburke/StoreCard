@@ -10,7 +10,8 @@ namespace StoreCard.Models.Items.Saved;
 internal class SavedApplication : SavedItem
 {
     [JsonConstructor]
-    public SavedApplication(string id, string name, string base64Icon, string appUserModelId) : base(id, name, base64Icon)
+    public SavedApplication(string id, string name, string base64Icon, string appUserModelId, long lastOpened) : base(
+        id, name, base64Icon, lastOpened)
     {
         AppUserModelId = appUserModelId;
     }
@@ -18,7 +19,8 @@ internal class SavedApplication : SavedItem
     public SavedApplication(InstalledApplication installedApplication) : base(
         Guid.NewGuid().ToString(),
         installedApplication.Name,
-        Images.ImageToBase64((BitmapSource) installedApplication.BitmapIcon))
+        Images.ImageToBase64((BitmapSource) installedApplication.BitmapIcon),
+        Time.UnixTimeMillis)
     {
         AppUserModelId = installedApplication.AppUserModelId;
     }
@@ -28,7 +30,7 @@ internal class SavedApplication : SavedItem
     public override ItemCategory Category => ItemCategory.App;
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.App;
 
-    public override void Open()
+    protected override void OpenProtected()
     {
         // From https://stackoverflow.com/a/57195200
         Process.Start("explorer.exe", @"shell:appsFolder\" + AppUserModelId);

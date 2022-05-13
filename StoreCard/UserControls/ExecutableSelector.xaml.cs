@@ -110,10 +110,10 @@ public partial class ExecutableSelector : INotifyPropertyChanged
     private void PathBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         var text = PathBox.Text;
-        
+
         IsExecutableValid = File.Exists(text) && text.EndsWith(".exe");
         if (!IsExecutableValid) return;
-        
+
         // Take file name without '.exe'
         ExecutableName = text.Split(@"\").Last().Split(".")[0];
         NameBox.Text = ExecutableName;
@@ -148,7 +148,8 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         var base64Icon = ExecutableIcon != null ? Images.ImageToBase64((BitmapSource) ExecutableIcon) : null;
         // Don't include the executable we are editing, if there is one
         var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != Executable?.Id).ToList();
-        savedItems.Add(new SavedExecutable(Guid.NewGuid().ToString(), ExecutableName, base64Icon, PathBox.Text));
+        savedItems.Add(new SavedExecutable(Guid.NewGuid().ToString(), ExecutableName, base64Icon, PathBox.Text,
+            Time.UnixTimeMillis));
         AppData.SaveItemsToFile(savedItems);
         Finish();
     }

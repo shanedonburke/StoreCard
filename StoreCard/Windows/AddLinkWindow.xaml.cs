@@ -71,7 +71,7 @@ namespace StoreCard.Windows
         {
             var base64Icon = Images.ImageToBase64((BitmapSource) LinkIcon);
             var savedItems = AppData.ReadItemsFromFile();
-            savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon, Links.NormalizeUrl(UrlBox.Text)));
+            savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon, Links.NormalizeUrl(UrlBox.Text), Time.UnixTimeMillis));
             AppData.SaveItemsToFile(savedItems);
             Close();
         }

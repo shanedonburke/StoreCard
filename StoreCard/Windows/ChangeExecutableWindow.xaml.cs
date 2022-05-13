@@ -29,25 +29,31 @@ namespace StoreCard.Windows
 
         private string _executableName = "";
 
-        public string ExecutableName {
+        public string ExecutableName
+        {
             get => _executableName;
-            set {
+            set
+            {
                 _executableName = value;
                 OnPropertyChanged(nameof(ExecutableName));
             }
         }
 
-        public bool DoesExecutableExist {
+        public bool DoesExecutableExist
+        {
             get => _doesExecutableExist;
-            set {
+            set
+            {
                 _doesExecutableExist = value;
                 OnPropertyChanged(nameof(DoesExecutableExist));
             }
         }
 
-        public ImageSource? ExecutableIcon {
+        public ImageSource? ExecutableIcon
+        {
             get => _executableIcon;
-            set {
+            set
+            {
                 _executableIcon = value;
                 OnPropertyChanged(nameof(ExecutableIcon));
             }
@@ -62,16 +68,10 @@ namespace StoreCard.Windows
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void SaveDefaultButton_Click(object sender, RoutedEventArgs e) {
-            var savedItems = AppData.ReadItemsFromFile();
-            if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem) {
-                Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
-                return;
-            }
+        private void SaveDefaultButton_Click(object sender, RoutedEventArgs e)
+        {
+            SetExecPathAndSave(SavedFileSystemItem.DEFAULT_EXECUTABLE);
 
-            matchingItem.SetExecutablePath(SavedFileSystemItem.DEFAULT_EXECUTABLE);
-            AppData.SaveItemsToFile(savedItems);
-            DialogResult = true;
             Close();
         }
 
@@ -82,26 +82,22 @@ namespace StoreCard.Windows
         }
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
         {
-            var savedItems = AppData.ReadItemsFromFile();
-            if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem) {
-                Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
-                return;
-            }
-            matchingItem.SetExecutablePath(ExecutablePathBox.Text);
-            AppData.SaveItemsToFile(savedItems);
-            DialogResult = true;
+            SetExecPathAndSave(ExecutablePathBox.Text);
+
             Close();
         }
 
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
-            var openFileDialog = new OpenFileDialog {
+            var openFileDialog = new OpenFileDialog
+            {
                 Filter = "Executables|*.exe|All Files (*.*)|*.*",
                 InitialDirectory = Environment.ExpandEnvironmentVariables("%ProgramW6432%"),
                 Title = "Select Executable"
@@ -110,7 +106,8 @@ namespace StoreCard.Windows
             if (openFileDialog.ShowDialog() == true) ExecutablePathBox.Text = openFileDialog.FileName;
         }
 
-        private void SaveSelectedAppAndClose() {
+        private void SaveSelectedAppAndClose()
+        {
             if (AppSelector.SelectedApp == null)
             {
                 Debug.WriteLine("Tried to save app, but no app was selected.");
@@ -118,19 +115,19 @@ namespace StoreCard.Windows
             }
             else
             {
-                var savedItems = AppData.ReadItemsFromFile();
-                if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem)
-                {
-                    Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
-                    return;
-                }
+                SetExecPathAndSave(AppSelector.SelectedApp.ExecutablePath
+                                  ?? SavedFileSystemItem.DEFAULT_EXECUTABLE);
+            }
 
-                matchingItem.SetExecutablePath(AppSelector.SelectedApp.ExecutablePath
-                                               ?? SavedFileSystemItem.DEFAULT_EXECUTABLE);
-                AppData.SaveItemsToFile(savedItems);
+            Close();
+        }
+
+        private void SetExecPathAndSave(string path)
+        {
+            if (AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.SetExecutablePath(path)) != null)
+            {
                 DialogResult = true;
             }
-            Close();
         }
 
         private void ExecutablePathBox_TextChanged(object sender, TextChangedEventArgs e)

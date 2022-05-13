@@ -6,7 +6,8 @@ internal class SavedLink : SavedItem
 {
     public string Url { get; }
 
-    public SavedLink(string id, string name, string? base64Icon, string url) : base(id, name, base64Icon)
+    public SavedLink(string id, string name, string? base64Icon, string url, long lastOpened) : base(id, name,
+        base64Icon, lastOpened)
     {
         Url = url;
     }
@@ -14,7 +15,7 @@ internal class SavedLink : SavedItem
     public override ItemCategory Category => ItemCategory.Link;
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.Link;
 
-    public override void Open()
+    protected override void OpenProtected()
     {
         var psi = new ProcessStartInfo
         {

@@ -12,12 +12,12 @@ public class SavedExecutable : SavedItem
     public override ItemCategory Category => ItemCategory.App;
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.Executable;
 
-    public SavedExecutable(string id, string name, string? base64Icon, string path) : base(id, name, base64Icon)
+    public SavedExecutable(string id, string name, string? base64Icon, string path, long lastOpened) : base(id, name, base64Icon, lastOpened)
     {
         Path = path;
     }
 
-    public override void Open()
+    protected override void OpenProtected()
     {
         if (!File.Exists(Path))
         {

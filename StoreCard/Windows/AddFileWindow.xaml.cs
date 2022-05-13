@@ -86,7 +86,8 @@ public partial class AddFileWindow : INotifyPropertyChanged
     }
 
     [NotifyPropertyChangedInvocator]
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
@@ -115,7 +116,8 @@ public partial class AddFileWindow : INotifyPropertyChanged
     {
         var base64Icon = FileIcon != null ? Images.ImageToBase64((BitmapSource) FileIcon) : null;
         var savedItems = AppData.ReadItemsFromFile();
-        savedItems.Add(new SavedFile(Guid.NewGuid().ToString(), FileName, base64Icon, FilePathBox.Text, SavedFileSystemItem.DEFAULT_EXECUTABLE));
+        savedItems.Add(new SavedFile(Guid.NewGuid().ToString(), FileName, base64Icon, FilePathBox.Text,
+            SavedFileSystemItem.DEFAULT_EXECUTABLE, Time.UnixTimeMillis));
         AppData.SaveItemsToFile(savedItems);
         Close();
     }
@@ -124,7 +126,8 @@ public partial class AddFileWindow : INotifyPropertyChanged
     {
         var base64Icon = FolderIcon != null ? Images.ImageToBase64((BitmapSource) FolderIcon) : null;
         var savedItems = AppData.ReadItemsFromFile();
-        savedItems.Add(new SavedFolder(Guid.NewGuid().ToString(), FolderName, base64Icon, FolderPathBox.Text, SavedFileSystemItem.DEFAULT_EXECUTABLE));
+        savedItems.Add(new SavedFolder(Guid.NewGuid().ToString(), FolderName, base64Icon, FolderPathBox.Text,
+            SavedFileSystemItem.DEFAULT_EXECUTABLE, Time.UnixTimeMillis));
         AppData.SaveItemsToFile(savedItems);
         Close();
     }
@@ -143,9 +146,11 @@ public partial class AddFileWindow : INotifyPropertyChanged
     {
         var text = FilePathBox.Text;
         DoesFileExist = File.Exists(text);
-        if (DoesFileExist) {
+        if (DoesFileExist)
+        {
             FileIcon = SystemIcons.GetFileIconByPath(text);
         }
+
         OnPropertyChanged(nameof(FileName));
     }
 
@@ -153,9 +158,11 @@ public partial class AddFileWindow : INotifyPropertyChanged
     {
         var text = FolderPathBox.Text;
         DoesFolderExist = Directory.Exists(text);
-        if (DoesFolderExist) {
+        if (DoesFolderExist)
+        {
             FolderIcon = SystemIcons.GetFolderIconByPath(text);
         }
+
         OnPropertyChanged(nameof(FolderName));
     }
 }

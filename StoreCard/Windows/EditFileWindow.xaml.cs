@@ -64,14 +64,15 @@ namespace StoreCard.Windows
         private void ChangeExecutableButton_Click(object sender, RoutedEventArgs e)
         {
             if (new ChangeExecutableWindow(_item).ShowDialog() != true) return;
-            var savedItems = AppData.ReadItemsFromFile();
-            if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem)
+
+            var item = AppData.FindSavedItemById<SavedFileSystemItem>(AppData.ReadItemsFromFile(), _item.Id);
+            if (item == null)
             {
                 Debug.WriteLine("Failed to find matching item for edit file window.");
                 return;
             }
 
-            _item = matchingItem;
+            _item = item;
             OnPropertyChanged(nameof(ExecutableName));
             OnPropertyChanged(nameof(ExecutableIcon));
         }
@@ -90,13 +91,12 @@ namespace StoreCard.Windows
         private void SaveNameButton_Click(object sender, RoutedEventArgs e)
         {
             var name = NameBox.Text;
-            _item.Name = name;
-            var savedItems = AppData.ReadItemsFromFile();
-            var matchingItem = savedItems.Find(i => i.Id == _item.Id);
-            if (matchingItem != null)
+
+            var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.Name = name);
+
+            if (updatedItem != null)
             {
-                matchingItem.Name = name;
-                AppData.SaveItemsToFile(savedItems);
+                _item = updatedItem;
                 OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
             }
             else
