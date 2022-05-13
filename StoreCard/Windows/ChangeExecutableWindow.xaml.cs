@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
-using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
-using StoreCard.UserControls;
 using StoreCard.Utils;
 
 namespace StoreCard.Windows
@@ -32,12 +28,6 @@ namespace StoreCard.Windows
         private ImageSource? _executableIcon;
 
         private string _executableName = "";
-
-        public bool ShouldEnableSaveAppButton => AppListBox.SelectedItem != null;
-
-        public string? SelectedAppName => (AppListBox.SelectedItem as InstalledApplication)?.Name;
-
-        public ImageSource? SelectedAppIcon => (AppListBox.SelectedItem as InstalledApplication)?.BitmapIcon;
 
         public string ExecutableName {
             get => _executableName;
@@ -72,24 +62,6 @@ namespace StoreCard.Windows
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void AppListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            OnPropertyChanged(nameof(ShouldEnableSaveAppButton));
-            OnPropertyChanged(nameof(SelectedAppName));
-            OnPropertyChanged(nameof(SelectedAppIcon));
-        }
-
-
-        private void AppListBox_ItemActivated(object sender, ItemActivatedEventArgs e) {
-            SaveSelectedAppAndClose();
-            e.Handled = true;
-        }
-
-        private void SaveAppButton_Click(object sender, RoutedEventArgs e)
-        {
-            SaveSelectedAppAndClose();
-        }
-
         private void SaveDefaultButton_Click(object sender, RoutedEventArgs e) {
             var savedItems = AppData.ReadItemsFromFile();
             if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem) {
@@ -112,18 +84,6 @@ namespace StoreCard.Windows
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private void LoadApps() {
-            foreach (var app in Applications.GetInstalledApplications()) {
-                AppListBox.AddItem(app);
-            }
-            AppListBox.FinishAddingItems();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Task.Run(LoadApps);
         }
 
         private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
@@ -151,16 +111,25 @@ namespace StoreCard.Windows
         }
 
         private void SaveSelectedAppAndClose() {
-            var savedItems = AppData.ReadItemsFromFile();
-            if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem) {
-                Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
-                return;
+            if (AppSelector.SelectedApp == null)
+            {
+                Debug.WriteLine("Tried to save app, but no app was selected.");
+                DialogResult = false;
             }
+            else
+            {
+                var savedItems = AppData.ReadItemsFromFile();
+                if (savedItems.Find(i => i.Id == _item.Id) is not SavedFileSystemItem matchingItem)
+                {
+                    Debug.WriteLine("Tried to change item executable, but no matching stored item was found.");
+                    return;
+                }
 
-            matchingItem.SetExecutablePath((AppListBox.SelectedItem as InstalledApplication)?.ExecutablePath
-                                           ?? SavedFileSystemItem.DEFAULT_EXECUTABLE);
-            AppData.SaveItemsToFile(savedItems);
-            DialogResult = true;
+                matchingItem.SetExecutablePath(AppSelector.SelectedApp.ExecutablePath
+                                               ?? SavedFileSystemItem.DEFAULT_EXECUTABLE);
+                AppData.SaveItemsToFile(savedItems);
+                DialogResult = true;
+            }
             Close();
         }
 
@@ -178,6 +147,16 @@ namespace StoreCard.Windows
                     icon.Handle,
                     Int32Rect.Empty,
                     BitmapSizeOptions.FromEmptyOptions());
+        }
+
+        private void AppSelector_SaveButtonClick(object sender, RoutedEventArgs e)
+        {
+            SaveSelectedAppAndClose();
+        }
+
+        private void AppSelector_CancelButtonClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

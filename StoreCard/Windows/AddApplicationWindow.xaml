@@ -80,74 +80,12 @@
             </StackPanel>
         </StackPanel>
         <!--  "Installed application" content  -->
-        <Grid
-            x:Name="InstalledApplicationContent"
+        <userControls:ApplicationSelector
+            x:Name="AppSelector"
             Grid.Row="1"
-            Visibility="{Binding IsChecked, ElementName=InstalledApplicationRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Grid.RowDefinitions>
-                <RowDefinition
-                    Height="*" />
-                <RowDefinition
-                    Height="60" />
-            </Grid.RowDefinitions>
-            <userControls:SearchableListBox
-                x:Name="AppListBox"
-                SelectionChanged="AppListBox_SelectionChanged"
-                ItemActivated="AppListBox_ItemActivated" />
-            <Grid
-                Grid.Row="1"
-                Margin="15,0,15,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="*" />
-                </Grid.ColumnDefinitions>
-                <!--  Selected app preview  -->
-                <StackPanel
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Visibility="{Binding Path=ShouldEnableSaveAppButton, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    VerticalAlignment="Center"
-                    Orientation="Horizontal">
-                    <TextBlock
-                        Margin="0,0,10,0"
-                        Text="Selected:"
-                        FontSize="12"
-                        VerticalAlignment="Center"
-                        Foreground="#AAAAAA" />
-                    <Image
-                        Width="24"
-                        Height="24"
-                        Margin="0,0,10,0"
-                        Source="{Binding Path=SelectedAppIcon}" />
-                    <TextBlock
-                        Text="{Binding Path=SelectedAppName}"
-                        FontSize="12"
-                        VerticalAlignment="Center"
-                        Foreground="White" />
-                </StackPanel>
-                <!--  "Save" button for applications  -->
-                <userControls:StoreCardButton
-                    Style="{DynamicResource PrimaryButton}"
-                    Grid.Column="2"
-                    Margin="0,15,5,15"
-                    Text="Save"
-                    IsEnabled="{Binding Path=ShouldEnableSaveAppButton}"
-                    Click="SaveAppButton_Click" />
-                <!--  "Cancel" button for applications  -->
-                <userControls:StoreCardButton
-                    Style="{DynamicResource SecondaryButton}"
-                    Grid.Column="3"
-                    Margin="5,15,0,15"
-                    Text="Cancel"
-                    Click="CancelButton_Click" />
-            </Grid>
-        </Grid>
+            Visibility="{Binding IsChecked, ElementName=InstalledApplicationRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+            SaveButtonClick="AppSelector_SaveButtonClick"
+            CancelButtonClick="AppSelector_CancelButtonClick" />
         <!--  "Installed game" content  -->
         <Grid
             x:Name="InstalledGameContent"

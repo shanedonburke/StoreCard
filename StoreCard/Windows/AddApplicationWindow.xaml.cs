@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -63,13 +64,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         }
     }
 
-    public bool ShouldEnableSaveAppButton => AppListBox.SelectedItem != null;
-
     public bool ShouldEnableSaveGameButton => GameListBox.SelectedIndex != -1;
-
-    public string? SelectedAppName => (AppListBox.SelectedItem as InstalledApplication)?.Name;
-
-    public ImageSource? SelectedAppIcon => (AppListBox.SelectedItem as InstalledApplication)?.BitmapIcon;
 
     public string? SelectedGameName => (GameListBox.SelectedItem as InstalledGame)?.Name;
 
@@ -88,11 +83,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    private void SaveAppButton_Click(object sender, RoutedEventArgs e)
-    {
-        SaveSelectedAppAndClose();
-    }
-
     private void SaveGameButton_Click(object sender, RoutedEventArgs e)
     {
         SaveSelectedGameAndClose();
@@ -100,9 +90,16 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void SaveSelectedAppAndClose()
     {
-        var savedItems = AppData.ReadItemsFromFile();
-        savedItems.Add(new SavedApplication((AppListBox.SelectedItem as InstalledApplication)!));
-        AppData.SaveItemsToFile(savedItems);
+        if (AppSelector.SelectedApp == null)
+        {
+            Debug.WriteLine("Tried to save app, but no app was selected.");
+        }
+        else
+        {
+            var savedItems = AppData.ReadItemsFromFile();
+            savedItems.Add(new SavedApplication(AppSelector.SelectedApp!));
+            AppData.SaveItemsToFile(savedItems);
+        }
         Close();
     }
 
@@ -112,15 +109,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         savedItems.Add((GameListBox.SelectedItem as InstalledGame)!.SavedItem);
         AppData.SaveItemsToFile(savedItems);
         Close();
-    }
-
-    private void LoadApps()
-    {
-        foreach (var app in Applications.GetInstalledApplications())
-        {
-            AppListBox.AddItem(app);
-        }
-        AppListBox.FinishAddingItems();
     }
 
     private void LoadGames()
@@ -137,8 +125,6 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
         Activate();
-
-        Task.Run(LoadApps);
         Task.Run(LoadGames);
     }
 
@@ -157,24 +143,11 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         Close();
     }
 
-    private void AppListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        OnPropertyChanged(nameof(ShouldEnableSaveAppButton));
-        OnPropertyChanged(nameof(SelectedAppName));
-        OnPropertyChanged(nameof(SelectedAppIcon));
-    }
-
     private void GameListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         OnPropertyChanged(nameof(ShouldEnableSaveGameButton));
         OnPropertyChanged(nameof(SelectedGameName));
         OnPropertyChanged(nameof(SelectedGameIcon));
-    }
-
-    private void AppListBox_ItemActivated(object sender, ItemActivatedEventArgs e)
-    {
-        SaveSelectedAppAndClose();
-        e.Handled = true;
     }
 
     private void GameListBox_ItemActivated(object sender, ItemActivatedEventArgs e)
@@ -184,6 +157,16 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     }
 
     private void ExecutableSelector_Finished(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
+
+    private void AppSelector_SaveButtonClick(object sender, RoutedEventArgs e)
+    {
+        SaveSelectedAppAndClose();
+    }
+
+    private void AppSelector_CancelButtonClick(object sender, RoutedEventArgs e)
     {
         Close();
     }
