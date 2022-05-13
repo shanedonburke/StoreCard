@@ -397,7 +397,7 @@
                 <userControls:StoreCardListBox.ItemContextMenu>
                     <ContextMenu d:DataContext="{d:DesignInstance saved:SavedItem}">
                         <MenuItem
-                            Click="ContextMenuOpenItem_Click">
+                            Click="OpenMenuItem_Click">
                             <MenuItem.Header>
                                 <TextBlock
                                     Margin="-20,0,0,0"
@@ -465,7 +465,7 @@
                             </MenuItem.Header>
                         </MenuItem>
                         <MenuItem
-                            Click="DeleteItem_Click">
+                            Click="DeleteMenuItem_Click">
                             <MenuItem.Header>
                                 <TextBlock
                                     Margin="-20,0,0,0"

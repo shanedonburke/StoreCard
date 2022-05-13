@@ -208,12 +208,12 @@ public partial class MainWindow : INotifyPropertyChanged
         AddButtonContextMenu.IsOpen = true;
     }
 
-    private void ContextMenuOpenItem_Click(object sender, RoutedEventArgs e)
+    private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
     {
         OpenSelectedItem();
     }
 
-    private void DeleteItem_Click(object sender, RoutedEventArgs e)
+    private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
     {
         if (ItemListBox.SelectedIndex == -1) return;
         AppData.DeleteItemAndSave((SavedItem) ItemListBox.SelectedItem);
