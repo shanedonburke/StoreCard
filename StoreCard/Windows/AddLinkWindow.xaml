@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:windows="clr-namespace:StoreCard.Windows"
-    xmlns:storeCard="clr-namespace:StoreCard"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
     mc:Ignorable="d"
     Width="600"
@@ -82,7 +81,7 @@
             <Label
                 Grid.Row="3"
                 Grid.Column="0"
-                Visibility="{Binding LinkTitle, Converter={StaticResource NotBlankVisibilityConverter}}"
+                Visibility="{Binding LinkTitle, Converter={StaticResource NotBlankToVisibilityConverter}}"
                 HorizontalAlignment="Left"
                 HorizontalContentAlignment="Left"
                 VerticalAlignment="Stretch"
@@ -93,7 +92,7 @@
             <Grid
                 Grid.Row="3"
                 Grid.Column="1"
-                Visibility="{Binding LinkTitle, Converter={StaticResource NotBlankVisibilityConverter}}"
+                Visibility="{Binding LinkTitle, Converter={StaticResource NotBlankToVisibilityConverter}}"
                 Margin="0,15,0,15">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition

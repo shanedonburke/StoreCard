@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace StoreCard.Converters;
 
-public class NullVisibilityConverter : IValueConverter
+public class NullToVisibilityConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
     {

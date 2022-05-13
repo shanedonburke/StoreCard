@@ -151,7 +151,7 @@
                         Height="24"
                         Margin="5,5,10,5"
                         RenderOptions.BitmapScalingMode="HighQuality"
-                        Visibility="{Binding BitmapIcon, Converter={StaticResource NullVisibilityConverter}, FallbackValue=Collapsed}"
+                        Visibility="{Binding BitmapIcon, Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}"
                         Source="{Binding BitmapIcon}" />
                     <TextBlock
                         Grid.Column="2"

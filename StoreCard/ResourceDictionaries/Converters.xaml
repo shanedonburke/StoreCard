@@ -2,14 +2,16 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:StoreCard.Converters">
-    <converters:NullVisibilityConverter
-        x:Key="NullVisibilityConverter" />
+    <converters:NotBlankToBooleanConverter
+        x:Key="NotBlankToBooleanConverter" />
+    <converters:NullToVisibilityConverter
+        x:Key="NullToVisibilityConverter" />
     <BooleanToVisibilityConverter
         x:Key="BooleanToVisibilityConverter" />
     <converters:InverseBooleanToVisibilityConverter
         x:Key="InverseBooleanToVisibilityConverter" />
-    <converters:NotBlankVisibilityConverter
-        x:Key="NotBlankVisibilityConverter" />
+    <converters:NotBlankToVisibilityConverter
+        x:Key="NotBlankToVisibilityConverter" />
     <converters:ValueToStringConverter
         x:Key="ValueToStringConverter" />
 </ResourceDictionary>
