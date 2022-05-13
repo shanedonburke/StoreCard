@@ -73,13 +73,23 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private IEnumerable<SavedItem> FilterItems()
     {
-        var items = Category == ItemCategory.None
-            ? _savedItems
-            : _savedItems.Where(item => item.Category == Category);
+        var items = Category switch
+        {
+            ItemCategory.None => _savedItems,
+            ItemCategory.Recent => GetRecentItems(),
+            _ => _savedItems.Where(item => item.Category == Category)
+        };
         items = items.Where(item => item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()));
         items = items.Concat(_savedItems.Where(item => !item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()) &&
                                                        item.Name.ToUpper().Contains(SearchBox.Text.ToUpper())));
         return items;
+    }
+
+    private IEnumerable<SavedItem> GetRecentItems()
+    {
+        var recentItems = _savedItems.ToList();
+        recentItems.Sort((a, b) => b.LastOpened.CompareTo(a.LastOpened));
+        return recentItems.Take(Range.EndAt(20));
     }
 
     private void RefreshItems()

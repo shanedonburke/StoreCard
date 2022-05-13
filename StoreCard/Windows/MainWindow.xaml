@@ -265,6 +265,29 @@
                         Margin="0,0,15,0"
                         VerticalAlignment="Center"
                         FontSize="18"
+                        Text="Recent">
+                        <TextBlock.Style>
+                            <Style
+                                TargetType="{x:Type TextBlock}">
+                                <Setter
+                                    Property="Foreground"
+                                    Value="#FF777777" />
+                                <Style.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                        Value="Recent">
+                                        <Setter
+                                            Property="Foreground"
+                                            Value="White" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock
+                        Margin="0,0,15,0"
+                        VerticalAlignment="Center"
+                        FontSize="18"
                         Text="Apps">
                         <TextBlock.Style>
                             <Style

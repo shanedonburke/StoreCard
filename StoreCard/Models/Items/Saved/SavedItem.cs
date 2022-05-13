@@ -59,6 +59,7 @@ public abstract class SavedItem : IListBoxItem
     public void Open()
     {
         LastOpened = Time.UnixTimeMillis;
+        AppData.UpdateSavedItemById<SavedItem>(Id, i => i.LastOpened = LastOpened);
         OpenProtected();
     }
 
