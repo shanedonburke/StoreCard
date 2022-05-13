@@ -74,4 +74,9 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    private void TaskbarIcon_TrayLeftMouseUp(object sender, RoutedEventArgs e)
+    {
+        new ShowMainWindowCommand().Execute();
+    }
 }

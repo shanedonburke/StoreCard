@@ -30,7 +30,7 @@
         Visibility="Visible"
         ToolTipText="StoreCard"
         MenuActivation="RightClick"
-        LeftClickCommand="{StaticResource ShowMainWindowCommand}"
+        TrayLeftMouseUp="TaskbarIcon_TrayLeftMouseUp"
         PopupActivation="DoubleClick">
         <tb:TaskbarIcon.ContextMenu>
             <ContextMenu>
