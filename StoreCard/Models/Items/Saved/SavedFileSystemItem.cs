@@ -29,7 +29,7 @@ public abstract class SavedFileSystemItem : SavedItem
     {
         if (!Exists())
         {
-            new MissingItemWindow(this, () => new EditFileCommand(this).Execute()).ShowDialog();
+            new ShowMissingItemAlertCommand(this, () => new EditFileCommand(this).Execute()).Execute();
             return;
         }
 

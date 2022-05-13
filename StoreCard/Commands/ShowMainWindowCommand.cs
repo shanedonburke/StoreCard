@@ -6,7 +6,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-public class ShowMainWindowCommand : ICommand, IStoreCardCommand
+public class ShowMainWindowCommand : ICommand, IStoreCardCommand<bool>
 {
     public event EventHandler? CanExecuteChanged;
 
@@ -15,8 +15,10 @@ public class ShowMainWindowCommand : ICommand, IStoreCardCommand
         return true;
     }
 
-    public void Execute() {
+    public bool Execute()
+    {
         Execute(null);
+        return true;
     }
 
     public void Execute(object? parameter)

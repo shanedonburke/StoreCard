@@ -1,12 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.Windows.Input;
-using StoreCard.Models.Items.Saved;
+﻿using StoreCard.Models.Items.Saved;
 using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-internal class EditFileCommand : IStoreCardCommand
+internal class EditFileCommand : IStoreCardCommand<bool>
 {
     private readonly SavedFileSystemItem _item;
 
@@ -15,8 +12,9 @@ internal class EditFileCommand : IStoreCardCommand
         _item = item;
     }
 
-    public void Execute()
+    public bool Execute()
     {
         new EditFileWindow(_item).Show();
+        return true;
     }
 }

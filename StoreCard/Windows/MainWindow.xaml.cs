@@ -89,19 +89,19 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void AddApplication_Click(object sender, RoutedEventArgs e)
     {
-        new AddApplicationWindow().Show();
+        new AddApplicationCommand().Execute();
         Close();
     }
 
     private void AddFile_Click(object sender, RoutedEventArgs e)
     {
-        new AddFileWindow().Show();
+        new AddFileCommand().Execute();
         Close();
     }
 
     private void AddLink_Click(object sender, RoutedEventArgs e)
     {
-        new AddLinkWindow().Show();
+        new AddLinkCommand().Execute();
         Close();
     }
 
@@ -250,7 +250,7 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void SettingsButton_Click(object sender, RoutedEventArgs e)
     {
-        new SettingsWindow().Show();
+        new OpenSettingsCommand().Execute();
         Close();
     }
 

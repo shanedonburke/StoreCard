@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using StoreCard.Commands;
 using StoreCard.Static;
 using StoreCard.Utils;
 using StoreCard.Windows;
@@ -23,11 +24,11 @@ namespace StoreCard
         {
             Processes.KillOtherStoreCardProcesses();
 
-            new TaskbarIconWindow().Show();
+            new CreateTaskbarIconCommand().Execute();
 
             if (!Environment.GetCommandLineArgs().Contains(CommandLineOptions.StartMinimized))
             {
-                new MainWindow().Show();
+                new ShowMainWindowCommand().Execute();
             }
         }
     }
