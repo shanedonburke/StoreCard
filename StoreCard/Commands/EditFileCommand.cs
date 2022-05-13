@@ -14,6 +14,7 @@ internal class EditFileCommand : IStoreCardCommand
     {
         _item = item;
     }
+
     public void Execute()
     {
         new EditFileWindow(_item).Show();
