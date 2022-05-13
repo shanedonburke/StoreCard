@@ -56,6 +56,6 @@ public abstract class SavedItem : IListBoxItem
 
     public int CompareTo(IListBoxItem? other)
     {
-        return Compare(Name, other?.Name, StringComparison.Ordinal);
+        return Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);
     }
 }

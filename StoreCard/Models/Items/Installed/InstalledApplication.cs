@@ -23,6 +23,6 @@ public class InstalledApplication : IListBoxItem
     public ImageSource? PrefixIcon => null;
 
     public int CompareTo(IListBoxItem? other) {
-        return string.Compare(Name, other?.Name, StringComparison.Ordinal);
+        return string.Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);
     }
 }
