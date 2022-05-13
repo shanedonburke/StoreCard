@@ -40,6 +40,7 @@
             x:Name="CustomListBox"
             Grid.Row="1"
             Margin="15,10,15,10"
+            ShowSecondaryText="Always"
             SelectionChanged="CustomListBox_SelectionChanged"
             KeyUp="CustomListBox_KeyUp" />
     </Grid>

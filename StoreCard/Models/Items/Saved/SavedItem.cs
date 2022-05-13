@@ -18,7 +18,6 @@ public enum ItemCategory : uint
 
 public enum SpecificItemCategory : uint
 {
-    None,
     App,
     Executable,
     SteamGame,

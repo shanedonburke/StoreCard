@@ -34,6 +34,8 @@ internal class SavedEpicGame : SavedGame
 
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.EpicGame;
 
+    public override string SecondaryText => "Epic Games";
+
     public override void Open()
     {
         Process.Start("CMD.exe", $"/c START com.epicgames.launcher://apps/{AppName}?action=launch&silent=true ");

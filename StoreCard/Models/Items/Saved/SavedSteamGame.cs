@@ -35,6 +35,8 @@ internal class SavedSteamGame : SavedGame
 
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.SteamGame;
 
+    public override string SecondaryText => "Steam";
+
     public override void Open()
     {
         if (SteamLibrary.SteamInstallFolder == null)
