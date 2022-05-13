@@ -27,89 +27,7 @@
     d:DataContext="{d:DesignInstance Type=windows:MainWindow, IsDesignTimeCreatable=False}">
     <Window.Resources>
         <!--  Item context menu  -->
-        <ContextMenu
-            x:Key="ItemMenuKey">
-            <MenuItem
-                x:Name="ContextMenuOpenItem"
-                Click="ContextMenuOpenItem_Click">
-                <MenuItem.Header>
-                    <TextBlock
-                        Margin="-20,0,0,0"
-                        Text="Open" />
-                </MenuItem.Header>
-            </MenuItem>
-            <MenuItem
-                x:Name="EditFileMenuItem"
-                Click="EditFileMenuItem_Click">
-                <MenuItem.Style>
-                    <Style
-                        TargetType="{x:Type MenuItem}">
-                        <Setter
-                            Property="Visibility"
-                            Value="Collapsed" />
-                        <Style.Triggers>
-                            <!--  Show if selected item is a folder  -->
-                            <DataTrigger
-                                Binding="{Binding (saved:SavedItem.Category), Converter={StaticResource ValueToStringConverter}}"
-                                Value="Folder">
-                                <Setter
-                                    Property="Visibility"
-                                    Value="Visible" />
-                            </DataTrigger>
-                            <!--  Show if selected item is a file  -->
-                            <DataTrigger
-                                Binding="{Binding (saved:SavedItem.Category), Converter={StaticResource ValueToStringConverter}}"
-                                Value="File">
-                                <Setter
-                                    Property="Visibility"
-                                    Value="Visible" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </MenuItem.Style>
-                <MenuItem.Header>
-                    <TextBlock
-                        Margin="-20,0,0,0"
-                        Text="Edit..." />
-                </MenuItem.Header>
-            </MenuItem>
-            <MenuItem
-                x:Name="EditExecutableMenuItem_Click"
-                Click="EditExecutableMenuItem_Click">
-                <MenuItem.Style>
-                    <Style
-                        TargetType="{x:Type MenuItem}">
-                        <Setter
-                            Property="Visibility"
-                            Value="Collapsed" />
-                        <Style.Triggers>
-                            <!--  Show if selected item is an executable  -->
-                            <DataTrigger
-                                Binding="{Binding (saved:SavedItem.SpecificCategory), Converter={StaticResource ValueToStringConverter}}"
-                                Value="Executable">
-                                <Setter
-                                    Property="Visibility"
-                                    Value="Visible" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </MenuItem.Style>
-                <MenuItem.Header>
-                    <TextBlock
-                        Margin="-20,0,0,0"
-                        Text="Edit..." />
-                </MenuItem.Header>
-            </MenuItem>
-            <MenuItem
-                x:Name="DeleteItem"
-                Click="DeleteItem_Click">
-                <MenuItem.Header>
-                    <TextBlock
-                        Margin="-20,0,0,0"
-                        Text="Delete" />
-                </MenuItem.Header>
-            </MenuItem>
-        </ContextMenu>
+        
     </Window.Resources>
 
     <!--  Main content  -->
@@ -473,10 +391,90 @@
                 Margin="10,10,10,10"
                 PreviewKeyDown="ItemListBox_PreviewKeyDown"
                 ItemDoubleClick="ListBoxItem_DoubleClick"
-                ItemContextMenu="{StaticResource ItemMenuKey}"
                 ShowActionButton="True"
                 ActionButtonText="Open"
-                ActionButtonClick="OpenButton_Click" />
+                ActionButtonClick="OpenButton_Click">
+                <userControls:StoreCardListBox.ItemContextMenu>
+                    <ContextMenu d:DataContext="{d:DesignInstance saved:SavedItem}">
+                        <MenuItem
+                            Click="ContextMenuOpenItem_Click">
+                            <MenuItem.Header>
+                                <TextBlock
+                                    Margin="-20,0,0,0"
+                                    Text="Open" />
+                            </MenuItem.Header>
+                        </MenuItem>
+                        <MenuItem
+                            Click="EditFileMenuItem_Click">
+                            <MenuItem.Style>
+                                <Style
+                                    TargetType="{x:Type MenuItem}">
+                                    <Setter
+                                        Property="Visibility"
+                                        Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <!--  Show if selected item is a folder  -->
+                                        <DataTrigger
+                                            Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                            Value="Folder">
+                                            <Setter
+                                                Property="Visibility"
+                                                Value="Visible" />
+                                        </DataTrigger>
+                                        <!--  Show if selected item is a file  -->
+                                        <DataTrigger
+                                            Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                            Value="File">
+                                            <Setter
+                                                Property="Visibility"
+                                                Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MenuItem.Style>
+                            <MenuItem.Header>
+                                <TextBlock
+                                    Margin="-20,0,0,0"
+                                    Text="Edit..." />
+                            </MenuItem.Header>
+                        </MenuItem>
+                        <MenuItem
+                            Click="EditExecutableMenuItem_Click">
+                            <MenuItem.Style>
+                                <Style
+                                    TargetType="{x:Type MenuItem}">
+                                    <Setter
+                                        Property="Visibility"
+                                        Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <!--  Show if selected item is an executable  -->
+                                        <DataTrigger
+                                            Binding="{Binding SpecificCategory, Converter={StaticResource ValueToStringConverter}}"
+                                            Value="Executable">
+                                            <Setter
+                                                Property="Visibility"
+                                                Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MenuItem.Style>
+                            <MenuItem.Header>
+                                <TextBlock
+                                    Margin="-20,0,0,0"
+                                    Text="Edit..." />
+                            </MenuItem.Header>
+                        </MenuItem>
+                        <MenuItem
+                            Click="DeleteItem_Click">
+                            <MenuItem.Header>
+                                <TextBlock
+                                    Margin="-20,0,0,0"
+                                    Text="Delete" />
+                            </MenuItem.Header>
+                        </MenuItem>
+                    </ContextMenu>
+                </userControls:StoreCardListBox.ItemContextMenu>
+            </userControls:StoreCardListBox>
         </Grid>
     </Border>
 </Window>

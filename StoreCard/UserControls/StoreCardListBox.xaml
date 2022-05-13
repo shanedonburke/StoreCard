@@ -199,7 +199,7 @@
                                                 Value="WhenActive" />
                                             <Condition
                                                 Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
-                                                Value="True" />
+                                                Value="WhenActive" />
                                         </MultiDataTrigger.Conditions>
                                         <MultiDataTrigger.Setters>
                                             <Setter

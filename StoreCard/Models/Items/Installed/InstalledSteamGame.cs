@@ -13,7 +13,7 @@ public class InstalledSteamGame : InstalledGame
         AppId = appId;
     }
 
-    public string SecondaryText => "Steam";
+    public override string SecondaryText => "Steam";
 
     public string AppId { get; }
 
