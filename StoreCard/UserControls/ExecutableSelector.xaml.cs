@@ -135,7 +135,7 @@ public partial class ExecutableSelector : INotifyPropertyChanged
     {
         var openFileDialog = new OpenFileDialog
         {
-            Filter = "Executables|*.exe|All Files (*.*)|*.*",
+            Filter = "Executables|*.exe",
             InitialDirectory = Environment.ExpandEnvironmentVariables("%ProgramW6432%"),
             Title = "Select Executable"
         };

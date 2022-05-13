@@ -2,7 +2,7 @@
 
 namespace StoreCard.Models.Items.Saved;
 
-internal class SavedLink : SavedItem
+public class SavedLink : SavedItem
 {
     public string Url { get; }
 

@@ -258,6 +258,19 @@ public partial class MainWindow : INotifyPropertyChanged
         Close();
     }
 
+    private void EditLinkMenuItem_Click(object sender, RoutedEventArgs e)
+    {
+        if (ItemListBox.SelectedItem is SavedLink link)
+        {
+            new EditLinkCommand(link).Execute();
+        }
+        else
+        {
+            Debug.WriteLine("Tried to edit the selected item as a link, but the item is not a link.");
+        }
+        Close();
+    }
+
     private void SettingsButton_Click(object sender, RoutedEventArgs e)
     {
         new OpenSettingsCommand().Execute();

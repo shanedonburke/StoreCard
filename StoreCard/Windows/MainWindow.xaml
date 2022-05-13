@@ -483,6 +483,32 @@
                             </MenuItem.Header>
                         </MenuItem>
                         <MenuItem
+                            Click="EditLinkMenuItem_Click">
+                            <MenuItem.Style>
+                                <Style
+                                    TargetType="{x:Type MenuItem}">
+                                    <Setter
+                                        Property="Visibility"
+                                        Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <!--  Show if selected item is an executable  -->
+                                        <DataTrigger
+                                            Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                            Value="Link">
+                                            <Setter
+                                                Property="Visibility"
+                                                Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </MenuItem.Style>
+                            <MenuItem.Header>
+                                <TextBlock
+                                    Margin="-20,0,0,0"
+                                    Text="Edit..." />
+                            </MenuItem.Header>
+                        </MenuItem>
+                        <MenuItem
                             Click="DeleteMenuItem_Click">
                             <MenuItem.Header>
                                 <TextBlock

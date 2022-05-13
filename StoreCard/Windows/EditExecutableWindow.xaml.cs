@@ -13,11 +13,8 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class EditExecutableWindow
 {
-    private SavedExecutable _executable;
-
     public EditExecutableWindow(SavedExecutable executable)
     {
-        _executable = executable;
         DataContext = this;
         InitializeComponent();
         ExecutableSelector.Executable = executable;
