@@ -1,5 +1,6 @@
 ﻿using System.Windows.Media;
 using StoreCard.Models.Items.Saved;
+using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Installed;
 
@@ -13,7 +14,7 @@ public class InstalledSteamGame : InstalledGame
         AppId = appId;
     }
 
-    public override string SecondaryText => "Steam";
+    public override string SecondaryText => GamePlatformNames.Steam;
 
     public string AppId { get; }
 

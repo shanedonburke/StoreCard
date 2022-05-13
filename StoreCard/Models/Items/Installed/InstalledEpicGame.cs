@@ -15,7 +15,7 @@ internal class InstalledEpicGame : InstalledGame
         AppName = appName;
     }
 
-    public override string SecondaryText => "Epic Games";
+    public override string SecondaryText => GamePlatformNames.EpicGames;
 
     public string AppName { get;  }
 

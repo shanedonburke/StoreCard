@@ -34,7 +34,7 @@ internal class SavedEpicGame : SavedGame
 
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.EpicGame;
 
-    public override string SecondaryText => "Epic Games";
+    public override string SecondaryText => GamePlatformNames.EpicGames;
 
     public override void Open()
     {

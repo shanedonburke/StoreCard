@@ -6,6 +6,7 @@ using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 using StoreCard.GameLibraries;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Static;
 using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
@@ -35,7 +36,7 @@ internal class SavedSteamGame : SavedGame
 
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.SteamGame;
 
-    public override string SecondaryText => "Steam";
+    public override string SecondaryText => GamePlatformNames.Steam;
 
     public override void Open()
     {
