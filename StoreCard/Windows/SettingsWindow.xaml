@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:userControls="clr-namespace:StoreCard.UserControls"
     mc:Ignorable="d"
     Width="600"
     Height="400"
@@ -21,6 +22,8 @@
                 Height="Auto" />
             <RowDefinition
                 Height="Auto" />
+            <RowDefinition
+                Height="20" />
             <RowDefinition
                 Height="Auto" />
         </Grid.RowDefinitions>
@@ -51,51 +54,64 @@
             HorizontalContentAlignment="Left"
             Foreground="White"
             FontSize="14" />
-        <StackPanel
+        <Separator
             Grid.Row="2"
-            Orientation="Horizontal"
-            Height="20"
-            Margin="0,5,0,0"
-            VerticalAlignment="Top">
-            <Label
-                Padding="0"
-                Margin="0,0,10,0"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center" />
+        <StackPanel
+            Grid.Row="3">
+            <StackPanel
+                Orientation="Horizontal"
+                Height="20"
+                Margin="0,0,0,10"
+                VerticalAlignment="Top">
+                <Label
+                    Padding="0"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Left"
+                    HorizontalContentAlignment="Left"
+                    VerticalAlignment="Top"
+                    VerticalContentAlignment="Center"
+                    Foreground="White"
+                    FontSize="14"
+                    Content="Shortcut" />
+                <Label
+                    Padding="0"
+                    Margin="0,0,10,0"
+                    HorizontalAlignment="Left"
+                    HorizontalContentAlignment="Left"
+                    VerticalAlignment="Top"
+                    VerticalContentAlignment="Center"
+                    Foreground="#AAAAAA"
+                    FontSize="14"
+                    Content="{Binding HotKeyText}" />
+                <Button
+                    Name="RecordHotKeyButton"
+                    Click="RecordHotKeyButton_Click"
+                    Width="16"
+                    Height="16"
+                    Background="Transparent"
+                    VerticalAlignment="Center">
+                    <Button.Template>
+                        <ControlTemplate
+                            TargetType="Button">
+                            <fa:IconBlock
+                                FontSize="16"
+                                Foreground="Red"
+                                IconFont="Solid"
+                                Cursor="Hand"
+                                Icon="Circle" />
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+            <userControls:StoreCardButton
+                Click="UseDefaultHotKeyButton_Click"
+                Height="30"
                 HorizontalAlignment="Left"
-                HorizontalContentAlignment="Left"
-                VerticalAlignment="Top"
-                VerticalContentAlignment="Center"
-                Foreground="White"
-                FontSize="14"
-                Content="Shortcut" />
-            <Label
-                Padding="0"
-                Margin="0,0,10,0"
-                HorizontalAlignment="Left"
-                HorizontalContentAlignment="Left"
-                VerticalAlignment="Top"
-                VerticalContentAlignment="Center"
-                Foreground="#AAAAAA"
-                FontSize="14"
-                Content="{Binding HotKeyText}" />
-            <Button
-                Name="RecordHotKeyButton"
-                Click="RecordHotKeyButton_Click"
-                Width="16"
-                Height="16"
-                Background="Transparent"
-                VerticalAlignment="Center">
-                <Button.Template>
-                    <ControlTemplate
-                        TargetType="Button">
-                        <fa:IconBlock
-                            FontSize="16"
-                            Foreground="Red"
-                            IconFont="Solid"
-                            Cursor="Hand"
-                            Icon="Circle" />
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                Style="{DynamicResource SecondaryButton}"
+                Text="Use default shortcut"
+                Width="150" />
         </StackPanel>
     </Grid>
 </Window>

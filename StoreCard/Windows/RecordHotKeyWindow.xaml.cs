@@ -103,7 +103,6 @@ namespace StoreCard.Windows
             _config.HotKeyModifiers = _modifiers;
             _config.VirtualHotKey = _virtualKey;
             AppData.SaveConfigToFile(_config);
-            HotKeyService.Instance.UpdateHotKey();
             DialogResult = true;
             Close();
         }

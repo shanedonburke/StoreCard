@@ -5,6 +5,7 @@ using System.Windows;
 using StoreCard.Commands;
 using StoreCard.Models;
 using StoreCard.Properties;
+using StoreCard.Services;
 using StoreCard.Utils;
 
 namespace StoreCard.Windows;
@@ -61,5 +62,12 @@ public partial class SettingsWindow : INotifyPropertyChanged
     {
         Shortcuts.RemoveStartupShortcut();
         OnPropertyChanged(nameof(IsStartupShortcutDisabled));
+    }
+
+    private void UseDefaultHotKeyButton_Click(object sender, RoutedEventArgs e)
+    {
+        _config.ResetHotKeyToDefault();
+        AppData.SaveConfigToFile(_config);
+        OnPropertyChanged(nameof(HotKeyText));
     }
 }

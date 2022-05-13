@@ -6,6 +6,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using StoreCard.Models;
 using StoreCard.Models.Items.Saved;
+using StoreCard.Services;
 
 namespace StoreCard.Utils;
 
@@ -55,6 +56,7 @@ internal class AppData
     public static void SaveConfigToFile(UserConfig config)
     {
         SerializeObjectToFile(config, GetConfigFilePath());
+        HotKeyService.Instance.UpdateHotKey();
     }
 
     public static void DeleteItemAndSave(SavedItem item)

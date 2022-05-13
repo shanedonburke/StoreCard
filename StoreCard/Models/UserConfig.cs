@@ -6,13 +6,16 @@ namespace StoreCard.Models;
 
 internal class UserConfig
 {
+    public static readonly uint DefaultHotKeyModifiers = HotKeys.ModifiersToHotKeyByte(Key.LWin, Key.LeftShift);
+    public static readonly uint DefaultVirtualHotKey = HotKeys.KeyToVirtualKey(Key.Z);
+
     public uint HotKeyModifiers;
     public uint VirtualHotKey;
 
     public UserConfig()
     {
-        HotKeyModifiers = HotKeys.ModifiersToHotKeyByte(Key.LWin, Key.LeftShift);
-        VirtualHotKey = HotKeys.KeyToVirtualKey(Key.Z);
+        HotKeyModifiers = DefaultHotKeyModifiers;
+        VirtualHotKey = DefaultVirtualHotKey;
     }
 
     [JsonConstructor]
@@ -20,5 +23,11 @@ internal class UserConfig
     {
         HotKeyModifiers = hotKeyModifiers;
         VirtualHotKey = virtualHotKey;
+    }
+
+    public void ResetHotKeyToDefault()
+    {
+        HotKeyModifiers = DefaultHotKeyModifiers;
+        VirtualHotKey = DefaultVirtualHotKey;
     }
 }
