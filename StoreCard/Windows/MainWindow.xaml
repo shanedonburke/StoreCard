@@ -25,11 +25,6 @@
     WindowStyle="None"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=windows:MainWindow, IsDesignTimeCreatable=False}">
-    <Window.Resources>
-        <!--  Item context menu  -->
-        
-    </Window.Resources>
-
     <!--  Main content  -->
     <Border
         Padding="10"
