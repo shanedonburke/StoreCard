@@ -66,6 +66,7 @@ public partial class LinkSelector : INotifyPropertyChanged
         set
         {
             _linkTitle = value;
+            LinkTitleBox.Text = _linkTitle;
             OnPropertyChanged(nameof(LinkTitle));
             OnPropertyChanged(nameof(ShouldEnableSaveButton));
         }
