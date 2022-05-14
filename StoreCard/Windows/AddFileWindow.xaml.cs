@@ -10,8 +10,6 @@ using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Microsoft.Win32;
-using Ookii.Dialogs.Wpf;
 using StoreCard.Commands;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
@@ -93,23 +91,14 @@ public partial class AddFileWindow : INotifyPropertyChanged
 
     private void BrowseFileButton_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new OpenFileDialog
-        {
-            Filter = "All Files (*.*)|*.*",
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-            Title = "Select File"
-        };
-
-        if (dialog.ShowDialog() == true) FilePathBox.Text = dialog.FileName;
+        var filePath = new BrowseFileCommand().Execute();
+        if (filePath != null) FilePathBox.Text = filePath;
     }
 
     private void BrowseFolderButton_Click(object sender, RoutedEventArgs e)
     {
-        var dialog = new VistaFolderBrowserDialog
-        {
-            RootFolder = Environment.SpecialFolder.UserProfile
-        };
-        if (dialog.ShowDialog() == true) FolderPathBox.Text = dialog.SelectedPath;
+        var folderPath = new BrowseFolderCommand().Execute();
+        if (folderPath != null) FolderPathBox.Text = folderPath;
     }
 
     private void SaveFileButton_Click(object sender, RoutedEventArgs e)

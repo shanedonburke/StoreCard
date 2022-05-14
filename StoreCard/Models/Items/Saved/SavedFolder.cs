@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Windows.Media;
+using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
 
@@ -16,5 +18,10 @@ internal class SavedFolder : SavedFileSystemItem
     public override bool Exists()
     {
         return Directory.Exists(Path);
+    }
+
+    protected override ImageSource GetSystemIcon()
+    {
+        return SystemIcons.GetFolderIconByPath(Path);
     }
 }

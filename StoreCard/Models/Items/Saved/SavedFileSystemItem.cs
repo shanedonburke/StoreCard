@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using StoreCard.Commands;
-using StoreCard.Windows;
+using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
 
@@ -11,19 +13,36 @@ public abstract class SavedFileSystemItem : SavedItem
     public static string DEFAULT_EXECUTABLE =
         Environment.GetFolderPath(Environment.SpecialFolder.Windows) + @"\explorer.exe";
 
-    public readonly string Path;
-
     public string ExecutablePath { get; private set; }
 
-    public string ExecutableName =>
-        ExecutablePath == DEFAULT_EXECUTABLE ? "Default" : ExecutablePath.Split(@"\").Last();
+    private string _path;
 
     protected SavedFileSystemItem(string id, string name, string? base64Icon, string path, string executablePath, long lastOpened)
         : base(id, name, base64Icon, lastOpened)
     {
-        Path = path;
+        _path = path;
         ExecutablePath = executablePath;
     }
+
+    public string Path
+    {
+        get => _path;
+        set
+        {
+            _path = value;
+            RegenerateBase64Icon();
+        }
+    }
+
+    public string ExecutableName =>
+        ExecutablePath == DEFAULT_EXECUTABLE ? "Default" : ExecutablePath.Split(@"\").Last();
+
+    public void SetExecutablePath(string path)
+    {
+        ExecutablePath = path.StartsWith("::") ? DEFAULT_EXECUTABLE : path;
+    }
+
+    public abstract bool Exists();
 
     protected override void OpenProtected()
     {
@@ -40,10 +59,13 @@ public abstract class SavedFileSystemItem : SavedItem
         openProcess.Start();
     }
 
-    public void SetExecutablePath(string path)
-    {
-        ExecutablePath = path.StartsWith("::") ? DEFAULT_EXECUTABLE : path;
-    }
+    protected abstract ImageSource? GetSystemIcon();
 
-    public abstract bool Exists();
+    private void RegenerateBase64Icon()
+    {
+        if (GetSystemIcon() is BitmapSource bitmapSource)
+        {
+            Base64Icon = Images.ImageToBase64(bitmapSource);
+        }
+    }
 }

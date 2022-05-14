@@ -1,4 +1,7 @@
 ﻿using System.IO;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
 
@@ -15,5 +18,10 @@ internal class SavedFile : SavedFileSystemItem
     public override bool Exists()
     {
         return File.Exists(Path);
+    }
+
+    protected override ImageSource? GetSystemIcon()
+    {
+        return SystemIcons.GetFileIconByPath(Path);
     }
 }

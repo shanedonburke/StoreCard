@@ -13,111 +13,175 @@ using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
 using StoreCard.Utils;
 
-namespace StoreCard.Windows
+namespace StoreCard.Windows;
+
+/// <summary>
+/// Interaction logic for EditFileWindow.xaml
+/// </summary>
+public sealed partial class EditFileWindow : INotifyPropertyChanged
 {
-    /// <summary>
-    /// Interaction logic for EditFileWindow.xaml
-    /// </summary>
-    public partial class EditFileWindow : INotifyPropertyChanged
+    public EditFileWindow(SavedFileSystemItem item)
     {
-        public EditFileWindow(SavedFileSystemItem item)
+        _item = item;
+
+        DataContext = this;
+        InitializeComponent();
+
+        PathBox.Text = item.Path;
+        NameBox.Text = item.Name;
+        OnPropertyChanged(nameof(IsPathValid));
+        OnPropertyChanged(nameof(ShouldEnableSavePathButton));
+    }
+
+    private SavedFileSystemItem _item;
+
+    public bool IsPathValid => _item.Exists();
+
+    public bool ShouldEnableSavePathButton => IsPathValid && PathBox.Text != _item.Path;
+
+    public bool ShouldEnableSaveNameButton => NameBox.Text.Trim() != "" && NameBox.Text != _item.Name;
+
+    public string ExecutableName => _item.ExecutableName;
+
+    public ImageSource ExecutableIcon
+    {
+        get
         {
-            _item = item;
-
-            DataContext = this;
-            InitializeComponent();
-
-            NameBox.Text = item.Name;
-        }
-
-        private SavedFileSystemItem _item;
-
-        public string Path => _item.Path;
-
-        public bool ShouldEnableSaveNameButton => NameBox.Text.Trim() != "" && NameBox.Text != _item.Name;
-
-        public string ExecutableName => _item.ExecutableName;
-
-        public ImageSource ExecutableIcon
-        {
-            get
+            var execPath = _item.ExecutablePath;
+            if (!File.Exists(execPath))
             {
-                var execPath = _item.ExecutablePath;
-                if (!File.Exists(execPath))
-                {
-                    execPath = SavedFileSystemItem.DEFAULT_EXECUTABLE;
-                }
-
-                var icon = System.Drawing.Icon.ExtractAssociatedIcon(execPath) ??
-                           System.Drawing.Icon.ExtractAssociatedIcon(SavedFileSystemItem.DEFAULT_EXECUTABLE);
-                Debug.Assert(icon != null, nameof(icon) + " != null");
-                return Imaging.CreateBitmapSourceFromHIcon(
-                    icon.Handle,
-                    Int32Rect.Empty,
-                    BitmapSizeOptions.FromEmptyOptions());
-            }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void ChangeExecutableButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (new ChangeExecutableWindow(_item).ShowDialog() != true) return;
-
-            var item = AppData.FindSavedItemById<SavedFileSystemItem>(AppData.ReadItemsFromFile(), _item.Id);
-            if (item == null)
-            {
-                Debug.WriteLine("Failed to find matching item for edit file window.");
-                return;
+                execPath = SavedFileSystemItem.DEFAULT_EXECUTABLE;
             }
 
-            _item = item;
-            OnPropertyChanged(nameof(ExecutableName));
-            OnPropertyChanged(nameof(ExecutableIcon));
+            var icon = System.Drawing.Icon.ExtractAssociatedIcon(execPath) ??
+                       System.Drawing.Icon.ExtractAssociatedIcon(SavedFileSystemItem.DEFAULT_EXECUTABLE);
+            Debug.Assert(icon != null, nameof(icon) + " != null");
+            return Imaging.CreateBitmapSourceFromHIcon(
+                icon.Handle,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
         }
+    }
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void ChangeExecutableButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (new ChangeExecutableWindow(_item).ShowDialog() != true) return;
+
+        var item = AppData.FindSavedItemById<SavedFileSystemItem>(AppData.ReadItemsFromFile(), _item.Id);
+        if (item == null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            Debug.WriteLine("Failed to find matching item for edit file window.");
+            return;
         }
 
-        private void Window_Closed(object? sender, EventArgs e)
+        _item = item;
+        OnPropertyChanged(nameof(ExecutableName));
+        OnPropertyChanged(nameof(ExecutableIcon));
+    }
+
+    [NotifyPropertyChangedInvocator]
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private void BrowseFile()
+    {
+        var filePath = new BrowseFileCommand().Execute();
+        if (filePath != null) PathBox.Text = filePath;
+    }
+
+    private void BrowseFolder()
+    {
+        var folderPath = new BrowseFolderCommand().Execute();
+        if (folderPath != null) PathBox.Text = folderPath;
+    }
+
+    private void OnNameChanged()
+    {
+        OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
+    }
+
+    private void OnPathChanged()
+    {
+        OnPropertyChanged(nameof(ShouldEnableSavePathButton));
+    }
+
+    private void Window_Closed(object? sender, EventArgs e)
+    {
+        new ShowMainWindowCommand().Execute();
+    }
+
+    private void BrowseButton_Click(object sender, RoutedEventArgs e)
+    {
+        switch (_item.SpecificCategory)
         {
-            new ShowMainWindowCommand().Execute();
+            case SpecificItemCategory.File:
+                BrowseFile();
+                break;
+            case SpecificItemCategory.Folder:
+                BrowseFolder();
+                break;
         }
+    }
 
-        private void SaveNameButton_Click(object sender, RoutedEventArgs e)
+    private void SavePathButton_Click(object sender, RoutedEventArgs e)
+    {
+        var path = PathBox.Text;
+
+        var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i =>
         {
-            var name = NameBox.Text;
+            i.Path = path;
+        });
 
-            var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.Name = name);
-
-            if (updatedItem != null)
-            {
-                _item = updatedItem;
-                OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
-            }
-            else
-            {
-                Debug.WriteLine("Tried to change item name, but no matching stored item was found.");
-            }
-        }
-
-        private void StoreCardTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        if (updatedItem != null)
         {
-            OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
+            _item = updatedItem;
+            OnPathChanged();
         }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        else
         {
-            AppData.DeleteItemAndSave(_item);
-            Close();
+            Debug.WriteLine("Tried to change item path, but no matching stored item was found.");
         }
+    }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+    private void SaveNameButton_Click(object sender, RoutedEventArgs e)
+    {
+        var name = NameBox.Text;
+
+        var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.Name = name);
+
+        if (updatedItem != null)
         {
-            Close();
+            _item = updatedItem;
+            OnNameChanged();
         }
+        else
+        {
+            Debug.WriteLine("Tried to change item name, but no matching stored item was found.");
+        }
+    }
+
+    private void PathBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        OnPathChanged();
+    }
+
+    private void NameBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        OnNameChanged();
+    }
+
+    private void DeleteButton_Click(object sender, RoutedEventArgs e)
+    {
+        AppData.DeleteItemAndSave(_item);
+        Close();
+    }
+
+    private void CloseButton_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

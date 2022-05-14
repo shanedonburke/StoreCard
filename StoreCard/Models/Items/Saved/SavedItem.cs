@@ -34,7 +34,7 @@ public abstract class SavedItem : IListBoxItem
 
     public string Name { get; set; }
 
-    public string? Base64Icon { get; protected set; }
+    public string? Base64Icon { get; set; }
 
     public long LastOpened { get; private set; }
 
