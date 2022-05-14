@@ -1,0 +1,62 @@
+﻿<Window
+    x:Class="StoreCard.Windows.UnsavedChangesWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:windows="clr-namespace:StoreCard.Windows"
+    xmlns:userControls="clr-namespace:StoreCard.UserControls"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance windows:UnsavedChangesWindow, IsDesignTimeCreatable=False}"
+    Background="{DynamicResource AppBackgroundColor_Brush}"
+    Title="UnsavedChangesWindow"
+    Height="200"
+    Width="450"
+    WindowStartupLocation="CenterScreen">
+    <Grid
+        Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="*" />
+            <RowDefinition
+                Height="30" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            Text="There are unsaved changes. Save them before closing?"
+            Foreground="White"
+            FontSize="14" />
+        <Grid
+            Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="2*" />
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="*" />
+            </Grid.ColumnDefinitions>
+            <userControls:StoreCardButton
+                Click="CloseWithoutSaving_Click"
+                Grid.Column="0"
+                Style="{DynamicResource DeleteButton}"
+                Text="Close without saving" />
+            <userControls:StoreCardButton
+                Click="Cancel_Click"
+                Grid.Column="2"
+                Style="{DynamicResource SecondaryButton}"
+                Text="Cancel"
+                Margin="0,0,5,0" />
+            <userControls:StoreCardButton
+                Click="Save_Click"
+                Grid.Column="3"
+                Style="{DynamicResource PrimaryButton}"
+                Text="Save"
+                Margin="5,0,0,0" />
+        </Grid>
+    </Grid>
+</Window>

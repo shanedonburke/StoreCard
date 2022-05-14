@@ -43,6 +43,8 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     public string ExecutableName => _item.ExecutableName;
 
+    private bool HasUnsavedChanges => ShouldEnableSavePathButton || ShouldEnableSaveNameButton;
+
     public ImageSource ExecutableIcon
     {
         get
@@ -109,6 +111,49 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         OnPropertyChanged(nameof(ShouldEnableSavePathButton));
     }
 
+    private void SavePath()
+    {
+        var path = PathBox.Text;
+
+        var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i =>
+        {
+            i.Path = path;
+        });
+
+        if (updatedItem != null)
+        {
+            _item = updatedItem;
+            OnPathChanged();
+        }
+        else
+        {
+            Debug.WriteLine("Tried to change item path, but no matching stored item was found.");
+        }
+    }
+
+    private void SaveName()
+    {
+        var name = NameBox.Text;
+
+        var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.Name = name);
+
+        if (updatedItem != null)
+        {
+            _item = updatedItem;
+            OnNameChanged();
+        }
+        else
+        {
+            Debug.WriteLine("Tried to change item name, but no matching stored item was found.");
+        }
+    }
+
+    private void SaveAll()
+    {
+        SavePath();
+        SaveName();
+    }
+
     private void Window_Closed(object? sender, EventArgs e)
     {
         new ShowMainWindowCommand().Execute();
@@ -129,39 +174,12 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     private void SavePathButton_Click(object sender, RoutedEventArgs e)
     {
-        var path = PathBox.Text;
-
-        var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i =>
-        {
-            i.Path = path;
-        });
-
-        if (updatedItem != null)
-        {
-            _item = updatedItem;
-            OnPathChanged();
-        }
-        else
-        {
-            Debug.WriteLine("Tried to change item path, but no matching stored item was found.");
-        }
+        SavePath();
     }
 
     private void SaveNameButton_Click(object sender, RoutedEventArgs e)
     {
-        var name = NameBox.Text;
-
-        var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.Name = name);
-
-        if (updatedItem != null)
-        {
-            _item = updatedItem;
-            OnNameChanged();
-        }
-        else
-        {
-            Debug.WriteLine("Tried to change item name, but no matching stored item was found.");
-        }
+        SaveName();
     }
 
     private void PathBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -183,5 +201,28 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
     private void CloseButton_Click(object sender, RoutedEventArgs e)
     {
         Close();
+    }
+
+    private void Window_Closing(object? sender, CancelEventArgs e)
+    {
+        if (!HasUnsavedChanges)
+        {
+            return;
+        }
+
+        var unsavedChangesWindow = new UnsavedChangesWindow();
+        unsavedChangesWindow.ShowDialog();
+
+        switch (unsavedChangesWindow.DialogResult)
+        {
+            case UnsavedChangesWindow.Result.SaveAndClose:
+                SaveAll();
+                break;
+            case UnsavedChangesWindow.Result.CloseWithoutSaving: 
+                break;
+            case UnsavedChangesWindow.Result.Cancel:
+                e.Cancel = true;
+                break;
+        }
     }
 }

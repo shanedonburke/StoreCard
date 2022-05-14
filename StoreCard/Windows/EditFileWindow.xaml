@@ -11,9 +11,10 @@
     Height="600"
     Background="{DynamicResource AppBackgroundColor_Brush}"
     WindowStartupLocation="CenterScreen"
+    Closing="Window_Closing"
     Closed="Window_Closed"
     Title="Edit Saved File"
-    d:DataContext="{d:DesignInstance Type=windows:EditFileWindow, IsDesignTimeCreatable=False}">
+    d:DataContext="{d:DesignInstance windows:EditFileWindow, IsDesignTimeCreatable=False}">
     <Grid
         Margin="15,15,15,15">
         <Grid.RowDefinitions>
