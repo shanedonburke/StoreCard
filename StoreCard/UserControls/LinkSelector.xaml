@@ -28,6 +28,8 @@
                     Height="30" />
                 <RowDefinition
                     Height="Auto" />
+                <RowDefinition
+                    Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
@@ -70,8 +72,25 @@
                 TextChanged="LinkTitleBox_TextChanged"
                 InactivePlaceholder="Enter title..."
                 ActivePlaceholder="Enter title..." />
-            <Label
+            <CheckBox
+                x:Name="OpenPrivateCheckBox"
                 Grid.Row="3"
+                Grid.Column="1"
+                Margin="0,15"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center">
+                <Label
+                    Content="Open in private/incognito window"
+                    Padding="5,0,0,2"
+                    HorizontalAlignment="Left"
+                    HorizontalContentAlignment="Left"
+                    VerticalAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Foreground="White"
+                    FontSize="14" />
+            </CheckBox>
+            <Label
+                Grid.Row="4"
                 Grid.Column="0"
                 Visibility="{Binding LinkTitle, Converter={StaticResource NotBlankToVisibilityConverter}}"
                 HorizontalAlignment="Left"
@@ -82,7 +101,7 @@
                 FontSize="14"
                 Content="Preview:" />
             <Grid
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="1"
                 Visibility="{Binding LinkTitle, Converter={StaticResource NotBlankToVisibilityConverter}}"
                 Margin="0,15,0,15">

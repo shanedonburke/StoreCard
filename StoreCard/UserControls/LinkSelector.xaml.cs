@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,11 +50,13 @@ public partial class LinkSelector : INotifyPropertyChanged
             {
                 UrlBox.Text = value.Url;
                 LinkTitleBox.Text = value.Name;
+                OpenPrivateCheckBox.IsChecked = value.ShouldOpenPrivate;
             }
             else
             {
                 UrlBox.Text = string.Empty;
                 LinkTitleBox.Text = string.Empty;
+                OpenPrivateCheckBox.IsChecked = false;
             }
         }
     }
@@ -104,9 +107,14 @@ public partial class LinkSelector : INotifyPropertyChanged
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {
-        var base64Icon = Images.ImageToBase64((BitmapSource)LinkIcon);
-        var savedItems = AppData.ReadItemsFromFile();
-        savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon, Links.NormalizeUrl(UrlBox.Text), Time.UnixTimeMillis));
+        var base64Icon = Images.ImageToBase64((BitmapSource) LinkIcon);
+
+        // Instead of updating the link we're editing, create a new list with only the new link
+        var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != Link?.Id).ToList();
+
+        var shouldOpenPrivate = OpenPrivateCheckBox.IsChecked == true;
+        savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon, Links.NormalizeUrl(UrlBox.Text),
+            Time.UnixTimeMillis, shouldOpenPrivate));
         AppData.SaveItemsToFile(savedItems);
         Finish();
     }
