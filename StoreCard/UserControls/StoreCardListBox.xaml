@@ -183,7 +183,7 @@
                                         Value="True">
                                         <Setter
                                             Property="Foreground"
-                                            Value="White" />
+                                            Value="#DDDDDD" />
                                     </DataTrigger>
                                     <DataTrigger
                                         Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=userControls:StoreCardListBox}, Path=ShowSecondaryText, Converter={StaticResource ValueToStringConverter}}"
@@ -199,7 +199,7 @@
                                                 Value="WhenActive" />
                                             <Condition
                                                 Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
-                                                Value="WhenActive" />
+                                                Value="True" />
                                         </MultiDataTrigger.Conditions>
                                         <MultiDataTrigger.Setters>
                                             <Setter

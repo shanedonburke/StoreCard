@@ -13,7 +13,10 @@ internal class SavedFile : SavedFileSystemItem
     }
 
     public override ItemCategory Category => ItemCategory.File;
+
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.File;
+
+    public override string SecondaryText => ItemCategory.File.ToString();
 
     public override bool Exists()
     {

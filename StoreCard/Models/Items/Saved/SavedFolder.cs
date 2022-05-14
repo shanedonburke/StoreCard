@@ -15,6 +15,8 @@ internal class SavedFolder : SavedFileSystemItem
 
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.Folder;
 
+    public override string SecondaryText => ItemCategory.Folder.ToString();
+
     public override bool Exists()
     {
         return Directory.Exists(Path);

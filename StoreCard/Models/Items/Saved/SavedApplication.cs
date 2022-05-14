@@ -28,7 +28,10 @@ internal class SavedApplication : SavedItem
     public string AppUserModelId { get; }
 
     public override ItemCategory Category => ItemCategory.App;
+
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.App;
+
+    public override string SecondaryText => ItemCategory.App.ToString();
 
     protected override void OpenProtected()
     {
