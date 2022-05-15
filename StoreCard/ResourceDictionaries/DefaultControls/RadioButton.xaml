@@ -93,7 +93,6 @@
                                 </Ellipse>
                             </Grid>
                         </BulletDecorator.Bullet>
-                        <!-- Radio button visual states -->
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup
                                 x:Name="CommonStates">
@@ -104,8 +103,7 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames
                                             Storyboard.TargetName="Border"
-                                            Storyboard.TargetProperty="(Shape.Fill).
-                                                                          (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                            Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                             <EasingColorKeyFrame
                                                 KeyTime="0"
                                                 Value="{DynamicResource ControlLightColor_Hover}" />
@@ -117,8 +115,7 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames
                                             Storyboard.TargetName="Border"
-                                            Storyboard.TargetProperty="(Shape.Fill).
-                                                                          (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                            Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                             <EasingColorKeyFrame
                                                 KeyTime="0"
                                                 Value="{DynamicResource ControlLightColor_Pressed}" />
@@ -130,24 +127,21 @@
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames
                                             Storyboard.TargetName="Border"
-                                            Storyboard.TargetProperty="(Shape.Fill).
-                                                                          (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                            Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                             <EasingColorKeyFrame
                                                 KeyTime="0"
                                                 Value="{DynamicResource ControlLightColor}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames
                                             Storyboard.TargetName="Border"
-                                            Storyboard.TargetProperty="(Shape.Stroke).
-                                                                          (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                            Storyboard.TargetProperty="(Shape.Stroke).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                             <EasingColorKeyFrame
                                                 KeyTime="0"
                                                 Value="#40000000" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames
                                             Storyboard.TargetName="Border"
-                                            Storyboard.TargetProperty="(Shape.Stroke).
-                                                                          (GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                                            Storyboard.TargetProperty="(Shape.Stroke).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
                                             <EasingColorKeyFrame
                                                 KeyTime="0"
                                                 Value="#40000000" />
