@@ -14,5 +14,8 @@
         <Setter
             Property="PressedBackgroundBrush"
             Value="{DynamicResource LightColor_Pressed_Brush}" />
+        <Setter
+            Property="Foreground"
+            Value="{DynamicResource LightForegroundColor_Brush}" />
     </Style>
 </ResourceDictionary>
