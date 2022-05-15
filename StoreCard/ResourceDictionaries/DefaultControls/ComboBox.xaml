@@ -52,7 +52,7 @@
                 Data="M 0 0 L 4 4 L 8 0 Z">
                 <Path.Fill>
                     <SolidColorBrush
-                        Color="{DynamicResource ForegroundColor_Brush}" />
+                        Color="{DynamicResource AppForegroundColor}" />
                 </Path.Fill>
             </Path>
         </Grid>

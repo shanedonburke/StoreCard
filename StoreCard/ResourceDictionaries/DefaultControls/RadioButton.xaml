@@ -72,7 +72,7 @@
                                             <LinearGradientBrush.GradientStops>
                                                 <GradientStopCollection>
                                                     <GradientStop
-                                                        Color="{DynamicResource ForegroundColor_Brush}" />
+                                                        Color="{DynamicResource AppForegroundColor}" />
                                                     <GradientStop
                                                         Color="{DynamicResource LightColor_Hover}"
                                                         Offset="1.0" />
