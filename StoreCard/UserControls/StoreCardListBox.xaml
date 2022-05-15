@@ -84,11 +84,11 @@
                                     <Setter
                                         TargetName="ItemTemplateInner"
                                         Property="Panel.Background"
-                                        Value="#80417356" />
+                                        Value="{DynamicResource SelectedBackgroundColor_Brush}" />
                                     <Setter
                                         TargetName="ItemTemplateInner"
                                         Property="Border.BorderBrush"
-                                        Value="#3BD97D" />
+                                        Value="{DynamicResource SelectedBorderColor_Brush}" />
                                 </MultiTrigger>
                                 <!--  Inactive selected item  -->
                                 <MultiTrigger>
@@ -103,11 +103,11 @@
                                     <Setter
                                         TargetName="ItemTemplateInner"
                                         Property="Panel.Background"
-                                        Value="#80417356" />
+                                        Value="{DynamicResource SelectedBackgroundColor_Brush}" />
                                     <Setter
                                         TargetName="ItemTemplateInner"
                                         Property="Border.BorderBrush"
-                                        Value="#3BD97D" />
+                                        Value="{DynamicResource SelectedBorderColor_Brush}" />
                                 </MultiTrigger>
                                 <Trigger
                                     Property="UIElement.IsEnabled"

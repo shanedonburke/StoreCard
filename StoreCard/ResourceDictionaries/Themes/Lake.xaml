@@ -10,15 +10,19 @@
     <Color
         x:Key="ControlPrimaryColor_Pressed">#34BF6E</Color>
     <Color
+        x:Key="SelectedBackgroundColor">#345642</Color>
+    <Color
+        x:Key="SelectedBorderColor">#3BD97D</Color>
+    <Color
         x:Key="ControlLightColor">#444444</Color>
     <Color
         x:Key="ControlLightColor_Hover">#666666</Color>
     <Color
         x:Key="ControlLightColor_Pressed">#555555</Color>
     <Color
-        x:Key="ButtonDisabledBackgroundColor">#363636</Color>
+        x:Key="DisabledBackgroundColor">#363636</Color>
     <Color
-        x:Key="ButtonDisabledTextColor">#6F6F6F</Color>
+        x:Key="DisabledTextColor">#6F6F6F</Color>
     <Color
         x:Key="ControlRedColor">#E73F3F</Color>
     <Color
@@ -39,6 +43,12 @@
         x:Key="ControlPrimaryColor_Pressed_Brush"
         Color="{DynamicResource ControlPrimaryColor_Pressed}" />
     <SolidColorBrush
+        x:Key="SelectedBackgroundColor_Brush"
+        Color="{DynamicResource SelectedBackgroundColor}" />
+    <SolidColorBrush
+        x:Key="SelectedBorderColor_Brush"
+        Color="{DynamicResource SelectedBorderColor}" />
+    <SolidColorBrush
         x:Key="ControlLightColor_Brush"
         Color="{DynamicResource ControlLightColor}" />
     <SolidColorBrush
@@ -57,9 +67,9 @@
         x:Key="ControlRedColor_Pressed_Brush"
         Color="{DynamicResource ControlRedColor_Pressed}" />
     <SolidColorBrush
-        x:Key="ButtonDisabledBackgroundColor_Brush"
-        Color="{DynamicResource ButtonDisabledBackgroundColor}" />
+        x:Key="DisabledBackgroundColor_Brush"
+        Color="{DynamicResource DisabledBackgroundColor}" />
     <SolidColorBrush
-        x:Key="ButtonDisabledTextColor_Brush"
-        Color="{DynamicResource ButtonDisabledTextColor}" />
+        x:Key="DisabledTextColor_Brush"
+        Color="{DynamicResource DisabledTextColor}" />
 </ResourceDictionary>
