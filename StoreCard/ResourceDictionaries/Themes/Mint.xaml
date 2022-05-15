@@ -4,72 +4,33 @@
     <Color
         x:Key="AppBackgroundColor">#222222</Color>
     <Color
-        x:Key="ControlPrimaryColor">#2DA65F</Color>
+        x:Key="AppForegroundColor">White</Color>
     <Color
-        x:Key="ControlPrimaryColor_Hover">#37CC75</Color>
+        x:Key="PrimaryColor">#2DA65F</Color>
     <Color
-        x:Key="ControlPrimaryColor_Pressed">#34BF6E</Color>
+        x:Key="PrimaryColor_Hover">#37CC75</Color>
+    <Color
+        x:Key="PrimaryColor_Pressed">#34BF6E</Color>
+    <Color
+        x:Key="PrimaryForegroundColor">White</Color>
     <Color
         x:Key="SelectedBackgroundColor">#345642</Color>
     <Color
         x:Key="SelectedBorderColor">#3BD97D</Color>
     <Color
-        x:Key="ControlLightColor">#444444</Color>
+        x:Key="LightColor">#444444</Color>
     <Color
-        x:Key="ControlLightColor_Hover">#666666</Color>
+        x:Key="LightColor_Hover">#666666</Color>
     <Color
-        x:Key="ControlLightColor_Pressed">#555555</Color>
+        x:Key="LightColor_Pressed">#555555</Color>
     <Color
         x:Key="DisabledBackgroundColor">#363636</Color>
     <Color
         x:Key="DisabledTextColor">#6F6F6F</Color>
     <Color
-        x:Key="ControlRedColor">#E73F3F</Color>
+        x:Key="RedColor">#E73F3F</Color>
     <Color
-        x:Key="ControlRedColor_Hover">#EA5757</Color>
+        x:Key="RedColor_Hover">#EA5757</Color>
     <Color
-        x:Key="ControlRedColor_Pressed">#E94949</Color>
-
-    <SolidColorBrush
-        x:Key="AppBackgroundColor_Brush"
-        Color="{DynamicResource AppBackgroundColor}" />
-    <SolidColorBrush
-        x:Key="ControlPrimaryColor_Brush"
-        Color="{DynamicResource ControlPrimaryColor}" />
-    <SolidColorBrush
-        x:Key="ControlPrimaryColor_Hover_Brush"
-        Color="{DynamicResource ControlPrimaryColor_Hover}" />
-    <SolidColorBrush
-        x:Key="ControlPrimaryColor_Pressed_Brush"
-        Color="{DynamicResource ControlPrimaryColor_Pressed}" />
-    <SolidColorBrush
-        x:Key="SelectedBackgroundColor_Brush"
-        Color="{DynamicResource SelectedBackgroundColor}" />
-    <SolidColorBrush
-        x:Key="SelectedBorderColor_Brush"
-        Color="{DynamicResource SelectedBorderColor}" />
-    <SolidColorBrush
-        x:Key="ControlLightColor_Brush"
-        Color="{DynamicResource ControlLightColor}" />
-    <SolidColorBrush
-        x:Key="ControlLightColor_Hover_Brush"
-        Color="{DynamicResource ControlLightColor_Hover}" />
-    <SolidColorBrush
-        x:Key="ControlLightColor_Pressed_Brush"
-        Color="{DynamicResource ControlLightColor_Pressed}" />
-    <SolidColorBrush
-        x:Key="ControlRedColor_Brush"
-        Color="{DynamicResource ControlRedColor}" />
-    <SolidColorBrush
-        x:Key="ControlRedColor_Hover_Brush"
-        Color="{DynamicResource ControlRedColor_Hover}" />
-    <SolidColorBrush
-        x:Key="ControlRedColor_Pressed_Brush"
-        Color="{DynamicResource ControlRedColor_Pressed}" />
-    <SolidColorBrush
-        x:Key="DisabledBackgroundColor_Brush"
-        Color="{DynamicResource DisabledBackgroundColor}" />
-    <SolidColorBrush
-        x:Key="DisabledTextColor_Brush"
-        Color="{DynamicResource DisabledTextColor}" />
+        x:Key="RedColor_Pressed">#E94949</Color>
 </ResourceDictionary>

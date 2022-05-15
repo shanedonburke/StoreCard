@@ -96,12 +96,12 @@
                                                             Value="{DynamicResource DisabledTextColor_Brush}" />
                                                     </DataTrigger>
                                                     <DataTrigger
-                                                        Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}"
+                                                        Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=Button}}"
                                                         Value="True">
                                                         <!--  Font color when enabled  -->
                                                         <Setter
                                                             Property="Foreground"
-                                                            Value="White" />
+                                                            Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=userControls:StoreCardButton}}" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>

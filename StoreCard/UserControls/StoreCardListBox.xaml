@@ -15,7 +15,7 @@
         Background="#002A2A2A"
         BorderBrush="#00000000"
         BorderThickness="0,0,0,0"
-        Foreground="White"
+        Foreground="{DynamicResource ForegroundColor_Brush}"
         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
         PreviewKeyDown="CustomListBox_PreviewKeyDown"
         KeyUp="CustomListBox_KeyUp"

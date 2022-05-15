@@ -52,7 +52,7 @@
                                         SnapsToDevicePixels="False"
                                         StrokeThickness="2"
                                         Data="M 1.5 5 L 5.5 10.5 M 5.5 10.5 L 11 1"
-                                        Stroke="{DynamicResource ControlPrimaryColor_Brush}"
+                                        Stroke="{DynamicResource PrimaryColor_Brush}"
                                         Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=CheckBox}, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     </Path>
                                 </Grid>

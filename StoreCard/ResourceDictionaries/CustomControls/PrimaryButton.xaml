@@ -7,12 +7,15 @@
         TargetType="{x:Type userControls:StoreCardButton}">
         <Setter
             Property="BackgroundBrush"
-            Value="{StaticResource ControlPrimaryColor_Brush}" />
+            Value="{StaticResource PrimaryColor_Brush}" />
         <Setter
             Property="HoverBackgroundBrush"
-            Value="{DynamicResource ControlPrimaryColor_Hover_Brush}" />
+            Value="{DynamicResource PrimaryColor_Hover_Brush}" />
         <Setter
             Property="PressedBackgroundBrush"
-            Value="{DynamicResource ControlPrimaryColor_Pressed_Brush}" />
+            Value="{DynamicResource PrimaryColor_Pressed_Brush}" />
+        <Setter
+            Property="Foreground"
+            Value="{DynamicResource PrimaryForegroundColor_Brush}" />
     </Style>
 </ResourceDictionary>

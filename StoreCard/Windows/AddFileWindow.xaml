@@ -32,7 +32,7 @@
             <Label
                 Margin="0,0,0,10"
                 FontSize="14"
-                Foreground="White">
+                Foreground="{DynamicResource ForegroundColor_Brush}">
                 Select a file or folder to save:
             </Label>
             <!--  "File" radio button  -->
@@ -47,7 +47,7 @@
                     Height="20"
                     VerticalAlignment="Stretch"
                     FontSize="14"
-                    Foreground="White">
+                    Foreground="{DynamicResource ForegroundColor_Brush}">
                     File
                 </TextBlock>
             </StackPanel>
@@ -62,7 +62,7 @@
                     Height="20"
                     VerticalAlignment="Stretch"
                     FontSize="14"
-                    Foreground="White">
+                    Foreground="{DynamicResource ForegroundColor_Brush}">
                     Folder
                 </TextBlock>
             </StackPanel>
@@ -91,7 +91,7 @@
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="White"
+                Foreground="{DynamicResource ForegroundColor_Brush}"
                 Text="Path:" />
             <!--  Path box  -->
             <userControls:StoreCardTextBox
@@ -149,7 +149,7 @@
                         VerticalAlignment="Center"
                         FontSize="14"
                         FontWeight="Bold"
-                        Foreground="White"
+                        Foreground="{DynamicResource ForegroundColor_Brush}"
                         TextTrimming="CharacterEllipsis"
                         TextWrapping="NoWrap"
                         Text="{Binding Path=FileName}" />
@@ -210,7 +210,7 @@
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="White"
+                Foreground="{DynamicResource ForegroundColor_Brush}"
                 Text="Path:" />
             <!--  Path box  -->
             <userControls:StoreCardTextBox
@@ -267,7 +267,7 @@
                         VerticalAlignment="Center"
                         FontSize="14"
                         FontWeight="Bold"
-                        Foreground="White"
+                        Foreground="{DynamicResource ForegroundColor_Brush}"
                         TextTrimming="CharacterEllipsis"
                         TextWrapping="NoWrap"
                         Text="{Binding FolderName}" />

@@ -32,7 +32,7 @@
             <fa:IconBlock
                 Icon="CircleNotch"
                 fa:Awesome.Spin="True"
-                Foreground="{DynamicResource ControlPrimaryColor_Brush}"
+                Foreground="{DynamicResource PrimaryColor_Brush}"
                 FontSize="80" />
         </Grid>
         <!--  Application list  -->

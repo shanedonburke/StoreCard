@@ -19,21 +19,21 @@
                         TargetType="{x:Type Border}">
                         <Setter
                             Property="Background"
-                            Value="{DynamicResource ControlLightColor_Pressed_Brush}" />
+                            Value="{DynamicResource LightColor_Pressed_Brush}" />
                         <Style.Triggers>
                             <DataTrigger
                                 Binding="{Binding IsMouseOver, RelativeSource={RelativeSource FindAncestor, AncestorType=ToggleButton}}"
                                 Value="True">
                                 <Setter
                                     Property="Background"
-                                    Value="{DynamicResource ControlLightColor_Hover_Brush}" />
+                                    Value="{DynamicResource LightColor_Hover_Brush}" />
                             </DataTrigger>
                             <DataTrigger
                                 Binding="{Binding IsDropDownOpen, RelativeSource={RelativeSource FindAncestor, AncestorType=ComboBox}}"
                                 Value="True">
                                 <Setter
                                     Property="Background"
-                                    Value="{DynamicResource ControlLightColor_Hover_Brush}" />
+                                    Value="{DynamicResource LightColor_Hover_Brush}" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -43,7 +43,7 @@
                 Grid.Column="0"
                 CornerRadius="2,0,0,2"
                 Margin="0"
-                Background="{DynamicResource ControlLightColor_Brush}" />
+                Background="{DynamicResource LightColor_Brush}" />
             <Path
                 x:Name="Arrow"
                 Grid.Column="1"
@@ -52,7 +52,7 @@
                 Data="M 0 0 L 4 4 L 8 0 Z">
                 <Path.Fill>
                     <SolidColorBrush
-                        Color="White" />
+                        Color="{DynamicResource ForegroundColor_Brush}" />
                 </Path.Fill>
             </Path>
         </Grid>
@@ -81,7 +81,7 @@
             Value="30" />
         <Setter
             Property="Foreground"
-            Value="White" />
+            Value="{DynamicResource ForegroundColor_Brush}" />
         <Setter
             Property="FontSize"
             Value="14" />
@@ -122,7 +122,7 @@
                                 <Border
                                     x:Name="DropDownBorder"
                                     BorderThickness="0"
-                                    Background="{DynamicResource ControlLightColor_Brush}"
+                                    Background="{DynamicResource LightColor_Brush}"
                                     CornerRadius="2"
                                     Margin="0,5,0,0" />
                                 <ScrollViewer
@@ -206,10 +206,10 @@
                                         <MultiDataTrigger.Setters>
                                             <Setter
                                                 Property="Background"
-                                                Value="{DynamicResource ControlLightColor_Pressed_Brush}" />
+                                                Value="{DynamicResource LightColor_Pressed_Brush}" />
                                             <Setter
                                                 Property="BorderBrush"
-                                                Value="{DynamicResource ControlLightColor_Pressed_Brush}" />
+                                                Value="{DynamicResource LightColor_Pressed_Brush}" />
                                         </MultiDataTrigger.Setters>
                                     </MultiDataTrigger>
                                 </Style.Triggers>

@@ -1,0 +1,52 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush
+        x:Key="AppBackgroundColor_Brush"
+        Color="{DynamicResource AppBackgroundColor}" />
+    <SolidColorBrush
+        x:Key="ForegroundColor_Brush"
+        Color="{DynamicResource AppForegroundColor}" />
+    <SolidColorBrush
+        x:Key="PrimaryColor_Brush"
+        Color="{DynamicResource PrimaryColor}" />
+    <SolidColorBrush
+        x:Key="PrimaryColor_Hover_Brush"
+        Color="{DynamicResource PrimaryColor_Hover}" />
+    <SolidColorBrush
+        x:Key="PrimaryColor_Pressed_Brush"
+        Color="{DynamicResource PrimaryColor_Pressed}" />
+    <SolidColorBrush
+        x:Key="PrimaryForegroundColor_Brush"
+        Color="{DynamicResource PrimaryForegroundColor}" />
+    <SolidColorBrush
+        x:Key="SelectedBackgroundColor_Brush"
+        Color="{DynamicResource SelectedBackgroundColor}" />
+    <SolidColorBrush
+        x:Key="SelectedBorderColor_Brush"
+        Color="{DynamicResource SelectedBorderColor}" />
+    <SolidColorBrush
+        x:Key="LightColor_Brush"
+        Color="{DynamicResource LightColor}" />
+    <SolidColorBrush
+        x:Key="LightColor_Hover_Brush"
+        Color="{DynamicResource LightColor_Hover}" />
+    <SolidColorBrush
+        x:Key="LightColor_Pressed_Brush"
+        Color="{DynamicResource LightColor_Pressed}" />
+    <SolidColorBrush
+        x:Key="RedColor_Brush"
+        Color="{DynamicResource RedColor}" />
+    <SolidColorBrush
+        x:Key="RedColor_Hover_Brush"
+        Color="{DynamicResource RedColor_Hover}" />
+    <SolidColorBrush
+        x:Key="RedColor_Pressed_Brush"
+        Color="{DynamicResource RedColor_Pressed}" />
+    <SolidColorBrush
+        x:Key="DisabledBackgroundColor_Brush"
+        Color="{DynamicResource DisabledBackgroundColor}" />
+    <SolidColorBrush
+        x:Key="DisabledTextColor_Brush"
+        Color="{DynamicResource DisabledTextColor}" />
+</ResourceDictionary>

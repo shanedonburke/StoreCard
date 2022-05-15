@@ -14,7 +14,7 @@
         Padding="5,0,5,0"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"
-        Background="{DynamicResource ControlLightColor_Brush}"
+        Background="{DynamicResource LightColor_Brush}"
         CornerRadius="5">
         <Grid
             HorizontalAlignment="Stretch"
@@ -72,7 +72,7 @@
                 Name="CustomTextBox"
                 VerticalContentAlignment="Stretch"
                 Background="Transparent"
-                CaretBrush="White"
+                CaretBrush="{DynamicResource ForegroundColor_Brush}"
                 BorderBrush="#00000000"
                 BorderThickness="0,0,0,0"
                 FontSize="14"
@@ -90,7 +90,7 @@
                             Value="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" />
                         <Setter
                             Property="Foreground"
-                            Value="White" />
+                            Value="{DynamicResource ForegroundColor_Brush}" />
                     </Style>
                 </TextBox.Style>
             </TextBox>

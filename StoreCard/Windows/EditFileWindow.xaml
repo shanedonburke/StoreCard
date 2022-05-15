@@ -51,7 +51,7 @@
                 HorizontalContentAlignment="Left"
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Center"
-                Foreground="White"
+                Foreground="{DynamicResource ForegroundColor_Brush}"
                 FontSize="14"
                 Content="Path:" />
             <userControls:StoreCardTextBox
@@ -100,7 +100,7 @@
                 HorizontalContentAlignment="Left"
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Center"
-                Foreground="White"
+                Foreground="{DynamicResource ForegroundColor_Brush}"
                 FontSize="14"
                 Content="Name:" />
             <userControls:StoreCardTextBox
@@ -128,7 +128,7 @@
                 HorizontalContentAlignment="Left"
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Center"
-                Foreground="White"
+                Foreground="{DynamicResource ForegroundColor_Brush}"
                 FontSize="14"
                 Content="Open with:" />
             <Grid
@@ -155,7 +155,7 @@
                     HorizontalContentAlignment="Left"
                     VerticalAlignment="Stretch"
                     VerticalContentAlignment="Center"
-                    Foreground="White"
+                    Foreground="{DynamicResource ForegroundColor_Brush}"
                     FontSize="14"
                     Content="{Binding ExecutableName}" />
                 <userControls:StoreCardButton

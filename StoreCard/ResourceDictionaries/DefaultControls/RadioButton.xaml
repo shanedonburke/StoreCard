@@ -40,7 +40,7 @@
                                     <!-- Margins...??? -->
                                     <Ellipse
                                         Margin="-3.5,-1,0.5,-1"
-                                        Stroke="{DynamicResource ControlPrimaryColor_Brush}"
+                                        Stroke="{DynamicResource PrimaryColor_Brush}"
                                         StrokeThickness="1.5" />
                                 </Grid>
                             </ControlTemplate>
@@ -72,9 +72,9 @@
                                             <LinearGradientBrush.GradientStops>
                                                 <GradientStopCollection>
                                                     <GradientStop
-                                                        Color="White" />
+                                                        Color="{DynamicResource ForegroundColor_Brush}" />
                                                     <GradientStop
-                                                        Color="{DynamicResource ControlLightColor_Hover}"
+                                                        Color="{DynamicResource LightColor_Hover}"
                                                         Offset="1.0" />
                                                 </GradientStopCollection>
                                             </LinearGradientBrush.GradientStops>
@@ -105,7 +105,7 @@
                                             Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                             <EasingColorKeyFrame
                                                 KeyTime="0"
-                                                Value="{DynamicResource ControlLightColor_Hover}" />
+                                                Value="{DynamicResource LightColor_Hover}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -117,7 +117,7 @@
                                             Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                             <EasingColorKeyFrame
                                                 KeyTime="0"
-                                                Value="{DynamicResource ControlLightColor_Pressed}" />
+                                                Value="{DynamicResource LightColor_Pressed}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -129,7 +129,7 @@
                                             Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                             <EasingColorKeyFrame
                                                 KeyTime="0"
-                                                Value="{DynamicResource ControlLightColor}" />
+                                                Value="{DynamicResource LightColor}" />
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames
                                             Storyboard.TargetName="Border"

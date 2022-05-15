@@ -56,7 +56,7 @@
                     Text="{Binding Path=SelectedAppName}"
                     FontSize="12"
                     VerticalAlignment="Center"
-                    Foreground="White" />
+                    Foreground="{DynamicResource ForegroundColor_Brush}" />
             </StackPanel>
             <!--  "Save" button  -->
             <local:StoreCardButton

@@ -43,7 +43,7 @@
                 HorizontalContentAlignment="Left"
                 VerticalAlignment="Top"
                 VerticalContentAlignment="Center"
-                Foreground="White"
+                Foreground="{DynamicResource ForegroundColor_Brush}"
                 FontSize="14"
                 Content="URL:" />
             <!--  URL box  -->
@@ -61,7 +61,7 @@
                 HorizontalContentAlignment="Left"
                 VerticalAlignment="Top"
                 VerticalContentAlignment="Center"
-                Foreground="White"
+                Foreground="{DynamicResource ForegroundColor_Brush}"
                 FontSize="14"
                 Content="Title:" />
             <!-- Title box  -->
@@ -86,7 +86,7 @@
                     HorizontalContentAlignment="Left"
                     VerticalAlignment="Center"
                     VerticalContentAlignment="Center"
-                    Foreground="White"
+                    Foreground="{DynamicResource ForegroundColor_Brush}"
                     FontSize="14" />
             </CheckBox>
             <Label
@@ -97,7 +97,7 @@
                 HorizontalContentAlignment="Left"
                 VerticalAlignment="Stretch"
                 VerticalContentAlignment="Center"
-                Foreground="White"
+                Foreground="{DynamicResource ForegroundColor_Brush}"
                 FontSize="14"
                 Content="Preview:" />
             <Grid
@@ -121,7 +121,7 @@
                     Grid.Column="1"
                     Text="{Binding LinkTitle}"
                     FontSize="14"
-                    Foreground="White"
+                    Foreground="{DynamicResource ForegroundColor_Brush}"
                     FontWeight="Bold"
                     Padding="0"
                     Margin="0"
