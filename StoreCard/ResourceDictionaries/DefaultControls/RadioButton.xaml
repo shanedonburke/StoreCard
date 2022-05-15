@@ -25,7 +25,6 @@
         <Setter
             Property="HorizontalAlignment"
             Value="Stretch" />
-        <!-- Radio button focus styling -->
         <Setter
             Property="FocusVisualStyle">
             <Setter.Value>
