@@ -8,15 +8,15 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary
-                    Source="ResourceDictionaries/Fonts.xaml" />
+                    Source="ResourceDictionaries/Themes/Mint.xaml" />
                 <ResourceDictionary
-                    Source="ResourceDictionaries/Theme/Colors.xaml" />
+                    Source="ResourceDictionaries/Fonts.xaml" />
                 <ResourceDictionary
                     Source="ResourceDictionaries/Converters.xaml" />
                 <ResourceDictionary
-                    Source="ResourceDictionaries/Theme/DefaultControls/DefaultControls.xaml" />
+                    Source="ResourceDictionaries/DefaultControls/DefaultControls.xaml" />
                 <ResourceDictionary
-                    Source="ResourceDictionaries/Theme/CustomControls/CustomControls.xaml" />
+                    Source="ResourceDictionaries/CustomControls/CustomControls.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

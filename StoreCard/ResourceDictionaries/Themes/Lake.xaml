@@ -1,0 +1,65 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color
+        x:Key="AppBackgroundColor">#222222</Color>
+    <Color
+        x:Key="ControlPrimaryColor">#0000FF</Color>
+    <Color
+        x:Key="ControlPrimaryColor_Hover">#37CC75</Color>
+    <Color
+        x:Key="ControlPrimaryColor_Pressed">#34BF6E</Color>
+    <Color
+        x:Key="ControlLightColor">#444444</Color>
+    <Color
+        x:Key="ControlLightColor_Hover">#666666</Color>
+    <Color
+        x:Key="ControlLightColor_Pressed">#555555</Color>
+    <Color
+        x:Key="ButtonDisabledBackgroundColor">#363636</Color>
+    <Color
+        x:Key="ButtonDisabledTextColor">#6F6F6F</Color>
+    <Color
+        x:Key="ControlRedColor">#E73F3F</Color>
+    <Color
+        x:Key="ControlRedColor_Hover">#EA5757</Color>
+    <Color
+        x:Key="ControlRedColor_Pressed">#E94949</Color>
+
+    <SolidColorBrush
+        x:Key="AppBackgroundColor_Brush"
+        Color="{DynamicResource AppBackgroundColor}" />
+    <SolidColorBrush
+        x:Key="ControlPrimaryColor_Brush"
+        Color="{DynamicResource ControlPrimaryColor}" />
+    <SolidColorBrush
+        x:Key="ControlPrimaryColor_Hover_Brush"
+        Color="{DynamicResource ControlPrimaryColor_Hover}" />
+    <SolidColorBrush
+        x:Key="ControlPrimaryColor_Pressed_Brush"
+        Color="{DynamicResource ControlPrimaryColor_Pressed}" />
+    <SolidColorBrush
+        x:Key="ControlLightColor_Brush"
+        Color="{DynamicResource ControlLightColor}" />
+    <SolidColorBrush
+        x:Key="ControlLightColor_Hover_Brush"
+        Color="{DynamicResource ControlLightColor_Hover}" />
+    <SolidColorBrush
+        x:Key="ControlLightColor_Pressed_Brush"
+        Color="{DynamicResource ControlLightColor_Pressed}" />
+    <SolidColorBrush
+        x:Key="ControlRedColor_Brush"
+        Color="{DynamicResource ControlRedColor}" />
+    <SolidColorBrush
+        x:Key="ControlRedColor_Hover_Brush"
+        Color="{DynamicResource ControlRedColor_Hover}" />
+    <SolidColorBrush
+        x:Key="ControlRedColor_Pressed_Brush"
+        Color="{DynamicResource ControlRedColor_Pressed}" />
+    <SolidColorBrush
+        x:Key="ButtonDisabledBackgroundColor_Brush"
+        Color="{DynamicResource ButtonDisabledBackgroundColor}" />
+    <SolidColorBrush
+        x:Key="ButtonDisabledTextColor_Brush"
+        Color="{DynamicResource ButtonDisabledTextColor}" />
+</ResourceDictionary>

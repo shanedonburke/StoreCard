@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using StoreCard.Commands;
 using StoreCard.Models;
 using StoreCard.Properties;
+using StoreCard.Static;
 using StoreCard.Utils;
 
 namespace StoreCard.Windows;
@@ -14,20 +18,26 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class SettingsWindow : INotifyPropertyChanged
 {
-
     private UserConfig _config;
+
+    public SettingsWindow()
+    {
+        _config = AppData.ReadConfigFromFile();
+
+        DataContext = this;
+        InitializeComponent();
+
+        RunOnStartupCheckBox.IsChecked = Shortcuts.IsStartupShortcutEnabled() != null;
+        ThemeComboBox.SelectedItem = _config.Theme.ToString();
+    }
+
+    public static IEnumerable<string> Themes => Enum.GetValues(typeof(Theme))
+        .Cast<Theme>()
+        .Select(t => t.ToString());
 
     public string HotKeyText => HotKeys.KeyStringFromConfig(_config);
 
     public bool IsStartupShortcutDisabled => Shortcuts.IsStartupShortcutEnabled() == false;
-
-    public SettingsWindow() {
-        InitializeComponent();
-        _config = AppData.ReadConfigFromFile();
-        DataContext = this;
-
-        RunOnStartupCheckBox.IsChecked = Shortcuts.IsStartupShortcutEnabled() != null;
-    }
 
     private void SettingsWindow_Closed(object? sender, EventArgs e)
     {
@@ -68,5 +78,12 @@ public partial class SettingsWindow : INotifyPropertyChanged
         _config.ResetHotKeyToDefault();
         AppData.SaveConfigToFile(_config);
         OnPropertyChanged(nameof(HotKeyText));
+    }
+
+    private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!Enum.TryParse((string) ThemeComboBox.SelectedItem, out Theme theme)) return;
+        _config.Theme = theme;
+        AppData.SaveConfigToFile(_config);
     }
 }

@@ -26,6 +26,10 @@
                 Height="20" />
             <RowDefinition
                 Height="Auto" />
+            <RowDefinition
+                Height="20" />
+            <RowDefinition
+                Height="Auto" />
         </Grid.RowDefinitions>
         <CheckBox
             x:Name="RunOnStartupCheckBox"
@@ -112,6 +116,29 @@
                 Style="{DynamicResource SecondaryButton}"
                 Text="Use default shortcut"
                 Width="150" />
+        </StackPanel>
+        <Separator
+            Grid.Row="4"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center" />
+        <StackPanel
+            Grid.Row="5"
+            Orientation="Horizontal">
+            <Label
+                Padding="0"
+                Margin="0,0,10,0"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Foreground="White"
+                FontSize="14"
+                Content="Theme" />
+            <ComboBox
+                x:Name="ThemeComboBox"
+                ItemsSource="{Binding Themes}"
+                SelectionChanged="ThemeComboBox_SelectionChanged"
+                Width="160" />
         </StackPanel>
     </Grid>
 </Window>
