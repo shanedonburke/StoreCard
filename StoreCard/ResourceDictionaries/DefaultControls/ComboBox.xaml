@@ -20,18 +20,30 @@
                         <Setter
                             Property="Background"
                             Value="{DynamicResource ControlLightColor_Pressed_Brush}" />
+                        <Style.Triggers>
+                            <DataTrigger
+                                Binding="{Binding IsMouseOver, RelativeSource={RelativeSource FindAncestor, AncestorType=ToggleButton}}"
+                                Value="True">
+                                <Setter
+                                    Property="Background"
+                                    Value="{DynamicResource ControlLightColor_Hover_Brush}" />
+                            </DataTrigger>
+                            <DataTrigger
+                                Binding="{Binding IsDropDownOpen, RelativeSource={RelativeSource FindAncestor, AncestorType=ComboBox}}"
+                                Value="True">
+                                <Setter
+                                    Property="Background"
+                                    Value="{DynamicResource ControlLightColor_Hover_Brush}" />
+                            </DataTrigger>
+                        </Style.Triggers>
                     </Style>
                 </Border.Style>
             </Border>
             <Border
                 Grid.Column="0"
                 CornerRadius="2,0,0,2"
-                Margin="0">
-                <Border.Background>
-                    <SolidColorBrush
-                        Color="{DynamicResource ControlLightColor}" />
-                </Border.Background>
-            </Border>
+                Margin="0"
+                Background="{DynamicResource ControlLightColor_Brush}" />
             <Path
                 x:Name="Arrow"
                 Grid.Column="1"
@@ -44,15 +56,6 @@
                 </Path.Fill>
             </Path>
         </Grid>
-    </ControlTemplate>
-
-    <ControlTemplate
-        x:Key="ComboBoxTextBox"
-        TargetType="{x:Type TextBox}">
-        <Border
-            x:Name="PART_ContentHost"
-            Focusable="False"
-            Background="{TemplateBinding Background}" />
     </ControlTemplate>
 
     <Style
@@ -74,9 +77,6 @@
             Property="ScrollViewer.CanContentScroll"
             Value="True" />
         <Setter
-            Property="MinWidth"
-            Value="120" />
-        <Setter
             Property="MinHeight"
             Value="30" />
         <Setter
@@ -91,51 +91,6 @@
                 <ControlTemplate
                     TargetType="{x:Type ComboBox}">
                     <Grid>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup
-                                x:Name="CommonStates">
-                                <VisualState
-                                    x:Name="Normal" />
-                                <VisualState
-                                    x:Name="MouseOver" />
-                                <VisualState
-                                    x:Name="Disabled">
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames
-                                            Storyboard.TargetName="PART_EditableTextBox"
-                                            Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame
-                                                KeyTime="0"
-                                                Value="{DynamicResource DisabledTextColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                            <VisualStateGroup
-                                x:Name="EditStates">
-                                <VisualState
-                                    x:Name="Editable">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetProperty="(UIElement.Visibility)"
-                                            Storyboard.TargetName="PART_EditableTextBox">
-                                            <DiscreteObjectKeyFrame
-                                                KeyTime="0"
-                                                Value="{x:Static Visibility.Visible}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames
-                                            Storyboard.TargetProperty="(UIElement.Visibility)"
-                                            Storyboard.TargetName="ContentSite">
-                                            <DiscreteObjectKeyFrame
-                                                KeyTime="0"
-                                                Value="{x:Static Visibility.Hidden}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState
-                                    x:Name="Uneditable" />
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
                         <ToggleButton
                             x:Name="ToggleButton"
                             Template="{DynamicResource ComboBoxToggleButton}"
@@ -152,17 +107,6 @@
                             VerticalAlignment="Stretch"
                             HorizontalAlignment="Left">
                         </ContentPresenter>
-                        <TextBox
-                            x:Name="PART_EditableTextBox"
-                            Style="{x:Null}"
-                            Template="{DynamicResource ComboBoxTextBox}"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Bottom"
-                            Margin="3,3,23,3"
-                            Focusable="True"
-                            Background="Transparent"
-                            Visibility="Hidden"
-                            IsReadOnly="{TemplateBinding IsReadOnly}" />
                         <Popup
                             x:Name="Popup"
                             Placement="Bottom"
@@ -232,52 +176,45 @@
                         Padding="4 2"
                         SnapsToDevicePixels="True"
                         BorderThickness="1"
-                        Background="Transparent"
                         Margin="0">
                         <Border.Style>
-                            <Style TargetType="{x:Type Border}">
+                            <Style
+                                TargetType="{x:Type Border}">
+                                <Setter
+                                    Property="Background"
+                                    Value="Transparent" />
                                 <Style.Triggers>
                                     <DataTrigger
-                                        Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ComboBoxItem}, Path=IsSelected}"
+                                        Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType=ComboBoxItem}}"
                                         Value="True">
                                         <Setter
                                             Property="BorderBrush"
                                             Value="{DynamicResource SelectedBorderColor_Brush}" />
+                                        <Setter
+                                            Property="Background"
+                                            Value="{DynamicResource SelectedBackgroundColor_Brush}" />
                                     </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition
+                                                Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType=ComboBoxItem}}"
+                                                Value="False" />
+                                            <Condition
+                                                Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}"
+                                                Value="True" />
+                                        </MultiDataTrigger.Conditions>
+                                        <MultiDataTrigger.Setters>
+                                            <Setter
+                                                Property="Background"
+                                                Value="{DynamicResource ControlLightColor_Pressed_Brush}" />
+                                            <Setter
+                                                Property="BorderBrush"
+                                                Value="{DynamicResource ControlLightColor_Pressed_Brush}" />
+                                        </MultiDataTrigger.Setters>
+                                    </MultiDataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Border.Style>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup
-                                x:Name="SelectionStates">
-                                <VisualState
-                                    x:Name="Unselected" />
-                                <VisualState
-                                    x:Name="Selected">
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames
-                                            Storyboard.TargetName="Border"
-                                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame
-                                                KeyTime="0"
-                                                Value="{DynamicResource SelectedBackgroundColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState
-                                    x:Name="SelectedUnfocused">
-                                    <Storyboard>
-                                        <ColorAnimationUsingKeyFrames
-                                            Storyboard.TargetName="Border"
-                                            Storyboard.TargetProperty="(Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame
-                                                KeyTime="0"
-                                                Value="{DynamicResource SelectedBackgroundColor}" />
-                                        </ColorAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
                         <ContentPresenter />
                     </Border>
                 </ControlTemplate>
