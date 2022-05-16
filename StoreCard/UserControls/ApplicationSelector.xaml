@@ -46,7 +46,7 @@
                     Text="Selected:"
                     FontSize="12"
                     VerticalAlignment="Center"
-                    Foreground="#AAAAAA" />
+                    Foreground="{DynamicResource SecondaryTextColor_Active_Brush}" />
                 <Image
                     Width="24"
                     Height="24"
