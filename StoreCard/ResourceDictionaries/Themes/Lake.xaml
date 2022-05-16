@@ -42,6 +42,13 @@
     <Color
         x:Key="SecondaryTextColor_Active">#5C6E75</Color>
 
+    <Color
+        x:Key="RadioButtonGradientColor_0">#BFBFBF</Color>
+    <Color
+        x:Key="RadioButtonGradientColor_1">#8F8F8F</Color>
+    <Color
+        x:Key="RadioButtonGradientColor_1_Hover">#6F6F6F</Color>
+
     <SolidColorBrush
         x:Key="AppBackgroundColor_Brush"
         Color="{DynamicResource AppBackgroundColor}" />

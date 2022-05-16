@@ -25,6 +25,7 @@
         <Setter
             Property="HorizontalAlignment"
             Value="Stretch" />
+        <!--  Ring around button when tab-focused  -->
         <Setter
             Property="FocusVisualStyle">
             <Setter.Value>
@@ -72,9 +73,9 @@
                                             <LinearGradientBrush.GradientStops>
                                                 <GradientStopCollection>
                                                     <GradientStop
-                                                        Color="{DynamicResource AppForegroundColor}" />
+                                                        Color="{DynamicResource RadioButtonGradientColor_0}" />
                                                     <GradientStop
-                                                        Color="{DynamicResource LightColor_Hover}"
+                                                        Color="{DynamicResource RadioButtonGradientColor_1}"
                                                         Offset="1.0" />
                                                 </GradientStopCollection>
                                             </LinearGradientBrush.GradientStops>
@@ -105,7 +106,7 @@
                                             Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
                                             <EasingColorKeyFrame
                                                 KeyTime="0"
-                                                Value="{DynamicResource LightColor_Hover}" />
+                                                Value="{DynamicResource RadioButtonGradientColor_1_Hover}" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
