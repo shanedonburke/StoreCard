@@ -173,7 +173,7 @@
                                 TargetType="Label">
                                 <Setter
                                     Property="Foreground"
-                                    Value="#888888" />
+                                    Value="{DynamicResource SecondaryTextColor_Inactive_Brush}" />
                                 <Setter
                                     Property="Visibility"
                                     Value="Collapsed" />
@@ -183,7 +183,7 @@
                                         Value="True">
                                         <Setter
                                             Property="Foreground"
-                                            Value="#DDDDDD" />
+                                            Value="{DynamicResource SecondaryTextColor_Active_Brush}" />
                                     </DataTrigger>
                                     <DataTrigger
                                         Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=userControls:StoreCardListBox}, Path=ShowSecondaryText, Converter={StaticResource ValueToStringConverter}}"

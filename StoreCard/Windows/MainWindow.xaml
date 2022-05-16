@@ -248,7 +248,7 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="#FF777777" />
+                                    Value="{DynamicResource InactiveTextColor_Brush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
@@ -271,7 +271,7 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="#FF777777" />
+                                    Value="{DynamicResource InactiveTextColor_Brush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
@@ -294,7 +294,7 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="#FF777777" />
+                                    Value="{DynamicResource InactiveTextColor_Brush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
@@ -317,7 +317,7 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="#FF777777" />
+                                    Value="{DynamicResource InactiveTextColor_Brush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
@@ -340,7 +340,7 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="#FF777777" />
+                                    Value="{DynamicResource InactiveTextColor_Brush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
@@ -363,7 +363,7 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="#FF777777" />
+                                    Value="{DynamicResource InactiveTextColor_Brush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
@@ -385,7 +385,7 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="#FF777777" />
+                                    Value="{DynamicResource InactiveTextColor_Brush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"

@@ -20,6 +20,12 @@
     <Color
         x:Key="LightColor_Pressed">#555555</Color>
     <Color
+        x:Key="RedColor">#E73F3F</Color>
+    <Color
+        x:Key="RedColor_Hover">#EA5757</Color>
+    <Color
+        x:Key="RedColor_Pressed">#E94949</Color>
+    <Color
         x:Key="LightForegroundColor">White</Color>
     <Color
         x:Key="SelectedBackgroundColor">#345642</Color>
@@ -30,11 +36,11 @@
     <Color
         x:Key="DisabledTextColor">#6F6F6F</Color>
     <Color
-        x:Key="RedColor">#E73F3F</Color>
+        x:Key="InactiveTextColor">#777777</Color>
     <Color
-        x:Key="RedColor_Hover">#EA5757</Color>
+        x:Key="SecondaryTextColor_Inactive">#888888</Color>
     <Color
-        x:Key="RedColor_Pressed">#E94949</Color>
+        x:Key="SecondaryTextColor_Active">#DDDDDD</Color>
 
     <SolidColorBrush
         x:Key="AppBackgroundColor_Brush"
@@ -85,6 +91,15 @@
         x:Key="DisabledBackgroundColor_Brush"
         Color="{DynamicResource DisabledBackgroundColor}" />
     <SolidColorBrush
+        x:Key="InactiveTextColor_Brush"
+        Color="{DynamicResource InactiveTextColor}" />
+    <SolidColorBrush
         x:Key="DisabledTextColor_Brush"
         Color="{DynamicResource DisabledTextColor}" />
+    <SolidColorBrush
+        x:Key="SecondaryTextColor_Inactive_Brush"
+        Color="{DynamicResource SecondaryTextColor_Inactive}" />
+    <SolidColorBrush
+        x:Key="SecondaryTextColor_Active_Brush"
+        Color="{DynamicResource SecondaryTextColor_Active}" />
 </ResourceDictionary>
