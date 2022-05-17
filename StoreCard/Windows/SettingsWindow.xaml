@@ -86,7 +86,7 @@
                     HorizontalContentAlignment="Left"
                     VerticalAlignment="Top"
                     VerticalContentAlignment="Center"
-                    Foreground="#AAAAAA"
+                    Foreground="{DynamicResource SecondaryTextBrush_Active}"
                     FontSize="14"
                     Content="{Binding HotKeyText}" />
                 <Button

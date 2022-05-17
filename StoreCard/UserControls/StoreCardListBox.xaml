@@ -182,7 +182,7 @@
                                         Value="True">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource SecondaryTextBrush_Aactive}" />
+                                            Value="{DynamicResource SecondaryTextBrush_Active}" />
                                     </DataTrigger>
                                     <DataTrigger
                                         Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=userControls:StoreCardListBox}, Path=ShowSecondaryText, Converter={StaticResource ValueToStringConverter}}"

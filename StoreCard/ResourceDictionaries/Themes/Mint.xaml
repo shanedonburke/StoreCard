@@ -70,12 +70,12 @@
         x:Key="InactiveTextBrush"
         Color="#777777" />
 
-    <!--  Color for secondary text shown in list box items  -->
+    <!--  Color for secondary text  -->
     <SolidColorBrush
         x:Key="SecondaryTextBrush_Inactive"
         Color="#888888" />
     <SolidColorBrush
-        x:Key="SecondaryTextBrush_Aactive"
+        x:Key="SecondaryTextBrush_Active"
         Color="#DDDDDD" />
 
     <!--  Text box colors  -->
