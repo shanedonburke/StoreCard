@@ -70,6 +70,7 @@ internal class HotKeys
             Key.LeftAlt => "Alt",
             Key.LWin => "Win",
             Key.LeftShift => "Shift",
+            Key.Tab => "Tab",
             _ => ToAscii(key).ToString().ToUpper()
         };
     }

@@ -41,7 +41,6 @@ namespace StoreCard.Windows
 
         private void RecordHotKeyWindow_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            e.Handled = true;
             var key = e.Key == Key.System ? e.SystemKey : e.Key;
 
             // Ignore modifier keys.
@@ -79,6 +78,14 @@ namespace StoreCard.Windows
                 text.Append("Shift+");
                 _modifiers |= (uint) ModifierKeys.Shift;
             }
+
+            // Ignore tab press with no modifiers (to navigate UI)
+            if (_modifiers == 0 && key is Key.Tab)
+            {
+                return;
+            }
+
+            e.Handled = true;
 
             _virtualKey = HotKeys.KeyToVirtualKey(key);
             text.Append(HotKeys.KeyToString(key));

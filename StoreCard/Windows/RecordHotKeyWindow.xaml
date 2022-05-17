@@ -12,7 +12,7 @@
     Background="{DynamicResource AppBackgroundBrush}"
     WindowStartupLocation="CenterScreen"
     Title="Record Shortcut"
-    KeyDown="RecordHotKeyWindow_PreviewKeyDown"
+    PreviewKeyDown="RecordHotKeyWindow_PreviewKeyDown"
     d:DataContext="{d:DesignInstance Type=windows:RecordHotKeyWindow, IsDesignTimeCreatable=False}">
     <Grid
         Margin="15">
