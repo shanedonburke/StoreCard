@@ -119,6 +119,20 @@
         #333333
     </Color>
 
+    <!--  Check box colors  -->
+    <Color
+        x:Key="CheckBoxBackgroundColor">
+        #333333
+    </Color>
+    <Color
+        x:Key="CheckBoxBackgroundColor_Hover">
+        #444444
+    </Color>
+    <Color
+        x:Key="CheckBoxBorderColor">
+        #777777
+    </Color>
+
     <!--  Colors used for radio buttons  -->
     <Color
         x:Key="RadioButtonGradientColor_0">
@@ -206,4 +220,13 @@
     <SolidColorBrush
         x:Key="IconButtonBackgroundColor_Pressed_Brush"
         Color="{DynamicResource IconButtonBackgroundColor_Pressed}" />
+    <SolidColorBrush
+        x:Key="CheckBoxBackgroundColor_Brush"
+        Color="{DynamicResource CheckBoxBackgroundColor}" />
+    <SolidColorBrush
+        x:Key="CheckBoxBackgroundColor_Hover_Brush"
+        Color="{DynamicResource CheckBoxBackgroundColor_Hover}" />
+    <SolidColorBrush
+        x:Key="CheckBoxBorderColor_Brush"
+        Color="{DynamicResource CheckBoxBorderColor}" />
 </ResourceDictionary>

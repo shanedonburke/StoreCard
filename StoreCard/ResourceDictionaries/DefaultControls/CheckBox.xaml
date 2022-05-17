@@ -29,17 +29,17 @@
                                         TargetType="Border">
                                         <Setter
                                             Property="Background"
-                                            Value="#333333" />
+                                            Value="{DynamicResource CheckBoxBackgroundColor_Brush}" />
                                         <Setter
                                             Property="BorderBrush"
-                                            Value="#777777" />
+                                            Value="{DynamicResource CheckBoxBorderColor_Brush}" />
                                         <Style.Triggers>
                                             <DataTrigger
                                                 Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=CheckBox}, Path=IsMouseOver}"
                                                 Value="True">
                                                 <Setter
                                                     Property="Background"
-                                                    Value="#444444" />
+                                                    Value="{DynamicResource CheckBoxBackgroundColor_Hover_Brush}" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
