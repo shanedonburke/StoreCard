@@ -101,14 +101,14 @@
                                     Value="True">
                                     <Setter
                                         Property="Background"
-                                        Value="#444444" />
+                                        Value="{DynamicResource IconButtonBackgroundColor_Hover_Brush}" />
                                 </Trigger>
                                 <Trigger
                                     Property="IsPressed"
                                     Value="True">
                                     <Setter
                                         Property="Background"
-                                        Value="#333333" />
+                                        Value="{DynamicResource IconButtonBackgroundColor_Pressed_Brush}" />
                                 </Trigger>
                                 <DataTrigger
                                     Binding="{Binding ElementName=AddButtonContextMenu, Path=IsOpen}"
@@ -208,14 +208,14 @@
                                     Value="True">
                                     <Setter
                                         Property="Background"
-                                        Value="#444444" />
+                                        Value="{DynamicResource IconButtonBackgroundColor_Hover_Brush}" />
                                 </Trigger>
                                 <Trigger
                                     Property="IsPressed"
                                     Value="True">
                                     <Setter
                                         Property="Background"
-                                        Value="#333333" />
+                                        Value="{DynamicResource IconButtonBackgroundColor_Pressed_Brush}" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>

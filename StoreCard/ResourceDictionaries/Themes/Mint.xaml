@@ -109,6 +109,16 @@
         #3A3A3A
     </Color>
 
+    <!--  Colors for icon buttons  -->
+    <Color
+        x:Key="IconButtonBackgroundColor_Hover">
+        #444444
+    </Color>
+    <Color
+        x:Key="IconButtonBackgroundColor_Pressed">
+        #333333
+    </Color>
+
     <!--  Colors used for radio buttons  -->
     <Color
         x:Key="RadioButtonGradientColor_0">
@@ -190,4 +200,10 @@
     <SolidColorBrush
         x:Key="ListBoxItemColor_Hover_Brush"
         Color="{DynamicResource ListBoxItemColor_Hover}" />
+    <SolidColorBrush
+        x:Key="IconButtonBackgroundColor_Hover_Brush"
+        Color="{DynamicResource IconButtonBackgroundColor_Hover}" />
+    <SolidColorBrush
+        x:Key="IconButtonBackgroundColor_Pressed_Brush"
+        Color="{DynamicResource IconButtonBackgroundColor_Pressed}" />
 </ResourceDictionary>
