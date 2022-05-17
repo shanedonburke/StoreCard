@@ -133,6 +133,12 @@
         #777777
     </Color>
 
+    <!--  Separator color  -->
+    <Color
+        x:Key="SeparatorColor">
+        #444444
+    </Color>
+
     <!--  Colors used for radio buttons  -->
     <Color
         x:Key="RadioButtonGradientColor_0">
@@ -229,4 +235,7 @@
     <SolidColorBrush
         x:Key="CheckBoxBorderColor_Brush"
         Color="{DynamicResource CheckBoxBorderColor}" />
+    <SolidColorBrush
+        x:Key="SeparatorColor_Brush"
+        Color="{DynamicResource SeparatorColor}" />
 </ResourceDictionary>
