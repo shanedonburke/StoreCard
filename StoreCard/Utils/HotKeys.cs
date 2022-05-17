@@ -78,7 +78,7 @@ internal class HotKeys
     // From https://stackoverflow.com/a/736509
     private static char ToAscii(Key key) {
         var outputBuilder = new StringBuilder(2);
-        var result = User32.ToAscii(HotKeys.KeyToVirtualKey(key), 0, new byte[256],
+        var result = User32.ToAscii(KeyToVirtualKey(key), 0, new byte[256],
             outputBuilder, 0);
         return result == 1 ? outputBuilder[0] : ' ';
     }
