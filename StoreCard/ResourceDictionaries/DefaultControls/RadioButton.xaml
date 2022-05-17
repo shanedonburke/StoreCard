@@ -12,7 +12,7 @@
             Value="True" />
         <Setter
             Property="Margin"
-            Value="0,0,5,0" />
+            Value="0,0,10,0" />
         <Setter
             Property="BorderThickness"
             Value="0,0,0,0" />
@@ -25,31 +25,6 @@
         <Setter
             Property="HorizontalAlignment"
             Value="Stretch" />
-        <!--  Ring around button when tab-focused  -->
-        <Setter
-            Property="FocusVisualStyle">
-            <Setter.Value>
-                <Style
-                    TargetType="Control">
-                    <Setter
-                        Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate>
-                                <Grid
-                                    Width="15"
-                                    Height="15">
-                                    <!-- Margins...??? -->
-                                    <Ellipse
-                                        Margin="-3.5,-1,0.5,-1"
-                                        Stroke="{DynamicResource PrimaryBrush}"
-                                        StrokeThickness="1.5" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Setter.Value>
-        </Setter>
         <!-- Radio button template -->
         <Setter
             Property="Template">
@@ -122,7 +97,7 @@
                             </Grid>
                         </BulletDecorator.Bullet>
                         <ContentPresenter
-                            Margin="4,0,0,0"
+                            Margin="0,0,0,0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             RecognizesAccessKey="True" />
