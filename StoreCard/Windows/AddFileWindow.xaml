@@ -11,7 +11,7 @@
     Title="Add File"
     Width="600"
     Height="400"
-    Background="{DynamicResource AppBackgroundColor_Brush}"
+    Background="{DynamicResource AppBackgroundBrush}"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=windows:AddFileWindow, IsDesignTimeCreatable=False}">
     <Window.Resources>
@@ -32,7 +32,7 @@
             <Label
                 Margin="0,0,0,10"
                 FontSize="14"
-                Foreground="{DynamicResource ForegroundColor_Brush}">
+                Foreground="{DynamicResource ForegroundBrush}">
                 Select a file or folder to save:
             </Label>
             <!--  "File" radio button  -->
@@ -47,7 +47,7 @@
                     Height="20"
                     VerticalAlignment="Stretch"
                     FontSize="14"
-                    Foreground="{DynamicResource ForegroundColor_Brush}">
+                    Foreground="{DynamicResource ForegroundBrush}">
                     File
                 </TextBlock>
             </StackPanel>
@@ -62,7 +62,7 @@
                     Height="20"
                     VerticalAlignment="Stretch"
                     FontSize="14"
-                    Foreground="{DynamicResource ForegroundColor_Brush}">
+                    Foreground="{DynamicResource ForegroundBrush}">
                     Folder
                 </TextBlock>
             </StackPanel>
@@ -91,7 +91,7 @@
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="{DynamicResource ForegroundColor_Brush}"
+                Foreground="{DynamicResource ForegroundBrush}"
                 Text="Path:" />
             <!--  Path box  -->
             <userControls:StoreCardTextBox
@@ -149,7 +149,7 @@
                         VerticalAlignment="Center"
                         FontSize="14"
                         FontWeight="Bold"
-                        Foreground="{DynamicResource ForegroundColor_Brush}"
+                        Foreground="{DynamicResource ForegroundBrush}"
                         TextTrimming="CharacterEllipsis"
                         TextWrapping="NoWrap"
                         Text="{Binding Path=FileName}" />
@@ -210,7 +210,7 @@
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 FontSize="14"
-                Foreground="{DynamicResource ForegroundColor_Brush}"
+                Foreground="{DynamicResource ForegroundBrush}"
                 Text="Path:" />
             <!--  Path box  -->
             <userControls:StoreCardTextBox
@@ -267,7 +267,7 @@
                         VerticalAlignment="Center"
                         FontSize="14"
                         FontWeight="Bold"
-                        Foreground="{DynamicResource ForegroundColor_Brush}"
+                        Foreground="{DynamicResource ForegroundBrush}"
                         TextTrimming="CharacterEllipsis"
                         TextWrapping="NoWrap"
                         Text="{Binding FolderName}" />

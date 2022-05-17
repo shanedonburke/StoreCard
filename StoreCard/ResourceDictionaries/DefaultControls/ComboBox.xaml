@@ -19,21 +19,21 @@
                         TargetType="{x:Type Border}">
                         <Setter
                             Property="Background"
-                            Value="{DynamicResource LightColor_Pressed_Brush}" />
+                            Value="{DynamicResource LightBrush_Pressed}" />
                         <Style.Triggers>
                             <DataTrigger
                                 Binding="{Binding IsMouseOver, RelativeSource={RelativeSource FindAncestor, AncestorType=ToggleButton}}"
                                 Value="True">
                                 <Setter
                                     Property="Background"
-                                    Value="{DynamicResource LightColor_Hover_Brush}" />
+                                    Value="{DynamicResource LightBrush_Hover}" />
                             </DataTrigger>
                             <DataTrigger
                                 Binding="{Binding IsDropDownOpen, RelativeSource={RelativeSource FindAncestor, AncestorType=ComboBox}}"
                                 Value="True">
                                 <Setter
                                     Property="Background"
-                                    Value="{DynamicResource LightColor_Hover_Brush}" />
+                                    Value="{DynamicResource LightBrush_Hover}" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -43,7 +43,7 @@
                 Grid.Column="0"
                 CornerRadius="2,0,0,2"
                 Margin="0"
-                Background="{DynamicResource LightColor_Brush}" />
+                Background="{DynamicResource LightBrush}" />
             <Path
                 x:Name="Arrow"
                 Grid.Column="1"
@@ -81,7 +81,7 @@
             Value="30" />
         <Setter
             Property="Foreground"
-            Value="{DynamicResource ForegroundColor_Brush}" />
+            Value="{DynamicResource ForegroundBrush}" />
         <Setter
             Property="FontSize"
             Value="14" />
@@ -122,7 +122,7 @@
                                 <Border
                                     x:Name="DropDownBorder"
                                     BorderThickness="0"
-                                    Background="{DynamicResource LightColor_Brush}"
+                                    Background="{DynamicResource LightBrush}"
                                     CornerRadius="2"
                                     Margin="0,5,0,0" />
                                 <ScrollViewer
@@ -189,10 +189,10 @@
                                         Value="True">
                                         <Setter
                                             Property="BorderBrush"
-                                            Value="{DynamicResource SelectedBorderColor_Brush}" />
+                                            Value="{DynamicResource SelectedBorderBrush}" />
                                         <Setter
                                             Property="Background"
-                                            Value="{DynamicResource SelectedBackgroundColor_Brush}" />
+                                            Value="{DynamicResource SelectedBackgroundBrush}" />
                                     </DataTrigger>
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
@@ -206,10 +206,10 @@
                                         <MultiDataTrigger.Setters>
                                             <Setter
                                                 Property="Background"
-                                                Value="{DynamicResource LightColor_Pressed_Brush}" />
+                                                Value="{DynamicResource LightBrush_Pressed}" />
                                             <Setter
                                                 Property="BorderBrush"
-                                                Value="{DynamicResource LightColor_Pressed_Brush}" />
+                                                Value="{DynamicResource LightBrush_Pressed}" />
                                         </MultiDataTrigger.Setters>
                                     </MultiDataTrigger>
                                 </Style.Triggers>

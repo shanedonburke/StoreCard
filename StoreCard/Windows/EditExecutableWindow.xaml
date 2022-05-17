@@ -9,7 +9,7 @@
     Title="Edit Executable"
     Width="800"
     Height="600"
-    Background="{DynamicResource AppBackgroundColor_Brush}"
+    Background="{DynamicResource AppBackgroundBrush}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d"
     Closed="Window_Closed"

@@ -46,7 +46,7 @@
                     Text="Selected:"
                     FontSize="12"
                     VerticalAlignment="Center"
-                    Foreground="{DynamicResource SecondaryTextColor_Active_Brush}" />
+                    Foreground="{DynamicResource SecondaryTextBrush_Aactive}" />
                 <Image
                     Width="24"
                     Height="24"
@@ -56,7 +56,7 @@
                     Text="{Binding Path=SelectedAppName}"
                     FontSize="12"
                     VerticalAlignment="Center"
-                    Foreground="{DynamicResource ForegroundColor_Brush}" />
+                    Foreground="{DynamicResource ForegroundBrush}" />
             </StackPanel>
             <!--  "Save" button  -->
             <local:StoreCardButton

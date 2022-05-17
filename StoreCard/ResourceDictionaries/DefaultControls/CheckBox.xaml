@@ -29,17 +29,17 @@
                                         TargetType="Border">
                                         <Setter
                                             Property="Background"
-                                            Value="{DynamicResource CheckBoxBackgroundColor_Brush}" />
+                                            Value="{DynamicResource CheckBoxBackgroundBrush}" />
                                         <Setter
                                             Property="BorderBrush"
-                                            Value="{DynamicResource CheckBoxBorderColor_Brush}" />
+                                            Value="{DynamicResource CheckBoxBorderBrush}" />
                                         <Style.Triggers>
                                             <DataTrigger
                                                 Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=CheckBox}, Path=IsMouseOver}"
                                                 Value="True">
                                                 <Setter
                                                     Property="Background"
-                                                    Value="{DynamicResource CheckBoxBackgroundColor_Hover_Brush}" />
+                                                    Value="{DynamicResource CheckBoxBackgroundBrush_Hover}" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -52,7 +52,7 @@
                                         SnapsToDevicePixels="False"
                                         StrokeThickness="2"
                                         Data="M 1.5 5 L 5.5 10.5 M 5.5 10.5 L 11 1"
-                                        Stroke="{DynamicResource PrimaryColor_Brush}"
+                                        Stroke="{DynamicResource PrimaryBrush}"
                                         Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=CheckBox}, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     </Path>
                                 </Grid>

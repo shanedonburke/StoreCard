@@ -27,7 +27,7 @@
             Grid.Column="0"
             VerticalAlignment="Center"
             FontSize="14"
-            Foreground="{DynamicResource ForegroundColor_Brush}"
+            Foreground="{DynamicResource ForegroundBrush}"
             Text="Path:" />
         <!--  Path box  -->
         <userControls:StoreCardTextBox
@@ -66,7 +66,7 @@
             <!--  Error message  -->
             <TextBlock
                 Grid.Row="0"
-                Foreground="{DynamicResource RedColor_Brush}"
+                Foreground="{DynamicResource RedBrush}"
                 FontSize="14"
                 Margin="50,0,0,0"
                 Text="The selected file is invalid. Please make sure the entered path exists and is an EXE file.">
@@ -110,7 +110,7 @@
                     Grid.Column="0"
                     VerticalAlignment="Center"
                     FontSize="14"
-                    Foreground="{DynamicResource ForegroundColor_Brush}"
+                    Foreground="{DynamicResource ForegroundBrush}"
                     Text="Name:" />
                 <!--  Name box  -->
                 <userControls:StoreCardTextBox
@@ -143,7 +143,7 @@
                     VerticalAlignment="Center"
                     FontSize="14"
                     FontWeight="Bold"
-                    Foreground="{DynamicResource ForegroundColor_Brush}"
+                    Foreground="{DynamicResource ForegroundBrush}"
                     TextTrimming="CharacterEllipsis"
                     TextWrapping="NoWrap"
                     Text="{Binding ExecutableName}" />

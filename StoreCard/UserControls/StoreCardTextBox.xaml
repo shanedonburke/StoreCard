@@ -13,14 +13,14 @@
         Padding="5,0,5,0"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"
-        Background="{DynamicResource LightColor_Brush}"
+        Background="{DynamicResource LightBrush}"
         CornerRadius="5">
         <Grid
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
             <TextBlock
                 FontSize="14"
-                Foreground="{DynamicResource TextBoxPlaceholderColor_Brush}"
+                Foreground="{DynamicResource TextBoxPlaceholderBrush}"
                 Padding="2,0,0,0"
                 VerticalAlignment="Center">
                 <TextBlock.Style>
@@ -42,7 +42,7 @@
                                         Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardTextBox}}, Path=InactivePlaceholder}" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="{DynamicResource TextBoxPlaceholderColor_Brush}" />
+                                        Value="{DynamicResource TextBoxPlaceholderBrush}" />
                                 </MultiDataTrigger.Setters>
                             </MultiDataTrigger>
                             <MultiDataTrigger>
@@ -60,7 +60,7 @@
                                         Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardTextBox}}, Path=ActivePlaceholder}" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="{DynamicResource TextBoxPlaceholderColor_Brush}" />
+                                        Value="{DynamicResource TextBoxPlaceholderBrush}" />
                                 </MultiDataTrigger.Setters>
                             </MultiDataTrigger>
                         </Style.Triggers>
@@ -71,7 +71,7 @@
                 Name="CustomTextBox"
                 VerticalContentAlignment="Stretch"
                 Background="Transparent"
-                CaretBrush="{DynamicResource ForegroundColor_Brush}"
+                CaretBrush="{DynamicResource ForegroundBrush}"
                 BorderBrush="#00000000"
                 BorderThickness="0,0,0,0"
                 FontSize="14"
@@ -89,7 +89,7 @@
                             Value="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" />
                         <Setter
                             Property="Foreground"
-                            Value="{DynamicResource ForegroundColor_Brush}" />
+                            Value="{DynamicResource ForegroundBrush}" />
                     </Style>
                 </TextBox.Style>
             </TextBox>

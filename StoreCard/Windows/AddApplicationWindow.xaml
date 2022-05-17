@@ -9,7 +9,7 @@
     Title="Add Application"
     Width="800"
     Height="600"
-    Background="{DynamicResource AppBackgroundColor_Brush}"
+    Background="{DynamicResource AppBackgroundBrush}"
     Closed="Window_Closed"
     Loaded="Window_Loaded"
     PreviewKeyDown="Window_PreviewKeyDown"
@@ -29,7 +29,7 @@
             <Label
                 Margin="0,0,0,10"
                 FontSize="14"
-                Foreground="{DynamicResource ForegroundColor_Brush}">
+                Foreground="{DynamicResource ForegroundBrush}">
                 Select an application to save:
             </Label>
             <!--  "Installed application"  -->
@@ -44,7 +44,7 @@
                     Height="20"
                     VerticalAlignment="Stretch"
                     FontSize="14"
-                    Foreground="{DynamicResource ForegroundColor_Brush}">
+                    Foreground="{DynamicResource ForegroundBrush}">
                     Installed application
                 </TextBlock>
             </StackPanel>
@@ -59,7 +59,7 @@
                     Height="20"
                     VerticalAlignment="Stretch"
                     FontSize="14"
-                    Foreground="{DynamicResource ForegroundColor_Brush}">
+                    Foreground="{DynamicResource ForegroundBrush}">
                     Other installed game
                 </TextBlock>
             </StackPanel>
@@ -74,7 +74,7 @@
                     Height="20"
                     VerticalAlignment="Stretch"
                     FontSize="14"
-                    Foreground="{DynamicResource ForegroundColor_Brush}">
+                    Foreground="{DynamicResource ForegroundBrush}">
                     Other executable
                 </TextBlock>
             </StackPanel>
@@ -136,7 +136,7 @@
                         Text="{Binding Path=SelectedGameName}"
                         FontSize="12"
                         VerticalAlignment="Center"
-                        Foreground="{DynamicResource ForegroundColor_Brush}" />
+                        Foreground="{DynamicResource ForegroundBrush}" />
                 </StackPanel>
                 <userControls:StoreCardButton
                     Style="{DynamicResource PrimaryButton}"

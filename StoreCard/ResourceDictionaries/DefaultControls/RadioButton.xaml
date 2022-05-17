@@ -41,7 +41,7 @@
                                     <!-- Margins...??? -->
                                     <Ellipse
                                         Margin="-3.5,-1,0.5,-1"
-                                        Stroke="{DynamicResource PrimaryColor_Brush}"
+                                        Stroke="{DynamicResource PrimaryBrush}"
                                         StrokeThickness="1.5" />
                                 </Grid>
                             </ControlTemplate>

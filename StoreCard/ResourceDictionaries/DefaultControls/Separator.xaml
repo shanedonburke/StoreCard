@@ -12,7 +12,7 @@
                     <Border
                         Height="1"
                         BorderThickness="1"
-                        BorderBrush="{DynamicResource SeparatorColor_Brush}" />
+                        BorderBrush="{DynamicResource SeparatorBrush}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

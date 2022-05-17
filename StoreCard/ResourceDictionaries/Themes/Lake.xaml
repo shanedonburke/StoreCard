@@ -155,87 +155,87 @@
 
     <!--  Brushes  -->
     <SolidColorBrush
-        x:Key="AppBackgroundColor_Brush"
+        x:Key="AppBackgroundBrush"
         Color="{DynamicResource AppBackgroundColor}" />
     <SolidColorBrush
-        x:Key="ForegroundColor_Brush"
+        x:Key="ForegroundBrush"
         Color="{DynamicResource AppForegroundColor}" />
     <SolidColorBrush
-        x:Key="PrimaryColor_Brush"
+        x:Key="PrimaryBrush"
         Color="{DynamicResource PrimaryColor}" />
     <SolidColorBrush
-        x:Key="PrimaryColor_Hover_Brush"
+        x:Key="PrimaryBrush_Hover"
         Color="{DynamicResource PrimaryColor_Hover}" />
     <SolidColorBrush
-        x:Key="PrimaryColor_Pressed_Brush"
+        x:Key="PrimaryBrush_Pressed"
         Color="{DynamicResource PrimaryColor_Pressed}" />
     <SolidColorBrush
-        x:Key="PrimaryForegroundColor_Brush"
+        x:Key="PrimaryForegroundBrush"
         Color="{DynamicResource PrimaryForegroundColor}" />
     <SolidColorBrush
-        x:Key="LightColor_Brush"
+        x:Key="LightBrush"
         Color="{DynamicResource LightColor}" />
     <SolidColorBrush
-        x:Key="LightColor_Hover_Brush"
+        x:Key="LightBrush_Hover"
         Color="{DynamicResource LightColor_Hover}" />
     <SolidColorBrush
-        x:Key="LightColor_Pressed_Brush"
+        x:Key="LightBrush_Pressed"
         Color="{DynamicResource LightColor_Pressed}" />
     <SolidColorBrush
-        x:Key="LightForegroundColor_Brush"
+        x:Key="LightForegroundBrush"
         Color="{DynamicResource LightForegroundColor}" />
     <SolidColorBrush
-        x:Key="RedColor_Brush"
+        x:Key="RedBrush"
         Color="{DynamicResource RedColor}" />
     <SolidColorBrush
-        x:Key="RedColor_Hover_Brush"
+        x:Key="RedBrush_Hover"
         Color="{DynamicResource RedColor_Hover}" />
     <SolidColorBrush
-        x:Key="RedColor_Pressed_Brush"
+        x:Key="RedBrush_Pressed"
         Color="{DynamicResource RedColor_Pressed}" />
     <SolidColorBrush
-        x:Key="SelectedBackgroundColor_Brush"
+        x:Key="SelectedBackgroundBrush"
         Color="{DynamicResource SelectedBackgroundColor}" />
     <SolidColorBrush
-        x:Key="SelectedBorderColor_Brush"
+        x:Key="SelectedBorderBrush"
         Color="{DynamicResource SelectedBorderColor}" />
     <SolidColorBrush
-        x:Key="DisabledBackgroundColor_Brush"
+        x:Key="DisabledBackgroundBrush"
         Color="{DynamicResource DisabledBackgroundColor}" />
     <SolidColorBrush
-        x:Key="InactiveTextColor_Brush"
+        x:Key="InactiveTextBrush"
         Color="{DynamicResource InactiveTextColor}" />
     <SolidColorBrush
-        x:Key="DisabledTextColor_Brush"
+        x:Key="DisabledTextBrush"
         Color="{DynamicResource DisabledTextColor}" />
     <SolidColorBrush
-        x:Key="SecondaryTextColor_Inactive_Brush"
+        x:Key="SecondaryTextBrush_Inactive"
         Color="{DynamicResource SecondaryTextColor_Inactive}" />
     <SolidColorBrush
-        x:Key="SecondaryTextColor_Active_Brush"
+        x:Key="SecondaryTextBrush_Aactive"
         Color="{DynamicResource SecondaryTextColor_Active}" />
     <SolidColorBrush
-        x:Key="TextBoxPlaceholderColor_Brush"
+        x:Key="TextBoxPlaceholderBrush"
         Color="{DynamicResource TextBoxPlaceholderColor}" />
     <SolidColorBrush
-        x:Key="ListBoxItemColor_Hover_Brush"
+        x:Key="ListBoxItemBrush_Hover"
         Color="{DynamicResource ListBoxItemColor_Hover}" />
     <SolidColorBrush
-        x:Key="IconButtonBackgroundColor_Hover_Brush"
+        x:Key="IconButtonBackgroundBrush_Hover"
         Color="{DynamicResource IconButtonBackgroundColor_Hover}" />
     <SolidColorBrush
-        x:Key="IconButtonBackgroundColor_Pressed_Brush"
+        x:Key="IconButtonBackgroundBrush_Pressed"
         Color="{DynamicResource IconButtonBackgroundColor_Pressed}" />
     <SolidColorBrush
-        x:Key="CheckBoxBackgroundColor_Brush"
+        x:Key="CheckBoxBackgroundBrush"
         Color="{DynamicResource CheckBoxBackgroundColor}" />
     <SolidColorBrush
-        x:Key="CheckBoxBackgroundColor_Hover_Brush"
+        x:Key="CheckBoxBackgroundBrush_Hover"
         Color="{DynamicResource CheckBoxBackgroundColor_Hover}" />
     <SolidColorBrush
-        x:Key="CheckBoxBorderColor_Brush"
+        x:Key="CheckBoxBorderBrush"
         Color="{DynamicResource CheckBoxBorderColor}" />
     <SolidColorBrush
-        x:Key="SeparatorColor_Brush"
+        x:Key="SeparatorBrush"
         Color="{DynamicResource SeparatorColor}" />
 </ResourceDictionary>

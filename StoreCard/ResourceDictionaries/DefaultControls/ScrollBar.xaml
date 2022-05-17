@@ -31,7 +31,7 @@
                                 TargetType="{x:Type Border}">
                                 <Setter
                                     Property="Background"
-                                    Value="{DynamicResource LightColor_Brush}" />
+                                    Value="{DynamicResource LightBrush}" />
                             </Style>
                         </Border.Style>
                     </Border>
@@ -42,7 +42,7 @@
                             <Setter
                                 Property="Background"
                                 TargetName="ThumbBorder"
-                                Value="{DynamicResource LightColor_Hover_Brush}" />
+                                Value="{DynamicResource LightBrush_Hover}" />
                         </Trigger>
                         <Trigger
                             Property="IsDragging"
@@ -50,7 +50,7 @@
                             <Setter
                                 Property="Background"
                                 TargetName="ThumbBorder"
-                                Value="{DynamicResource LightColor_Pressed_Brush}" />
+                                Value="{DynamicResource LightBrush_Pressed}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

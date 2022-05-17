@@ -9,7 +9,7 @@
     mc:Ignorable="d"
     Width="400"
     Height="300"
-    Background="{DynamicResource AppBackgroundColor_Brush}"
+    Background="{DynamicResource AppBackgroundBrush}"
     WindowStartupLocation="CenterScreen"
     Title="Missing Item"
     Closed="Window_Closed"
@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
         <TextBlock
             Grid.Row="0"
-            Foreground="{DynamicResource ForegroundColor_Brush}"
+            Foreground="{DynamicResource ForegroundBrush}"
             FontSize="14"
             TextWrapping="Wrap">
             The item you are trying to open does not exist.

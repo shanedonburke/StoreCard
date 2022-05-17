@@ -8,7 +8,7 @@
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance windows:UnsavedChangesWindow, IsDesignTimeCreatable=False}"
-    Background="{DynamicResource AppBackgroundColor_Brush}"
+    Background="{DynamicResource AppBackgroundBrush}"
     Title="UnsavedChangesWindow"
     Height="200"
     Width="450"
@@ -24,7 +24,7 @@
         <TextBlock
             Grid.Row="0"
             Text="There are unsaved changes. Save them before closing?"
-            Foreground="{DynamicResource ForegroundColor_Brush}"
+            Foreground="{DynamicResource ForegroundBrush}"
             FontSize="14" />
         <Grid
             Grid.Row="1"

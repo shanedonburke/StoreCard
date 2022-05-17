@@ -14,7 +14,7 @@
         Name="CustomListBox"
         Background="Transparent"
         BorderThickness="0,0,0,0"
-        Foreground="{DynamicResource ForegroundColor_Brush}"
+        Foreground="{DynamicResource ForegroundBrush}"
         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
         PreviewKeyDown="CustomListBox_PreviewKeyDown"
         KeyUp="CustomListBox_KeyUp"
@@ -64,7 +64,7 @@
                                     <Setter
                                         TargetName="ItemTemplateInner"
                                         Property="Panel.Background"
-                                        Value="{DynamicResource ListBoxItemColor_Hover_Brush}" />
+                                        Value="{DynamicResource ListBoxItemBrush_Hover}" />
                                     <Setter
                                         TargetName="ItemTemplateInner"
                                         Property="Border.BorderBrush"
@@ -83,11 +83,11 @@
                                     <Setter
                                         TargetName="ItemTemplateInner"
                                         Property="Panel.Background"
-                                        Value="{DynamicResource SelectedBackgroundColor_Brush}" />
+                                        Value="{DynamicResource SelectedBackgroundBrush}" />
                                     <Setter
                                         TargetName="ItemTemplateInner"
                                         Property="Border.BorderBrush"
-                                        Value="{DynamicResource SelectedBorderColor_Brush}" />
+                                        Value="{DynamicResource SelectedBorderBrush}" />
                                 </MultiTrigger>
                                 <!--  Inactive selected item  -->
                                 <MultiTrigger>
@@ -102,11 +102,11 @@
                                     <Setter
                                         TargetName="ItemTemplateInner"
                                         Property="Panel.Background"
-                                        Value="{DynamicResource SelectedBackgroundColor_Brush}" />
+                                        Value="{DynamicResource SelectedBackgroundBrush}" />
                                     <Setter
                                         TargetName="ItemTemplateInner"
                                         Property="Border.BorderBrush"
-                                        Value="{DynamicResource SelectedBorderColor_Brush}" />
+                                        Value="{DynamicResource SelectedBorderBrush}" />
                                 </MultiTrigger>
                                 <Trigger
                                     Property="UIElement.IsEnabled"
@@ -172,7 +172,7 @@
                                 TargetType="Label">
                                 <Setter
                                     Property="Foreground"
-                                    Value="{DynamicResource SecondaryTextColor_Inactive_Brush}" />
+                                    Value="{DynamicResource SecondaryTextBrush_Inactive}" />
                                 <Setter
                                     Property="Visibility"
                                     Value="Collapsed" />
@@ -182,7 +182,7 @@
                                         Value="True">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource SecondaryTextColor_Active_Brush}" />
+                                            Value="{DynamicResource SecondaryTextBrush_Aactive}" />
                                     </DataTrigger>
                                     <DataTrigger
                                         Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=userControls:StoreCardListBox}, Path=ShowSecondaryText, Converter={StaticResource ValueToStringConverter}}"

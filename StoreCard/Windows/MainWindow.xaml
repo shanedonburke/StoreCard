@@ -28,7 +28,7 @@
     <!--  Main content  -->
     <Border
         Padding="10"
-        Background="{DynamicResource AppBackgroundColor_Brush}"
+        Background="{DynamicResource AppBackgroundBrush}"
         CornerRadius="5">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -73,7 +73,7 @@
                     FontFamily="Arial"
                     FontSize="24"
                     FontWeight="Bold"
-                    Foreground="{DynamicResource ForegroundColor_Brush}">
+                    Foreground="{DynamicResource ForegroundBrush}">
                     <Button.Style>
                         <Style
                             TargetType="{x:Type Button}">
@@ -101,14 +101,14 @@
                                     Value="True">
                                     <Setter
                                         Property="Background"
-                                        Value="{DynamicResource IconButtonBackgroundColor_Hover_Brush}" />
+                                        Value="{DynamicResource IconButtonBackgroundBrush_Hover}" />
                                 </Trigger>
                                 <Trigger
                                     Property="IsPressed"
                                     Value="True">
                                     <Setter
                                         Property="Background"
-                                        Value="{DynamicResource IconButtonBackgroundColor_Pressed_Brush}" />
+                                        Value="{DynamicResource IconButtonBackgroundBrush_Pressed}" />
                                 </Trigger>
                                 <DataTrigger
                                     Binding="{Binding ElementName=AddButtonContextMenu, Path=IsOpen}"
@@ -155,7 +155,7 @@
                     </Button.ContextMenu>
                     <fa:IconBlock
                         Icon="Plus"
-                        Foreground="{DynamicResource ForegroundColor_Brush}"
+                        Foreground="{DynamicResource ForegroundBrush}"
                         FontSize="18" />
                 </Button>
                 <!--  Search box  -->
@@ -180,7 +180,7 @@
                     BorderThickness="0,0,0,0"
                     FontFamily="Arial"
                     FontSize="24"
-                    Foreground="{DynamicResource ForegroundColor_Brush}">
+                    Foreground="{DynamicResource ForegroundBrush}">
                     <Button.Style>
                         <Style
                             TargetType="{x:Type Button}">
@@ -208,21 +208,21 @@
                                     Value="True">
                                     <Setter
                                         Property="Background"
-                                        Value="{DynamicResource IconButtonBackgroundColor_Hover_Brush}" />
+                                        Value="{DynamicResource IconButtonBackgroundBrush_Hover}" />
                                 </Trigger>
                                 <Trigger
                                     Property="IsPressed"
                                     Value="True">
                                     <Setter
                                         Property="Background"
-                                        Value="{DynamicResource IconButtonBackgroundColor_Pressed_Brush}" />
+                                        Value="{DynamicResource IconButtonBackgroundBrush_Pressed}" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </Button.Style>
                     <fa:IconBlock
                         Icon="Wrench"
-                        Foreground="{DynamicResource ForegroundColor_Brush}"
+                        Foreground="{DynamicResource ForegroundBrush}"
                         FontSize="18" />
                 </Button>
             </Grid>
@@ -248,14 +248,14 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="{DynamicResource InactiveTextColor_Brush}" />
+                                    Value="{DynamicResource InactiveTextBrush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
                                         Value="None">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundColor_Brush}" />
+                                            Value="{DynamicResource ForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -271,14 +271,14 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="{DynamicResource InactiveTextColor_Brush}" />
+                                    Value="{DynamicResource InactiveTextBrush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
                                         Value="Recent">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundColor_Brush}" />
+                                            Value="{DynamicResource ForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -294,14 +294,14 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="{DynamicResource InactiveTextColor_Brush}" />
+                                    Value="{DynamicResource InactiveTextBrush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
                                         Value="App">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundColor_Brush}" />
+                                            Value="{DynamicResource ForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -317,14 +317,14 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="{DynamicResource InactiveTextColor_Brush}" />
+                                    Value="{DynamicResource InactiveTextBrush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
                                         Value="Game">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundColor_Brush}" />
+                                            Value="{DynamicResource ForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -340,14 +340,14 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="{DynamicResource InactiveTextColor_Brush}" />
+                                    Value="{DynamicResource InactiveTextBrush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
                                         Value="Folder">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundColor_Brush}" />
+                                            Value="{DynamicResource ForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -363,14 +363,14 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="{DynamicResource InactiveTextColor_Brush}" />
+                                    Value="{DynamicResource InactiveTextBrush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
                                         Value="File">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundColor_Brush}" />
+                                            Value="{DynamicResource ForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -385,14 +385,14 @@
                                 TargetType="{x:Type TextBlock}">
                                 <Setter
                                     Property="Foreground"
-                                    Value="{DynamicResource InactiveTextColor_Brush}" />
+                                    Value="{DynamicResource InactiveTextBrush}" />
                                 <Style.Triggers>
                                     <DataTrigger
                                         Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
                                         Value="Link">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundColor_Brush}" />
+                                            Value="{DynamicResource ForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
