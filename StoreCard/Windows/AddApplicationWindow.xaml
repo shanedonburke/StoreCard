@@ -126,7 +126,7 @@
                         Text="Selected:"
                         FontSize="12"
                         VerticalAlignment="Center"
-                        Foreground="#AAAAAA" />
+                        Foreground="{DynamicResource InactiveTextBrush}" />
                     <Image
                         Width="24"
                         Height="24"
