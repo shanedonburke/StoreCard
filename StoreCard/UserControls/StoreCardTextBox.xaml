@@ -72,14 +72,14 @@
                 VerticalContentAlignment="Stretch"
                 Background="Transparent"
                 CaretBrush="{DynamicResource AppForegroundBrush}"
-                BorderBrush="#00000000"
+                BorderBrush="Transparent"
                 BorderThickness="0,0,0,0"
                 FontSize="14"
                 MaxLines="1"
                 PreviewKeyDown="CustomTextBox_PreviewKeyDown"
                 KeyUp="CustomTextBox_KeyUp"
                 TextChanged="CustomTextBox_TextChanged"
-                SelectionBrush="#65FFFFFF"
+                SelectionBrush="{DynamicResource TextBoxSelectionBrush}"
                 TextWrapping="NoWrap">
                 <TextBox.Style>
                     <Style

@@ -78,10 +78,13 @@
         x:Key="SecondaryTextBrush_Aactive"
         Color="#DDDDDD" />
 
-    <!--  Color of text box placeholder text  -->
+    <!--  Text box colors  -->
     <SolidColorBrush
         x:Key="TextBoxPlaceholderBrush"
         Color="#AAAAAA" />
+    <SolidColorBrush
+        x:Key="TextBoxSelectionBrush"
+        Color="#65FFFFFF" />
 
     <!--  Color of list box items on hover  -->
     <SolidColorBrush
