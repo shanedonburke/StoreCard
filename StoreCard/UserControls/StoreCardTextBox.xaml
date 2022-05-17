@@ -71,7 +71,7 @@
                 Name="CustomTextBox"
                 VerticalContentAlignment="Stretch"
                 Background="Transparent"
-                CaretBrush="{DynamicResource ForegroundBrush}"
+                CaretBrush="{DynamicResource AppForegroundBrush}"
                 BorderBrush="#00000000"
                 BorderThickness="0,0,0,0"
                 FontSize="14"
@@ -89,7 +89,7 @@
                             Value="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" />
                         <Setter
                             Property="Foreground"
-                            Value="{DynamicResource ForegroundBrush}" />
+                            Value="{DynamicResource AppForegroundBrush}" />
                     </Style>
                 </TextBox.Style>
             </TextBox>

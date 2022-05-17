@@ -14,7 +14,7 @@
         Name="CustomListBox"
         Background="Transparent"
         BorderThickness="0,0,0,0"
-        Foreground="{DynamicResource ForegroundBrush}"
+        Foreground="{DynamicResource AppForegroundBrush}"
         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
         PreviewKeyDown="CustomListBox_PreviewKeyDown"
         KeyUp="CustomListBox_KeyUp"

@@ -24,7 +24,7 @@
         <TextBlock
             Grid.Row="0"
             Text="There are unsaved changes. Save them before closing?"
-            Foreground="{DynamicResource ForegroundBrush}"
+            Foreground="{DynamicResource AppForegroundBrush}"
             FontSize="14" />
         <Grid
             Grid.Row="1"

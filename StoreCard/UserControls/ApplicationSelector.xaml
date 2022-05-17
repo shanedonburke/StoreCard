@@ -56,7 +56,7 @@
                     Text="{Binding Path=SelectedAppName}"
                     FontSize="12"
                     VerticalAlignment="Center"
-                    Foreground="{DynamicResource ForegroundBrush}" />
+                    Foreground="{DynamicResource AppForegroundBrush}" />
             </StackPanel>
             <!--  "Save" button  -->
             <local:StoreCardButton

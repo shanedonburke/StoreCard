@@ -27,7 +27,7 @@
             Grid.Column="0"
             VerticalAlignment="Center"
             FontSize="14"
-            Foreground="{DynamicResource ForegroundBrush}"
+            Foreground="{DynamicResource AppForegroundBrush}"
             Text="Path:" />
         <!--  Path box  -->
         <userControls:StoreCardTextBox
@@ -110,7 +110,7 @@
                     Grid.Column="0"
                     VerticalAlignment="Center"
                     FontSize="14"
-                    Foreground="{DynamicResource ForegroundBrush}"
+                    Foreground="{DynamicResource AppForegroundBrush}"
                     Text="Name:" />
                 <!--  Name box  -->
                 <userControls:StoreCardTextBox
@@ -143,7 +143,7 @@
                     VerticalAlignment="Center"
                     FontSize="14"
                     FontWeight="Bold"
-                    Foreground="{DynamicResource ForegroundBrush}"
+                    Foreground="{DynamicResource AppForegroundBrush}"
                     TextTrimming="CharacterEllipsis"
                     TextWrapping="NoWrap"
                     Text="{Binding ExecutableName}" />

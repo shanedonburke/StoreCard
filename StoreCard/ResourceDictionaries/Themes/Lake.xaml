@@ -156,22 +156,22 @@
     <!--  Brushes  -->
     <SolidColorBrush
         x:Key="AppBackgroundBrush"
-        Color="{DynamicResource AppBackgroundColor}" />
+        Color="#e1eef0" />
     <SolidColorBrush
-        x:Key="ForegroundBrush"
-        Color="{DynamicResource AppForegroundColor}" />
+        x:Key="AppForegroundBrush"
+        Color="Black" />
     <SolidColorBrush
         x:Key="PrimaryBrush"
-        Color="{DynamicResource PrimaryColor}" />
+        Color="#049BDB" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Hover"
-        Color="{DynamicResource PrimaryColor_Hover}" />
+        Color="#2DBDFB" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Pressed"
-        Color="{DynamicResource PrimaryColor_Pressed}" />
+        Color="#0AB2FA" />
     <SolidColorBrush
         x:Key="PrimaryForegroundBrush"
-        Color="{DynamicResource PrimaryForegroundColor}" />
+        Color="White" />
     <SolidColorBrush
         x:Key="LightBrush"
         Color="{DynamicResource LightColor}" />

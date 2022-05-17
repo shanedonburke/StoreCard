@@ -45,7 +45,7 @@
                 HorizontalContentAlignment="Left"
                 VerticalAlignment="Center"
                 VerticalContentAlignment="Center"
-                Foreground="{DynamicResource ForegroundBrush}"
+                Foreground="{DynamicResource AppForegroundBrush}"
                 FontSize="14" />
         </CheckBox>
         <Label
@@ -56,7 +56,7 @@
             Margin="0,10"
             HorizontalAlignment="Left"
             HorizontalContentAlignment="Left"
-            Foreground="{DynamicResource ForegroundBrush}"
+            Foreground="{DynamicResource AppForegroundBrush}"
             FontSize="14" />
         <Separator
             Grid.Row="2"
@@ -76,7 +76,7 @@
                     HorizontalContentAlignment="Left"
                     VerticalAlignment="Top"
                     VerticalContentAlignment="Center"
-                    Foreground="{DynamicResource ForegroundBrush}"
+                    Foreground="{DynamicResource AppForegroundBrush}"
                     FontSize="14"
                     Content="Shortcut" />
                 <Label
@@ -131,7 +131,7 @@
                 HorizontalContentAlignment="Left"
                 VerticalAlignment="Center"
                 VerticalContentAlignment="Center"
-                Foreground="{DynamicResource ForegroundBrush}"
+                Foreground="{DynamicResource AppForegroundBrush}"
                 FontSize="14"
                 Content="Theme" />
             <ComboBox

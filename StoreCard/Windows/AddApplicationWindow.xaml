@@ -29,7 +29,7 @@
             <Label
                 Margin="0,0,0,10"
                 FontSize="14"
-                Foreground="{DynamicResource ForegroundBrush}">
+                Foreground="{DynamicResource AppForegroundBrush}">
                 Select an application to save:
             </Label>
             <!--  "Installed application"  -->
@@ -44,7 +44,7 @@
                     Height="20"
                     VerticalAlignment="Stretch"
                     FontSize="14"
-                    Foreground="{DynamicResource ForegroundBrush}">
+                    Foreground="{DynamicResource AppForegroundBrush}">
                     Installed application
                 </TextBlock>
             </StackPanel>
@@ -59,7 +59,7 @@
                     Height="20"
                     VerticalAlignment="Stretch"
                     FontSize="14"
-                    Foreground="{DynamicResource ForegroundBrush}">
+                    Foreground="{DynamicResource AppForegroundBrush}">
                     Other installed game
                 </TextBlock>
             </StackPanel>
@@ -74,7 +74,7 @@
                     Height="20"
                     VerticalAlignment="Stretch"
                     FontSize="14"
-                    Foreground="{DynamicResource ForegroundBrush}">
+                    Foreground="{DynamicResource AppForegroundBrush}">
                     Other executable
                 </TextBlock>
             </StackPanel>
@@ -136,7 +136,7 @@
                         Text="{Binding Path=SelectedGameName}"
                         FontSize="12"
                         VerticalAlignment="Center"
-                        Foreground="{DynamicResource ForegroundBrush}" />
+                        Foreground="{DynamicResource AppForegroundBrush}" />
                 </StackPanel>
                 <userControls:StoreCardButton
                     Style="{DynamicResource PrimaryButton}"

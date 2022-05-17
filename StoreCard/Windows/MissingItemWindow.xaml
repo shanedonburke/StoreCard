@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
         <TextBlock
             Grid.Row="0"
-            Foreground="{DynamicResource ForegroundBrush}"
+            Foreground="{DynamicResource AppForegroundBrush}"
             FontSize="14"
             TextWrapping="Wrap">
             The item you are trying to open does not exist.

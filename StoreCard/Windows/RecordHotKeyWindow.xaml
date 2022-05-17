@@ -27,7 +27,7 @@
         <TextBlock
             Grid.Row="0"
             Text="Record a new keyboard shortcut:"
-            Foreground="{DynamicResource ForegroundBrush}"
+            Foreground="{DynamicResource AppForegroundBrush}"
             FontSize="14" />
         <Grid
             Grid.Row="1">
@@ -37,7 +37,7 @@
                 <TextBlock
                     HorizontalAlignment="Center"
                     FontSize="14"
-                    Foreground="{DynamicResource ForegroundBrush}"
+                    Foreground="{DynamicResource AppForegroundBrush}"
                     FontWeight="Bold"
                     Margin="0,0,0,10"
                     Text="{Binding Path=HotKeyText}" />

@@ -73,7 +73,7 @@
                     FontFamily="Arial"
                     FontSize="24"
                     FontWeight="Bold"
-                    Foreground="{DynamicResource ForegroundBrush}">
+                    Foreground="{DynamicResource AppForegroundBrush}">
                     <Button.Style>
                         <Style
                             TargetType="{x:Type Button}">
@@ -155,7 +155,7 @@
                     </Button.ContextMenu>
                     <fa:IconBlock
                         Icon="Plus"
-                        Foreground="{DynamicResource ForegroundBrush}"
+                        Foreground="{DynamicResource AppForegroundBrush}"
                         FontSize="18" />
                 </Button>
                 <!--  Search box  -->
@@ -180,7 +180,7 @@
                     BorderThickness="0,0,0,0"
                     FontFamily="Arial"
                     FontSize="24"
-                    Foreground="{DynamicResource ForegroundBrush}">
+                    Foreground="{DynamicResource AppForegroundBrush}">
                     <Button.Style>
                         <Style
                             TargetType="{x:Type Button}">
@@ -222,7 +222,7 @@
                     </Button.Style>
                     <fa:IconBlock
                         Icon="Wrench"
-                        Foreground="{DynamicResource ForegroundBrush}"
+                        Foreground="{DynamicResource AppForegroundBrush}"
                         FontSize="18" />
                 </Button>
             </Grid>
@@ -255,7 +255,7 @@
                                         Value="None">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundBrush}" />
+                                            Value="{DynamicResource AppForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -278,7 +278,7 @@
                                         Value="Recent">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundBrush}" />
+                                            Value="{DynamicResource AppForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -301,7 +301,7 @@
                                         Value="App">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundBrush}" />
+                                            Value="{DynamicResource AppForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -324,7 +324,7 @@
                                         Value="Game">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundBrush}" />
+                                            Value="{DynamicResource AppForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -347,7 +347,7 @@
                                         Value="Folder">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundBrush}" />
+                                            Value="{DynamicResource AppForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -370,7 +370,7 @@
                                         Value="File">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundBrush}" />
+                                            Value="{DynamicResource AppForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -392,7 +392,7 @@
                                         Value="Link">
                                         <Setter
                                             Property="Foreground"
-                                            Value="{DynamicResource ForegroundBrush}" />
+                                            Value="{DynamicResource AppForegroundBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
