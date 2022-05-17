@@ -18,11 +18,11 @@
     </Color>
     <Color
         x:Key="PrimaryColor_Hover">
-        #37CC75
+        #2DBDFB
     </Color>
     <Color
         x:Key="PrimaryColor_Pressed">
-        #34BF6E
+        #0AB2FA
     </Color>
     <Color
         x:Key="PrimaryForegroundColor">
