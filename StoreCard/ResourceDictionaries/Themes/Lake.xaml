@@ -4,7 +4,7 @@
     <!--  Global colors  -->
     <Color
         x:Key="AppBackgroundColor">
-        #DDEBED
+        #e1eef0
     </Color>
     <Color
         x:Key="AppForegroundColor">
