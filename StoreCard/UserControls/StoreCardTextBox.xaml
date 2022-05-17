@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:StoreCard"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
     mc:Ignorable="d"
     d:DesignHeight="450"
@@ -21,7 +20,7 @@
             VerticalAlignment="Stretch">
             <TextBlock
                 FontSize="14"
-                Foreground="#AAAAAA"
+                Foreground="{DynamicResource TextBoxPlaceholderColor_Brush}"
                 Padding="2,0,0,0"
                 VerticalAlignment="Center">
                 <TextBlock.Style>
@@ -43,7 +42,7 @@
                                         Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardTextBox}}, Path=InactivePlaceholder}" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="#AAAAAA" />
+                                        Value="{DynamicResource TextBoxPlaceholderColor_Brush}" />
                                 </MultiDataTrigger.Setters>
                             </MultiDataTrigger>
                             <MultiDataTrigger>
@@ -61,7 +60,7 @@
                                         Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardTextBox}}, Path=ActivePlaceholder}" />
                                     <Setter
                                         Property="Foreground"
-                                        Value="#AAAAAA" />
+                                        Value="{DynamicResource TextBoxPlaceholderColor_Brush}" />
                                 </MultiDataTrigger.Setters>
                             </MultiDataTrigger>
                         </Style.Triggers>

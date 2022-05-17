@@ -41,6 +41,8 @@
         x:Key="SecondaryTextColor_Inactive">#888888</Color>
     <Color
         x:Key="SecondaryTextColor_Active">#DDDDDD</Color>
+    <Color
+        x:Key="TextBoxPlaceholderColor">#AAAAAA</Color>
 
     <Color
         x:Key="RadioButtonGradientColor_0">#EEEEEE</Color>
@@ -109,4 +111,7 @@
     <SolidColorBrush
         x:Key="SecondaryTextColor_Active_Brush"
         Color="{DynamicResource SecondaryTextColor_Active}" />
+    <SolidColorBrush
+        x:Key="TextBoxPlaceholderColor_Brush"
+        Color="{DynamicResource TextBoxPlaceholderColor}" />
 </ResourceDictionary>
