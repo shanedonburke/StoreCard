@@ -116,13 +116,9 @@
                                 </Ellipse>
                                 <Ellipse
                                     x:Name="CheckMark"
+                                    Fill="{DynamicResource RadioButtonBulletBrush}"
                                     Margin="4"
-                                    Visibility="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                    <Ellipse.Fill>
-                                        <SolidColorBrush
-                                            Color="#3F3F3F" />
-                                    </Ellipse.Fill>
-                                </Ellipse>
+                                    Visibility="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             </Grid>
                         </BulletDecorator.Bullet>
                         <ContentPresenter

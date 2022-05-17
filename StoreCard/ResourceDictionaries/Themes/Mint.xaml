@@ -2,20 +2,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!--  Colors used for radio buttons  -->
-    <Color
-        x:Key="RadioButtonGradientColor_0">
-        #EEEEEE
-    </Color>
-    <Color
-        x:Key="RadioButtonGradientColor_1">
-        #666666
-    </Color>
-    <Color
-        x:Key="RadioButtonGradientColor_1_Hover">
-        #444444
-    </Color>
-
     <!--  Global colors  -->
     <SolidColorBrush
         x:Key="AppBackgroundBrush"
@@ -120,6 +106,23 @@
     <SolidColorBrush
         x:Key="CheckBoxBorderBrush"
         Color="#777777" />
+
+    <!--  Radio button colors  -->
+    <Color
+        x:Key="RadioButtonGradientColor_0">
+        #EEEEEE
+    </Color>
+    <Color
+        x:Key="RadioButtonGradientColor_1">
+        #666666
+    </Color>
+    <Color
+        x:Key="RadioButtonGradientColor_1_Hover">
+        #444444
+    </Color>
+    <SolidColorBrush
+        x:Key="RadioButtonBulletBrush"
+        Color="#3F3F3F" />
 
     <!--  Separator color  -->
     <SolidColorBrush
