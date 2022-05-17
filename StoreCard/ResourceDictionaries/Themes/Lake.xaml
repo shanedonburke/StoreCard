@@ -42,7 +42,7 @@
     <Color
         x:Key="SecondaryTextColor_Active">#5C6E75</Color>
     <Color
-        x:Key="TextBoxPlaceholderColor">#808080</Color>
+        x:Key="TextBoxPlaceholderColor">#707070</Color>
 
     <Color
         x:Key="RadioButtonGradientColor_0">#BFBFBF</Color>
