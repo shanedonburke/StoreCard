@@ -76,10 +76,10 @@
     <!--  Color for secondary text  -->
     <SolidColorBrush
         x:Key="SecondaryTextBrush_Inactive"
-        Color="#90A1A7" />
+        Color="#8fa698" />
     <SolidColorBrush
         x:Key="SecondaryTextBrush_Active"
-        Color="#5C6E75" />
+        Color="#5d7567" />
 
     <!--  Text box colors  -->
     <SolidColorBrush
@@ -92,7 +92,7 @@
     <!--  Color of list box items on hover  -->
     <SolidColorBrush
         x:Key="ListBoxItemBrush_Hover"
-        Color="#C2E6F0" />
+        Color="#d6f5e2" />
 
     <!--  Colors for icon buttons  -->
     <SolidColorBrush
@@ -105,13 +105,13 @@
     <!--  Check box colors  -->
     <SolidColorBrush
         x:Key="CheckBoxBackgroundBrush"
-        Color="#e5eaeb" />
+        Color="#e4ebe6" />
     <SolidColorBrush
         x:Key="CheckBoxBackgroundBrush_Hover"
-        Color="#d4dcde" />
+        Color="#d4ded8" />
     <SolidColorBrush
         x:Key="CheckBoxBorderBrush"
-        Color="#8fa4a8" />
+        Color="#8fa899" />
 
     <!--  Radio button colors  -->
     <Color
