@@ -17,8 +17,7 @@ internal class UserConfig
 
     public uint VirtualHotKey;
 
-    [JsonConverter(typeof(StringEnumConverter))]
-    private Theme _theme = Theme.Mint;
+    private string _theme = "Mint (Dark)";
 
     public UserConfig()
     {
@@ -33,13 +32,13 @@ internal class UserConfig
         VirtualHotKey = virtualHotKey;
     }
 
-    public Theme Theme
+    public string Theme
     {
         get => _theme;
         set
         {
             _theme = value;
-            ((App) Application.Current).SetTheme(value);
+            ((App)Application.Current).SetTheme(value);
         }
     }
 

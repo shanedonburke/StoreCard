@@ -9,24 +9,24 @@ namespace StoreCard.Utils;
 
 internal class Links
 {
-    private static readonly HttpClient _httpClient = new();
+    private static readonly HttpClient s_httpClient = new();
 
-    private static readonly Regex _urlRegex =
+    private static readonly Regex s_urlRegex =
         new(@"(http(s)?:\/\/)?(www\.)?([-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6})\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)");
 
-    private static readonly Regex _titleRegex = new(@"<title>(.+)</title>");
+    private static readonly Regex s_titleRegex = new(@"<title>(.+)</title>");
 
     public static async Task<string> GetPageTitle(string url)
     {
         var title = string.Empty;
 
         var fullUrl = NormalizeUrl(url);
-        if (!_urlRegex.Match(fullUrl).Success) return title;
+        if (!s_urlRegex.Match(fullUrl).Success) return title;
 
         try
         {
-            var responseBody = await _httpClient.GetStringAsync(fullUrl);
-            var m = _titleRegex.Match(responseBody);
+            var responseBody = await s_httpClient.GetStringAsync(fullUrl);
+            var m = s_titleRegex.Match(responseBody);
             if (m.Success)
             {
                 title = m.Groups[1].Captures[0].ToString();
@@ -44,14 +44,14 @@ internal class Links
     {
         BitmapImage? image = null;
 
-        var m = _urlRegex.Match(url);
+        var m = s_urlRegex.Match(url);
         if (!m.Success) return image;
 
         var domain = m.Groups[4].Captures[0].ToString();
         try
         {
             var bytes =
-                await _httpClient.GetByteArrayAsync(@"https://icons.duckduckgo.com/ip3/" + domain + ".ico");
+                await s_httpClient.GetByteArrayAsync(@"https://icons.duckduckgo.com/ip3/" + domain + ".ico");
             image = Images.BytesToBitmapImage(bytes);
             image.Freeze();
         }

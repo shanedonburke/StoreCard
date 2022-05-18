@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using StoreCard.Commands;
@@ -19,9 +20,18 @@ public partial class App
         });
     }
 
-    public void SetTheme(Theme theme)
+    public void SetTheme(string theme)
     {
-        Resources.MergedDictionaries[0].Source = new Uri($"pack://application:,,,/ResourceDictionaries/Themes/{theme}.xaml");
+        try
+        {
+            Resources.MergedDictionaries[0].Source =
+                new Uri($"pack://application:,,,/ResourceDictionaries/Themes/{theme}.xaml");
+        }
+        catch (IOException)
+        {
+            Resources.MergedDictionaries[0].Source =
+                new Uri($"pack://application:,,,/ResourceDictionaries/Themes/Mint (Dark).xaml");
+        }
     }
 
     private void App_Startup(object sender, StartupEventArgs e)
@@ -30,7 +40,7 @@ public partial class App
 
         new CreateTaskbarIconCommand().Execute();
 
-        SetTheme(AppData.ReadConfigFromFile().Theme);
+        // SetTheme(AppData.ReadConfigFromFile().Theme);
 
         if (!Environment.GetCommandLineArgs().Contains(CommandLineOptions.StartMinimized))
         {

@@ -53,6 +53,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="ResourceDictionaries\Themes\Lake.xaml" />
+    <Page Remove="ResourceDictionaries\Themes\Mint %28Dark%29.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ResourceDictionaries\Themes\Lake.xaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ResourceDictionaries\Themes\Mint (Dark).xaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="C:\Users\Shane\source\repos\shanedonburke\StoreCard\StoreCard\.editorconfig" />
   </ItemGroup>
 

@@ -10,7 +10,7 @@ namespace StoreCard.Models.Items.Saved;
 
 public abstract class SavedFileSystemItem : SavedItem
 {
-    public static string DEFAULT_EXECUTABLE =
+    public static string DefaultExecutable =
         Environment.GetFolderPath(Environment.SpecialFolder.Windows) + @"\explorer.exe";
 
     public string ExecutablePath { get; private set; }
@@ -35,11 +35,11 @@ public abstract class SavedFileSystemItem : SavedItem
     }
 
     public string ExecutableName =>
-        ExecutablePath == DEFAULT_EXECUTABLE ? "Default" : ExecutablePath.Split(@"\").Last();
+        ExecutablePath == DefaultExecutable ? "Default" : ExecutablePath.Split(@"\").Last();
 
     public void SetExecutablePath(string path)
     {
-        ExecutablePath = path.StartsWith("::") ? DEFAULT_EXECUTABLE : path;
+        ExecutablePath = path.StartsWith("::") ? DefaultExecutable : path;
     }
 
     public abstract bool Exists();

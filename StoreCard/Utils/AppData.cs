@@ -23,10 +23,8 @@ internal class AppData
             List<SavedItem>? savedItems = null;
             try
             {
-                savedItems = JsonConvert.DeserializeObject<List<SavedItem>>(json, new JsonSerializerSettings
-                {
-                    TypeNameHandling = TypeNameHandling.All
-                });
+                savedItems = JsonConvert.DeserializeObject<List<SavedItem>>(json,
+                    new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
             }
             catch (JsonSerializationException ex)
             {
@@ -90,10 +88,8 @@ internal class AppData
     {
         Directory.CreateDirectory(Path.GetDirectoryName(filePath) ??
                                   throw new InvalidOperationException($"Could not get directory name for {filePath}"));
-        var json = JsonConvert.SerializeObject(objectToSave, new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.All
-        });
+        var json = JsonConvert.SerializeObject(objectToSave,
+            new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
         File.WriteAllText(filePath, json);
     }
 

@@ -70,7 +70,7 @@ namespace StoreCard.Windows
 
         private void SaveDefaultButton_Click(object sender, RoutedEventArgs e)
         {
-            SetExecPathAndSave(SavedFileSystemItem.DEFAULT_EXECUTABLE);
+            SetExecPathAndSave(SavedFileSystemItem.DefaultExecutable);
 
             Close();
         }
@@ -116,7 +116,7 @@ namespace StoreCard.Windows
             else
             {
                 SetExecPathAndSave(AppSelector.SelectedApp.ExecutablePath
-                                  ?? SavedFileSystemItem.DEFAULT_EXECUTABLE);
+                                  ?? SavedFileSystemItem.DefaultExecutable);
             }
 
             Close();

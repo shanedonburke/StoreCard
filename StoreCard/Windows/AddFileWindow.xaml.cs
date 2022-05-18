@@ -106,7 +106,7 @@ public partial class AddFileWindow : INotifyPropertyChanged
         var base64Icon = FileIcon != null ? Images.ImageToBase64((BitmapSource) FileIcon) : null;
         var savedItems = AppData.ReadItemsFromFile();
         savedItems.Add(new SavedFile(Guid.NewGuid().ToString(), FileName, base64Icon, FilePathBox.Text,
-            SavedFileSystemItem.DEFAULT_EXECUTABLE, Time.UnixTimeMillis));
+            SavedFileSystemItem.DefaultExecutable, Time.UnixTimeMillis));
         AppData.SaveItemsToFile(savedItems);
         Close();
     }
@@ -116,7 +116,7 @@ public partial class AddFileWindow : INotifyPropertyChanged
         var base64Icon = FolderIcon != null ? Images.ImageToBase64((BitmapSource) FolderIcon) : null;
         var savedItems = AppData.ReadItemsFromFile();
         savedItems.Add(new SavedFolder(Guid.NewGuid().ToString(), FolderName, base64Icon, FolderPathBox.Text,
-            SavedFileSystemItem.DEFAULT_EXECUTABLE, Time.UnixTimeMillis));
+            SavedFileSystemItem.DefaultExecutable, Time.UnixTimeMillis));
         AppData.SaveItemsToFile(savedItems);
         Close();
     }

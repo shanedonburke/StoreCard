@@ -8,7 +8,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary
-                    Source="ResourceDictionaries/Themes/Mint.xaml" />
+                    Source="ResourceDictionaries/Themes/Mint (Dark).xaml" />
                 <ResourceDictionary
                     Source="ResourceDictionaries/Fonts.xaml" />
                 <ResourceDictionary

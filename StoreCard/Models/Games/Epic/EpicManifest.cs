@@ -3,7 +3,7 @@
 public class EpicManifest
 {
     public int FormatVersion;
-    public bool bIsIncompleteInstall;
+    public bool BIsIncompleteInstall;
     public string LaunchExecutable;
     public string DisplayName;
     public string InstallLocation;
@@ -13,7 +13,7 @@ public class EpicManifest
         string installLocation, string appName)
     {
         FormatVersion = formatVersion;
-        this.bIsIncompleteInstall = bIsIncompleteInstall;
+        this.BIsIncompleteInstall = bIsIncompleteInstall;
         LaunchExecutable = launchExecutable;
         DisplayName = displayName;
         InstallLocation = installLocation;

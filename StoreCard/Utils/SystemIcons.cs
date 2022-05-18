@@ -27,7 +27,7 @@ internal class SystemIcons
 
     public static ImageSource GetFolderIconByPath(string path)
     {
-        var shinfo = new Shell32.SHFILEINFO();
+        var shinfo = new Shell32.Shfileinfo();
 
         // Call function with the path to the folder you want the icon for
         Shell32.SHGetFileInfo(
@@ -35,7 +35,7 @@ internal class SystemIcons
             0,
             ref shinfo,
             (uint) Marshal.SizeOf(shinfo),
-            Shell32.SHGFI_ICON | Shell32.SHGFI_LARGEICON);
+            Shell32.ShgfiIcon | Shell32.ShgfiLargeicon);
 
         using var i = Icon.FromHandle(shinfo.hIcon);
 
