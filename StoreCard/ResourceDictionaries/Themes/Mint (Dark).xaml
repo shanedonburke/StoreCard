@@ -5,7 +5,7 @@
     <!--  Global colors  -->
     <SolidColorBrush
         x:Key="AppBackgroundBrush"
-        Color="#222222" />
+        Color="#222422" />
     <SolidColorBrush
         x:Key="AppForegroundBrush"
         Color="White" />

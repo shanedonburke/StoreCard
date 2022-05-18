@@ -27,13 +27,13 @@
     <!--  Light/secondary color  -->
     <SolidColorBrush
         x:Key="LightBrush"
-        Color="#c9d6ce" />
+        Color="#dce4df" />
     <SolidColorBrush
         x:Key="LightBrush_Hover"
-        Color="#b3c7bb" />
+        Color="#c5d3ca" />
     <SolidColorBrush
         x:Key="LightBrush_Pressed"
-        Color="#bcccc2" />
+        Color="#d1dcd5" />
     <SolidColorBrush
         x:Key="LightForegroundBrush"
         Color="Black" />

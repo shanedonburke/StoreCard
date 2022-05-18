@@ -5,7 +5,7 @@
     <!--  Global colors  -->
     <SolidColorBrush
         x:Key="AppBackgroundBrush"
-        Color="#222222" />
+        Color="#222224" />
     <SolidColorBrush
         x:Key="AppForegroundBrush"
         Color="White" />
@@ -13,13 +13,13 @@
     <!--  Primary color  -->
     <SolidColorBrush
         x:Key="PrimaryBrush"
-        Color="#2da65f" />
+        Color="#049bdb" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Hover"
-        Color="#37cc75" />
+        Color="#2dbdfb" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Pressed"
-        Color="#34bf6e" />
+        Color="#0ab2fa" />
     <SolidColorBrush
         x:Key="PrimaryForegroundBrush"
         Color="White" />
@@ -41,13 +41,13 @@
     <!--  Red color  -->
     <SolidColorBrush
         x:Key="RedBrush"
-        Color="#e73f3f" />
+        Color="#fa0a26" />
     <SolidColorBrush
         x:Key="RedBrush_Hover"
-        Color="#ea5757" />
+        Color="#fb3c52" />
     <SolidColorBrush
         x:Key="RedBrush_Pressed"
-        Color="#E94949" />
+        Color="#fb233c" />
     <SolidColorBrush
         x:Key="RedForegroundBrush"
         Color="White" />
@@ -55,10 +55,10 @@
     <!--  Colors for selected list/menu items  -->
     <SolidColorBrush
         x:Key="SelectedBackgroundBrush"
-        Color="#345642" />
+        Color="#344c57" />
     <SolidColorBrush
         x:Key="SelectedBorderBrush"
-        Color="#3bd97d" />
+        Color="#3baad9" />
 
     <!--  Colors for disabled controls  -->
     <SolidColorBrush
