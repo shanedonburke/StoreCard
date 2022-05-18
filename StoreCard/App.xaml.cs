@@ -22,15 +22,14 @@ public partial class App
 
     public void SetTheme(string theme)
     {
-        try
+        if (SetThemeInternal(theme))
         {
-            Resources.MergedDictionaries[0].Source =
-                new Uri($"pack://application:,,,/ResourceDictionaries/Themes/{theme}.xaml");
+            return;
         }
-        catch (IOException)
+
+        if (!SetThemeInternal("Mint (Dark)"))
         {
-            Resources.MergedDictionaries[0].Source =
-                new Uri($"pack://application:,,,/ResourceDictionaries/Themes/Mint (Dark).xaml");
+            SetThemeInternal(ThemeFinder.FindThemes()[0]);
         }
     }
 
@@ -40,11 +39,25 @@ public partial class App
 
         new CreateTaskbarIconCommand().Execute();
 
-        // SetTheme(AppData.ReadConfigFromFile().Theme);
+        SetTheme(AppData.ReadConfigFromFile().Theme);
 
         if (!Environment.GetCommandLineArgs().Contains(CommandLineOptions.StartMinimized))
         {
             new ShowMainWindowCommand().Execute();
+        }
+    }
+
+    private bool SetThemeInternal(string theme)
+    {
+        try
+        {
+            Resources.MergedDictionaries[0].Source =
+                new Uri($"pack://application:,,,/ResourceDictionaries/Themes/{theme}.xaml");
+            return true;
+        }
+        catch (IOException)
+        {
+            return false;
         }
     }
 }

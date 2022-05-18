@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using StoreCard.Commands;
@@ -20,9 +16,6 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class SettingsWindow : INotifyPropertyChanged
 {
-    private static readonly Regex s_themePathRegex =
-        new(@"^[a-zA-Z]:\\(((?![<>:""/\\|?*]).)+((?<![ .])\\)?)*\\(?<themeName>.+)\.xaml$");
-
     private UserConfig _config;
 
     public SettingsWindow()
@@ -36,24 +29,7 @@ public partial class SettingsWindow : INotifyPropertyChanged
         ThemeComboBox.SelectedItem = _config.Theme;
     }
 
-    public static IEnumerable<string> Themes
-    {
-        get
-        {
-            string[] files = Directory.GetFiles(Path.Combine(
-                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!,
-                @"ResourceDictionaries\Themes"));
-
-            var themeNames =
-                (from file in files
-                    select s_themePathRegex.Match(file)
-                    into match
-                    where match.Success
-                    select match.Groups["themeName"].Value).ToList();
-
-            return themeNames;
-        }
-    }
+    public static IEnumerable<string> Themes => ThemeFinder.FindThemes();
 
     public string HotKeyText => HotKeys.KeyStringFromConfig(_config);
 
