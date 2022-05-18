@@ -53,6 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="ResourceDictionaries\Themes\Lake (Dark).xaml" />
     <Page Remove="ResourceDictionaries\Themes\Lake (Light).xaml" />
     <Page Remove="ResourceDictionaries\Themes\Mint %28Dark%29.xaml" />
     <Page Remove="ResourceDictionaries\Themes\Mint (Light).xaml" />
@@ -63,6 +64,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ResourceDictionaries\Themes\Mint %28Light%29.xaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Content>
+    <Content Include="ResourceDictionaries\Themes\Lake %28Dark%29.xaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

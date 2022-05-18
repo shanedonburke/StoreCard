@@ -13,13 +13,13 @@
     <!--  Primary color  -->
     <SolidColorBrush
         x:Key="PrimaryBrush"
-        Color="#2DA65F" />
+        Color="#2da65f" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Hover"
-        Color="#37CC75" />
+        Color="#37cc75" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Pressed"
-        Color="#34BF6E" />
+        Color="#34bf6e" />
     <SolidColorBrush
         x:Key="PrimaryForegroundBrush"
         Color="White" />
@@ -41,13 +41,13 @@
     <!--  Red color  -->
     <SolidColorBrush
         x:Key="RedBrush"
-        Color="#E73F3F" />
+        Color="#e73f3f" />
     <SolidColorBrush
         x:Key="RedBrush_Hover"
-        Color="#EA5757" />
+        Color="#ea5757" />
     <SolidColorBrush
         x:Key="RedBrush_Pressed"
-        Color="#E94949" />
+        Color="#e94949" />
     <SolidColorBrush
         x:Key="RedForegroundBrush"
         Color="White" />
@@ -116,22 +116,22 @@
     <!--  Radio button colors  -->
     <Color
         x:Key="RadioButtonGradientColor_0">
-        #BFBFBF
+        #bfbfbf
     </Color>
     <Color
         x:Key="RadioButtonGradientColor_1">
-        #8F8F8F
+        #8f8f8f
     </Color>
     <Color
         x:Key="RadioButtonGradientColor_1_Hover">
-        #6F6F6F
+        #6f6f6f
     </Color>
     <SolidColorBrush
         x:Key="RadioButtonBulletBrush"
-        Color="#3F3F3F" />
+        Color="#3f3f3f" />
 
     <!--  Separator color  -->
     <SolidColorBrush
         x:Key="SeparatorBrush"
-        Color="#BBBBBB" />
+        Color="#bbbbbb" />
 </ResourceDictionary>

@@ -13,13 +13,13 @@
     <!--  Primary color  -->
     <SolidColorBrush
         x:Key="PrimaryBrush"
-        Color="#049BDB" />
+        Color="#049bdb" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Hover"
-        Color="#2DBDFB" />
+        Color="#2dbdfb" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Pressed"
-        Color="#0AB2FA" />
+        Color="#0ab2fa" />
     <SolidColorBrush
         x:Key="PrimaryForegroundBrush"
         Color="White" />
@@ -76,10 +76,10 @@
     <!--  Color for secondary text  -->
     <SolidColorBrush
         x:Key="SecondaryTextBrush_Inactive"
-        Color="#90A1A7" />
+        Color="#90a1a7" />
     <SolidColorBrush
         x:Key="SecondaryTextBrush_Active"
-        Color="#5C6E75" />
+        Color="#5c6e75" />
 
     <!--  Text box colors  -->
     <SolidColorBrush
@@ -92,7 +92,7 @@
     <!--  Color of list box items on hover  -->
     <SolidColorBrush
         x:Key="ListBoxItemBrush_Hover"
-        Color="#C2E6F0" />
+        Color="#c2e6f0" />
 
     <!--  Colors for icon buttons  -->
     <SolidColorBrush
@@ -116,22 +116,22 @@
     <!--  Radio button colors  -->
     <Color
         x:Key="RadioButtonGradientColor_0">
-        #BFBFBF
+        #bfbfbf
     </Color>
     <Color
         x:Key="RadioButtonGradientColor_1">
-        #8F8F8F
+        #8f8f8f
     </Color>
     <Color
         x:Key="RadioButtonGradientColor_1_Hover">
-        #6F6F6F
+        #6f6f6f
     </Color>
     <SolidColorBrush
         x:Key="RadioButtonBulletBrush"
-        Color="#3F3F3F" />
+        Color="#3f3f3f" />
 
     <!--  Separator color  -->
     <SolidColorBrush
         x:Key="SeparatorBrush"
-        Color="#BBBBBB" />
+        Color="#bbbbbb" />
 </ResourceDictionary>
