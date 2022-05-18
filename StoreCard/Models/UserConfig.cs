@@ -17,7 +17,7 @@ internal class UserConfig
 
     public uint VirtualHotKey;
 
-    private string _theme = "Mint (Dark)";
+    private string _theme = "Lake (Dark)";
 
     public UserConfig()
     {

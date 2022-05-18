@@ -27,7 +27,7 @@ public partial class App
             return;
         }
 
-        if (!SetThemeInternal("Mint (Dark)"))
+        if (!SetThemeInternal("Lake (Dark)"))
         {
             SetThemeInternal(ThemeFinder.FindThemes()[0]);
         }
