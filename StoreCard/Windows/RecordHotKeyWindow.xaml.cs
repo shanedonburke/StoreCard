@@ -57,26 +57,26 @@ namespace StoreCard.Windows
             if ((Keyboard.Modifiers & ModifierKeys.Control) != 0)
             {
                 text.Append("Ctrl+");
-                _modifiers |= (uint) ModifierKeys.Control;
+                _modifiers |= (uint)ModifierKeys.Control;
             }
 
             if ((Keyboard.Modifiers & ModifierKeys.Alt) != 0)
             {
                 text.Append("Alt+");
-                _modifiers |= (uint) ModifierKeys.Alt;
+                _modifiers |= (uint)ModifierKeys.Alt;
             }
 
             if ((Keyboard.Modifiers & ModifierKeys.Windows) != 0 || Keyboard.IsKeyDown(Key.LWin) ||
                 Keyboard.IsKeyDown(Key.RWin))
             {
                 text.Append("Win+");
-                _modifiers |= (uint) ModifierKeys.Windows;
+                _modifiers |= (uint)ModifierKeys.Windows;
             }
 
             if ((Keyboard.Modifiers & ModifierKeys.Shift) != 0)
             {
                 text.Append("Shift+");
-                _modifiers |= (uint) ModifierKeys.Shift;
+                _modifiers |= (uint)ModifierKeys.Shift;
             }
 
             // Ignore tab press with no modifiers (to navigate UI)

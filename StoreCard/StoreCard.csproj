@@ -48,4 +48,12 @@
     <Folder Include="Fonts\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Shane\source\repos\shanedonburke\StoreCard\StoreCard\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Shane\source\repos\shanedonburke\StoreCard\StoreCard\.editorconfig" />
+  </ItemGroup>
+
 </Project>
