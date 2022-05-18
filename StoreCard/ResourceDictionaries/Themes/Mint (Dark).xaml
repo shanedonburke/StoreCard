@@ -48,7 +48,9 @@
     <SolidColorBrush
         x:Key="RedBrush_Pressed"
         Color="#E94949" />
-
+    <SolidColorBrush
+        x:Key="RedForegroundBrush"
+        Color="White" />
 
     <!--  Colors for selected list/menu items  -->
     <SolidColorBrush
