@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -93,10 +94,6 @@ namespace StoreCard.UserControls
                 _items.Add(item);
                 _items.Sort();
 
-                for (var i = 0; i < _items.Count; i++) {
-                    _filteredItems.Move(_filteredItems.IndexOf(_items[i]), i);
-                }
-
                 if (_items.Any())
                 {
                     SelectedIndex = 0;
@@ -126,7 +123,7 @@ namespace StoreCard.UserControls
             Application.Current.Dispatcher.Invoke(() =>
             {
                 _filteredItems.Clear();
-                foreach (var item in items)
+                foreach (IListBoxItem item in items)
                 {
                     _filteredItems.Add(item);
                 }

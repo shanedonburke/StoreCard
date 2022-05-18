@@ -14,5 +14,8 @@
         <Setter
             Property="PressedBackgroundBrush"
             Value="{DynamicResource RedBrush_Pressed}" />
+        <Setter
+            Property="Foreground"
+            Value="{DynamicResource RedForegroundBrush}" />
     </Style>
 </ResourceDictionary>

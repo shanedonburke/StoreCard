@@ -41,13 +41,16 @@
     <!--  Red color  -->
     <SolidColorBrush
         x:Key="RedBrush"
-        Color="#E73F3F" />
+        Color="#fa0a26" />
     <SolidColorBrush
         x:Key="RedBrush_Hover"
-        Color="#EA5757" />
+        Color="#fb3c52" />
     <SolidColorBrush
         x:Key="RedBrush_Pressed"
-        Color="#E94949" />
+        Color="#fb233c" />
+    <SolidColorBrush
+        x:Key="RedForegroundBrush"
+        Color="White" />
 
     <!--  Colors for selected list/menu items  -->
     <SolidColorBrush
