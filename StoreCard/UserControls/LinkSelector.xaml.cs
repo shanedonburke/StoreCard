@@ -7,8 +7,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using StoreCard.Annotations;
 using StoreCard.Models.Items.Saved;
+using StoreCard.Properties;
 using StoreCard.Static;
 using StoreCard.Utils;
 

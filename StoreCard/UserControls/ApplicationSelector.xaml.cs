@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using StoreCard.Annotations;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Properties;
 using StoreCard.Utils;
 
 namespace StoreCard.UserControls;

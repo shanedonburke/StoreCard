@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using StoreCard.Annotations;
 using StoreCard.Commands;
 using StoreCard.Models.Items.Saved;
+using StoreCard.Properties;
 using StoreCard.Utils;
 
 namespace StoreCard.Windows

@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Icons\StoreCard.ico</ApplicationIcon>
+    <SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -50,6 +51,11 @@
 
   <ItemGroup>
     <EditorConfigFiles Remove="C:\Users\Shane\source\repos\shanedonburke\StoreCard\StoreCard\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Effects\bin\ColorChange.ps" />
+    <None Remove="Effects\ColorChange.fx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -125,5 +131,25 @@
   <ItemGroup>
     <None Include="C:\Users\Shane\source\repos\shanedonburke\StoreCard\StoreCard\.editorconfig" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Effects\bin\ColorChange.ps">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Effects\ColorChange.fx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="call $(ProjectDir)Effects\CompileShaders.bat" />
+  </Target>
 
 </Project>
