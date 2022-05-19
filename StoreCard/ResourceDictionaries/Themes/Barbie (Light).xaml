@@ -76,10 +76,10 @@
     <!--  Color for secondary text  -->
     <SolidColorBrush
         x:Key="SecondaryTextBrush_Inactive"
-        Color="#a68f99" />
+        Color="#8f7581" />
     <SolidColorBrush
         x:Key="SecondaryTextBrush_Active"
-        Color="#755d68" />
+        Color="#8a0f48" />
 
     <!--  Text box colors  -->
     <SolidColorBrush

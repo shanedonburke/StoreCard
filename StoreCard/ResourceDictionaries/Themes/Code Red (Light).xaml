@@ -79,7 +79,7 @@
         Color="#8f7675" />
     <SolidColorBrush
         x:Key="SecondaryTextBrush_Active"
-        Color="#593736" />
+        Color="#8a130f" />
 
     <!--  Text box colors  -->
     <SolidColorBrush
