@@ -5,7 +5,7 @@
     <!--  Global colors  -->
     <SolidColorBrush
         x:Key="AppBackgroundBrush"
-        Color="#f0e6eb" />
+        Color="#f0e9ec" />
     <SolidColorBrush
         x:Key="AppForegroundBrush"
         Color="Black" />
@@ -30,7 +30,7 @@
         Color="#d8cbd1" />
     <SolidColorBrush
         x:Key="LightBrush_Hover"
-        Color="#cfbfc5" />
+        Color="#cdbcc2" />
     <SolidColorBrush
         x:Key="LightBrush_Pressed"
         Color="#d3c5cb" />

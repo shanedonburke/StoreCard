@@ -16,7 +16,7 @@
         Color="#c9241c" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Hover"
-        Color="#37cc75" />
+        Color="#cc3e37" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Pressed"
         Color="#34bf6e" />
