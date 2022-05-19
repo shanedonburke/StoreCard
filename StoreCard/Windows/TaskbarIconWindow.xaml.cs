@@ -13,11 +13,8 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class TaskbarIconWindow : INotifyPropertyChanged
 {
-    private static void OnHotKeyPressed() {
-        // Don't open if windows other than this one and the main window are open
-        if (Application.Current.Windows.Count > 2) {
-            return;
-        }
+    private static void OnHotKeyPressed()
+    {
         new ShowMainWindowCommand().Execute();
     }
 
