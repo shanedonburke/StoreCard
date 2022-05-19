@@ -10,7 +10,7 @@
     xmlns:saved="clr-namespace:StoreCard.Models.Items.Saved"
     Title="StoreCard"
     Width="540"
-    Height="640"
+    Height="655"
     AllowsTransparency="True"
     Background="Transparent"
     Activated="MainWindow_Activated"

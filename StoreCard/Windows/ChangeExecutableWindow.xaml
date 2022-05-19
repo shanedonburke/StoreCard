@@ -8,7 +8,7 @@
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
     mc:Ignorable="d"
     Width="800"
-    Height="600"
+    Height="605"
     Background="{DynamicResource AppBackgroundBrush}"
     WindowStartupLocation="CenterScreen"
     Title="Open With"

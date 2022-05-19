@@ -8,7 +8,7 @@
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
     Title="Add Application"
     Width="800"
-    Height="600"
+    Height="605"
     Background="{DynamicResource AppBackgroundBrush}"
     Closed="Window_Closed"
     Loaded="Window_Loaded"
