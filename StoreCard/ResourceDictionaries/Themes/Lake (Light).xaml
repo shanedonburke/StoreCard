@@ -84,7 +84,7 @@
     <!--  Text box colors  -->
     <SolidColorBrush
         x:Key="TextBoxPlaceholderBrush"
-        Color="#909090" />
+        Color="#72868f" />
     <SolidColorBrush
         x:Key="TextBoxSelectionBrush"
         Color="#65000000" />
@@ -124,14 +124,14 @@
     </Color>
     <Color
         x:Key="RadioButtonGradientColor_1_Hover">
-        #6f6f6f
+        #656d70
     </Color>
     <SolidColorBrush
         x:Key="RadioButtonBulletBrush"
-        Color="#65706a" />
+        Color="#35393b" />
 
     <!--  Separator color  -->
     <SolidColorBrush
         x:Key="SeparatorBrush"
-        Color="#bbbbbb" />
+        Color="#a8b5ba" />
 </ResourceDictionary>

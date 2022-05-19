@@ -5,7 +5,7 @@
     <!--  Global colors  -->
     <SolidColorBrush
         x:Key="AppBackgroundBrush"
-        Color="#f0e1e8" />
+        Color="#eae1f0" />
     <SolidColorBrush
         x:Key="AppForegroundBrush"
         Color="Black" />
@@ -13,13 +13,13 @@
     <!--  Primary color  -->
     <SolidColorBrush
         x:Key="PrimaryBrush"
-        Color="#c91c6d" />
+        Color="#8a1cc9" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Hover"
-        Color="#e23687" />
+        Color="#a435e3" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Pressed"
-        Color="#df2079" />
+        Color="#991fe0" />
     <SolidColorBrush
         x:Key="PrimaryForegroundBrush"
         Color="White" />
@@ -27,13 +27,13 @@
     <!--  Light/secondary color  -->
     <SolidColorBrush
         x:Key="LightBrush"
-        Color="#d6c9cf" />
+        Color="#d1c9d6" />
     <SolidColorBrush
         x:Key="LightBrush_Hover"
-        Color="#c7b3bc" />
+        Color="#c0b3c7" />
     <SolidColorBrush
         x:Key="LightBrush_Pressed"
-        Color="#ccbcc3" />
+        Color="#c6bccc" />
     <SolidColorBrush
         x:Key="LightForegroundBrush"
         Color="Black" />
@@ -41,13 +41,13 @@
     <!--  Red color  -->
     <SolidColorBrush
         x:Key="RedBrush"
-        Color="#db304d" />
+        Color="#c91c2d" />
     <SolidColorBrush
         x:Key="RedBrush_Hover"
-        Color="#e15169" />
+        Color="#e33546" />
     <SolidColorBrush
         x:Key="RedBrush_Pressed"
-        Color="#de3f5a" />
+        Color="#e01f32" />
     <SolidColorBrush
         x:Key="RedForegroundBrush"
         Color="White" />
@@ -55,36 +55,36 @@
     <!--  Colors for selected list/menu items  -->
     <SolidColorBrush
         x:Key="SelectedBackgroundBrush"
-        Color="#f2cadd" />
+        Color="#d9b5ed" />
     <SolidColorBrush
         x:Key="SelectedBorderBrush"
-        Color="#cf367d" />
+        Color="#9736cf" />
 
     <!--  Colors for disabled controls  -->
     <SolidColorBrush
         x:Key="DisabledBackgroundBrush"
-        Color="#917180" />
+        Color="#867191" />
     <SolidColorBrush
         x:Key="DisabledTextBrush"
-        Color="#dbced4" />
+        Color="#d6cedb" />
 
     <!--  Color for inactive text elements  -->
     <SolidColorBrush
         x:Key="InactiveTextBrush"
-        Color="#999999" />
+        Color="#8e7a99" />
 
     <!--  Color for secondary text  -->
     <SolidColorBrush
         x:Key="SecondaryTextBrush_Inactive"
-        Color="#a68f99" />
+        Color="#9d8fa6" />
     <SolidColorBrush
         x:Key="SecondaryTextBrush_Active"
-        Color="#755d68" />
+        Color="#6c5d75" />
 
     <!--  Text box colors  -->
     <SolidColorBrush
         x:Key="TextBoxPlaceholderBrush"
-        Color="#909090" />
+        Color="#84728f" />
     <SolidColorBrush
         x:Key="TextBoxSelectionBrush"
         Color="#65000000" />
@@ -92,7 +92,7 @@
     <!--  Color of list box items on hover  -->
     <SolidColorBrush
         x:Key="ListBoxItemBrush_Hover"
-        Color="#f2cada" />
+        Color="#e4caf2" />
 
     <!--  Colors for icon buttons  -->
     <SolidColorBrush
@@ -105,33 +105,33 @@
     <!--  Check box colors  -->
     <SolidColorBrush
         x:Key="CheckBoxBackgroundBrush"
-        Color="#ebe4e7" />
+        Color="#e8e4eb" />
     <SolidColorBrush
         x:Key="CheckBoxBackgroundBrush_Hover"
-        Color="#ded3d8" />
+        Color="#dad3de" />
     <SolidColorBrush
         x:Key="CheckBoxBorderBrush"
-        Color="#a88f9b" />
+        Color="#9f8fa8" />
 
     <!--  Radio button colors  -->
     <Color
         x:Key="RadioButtonGradientColor_0">
-        #ccb8c1
+        #b8acbf
     </Color>
     <Color
         x:Key="RadioButtonGradientColor_1">
-        #8f8187
+        #8a818f
     </Color>
     <Color
         x:Key="RadioButtonGradientColor_1_Hover">
-        #70656a
+        #6c6570
     </Color>
     <SolidColorBrush
         x:Key="RadioButtonBulletBrush"
-        Color="#403339" />
+        Color="#3a353b" />
 
     <!--  Separator color  -->
     <SolidColorBrush
         x:Key="SeparatorBrush"
-        Color="#baa8b0" />
+        Color="#baa8ba" />
 </ResourceDictionary>
