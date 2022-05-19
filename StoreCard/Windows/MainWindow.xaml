@@ -9,8 +9,8 @@
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
     xmlns:saved="clr-namespace:StoreCard.Models.Items.Saved"
     Title="StoreCard"
-    Width="500"
-    Height="600"
+    Width="540"
+    Height="640"
     AllowsTransparency="True"
     Background="Transparent"
     Activated="MainWindow_Activated"
@@ -27,9 +27,17 @@
     d:DataContext="{d:DesignInstance Type=windows:MainWindow, IsDesignTimeCreatable=False}">
     <!--  Main content  -->
     <Border
+        Margin="20"
         Padding="10"
         Background="{DynamicResource AppBackgroundBrush}"
         CornerRadius="5">
+        <Border.Effect>
+            <DropShadowEffect
+                Direction="-75"
+                ShadowDepth="2"
+                Opacity="0.8"
+                BlurRadius="25" />
+        </Border.Effect>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition
