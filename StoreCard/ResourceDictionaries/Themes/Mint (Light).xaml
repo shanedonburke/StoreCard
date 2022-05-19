@@ -116,19 +116,19 @@
     <!--  Radio button colors  -->
     <Color
         x:Key="RadioButtonGradientColor_0">
-        #bfbfbf
+        #acbfb4
     </Color>
     <Color
         x:Key="RadioButtonGradientColor_1">
-        #8f8f8f
+        #818f86
     </Color>
     <Color
         x:Key="RadioButtonGradientColor_1_Hover">
-        #6f6f6f
+        #65706a
     </Color>
     <SolidColorBrush
         x:Key="RadioButtonBulletBrush"
-        Color="#3f3f3f" />
+        Color="#39403c" />
 
     <!--  Separator color  -->
     <SolidColorBrush
