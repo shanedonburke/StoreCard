@@ -55,6 +55,7 @@
   <ItemGroup>
     <Page Remove="ResourceDictionaries\Themes\Barbie (Dark).xaml" />
     <Page Remove="ResourceDictionaries\Themes\Barbie (Light).xaml" />
+    <Page Remove="ResourceDictionaries\Themes\Deep Purple (Dark).xaml" />
     <Page Remove="ResourceDictionaries\Themes\Lake (Dark).xaml" />
     <Page Remove="ResourceDictionaries\Themes\Lake (Light).xaml" />
     <Page Remove="ResourceDictionaries\Themes\Mint %28Dark%29.xaml" />
@@ -64,6 +65,7 @@
   <ItemGroup>
     <Content Include="ResourceDictionaries\Themes\Lake %28Light%29.xaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>MSBuild:Compile</Generator>
     </Content>
     <Content Include="ResourceDictionaries\Themes\Barbie %28Light%29.xaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -87,6 +89,12 @@
     </Content>
     <Content Include="ResourceDictionaries\Themes\Mint %28Dark%29.xaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>MSBuild:Compile</Generator>
+    </Content>
+    <Content Include="ResourceDictionaries\Themes\Deep Purple %28Dark%29.xaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Content>
   </ItemGroup>
 
