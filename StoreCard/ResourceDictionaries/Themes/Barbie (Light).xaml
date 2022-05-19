@@ -5,7 +5,7 @@
     <!--  Global colors  -->
     <SolidColorBrush
         x:Key="AppBackgroundBrush"
-        Color="#f0e1e8" />
+        Color="#f0e6eb" />
     <SolidColorBrush
         x:Key="AppForegroundBrush"
         Color="Black" />
@@ -27,13 +27,13 @@
     <!--  Light/secondary color  -->
     <SolidColorBrush
         x:Key="LightBrush"
-        Color="#d6c9cf" />
+        Color="#d8cbd1" />
     <SolidColorBrush
         x:Key="LightBrush_Hover"
-        Color="#c7b3bc" />
+        Color="#cfbfc5" />
     <SolidColorBrush
         x:Key="LightBrush_Pressed"
-        Color="#ccbcc3" />
+        Color="#d3c5cb" />
     <SolidColorBrush
         x:Key="LightForegroundBrush"
         Color="Black" />
@@ -84,7 +84,7 @@
     <!--  Text box colors  -->
     <SolidColorBrush
         x:Key="TextBoxPlaceholderBrush"
-        Color="#909090" />
+        Color="#8f727d" />
     <SolidColorBrush
         x:Key="TextBoxSelectionBrush"
         Color="#65000000" />
@@ -97,10 +97,10 @@
     <!--  Colors for icon buttons  -->
     <SolidColorBrush
         x:Key="IconButtonBackgroundBrush_Hover"
-        Color="#33000000" />
+        Color="#22000000" />
     <SolidColorBrush
         x:Key="IconButtonBackgroundBrush_Pressed"
-        Color="#22000000" />
+        Color="#11000000" />
 
     <!--  Check box colors  -->
     <SolidColorBrush
