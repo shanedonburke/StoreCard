@@ -1,0 +1,137 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  Global colors  -->
+    <SolidColorBrush
+        x:Key="AppBackgroundBrush"
+        Color="#25162e" />
+    <SolidColorBrush
+        x:Key="AppForegroundBrush"
+        Color="White" />
+
+    <!--  Primary color  -->
+    <SolidColorBrush
+        x:Key="PrimaryBrush"
+        Color="#8a1cc9" />
+    <SolidColorBrush
+        x:Key="PrimaryBrush_Hover"
+        Color="#a435e3" />
+    <SolidColorBrush
+        x:Key="PrimaryBrush_Pressed"
+        Color="#991fe0" />
+    <SolidColorBrush
+        x:Key="PrimaryForegroundBrush"
+        Color="White" />
+
+    <!--  Light/secondary color  -->
+    <SolidColorBrush
+        x:Key="LightBrush"
+        Color="#403745" />
+    <SolidColorBrush
+        x:Key="LightBrush_Hover"
+        Color="#5f5266" />
+    <SolidColorBrush
+        x:Key="LightBrush_Pressed"
+        Color="#4e4354" />
+    <SolidColorBrush
+        x:Key="LightForegroundBrush"
+        Color="White" />
+
+    <!--  Red color  -->
+    <SolidColorBrush
+        x:Key="RedBrush"
+        Color="#c91c2d" />
+    <SolidColorBrush
+        x:Key="RedBrush_Hover"
+        Color="#e33546" />
+    <SolidColorBrush
+        x:Key="RedBrush_Pressed"
+        Color="#e01f32" />
+    <SolidColorBrush
+        x:Key="RedForegroundBrush"
+        Color="White" />
+
+    <!--  Colors for selected list/menu items  -->
+    <SolidColorBrush
+        x:Key="SelectedBackgroundBrush"
+        Color="#4a3457" />
+    <SolidColorBrush
+        x:Key="SelectedBorderBrush"
+        Color="#9f3bd9" />
+
+    <!--  Colors for disabled controls  -->
+    <SolidColorBrush
+        x:Key="DisabledBackgroundBrush"
+        Color="#322b36" />
+    <SolidColorBrush
+        x:Key="DisabledTextBrush"
+        Color="#685a70" />
+
+    <!--  Color for inactive text elements  -->
+    <SolidColorBrush
+        x:Key="InactiveTextBrush"
+        Color="#6f6078" />
+
+    <!--  Color for secondary text  -->
+    <SolidColorBrush
+        x:Key="SecondaryTextBrush_Inactive"
+        Color="#7d6c87" />
+    <SolidColorBrush
+        x:Key="SecondaryTextBrush_Active"
+        Color="#ceb1de" />
+
+    <!--  Text box colors  -->
+    <SolidColorBrush
+        x:Key="TextBoxPlaceholderBrush"
+        Color="#9e89ab" />
+    <SolidColorBrush
+        x:Key="TextBoxSelectionBrush"
+        Color="#65ffffff" />
+
+    <!--  Color of list box items on hover  -->
+    <SolidColorBrush
+        x:Key="ListBoxItemBrush_Hover"
+        Color="#443b4a" />
+
+    <!--  Colors for icon buttons  -->
+    <SolidColorBrush
+        x:Key="IconButtonBackgroundBrush_Hover"
+        Color="#403745" />
+    <SolidColorBrush
+        x:Key="IconButtonBackgroundBrush_Pressed"
+        Color="#2f2933" />
+
+    <!--  Check box colors  -->
+    <SolidColorBrush
+        x:Key="CheckBoxBackgroundBrush"
+        Color="#2f2933" />
+    <SolidColorBrush
+        x:Key="CheckBoxBackgroundBrush_Hover"
+        Color="#403745" />
+    <SolidColorBrush
+        x:Key="CheckBoxBorderBrush"
+        Color="#6f6078" />
+
+    <!--  Radio button colors  -->
+    <Color
+        x:Key="RadioButtonGradientColor_0">
+        #e4d5ed
+    </Color>
+    <Color
+        x:Key="RadioButtonGradientColor_1">
+        #625c66
+    </Color>
+    <Color
+        x:Key="RadioButtonGradientColor_1_Hover">
+        #423e45
+    </Color>
+    <SolidColorBrush
+        x:Key="RadioButtonBulletBrush"
+        Color="#3d3940" />
+
+    <!--  Separator color  -->
+    <SolidColorBrush
+        x:Key="SeparatorBrush"
+        Color="#444444" />
+</ResourceDictionary>
