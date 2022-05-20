@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Icons\StoreCard.ico</ApplicationIcon>
-    <SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -46,6 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Effects\bin\" />
     <Folder Include="Fonts\" />
   </ItemGroup>
 
@@ -54,7 +55,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Effects\bin\ColorChange.ps" />
     <None Remove="Effects\ColorChange.fx" />
   </ItemGroup>
 
@@ -133,10 +133,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Effects\bin\ColorChange.ps">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Effects\ColorChange.fx">
+    <Resource Include="Effects\Shaders\ColorChange.fx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -148,7 +145,7 @@
     </None>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="call $(ProjectDir)Effects\CompileShaders.bat" />
   </Target>
 
