@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:userControls="clr-namespace:StoreCard.UserControls"
+             xmlns:effects="clr-namespace:StoreCard.Effects"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance userControls:LinkSelector}">
@@ -116,7 +117,12 @@
                     Height="24"
                     Width="24"
                     Margin="0,0,10,0"
-                    Source="{Binding Path=LinkIcon}" />
+                    Source="{Binding Path=LinkIcon}">
+                    <Image.Effect>
+                        <effects:ColorChangeEffect
+                            TargetBrush="{DynamicResource SecondaryTextBrush_Active}" />
+                    </Image.Effect>
+                </Image>
                 <TextBlock
                     Grid.Column="1"
                     Text="{Binding LinkTitle}"
