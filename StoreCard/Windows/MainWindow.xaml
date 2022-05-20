@@ -78,9 +78,9 @@
                     BorderBrush="Transparent"
                     BorderThickness="0,0,0,0"
                     Click="AddButton_Click"
+                    FocusVisualStyle="{DynamicResource FocusVisual}"
                     FontFamily="Arial"
                     FontSize="24"
-                    FontWeight="Bold"
                     Foreground="{DynamicResource AppForegroundBrush}">
                     <Button.Style>
                         <Style
@@ -134,31 +134,16 @@
                             Name="AddButtonContextMenu">
                             <MenuItem
                                 x:Name="AddApplication"
-                                Click="AddApplication_Click">
-                                <MenuItem.Header>
-                                    <TextBlock
-                                        Margin="-20,0,0,0"
-                                        Text="Add App or Game..." />
-                                </MenuItem.Header>
-                            </MenuItem>
+                                Click="AddApplication_Click"
+                                Header="Add App or Game..." />
                             <MenuItem
                                 Name="AddFile"
-                                Click="AddFile_Click">
-                                <MenuItem.Header>
-                                    <TextBlock
-                                        Margin="-20,0,0,0"
-                                        Text="Add File or Folder..." />
-                                </MenuItem.Header>
-                            </MenuItem>
+                                Click="AddFile_Click"
+                                Header="Add File or Folder..." />
                             <MenuItem
                                 x:Name="AddLink"
-                                Click="AddLink_Click">
-                                <MenuItem.Header>
-                                    <TextBlock
-                                        Margin="-20,0,0,0"
-                                        Text="Add Link..." />
-                                </MenuItem.Header>
-                            </MenuItem>
+                                Click="AddLink_Click"
+                                Header="Add Link..." />
                         </ContextMenu>
                     </Button.ContextMenu>
                     <fa:IconBlock
@@ -186,7 +171,7 @@
                     VerticalContentAlignment="Center"
                     BorderBrush="Transparent"
                     BorderThickness="0,0,0,0"
-                    FontFamily="Arial"
+                    FocusVisualStyle="{DynamicResource FocusVisual}"
                     FontSize="24"
                     Foreground="{DynamicResource AppForegroundBrush}">
                     <Button.Style>

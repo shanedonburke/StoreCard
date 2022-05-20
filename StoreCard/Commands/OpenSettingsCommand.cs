@@ -6,7 +6,9 @@ internal class OpenSettingsCommand : IStoreCardCommand<bool>
 {
     public bool Execute()
     {
-        new SettingsWindow().Show();
+        var window = new SettingsWindow();
+        window.Show();
+        window.Activate();
         return true;
     }
 }

@@ -54,7 +54,6 @@
             </Path>
         </Grid>
     </ControlTemplate>
-
     <Style
         x:Key="{x:Type ComboBox}"
         TargetType="{x:Type ComboBox}">
@@ -73,6 +72,9 @@
         <Setter
             Property="ScrollViewer.CanContentScroll"
             Value="True" />
+        <Setter
+            Property="FocusVisualStyle"
+            Value="{DynamicResource FocusVisual}" />
         <Setter
             Property="MinHeight"
             Value="30" />
@@ -153,7 +155,6 @@
             </Setter.Value>
         </Setter>
     </Style>
-
     <Style
         x:Key="{x:Type ComboBoxItem}"
         TargetType="{x:Type ComboBoxItem}">
@@ -203,10 +204,10 @@
                                         <MultiDataTrigger.Setters>
                                             <Setter
                                                 Property="Background"
-                                                Value="{DynamicResource LightBrush_Pressed}" />
+                                                Value="{DynamicResource LightBrush_Hover}" />
                                             <Setter
                                                 Property="BorderBrush"
-                                                Value="{DynamicResource LightBrush_Pressed}" />
+                                                Value="{DynamicResource LightBrush_Hover}" />
                                         </MultiDataTrigger.Setters>
                                     </MultiDataTrigger>
                                 </Style.Triggers>

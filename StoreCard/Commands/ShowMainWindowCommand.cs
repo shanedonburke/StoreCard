@@ -9,25 +9,21 @@ public class ShowMainWindowCommand : IStoreCardCommand<bool>
 {
     public bool Execute()
     {
-        WindowCollection windows = Application.Current.Windows;
+        var windows = Application.Current.Windows
+            .Cast<Window>()
+            .Where(w => w is not TaskbarIconWindow && w.GetType().Name != "AdornerWindow")
+            .ToList();
 
-        // If dialog window(s) are open, activate them instead of opening the main window
-        if (windows.Count > 2)
+        // If any windows are open, activate them instead of opening a new main window
+        if (windows.Any())
         {
-            // The first two windows are the system tray window and the invisible main one
-            for (int i = 2; i < windows.Count; i++)
+            foreach (Window window in windows)
             {
-                windows[i]?.BringToFront();
+                window.BringToFront();
             }
 
             return true;
         }
-
-        MainWindow? mainWindow = Application.Current.Windows
-            .Cast<Window>()
-            .FirstOrDefault(w => w is MainWindow) as MainWindow;
-
-        mainWindow?.Close();
 
         MainWindow newWindow = new();
         newWindow.Show();

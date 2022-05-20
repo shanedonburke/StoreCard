@@ -26,22 +26,12 @@
                 <MenuItem
                     x:Name="OpenMenuItem"
                     Click="OpenMenuItem_Click"
-                    InputGestureText="{Binding Path=HotKeyText}">
-                    <MenuItem.Header>
-                        <TextBlock
-                            Text="Open"
-                            Margin="-20,0,0,0" />
-                    </MenuItem.Header>
-                </MenuItem>
+                    InputGestureText="{Binding Path=HotKeyText}"
+                    Header="Open" />
                 <MenuItem
                     x:Name="ExitMenuItem"
-                    Click="ExitMenuItem_Click">
-                    <MenuItem.Header>
-                        <TextBlock
-                            Text="Exit"
-                            Margin="-20,0,0,0" />
-                    </MenuItem.Header>
-                </MenuItem>
+                    Click="ExitMenuItem_Click"
+                    Header="Exit" />
             </ContextMenu>
         </tb:TaskbarIcon.ContextMenu>
     </tb:TaskbarIcon>

@@ -17,6 +17,8 @@
                     Source="ResourceDictionaries/DefaultControls/DefaultControls.xaml" />
                 <ResourceDictionary
                     Source="ResourceDictionaries/CustomControls/CustomControls.xaml" />
+                <ResourceDictionary
+                    Source="ResourceDictionaries/FocusVisual.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

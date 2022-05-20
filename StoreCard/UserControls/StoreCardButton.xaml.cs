@@ -8,7 +8,7 @@ namespace StoreCard.UserControls;
 /// </summary>
 public partial class StoreCardButton
 {
-    public new static readonly DependencyProperty IsEnabledProperty = DependencyProperty.Register(
+    public static new readonly DependencyProperty IsEnabledProperty = DependencyProperty.Register(
         nameof(IsEnabled),
         typeof(bool),
         typeof(StoreCardButton),
@@ -19,7 +19,7 @@ public partial class StoreCardButton
         typeof(string),
         typeof(StoreCardButton));
 
-    public new static readonly DependencyProperty FontSizeProperty = DependencyProperty.Register(
+    public static new readonly DependencyProperty FontSizeProperty = DependencyProperty.Register(
         nameof(FontSize),
         typeof(int),
         typeof(StoreCardButton),
@@ -48,19 +48,19 @@ public partial class StoreCardButton
 
     public new bool IsEnabled
     {
-        get => (bool) GetValue(IsEnabledProperty);
+        get => (bool)GetValue(IsEnabledProperty);
         set => SetValue(IsEnabledProperty, value);
     }
 
     public string Text
     {
-        get => (string) GetValue(TextProperty);
+        get => (string)GetValue(TextProperty);
         set => SetValue(TextProperty, value);
     }
 
     public new int FontSize
     {
-        get => (int) GetValue(FontSizeProperty);
+        get => (int)GetValue(FontSizeProperty);
         set => SetValue(FontSizeProperty, value);
     }
 
@@ -73,13 +73,13 @@ public partial class StoreCardButton
 
     public Brush HoverBackgroundBrush
     {
-        get => (Brush) GetValue(HoverBackgroundBrushProperty);
+        get => (Brush)GetValue(HoverBackgroundBrushProperty);
         set => SetValue(HoverBackgroundBrushProperty, value);
     }
 
     public Brush PressedBackgroundBrush
     {
-        get => (Brush) GetValue(PressedBackgroundBrushProperty);
+        get => (Brush)GetValue(PressedBackgroundBrushProperty);
         set => SetValue(PressedBackgroundBrushProperty, value);
     }
 
@@ -87,6 +87,14 @@ public partial class StoreCardButton
     {
         add => AddHandler(ClickEvent, value);
         remove => RemoveHandler(ClickEvent, value);
+    }
+
+    static StoreCardButton()
+    {
+        // Button is a tab stop unless overriden with `IsTabStop="False"`
+        IsTabStopProperty.OverrideMetadata(
+            typeof(StoreCardButton),
+            new FrameworkPropertyMetadata(true));
     }
 
     public StoreCardButton()

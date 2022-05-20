@@ -5,13 +5,17 @@
         x:Key="{x:Type ContextMenu}"
         TargetType="{x:Type ContextMenu}">
         <Setter
-            Property="ItemsPanel">
+            Property="Template">
             <Setter.Value>
-                <ItemsPanelTemplate>
-                    <StackPanel
-                        Margin="0,0,0,0"
-                        Background="White" />
-                </ItemsPanelTemplate>
+                <ControlTemplate
+                    TargetType="ContextMenu">
+                    <Border
+                        Background="{DynamicResource AppBackgroundBrush}">
+                        <StackPanel
+                            IsItemsHost="True"
+                            KeyboardNavigation.DirectionalNavigation="Cycle" />
+                    </Border>
+                </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>

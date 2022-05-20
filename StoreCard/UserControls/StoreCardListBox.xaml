@@ -33,6 +33,9 @@
                 <Setter
                     Property="SnapsToDevicePixels"
                     Value="True" />
+                <Setter
+                    Property="FocusVisualStyle"
+                    Value="{DynamicResource FocusVisual}" />
                 <!--  Override mouse-over/selection style (from https://stackoverflow.com/a/66207005)  -->
                 <Setter
                     Property="Template">
@@ -250,7 +253,7 @@
                         FontSize="12"
                         Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=ActionButtonText}"
                         Click="ActionButton_Click"
-                        IsTabStop="False">
+                        IsTabStop="False">      
                         <userControls:StoreCardButton.Style>
                             <Style
                                 TargetType="{x:Type userControls:StoreCardButton}"
