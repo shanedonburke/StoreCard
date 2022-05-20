@@ -21,9 +21,13 @@
             <RowDefinition
                 Height="Auto" />
             <RowDefinition
+                Height="20" />
+            <RowDefinition
                 Height="Auto" />
             <RowDefinition
                 Height="20" />
+            <RowDefinition
+                Height="Auto" />
             <RowDefinition
                 Height="Auto" />
             <RowDefinition
@@ -31,39 +35,8 @@
             <RowDefinition
                 Height="Auto" />
         </Grid.RowDefinitions>
-        <CheckBox
-            x:Name="RunOnStartupCheckBox"
-            Grid.Row="0"
-            VerticalAlignment="Center"
-            VerticalContentAlignment="Center"
-            Checked="RunOnStartupCheckBox_Checked"
-            Unchecked="RunOnStartupCheckBox_Unchecked">
-            <Label
-                Content="Run on startup"
-                Padding="5,0,0,2"
-                HorizontalAlignment="Left"
-                HorizontalContentAlignment="Left"
-                VerticalAlignment="Center"
-                VerticalContentAlignment="Center"
-                Foreground="{DynamicResource AppForegroundBrush}"
-                FontSize="14" />
-        </CheckBox>
-        <Label
-            Grid.Row="1"
-            Content="Please enable StoreCard in the Startup section of Task Manager."
-            Visibility="{Binding Path=IsStartupShortcutDisabled, Converter={StaticResource BooleanToVisibilityConverter}}"
-            Padding="0"
-            Margin="0,10"
-            HorizontalAlignment="Left"
-            HorizontalContentAlignment="Left"
-            Foreground="{DynamicResource AppForegroundBrush}"
-            FontSize="14" />
-        <Separator
-            Grid.Row="2"
-            VerticalAlignment="Center"
-            VerticalContentAlignment="Center" />
         <StackPanel
-            Grid.Row="3">
+            Grid.Row="0">
             <StackPanel
                 Orientation="Horizontal"
                 Height="20"
@@ -118,11 +91,11 @@
                 Width="150" />
         </StackPanel>
         <Separator
-            Grid.Row="4"
+            Grid.Row="1"
             VerticalAlignment="Center"
             VerticalContentAlignment="Center" />
         <StackPanel
-            Grid.Row="5"
+            Grid.Row="2"
             Orientation="Horizontal">
             <Label
                 Padding="0"
@@ -140,5 +113,57 @@
                 SelectionChanged="ThemeComboBox_SelectionChanged"
                 Width="160" />
         </StackPanel>
+        <Separator
+            Grid.Row="3"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center" />
+        <CheckBox
+            x:Name="RunOnStartupCheckBox"
+            Grid.Row="4"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Checked="RunOnStartupCheckBox_Checked"
+            Unchecked="RunOnStartupCheckBox_Unchecked">
+            <Label
+                Content="Run on startup"
+                Padding="5,0,0,2"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Foreground="{DynamicResource AppForegroundBrush}"
+                FontSize="14" />
+        </CheckBox>
+        <Label
+            Grid.Row="5"
+            Content="Please enable StoreCard in the Startup section of Task Manager."
+            Visibility="{Binding Path=IsStartupShortcutDisabled, Converter={StaticResource BooleanToVisibilityConverter}}"
+            Padding="0"
+            Margin="0,10,0,0"
+            HorizontalAlignment="Left"
+            HorizontalContentAlignment="Left"
+            Foreground="{DynamicResource RedBrush}"
+            FontSize="14" />
+        <Separator
+            Grid.Row="6"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center" />
+        <CheckBox
+            x:Name="ShowPrefixIconsCheckBox"
+            Grid.Row="7"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Checked="ShowPrefixIconsCheckBox_Changed"
+            Unchecked="ShowPrefixIconsCheckBox_Changed">
+            <Label
+                Content="Show item type (game, link, etc.) next to icon"
+                Padding="5,0,0,2"
+                HorizontalAlignment="Left"
+                HorizontalContentAlignment="Left"
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Foreground="{DynamicResource AppForegroundBrush}"
+                FontSize="14" />
+        </CheckBox>
     </Grid>
 </Window>

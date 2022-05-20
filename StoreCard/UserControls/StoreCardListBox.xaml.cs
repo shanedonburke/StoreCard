@@ -4,13 +4,14 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using StoreCard.Models;
 using StoreCard.Models.Items;
+using StoreCard.Utils;
 
 namespace StoreCard.UserControls;
 
 public enum SecondaryTextVisibility
 {
-    Never,
     WhenActive,
     Always
 }
@@ -49,13 +50,13 @@ public partial class StoreCardListBox
         typeof(MouseButtonEventHandler),
         typeof(StoreCardListBox));
 
-    public new static readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
+    public static new readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
         nameof(PreviewKeyDown),
         RoutingStrategy.Bubble,
         typeof(KeyEventHandler),
         typeof(StoreCardListBox));
 
-    public new static readonly RoutedEvent KeyUpEvent = EventManager.RegisterRoutedEvent(
+    public static new readonly RoutedEvent KeyUpEvent = EventManager.RegisterRoutedEvent(
         nameof(KeyUpEvent),
         RoutingStrategy.Bubble,
         typeof(KeyEventHandler),
@@ -72,6 +73,15 @@ public partial class StoreCardListBox
         RoutingStrategy.Bubble,
         typeof(SelectionChangedEventHandler),
         typeof(StoreCardListBox));
+
+    private readonly UserConfig _userConfig;
+
+    public StoreCardListBox()
+    {
+        _userConfig = AppData.ReadConfigFromFile();
+        DataContext = this;
+        InitializeComponent();
+    }
 
     public IEnumerable<IListBoxItem> ItemsSource
     {
@@ -150,9 +160,7 @@ public partial class StoreCardListBox
         set => CustomListBox.SelectedItem = value;
     }
 
-    public StoreCardListBox() {
-        InitializeComponent();
-    }
+    public bool ShouldShowPrefixIcons => _userConfig.ShouldShowPrefixIcons;
 
     public void ScrollIntoView(object item)
     {

@@ -16,28 +16,29 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class SettingsWindow : INotifyPropertyChanged
 {
-    private UserConfig _config;
+    private UserConfig _userConfig;
 
     public SettingsWindow()
     {
-        _config = AppData.ReadConfigFromFile();
+        _userConfig = AppData.ReadConfigFromFile();
 
         DataContext = this;
         InitializeComponent();
 
         RunOnStartupCheckBox.IsChecked = Shortcuts.IsStartupShortcutEnabled() != null;
-        ThemeComboBox.SelectedItem = _config.Theme;
+        ShowPrefixIconsCheckBox.IsChecked = _userConfig.ShouldShowPrefixIcons;
+        ThemeComboBox.SelectedItem = _userConfig.Theme;
     }
 
     public static IEnumerable<string> Themes => ThemeFinder.FindThemes();
 
-    public string HotKeyText => HotKeys.KeyStringFromConfig(_config);
+    public string HotKeyText => HotKeys.KeyStringFromConfig(_userConfig);
 
     public bool IsStartupShortcutDisabled => Shortcuts.IsStartupShortcutEnabled() == false;
 
     private void SettingsWindow_Closed(object? sender, EventArgs e)
     {
-        AppData.SaveConfigToFile(_config);
+        AppData.SaveConfigToFile(_userConfig);
         new ShowMainWindowCommand().Execute();
         Close();
     }
@@ -45,7 +46,7 @@ public partial class SettingsWindow : INotifyPropertyChanged
     private void RecordHotKeyButton_Click(object sender, RoutedEventArgs e)
     {
         if (new RecordHotKeyWindow().ShowDialog() != true) return;
-        _config = AppData.ReadConfigFromFile();
+        _userConfig = AppData.ReadConfigFromFile();
         OnPropertyChanged(nameof(HotKeyText));
     }
 
@@ -71,14 +72,20 @@ public partial class SettingsWindow : INotifyPropertyChanged
 
     private void UseDefaultHotKeyButton_Click(object sender, RoutedEventArgs e)
     {
-        _config.ResetHotKeyToDefault();
-        AppData.SaveConfigToFile(_config);
+        _userConfig.ResetHotKeyToDefault();
+        AppData.SaveConfigToFile(_userConfig);
         OnPropertyChanged(nameof(HotKeyText));
     }
 
     private void ThemeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        _config.Theme = (string)ThemeComboBox.SelectedItem;
-        AppData.SaveConfigToFile(_config);
+        _userConfig.Theme = (string)ThemeComboBox.SelectedItem;
+        AppData.SaveConfigToFile(_userConfig);
+    }
+
+    private void ShowPrefixIconsCheckBox_Changed(object sender, RoutedEventArgs e)
+    {
+        _userConfig.ShouldShowPrefixIcons = ShowPrefixIconsCheckBox.IsChecked == true;
+        AppData.SaveConfigToFile(_userConfig);
     }
 }

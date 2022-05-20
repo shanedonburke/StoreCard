@@ -1,8 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using StoreCard.Static;
 using StoreCard.Utils;
 
 namespace StoreCard.Models;
@@ -17,7 +15,7 @@ internal class UserConfig
 
     public uint VirtualHotKey;
 
-    public bool ShouldShowPrefixIcons = true;
+    public bool ShouldShowPrefixIcons = false;
 
     private string _theme = "Lake (Dark)";
 
