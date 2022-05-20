@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Windows.Media;
+using StoreCard.Static;
 using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
@@ -22,9 +24,11 @@ public class SavedLink : SavedItem
 
     public override string SecondaryText => ItemCategory.Link.ToString();
 
+    public override ImageSource PrefixIcon => Icons.LinkIcon;
+
     protected override void OpenProtected()
     {
-        var defaultBrowserExe = Browser.GetDefaultBrowserExecutable();
+        string? defaultBrowserExe = Browser.GetDefaultBrowserExecutable();
 
         ProcessStartInfo psi;
 

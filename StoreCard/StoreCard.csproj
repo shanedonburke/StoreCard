@@ -133,7 +133,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Effects\Shaders\ColorChange.fx">
+    <Resource Include="Effects\bin\*.ps">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

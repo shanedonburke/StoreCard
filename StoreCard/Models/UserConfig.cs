@@ -17,6 +17,8 @@ internal class UserConfig
 
     public uint VirtualHotKey;
 
+    public bool ShouldShowPrefixIcons = true;
+
     private string _theme = "Lake (Dark)";
 
     public UserConfig()
