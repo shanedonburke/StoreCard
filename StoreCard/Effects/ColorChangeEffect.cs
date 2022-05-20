@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
@@ -16,13 +11,13 @@ public class ColorChangeEffect : ShaderEffect
     public static readonly DependencyProperty InputProperty =
         RegisterPixelShaderSamplerProperty("Input", typeof(ColorChangeEffect), 0);
 
-    public static readonly DependencyProperty TargetColorProperty =
-        DependencyProperty.Register("TargetColor", typeof(Color), typeof(ColorChangeEffect),
-            new UIPropertyMetadata(Colors.White, PixelShaderConstantCallback(0)));
-
     public static readonly DependencyProperty TargetBrushProperty =
         DependencyProperty.Register("TargetBrush", typeof(SolidColorBrush), typeof(ColorChangeEffect),
             new UIPropertyMetadata(new SolidColorBrush(Colors.White), OnTargetBrushChanged));
+
+    private static readonly DependencyProperty s_targetColorProperty =
+        DependencyProperty.Register("s_targetColor", typeof(Color), typeof(ColorChangeEffect),
+            new UIPropertyMetadata(Colors.White, PixelShaderConstantCallback(0)));
 
     private static readonly PixelShader s_pixelShader = new();
 
@@ -35,18 +30,18 @@ public class ColorChangeEffect : ShaderEffect
     {
         PixelShader = s_pixelShader;
         UpdateShaderValue(InputProperty);
-        UpdateShaderValue(TargetColorProperty);
+        UpdateShaderValue(s_targetColorProperty);
     }
 
     private static void OnTargetBrushChanged(
         DependencyObject sender, DependencyPropertyChangedEventArgs e)
     {
-        (sender as ColorChangeEffect)!.SetValue(TargetColorProperty, (e.NewValue as SolidColorBrush)!.Color);
+        (sender as ColorChangeEffect)!.SetValue(s_targetColorProperty, (e.NewValue as SolidColorBrush)!.Color);
     }
 
     public SolidColorBrush TargetBrush
     {
         get => (SolidColorBrush)GetValue(TargetBrushProperty);
-        set => SetValue(TargetColorProperty, value.Color);
+        set => SetValue(s_targetColorProperty, value.Color);
     }
 }
