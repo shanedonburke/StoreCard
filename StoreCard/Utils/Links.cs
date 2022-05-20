@@ -18,9 +18,9 @@ internal class Links
 
     public static async Task<string> GetPageTitle(string url)
     {
-        var title = string.Empty;
+        string title = string.Empty;
 
-        var fullUrl = NormalizeUrl(url);
+        string fullUrl = NormalizeUrl(url);
         if (!s_urlRegex.Match(fullUrl).Success) return title;
 
         try
@@ -47,10 +47,10 @@ internal class Links
         var m = s_urlRegex.Match(url);
         if (!m.Success) return image;
 
-        var domain = m.Groups[4].Captures[0].ToString();
+        string domain = m.Groups[4].Captures[0].ToString();
         try
         {
-            var bytes =
+            byte[] bytes =
                 await s_httpClient.GetByteArrayAsync(@"https://icons.duckduckgo.com/ip3/" + domain + ".ico");
             image = Images.BytesToBitmapImage(bytes);
             image.Freeze();
@@ -65,8 +65,8 @@ internal class Links
 
     public static string NormalizeUrl(string url)
     {
-        var includesScheme = url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) || 
-                             url.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
+        bool includesScheme = url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+                              url.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
         return includesScheme ? url : $"http://{url}";
     }
 }
