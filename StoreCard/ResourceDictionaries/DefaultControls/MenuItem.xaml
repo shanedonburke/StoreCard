@@ -17,8 +17,12 @@
                                     Property="Background"
                                     Value="Transparent" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsHighlighted, RelativeSource={RelativeSource AncestorType=MenuItem}}" Value="True">
-                                        <Setter Property="Background" Value="Red"></Setter>
+                                    <DataTrigger
+                                        Binding="{Binding IsHighlighted, RelativeSource={RelativeSource AncestorType=MenuItem}}"
+                                        Value="True">
+                                        <Setter
+                                            Property="Background"
+                                            Value="#eaeaea"></Setter>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -26,16 +30,22 @@
                         <Grid
                             Margin="10,5">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition
+                                    Width="Auto" />
+                                <ColumnDefinition
+                                    Width="*" />
+                                <ColumnDefinition
+                                    Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Foreground="White" Text="{TemplateBinding Header}" />
+                            <TextBlock
+                                Grid.Column="0"
+                                Foreground="Black"
+                                Text="{TemplateBinding Header}" />
                             <TextBlock
                                 Grid.Column="2"
                                 Text="{TemplateBinding InputGestureText}"
                                 Visibility="{TemplateBinding InputGestureText, Converter={StaticResource NotBlankToVisibilityConverter}}"
-                                Foreground="{DynamicResource SecondaryTextBrush_Active}"
+                                Foreground="#707070"
                                 Margin="10,0,0,0"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Center" />

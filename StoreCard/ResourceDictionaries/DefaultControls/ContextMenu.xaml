@@ -10,7 +10,9 @@
                 <ControlTemplate
                     TargetType="ContextMenu">
                     <Border
-                        Background="{DynamicResource AppBackgroundBrush}">
+                        Background="White"
+                        BorderBrush="#26000000"
+                        BorderThickness="1">
                         <StackPanel
                             IsItemsHost="True"
                             KeyboardNavigation.DirectionalNavigation="Cycle" />
