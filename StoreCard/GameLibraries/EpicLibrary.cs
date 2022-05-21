@@ -47,11 +47,11 @@ internal class EpicLibrary : GameLibrary
             if (!File.Exists(execPath)) continue;
 
             var hIcon = System.Drawing.Icon.ExtractAssociatedIcon(execPath);
-            var icon = Imaging.CreateBitmapSourceFromHIcon(
+
+            BitmapSource icon = Imaging.CreateBitmapSourceFromHIcon(
                 hIcon!.Handle,
                 Int32Rect.Empty,
                 BitmapSizeOptions.FromEmptyOptions());
-
             icon.Freeze();
 
             yield return new InstalledEpicGame(manifest.DisplayName, icon, manifest.AppName);

@@ -21,7 +21,7 @@ internal class SteamLibrary : GameLibrary
         // is no longer locked by another process.
         try
         {
-            using var inputStream = File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None);
+            using FileStream inputStream = File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None);
             return inputStream.Length > 0;
         }
         catch

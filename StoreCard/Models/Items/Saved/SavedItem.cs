@@ -23,6 +23,7 @@ public enum SpecificItemCategory : uint
     Executable,
     SteamGame,
     EpicGame,
+    BattleNetGame,
     Folder,
     File,
     Link
