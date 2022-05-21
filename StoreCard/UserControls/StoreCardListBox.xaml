@@ -7,6 +7,7 @@
     xmlns:items="clr-namespace:StoreCard.Models.Items"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
     xmlns:effects="clr-namespace:StoreCard.Effects"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -185,6 +186,13 @@
                         RenderOptions.BitmapScalingMode="HighQuality"
                         Visibility="{Binding BitmapIcon, Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}"
                         Source="{Binding BitmapIcon}" />
+                    <fa:IconBlock
+                        Grid.Column="1"
+                        Foreground="{DynamicResource SecondaryTextBrush_Active}"
+                        Visibility="{Binding BitmapIcon, Converter={StaticResource InverseNullToVisibilityConverter}, FallbackValue=Visible}"
+                        Icon="QuestionCircle"
+                        FontSize="24"
+                        Margin="5,5,10,5" />
                     <TextBlock
                         Grid.Column="2"
                         Margin="3"

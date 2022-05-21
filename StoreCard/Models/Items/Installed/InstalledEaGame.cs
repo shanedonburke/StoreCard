@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using StoreCard.Models.Items.Saved;
 
 namespace StoreCard.Models.Items.Installed;
@@ -15,7 +16,7 @@ internal class InstalledEaGame : InstalledGame
 {
     public readonly string GameId;
 
-    public InstalledEaGame(string name, string gameId, ImageSource? bitmapIcon) : base(name, null)
+    public InstalledEaGame(string name, string gameId, BitmapSource? bitmapIcon) : base(name, bitmapIcon)
     {
         GameId = gameId;
     }

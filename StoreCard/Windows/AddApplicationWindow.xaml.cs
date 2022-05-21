@@ -79,7 +79,8 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
     [NotifyPropertyChangedInvocator]
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) {
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
@@ -96,16 +97,17 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         }
         else
         {
-            var savedItems = AppData.ReadItemsFromFile();
+            List<SavedItem> savedItems = AppData.ReadItemsFromFile();
             savedItems.Add(new SavedApplication(AppSelector.SelectedApp!));
             AppData.SaveItemsToFile(savedItems);
         }
+
         Close();
     }
 
     private void SaveSelectedGameAndClose()
     {
-        var savedItems = AppData.ReadItemsFromFile();
+        List<SavedItem> savedItems = AppData.ReadItemsFromFile();
         savedItems.Add((GameListBox.SelectedItem as InstalledGame)!.SavedItem);
         AppData.SaveItemsToFile(savedItems);
         Close();
@@ -113,12 +115,21 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void LoadGames()
     {
-        foreach (var game in new SteamLibrary().GetInstalledGames()) {
+        foreach (InstalledGame game in new SteamLibrary().GetInstalledGames())
+        {
             GameListBox.AddItem(game);
         }
-        foreach (var game in new EpicLibrary().GetInstalledGames()) {
+
+        foreach (InstalledGame game in new EpicLibrary().GetInstalledGames())
+        {
             GameListBox.AddItem(game);
         }
+
+        foreach (InstalledGame game in new EaLibrary().GetInstalledGames())
+        {
+            GameListBox.AddItem(game);
+        }
+
         GameListBox.FinishAddingItems();
     }
 

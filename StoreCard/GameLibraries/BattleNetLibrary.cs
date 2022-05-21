@@ -12,7 +12,7 @@ namespace StoreCard.GameLibraries;
 internal class BattleNetLibrary : GameLibrary
 {
     public static readonly string? BattleNetInstallFolder =
-        Registry.GetValue(RegistryKeys.SoftwareUninstall + @"\Battle.net", "InstallLocation", null) as string;
+        Registry.GetValue("HKEY_LOCAL_MACHINE" + RegistryKeys.SoftwareUninstall + @"\Battle.net", "InstallLocation", null) as string;
 
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
