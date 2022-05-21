@@ -48,7 +48,7 @@ internal class SavedSteamGame : SavedGame
             return;
         }
 
-        var steamExecPath = Path.Combine(SteamLibrary.SteamInstallFolder, "steam.exe");
+        string steamExecPath = Path.Combine(SteamLibrary.SteamInstallFolder, "steam.exe");
         Process.Start(steamExecPath, $"steam://rungameid/{AppId}");
     }
 }
