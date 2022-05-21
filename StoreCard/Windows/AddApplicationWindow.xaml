@@ -45,7 +45,7 @@
                     VerticalAlignment="Stretch"
                     FontSize="14"
                     Foreground="{DynamicResource AppForegroundBrush}">
-                    Installed application
+                    Installed app or Xbox game
                 </TextBlock>
             </StackPanel>
             <!--  "Other installed game"  -->
