@@ -7,17 +7,17 @@ namespace StoreCard.Models.Items.Installed;
 
 internal class InstalledEpicGame : InstalledGame
 {
+    public readonly string AppName;
+
     public InstalledEpicGame(
         string name,
-        ImageSource bitmapIcon,
+        BitmapSource bitmapIcon,
         string appName) : base(name, bitmapIcon)
     {
         AppName = appName;
     }
 
     public override string SecondaryText => GamePlatformNames.EpicGames;
-
-    public string AppName { get;  }
 
     public override SavedItem SavedItem => new SavedEpicGame(this);
 }

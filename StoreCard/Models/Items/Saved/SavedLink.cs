@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using StoreCard.Static;
 using StoreCard.Utils;
 
@@ -24,7 +25,7 @@ public class SavedLink : SavedItem
 
     public override string SecondaryText => ItemCategory.Link.ToString();
 
-    public override ImageSource PrefixIcon => Icons.LinkIcon;
+    public override BitmapSource PrefixIcon => Icons.LinkIcon;
 
     protected override void OpenProtected()
     {

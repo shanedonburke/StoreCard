@@ -19,8 +19,8 @@ public class InstalledApplication : IListBoxItem
     public string Name { get; }
     public string AppUserModelId { get; }
     public string? ExecutablePath { get; }
-    public ImageSource BitmapIcon { get; }
-    public ImageSource? PrefixIcon => null;
+    public BitmapSource BitmapIcon { get; }
+    public BitmapSource? PrefixIcon => null;
 
     public int CompareTo(IListBoxItem? other) {
         return string.Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);

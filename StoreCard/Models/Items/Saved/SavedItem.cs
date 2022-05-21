@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 using StoreCard.Utils;
 using static System.String;
@@ -24,6 +25,7 @@ public enum SpecificItemCategory : uint
     SteamGame,
     EpicGame,
     BattleNetGame,
+    EaGame,
     Folder,
     File,
     Link
@@ -51,9 +53,9 @@ public abstract class SavedItem : IListBoxItem
 
     public abstract SpecificItemCategory SpecificCategory { get; }
 
-    [JsonIgnore] public ImageSource? BitmapIcon => Base64Icon != null ? Images.Base64ToImage(Base64Icon) : null;
+    [JsonIgnore] public BitmapSource? BitmapIcon => Base64Icon != null ? Images.Base64ToImage(Base64Icon) : null;
 
-    [JsonIgnore] public virtual ImageSource? PrefixIcon => null;
+    [JsonIgnore] public virtual BitmapSource? PrefixIcon => null;
 
     [JsonIgnore] public virtual string SecondaryText => Empty;
 

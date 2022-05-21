@@ -21,7 +21,7 @@ internal class Images
     // From https://stackoverflow.com/a/593406
     public static BitmapImage Base64ToImage(string base64)
     {
-        var binaryData = Convert.FromBase64String(base64);
+        byte[] binaryData = Convert.FromBase64String(base64);
 
         var bi = new BitmapImage();
         bi.BeginInit();

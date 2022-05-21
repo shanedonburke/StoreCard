@@ -6,6 +6,8 @@
         x:Key="NotBlankToBooleanConverter" />
     <converters:NullToVisibilityConverter
         x:Key="NullToVisibilityConverter" />
+    <converters:InverseNullToVisibilityConverter
+        x:Key="InverseNullToVisibilityConverter" />
     <BooleanToVisibilityConverter
         x:Key="BooleanToVisibilityConverter" />
     <converters:InverseBooleanToVisibilityConverter

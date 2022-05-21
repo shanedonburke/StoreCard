@@ -1,4 +1,5 @@
 ﻿using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Saved;
@@ -12,5 +13,5 @@ internal abstract class SavedGame : SavedItem
 
     public override ItemCategory Category => ItemCategory.Game;
 
-    public override ImageSource PrefixIcon => Icons.GameIcon;
+    public override BitmapSource PrefixIcon => Icons.GameIcon;
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace StoreCard.Models.Items;
 
@@ -7,9 +8,9 @@ public interface IListBoxItem : IComparable<IListBoxItem>
 {
     public string Name { get; }
 
-    public ImageSource? BitmapIcon { get; }
+    public BitmapSource? BitmapIcon { get; }
         
-    public ImageSource? PrefixIcon { get; }
+    public BitmapSource? PrefixIcon { get; }
 
     public string SecondaryText { get; }
 }
