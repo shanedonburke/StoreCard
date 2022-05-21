@@ -23,13 +23,12 @@ internal class SavedEaGame : SavedGame
         AppId = appId;
     }
 
-    public SavedEaGame(InstalledEaGame game) : base(
+    public SavedEaGame(InstalledEaGame game) : this(
         Guid.NewGuid().ToString(),
         game.Name,
-        game.BitmapIcon?.ToBase64(),
-        Time.UnixTimeMillis)
+        Time.UnixTimeMillis,
+        game.GameId)
     {
-        AppId = game.GameId;
     }
 
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.EaGame;

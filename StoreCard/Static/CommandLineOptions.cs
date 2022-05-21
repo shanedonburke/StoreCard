@@ -1,6 +1,6 @@
 ﻿namespace StoreCard.Static;
 
-internal class CommandLineOptions
+internal static class CommandLineOptions
 {
     public static readonly string StartMinimized = "-startminimized";
 }

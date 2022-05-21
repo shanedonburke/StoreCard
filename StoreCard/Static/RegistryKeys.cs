@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StoreCard.Static;
 
-internal class RegistryKeys
+internal static class RegistryKeys
 {
-    public static string SoftwareUninstall = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+    public static string SoftwareUninstall = @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall";
 }

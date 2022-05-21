@@ -9,10 +9,7 @@ internal class InstalledEpicGame : InstalledGame
 {
     public readonly string AppName;
 
-    public InstalledEpicGame(
-        string name,
-        BitmapSource bitmapIcon,
-        string appName) : base(name, bitmapIcon)
+    public InstalledEpicGame(string name, BitmapSource bitmapIcon, string appName) : base(name, bitmapIcon)
     {
         AppName = appName;
     }

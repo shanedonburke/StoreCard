@@ -3,7 +3,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.Static;
 
-internal class Icons
+internal static class Icons
 {
     public static readonly BitmapSource LinkIcon;
 

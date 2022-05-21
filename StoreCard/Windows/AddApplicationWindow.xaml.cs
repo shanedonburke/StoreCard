@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using StoreCard.Commands;
 using StoreCard.GameLibraries;
+using StoreCard.GameLibraries.BattleNet;
 using StoreCard.GameLibraries.Ea;
 using StoreCard.GameLibraries.Epic;
 using StoreCard.GameLibraries.Steam;
@@ -129,6 +130,11 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         }
 
         foreach (InstalledGame game in new EaLibrary().GetInstalledGames())
+        {
+            GameListBox.AddItem(game);
+        }
+
+        foreach (InstalledGame game in new BattleNetLibrary().GetInstalledGames())
         {
             GameListBox.AddItem(game);
         }

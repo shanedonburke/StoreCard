@@ -61,6 +61,33 @@ namespace StoreCard.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to wow=WoW
+        ///diablo3=D3
+        ///s2=S2
+        ///s1=S1
+        ///hs_beta=WTCG
+        ///heroes=Hero
+        ///prometheus=Pro
+        ///Diablo II=D2
+        ///Warcraft III=W3
+        ///viper=VIPR
+        ///odin=ODIN
+        ///w3=W3
+        ///lazarus=LAZR
+        ///zeus=ZEUS
+        ///wlby=WLBY
+        ///osi=OSI
+        ///rtro=RTRO
+        ///fore=FORE
+        ///.
+        /// </summary>
+        internal static string BattleNetGameIds {
+            get {
+                return ResourceManager.GetString("BattleNetGameIds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap GameIcon {

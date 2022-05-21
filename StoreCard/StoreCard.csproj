@@ -48,6 +48,7 @@
   <ItemGroup>
     <Folder Include="Effects\bin\" />
     <Folder Include="Fonts\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>
