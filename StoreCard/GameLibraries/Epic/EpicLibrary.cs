@@ -6,10 +6,9 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
-using StoreCard.Models.Games.Epic;
 using StoreCard.Models.Items.Installed;
 
-namespace StoreCard.GameLibraries;
+namespace StoreCard.GameLibraries.Epic;
 
 internal class EpicLibrary : GameLibrary
 {

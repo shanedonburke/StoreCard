@@ -7,7 +7,7 @@ using Microsoft.Win32;
 using SteamKit2;
 using StoreCard.Models.Items.Installed;
 
-namespace StoreCard.GameLibraries;
+namespace StoreCard.GameLibraries.Steam;
 
 internal class SteamLibrary : GameLibrary
 {

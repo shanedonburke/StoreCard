@@ -1,4 +1,4 @@
-﻿namespace StoreCard.Models.Games.Epic;
+﻿namespace StoreCard.GameLibraries.Epic;
 
 public class EpicManifest
 {
