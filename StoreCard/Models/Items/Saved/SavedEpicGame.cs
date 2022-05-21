@@ -25,7 +25,7 @@ internal class SavedEpicGame : SavedGame
     public SavedEpicGame(InstalledEpicGame game) : base(
         Guid.NewGuid().ToString(),
         game.Name,
-        (game.BitmapIcon as BitmapSource)?.ToBase64(),
+        game.BitmapIcon?.ToBase64(),
         Time.UnixTimeMillis)
     {
         AppName = game.AppName;

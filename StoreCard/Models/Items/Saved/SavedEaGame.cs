@@ -26,7 +26,7 @@ internal class SavedEaGame : SavedGame
     public SavedEaGame(InstalledEaGame game) : base(
         Guid.NewGuid().ToString(),
         game.Name,
-        (game.BitmapIcon as BitmapSource)?.ToBase64(),
+        game.BitmapIcon?.ToBase64(),
         Time.UnixTimeMillis)
     {
         GameId = game.GameId;

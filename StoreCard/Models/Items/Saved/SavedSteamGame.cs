@@ -27,7 +27,7 @@ internal class SavedSteamGame : SavedGame
     public SavedSteamGame(InstalledSteamGame game) : base(
         Guid.NewGuid().ToString(),
         game.Name,
-        (game.BitmapIcon as BitmapSource)?.ToBase64(),
+        game.BitmapIcon?.ToBase64(),
         Time.UnixTimeMillis
     )
     {
