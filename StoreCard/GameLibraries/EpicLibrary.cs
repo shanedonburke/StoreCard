@@ -15,34 +15,35 @@ internal class EpicLibrary : GameLibrary
 {
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
-        var installedGames = new List<InstalledGame>();
+        string programDataFolder = Environment.ExpandEnvironmentVariables("%ProgramData%");
 
-        var programDataFolder = Environment.ExpandEnvironmentVariables("%ProgramData%");
-
-        var launcherInstalledPath = Path.Combine(programDataFolder,
+        string launcherInstalledPath = Path.Combine(programDataFolder,
             @"Epic\UnrealEngineLauncher\LauncherInstalled.dat");
-        var manifestFolderPath = Path.Combine(programDataFolder, @"Epic\EpicGamesLauncher\Data\Manifests");
+        string manifestFolderPath = Path.Combine(programDataFolder, @"Epic\EpicGamesLauncher\Data\Manifests");
 
-        if (!File.Exists(launcherInstalledPath) || !Directory.Exists(manifestFolderPath)) {
-            return installedGames;
+        if (!File.Exists(launcherInstalledPath) || !Directory.Exists(manifestFolderPath))
+        {
+            yield break;
         }
 
-        if (JsonConvert.DeserializeObject<EpicLauncherInstalled>(File.ReadAllText(launcherInstalledPath)) is not { } launcherInstalled) {
-            return installedGames;
+        if (JsonConvert.DeserializeObject<EpicLauncherInstalled>(File.ReadAllText(launcherInstalledPath)) is not { } launcherInstalled)
+        {
+            yield break;
         }
 
         var appNames = launcherInstalled.InstallationList.Select(app => app.AppName).ToList();
 
-        var manifestPaths = Directory.GetFiles(manifestFolderPath, "*.item");
+        string[] manifestPaths = Directory.GetFiles(manifestFolderPath, "*.item");
 
-        foreach (var manifestPath in manifestPaths) {
-            if (JsonConvert.DeserializeObject<EpicManifest>(File.ReadAllText(manifestPath)) is not { } manifest) {
-                return installedGames;
+        foreach (string manifestPath in manifestPaths) {
+            if (JsonConvert.DeserializeObject<EpicManifest>(File.ReadAllText(manifestPath)) is not { } manifest)
+            {
+                yield break;
             }
 
             if (!appNames.Contains(manifest.AppName)) continue;
 
-            var execPath = Path.Combine(manifest.InstallLocation, manifest.LaunchExecutable);
+            string execPath = Path.Combine(manifest.InstallLocation, manifest.LaunchExecutable);
             if (!File.Exists(execPath)) continue;
 
             var hIcon = System.Drawing.Icon.ExtractAssociatedIcon(execPath);
@@ -53,9 +54,7 @@ internal class EpicLibrary : GameLibrary
 
             icon.Freeze();
 
-            installedGames.Add(new InstalledEpicGame(manifest.DisplayName, icon, manifest.AppName));
+            yield return new InstalledEpicGame(manifest.DisplayName, icon, manifest.AppName);
         }
-
-        return installedGames;
     }
 }
