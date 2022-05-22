@@ -11,5 +11,5 @@ namespace StoreCard.Static;
 
 internal static class RegistryKeys
 {
-    public static string SoftwareUninstall = @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall";
+    public static string SoftwareUninstall64 = @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall";
 }
