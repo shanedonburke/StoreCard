@@ -10,19 +10,9 @@ namespace StoreCard.GameLibraries.Ea;
 
 internal class EaLibrary : GameLibrary
 {
-    public static readonly string? EaLauncherPath =
-        Registry.GetValue(
-            RegUtils.BuildRegistryPath(
-                RegUtils.Keys.HkeyLocalMachine,
-                RegUtils.Paths.Software32,
-                "Electronic Arts",
-                "EA Desktop"),
-            "LauncherAppPath",
-            null) as string;
-
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
-        if (EaLauncherPath == null) yield break;
+        if (EaLaunchers.GetLauncher() == null) yield break;
 
         using RegistryKey? gameListKey = Registry.LocalMachine.OpenSubKey(
             RegUtils.BuildRegistryPath(RegUtils.Paths.Software32, "Origin Games"));

@@ -38,26 +38,28 @@ internal class SavedEaGame : SavedGame
 
     protected override void OpenProtected()
     {
-        if (EaLibrary.EaLauncherPath == null)
+        EaLaunchers.Launcher? launcher = EaLaunchers.GetLauncher();
+
+        if (launcher == null)
         {
             MessageBoxService.Instance.ShowMessageBox(
-                "The EA launcher could not be found.",
+                "No EA launcher could be found. Please install Origin or EA Desktop, then try again.",
                 "Error",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
             return;
         }
 
-        if (!Processes.IsProcessWithNameRunning("EADesktop"))
+        if (!launcher.IsRunning)
         {
             MessageBoxService.Instance.ShowMessageBox(
-                "EA Desktop is not running. Please open it, then try again.",
+                "An EA launcher must be running to start this game. Please open Origin or EA Desktop, then try again.",
                 "Warning",
                 MessageBoxButton.OK,
                 MessageBoxImage.Warning);
             return;
         }
 
-        Process.Start(EaLibrary.EaLauncherPath, $"origin://LaunchGame/{AppId}");
+        Process.Start(launcher.LauncherPath, $"origin://LaunchGame/{AppId}");
     }
 }
