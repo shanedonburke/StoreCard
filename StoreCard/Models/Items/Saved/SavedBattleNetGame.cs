@@ -43,7 +43,7 @@ internal class SavedBattleNetGame : SavedGame
             return;
         }
 
-        if (!Process.GetProcessesByName("Battle.net").Any())
+        if (!Processes.IsProcessWithNameRunning("Battle.net"))
         {
             MessageBoxService.Instance.ShowMessageBox("The Battle.net launcher is not running. Please open it, then try again.", "Warning",
                 MessageBoxButton.OK, MessageBoxImage.Warning);

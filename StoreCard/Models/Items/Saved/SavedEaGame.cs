@@ -28,7 +28,7 @@ internal class SavedEaGame : SavedGame
         Guid.NewGuid().ToString(),
         game.Name,
         Time.UnixTimeMillis,
-        game.GameId)
+        game.AppId)
     {
     }
 
@@ -41,6 +41,16 @@ internal class SavedEaGame : SavedGame
         if (EaLibrary.EaLauncherPath == null)
         {
             MessageBoxService.Instance.ShowMessageBox("The EA launcher could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+
+        if (!Processes.IsProcessWithNameRunning("EADesktop"))
+        {
+            MessageBoxService.Instance.ShowMessageBox(
+                "EA Desktop is not running. Please open it, then try again.",
+                "Warning",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
             return;
         }
 

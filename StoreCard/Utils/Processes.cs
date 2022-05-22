@@ -17,4 +17,9 @@ internal class Processes
             }
         }
     }
+
+    public static bool IsProcessWithNameRunning(string name)
+    {
+        return Process.GetProcessesByName(name).Any();
+    }
 }

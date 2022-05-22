@@ -29,13 +29,13 @@ internal class EaLibrary : GameLibrary
 
         if (gameListKey == null) yield break;
 
-        foreach (string gameId in gameListKey.GetSubKeyNames())
+        foreach (string appId in gameListKey.GetSubKeyNames())
         {
-            using RegistryKey? gameKey = gameListKey.OpenSubKey(gameId);
+            using RegistryKey? gameKey = gameListKey.OpenSubKey(appId);
 
             if (gameKey?.GetValue("DisplayName") is not string gameName) continue;
 
-            yield return new InstalledEaGame(gameName, gameId, null);
+            yield return new InstalledEaGame(gameName, appId, null);
         }
     }
 }

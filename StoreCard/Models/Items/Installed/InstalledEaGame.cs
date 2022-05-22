@@ -6,11 +6,11 @@ namespace StoreCard.Models.Items.Installed;
 
 internal class InstalledEaGame : InstalledGame
 {
-    public readonly string GameId;
+    public readonly string AppId;
 
-    public InstalledEaGame(string name, string gameId, BitmapSource? bitmapIcon) : base(name, bitmapIcon)
+    public InstalledEaGame(string name, string appId, BitmapSource? bitmapIcon) : base(name, bitmapIcon)
     {
-        GameId = gameId;
+        AppId = appId;
     }
 
     public override SavedItem SavedItem => new SavedEaGame(this);
