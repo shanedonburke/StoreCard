@@ -14,11 +14,11 @@ internal class AppData
 {
     public static List<SavedItem> ReadItemsFromFile()
     {
-        var filePath = GetItemsFilePath();
+        string filePath = GetItemsFilePath();
 
         if (!File.Exists(filePath)) return new List<SavedItem>();
 
-        var json = File.ReadAllText(filePath);
+        string json = File.ReadAllText(filePath);
         {
             List<SavedItem>? savedItems = null;
             try
@@ -37,11 +37,11 @@ internal class AppData
 
     public static UserConfig ReadConfigFromFile()
     {
-        var filePath = GetConfigFilePath();
+        string filePath = GetConfigFilePath();
 
         if (!File.Exists(filePath)) return new UserConfig();
 
-        var json = File.ReadAllText(filePath);
+        string json = File.ReadAllText(filePath);
         return JsonConvert.DeserializeObject<UserConfig>(json) ?? new UserConfig();
     }
 
@@ -88,7 +88,7 @@ internal class AppData
     {
         Directory.CreateDirectory(Path.GetDirectoryName(filePath) ??
                                   throw new InvalidOperationException($"Could not get directory name for {filePath}"));
-        var json = JsonConvert.SerializeObject(objectToSave,
+        string json = JsonConvert.SerializeObject(objectToSave,
             new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
         File.WriteAllText(filePath, json);
     }

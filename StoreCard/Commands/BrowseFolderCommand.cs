@@ -15,6 +15,7 @@ internal class BrowseFolderCommand : IStoreCardCommand<string?>
         {
             RootFolder = Environment.SpecialFolder.UserProfile
         };
+
         return dialog.ShowDialog() == true ? dialog.SelectedPath : null;
     }
 }

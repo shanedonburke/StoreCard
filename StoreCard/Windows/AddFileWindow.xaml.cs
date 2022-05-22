@@ -91,14 +91,18 @@ public partial class AddFileWindow : INotifyPropertyChanged
 
     private void BrowseFileButton_Click(object sender, RoutedEventArgs e)
     {
-        var filePath = new BrowseFileCommand().Execute();
-        if (filePath != null) FilePathBox.Text = filePath;
+        if (new BrowseFileCommand().Execute() is { } filePath)
+        {
+            FilePathBox.Text = filePath;
+        }
     }
 
     private void BrowseFolderButton_Click(object sender, RoutedEventArgs e)
     {
-        var folderPath = new BrowseFolderCommand().Execute();
-        if (folderPath != null) FolderPathBox.Text = folderPath;
+        if (new BrowseFolderCommand().Execute() is { } folderPath)
+        {
+            FolderPathBox.Text = folderPath;
+        }
     }
 
     private void SaveFileButton_Click(object sender, RoutedEventArgs e)

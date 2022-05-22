@@ -91,14 +91,18 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     private void BrowseFile()
     {
-        var filePath = new BrowseFileCommand().Execute();
-        if (filePath != null) PathBox.Text = filePath;
+        if (new BrowseFileCommand().Execute() is { } filePath)
+        {
+            PathBox.Text = filePath;
+        }
     }
 
     private void BrowseFolder()
     {
-        var folderPath = new BrowseFolderCommand().Execute();
-        if (folderPath != null) PathBox.Text = folderPath;
+        if (new BrowseFolderCommand().Execute() is { } folderPath)
+        {
+            PathBox.Text = folderPath;
+        }
     }
 
     private void OnNameChanged()

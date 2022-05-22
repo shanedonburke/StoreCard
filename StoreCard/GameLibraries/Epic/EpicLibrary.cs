@@ -14,7 +14,7 @@ internal class EpicLibrary : GameLibrary
 {
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
-        string programDataFolder = Environment.ExpandEnvironmentVariables("%ProgramData%");
+        string programDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
 
         string launcherInstalledPath = Path.Combine(programDataFolder,
             @"Epic\UnrealEngineLauncher\LauncherInstalled.dat");

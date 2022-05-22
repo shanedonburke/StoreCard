@@ -10,6 +10,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using StoreCard.Commands;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
 using StoreCard.Utils;
@@ -133,14 +134,10 @@ public partial class ExecutableSelector : INotifyPropertyChanged
 
     private void BrowseButton_Click(object sender, RoutedEventArgs e)
     {
-        var openFileDialog = new OpenFileDialog
+        if (new BrowseExecutableCommand().Execute() is { } fileName)
         {
-            Filter = "Executables|*.exe",
-            InitialDirectory = Environment.ExpandEnvironmentVariables("%ProgramW6432%"),
-            Title = "Select Executable"
-        };
-
-        if (openFileDialog.ShowDialog() == true) PathBox.Text = openFileDialog.FileName;
+            PathBox.Text = fileName;
+        }
     }
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
