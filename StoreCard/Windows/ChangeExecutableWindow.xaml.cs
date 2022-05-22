@@ -97,9 +97,9 @@ namespace StoreCard.Windows
 
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (new BrowseExecutableCommand().Execute() is { } fileName)
+            if (new BrowseExecutableCommand().Execute() is { } filePath)
             {
-                ExecutablePathBox.Text = fileName;
+                ExecutablePathBox.Text = filePath;
             }
         }
 
