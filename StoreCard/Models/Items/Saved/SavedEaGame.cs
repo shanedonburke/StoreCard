@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using Newtonsoft.Json;
-using StoreCard.GameLibraries;
 using StoreCard.GameLibraries.Ea;
 using StoreCard.Models.Items.Installed;
 using StoreCard.Services;
@@ -60,6 +59,7 @@ internal class SavedEaGame : SavedGame
             return;
         }
 
-        Process.Start(launcher.LauncherPath, $"origin://LaunchGame/{AppId}");
+        // If `LauncherPath` is null, `GetLauncher()` will have already returned null
+        Process.Start(launcher.LauncherPath!, $"origin://LaunchGame/{AppId}");
     }
 }
