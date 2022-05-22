@@ -10,15 +10,7 @@ namespace StoreCard.Services;
 
 internal class HotKeyService
 {
-    static HotKeyService()
-    {
-    }
-
-    private HotKeyService()
-    {
-    }
-
-    public static HotKeyService Instance { get; } = new();
+    public static readonly HotKeyService Instance = new();
 
     private const int HotKeyId = 9000;
 
@@ -29,6 +21,14 @@ internal class HotKeyService
     private Window? _registeredWindow;
 
     private HwndSource? _source;
+
+    static HotKeyService()
+    {
+    }
+
+    private HotKeyService()
+    {
+    }
 
     // See https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerhotkey
     // and https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes

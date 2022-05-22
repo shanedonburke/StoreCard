@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using Newtonsoft.Json;
 using StoreCard.GameLibraries.BattleNet;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Services;
 using StoreCard.Utils;
 using File = System.IO.File;
 
@@ -15,7 +17,8 @@ internal class SavedBattleNetGame : SavedGame
     public readonly string GameId;
 
     [JsonConstructor]
-    public SavedBattleNetGame(string id, string name, string? base64Icon, long lastOpened, string gameId) : base(id, name, base64Icon, lastOpened)
+    public SavedBattleNetGame(string id, string name, string? base64Icon, long lastOpened, string gameId) : base(id,
+        name, base64Icon, lastOpened)
     {
         GameId = gameId;
     }
@@ -35,7 +38,15 @@ internal class SavedBattleNetGame : SavedGame
     {
         if (BattleNetLibrary.BattleNetInstallFolder == null)
         {
-            MessageBox.Show("The Battle.net installation folder could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show("The Battle.net installation folder could not be found.", "Error", MessageBoxButton.OK,
+                MessageBoxImage.Error);
+            return;
+        }
+
+        if (!Process.GetProcessesByName("Battle.net").Any())
+        {
+            MessageBoxService.Instance.ShowMessageBox("The Battle.net launcher is not running. Please open it, then try again.", "Warning",
+                MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
 
