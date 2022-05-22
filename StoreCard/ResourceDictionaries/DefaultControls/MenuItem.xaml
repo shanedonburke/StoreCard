@@ -22,7 +22,7 @@
                                         Value="True">
                                         <Setter
                                             Property="Background"
-                                            Value="#eaeaea"></Setter>
+                                            Value="#e0e0e0"></Setter>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
