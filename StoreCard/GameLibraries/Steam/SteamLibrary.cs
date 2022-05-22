@@ -63,9 +63,8 @@ internal class SteamLibrary : GameLibrary
             .ToList();
 
         foreach (string? manifestPath in steamAppsFolderPaths
-                     .Select(appsFolderPath =>
-                         Directory.GetFiles(appsFolderPath, "*.acf", SearchOption.TopDirectoryOnly))
-                     .SelectMany(appManifestPaths => appManifestPaths))
+                     .SelectMany(appsFolderPath => new SafeFileEnumerator(appsFolderPath, "*.acf", SearchOption.TopDirectoryOnly))
+                     .Select(fileInfo => fileInfo.FullName))
         {
             var manifest = KeyValue.LoadFromString(File.ReadAllText(manifestPath));
             if (manifest == null) continue;

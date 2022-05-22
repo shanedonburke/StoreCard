@@ -16,9 +16,12 @@ internal class ThemeFinder
 
     public static List<string> FindThemes()
     {
-        string[] files = Directory.GetFiles(Path.Combine(
-            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!,
-            @"ResourceDictionaries\Themes"));
+        IEnumerable<string> files = new SafeFileEnumerator(
+            Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)!,
+                @"ResourceDictionaries\Themes"),
+            "*.xaml",
+            SearchOption.TopDirectoryOnly).Select(info => info.FullName);
 
         var themeNames =
             (from file in files

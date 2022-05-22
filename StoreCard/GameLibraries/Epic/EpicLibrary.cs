@@ -7,6 +7,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Epic;
 
@@ -25,16 +26,20 @@ internal class EpicLibrary : GameLibrary
             yield break;
         }
 
-        if (JsonConvert.DeserializeObject<EpicLauncherInstalled>(File.ReadAllText(launcherInstalledPath)) is not { } launcherInstalled)
+        if (JsonConvert.DeserializeObject<EpicLauncherInstalled>(
+                File.ReadAllText(launcherInstalledPath)) is not { } launcherInstalled)
         {
             yield break;
         }
 
         var appNames = launcherInstalled.InstallationList.Select(app => app.AppName).ToList();
 
-        string[] manifestPaths = Directory.GetFiles(manifestFolderPath, "*.item");
+        IEnumerable<string> manifestPaths =
+            new SafeFileEnumerator(manifestFolderPath, "*.item", SearchOption.TopDirectoryOnly)
+                .Select(info => info.FullName);
 
-        foreach (string manifestPath in manifestPaths) {
+        foreach (string manifestPath in manifestPaths)
+        {
             if (JsonConvert.DeserializeObject<EpicManifest>(File.ReadAllText(manifestPath)) is not { } manifest)
             {
                 yield break;
