@@ -38,7 +38,7 @@ internal class SavedBattleNetGame : SavedGame
     {
         if (BattleNetLibrary.BattleNetInstallFolder == null)
         {
-            MessageBox.Show("The Battle.net installation folder could not be found.", "Error", MessageBoxButton.OK,
+            MessageBoxService.Instance.ShowMessageBox("The Battle.net installation folder could not be found.", "Error", MessageBoxButton.OK,
                 MessageBoxImage.Error);
             return;
         }

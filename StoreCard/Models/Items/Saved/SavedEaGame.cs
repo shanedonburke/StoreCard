@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using StoreCard.GameLibraries;
 using StoreCard.GameLibraries.Ea;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Services;
 using StoreCard.Static;
 using StoreCard.Utils;
 
@@ -39,7 +40,7 @@ internal class SavedEaGame : SavedGame
     {
         if (EaLibrary.EaLauncherPath == null)
         {
-            MessageBox.Show("The EA launcher could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBoxService.Instance.ShowMessageBox("The EA launcher could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 

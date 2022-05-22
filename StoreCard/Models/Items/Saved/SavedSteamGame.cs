@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using StoreCard.GameLibraries;
 using StoreCard.GameLibraries.Steam;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Services;
 using StoreCard.Static;
 using StoreCard.Utils;
 
@@ -45,7 +46,8 @@ internal class SavedSteamGame : SavedGame
     {
         if (SteamLibrary.SteamInstallFolder == null)
         {
-            MessageBox.Show("The Steam installation folder could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBoxService.Instance.ShowMessageBox("The Steam installation folder could not be found.", "Error",
+                MessageBoxButton.OK, MessageBoxImage.Error);
             return;
         }
 
