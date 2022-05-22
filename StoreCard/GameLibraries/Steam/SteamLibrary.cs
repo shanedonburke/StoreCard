@@ -67,7 +67,6 @@ internal class SteamLibrary : GameLibrary
                          Directory.GetFiles(appsFolderPath, "*.acf", SearchOption.TopDirectoryOnly))
                      .SelectMany(appManifestPaths => appManifestPaths))
         {
-            Debug.WriteLine(IsFileReady(manifestPath));
             var manifest = KeyValue.LoadFromString(File.ReadAllText(manifestPath));
             if (manifest == null) continue;
 
