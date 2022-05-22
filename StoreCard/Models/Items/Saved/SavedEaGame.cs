@@ -40,7 +40,11 @@ internal class SavedEaGame : SavedGame
     {
         if (EaLibrary.EaLauncherPath == null)
         {
-            MessageBoxService.Instance.ShowMessageBox("The EA launcher could not be found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBoxService.Instance.ShowMessageBox(
+                "The EA launcher could not be found.",
+                "Error",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
             return;
         }
 
