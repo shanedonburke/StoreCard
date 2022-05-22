@@ -113,7 +113,7 @@ namespace StoreCard.Windows
             else
             {
                 SetExecPathAndSave(AppSelector.SelectedApp.ExecutablePath
-                                  ?? SavedFileSystemItem.DefaultExecutable);
+                    ?? SavedFileSystemItem.DefaultExecutable);
             }
 
             Close();
