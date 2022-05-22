@@ -6,14 +6,31 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using SteamKit2;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Steam;
 
 internal class SteamLibrary : GameLibrary
 {
     public static readonly string? SteamInstallFolder =
-        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Valve\Steam", "InstallPath", null) as string ??
-        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "InstallPath", null) as string;
+        Registry.GetValue(
+            RegUtils.BuildRegistryPath(
+                RegUtils.Keys.HkeyLocalMachine,
+                RegUtils.Paths.Software32,
+                "Valve",
+                "Steam"
+            ),
+            "InstallPath",
+            null) as string ??
+        Registry.GetValue(
+            RegUtils.BuildRegistryPath(
+                RegUtils.Keys.HkeyLocalMachine,
+                RegUtils.Paths.Software64,
+                "Valve",
+                "Steam"
+            ),
+            "InstallPath",
+            null) as string;
 
     private static bool IsFileReady(string filename)
     {

@@ -30,8 +30,7 @@ internal class Shortcuts
             return null;
         }
 
-        var regKey = Registry.CurrentUser.OpenSubKey
-            (@"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder", true);
+        RegistryKey? regKey = Registry.CurrentUser.OpenSubKey(RegUtils.Paths.StartupFolder64, true);
 
         if (regKey?.GetValue("StoreCard.lnk") is byte[] { Length: > 0 } regValue) {
             return regValue[0] == 0x2;
@@ -41,10 +40,10 @@ internal class Shortcuts
     }
 
     private static void CreateShortcut(string folder, string arguments = "") {
-        var wshShell = new WshShell();
+        WshShell wshShell = new WshShell();
 
         // Create the shortcut
-        var shortcut = (IWshShortcut)wshShell.CreateShortcut(
+        IWshShortcut? shortcut = (IWshShortcut)wshShell.CreateShortcut(
             Path.Join(folder, Application.ProductName + ".lnk"));
 
         shortcut.TargetPath = Application.ExecutablePath;

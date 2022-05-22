@@ -4,20 +4,29 @@
 using System.Collections.Generic;
 using Microsoft.Win32;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Ea;
 
 internal class EaLibrary : GameLibrary
 {
     public static readonly string? EaLauncherPath =
-        Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Electronic Arts\EA Desktop", "LauncherAppPath",
+        Registry.GetValue(
+            RegUtils.BuildRegistryPath(
+                RegUtils.Keys.HkeyLocalMachine,
+                RegUtils.Paths.Software32,
+                "Electronic Arts",
+                "EA Desktop"),
+            "LauncherAppPath",
             null) as string;
 
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
         if (EaLauncherPath == null) yield break;
 
-        using RegistryKey? gameListKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Origin Games");
+        using RegistryKey? gameListKey = Registry.LocalMachine.OpenSubKey(
+            RegUtils.BuildRegistryPath(RegUtils.Paths.Software32, "Origin Games"));
+
         if (gameListKey == null) yield break;
 
         foreach (string gameId in gameListKey.GetSubKeyNames())

@@ -10,19 +10,25 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using StoreCard.Models.Items.Installed;
 using StoreCard.Static;
+using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.BattleNet;
 
 internal class BattleNetLibrary : GameLibrary
 {
-    public static readonly string? BattleNetInstallFolder =
-        Registry.GetValue($"HKEY_LOCAL_MACHINE\\{RegistryKeys.SoftwareUninstall32}\\Battle.net", "InstallLocation", null) as string;
+    public static readonly string? BattleNetInstallFolder = Registry.GetValue(
+        RegUtils.BuildRegistryPath(
+            RegUtils.Keys.HkeyLocalMachine,
+            RegUtils.Paths.Uninstall32,
+            "Battle.net"),
+        "InstallLocation",
+        null) as string;
 
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
         if (BattleNetInstallFolder == null) yield break;
 
-        using RegistryKey? uninstallKey = Registry.LocalMachine.OpenSubKey(RegistryKeys.SoftwareUninstall32);
+        using RegistryKey? uninstallKey = Registry.LocalMachine.OpenSubKey(RegUtils.Paths.Uninstall32);
         if (uninstallKey == null) yield break;
 
         foreach (string programKeyName in uninstallKey.GetSubKeyNames())
