@@ -18,6 +18,7 @@ using StoreCard.GameLibraries;
 using StoreCard.GameLibraries.BattleNet;
 using StoreCard.GameLibraries.Ea;
 using StoreCard.GameLibraries.Epic;
+using StoreCard.GameLibraries.Itch;
 using StoreCard.GameLibraries.Steam;
 using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Saved;
@@ -135,6 +136,11 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         }
 
         foreach (InstalledGame game in new BattleNetLibrary().GetInstalledGames())
+        {
+            GameListBox.AddItem(game);
+        }
+
+        foreach (InstalledGame game in new ItchLibrary().GetInstalledGames())
         {
             GameListBox.AddItem(game);
         }
