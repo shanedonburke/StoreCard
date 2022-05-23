@@ -34,9 +34,10 @@ internal class EpicLibrary : GameLibrary
 
         var appNames = launcherInstalled.InstallationList.Select(app => app.AppName).ToList();
 
-        IEnumerable<string> manifestPaths =
-            new SafeFileEnumerator(manifestFolderPath, "*.item", SearchOption.TopDirectoryOnly)
-                .Select(info => info.FullName);
+        IEnumerable<string> manifestPaths = Directory.EnumerateFiles(
+            manifestFolderPath,
+            "*.item",
+            SearchOption.TopDirectoryOnly);
 
         foreach (string manifestPath in manifestPaths)
         {
