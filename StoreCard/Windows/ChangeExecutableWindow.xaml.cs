@@ -15,142 +15,141 @@ using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
 using StoreCard.Utils;
 
-namespace StoreCard.Windows
+namespace StoreCard.Windows;
+
+/// <summary>
+/// Interaction logic for ChangeExecutableWindow.xaml
+/// </summary>
+public partial class ChangeExecutableWindow : INotifyPropertyChanged
 {
-    /// <summary>
-    /// Interaction logic for ChangeExecutableWindow.xaml
-    /// </summary>
-    public partial class ChangeExecutableWindow : INotifyPropertyChanged
+    private readonly SavedFileSystemItem _item;
+
+    private bool _doesExecutableExist;
+
+    private ImageSource? _executableIcon;
+
+    private string _executableName = "";
+
+    public string ExecutableName
     {
-        private readonly SavedFileSystemItem _item;
-
-        private bool _doesExecutableExist;
-
-        private ImageSource? _executableIcon;
-
-        private string _executableName = "";
-
-        public string ExecutableName
+        get => _executableName;
+        set
         {
-            get => _executableName;
-            set
-            {
-                _executableName = value;
-                OnPropertyChanged(nameof(ExecutableName));
-            }
+            _executableName = value;
+            OnPropertyChanged(nameof(ExecutableName));
         }
+    }
 
-        public bool DoesExecutableExist
+    public bool DoesExecutableExist
+    {
+        get => _doesExecutableExist;
+        set
         {
-            get => _doesExecutableExist;
-            set
-            {
-                _doesExecutableExist = value;
-                OnPropertyChanged(nameof(DoesExecutableExist));
-            }
+            _doesExecutableExist = value;
+            OnPropertyChanged(nameof(DoesExecutableExist));
         }
+    }
 
-        public ImageSource? ExecutableIcon
+    public ImageSource? ExecutableIcon
+    {
+        get => _executableIcon;
+        set
         {
-            get => _executableIcon;
-            set
-            {
-                _executableIcon = value;
-                OnPropertyChanged(nameof(ExecutableIcon));
-            }
+            _executableIcon = value;
+            OnPropertyChanged(nameof(ExecutableIcon));
         }
+    }
 
-        public ChangeExecutableWindow(SavedFileSystemItem item)
+    public ChangeExecutableWindow(SavedFileSystemItem item)
+    {
+        _item = item;
+        InitializeComponent();
+        DataContext = this;
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void SaveDefaultButton_Click(object sender, RoutedEventArgs e)
+    {
+        SetExecPathAndSave(SavedFileSystemItem.DefaultExecutable);
+
+        Close();
+    }
+
+    private void CancelButton_Click(object sender, RoutedEventArgs e)
+    {
+        DialogResult = false;
+        Close();
+    }
+
+    [NotifyPropertyChangedInvocator]
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
+    {
+        SetExecPathAndSave(ExecutablePathBox.Text);
+
+        Close();
+    }
+
+    private void BrowseButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (new BrowseExecutableCommand().Execute() is { } filePath)
         {
-            _item = item;
-            InitializeComponent();
-            DataContext = this;
+            ExecutablePathBox.Text = filePath;
         }
+    }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void SaveDefaultButton_Click(object sender, RoutedEventArgs e)
+    private void SaveSelectedAppAndClose()
+    {
+        if (AppSelector.SelectedApp == null)
         {
-            SetExecPathAndSave(SavedFileSystemItem.DefaultExecutable);
-
-            Close();
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
+            Debug.WriteLine("Tried to save app, but no app was selected.");
             DialogResult = false;
-            Close();
         }
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        else
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            SetExecPathAndSave(AppSelector.SelectedApp.ExecutablePath
+                               ?? SavedFileSystemItem.DefaultExecutable);
         }
 
-        private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
+        Close();
+    }
+
+    private void SetExecPathAndSave(string path)
+    {
+        if (AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.SetExecutablePath(path)) != null)
         {
-            SetExecPathAndSave(ExecutablePathBox.Text);
-
-            Close();
+            DialogResult = true;
         }
+    }
 
-        private void BrowseButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (new BrowseExecutableCommand().Execute() is { } filePath)
-            {
-                ExecutablePathBox.Text = filePath;
-            }
-        }
+    private void ExecutablePathBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var text = ExecutablePathBox.Text;
+        DoesExecutableExist = File.Exists(text);
+        if (!DoesExecutableExist) return;
+        // Take file name without '.exe'
+        ExecutableName = text.Split(@"\").Last();
 
-        private void SaveSelectedAppAndClose()
-        {
-            if (AppSelector.SelectedApp == null)
-            {
-                Debug.WriteLine("Tried to save app, but no app was selected.");
-                DialogResult = false;
-            }
-            else
-            {
-                SetExecPathAndSave(AppSelector.SelectedApp.ExecutablePath
-                    ?? SavedFileSystemItem.DefaultExecutable);
-            }
+        var icon = System.Drawing.Icon.ExtractAssociatedIcon(text);
+        if (icon != null)
+            ExecutableIcon = Imaging.CreateBitmapSourceFromHIcon(
+                icon.Handle,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
+    }
 
-            Close();
-        }
+    private void AppSelector_SaveButtonClick(object sender, RoutedEventArgs e)
+    {
+        SaveSelectedAppAndClose();
+    }
 
-        private void SetExecPathAndSave(string path)
-        {
-            if (AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.SetExecutablePath(path)) != null)
-            {
-                DialogResult = true;
-            }
-        }
-
-        private void ExecutablePathBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var text = ExecutablePathBox.Text;
-            DoesExecutableExist = File.Exists(text);
-            if (!DoesExecutableExist) return;
-            // Take file name without '.exe'
-            ExecutableName = text.Split(@"\").Last();
-
-            var icon = System.Drawing.Icon.ExtractAssociatedIcon(text);
-            if (icon != null)
-                ExecutableIcon = Imaging.CreateBitmapSourceFromHIcon(
-                    icon.Handle,
-                    Int32Rect.Empty,
-                    BitmapSizeOptions.FromEmptyOptions());
-        }
-
-        private void AppSelector_SaveButtonClick(object sender, RoutedEventArgs e)
-        {
-            SaveSelectedAppAndClose();
-        }
-
-        private void AppSelector_CancelButtonClick(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+    private void AppSelector_CancelButtonClick(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 }

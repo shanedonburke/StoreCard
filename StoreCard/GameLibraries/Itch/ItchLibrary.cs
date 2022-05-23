@@ -36,7 +36,8 @@ internal class ItchLibrary : GameLibrary
             StartInfo = new ProcessStartInfo
             {
                 FileName = butlerExecPath,
-                Arguments = $@"daemon --json --transport tcp --dbpath ""{dbPath}"" --keep-alive",
+                Arguments =
+                    $"daemon --keep-alive --json --transport tcp --dbpath \"{dbPath}\" --destiny-pid {Environment.ProcessId}",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -74,45 +75,39 @@ internal class ItchLibrary : GameLibrary
         {
             {"jsonrpc", "2.0"},
             {"method", "Meta.Authenticate"},
+            {"id", 0},
             {"params", new Dictionary<string, string> {{"secret", listenNotif.Secret}}}
         };
         string authReqJson = JsonConvert.SerializeObject(authReq);
-        byte[] utf8Bytes = Encoding.UTF8.GetBytes(authReqJson);
+        byte[] utf8Bytes = Encoding.UTF8.GetBytes(authReqJson + "\n");
         string ascii = Encoding.ASCII.GetString(utf8Bytes);
 
-        TcpClient tcpClient = new();
-        tcpClient.ReceiveTimeout = -1;
-        tcpClient.SendTimeout = -1;
-        tcpClient.Connect(server, int.Parse(port));
-        NetworkStream stream = tcpClient.GetStream();
-        using StreamWriter writer = new(stream, Encoding.ASCII);
-        writer.AutoFlush = true;
-        Thread.Sleep(100);
-        writer.WriteLine(ascii);
+        Socket socket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        socket.Connect(server, int.Parse(port));
+        socket.Send(Encoding.ASCII.GetBytes(ascii));
         // tcpClient.GetStream().Write(authReqBytes, 0, authReqBytes.Length);
-        Thread.Sleep(100);
 
         Dictionary<string, object> cavesReq = new()
         {
-            { "jsonrpc", "2.0" },
-            { "method", "Version.Get" },
-            { "params", new Dictionary<string, string>() }
+            {"jsonrpc", "2.0"}, {"method", "Fetch.Caves"}, {"id", 1}, {"params", new Dictionary<string, string>()}
         };
         string reqJson = JsonConvert.SerializeObject(cavesReq);
-        byte[] cutf8Bytes = Encoding.UTF8.GetBytes(reqJson);
+        byte[] cutf8Bytes = Encoding.UTF8.GetBytes(reqJson + "\n");
         string cascii = Encoding.ASCII.GetString(cutf8Bytes);
-        writer.WriteLine(cascii);
+        socket.Send(Encoding.ASCII.GetBytes(cascii));
 
         // using StreamReader reader = new(tcpClient.GetStream(), Encoding.ASCII);
-        char[] buffer = new char[1024];
+        byte[] buffer = new byte[1024];
 
-        using StreamReader reader = new StreamReader(stream);
+        // using StreamReader reader = new StreamReader(stream);
 
         while (true)
         {
-            Thread.Sleep(100);
-
-            Debug.WriteLine(stream.DataAvailable);
+            if (socket.Receive(buffer) > 0)
+            {
+                Debug.WriteLine(Encoding.ASCII.GetString(buffer));
+            }
         }
+        Debug.WriteLine("Done");
     }
 }
