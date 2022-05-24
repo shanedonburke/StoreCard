@@ -11,6 +11,7 @@ using Microsoft.Win32;
 using StoreCard.Models.Items.Installed;
 using StoreCard.Static;
 using StoreCard.Utils;
+using SystemIcons = StoreCard.Utils.SystemIcons;
 
 namespace StoreCard.GameLibraries.BattleNet;
 
@@ -50,13 +51,7 @@ internal class BattleNetLibrary : GameLibrary
 
             if (programKey.GetValue("DisplayIcon") is not string displayIconPath) continue;
 
-            if (Icon.ExtractAssociatedIcon(displayIconPath) is not {} hIcon) continue;
-
-            BitmapSource icon = Imaging.CreateBitmapSourceFromHIcon(
-                hIcon!.Handle,
-                Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());
-            icon.Freeze();
+            if (SystemIcons.GetFileIconByPath(displayIconPath) is not { } icon) continue;
 
             yield return new InstalledBattleNetGame(displayName, icon, gameId);
         }

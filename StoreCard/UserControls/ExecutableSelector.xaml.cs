@@ -119,12 +119,10 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         ExecutableName = text.Split(@"\").Last().Split(".")[0];
         NameBox.Text = ExecutableName;
 
-        var icon = System.Drawing.Icon.ExtractAssociatedIcon(text);
-        if (icon != null)
-            ExecutableIcon = Imaging.CreateBitmapSourceFromHIcon(
-                icon.Handle,
-                Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());
+        if (SystemIcons.GetFileIconByPath(text) is { } icon)
+        {
+            ExecutableIcon = icon;
+        }
     }
 
     private void NameBox_TextChanged(object sender, TextChangedEventArgs e)

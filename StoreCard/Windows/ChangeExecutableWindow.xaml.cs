@@ -135,12 +135,10 @@ public partial class ChangeExecutableWindow : INotifyPropertyChanged
         // Take file name without '.exe'
         ExecutableName = text.Split(@"\").Last();
 
-        var icon = System.Drawing.Icon.ExtractAssociatedIcon(text);
-        if (icon != null)
-            ExecutableIcon = Imaging.CreateBitmapSourceFromHIcon(
-                icon.Handle,
-                Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());
+        if (SystemIcons.GetFileIconByPath(text) is { } icon)
+        {
+            ExecutableIcon = icon;
+        }
     }
 
     private void AppSelector_SaveButtonClick(object sender, RoutedEventArgs e)

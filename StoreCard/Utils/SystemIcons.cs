@@ -15,14 +15,17 @@ namespace StoreCard.Utils;
 
 internal class SystemIcons
 {
-    public static ImageSource? GetFileIconByPath(string path)
+    public static BitmapSource? GetFileIconByPath(string path)
     {
-        var icon = Icon.ExtractAssociatedIcon(path);
-        if (icon == null) return null;
-        return Imaging.CreateBitmapSourceFromHIcon(
-            icon.Handle,
+        var hIcon = Icon.ExtractAssociatedIcon(path);
+        if (hIcon == null) return null;
+
+        BitmapSource icon = Imaging.CreateBitmapSourceFromHIcon(
+            hIcon.Handle,
             Int32Rect.Empty,
             BitmapSizeOptions.FromEmptyOptions());
+        icon.Freeze();
+        return icon;
     }
 
     public static ImageSource GetFolderIconByPath(string path)

@@ -153,9 +153,16 @@ internal class ButlerClient
             return default;
         }
 
-        return JsonConvert.DeserializeObject<ButlerResponse<TResult>>(jsonRes, new JsonSerializerSettings
+        try
         {
-            MissingMemberHandling = MissingMemberHandling.Ignore
-        }) is { } res ? res.Result : default;
+            return JsonConvert.DeserializeObject<ButlerResponse<TResult>>(jsonRes, new JsonSerializerSettings
+            {
+                MissingMemberHandling = MissingMemberHandling.Ignore
+            }) is { } res ? res.Result : default;
+        }
+        catch (JsonSerializationException)
+        {
+            return default;
+        }
     }
 }

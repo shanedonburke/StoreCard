@@ -8,7 +8,7 @@ internal class InstalledEaGame : InstalledGame
 {
     public readonly string AppId;
 
-    public InstalledEaGame(string name, string appId, BitmapSource? bitmapIcon) : base(name, bitmapIcon)
+    public InstalledEaGame(string name, BitmapSource? bitmapIcon, string appId) : base(name, bitmapIcon)
     {
         AppId = appId;
     }

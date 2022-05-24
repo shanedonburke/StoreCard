@@ -25,7 +25,7 @@ internal class EaLibrary : GameLibrary
 
             if (gameKey?.GetValue("DisplayName") is not string gameName) continue;
 
-            yield return new InstalledEaGame(gameName, appId, null);
+            yield return new InstalledEaGame(gameName, null, appId);
         }
     }
 }

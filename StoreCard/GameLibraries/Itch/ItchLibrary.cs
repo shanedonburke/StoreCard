@@ -4,15 +4,20 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 using StoreCard.Models.Items.Installed;
 using StoreCard.Utils;
+using SystemIcons = System.Drawing.SystemIcons;
 
 namespace StoreCard.GameLibraries.Itch;
 
@@ -21,23 +26,24 @@ internal class ItchLibrary : GameLibrary
     private static readonly string s_dataFolder =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "itch");
 
+    public static readonly string? ButlerExecPath = Directory.EnumerateFiles(
+        Path.Combine(s_dataFolder, @"broth\butler\versions"),
+        "butler.exe",
+        SearchOption.AllDirectories).ToList().FirstOrDefault();
+
+    public static readonly string ButlerDbPath = Path.Combine(s_dataFolder, @"db\butler.db");
+
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
-        string butlerRoot = Path.Combine(s_dataFolder, @"broth\butler\versions");
-        string? butlerExecPath = Directory.EnumerateFiles(
-            butlerRoot,
-            "butler.exe",
-            SearchOption.AllDirectories).ToList().FirstOrDefault();
-        if (butlerExecPath == null) yield break;
+        if (ButlerExecPath == null) yield break;
 
-        string dbPath = Path.Combine(s_dataFolder, @"db\butler.db");
         Process butlerProc = new()
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = butlerExecPath,
+                FileName = ButlerExecPath,
                 Arguments =
-                    $"daemon --keep-alive --json --transport tcp --dbpath \"{dbPath}\" --destiny-pid {Environment.ProcessId}",
+                    $"daemon --keep-alive --json --transport tcp --dbpath \"{ButlerDbPath}\" --destiny-pid {Environment.ProcessId}",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -47,7 +53,7 @@ internal class ItchLibrary : GameLibrary
 
         butlerProc.Start();
 
-        ButlerClient client = new(butlerExecPath, dbPath, butlerProc);
+        ButlerClient client = new(ButlerExecPath, ButlerDbPath, butlerProc);
         client.Start();
 
         if (!client.Authenticate())
@@ -62,9 +68,29 @@ internal class ItchLibrary : GameLibrary
             yield break;
         }
 
-        foreach (var cave in caves)
+        foreach (ButlerCave cave in caves)
         {
-            Debug.WriteLine(cave.Id);
+            string installFolder = cave.InstallInfo.InstallFolder;
+
+            BitmapSource? icon = null;
+
+            foreach (string exePath in Directory.EnumerateFiles(installFolder, "*.exe", SearchOption.AllDirectories))
+            {
+                Icon? hIcon = Icon.ExtractAssociatedIcon(exePath);
+
+                if (hIcon == SystemIcons.Application)
+                {
+                    continue;
+                }
+
+                icon = Imaging.CreateBitmapSourceFromHIcon(
+                    hIcon!.Handle,
+                    Int32Rect.Empty,
+                    BitmapSizeOptions.FromEmptyOptions());
+                icon.Freeze();
+            }
+
+            yield return new InstalledItchGame(cave.Game.Title, icon, cave.Id);
         }
     }
 }

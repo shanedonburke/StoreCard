@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using StoreCard.GameLibraries.Itch;
 using StoreCard.Models.Items.Installed;
 using StoreCard.Static;
 using StoreCard.Utils;
@@ -41,5 +42,8 @@ internal class SavedItchGame : SavedGame
 
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.ItchGame;
 
-    protected override void OpenProtected() => throw new NotImplementedException();
+    protected override void OpenProtected()
+    {
+    }
+
 }
