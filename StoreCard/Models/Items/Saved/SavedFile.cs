@@ -25,6 +25,6 @@ internal class SavedFile : SavedFileSystemItem
 
     protected override ImageSource? GetSystemIcon()
     {
-        return SystemIcons.GetFileIconByPath(Path);
+        return IconUtils.GetFileIconByPath(Path);
     }
 }

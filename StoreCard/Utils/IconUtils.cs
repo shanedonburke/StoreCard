@@ -13,19 +13,22 @@ using StoreCard.Native;
 
 namespace StoreCard.Utils;
 
-internal class SystemIcons
+internal class IconUtils
 {
+    public static BitmapSource CreateBitmapSourceFromHIcon(Icon icon)
+    {
+        BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHIcon(
+            icon.Handle,
+            Int32Rect.Empty,
+            BitmapSizeOptions.FromEmptyOptions());
+        bitmapSource.Freeze();
+        return bitmapSource;
+    }
+
     public static BitmapSource? GetFileIconByPath(string path)
     {
         var hIcon = Icon.ExtractAssociatedIcon(path);
-        if (hIcon == null) return null;
-
-        BitmapSource icon = Imaging.CreateBitmapSourceFromHIcon(
-            hIcon.Handle,
-            Int32Rect.Empty,
-            BitmapSizeOptions.FromEmptyOptions());
-        icon.Freeze();
-        return icon;
+        return hIcon == null ? null : CreateBitmapSourceFromHIcon(hIcon);
     }
 
     public static ImageSource GetFolderIconByPath(string path)

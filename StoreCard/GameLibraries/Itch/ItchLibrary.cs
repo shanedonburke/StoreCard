@@ -83,11 +83,7 @@ internal class ItchLibrary : GameLibrary
                     continue;
                 }
 
-                icon = Imaging.CreateBitmapSourceFromHIcon(
-                    hIcon!.Handle,
-                    Int32Rect.Empty,
-                    BitmapSizeOptions.FromEmptyOptions());
-                icon.Freeze();
+                icon = IconUtils.CreateBitmapSourceFromHIcon(hIcon ?? SystemIcons.Application);
             }
 
             yield return new InstalledItchGame(cave.Game.Title, icon, cave.Id);

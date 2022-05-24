@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -49,19 +50,15 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
     {
         get
         {
-            var execPath = _item.ExecutablePath;
+            string execPath = _item.ExecutablePath;
             if (!File.Exists(execPath))
             {
                 execPath = SavedFileSystemItem.DefaultExecutable;
             }
 
-            var icon = System.Drawing.Icon.ExtractAssociatedIcon(execPath) ??
-                       System.Drawing.Icon.ExtractAssociatedIcon(SavedFileSystemItem.DefaultExecutable);
-            Debug.Assert(icon != null, nameof(icon) + " != null");
-            return Imaging.CreateBitmapSourceFromHIcon(
-                icon.Handle,
-                Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());
+            Icon? hIcon = System.Drawing.Icon.ExtractAssociatedIcon(execPath) ??
+                          System.Drawing.Icon.ExtractAssociatedIcon(SavedFileSystemItem.DefaultExecutable);
+            return IconUtils.CreateBitmapSourceFromHIcon(hIcon!);
         }
     }
 

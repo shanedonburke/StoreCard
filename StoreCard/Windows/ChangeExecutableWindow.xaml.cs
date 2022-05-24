@@ -135,7 +135,7 @@ public partial class ChangeExecutableWindow : INotifyPropertyChanged
         // Take file name without '.exe'
         ExecutableName = text.Split(@"\").Last();
 
-        if (SystemIcons.GetFileIconByPath(text) is { } icon)
+        if (IconUtils.GetFileIconByPath(text) is { } icon)
         {
             ExecutableIcon = icon;
         }

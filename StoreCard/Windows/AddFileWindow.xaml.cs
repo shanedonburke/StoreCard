@@ -14,7 +14,6 @@ using StoreCard.Commands;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
 using StoreCard.Utils;
-using SystemIcons = StoreCard.Utils.SystemIcons;
 
 namespace StoreCard.Windows;
 
@@ -141,7 +140,7 @@ public partial class AddFileWindow : INotifyPropertyChanged
         DoesFileExist = File.Exists(text);
         if (DoesFileExist)
         {
-            FileIcon = SystemIcons.GetFileIconByPath(text);
+            FileIcon = IconUtils.GetFileIconByPath(text);
         }
 
         OnPropertyChanged(nameof(FileName));
@@ -153,7 +152,7 @@ public partial class AddFileWindow : INotifyPropertyChanged
         DoesFolderExist = Directory.Exists(text);
         if (DoesFolderExist)
         {
-            FolderIcon = SystemIcons.GetFolderIconByPath(text);
+            FolderIcon = IconUtils.GetFolderIconByPath(text);
         }
 
         OnPropertyChanged(nameof(FolderName));
