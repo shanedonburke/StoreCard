@@ -47,66 +47,24 @@ internal class ItchLibrary : GameLibrary
 
         butlerProc.Start();
 
-        ButlerListenNotification? listenNotif = null;
+        ButlerClient client = new(butlerExecPath, dbPath, butlerProc);
+        client.Start();
 
-        while (listenNotif == null)
+        if (!client.Authenticate())
         {
-            string? jsonLine = butlerProc.StandardOutput.ReadLine();
-            if (jsonLine == null) continue;
-            try
-            {
-                listenNotif = JsonConvert.DeserializeObject<ButlerListenNotification>(jsonLine,
-                    new JsonSerializerSettings {MissingMemberHandling = MissingMemberHandling.Error});
-            }
-            catch (JsonSerializationException)
-            {
-            }
-        }
-
-        (string? server, string? port, IEnumerable<string> rest) = listenNotif.Tcp.Address.Split(":");
-
-        if (server == null || port == null)
-        {
-            butlerProc.Kill();
+            Debug.WriteLine("Failed to authenticate with Butler client.");
             yield break;
         }
 
-        Dictionary<string, object> authReq = new()
+        if (client.FetchCaves() is not { } caves)
         {
-            {"jsonrpc", "2.0"},
-            {"method", "Meta.Authenticate"},
-            {"id", 0},
-            {"params", new Dictionary<string, string> {{"secret", listenNotif.Secret}}}
-        };
-        string authReqJson = JsonConvert.SerializeObject(authReq);
-        byte[] utf8Bytes = Encoding.UTF8.GetBytes(authReqJson + "\n");
-        string ascii = Encoding.ASCII.GetString(utf8Bytes);
+            Debug.WriteLine("Failed to fetch caves.");
+            yield break;
+        }
 
-        Socket socket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        socket.Connect(server, int.Parse(port));
-        socket.Send(Encoding.ASCII.GetBytes(ascii));
-        // tcpClient.GetStream().Write(authReqBytes, 0, authReqBytes.Length);
-
-        Dictionary<string, object> cavesReq = new()
+        foreach (var cave in caves)
         {
-            {"jsonrpc", "2.0"}, {"method", "Fetch.Caves"}, {"id", 1}, {"params", new Dictionary<string, string>()}
-        };
-        string reqJson = JsonConvert.SerializeObject(cavesReq);
-        byte[] cutf8Bytes = Encoding.UTF8.GetBytes(reqJson + "\n");
-        string cascii = Encoding.ASCII.GetString(cutf8Bytes);
-        socket.Send(Encoding.ASCII.GetBytes(cascii));
-
-        // using StreamReader reader = new(tcpClient.GetStream(), Encoding.ASCII);
-        byte[] buffer = new byte[8192];
-
-        // using StreamReader reader = new StreamReader(stream);
-
-        while (true)
-        {
-            if (socket.Receive(buffer) > 0)
-            {
-                Debug.WriteLine(Encoding.ASCII.GetString(buffer));
-            }
+            Debug.WriteLine(cave.Id);
         }
     }
 }

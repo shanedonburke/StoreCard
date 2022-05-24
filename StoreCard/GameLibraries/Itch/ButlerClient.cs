@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using StoreCard.Utils;
@@ -53,10 +54,13 @@ internal class ButlerClient
 
     private string? _secret;
 
-    public ButlerClient(string execPath, string dbPath)
+    private Process _process;
+
+    public ButlerClient(string execPath, string dbPath, Process process)
     {
         _execPath = execPath;
         _dbPath = dbPath;
+        _process = process;
     }
 
     private NetworkStream Stream => _tcpClient.GetStream();
@@ -124,21 +128,27 @@ internal class ButlerClient
 
     private TResult? SendRequest<TResult>(string method, Dictionary<string, object> parameters)
     {
+        Thread.Sleep(100);
         Dictionary<string, object> req = new()
         {
-            {"jsonrpc", "2.0"}, {"method", method}, {"id", new Random().Next()}, {"params", parameters}
+            {"jsonrpc", "2.0"}, {"method", method}, {"id", 0}, {"params", parameters}
         };
 
         string json = JsonConvert.SerializeObject(req);
         byte[] utf8Bytes = Encoding.UTF8.GetBytes(json);
         string ascii = Encoding.ASCII.GetString(utf8Bytes);
 
-        using StreamWriter writer = new(Stream);
+        using StreamWriter writer = new(Stream, Encoding.ASCII);
         writer.WriteLine(ascii);
 
-        using StreamReader reader = new(Stream);
+        // while (true)
+        // {
+        //     Debug.WriteLine(_process.StandardOutput.ReadLine());
+        // }
 
-        if (reader.ReadLine() is not { } jsonRes)
+        using StreamReader reader = new(Stream, Encoding.ASCII);
+
+        if (reader.ReadToEnd() is not { } jsonRes)
         {
             return default;
         }
