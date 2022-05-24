@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using StoreCard.Static;
 using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
@@ -11,6 +12,8 @@ internal class SavedFile : SavedFileSystemItem
         : base(id, name, base64Icon, path, executablePath, lastOpened)
     {
     }
+
+    public override BitmapSource? PrefixIcon => Icons.FileIcon;
 
     public override ItemCategory Category => ItemCategory.File;
 

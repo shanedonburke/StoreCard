@@ -10,6 +10,8 @@ namespace StoreCard.Models.Items.Saved;
 
 internal class SavedApplication : SavedItem
 {
+    public readonly string AppUserModelId;
+
     [JsonConstructor]
     public SavedApplication(string id, string name, string base64Icon, string appUserModelId, long lastOpened) : base(
         id, name, base64Icon, lastOpened)
@@ -25,8 +27,6 @@ internal class SavedApplication : SavedItem
     {
         AppUserModelId = installedApplication.AppUserModelId;
     }
-
-    public string AppUserModelId { get; }
 
     public override BitmapSource PrefixIcon => Icons.AppIcon;
 

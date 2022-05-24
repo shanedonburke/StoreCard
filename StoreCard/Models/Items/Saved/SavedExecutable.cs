@@ -1,17 +1,21 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using System.Windows.Media.Imaging;
 using StoreCard.Commands;
+using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Saved;
 
 public class SavedExecutable : SavedItem
 {
-    public string Path { get; }
+    public readonly string Path;
 
     public SavedExecutable(string id, string name, string? base64Icon, string path, long lastOpened) : base(id, name, base64Icon, lastOpened)
     {
         Path = path;
     }
+
+    public override BitmapSource PrefixIcon => Icons.AppIcon;
 
     public override ItemCategory Category => ItemCategory.App;
 
