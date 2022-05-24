@@ -5,13 +5,16 @@ namespace StoreCard.Static;
 
 internal static class Icons
 {
-    public static readonly BitmapSource LinkIcon;
+    public static readonly BitmapSource AppIcon;
 
     public static readonly BitmapSource GameIcon;
 
+    public static readonly BitmapSource LinkIcon;
+
     static Icons()
     {
-        LinkIcon = Images.BitmapToBitmapImage(Properties.Resources.LinkIcon);
+        AppIcon = Images.BitmapToBitmapImage(Properties.Resources.AppIcon);
         GameIcon = Images.BitmapToBitmapImage(Properties.Resources.GameIcon);
+        LinkIcon = Images.BitmapToBitmapImage(Properties.Resources.LinkIcon);
     }
 }

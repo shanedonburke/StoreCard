@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Static;
 using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
@@ -26,6 +27,8 @@ internal class SavedApplication : SavedItem
     }
 
     public string AppUserModelId { get; }
+
+    public override BitmapSource PrefixIcon => Icons.AppIcon;
 
     public override ItemCategory Category => ItemCategory.App;
 
