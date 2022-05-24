@@ -46,7 +46,7 @@ internal class ButlerClient
         }
     }
 
-    private readonly TcpClient _tcpClient = new();
+    private readonly Socket _socket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
     private readonly string _execPath;
 
@@ -62,8 +62,6 @@ internal class ButlerClient
         _dbPath = dbPath;
         _process = process;
     }
-
-    private NetworkStream Stream => _tcpClient.GetStream();
 
     public void Start()
     {
@@ -106,7 +104,7 @@ internal class ButlerClient
         string server = split[0];
         int port = int.Parse(split[1]);
 
-        _tcpClient.Connect(server, port);
+        _socket.Connect(server, port);
     }
 
     public bool Authenticate()
@@ -128,31 +126,36 @@ internal class ButlerClient
 
     private TResult? SendRequest<TResult>(string method, Dictionary<string, object> parameters)
     {
-        Thread.Sleep(100);
         Dictionary<string, object> req = new()
         {
-            {"jsonrpc", "2.0"}, {"method", method}, {"id", 0}, {"params", parameters}
+            {"jsonrpc", "2.0"}, {"method", method}, {"id", new Random().Next()}, {"params", parameters}
         };
 
         string json = JsonConvert.SerializeObject(req);
-        byte[] utf8Bytes = Encoding.UTF8.GetBytes(json);
+        byte[] utf8Bytes = Encoding.UTF8.GetBytes(json + "\n");
         string ascii = Encoding.ASCII.GetString(utf8Bytes);
 
-        using StreamWriter writer = new(Stream, Encoding.ASCII);
-        writer.WriteLine(ascii);
+        _socket.Send(Encoding.ASCII.GetBytes(ascii));
 
-        // while (true)
-        // {
-        //     Debug.WriteLine(_process.StandardOutput.ReadLine());
-        // }
+        string response;
 
-        using StreamReader reader = new(Stream, Encoding.ASCII);
+        do
+        {
+            byte[] buffer = new byte[65536];
+            Thread.Sleep(100);
+            Debug.WriteLine(_socket.Receive(buffer));
+            response = Encoding.ASCII.GetString(buffer);
+        }
+        while (response.Trim() == string.Empty);
 
-        if (reader.ReadToEnd() is not { } jsonRes)
+        if (response is not { } jsonRes)
         {
             return default;
         }
 
-        return JsonConvert.DeserializeObject<ButlerResponse<TResult>>(jsonRes) is { } res ? res.Result : default;
+        return JsonConvert.DeserializeObject<ButlerResponse<TResult>>(jsonRes, new JsonSerializerSettings
+        {
+            MissingMemberHandling = MissingMemberHandling.Ignore
+        }) is { } res ? res.Result : default;
     }
 }
