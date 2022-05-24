@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StoreCard.GameLibraries.Itch;
 
-internal class ListenNotification
+internal class ButlerListenNotification
 {
     public class TcpInfo
     {
@@ -23,7 +23,7 @@ internal class ListenNotification
     public readonly long Time;
     public readonly string Type;
 
-    public ListenNotification(string secret, TcpInfo tcp, long time, string type)
+    public ButlerListenNotification(string secret, TcpInfo tcp, long time, string type)
     {
         Secret = secret;
         Tcp = tcp;

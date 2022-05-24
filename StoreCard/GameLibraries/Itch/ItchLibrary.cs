@@ -47,7 +47,7 @@ internal class ItchLibrary : GameLibrary
 
         butlerProc.Start();
 
-        ListenNotification? listenNotif = null;
+        ButlerListenNotification? listenNotif = null;
 
         while (listenNotif == null)
         {
@@ -55,7 +55,7 @@ internal class ItchLibrary : GameLibrary
             if (jsonLine == null) continue;
             try
             {
-                listenNotif = JsonConvert.DeserializeObject<ListenNotification>(jsonLine,
+                listenNotif = JsonConvert.DeserializeObject<ButlerListenNotification>(jsonLine,
                     new JsonSerializerSettings {MissingMemberHandling = MissingMemberHandling.Error});
             }
             catch (JsonSerializationException)
@@ -97,7 +97,7 @@ internal class ItchLibrary : GameLibrary
         socket.Send(Encoding.ASCII.GetBytes(cascii));
 
         // using StreamReader reader = new(tcpClient.GetStream(), Encoding.ASCII);
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[8192];
 
         // using StreamReader reader = new StreamReader(stream);
 
@@ -108,6 +108,5 @@ internal class ItchLibrary : GameLibrary
                 Debug.WriteLine(Encoding.ASCII.GetString(buffer));
             }
         }
-        Debug.WriteLine("Done");
     }
 }
