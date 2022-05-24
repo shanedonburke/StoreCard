@@ -2,8 +2,9 @@
 
 internal static class GamePlatformNames
 {
-    public static string Ea = "EA";
-    public static string EpicGames = "Epic Games";
-    public static string Steam = "Steam";
-    public static string BattleNet = "Battle.net";
+    public const string Ea = "EA";
+    public const string EpicGames = "Epic Games";
+    public const string Steam = "Steam";
+    public const string BattleNet = "Battle.net";
+    public const string Itch = "itch";
 }

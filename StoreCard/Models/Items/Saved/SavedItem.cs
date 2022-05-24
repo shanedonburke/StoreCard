@@ -26,6 +26,7 @@ public enum SpecificItemCategory : uint
     EpicGame,
     BattleNetGame,
     EaGame,
+    ItchGame,
     Folder,
     File,
     Link
