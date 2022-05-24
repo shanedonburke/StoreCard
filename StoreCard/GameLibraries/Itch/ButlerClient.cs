@@ -22,12 +22,13 @@ internal class ButlerClient
         public const string MetaAuthenticate = "Meta.Authenticate";
 
         public const string FetchCaves = "Fetch.Caves";
+
+        public const string Launch = "Launch";
     }
 
     private class AuthenticateResult
     {
-        [JsonProperty("ok")]
-        public readonly bool Ok;
+        [JsonProperty("ok")] public readonly bool Ok;
 
         public AuthenticateResult(bool ok)
         {
@@ -37,8 +38,7 @@ internal class ButlerClient
 
     private class FetchCavesResult
     {
-        [JsonProperty("items")]
-        public List<ButlerCave> Items;
+        [JsonProperty("items")] public List<ButlerCave> Items;
 
         public FetchCavesResult(List<ButlerCave> items)
         {
@@ -48,20 +48,11 @@ internal class ButlerClient
 
     private readonly Socket _socket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-    private readonly string _execPath;
+    private readonly string _execPath = ButlerPaths.ButlerExecutable!;
 
-    private readonly string _dbPath;
+    private readonly string _dbPath = ButlerPaths.ButlerDatabase;
 
     private string? _secret;
-
-    private Process _process;
-
-    public ButlerClient(string execPath, string dbPath, Process process)
-    {
-        _execPath = execPath;
-        _dbPath = dbPath;
-        _process = process;
-    }
 
     public void Start()
     {
@@ -115,13 +106,22 @@ internal class ButlerClient
         }
 
         Dictionary<string, object> parameters = new() {{"secret", _secret!}};
-
         return SendRequest<AuthenticateResult>(Methods.MetaAuthenticate, parameters) != null;
     }
 
     public List<ButlerCave>? FetchCaves()
     {
         return SendRequest<FetchCavesResult>(Methods.FetchCaves, new Dictionary<string, object>())?.Items;
+    }
+
+    public void Launch(string caveId)
+    {
+        Dictionary<string, object> parameters = new()
+        {
+            {"caveId", caveId},
+            {"prereqsDir", ButlerPaths.ButlerPrereqsFolder}
+        };
+        SendRequest<object>(Methods.Launch, parameters);
     }
 
     private TResult? SendRequest<TResult>(string method, Dictionary<string, object> parameters)
@@ -141,24 +141,21 @@ internal class ButlerClient
 
         do
         {
-            byte[] buffer = new byte[65536];
             Thread.Sleep(100);
-            Debug.WriteLine(_socket.Receive(buffer));
+            byte[] buffer = new byte[65536];
+            _socket.Receive(buffer);
             response = Encoding.ASCII.GetString(buffer);
-        }
-        while (response.Trim() == string.Empty);
+        } while (response.Trim() == string.Empty);
 
-        if (response is not { } jsonRes)
-        {
-            return default;
-        }
+        // The buffer may contain multiple lines of JSON objects (e.g., logs)
+        string resJson = response.Split("\n")[0];
 
         try
         {
-            return JsonConvert.DeserializeObject<ButlerResponse<TResult>>(jsonRes, new JsonSerializerSettings
-            {
-                MissingMemberHandling = MissingMemberHandling.Ignore
-            }) is { } res ? res.Result : default;
+            return JsonConvert.DeserializeObject<ButlerResponse<TResult>>(resJson,
+                new JsonSerializerSettings {MissingMemberHandling = MissingMemberHandling.Ignore}) is { } res
+                ? res.Result
+                : default;
         }
         catch (JsonSerializationException)
         {

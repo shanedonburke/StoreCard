@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Newtonsoft.Json;
 using StoreCard.GameLibraries.Itch;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Services;
 using StoreCard.Static;
 using StoreCard.Utils;
 
@@ -44,6 +46,19 @@ internal class SavedItchGame : SavedGame
 
     protected override void OpenProtected()
     {
-    }
+        ButlerClient client = new();
+        client.Start();
 
+        if (!client.Authenticate())
+        {
+            MessageBoxService.Instance.ShowMessageBox(
+                "Failed to authenticate. Please verify your itch installation.",
+                "Error",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+            return;
+        }
+
+        client.Launch(CaveId);
+    }
 }

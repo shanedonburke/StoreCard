@@ -23,27 +23,19 @@ namespace StoreCard.GameLibraries.Itch;
 
 internal class ItchLibrary : GameLibrary
 {
-    private static readonly string s_dataFolder =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "itch");
-
-    public static readonly string? ButlerExecPath = Directory.EnumerateFiles(
-        Path.Combine(s_dataFolder, @"broth\butler\versions"),
-        "butler.exe",
-        SearchOption.AllDirectories).ToList().FirstOrDefault();
-
-    public static readonly string ButlerDbPath = Path.Combine(s_dataFolder, @"db\butler.db");
+    public bool IsInstalled => ButlerPaths.ButlerExecutable != null && File.Exists(ButlerPaths.ButlerDatabase);
 
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
-        if (ButlerExecPath == null) yield break;
+        if (!IsInstalled) yield break;
 
         Process butlerProc = new()
         {
             StartInfo = new ProcessStartInfo
             {
-                FileName = ButlerExecPath,
+                FileName = ButlerPaths.ButlerExecutable,
                 Arguments =
-                    $"daemon --keep-alive --json --transport tcp --dbpath \"{ButlerDbPath}\" --destiny-pid {Environment.ProcessId}",
+                    $"daemon --keep-alive --json --transport tcp --dbpath \"{ButlerPaths.ButlerDatabase}\" --destiny-pid {Environment.ProcessId}",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -53,7 +45,7 @@ internal class ItchLibrary : GameLibrary
 
         butlerProc.Start();
 
-        ButlerClient client = new(ButlerExecPath, ButlerDbPath, butlerProc);
+        ButlerClient client = new();
         client.Start();
 
         if (!client.Authenticate())
