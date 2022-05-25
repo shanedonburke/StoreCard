@@ -156,7 +156,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
 
     private void Window_Closed(object sender, EventArgs e)
     {
-        new ShowMainWindowCommand().Execute();
+        new ShowSearchCommand().Execute();
     }
 
     private void Window_PreviewKeyDown(object sender, KeyEventArgs e)

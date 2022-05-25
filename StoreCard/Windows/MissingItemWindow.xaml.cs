@@ -54,7 +54,7 @@ public sealed partial class MissingItemWindow : INotifyPropertyChanged
     {
         if (_shouldShowMainWindowOnClose)
         {
-            new ShowMainWindowCommand().Execute();
+            new ShowSearchCommand().Execute();
         }
     }
 

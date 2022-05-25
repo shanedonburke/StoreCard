@@ -26,10 +26,11 @@ internal class UserConfig
     }
 
     [JsonConstructor]
-    public UserConfig(uint hotKeyModifiers, uint virtualHotKey)
+    public UserConfig(uint hotKeyModifiers, uint virtualHotKey, bool shouldShowTutorial)
     {
         HotKeyModifiers = hotKeyModifiers;
         VirtualHotKey = virtualHotKey;
+        ShouldShowTutorial = shouldShowTutorial;
     }
 
     public string Theme
@@ -42,9 +43,16 @@ internal class UserConfig
         }
     }
 
+    public bool ShouldShowTutorial { get; private set; } = true;
+
     public void ResetHotKeyToDefault()
     {
         HotKeyModifiers = DefaultHotKeyModifiers;
         VirtualHotKey = DefaultVirtualHotKey;
+    }
+
+    public void DisableTutorial()
+    {
+        ShouldShowTutorial = false;
     }
 }

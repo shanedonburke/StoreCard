@@ -25,7 +25,7 @@ public partial class AddLinkWindow
 
     private void Window_Closed(object? sender, EventArgs e)
     {
-        new ShowMainWindowCommand().Execute();
+        new ShowSearchCommand().Execute();
     }
 
     private void LinkSelector_Finished(object sender, RoutedEventArgs e)

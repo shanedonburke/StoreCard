@@ -273,7 +273,7 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void SettingsButton_Click(object sender, RoutedEventArgs e)
     {
-        new OpenSettingsCommand().Execute();
+        new ShowSettingsCommand().Execute();
         Close();
     }
 

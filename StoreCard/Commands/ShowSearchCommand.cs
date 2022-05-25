@@ -5,7 +5,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-public class ShowMainWindowCommand : IStoreCardCommand<bool>
+public class ShowSearchCommand : IStoreCardCommand<bool>
 {
     public bool Execute()
     {

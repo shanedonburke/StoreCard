@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using StoreCard.Commands;
+using StoreCard.Models;
 using StoreCard.Static;
 using StoreCard.Utils;
 
@@ -13,6 +14,8 @@ namespace StoreCard;
 /// </summary>
 public partial class App
 {
+    private readonly Lazy<UserConfig> _config = new(() => AppData.ReadConfigFromFile());
+
     public App()
     {
         FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata {
@@ -39,11 +42,23 @@ public partial class App
 
         new CreateTaskbarIconCommand().Execute();
 
-        SetTheme(AppData.ReadConfigFromFile().Theme);
+        SetTheme(_config.Value.Theme);
 
         if (!Environment.GetCommandLineArgs().Contains(CommandLineOptions.StartMinimized))
         {
-            new ShowMainWindowCommand().Execute();
+            ShowStartupWindow();
+        }
+    }
+
+    private void ShowStartupWindow()
+    {
+        if (_config.Value.ShouldShowTutorial)
+        {
+            new ShowTutorialCommand().Execute();
+        }
+        else
+        {
+            new ShowSearchCommand().Execute();
         }
     }
 

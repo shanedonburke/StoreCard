@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StoreCard.Commands;
 
-internal interface IStoreCardCommand<out T>
+internal interface IStoreCardCommand<out TResult>
 {
-    public T Execute();
+    public TResult Execute();
 }

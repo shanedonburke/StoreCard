@@ -26,6 +26,6 @@ public partial class EditExecutableWindow
 
     private void Window_Closed(object? sender, EventArgs e)
     {
-        new ShowMainWindowCommand().Execute();
+        new ShowSearchCommand().Execute();
     }
 }

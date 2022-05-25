@@ -39,7 +39,7 @@ public partial class SettingsWindow : INotifyPropertyChanged
     private void SettingsWindow_Closed(object? sender, EventArgs e)
     {
         AppData.SaveConfigToFile(_userConfig);
-        new ShowMainWindowCommand().Execute();
+        new ShowSearchCommand().Execute();
         Close();
     }
 

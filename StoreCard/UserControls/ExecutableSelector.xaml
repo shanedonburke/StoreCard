@@ -179,7 +179,6 @@
                     Text="Save"
                     IsEnabled="{Binding Path=IsExecutableValid}"
                     Click="SaveButton_Click" />
-                <!--  "Cancel" button for applications  -->
                 <userControls:StoreCardButton
                     Style="{DynamicResource SecondaryButton}"
                     Grid.Column="3"

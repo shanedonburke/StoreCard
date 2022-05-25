@@ -1,0 +1,113 @@
+﻿<Window
+    x:Class="StoreCard.Windows.TutorialWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:windows="clr-namespace:StoreCard.Windows"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:userControls="clr-namespace:StoreCard.UserControls"
+    mc:Ignorable="d"
+    Closed="Window_Closed"
+    Width="620"
+    Height="320"
+    Background="{DynamicResource AppBackgroundBrush}"
+    WindowStartupLocation="CenterScreen"
+    Title="Welcome"
+    d:DataContext="{d:DesignInstance Type=windows:TutorialWindow, IsDesignTimeCreatable=False}">
+    <Grid
+        Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto" />
+            <RowDefinition
+                Height="*" />
+            <RowDefinition
+                Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="0"
+            FontSize="16"
+            Foreground="{DynamicResource AppForegroundBrush}"
+            Margin="0,0,0,5">
+            Welcome to StoreCard!
+        </TextBlock>
+        <FlowDocumentScrollViewer
+            Grid.Row="1"
+            VerticalAlignment="Top">
+            <FlowDocument
+                FontFamily="{StaticResource RobotoFont}"
+                FontSize="14"
+                Foreground="{DynamicResource AppForegroundBrush}">
+                <List
+                    MarkerStyle="Decimal"
+                    Padding="10,0,0,0">
+                    <ListItem>
+                        <Paragraph>
+                            <Run>Press</Run>
+                            <Run
+                                FontWeight="Bold"
+                                Text="{Binding HotKeyText, Mode=OneWay}" />
+                            <Run>to open the search window.</Run>
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem
+                        Margin="0,15">
+                        <Paragraph>
+                            <Run>Click the</Run>
+                            <InlineUIContainer>
+                                <fa:IconBlock
+                                    Icon="Plus"
+                                    Foreground="{DynamicResource AppForegroundBrush}"
+                                    FontSize="18"
+                                    Margin="2,0" />
+                            </InlineUIContainer>
+                            <Run>button to add items to the search list.</Run>
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>
+                            <Run>Click the</Run>
+                            <InlineUIContainer>
+                                <fa:IconBlock
+                                    Icon="Wrench"
+                                    Foreground="{DynamicResource AppForegroundBrush}"
+                                    FontSize="18"
+                                    Margin="2,0" />
+                            </InlineUIContainer>
+                            <Run>button to configure the color theme, keyboard shortcut, and more.</Run>
+                        </Paragraph>
+                    </ListItem>
+                </List>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+        <Grid
+            Grid.Row="2"
+            VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="30" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="*" />
+                <ColumnDefinition
+                    Width="*" />
+            </Grid.ColumnDefinitions>
+            <userControls:StoreCardButton
+                Grid.Column="1"
+                Click="DontShowAgainButton_Click"
+                Style="{DynamicResource SecondaryButton}"
+                Margin="0,0,5,0"
+                Text="Don't show again" />
+            <userControls:StoreCardButton
+                Grid.Column="2"
+                Click="CloseButton_Click"
+                Style="{DynamicResource PrimaryButton}"
+                Margin="5,0,0,0"
+                Text="Close" />
+        </Grid>
+    </Grid>
+</Window>

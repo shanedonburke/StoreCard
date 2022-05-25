@@ -15,7 +15,7 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
 {
     private static void OnHotKeyPressed()
     {
-        new ShowMainWindowCommand().Execute();
+        new ShowSearchCommand().Execute();
     }
 
     public TaskbarIconWindow() {
@@ -56,7 +56,7 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
 
     private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
     {
-        new ShowMainWindowCommand().Execute();
+        new ShowSearchCommand().Execute();
     }
 
     private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
@@ -74,6 +74,6 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
 
     private void TaskbarIcon_TrayLeftMouseUp(object sender, RoutedEventArgs e)
     {
-        new ShowMainWindowCommand().Execute();
+        new ShowSearchCommand().Execute();
     }
 }
