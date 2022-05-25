@@ -231,166 +231,306 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Orientation="Horizontal">
-                    <TextBlock
-                        Margin="0,0,15,0"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="All">
-                        <TextBlock.Style>
+                    <Button
+                        Click="AllCategoryButton_Click">
+                        <Button.Style>
                             <Style
-                                TargetType="{x:Type TextBlock}">
+                                TargetType="Button">
                                 <Setter
-                                    Property="Foreground"
-                                    Value="{DynamicResource InactiveTextBrush}" />
-                                <Style.Triggers>
-                                    <DataTrigger
-                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
-                                        Value="None">
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="{DynamicResource AppForegroundBrush}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
+                                    Property="OverridesDefaultStyle"
+                                    Value="True" />
+                                <Setter
+                                    Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate
+                                            TargetType="Button">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                             </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <TextBlock
-                        Margin="0,0,15,0"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="Recent">
-                        <TextBlock.Style>
+                        </Button.Style>
+                        <TextBlock
+                            Margin="0,0,15,0"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Text="All">
+                            <TextBlock.Style>
+                                <Style
+                                    TargetType="{x:Type TextBlock}">
+                                    <Setter
+                                        Property="Foreground"
+                                        Value="{DynamicResource InactiveTextBrush}" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                            Value="None">
+                                            <Setter
+                                                Property="Foreground"
+                                                Value="{DynamicResource AppForegroundBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Button>
+                    <Button Click="RecentCategoryButton_Click">
+                        <Button.Style>
                             <Style
-                                TargetType="{x:Type TextBlock}">
+                                TargetType="Button">
                                 <Setter
-                                    Property="Foreground"
-                                    Value="{DynamicResource InactiveTextBrush}" />
-                                <Style.Triggers>
-                                    <DataTrigger
-                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
-                                        Value="Recent">
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="{DynamicResource AppForegroundBrush}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
+                                    Property="OverridesDefaultStyle"
+                                    Value="True" />
+                                <Setter
+                                    Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate
+                                            TargetType="Button">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                             </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <TextBlock
-                        Margin="0,0,15,0"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="Apps">
-                        <TextBlock.Style>
+                        </Button.Style>
+                        <TextBlock
+                            Margin="0,0,15,0"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Text="Recent">
+                            <TextBlock.Style>
+                                <Style
+                                    TargetType="{x:Type TextBlock}">
+                                    <Setter
+                                        Property="Foreground"
+                                        Value="{DynamicResource InactiveTextBrush}" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                            Value="Recent">
+                                            <Setter
+                                                Property="Foreground"
+                                                Value="{DynamicResource AppForegroundBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Button>
+                    <Button
+                        Click="AppsCategoryButton_Click">
+                        <Button.Style>
                             <Style
-                                TargetType="{x:Type TextBlock}">
+                                TargetType="Button">
                                 <Setter
-                                    Property="Foreground"
-                                    Value="{DynamicResource InactiveTextBrush}" />
-                                <Style.Triggers>
-                                    <DataTrigger
-                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
-                                        Value="App">
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="{DynamicResource AppForegroundBrush}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
+                                    Property="OverridesDefaultStyle"
+                                    Value="True" />
+                                <Setter
+                                    Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate
+                                            TargetType="Button">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                             </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <TextBlock
-                        Margin="0,0,15,0"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="Games">
-                        <TextBlock.Style>
+                        </Button.Style>
+                        <TextBlock
+                            Margin="0,0,15,0"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Text="Apps">
+                            <TextBlock.Style>
+                                <Style
+                                    TargetType="{x:Type TextBlock}">
+                                    <Setter
+                                        Property="Foreground"
+                                        Value="{DynamicResource InactiveTextBrush}" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                            Value="App">
+                                            <Setter
+                                                Property="Foreground"
+                                                Value="{DynamicResource AppForegroundBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Button>
+                    <Button
+                        Click="GamesCategoryButton_Click">
+                        <Button.Style>
                             <Style
-                                TargetType="{x:Type TextBlock}">
+                                TargetType="Button">
                                 <Setter
-                                    Property="Foreground"
-                                    Value="{DynamicResource InactiveTextBrush}" />
-                                <Style.Triggers>
-                                    <DataTrigger
-                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
-                                        Value="Game">
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="{DynamicResource AppForegroundBrush}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
+                                    Property="OverridesDefaultStyle"
+                                    Value="True" />
+                                <Setter
+                                    Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate
+                                            TargetType="Button">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                             </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <TextBlock
-                        Margin="0,0,15,0"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="Folders">
-                        <TextBlock.Style>
+                        </Button.Style>
+                        <TextBlock
+                            Margin="0,0,15,0"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Text="Games">
+                            <TextBlock.Style>
+                                <Style
+                                    TargetType="{x:Type TextBlock}">
+                                    <Setter
+                                        Property="Foreground"
+                                        Value="{DynamicResource InactiveTextBrush}" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                            Value="Game">
+                                            <Setter
+                                                Property="Foreground"
+                                                Value="{DynamicResource AppForegroundBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Button>
+                    <Button
+                        Click="FoldersCategoryButton_Click">
+                        <Button.Style>
                             <Style
-                                TargetType="{x:Type TextBlock}">
+                                TargetType="Button">
                                 <Setter
-                                    Property="Foreground"
-                                    Value="{DynamicResource InactiveTextBrush}" />
-                                <Style.Triggers>
-                                    <DataTrigger
-                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
-                                        Value="Folder">
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="{DynamicResource AppForegroundBrush}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
+                                    Property="OverridesDefaultStyle"
+                                    Value="True" />
+                                <Setter
+                                    Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate
+                                            TargetType="Button">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                             </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <TextBlock
-                        Margin="0,0,15,0"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="Files">
-                        <TextBlock.Style>
+                        </Button.Style>
+                        <TextBlock
+                            Margin="0,0,15,0"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Text="Folders">
+                            <TextBlock.Style>
+                                <Style
+                                    TargetType="{x:Type TextBlock}">
+                                    <Setter
+                                        Property="Foreground"
+                                        Value="{DynamicResource InactiveTextBrush}" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                            Value="Folder">
+                                            <Setter
+                                                Property="Foreground"
+                                                Value="{DynamicResource AppForegroundBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Button>
+                    <Button
+                        Click="FilesCategoryButton_Click">
+                        <Button.Style>
                             <Style
-                                TargetType="{x:Type TextBlock}">
+                                TargetType="Button">
                                 <Setter
-                                    Property="Foreground"
-                                    Value="{DynamicResource InactiveTextBrush}" />
-                                <Style.Triggers>
-                                    <DataTrigger
-                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
-                                        Value="File">
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="{DynamicResource AppForegroundBrush}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
+                                    Property="OverridesDefaultStyle"
+                                    Value="True" />
+                                <Setter
+                                    Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate
+                                            TargetType="Button">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                             </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
-                    <TextBlock
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Text="Links">
-                        <TextBlock.Style>
+                        </Button.Style>
+                        <TextBlock
+                            Margin="0,0,15,0"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Text="Files">
+                            <TextBlock.Style>
+                                <Style
+                                    TargetType="{x:Type TextBlock}">
+                                    <Setter
+                                        Property="Foreground"
+                                        Value="{DynamicResource InactiveTextBrush}" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                            Value="File">
+                                            <Setter
+                                                Property="Foreground"
+                                                Value="{DynamicResource AppForegroundBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Button>
+                    <Button
+                        Click="LinksCategoryButton_Click">
+                        <Button.Style>
                             <Style
-                                TargetType="{x:Type TextBlock}">
+                                TargetType="Button">
                                 <Setter
-                                    Property="Foreground"
-                                    Value="{DynamicResource InactiveTextBrush}" />
-                                <Style.Triggers>
-                                    <DataTrigger
-                                        Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
-                                        Value="Link">
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="{DynamicResource AppForegroundBrush}" />
-                                    </DataTrigger>
-                                </Style.Triggers>
+                                    Property="OverridesDefaultStyle"
+                                    Value="True" />
+                                <Setter
+                                    Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate
+                                            TargetType="Button">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                             </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                        </Button.Style>
+                        <TextBlock
+                            Margin="0,0,15,0"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Text="Links">
+                            <TextBlock.Style>
+                                <Style
+                                    TargetType="{x:Type TextBlock}">
+                                    <Setter
+                                        Property="Foreground"
+                                        Value="{DynamicResource InactiveTextBrush}" />
+                                    <Style.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding Category, Converter={StaticResource ValueToStringConverter}}"
+                                            Value="Link">
+                                            <Setter
+                                                Property="Foreground"
+                                                Value="{DynamicResource AppForegroundBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Button>
                 </StackPanel>
             </Border>
             <!--  Saved items  -->
@@ -406,7 +546,8 @@
                 ActionButtonText="Open"
                 ActionButtonClick="OpenButton_Click">
                 <userControls:StoreCardListBox.ItemContextMenu>
-                    <ContextMenu d:DataContext="{d:DesignInstance saved:SavedItem}">
+                    <ContextMenu
+                        d:DataContext="{d:DesignInstance saved:SavedItem}">
                         <MenuItem
                             Click="OpenMenuItem_Click"
                             Header="Open" />

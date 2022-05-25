@@ -290,4 +290,39 @@ public partial class MainWindow : INotifyPropertyChanged
     {
         if (ItemListBox.ItemsSource.Any()) ItemListBox.SelectedIndex = 0;
     }
+
+    private void AllCategoryButton_Click(object sender, RoutedEventArgs e)
+    {
+        Category = ItemCategory.None;
+    }
+
+    private void RecentCategoryButton_Click(object sender, RoutedEventArgs e)
+    {
+        Category = ItemCategory.Recent;
+    }
+
+    private void AppsCategoryButton_Click(object sender, RoutedEventArgs e)
+    {
+        Category = ItemCategory.App;
+    }
+
+    private void GamesCategoryButton_Click(object sender, RoutedEventArgs e)
+    {
+        Category = ItemCategory.Game;
+    }
+
+    private void FoldersCategoryButton_Click(object sender, RoutedEventArgs e)
+    {
+        Category = ItemCategory.Folder;
+    }
+
+    private void FilesCategoryButton_Click(object sender, RoutedEventArgs e)
+    {
+        Category = ItemCategory.File;
+    }
+
+    private void LinksCategoryButton_Click(object sender, RoutedEventArgs e)
+    {
+        Category = ItemCategory.Link;
+    }
 }
