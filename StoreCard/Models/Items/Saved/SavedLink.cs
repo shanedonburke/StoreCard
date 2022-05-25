@@ -29,7 +29,7 @@ public class SavedLink : SavedItem
 
     protected override void OpenProtected()
     {
-        string? defaultBrowserExe = Browser.GetDefaultBrowserExecutable();
+        string? defaultBrowserExe = BrowserUtils.GetDefaultBrowserExecutable();
 
         ProcessStartInfo psi;
 

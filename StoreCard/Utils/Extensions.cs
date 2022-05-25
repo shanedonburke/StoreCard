@@ -20,7 +20,7 @@ internal static class Extensions
 
     public static string ToBase64(this BitmapSource bitmap)
     {
-        return Images.ImageToBase64(bitmap);
+        return ImageUtils.ImageToBase64(bitmap);
     }
 
     public static void Deconstruct<T>(this IEnumerable<T> seq, out T? first, out IEnumerable<T> rest)

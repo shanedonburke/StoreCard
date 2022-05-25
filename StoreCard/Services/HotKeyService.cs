@@ -63,7 +63,7 @@ internal class HotKeyService
         _source?.AddHook(HwndHook);
 
         var config = AppData.ReadConfigFromFile();
-        HotKeyRegistered(HotKeys.KeyStringFromConfig(config));
+        HotKeyRegistered(HotKeyUtils.KeyStringFromConfig(config));
 
         return User32.RegisterHotKey(helper.Handle, HotKeyId, config.HotKeyModifiers, config.VirtualHotKey);
     }

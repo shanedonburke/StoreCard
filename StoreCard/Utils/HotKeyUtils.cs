@@ -7,7 +7,7 @@ using StoreCard.Native;
 
 namespace StoreCard.Utils;
 
-internal class HotKeys
+internal class HotKeyUtils
 {
     public static uint ModifiersToHotKeyByte(params Key[] modifiers)
     {

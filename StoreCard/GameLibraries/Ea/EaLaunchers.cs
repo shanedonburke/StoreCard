@@ -20,7 +20,7 @@ internal class EaLaunchers
 
         public bool IsInstalled => LauncherPath != null;
 
-        public bool IsRunning => Processes.IsProcessWithNameRunning(ProcessName);
+        public bool IsRunning => ProcessUtils.IsProcessWithNameRunning(ProcessName);
     }
 
     public static Launcher Desktop = new(

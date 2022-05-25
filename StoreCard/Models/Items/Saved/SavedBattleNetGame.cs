@@ -27,7 +27,7 @@ internal class SavedBattleNetGame : SavedGame
         Guid.NewGuid().ToString(),
         game.Name,
         game.BitmapIcon?.ToBase64(),
-        Time.UnixTimeMillis,
+        TimeUtils.UnixTimeMillis,
         game.GameId)
     {
     }
@@ -43,7 +43,7 @@ internal class SavedBattleNetGame : SavedGame
             return;
         }
 
-        if (!Processes.IsProcessWithNameRunning("Battle.net"))
+        if (!ProcessUtils.IsProcessWithNameRunning("Battle.net"))
         {
             MessageBoxService.Instance.ShowMessageBox("The Battle.net launcher is not running. Please open it, then try again.", "Warning",
                 MessageBoxButton.OK, MessageBoxImage.Warning);

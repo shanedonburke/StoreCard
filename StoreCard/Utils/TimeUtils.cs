@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StoreCard.Utils;
 
-internal class Time
+internal class TimeUtils
 {
     public static long UnixTimeMillis => DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 }

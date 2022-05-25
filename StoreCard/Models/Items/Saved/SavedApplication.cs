@@ -22,8 +22,8 @@ internal class SavedApplication : SavedItem
     public SavedApplication(InstalledApplication installedApplication) : base(
         Guid.NewGuid().ToString(),
         installedApplication.Name,
-        Images.ImageToBase64((BitmapSource) installedApplication.BitmapIcon),
-        Time.UnixTimeMillis)
+        ImageUtils.ImageToBase64((BitmapSource) installedApplication.BitmapIcon),
+        TimeUtils.UnixTimeMillis)
     {
         AppUserModelId = installedApplication.AppUserModelId;
     }

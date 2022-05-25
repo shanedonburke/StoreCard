@@ -8,7 +8,7 @@ using File = System.IO.File;
 
 namespace StoreCard.Utils;
 
-internal class Shortcuts
+internal class ShortcutUtils
 {
     private static string StartupFolderPath => Environment.GetFolderPath(
         Environment.SpecialFolder.Startup);

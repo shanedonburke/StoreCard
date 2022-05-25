@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 
 namespace StoreCard.Utils;
 
-internal class Links
+internal class LinkUtils
 {
     private static readonly HttpClient s_httpClient = new();
 
@@ -52,7 +52,7 @@ internal class Links
         {
             byte[] bytes =
                 await s_httpClient.GetByteArrayAsync(@"https://icons.duckduckgo.com/ip3/" + domain + ".ico");
-            image = Images.BytesToBitmapImage(bytes);
+            image = ImageUtils.BytesToBitmapImage(bytes);
             image.Freeze();
         }
         catch

@@ -30,7 +30,7 @@ internal class SavedSteamGame : SavedGame
         Guid.NewGuid().ToString(),
         game.Name,
         game.BitmapIcon?.ToBase64(),
-        Time.UnixTimeMillis
+        TimeUtils.UnixTimeMillis
     )
     {
         AppId = game.AppId;

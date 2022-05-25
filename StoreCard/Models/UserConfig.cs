@@ -1,15 +1,16 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using Newtonsoft.Json;
+using StoreCard.Services;
 using StoreCard.Utils;
 
 namespace StoreCard.Models;
 
 internal class UserConfig
 {
-    public static readonly uint DefaultHotKeyModifiers = HotKeys.ModifiersToHotKeyByte(Key.LWin, Key.LeftShift);
+    public static readonly uint DefaultHotKeyModifiers = HotKeyUtils.ModifiersToHotKeyByte(Key.LWin, Key.LeftShift);
 
-    public static readonly uint DefaultVirtualHotKey = HotKeys.KeyToVirtualKey(Key.Z);
+    public static readonly uint DefaultVirtualHotKey = HotKeyUtils.KeyToVirtualKey(Key.Z);
 
     public uint HotKeyModifiers;
 
@@ -39,7 +40,7 @@ internal class UserConfig
         set
         {
             _theme = value;
-            ((App)Application.Current).SetTheme(value);
+            ThemeUtils.SetTheme(value);
         }
     }
 

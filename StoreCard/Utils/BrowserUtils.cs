@@ -3,7 +3,7 @@ using Microsoft.Win32;
 
 namespace StoreCard.Utils;
 
-internal class Browser
+internal class BrowserUtils
 {
     public static string? GetDefaultBrowserExecutable()
     {
@@ -12,13 +12,13 @@ internal class Browser
 
         using var userChoiceKey = Registry.CurrentUser.OpenSubKey(userChoicePath);
 
-        var progId = userChoiceKey?.GetValue("Progid")?.ToString();
+        string? progId = userChoiceKey?.GetValue("Progid")?.ToString();
         if (progId == null)
         {
             return null;
         }
 
-        var openCommandPath = progId + @"\shell\open\command";
+        string openCommandPath = progId + @"\shell\open\command";
 
         using var openCommandPathKey = Registry.ClassesRoot.OpenSubKey(openCommandPath);
 

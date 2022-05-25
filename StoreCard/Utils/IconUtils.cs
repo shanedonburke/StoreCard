@@ -40,7 +40,7 @@ internal class IconUtils
             path,
             0,
             ref shinfo,
-            (uint) Marshal.SizeOf(shinfo),
+            (uint)Marshal.SizeOf(shinfo),
             Shell32.ShgfiIcon | Shell32.ShgfiLargeicon);
 
         using var i = Icon.FromHandle(shinfo.hIcon);

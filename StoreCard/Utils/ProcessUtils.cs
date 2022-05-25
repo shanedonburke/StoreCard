@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StoreCard.Utils;
 
-internal class Processes
+internal class ProcessUtils
 {
     public static void KillOtherStoreCardProcesses() {
         var otherProcesses = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);

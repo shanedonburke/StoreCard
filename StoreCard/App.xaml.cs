@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using StoreCard.Commands;
 using StoreCard.Models;
+using StoreCard.Services;
 using StoreCard.Static;
 using StoreCard.Utils;
 
@@ -14,7 +15,7 @@ namespace StoreCard;
 /// </summary>
 public partial class App
 {
-    private readonly Lazy<UserConfig> _config = new(() => AppData.ReadConfigFromFile());
+    private readonly UserConfig _config = AppData.ReadConfigFromFile();
 
     public App()
     {
@@ -23,26 +24,13 @@ public partial class App
         });
     }
 
-    public void SetTheme(string theme)
-    {
-        if (SetThemeInternal(theme))
-        {
-            return;
-        }
-
-        if (!SetThemeInternal("Lake (Dark)"))
-        {
-            SetThemeInternal(ThemeFinder.FindThemes()[0]);
-        }
-    }
-
     private void App_Startup(object sender, StartupEventArgs e)
     {
-        Processes.KillOtherStoreCardProcesses();
+        ProcessUtils.KillOtherStoreCardProcesses();
 
         new CreateTaskbarIconCommand().Execute();
 
-        SetTheme(_config.Value.Theme);
+        ThemeUtils.SetTheme(_config.Theme);
 
         if (!Environment.GetCommandLineArgs().Contains(CommandLineOptions.StartMinimized))
         {
@@ -52,27 +40,13 @@ public partial class App
 
     private void ShowStartupWindow()
     {
-        if (_config.Value.ShouldShowTutorial)
+        if (_config.ShouldShowTutorial)
         {
             new ShowTutorialCommand().Execute();
         }
         else
         {
             new ShowSearchCommand().Execute();
-        }
-    }
-
-    private bool SetThemeInternal(string theme)
-    {
-        try
-        {
-            Resources.MergedDictionaries[0].Source =
-                new Uri($"pack://application:,,,/ResourceDictionaries/Themes/{theme}.xaml");
-            return true;
-        }
-        catch (IOException)
-        {
-            return false;
         }
     }
 }

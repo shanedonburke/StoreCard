@@ -106,20 +106,20 @@ public partial class AddFileWindow : INotifyPropertyChanged
 
     private void SaveFileButton_Click(object sender, RoutedEventArgs e)
     {
-        var base64Icon = FileIcon != null ? Images.ImageToBase64((BitmapSource) FileIcon) : null;
+        var base64Icon = FileIcon != null ? ImageUtils.ImageToBase64((BitmapSource) FileIcon) : null;
         var savedItems = AppData.ReadItemsFromFile();
         savedItems.Add(new SavedFile(Guid.NewGuid().ToString(), FileName, base64Icon, FilePathBox.Text,
-            SavedFileSystemItem.DefaultExecutable, Time.UnixTimeMillis));
+            SavedFileSystemItem.DefaultExecutable, TimeUtils.UnixTimeMillis));
         AppData.SaveItemsToFile(savedItems);
         Close();
     }
 
     private void SaveFolderButton_Click(object sender, RoutedEventArgs e)
     {
-        var base64Icon = FolderIcon != null ? Images.ImageToBase64((BitmapSource) FolderIcon) : null;
+        var base64Icon = FolderIcon != null ? ImageUtils.ImageToBase64((BitmapSource) FolderIcon) : null;
         var savedItems = AppData.ReadItemsFromFile();
         savedItems.Add(new SavedFolder(Guid.NewGuid().ToString(), FolderName, base64Icon, FolderPathBox.Text,
-            SavedFileSystemItem.DefaultExecutable, Time.UnixTimeMillis));
+            SavedFileSystemItem.DefaultExecutable, TimeUtils.UnixTimeMillis));
         AppData.SaveItemsToFile(savedItems);
         Close();
     }

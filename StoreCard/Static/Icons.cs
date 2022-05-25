@@ -17,10 +17,10 @@ internal static class Icons
 
     static Icons()
     {
-        AppIcon = Images.BitmapToBitmapImage(Properties.Resources.AppIcon);
-        GameIcon = Images.BitmapToBitmapImage(Properties.Resources.GameIcon);
-        FileIcon = Images.BitmapToBitmapImage(Properties.Resources.FileIcon);
-        FolderIcon = Images.BitmapToBitmapImage(Properties.Resources.FolderIcon);
-        LinkIcon = Images.BitmapToBitmapImage(Properties.Resources.LinkIcon);
+        AppIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.AppIcon);
+        GameIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.GameIcon);
+        FileIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.FileIcon);
+        FolderIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.FolderIcon);
+        LinkIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.LinkIcon);
     }
 }

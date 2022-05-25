@@ -35,7 +35,7 @@ public partial class RecordHotKeyWindow : INotifyPropertyChanged
     {
         InitializeComponent();
         _config = AppData.ReadConfigFromFile();
-        HotKeyText = HotKeys.KeyStringFromConfig(_config);
+        HotKeyText = HotKeyUtils.KeyStringFromConfig(_config);
         DataContext = this;
     }
 
@@ -87,8 +87,8 @@ public partial class RecordHotKeyWindow : INotifyPropertyChanged
 
         e.Handled = true;
 
-        _virtualKey = HotKeys.KeyToVirtualKey(key);
-        text.Append(HotKeys.KeyToString(key));
+        _virtualKey = HotKeyUtils.KeyToVirtualKey(key);
+        text.Append(HotKeyUtils.KeyToString(key));
         HotKeyText = text.ToString();
     }
 
@@ -102,7 +102,7 @@ public partial class RecordHotKeyWindow : INotifyPropertyChanged
 
     private void ClearButton_Click(object sender, RoutedEventArgs e)
     {
-        HotKeyText = HotKeys.KeyStringFromConfig(_config);
+        HotKeyText = HotKeyUtils.KeyStringFromConfig(_config);
     }
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)

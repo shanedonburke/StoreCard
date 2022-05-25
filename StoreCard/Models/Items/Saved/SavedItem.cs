@@ -54,7 +54,7 @@ public abstract class SavedItem : IListBoxItem
 
     public abstract SpecificItemCategory SpecificCategory { get; }
 
-    [JsonIgnore] public BitmapSource? BitmapIcon => Base64Icon != null ? Images.Base64ToImage(Base64Icon) : null;
+    [JsonIgnore] public BitmapSource? BitmapIcon => Base64Icon != null ? ImageUtils.Base64ToImage(Base64Icon) : null;
 
     [JsonIgnore] public virtual BitmapSource? PrefixIcon => null;
 
@@ -62,7 +62,7 @@ public abstract class SavedItem : IListBoxItem
 
     public void Open()
     {
-        LastOpened = Time.UnixTimeMillis;
+        LastOpened = TimeUtils.UnixTimeMillis;
         AppData.UpdateSavedItemById<SavedItem>(Id, i => i.LastOpened = LastOpened);
         OpenProtected();
     }

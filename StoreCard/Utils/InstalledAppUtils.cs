@@ -5,7 +5,7 @@ using StoreCard.Models.Items.Installed;
 
 namespace StoreCard.Utils;
 
-internal class Applications
+internal class InstalledAppUtils
 {
     public static IEnumerable<InstalledApplication> GetInstalledApplications() {
         // From https://stackoverflow.com/a/57195200

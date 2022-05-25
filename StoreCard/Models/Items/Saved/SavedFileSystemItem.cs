@@ -65,7 +65,7 @@ public abstract class SavedFileSystemItem : SavedItem
     {
         if (GetSystemIcon() is BitmapSource bitmapSource)
         {
-            Base64Icon = Images.ImageToBase64(bitmapSource);
+            Base64Icon = ImageUtils.ImageToBase64(bitmapSource);
         }
     }
 }

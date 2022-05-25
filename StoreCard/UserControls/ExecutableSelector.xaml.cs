@@ -140,13 +140,13 @@ public partial class ExecutableSelector : INotifyPropertyChanged
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {
-        var base64Icon = ExecutableIcon != null ? Images.ImageToBase64((BitmapSource) ExecutableIcon) : null;
+        var base64Icon = ExecutableIcon != null ? ImageUtils.ImageToBase64((BitmapSource) ExecutableIcon) : null;
 
         // Instead of updating the item we're editing, create a new list with only the new item
         var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != Executable?.Id).ToList();
 
         savedItems.Add(new SavedExecutable(Guid.NewGuid().ToString(), ExecutableName, base64Icon, PathBox.Text,
-            Time.UnixTimeMillis));
+            TimeUtils.UnixTimeMillis));
         AppData.SaveItemsToFile(savedItems);
         Finish();
     }

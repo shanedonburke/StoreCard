@@ -34,7 +34,7 @@ public partial class TutorialWindow
         InitializeComponent();
     }
 
-    public string HotKeyText => HotKeys.KeyStringFromConfig(_config);
+    public string HotKeyText => HotKeyUtils.KeyStringFromConfig(_config);
 
     private void DontShowAgainButton_Click(object sender, RoutedEventArgs e)
     {

@@ -36,7 +36,7 @@ internal class SavedItchGame : SavedGame
         Guid.NewGuid().ToString(),
         game.Name,
         game.BitmapIcon?.ToBase64(),
-        Time.UnixTimeMillis,
+        TimeUtils.UnixTimeMillis,
         game.CaveId)
     {
     }

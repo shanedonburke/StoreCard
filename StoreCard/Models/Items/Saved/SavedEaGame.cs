@@ -26,7 +26,7 @@ internal class SavedEaGame : SavedGame
     public SavedEaGame(InstalledEaGame game) : this(
         Guid.NewGuid().ToString(),
         game.Name,
-        Time.UnixTimeMillis,
+        TimeUtils.UnixTimeMillis,
         game.AppId)
     {
     }

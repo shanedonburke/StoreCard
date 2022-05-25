@@ -25,16 +25,16 @@ public partial class SettingsWindow : INotifyPropertyChanged
         DataContext = this;
         InitializeComponent();
 
-        RunOnStartupCheckBox.IsChecked = Shortcuts.IsStartupShortcutEnabled() != null;
+        RunOnStartupCheckBox.IsChecked = ShortcutUtils.IsStartupShortcutEnabled() != null;
         ShowPrefixIconsCheckBox.IsChecked = _userConfig.ShouldShowPrefixIcons;
         ThemeComboBox.SelectedItem = _userConfig.Theme;
     }
 
     public static IEnumerable<string> Themes => ThemeFinder.FindThemes();
 
-    public string HotKeyText => HotKeys.KeyStringFromConfig(_userConfig);
+    public string HotKeyText => HotKeyUtils.KeyStringFromConfig(_userConfig);
 
-    public bool IsStartupShortcutDisabled => Shortcuts.IsStartupShortcutEnabled() == false;
+    public bool IsStartupShortcutDisabled => ShortcutUtils.IsStartupShortcutEnabled() == false;
 
     private void SettingsWindow_Closed(object? sender, EventArgs e)
     {
@@ -60,13 +60,13 @@ public partial class SettingsWindow : INotifyPropertyChanged
 
     private void RunOnStartupCheckBox_Checked(object sender, RoutedEventArgs e)
     {
-        Shortcuts.CreateStartupShortcut();
+        ShortcutUtils.CreateStartupShortcut();
         OnPropertyChanged(nameof(IsStartupShortcutDisabled));
     }
 
     private void RunOnStartupCheckBox_Unchecked(object sender, RoutedEventArgs e)
     {
-        Shortcuts.RemoveStartupShortcut();
+        ShortcutUtils.RemoveStartupShortcut();
         OnPropertyChanged(nameof(IsStartupShortcutDisabled));
     }
 

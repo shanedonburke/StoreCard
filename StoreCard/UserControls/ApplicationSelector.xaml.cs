@@ -63,7 +63,7 @@ public partial class ApplicationSelector : INotifyPropertyChanged
 
     private void LoadApps()
     {
-        foreach (var app in Applications.GetInstalledApplications())
+        foreach (var app in InstalledAppUtils.GetInstalledApplications())
         {
             AppListBox.AddItem(app);
         }

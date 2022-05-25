@@ -95,26 +95,26 @@ public partial class LinkSelector : INotifyPropertyChanged
 
     private async void GetWebsiteDetails()
     {
-        var title = await Links.GetPageTitle(UrlBox.Text);
+        var title = await LinkUtils.GetPageTitle(UrlBox.Text);
         if (title != string.Empty)
         {
             LinkTitle = title;
         }
 
-        _favicon = await Links.GetPageIcon(UrlBox.Text);
+        _favicon = await LinkUtils.GetPageIcon(UrlBox.Text);
         OnPropertyChanged(nameof(LinkIcon));
     }
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {
-        var base64Icon = Images.ImageToBase64((BitmapSource) LinkIcon);
+        var base64Icon = ImageUtils.ImageToBase64((BitmapSource) LinkIcon);
 
         // Instead of updating the link we're editing, create a new list with only the new link
         var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != Link?.Id).ToList();
 
         var shouldOpenPrivate = OpenPrivateCheckBox.IsChecked == true;
-        savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon, Links.NormalizeUrl(UrlBox.Text),
-            Time.UnixTimeMillis, shouldOpenPrivate));
+        savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon, LinkUtils.NormalizeUrl(UrlBox.Text),
+            TimeUtils.UnixTimeMillis, shouldOpenPrivate));
         AppData.SaveItemsToFile(savedItems);
         Finish();
     }
