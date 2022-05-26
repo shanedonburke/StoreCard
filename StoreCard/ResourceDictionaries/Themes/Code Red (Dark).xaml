@@ -19,7 +19,7 @@
         Color="#cc3e37" />
     <SolidColorBrush
         x:Key="PrimaryBrush_Pressed"
-        Color="#34bf6e" />
+        Color="#bf3b34" />
     <SolidColorBrush
         x:Key="PrimaryForegroundBrush"
         Color="White" />
