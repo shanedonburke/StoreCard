@@ -1,5 +1,5 @@
-﻿using System.IO;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -7,7 +7,7 @@ using StoreCard.Commands;
 using StoreCard.Static;
 using StoreCard.Utils;
 
-namespace StoreCard.Models.Items.Saved;
+namespace StoreCard.Models.Items.Saved.FileSystem;
 
 public abstract class SavedFileSystemItem : SavedItem
 {

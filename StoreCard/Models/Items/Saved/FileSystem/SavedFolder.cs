@@ -4,7 +4,7 @@ using System.Windows.Media.Imaging;
 using StoreCard.Static;
 using StoreCard.Utils;
 
-namespace StoreCard.Models.Items.Saved;
+namespace StoreCard.Models.Items.Saved.FileSystem;
 
 internal class SavedFolder : SavedFileSystemItem
 {
