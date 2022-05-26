@@ -7,13 +7,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StoreCard.Static;
 
 namespace StoreCard.GameLibraries.Itch;
 
 internal static class ButlerPaths
 {
     private static readonly string s_itchDataFolder =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "itch");
+        Path.Combine(FolderPaths.ApplicationData, "itch");
 
     public static readonly string? ButlerExecutable = Directory.EnumerateFiles(
         Path.Combine(s_itchDataFolder, @"broth\butler\versions"),

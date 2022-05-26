@@ -7,18 +7,30 @@ using Newtonsoft.Json;
 using StoreCard.Models;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Services;
+using StoreCard.Static;
 
 namespace StoreCard.Utils;
 
 internal class AppData
 {
+    private static readonly string s_itemsFilePath = Path.Combine(
+        FolderPaths.ApplicationData,
+        "StoreCard",
+        "Items.json");
+
+    private static readonly string s_configFilePath = Path.Combine(
+        FolderPaths.ApplicationData,
+        "StoreCard",
+        "Config.json");
+
     public static List<SavedItem> ReadItemsFromFile()
     {
-        string filePath = GetItemsFilePath();
+        if (!File.Exists(s_itemsFilePath))
+        {
+            return new List<SavedItem>();
+        }
 
-        if (!File.Exists(filePath)) return new List<SavedItem>();
-
-        string json = File.ReadAllText(filePath);
+        string json = File.ReadAllText(s_itemsFilePath);
         {
             List<SavedItem>? savedItems = null;
             try
@@ -37,23 +49,21 @@ internal class AppData
 
     public static UserConfig ReadConfigFromFile()
     {
-        string filePath = GetConfigFilePath();
+        if (!File.Exists(s_configFilePath)) return new UserConfig();
 
-        if (!File.Exists(filePath)) return new UserConfig();
-
-        string json = File.ReadAllText(filePath);
+        string json = File.ReadAllText(s_configFilePath);
         return JsonConvert.DeserializeObject<UserConfig>(json) ?? new UserConfig();
     }
 
     public static void SaveItemsToFile(List<SavedItem> items)
     {
         items.Sort();
-        SerializeObjectToFile(items, GetItemsFilePath());
+        SerializeObjectToFile(items, s_itemsFilePath);
     }
 
     public static void SaveConfigToFile(UserConfig config)
     {
-        SerializeObjectToFile(config, GetConfigFilePath());
+        SerializeObjectToFile(config, s_configFilePath);
         HotKeyService.Instance.UpdateHotKey();
     }
 
@@ -91,21 +101,5 @@ internal class AppData
         string json = JsonConvert.SerializeObject(objectToSave,
             new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
         File.WriteAllText(filePath, json);
-    }
-
-    private static string GetItemsFilePath()
-    {
-        return Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "StoreCard",
-            "Items.json");
-    }
-
-    private static string GetConfigFilePath()
-    {
-        return Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "StoreCard",
-            "Config.json");
     }
 }

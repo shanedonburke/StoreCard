@@ -1,35 +1,41 @@
-﻿using System;
+﻿using System.IO;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using StoreCard.Commands;
+using StoreCard.Static;
 using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
 
 public abstract class SavedFileSystemItem : SavedItem
 {
-    public static string DefaultExecutable =
-        Environment.GetFolderPath(Environment.SpecialFolder.Windows) + @"\explorer.exe";
+    public static readonly string DefaultExecutable = Path.Combine(FolderPaths.Windows, "explorer.exe");
 
     public string ExecutablePath { get; private set; }
 
-    private string _path;
+    private string _itemItemPath;
 
-    protected SavedFileSystemItem(string id, string name, string? base64Icon, string path, string executablePath, long lastOpened)
+    protected SavedFileSystemItem(
+        string id,
+        string name,
+        string? base64Icon,
+        string itemItemPath,
+        string executablePath,
+        long lastOpened)
         : base(id, name, base64Icon, lastOpened)
     {
-        _path = path;
+        _itemItemPath = itemItemPath;
         ExecutablePath = executablePath;
     }
 
-    public string Path
+    public string ItemPath
     {
-        get => _path;
+        get => _itemItemPath;
         set
         {
-            _path = value;
+            _itemItemPath = value;
             RegenerateBase64Icon();
         }
     }
@@ -55,7 +61,7 @@ public abstract class SavedFileSystemItem : SavedItem
         using var openProcess = new Process();
 
         openProcess.StartInfo.FileName = ExecutablePath;
-        openProcess.StartInfo.Arguments = $"\"{Path}\"";
+        openProcess.StartInfo.Arguments = $"\"{ItemPath}\"";
         openProcess.Start();
     }
 

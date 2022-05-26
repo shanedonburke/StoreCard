@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
+using StoreCard.Static;
 
 namespace StoreCard.Commands;
 
@@ -14,7 +15,7 @@ internal class BrowseFileCommand : IStoreCardCommand<string?>
         var dialog = new OpenFileDialog
         {
             Filter = "All Files (*.*)|*.*",
-            InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            InitialDirectory = FolderPaths.UserProfile,
             Title = "Select File"
         };
 

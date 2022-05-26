@@ -28,7 +28,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         DataContext = this;
         InitializeComponent();
 
-        PathBox.Text = item.Path;
+        PathBox.Text = item.ItemPath;
         NameBox.Text = item.Name;
         OnPropertyChanged(nameof(IsPathValid));
         OnPropertyChanged(nameof(ShouldEnableSavePathButton));
@@ -38,7 +38,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     public bool IsPathValid => _item.Exists();
 
-    public bool ShouldEnableSavePathButton => IsPathValid && PathBox.Text != _item.Path;
+    public bool ShouldEnableSavePathButton => IsPathValid && PathBox.Text != _item.ItemPath;
 
     public bool ShouldEnableSaveNameButton => NameBox.Text.Trim() != "" && NameBox.Text != _item.Name;
 
@@ -118,7 +118,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
         var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i =>
         {
-            i.Path = path;
+            i.ItemPath = path;
         });
 
         if (updatedItem != null)

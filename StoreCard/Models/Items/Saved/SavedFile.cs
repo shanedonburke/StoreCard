@@ -8,8 +8,8 @@ namespace StoreCard.Models.Items.Saved;
 
 internal class SavedFile : SavedFileSystemItem
 {
-    public SavedFile(string id, string name, string? base64Icon, string path, string executablePath, long lastOpened)
-        : base(id, name, base64Icon, path, executablePath, lastOpened)
+    public SavedFile(string id, string name, string? base64Icon, string itemItemPath, string executablePath, long lastOpened)
+        : base(id, name, base64Icon, itemItemPath, executablePath, lastOpened)
     {
     }
 
@@ -23,11 +23,11 @@ internal class SavedFile : SavedFileSystemItem
 
     public override bool Exists()
     {
-        return File.Exists(Path);
+        return File.Exists(ItemPath);
     }
 
     protected override ImageSource? GetSystemIcon()
     {
-        return IconUtils.GetFileIconByPath(Path);
+        return IconUtils.GetFileIconByPath(ItemPath);
     }
 }

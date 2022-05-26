@@ -10,13 +10,10 @@ namespace StoreCard.Utils;
 
 internal class ShortcutUtils
 {
-    private static string StartupFolderPath => Environment.GetFolderPath(
-        Environment.SpecialFolder.Startup);
-
-    private static string StartupShortcutPath => Path.Join(StartupFolderPath, "StoreCard.lnk");
+    private static string StartupShortcutPath => Path.Join(FolderPaths.Startup, "StoreCard.lnk");
 
     public static void CreateStartupShortcut() {
-        CreateShortcut(StartupFolderPath, CommandLineOptions.StartMinimized);
+        CreateShortcut(FolderPaths.Startup, CommandLineOptions.StartMinimized);
     }
 
     public static void RemoveStartupShortcut() {

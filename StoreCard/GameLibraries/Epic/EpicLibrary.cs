@@ -8,27 +8,30 @@ using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Installed.Games;
+using StoreCard.Static;
 using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Epic;
 
 internal class EpicLibrary : GameLibrary
 {
+    private static readonly string s_launcherInstalledPath = Path.Combine(
+        FolderPaths.CommonApplicationData,
+        @"Epic\UnrealEngineLauncher\LauncherInstalled.dat");
+
+    private static readonly string s_manifestFolderPath = Path.Combine(
+        FolderPaths.CommonApplicationData,
+        @"Epic\EpicGamesLauncher\Data\Manifests");
+
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
-        string programDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-
-        string launcherInstalledPath = Path.Combine(programDataFolder,
-            @"Epic\UnrealEngineLauncher\LauncherInstalled.dat");
-        string manifestFolderPath = Path.Combine(programDataFolder, @"Epic\EpicGamesLauncher\Data\Manifests");
-
-        if (!File.Exists(launcherInstalledPath) || !Directory.Exists(manifestFolderPath))
+        if (!File.Exists(s_launcherInstalledPath) || !Directory.Exists(s_manifestFolderPath))
         {
             yield break;
         }
 
         if (JsonConvert.DeserializeObject<EpicLauncherInstalled>(
-                File.ReadAllText(launcherInstalledPath)) is not { } launcherInstalled)
+                File.ReadAllText(s_launcherInstalledPath)) is not { } launcherInstalled)
         {
             yield break;
         }
@@ -36,7 +39,7 @@ internal class EpicLibrary : GameLibrary
         var appNames = launcherInstalled.InstallationList.Select(app => app.AppName).ToList();
 
         IEnumerable<string> manifestPaths = Directory.EnumerateFiles(
-            manifestFolderPath,
+            s_manifestFolderPath,
             "*.item",
             SearchOption.TopDirectoryOnly);
 
