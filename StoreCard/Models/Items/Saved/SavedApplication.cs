@@ -19,13 +19,13 @@ internal class SavedApplication : SavedItem
         AppUserModelId = appUserModelId;
     }
 
-    public SavedApplication(InstalledApplication installedApplication) : base(
+    public SavedApplication(InstalledApp installedApp) : base(
         Guid.NewGuid().ToString(),
-        installedApplication.Name,
-        ImageUtils.ImageToBase64((BitmapSource) installedApplication.BitmapIcon),
+        installedApp.Name,
+        ImageUtils.ImageToBase64((BitmapSource) installedApp.BitmapIcon),
         TimeUtils.UnixTimeMillis)
     {
-        AppUserModelId = installedApplication.AppUserModelId;
+        AppUserModelId = installedApp.AppUserModelId;
     }
 
     public override BitmapSource PrefixIcon => Icons.AppIcon;

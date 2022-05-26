@@ -35,11 +35,11 @@ public partial class ApplicationSelector : INotifyPropertyChanged
 
     public bool ShouldEnableSaveButton => AppListBox.SelectedItem != null;
 
-    public InstalledApplication? SelectedApp => AppListBox.SelectedItem as InstalledApplication;
+    public InstalledApp? SelectedApp => AppListBox.SelectedItem as InstalledApp;
 
-    public string? SelectedAppName => (AppListBox.SelectedItem as InstalledApplication)?.Name;
+    public string? SelectedAppName => (AppListBox.SelectedItem as InstalledApp)?.Name;
 
-    public ImageSource? SelectedAppIcon => (AppListBox.SelectedItem as InstalledApplication)?.BitmapIcon;
+    public ImageSource? SelectedAppIcon => (AppListBox.SelectedItem as InstalledApp)?.BitmapIcon;
 
     public event RoutedEventHandler SaveButtonClick
     {
@@ -63,7 +63,7 @@ public partial class ApplicationSelector : INotifyPropertyChanged
 
     private void LoadApps()
     {
-        foreach (var app in InstalledAppUtils.GetInstalledApplications())
+        foreach (var app in InstalledAppUtils.GetInstalledApps())
         {
             AppListBox.AddItem(app);
         }

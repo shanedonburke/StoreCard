@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace StoreCard.Models.Items.Installed;
 
-public class InstalledApplication : IListBoxItem
+public class InstalledApp : IListBoxItem
 {
-    public InstalledApplication(string name, string appUserModelId, string? executablePath, BitmapSource icon)
+    public InstalledApp(string name, string appUserModelId, string? executablePath, BitmapSource icon)
     {
         Name = name;
         AppUserModelId = appUserModelId;
