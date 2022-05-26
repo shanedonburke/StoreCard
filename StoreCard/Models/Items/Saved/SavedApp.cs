@@ -8,18 +8,18 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
 
-internal class SavedApplication : SavedItem
+internal class SavedApp : SavedItem
 {
     public readonly string AppUserModelId;
 
     [JsonConstructor]
-    public SavedApplication(string id, string name, string base64Icon, string appUserModelId, long lastOpened) : base(
+    public SavedApp(string id, string name, string base64Icon, string appUserModelId, long lastOpened) : base(
         id, name, base64Icon, lastOpened)
     {
         AppUserModelId = appUserModelId;
     }
 
-    public SavedApplication(InstalledApp installedApp) : base(
+    public SavedApp(InstalledApp installedApp) : base(
         Guid.NewGuid().ToString(),
         installedApp.Name,
         ImageUtils.ImageToBase64((BitmapSource) installedApp.BitmapIcon),

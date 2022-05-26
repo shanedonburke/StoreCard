@@ -6,7 +6,7 @@ internal class AddApplicationCommand : IStoreCardCommand<bool>
 {
     public bool Execute()
     {
-        new AddApplicationWindow().Show();
+        new AddAppWindow().Show();
         return true;
     }
 }

@@ -30,11 +30,11 @@ using StoreCard.Utils;
 namespace StoreCard.Windows;
 
 /// <summary>
-///     Interaction logic for AddApplicationWindow.xaml
+///     Interaction logic for AddAppWindow.xaml
 /// </summary>
-public partial class AddApplicationWindow : INotifyPropertyChanged
+public partial class AddAppWindow : INotifyPropertyChanged
 {
-    public AddApplicationWindow()
+    public AddAppWindow()
     {
         InitializeComponent();
         DataContext = this;
@@ -104,7 +104,7 @@ public partial class AddApplicationWindow : INotifyPropertyChanged
         else
         {
             List<SavedItem> savedItems = AppData.ReadItemsFromFile();
-            savedItems.Add(new SavedApplication(AppSelector.SelectedApp!));
+            savedItems.Add(new SavedApp(AppSelector.SelectedApp!));
             AppData.SaveItemsToFile(savedItems);
         }
 

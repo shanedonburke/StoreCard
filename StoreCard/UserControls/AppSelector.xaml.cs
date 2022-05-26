@@ -11,23 +11,23 @@ using StoreCard.Utils;
 namespace StoreCard.UserControls;
 
 /// <summary>
-/// Interaction logic for ApplicationSelector.xaml
+/// Interaction logic for AppSelector.xaml
 /// </summary>
-public partial class ApplicationSelector : INotifyPropertyChanged
+public partial class AppSelector : INotifyPropertyChanged
 {
     public static readonly RoutedEvent SaveButtonClickEvent = EventManager.RegisterRoutedEvent(
         nameof(SaveButtonClick),
         RoutingStrategy.Bubble,
         typeof(RoutedEventHandler),
-        typeof(ApplicationSelector));
+        typeof(AppSelector));
 
     public static readonly RoutedEvent CancelButtonClickEvent = EventManager.RegisterRoutedEvent(
         nameof(CancelButtonClick),
         RoutingStrategy.Bubble,
         typeof(RoutedEventHandler),
-        typeof(ApplicationSelector));
+        typeof(AppSelector));
 
-    public ApplicationSelector()
+    public AppSelector()
     {
         DataContext = this;
         InitializeComponent();
