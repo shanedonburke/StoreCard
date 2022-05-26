@@ -46,6 +46,25 @@ public partial class StoreCardButton
         typeof(RoutedEventHandler),
         typeof(StoreCardButton));
 
+    static StoreCardButton()
+    {
+        // Button is a tab stop unless overriden with `IsTabStop="False"`
+        IsTabStopProperty.OverrideMetadata(
+            typeof(StoreCardButton),
+            new FrameworkPropertyMetadata(true));
+    }
+
+    public StoreCardButton()
+    {
+        InitializeComponent();
+    }
+
+    public event RoutedEventHandler Click
+    {
+        add => AddHandler(ClickEvent, value);
+        remove => RemoveHandler(ClickEvent, value);
+    }
+
     public new bool IsEnabled
     {
         get => (bool)GetValue(IsEnabledProperty);
@@ -64,7 +83,6 @@ public partial class StoreCardButton
         set => SetValue(FontSizeProperty, value);
     }
 
-
     public Brush BackgroundBrush
     {
         get => (Brush)GetValue(BackgroundBrushProperty);
@@ -81,25 +99,6 @@ public partial class StoreCardButton
     {
         get => (Brush)GetValue(PressedBackgroundBrushProperty);
         set => SetValue(PressedBackgroundBrushProperty, value);
-    }
-
-    public event RoutedEventHandler Click
-    {
-        add => AddHandler(ClickEvent, value);
-        remove => RemoveHandler(ClickEvent, value);
-    }
-
-    static StoreCardButton()
-    {
-        // Button is a tab stop unless overriden with `IsTabStop="False"`
-        IsTabStopProperty.OverrideMetadata(
-            typeof(StoreCardButton),
-            new FrameworkPropertyMetadata(true));
-    }
-
-    public StoreCardButton()
-    {
-        InitializeComponent();
     }
 
     private void CustomButton_Click(object sender, RoutedEventArgs e)

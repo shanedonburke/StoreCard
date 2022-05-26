@@ -16,4 +16,6 @@
         x:Key="NotBlankToVisibilityConverter" />
     <converters:ValueToStringConverter
         x:Key="ValueToStringConverter" />
+    <converters:MultiValueEqualityConverter
+        x:Key="MultiValueEqualityConverter" />
 </ResourceDictionary>

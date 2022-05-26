@@ -311,14 +311,14 @@ public partial class MainWindow : INotifyPropertyChanged
         Category = ItemCategory.Game;
     }
 
-    private void FoldersCategoryButton_Click(object sender, RoutedEventArgs e)
-    {
-        Category = ItemCategory.Folder;
-    }
-
     private void FilesCategoryButton_Click(object sender, RoutedEventArgs e)
     {
         Category = ItemCategory.File;
+    }
+
+    private void FoldersCategoryButton_Click(object sender, RoutedEventArgs e)
+    {
+        Category = ItemCategory.Folder;
     }
 
     private void LinksCategoryButton_Click(object sender, RoutedEventArgs e)
