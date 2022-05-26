@@ -58,10 +58,11 @@ public abstract class SavedFileSystemItem : SavedItem
             return;
         }
 
-        using var openProcess = new Process();
+        using var openProcess = new Process
+        {
+            StartInfo = new ProcessStartInfo {FileName = ExecutablePath, Arguments = $"\"{ItemPath}\""}
+        };
 
-        openProcess.StartInfo.FileName = ExecutablePath;
-        openProcess.StartInfo.Arguments = $"\"{ItemPath}\"";
         openProcess.Start();
     }
 
