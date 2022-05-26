@@ -67,9 +67,13 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     private void ChangeExecutableButton_Click(object sender, RoutedEventArgs e)
     {
-        if (new ChangeExecutableWindow(_item).ShowDialog() != true) return;
+        if (!new ChangeExecutableCommand(_item).Execute())
+        {
+            return;
+        }
 
         var item = AppData.FindSavedItemById<SavedFileSystemItem>(AppData.ReadItemsFromFile(), _item.Id);
+
         if (item == null)
         {
             Debug.WriteLine("Failed to find matching item for edit file window.");
