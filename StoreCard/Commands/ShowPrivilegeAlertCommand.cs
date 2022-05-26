@@ -11,18 +11,18 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-internal class ShowMissingExecutableAlertCommand : IStoreCardCommand<bool>
+internal class ShowPrivilegeAlertCommand : IStoreCardCommand<bool>
 {
     private readonly SavedFileSystemItem _item;
 
-    public ShowMissingExecutableAlertCommand(SavedFileSystemItem item)
+    public ShowPrivilegeAlertCommand(SavedFileSystemItem item)
     {
         _item = item;
     }
 
     public bool Execute()
     {
-        new InvalidExecutableWindow(_item, "Missing Executable", "could not be found").Show();
+        new InvalidExecutableWindow(_item, "Administrative Privileges Required", "requires administrative privileges").Show();
         return true;
     }
 }

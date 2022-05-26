@@ -23,18 +23,24 @@ namespace StoreCard.Windows;
 /// <summary>
 /// Interaction logic for MissingExecutableWindow.xaml
 /// </summary>
-public partial class MissingExecutableWindow
+public partial class InvalidExecutableWindow
 {
     private readonly SavedFileSystemItem _item;
 
     private bool _shouldShowSearchOnClose = true;
 
-    public MissingExecutableWindow(SavedFileSystemItem item)
+    public InvalidExecutableWindow(SavedFileSystemItem item, string windowTitle, string explanation)
     {
         _item = item;
+        WindowTitle = windowTitle;
+        Explanation = explanation;
         DataContext = this;
         InitializeComponent();
     }
+
+    public string WindowTitle { get; }
+
+    public string Explanation { get; }
 
     public string ExecutableName => _item.ExecutableName;
 
@@ -54,6 +60,7 @@ public partial class MissingExecutableWindow
 
     private void EditButton_Click(object sender, RoutedEventArgs e)
     {
+        _shouldShowSearchOnClose = false;
         new ChangeExecutableCommand(_item, false).Execute();
         Close();
     }

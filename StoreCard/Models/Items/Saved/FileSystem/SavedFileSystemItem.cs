@@ -79,7 +79,7 @@ public abstract class SavedFileSystemItem : SavedItem
         }
         catch (Win32Exception)
         {
-            // TODO
+            new ShowPrivilegeAlertCommand(this).Execute();
         }
     }
 
