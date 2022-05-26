@@ -46,13 +46,20 @@ internal class SavedSteamGame : SavedGame
     {
         if (SteamLibrary.SteamInstallFolder == null)
         {
-            MessageBoxService.Instance.ShowMessageBox("The Steam installation folder could not be found.", "Error",
-                MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBoxService.Instance.ShowMessageBox(
+                "The Steam installation folder could not be found.",
+                "Error",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
             return;
         }
 
         string steamExecPath = Path.Combine(SteamLibrary.SteamInstallFolder, "steam.exe");
-        if (!File.Exists(steamExecPath)) return;
+
+        if (!File.Exists(steamExecPath))
+        {
+            return;
+        }
 
         Process.Start(steamExecPath, $"steam://rungameid/{AppId}");
     }
