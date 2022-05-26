@@ -67,7 +67,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     private void ChangeExecutableButton_Click(object sender, RoutedEventArgs e)
     {
-        if (!new ChangeExecutableCommand(_item).Execute())
+        if (!new ChangeExecutableCommand(_item, true).Execute())
         {
             return;
         }

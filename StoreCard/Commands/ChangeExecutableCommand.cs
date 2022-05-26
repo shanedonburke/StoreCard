@@ -9,13 +9,22 @@ internal class ChangeExecutableCommand : IStoreCardCommand<bool>
 {
     private readonly SavedFileSystemItem _item;
 
-    public ChangeExecutableCommand(SavedFileSystemItem item)
+    private readonly bool _shouldShowAsDialog;
+
+    public ChangeExecutableCommand(SavedFileSystemItem item, bool shouldShowAsDialog)
     {
         _item = item;
+        _shouldShowAsDialog = shouldShowAsDialog;
     }
 
     public bool Execute()
     {
-        return new ChangeExecutableWindow(_item).ShowDialog() ?? false;
+        if (_shouldShowAsDialog)
+        {
+            return new ChangeExecutableWindow(_item).ShowDialog() ?? false;
+        }
+
+        new ChangeExecutableWindow(_item).Show();
+        return true;
     }
 }

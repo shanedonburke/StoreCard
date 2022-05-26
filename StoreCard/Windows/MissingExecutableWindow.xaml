@@ -1,5 +1,5 @@
 ﻿<Window
-    x:Class="StoreCard.Windows.MissingItemWindow"
+    x:Class="StoreCard.Windows.MissingExecutableWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,13 +7,13 @@
     xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
     mc:Ignorable="d"
-    Width="400"
+    Closed="Window_Closed"
+    Width="500"
     Height="300"
     Background="{DynamicResource AppBackgroundBrush}"
     WindowStartupLocation="CenterScreen"
-    Title="Missing Item"
-    Closed="Window_Closed"
-    d:DataContext="{d:DesignInstance Type=windows:MissingItemWindow, IsDesignTimeCreatable=False}">
+    Title="Missing Executable"
+    d:DataContext="{d:DesignInstance Type=windows:MissingExecutableWindow, IsDesignTimeCreatable=False}">
     <Grid
         Margin="15">
         <Grid.RowDefinitions>
@@ -27,10 +27,15 @@
             Foreground="{DynamicResource AppForegroundBrush}"
             FontSize="14"
             TextWrapping="Wrap">
-            The item you are trying to open does not exist.
+            <!--  Line feeds in XAML are translated into spaces, so there can't be any between tags -->
+            <Run
+                Text="You tried to open an item with" /> <Run
+                FontWeight="Bold"
+                Text="{Binding ExecutableName, Mode=OneWay}" /><Run
+                Text=", but that executable could not be found." />
             <LineBreak />
             <LineBreak />
-            Please edit the item or delete it.
+            <Run>Please select a new executable or delete the item.</Run>
         </TextBlock>
         <Grid
             Grid.Row="1">
@@ -43,18 +48,17 @@
                     Width="*" />
             </Grid.ColumnDefinitions>
             <userControls:StoreCardButton
-                Style="{DynamicResource DeleteButton}"
                 Grid.Column="0"
+                Click="DeleteButton_Click"
+                Style="{DynamicResource DeleteButton}"
                 HorizontalAlignment="Stretch"
-                Text="Delete"
-                Click="DeleteButton_Click" />
+                Text="Delete" />
             <userControls:StoreCardButton
-                Style="{DynamicResource PrimaryButton}"
                 Grid.Column="2"
+                Click="EditButton_Click"
+                Style="{DynamicResource PrimaryButton}"
                 HorizontalAlignment="Stretch"
-                Text="Edit"
-                Visibility="{Binding ShouldShowEditButton, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Click="EditButton_Click" />
+                Text="Edit" />
         </Grid>
     </Grid>
 </Window>

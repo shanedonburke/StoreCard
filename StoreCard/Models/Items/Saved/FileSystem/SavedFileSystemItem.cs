@@ -1,9 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using StoreCard.Commands;
+using StoreCard.Services;
 using StoreCard.Static;
 using StoreCard.Utils;
 
@@ -40,8 +43,9 @@ public abstract class SavedFileSystemItem : SavedItem
         }
     }
 
-    public string ExecutableName =>
-        ExecutablePath == DefaultExecutable ? "Default" : ExecutablePath.Split(@"\").Last();
+    public string ExecutableName => ExecutablePath == DefaultExecutable
+        ? "Default"
+        : ExecutablePath.Split(@"\").Last();
 
     public void SetExecutablePath(string path)
     {
@@ -58,12 +62,25 @@ public abstract class SavedFileSystemItem : SavedItem
             return;
         }
 
+        if (!File.Exists(ExecutablePath))
+        {
+            new ShowMissingExecutableAlertCommand(this).Execute();
+            return;
+        }
+
         using var openProcess = new Process
         {
             StartInfo = new ProcessStartInfo {FileName = ExecutablePath, Arguments = $"\"{ItemPath}\""}
         };
 
-        openProcess.Start();
+        try
+        {
+            openProcess.Start();
+        }
+        catch (Win32Exception)
+        {
+            // TODO
+        }
     }
 
     protected abstract ImageSource? GetSystemIcon();

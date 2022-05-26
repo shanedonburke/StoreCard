@@ -31,6 +31,8 @@ public partial class ChangeExecutableWindow : INotifyPropertyChanged
 
     private string _executableName = "";
 
+    private bool _isDialog = false;
+
     public string ExecutableName
     {
         get => _executableName;
@@ -70,16 +72,25 @@ public partial class ChangeExecutableWindow : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    public new bool? ShowDialog()
+    {
+        _isDialog = true;
+        return base.ShowDialog();
+    }
+
     private void SaveDefaultButton_Click(object sender, RoutedEventArgs e)
     {
         SetExecPathAndSave(SavedFileSystemItem.DefaultExecutable);
-
         Close();
     }
 
     private void CancelButton_Click(object sender, RoutedEventArgs e)
     {
-        DialogResult = false;
+        if (_isDialog)
+        {
+            DialogResult = false;
+        }
+
         Close();
     }
 
@@ -122,17 +133,26 @@ public partial class ChangeExecutableWindow : INotifyPropertyChanged
 
     private void SetExecPathAndSave(string path)
     {
-        if (AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.SetExecutablePath(path)) != null)
+        var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(
+            _item.Id,
+            i => i.SetExecutablePath(path));
+
+        if (_isDialog)
         {
-            DialogResult = true;
+            DialogResult = updatedItem != null;
         }
     }
 
     private void ExecutablePathBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var text = ExecutablePathBox.Text;
+        string text = ExecutablePathBox.Text;
         DoesExecutableExist = File.Exists(text);
-        if (!DoesExecutableExist) return;
+
+        if (!DoesExecutableExist)
+        {
+            return;
+        }
+
         // Take file name without '.exe'
         ExecutableName = text.Split(@"\").Last();
 
@@ -150,5 +170,13 @@ public partial class ChangeExecutableWindow : INotifyPropertyChanged
     private void AppSelector_CancelButtonClick(object sender, RoutedEventArgs e)
     {
         Close();
+    }
+
+    private void Window_Closed(object? sender, EventArgs e)
+    {
+        if (!_isDialog)
+        {
+            new ShowSearchCommand().Execute();
+        }
     }
 }

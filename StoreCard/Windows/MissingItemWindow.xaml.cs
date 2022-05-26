@@ -18,7 +18,7 @@ public sealed partial class MissingItemWindow : INotifyPropertyChanged
 
     private readonly Action? _editAction;
 
-    private bool _shouldShowMainWindowOnClose = true;
+    private bool _shouldShowSearchOnClose = true;
 
     public MissingItemWindow(SavedItem item, Action editAction) : this(item)
     {
@@ -45,14 +45,14 @@ public sealed partial class MissingItemWindow : INotifyPropertyChanged
 
     private void EditButton_Click(object sender, RoutedEventArgs e)
     {
-        _shouldShowMainWindowOnClose = false;
+        _shouldShowSearchOnClose = false;
         _editAction?.Invoke();
         Close();
     }
 
     private void Window_Closed(object? sender, EventArgs e)
     {
-        if (_shouldShowMainWindowOnClose)
+        if (_shouldShowSearchOnClose)
         {
             new ShowSearchCommand().Execute();
         }

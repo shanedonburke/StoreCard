@@ -7,6 +7,7 @@
     xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
     mc:Ignorable="d"
+    Closed="Window_Closed"
     Width="800"
     Height="605"
     Background="{DynamicResource AppBackgroundBrush}"
