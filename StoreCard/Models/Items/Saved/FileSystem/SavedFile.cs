@@ -8,7 +8,13 @@ namespace StoreCard.Models.Items.Saved.FileSystem;
 
 internal class SavedFile : SavedFileSystemItem
 {
-    public SavedFile(string id, string name, string? base64Icon, string itemItemPath, string executablePath, long lastOpened)
+    public SavedFile(
+        string id,
+        string name,
+        string? base64Icon,
+        string itemItemPath,
+        string executablePath,
+        long lastOpened)
         : base(id, name, base64Icon, itemItemPath, executablePath, lastOpened)
     {
     }
