@@ -21,6 +21,7 @@ using StoreCard.GameLibraries.Epic;
 using StoreCard.GameLibraries.Itch;
 using StoreCard.GameLibraries.Steam;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
 using StoreCard.UserControls;

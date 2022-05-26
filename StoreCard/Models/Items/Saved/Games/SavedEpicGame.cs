@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Static;
 using StoreCard.Utils;
 
-namespace StoreCard.Models.Items.Saved;
+namespace StoreCard.Models.Items.Saved.Games;
 
 internal class SavedEpicGame : SavedGame
 {

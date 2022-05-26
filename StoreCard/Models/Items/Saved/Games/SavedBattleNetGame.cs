@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using Newtonsoft.Json;
 using StoreCard.GameLibraries.BattleNet;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Services;
 using StoreCard.Utils;
 using File = System.IO.File;
 
-namespace StoreCard.Models.Items.Saved;
+namespace StoreCard.Models.Items.Saved.Games;
 
 internal class SavedBattleNetGame : SavedGame
 {

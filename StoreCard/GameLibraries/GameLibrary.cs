@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Models.Items.Installed.Games;
 
 namespace StoreCard.GameLibraries;
 

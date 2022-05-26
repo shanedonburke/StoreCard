@@ -1,8 +1,7 @@
-﻿using System.Windows.Media;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 using StoreCard.Static;
 
-namespace StoreCard.Models.Items.Saved;
+namespace StoreCard.Models.Items.Saved.Games;
 
 internal abstract class SavedGame : SavedItem
 {

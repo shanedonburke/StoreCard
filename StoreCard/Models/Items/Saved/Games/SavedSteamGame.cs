@@ -2,16 +2,15 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
-using StoreCard.GameLibraries;
 using StoreCard.GameLibraries.Steam;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Services;
 using StoreCard.Static;
 using StoreCard.Utils;
 
-namespace StoreCard.Models.Items.Saved;
+namespace StoreCard.Models.Items.Saved.Games;
 
 internal class SavedSteamGame : SavedGame
 {

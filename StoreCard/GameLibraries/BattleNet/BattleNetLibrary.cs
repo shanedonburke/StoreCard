@@ -9,6 +9,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Static;
 using StoreCard.Utils;
 

@@ -2,20 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 using StoreCard.GameLibraries.Itch;
 using StoreCard.Models.Items.Installed;
+using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Services;
 using StoreCard.Static;
 using StoreCard.Utils;
 
-namespace StoreCard.Models.Items.Saved;
+namespace StoreCard.Models.Items.Saved.Games;
 
 internal class SavedItchGame : SavedGame
 {

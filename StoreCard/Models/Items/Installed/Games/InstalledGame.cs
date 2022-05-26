@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Static;
 
-namespace StoreCard.Models.Items.Installed;
+namespace StoreCard.Models.Items.Installed.Games;
 
 public abstract class InstalledGame : IListBoxItem
 {

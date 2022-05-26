@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
+﻿using System.Windows.Media.Imaging;
 using StoreCard.Models.Items.Saved;
+using StoreCard.Models.Items.Saved.Games;
 using StoreCard.Static;
 
-namespace StoreCard.Models.Items.Installed;
+namespace StoreCard.Models.Items.Installed.Games;
 
 internal class InstalledBattleNetGame : InstalledGame
 {
