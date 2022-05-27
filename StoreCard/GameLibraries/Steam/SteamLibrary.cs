@@ -50,13 +50,26 @@ internal class SteamLibrary : GameLibrary
 
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
-        if (SteamInstallFolder == null) yield break;
+        if (SteamInstallFolder == null)
+        {
+            yield break;
+        }
 
-        string? libraryCacheFolder = $"{SteamInstallFolder}\\appcache\\librarycache";
-        string? steamAppsFolder = $"{SteamInstallFolder}\\steamapps";
+        string libraryCacheFolder = $"{SteamInstallFolder}\\appcache\\librarycache";
+        string steamAppsFolder = $"{SteamInstallFolder}\\steamapps";
+        string libraryFoldersPath = $"{steamAppsFolder}\\libraryfolders.vdf";
 
-        var libraryFolders = KeyValue.LoadFromString(File.ReadAllText($"{steamAppsFolder}\\libraryfolders.vdf"));
-        if (libraryFolders == null) yield break;
+        if (!File.Exists(libraryFoldersPath))
+        {
+            yield break;
+        }
+
+        var libraryFolders = KeyValue.LoadFromString(File.ReadAllText(libraryFoldersPath));
+
+        if (libraryFolders == null)
+        {
+            yield break;
+        }
 
         var steamAppsFolderPaths = libraryFolders.Children
             .Where(child => int.TryParse(child.Name, out _))
@@ -68,6 +81,11 @@ internal class SteamLibrary : GameLibrary
 
         foreach (string? manifestPath in manifestPaths)
         {
+            if (!File.Exists(manifestPath))
+            {
+                continue;
+            }
+
             var manifest = KeyValue.LoadFromString(File.ReadAllText(manifestPath));
             if (manifest == null) continue;
 
@@ -75,8 +93,12 @@ internal class SteamLibrary : GameLibrary
             string? appId = manifest["appid"].Value;
             if (name == null || appId == null) continue;
 
-            string? iconPath = $"{libraryCacheFolder}\\{appId}_icon.jpg";
-            if (!File.Exists(iconPath)) continue;
+            string iconPath = $"{libraryCacheFolder}\\{appId}_icon.jpg";
+
+            if (!File.Exists(iconPath))
+            {
+                continue;
+            }
 
             Stream imageStreamSource = new FileStream(iconPath,
                 FileMode.Open,

@@ -60,6 +60,11 @@ internal class EpicLibrary : GameLibrary
 
         foreach (string manifestPath in manifestPaths)
         {
+            if (!File.Exists(manifestPath))
+            {
+                continue;
+            }
+
             EpicManifest? manifest;
 
             try
