@@ -56,7 +56,8 @@ public partial class MainWindow : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    private static uint Nfmod(float a, float b) {
+    private static uint Nfmod(float a, float b)
+    {
         return (uint)(a - b * Math.Floor(a / b));
     }
 
@@ -181,11 +182,11 @@ public partial class MainWindow : INotifyPropertyChanged
                 Deactivate();
                 break;
             case Key.Left:
-                Category = (ItemCategory) Nfmod((int) Category - 1, Enum.GetNames(typeof(ItemCategory)).Length);
+                Category = (ItemCategory)Nfmod((int)Category - 1, Enum.GetNames(typeof(ItemCategory)).Length);
                 SelectFirstItem();
                 break;
             case Key.Right:
-                Category = (ItemCategory) Nfmod((int) Category + 1, Enum.GetNames(typeof(ItemCategory)).Length);
+                Category = (ItemCategory)Nfmod((int)Category + 1, Enum.GetNames(typeof(ItemCategory)).Length);
                 SelectFirstItem();
                 break;
         }
@@ -227,7 +228,7 @@ public partial class MainWindow : INotifyPropertyChanged
     private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
     {
         if (ItemListBox.SelectedIndex == -1) return;
-        AppData.DeleteItemAndSave((SavedItem) ItemListBox.SelectedItem);
+        AppData.DeleteItemAndSave((SavedItem)ItemListBox.SelectedItem);
         RefreshSavedItems();
     }
 
@@ -246,16 +247,21 @@ public partial class MainWindow : INotifyPropertyChanged
         {
             Debug.WriteLine("Tried to edit the selected item as a file, but the item is not a file or folder.");
         }
+
         Close();
     }
 
     private void EditExecutableMenuItem_Click(object sender, RoutedEventArgs e)
     {
-        if (ItemListBox.SelectedItem is SavedExecutable executable) {
+        if (ItemListBox.SelectedItem is SavedExecutable executable)
+        {
             new EditExecutableCommand(executable).Execute();
-        } else {
+        }
+        else
+        {
             Debug.WriteLine("Tried to edit the selected item as an executable, but the item is not an executable.");
         }
+
         Close();
     }
 
@@ -269,6 +275,7 @@ public partial class MainWindow : INotifyPropertyChanged
         {
             Debug.WriteLine("Tried to edit the selected item as a link, but the item is not a link.");
         }
+
         Close();
     }
 
