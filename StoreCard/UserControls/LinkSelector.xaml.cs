@@ -75,7 +75,17 @@ public partial class LinkSelector : INotifyPropertyChanged
         }
     }
 
-    public ImageSource LinkIcon => _favicon ?? Icons.LinkIcon;
+    public ImageSource? Favicon
+    {
+        get => _favicon;
+        set
+        {
+            _favicon = value;
+            OnPropertyChanged(nameof(Favicon));
+        }
+    }
+
+    public ImageSource DefaultIcon => Icons.LinkIcon;
 
     public bool ShouldEnableSaveButton => UrlBox.Text != string.Empty && LinkTitle != string.Empty;
 
@@ -95,25 +105,26 @@ public partial class LinkSelector : INotifyPropertyChanged
 
     private async void GetWebsiteDetails()
     {
-        var title = await LinkUtils.GetPageTitle(UrlBox.Text);
+        string title = await LinkUtils.GetPageTitle(UrlBox.Text);
+
         if (title != string.Empty)
         {
             LinkTitle = title;
         }
 
-        _favicon = await LinkUtils.GetPageIcon(UrlBox.Text);
-        OnPropertyChanged(nameof(LinkIcon));
+        Favicon = await LinkUtils.GetPageIcon(UrlBox.Text);
     }
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {
-        var base64Icon = ImageUtils.ImageToBase64((BitmapSource) LinkIcon);
+        string base64Icon = ImageUtils.ImageToBase64((BitmapSource)Favicon);
 
         // Instead of updating the link we're editing, create a new list with only the new link
         var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != Link?.Id).ToList();
 
-        var shouldOpenPrivate = OpenPrivateCheckBox.IsChecked == true;
-        savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon, LinkUtils.NormalizeUrl(UrlBox.Text),
+        bool shouldOpenPrivate = OpenPrivateCheckBox.IsChecked == true;
+        savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon,
+            LinkUtils.NormalizeUrl(UrlBox.Text),
             TimeUtils.UnixTimeMillis, shouldOpenPrivate));
         AppData.SaveItemsToFile(savedItems);
         Finish();
