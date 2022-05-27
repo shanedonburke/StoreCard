@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
@@ -30,8 +32,21 @@ internal class EpicLibrary : GameLibrary
             yield break;
         }
 
-        if (JsonConvert.DeserializeObject<EpicLauncherInstalled>(
-                File.ReadAllText(s_launcherInstalledPath)) is not { } launcherInstalled)
+        EpicLauncherInstalled? launcherInstalled;
+
+        try
+        {
+            launcherInstalled = JsonConvert.DeserializeObject<EpicLauncherInstalled>(
+                File.ReadAllText(s_launcherInstalledPath));
+        }
+        catch (JsonSerializationException e)
+        {
+            Debug.WriteLine("Failed to deserialize Epic Games data file:");
+            Debug.WriteLine(e.Message);
+            yield break;
+        }
+
+        if (launcherInstalled == null)
         {
             yield break;
         }
@@ -45,9 +60,22 @@ internal class EpicLibrary : GameLibrary
 
         foreach (string manifestPath in manifestPaths)
         {
-            if (JsonConvert.DeserializeObject<EpicManifest>(File.ReadAllText(manifestPath)) is not { } manifest)
+            EpicManifest? manifest;
+
+            try
             {
+                manifest = JsonConvert.DeserializeObject<EpicManifest>(File.ReadAllText(manifestPath));
+            }
+            catch (JsonSerializationException e)
+            {
+                Debug.WriteLine("Failed to deserialize Epic Games manifest:");
+                Debug.WriteLine(e.Message);
                 yield break;
+            }
+
+            if (manifest == null)
+            {
+                continue;
             }
 
             if (!appNames.Contains(manifest.AppName)) continue;

@@ -81,7 +81,8 @@ internal class ButlerClient
 
             try
             {
-                listenNotif = JsonConvert.DeserializeObject<ButlerListenNotification>(jsonLine,
+                listenNotif = JsonConvert.DeserializeObject<ButlerListenNotification>(
+                    jsonLine,
                     new JsonSerializerSettings {MissingMemberHandling = MissingMemberHandling.Error});
             }
             catch (JsonSerializationException)
@@ -152,13 +153,16 @@ internal class ButlerClient
 
         try
         {
-            return JsonConvert.DeserializeObject<ButlerResponse<TResult>>(resJson,
+            return JsonConvert.DeserializeObject<ButlerResponse<TResult>>(
+                resJson,
                 new JsonSerializerSettings {MissingMemberHandling = MissingMemberHandling.Ignore}) is { } res
                 ? res.Result
                 : default;
         }
-        catch (JsonSerializationException)
+        catch (JsonSerializationException e)
         {
+            Debug.WriteLine("Failed to deserialize Butler response:");
+            Debug.WriteLine(e.Message);
             return default;
         }
     }

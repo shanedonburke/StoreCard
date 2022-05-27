@@ -31,28 +31,44 @@ internal class AppData
         }
 
         string json = File.ReadAllText(s_itemsFilePath);
-        {
-            List<SavedItem>? savedItems = null;
-            try
-            {
-                savedItems = JsonConvert.DeserializeObject<List<SavedItem>>(json,
-                    new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
-            }
-            catch (JsonSerializationException ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+        List<SavedItem>? savedItems = null;
 
-            return savedItems ?? new List<SavedItem>();
+        try
+        {
+            savedItems = JsonConvert.DeserializeObject<List<SavedItem>>(
+                json,
+                new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
         }
+        catch (JsonSerializationException e)
+        {
+            Debug.WriteLine("Failed to deserialize list of saved items:");
+            Debug.WriteLine(e.Message);
+        }
+
+        return savedItems ?? new List<SavedItem>();
     }
 
     public static UserConfig ReadConfigFromFile()
     {
-        if (!File.Exists(s_configFilePath)) return new UserConfig();
+        if (!File.Exists(s_configFilePath))
+        {
+            return new UserConfig();
+        }
 
         string json = File.ReadAllText(s_configFilePath);
-        return JsonConvert.DeserializeObject<UserConfig>(json) ?? new UserConfig();
+        UserConfig? config = null;
+
+        try
+        {
+            config = JsonConvert.DeserializeObject<UserConfig>(json);
+        }
+        catch (JsonSerializationException e)
+        {
+            Debug.WriteLine("Failed to deserialize user config:");
+            Debug.WriteLine(e.Message);
+        }
+
+        return config ?? new UserConfig();
     }
 
     public static void SaveItemsToFile(List<SavedItem> items)
