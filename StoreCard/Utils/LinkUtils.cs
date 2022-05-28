@@ -25,8 +25,8 @@ public class LinkUtils
 
         try
         {
-            string? responseBody = await s_httpClient.GetStringAsync(fullUrl);
-            Match? m = s_titleRegex.Match(responseBody);
+            string responseBody = await s_httpClient.GetStringAsync(fullUrl);
+            Match m = s_titleRegex.Match(responseBody);
             if (m.Success)
             {
                 title = m.Groups[1].Captures[0].ToString();
@@ -44,7 +44,7 @@ public class LinkUtils
     {
         BitmapImage? image = null;
 
-        Match? m = s_urlRegex.Match(url);
+        Match m = s_urlRegex.Match(url);
         if (!m.Success) return image;
 
         string domain = m.Groups[4].Captures[0].ToString();

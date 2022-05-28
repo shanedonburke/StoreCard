@@ -117,7 +117,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     private void SavePath()
     {
-        string? path = PathBox.Text;
+        string path = PathBox.Text;
 
         SavedFileSystemItem? updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i =>
         {
@@ -137,7 +137,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     private void SaveName()
     {
-        string? name = NameBox.Text;
+        string name = NameBox.Text;
 
         SavedFileSystemItem? updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.Name = name);
 
