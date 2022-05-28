@@ -118,7 +118,7 @@
 					  Source="$(var.StoreCard_TargetDir)Ookii.Dialogs.Wpf.dll" />
 			</Component>
 			<Component Id="Hardcodet.NotifyIcon.Wpf.dll"
-			           Guid="912037ef-a045-4596-bd21-e740c8d715ca">
+					   Guid="912037ef-a045-4596-bd21-e740c8d715ca">
 				<File Id="Hardcodet.NotifyIcon.Wpf.dll"
 					  Name="Hardcodet.NotifyIcon.Wpf.dll"
 					  Source="$(var.StoreCard_TargetDir)Hardcodet.NotifyIcon.Wpf.dll" />
