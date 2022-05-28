@@ -40,9 +40,12 @@ public class ColorChangeEffect : ShaderEffect
     }
 
     private static void OnTargetBrushChanged(
-        DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        DependencyObject sender,
+        DependencyPropertyChangedEventArgs e)
     {
-        (sender as ColorChangeEffect)!.SetValue(s_targetColorProperty, (e.NewValue as SolidColorBrush)!.Color);
+        ((ColorChangeEffect)sender).SetValue(
+            s_targetColorProperty,
+            (e.NewValue as SolidColorBrush)!.Color);
     }
 
     public SolidColorBrush TargetBrush
