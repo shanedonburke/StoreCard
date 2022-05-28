@@ -106,9 +106,17 @@ public partial class AddFileWindow : INotifyPropertyChanged
     private void SaveFileButton_Click(object sender, RoutedEventArgs e)
     {
         string? base64Icon = FileIcon != null ? ImageUtils.ImageToBase64((BitmapSource) FileIcon) : null;
+
         List<SavedItem> savedItems = AppData.ReadItemsFromFile();
-        savedItems.Add(new SavedFile(Guid.NewGuid().ToString(), FileName, base64Icon, FilePathBox.Text,
-            SavedFileSystemItem.DefaultExecutable, TimeUtils.UnixTimeMillis));
+
+        savedItems.Add(new SavedFile(
+            Guid.NewGuid().ToString(),
+            FileName,
+            base64Icon,
+            FilePathBox.Text,
+            SavedFileSystemItem.DefaultExecutable,
+            TimeUtils.UnixTimeMillis));
+
         AppData.SaveItemsToFile(savedItems);
         Close();
     }
@@ -116,9 +124,17 @@ public partial class AddFileWindow : INotifyPropertyChanged
     private void SaveFolderButton_Click(object sender, RoutedEventArgs e)
     {
         string? base64Icon = FolderIcon != null ? ImageUtils.ImageToBase64((BitmapSource) FolderIcon) : null;
+
         List<SavedItem> savedItems = AppData.ReadItemsFromFile();
-        savedItems.Add(new SavedFolder(Guid.NewGuid().ToString(), FolderName, base64Icon, FolderPathBox.Text,
-            SavedFileSystemItem.DefaultExecutable, TimeUtils.UnixTimeMillis));
+
+        savedItems.Add(new SavedFolder(
+            Guid.NewGuid().ToString(),
+            FolderName,
+            base64Icon,
+            FolderPathBox.Text,
+            SavedFileSystemItem.DefaultExecutable,
+            TimeUtils.UnixTimeMillis));
+
         AppData.SaveItemsToFile(savedItems);
         Close();
     }
@@ -137,6 +153,7 @@ public partial class AddFileWindow : INotifyPropertyChanged
     {
         string text = FilePathBox.Text;
         DoesFileExist = File.Exists(text);
+
         if (DoesFileExist)
         {
             FileIcon = IconUtils.GetFileIconByPath(text);
@@ -149,6 +166,7 @@ public partial class AddFileWindow : INotifyPropertyChanged
     {
         string text = FolderPathBox.Text;
         DoesFolderExist = Directory.Exists(text);
+
         if (DoesFolderExist)
         {
             FolderIcon = IconUtils.GetFolderIconByPath(text);

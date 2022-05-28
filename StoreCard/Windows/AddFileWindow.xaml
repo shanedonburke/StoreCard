@@ -6,29 +6,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
     xmlns:windows="clr-namespace:StoreCard.Windows"
-    Closed="Window_Closed"
-    WindowStartupLocation="CenterScreen"
     Title="Add File"
     Width="600"
     Height="400"
+    d:DataContext="{d:DesignInstance Type=windows:AddFileWindow,
+                                     IsDesignTimeCreatable=False}"
     Background="{DynamicResource AppBackgroundBrush}"
-    mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=windows:AddFileWindow, IsDesignTimeCreatable=False}">
-    <Window.Resources>
-        <BooleanToVisibilityConverter
-            x:Key="BooleanToVisibilityConverter" />
-    </Window.Resources>
+    Closed="Window_Closed"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition
-                Height="Auto" />
-            <RowDefinition
-                Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--  Radio buttons  -->
-        <StackPanel
-            Grid.Row="0"
-            Margin="10">
+        <StackPanel Grid.Row="0" Margin="10">
             <Label
                 Margin="0,0,0,10"
                 FontSize="14"
@@ -36,9 +29,7 @@
                 Select a file or folder to save:
             </Label>
             <!--  "File" radio button  -->
-            <StackPanel
-                Margin="5,0,0,10"
-                Orientation="Horizontal">
+            <StackPanel Margin="5,0,0,10" Orientation="Horizontal">
                 <RadioButton
                     Name="FileRadioButton"
                     GroupName="ItemType"
@@ -52,12 +43,8 @@
                 </TextBlock>
             </StackPanel>
             <!--  "Folder" radio button  -->
-            <StackPanel
-                Margin="5,0,0,10"
-                Orientation="Horizontal">
-                <RadioButton
-                    Name="FolderRadioButton"
-                    GroupName="ItemType" />
+            <StackPanel Margin="5,0,0,10" Orientation="Horizontal">
+                <RadioButton Name="FolderRadioButton" GroupName="ItemType" />
                 <TextBlock
                     Height="20"
                     VerticalAlignment="Stretch"
@@ -69,23 +56,18 @@
         </StackPanel>
         <!--  "File" item type  -->
         <Grid
-            Visibility="{Binding IsChecked, ElementName=FileRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}"
             Grid.Row="1"
             Margin="15,0,15,15"
-            VerticalAlignment="Stretch">
+            VerticalAlignment="Stretch"
+            Visibility="{Binding IsChecked, ElementName=FileRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
-                <RowDefinition
-                    Height="30" />
-                <RowDefinition
-                    Height="*" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="50" />
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="Auto" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock
                 Grid.Column="0"
@@ -99,18 +81,18 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Margin="0,0,10,0"
-                InactivePlaceholder="Enter path to file..."
                 ActivePlaceholder="Enter path to file..."
+                InactivePlaceholder="Enter path to file..."
                 TextChanged="FilePathBox_TextChanged" />
             <!--  "Browse" button for files  -->
             <userControls:StoreCardButton
-                Style="{DynamicResource PrimaryButton}"
                 x:Name="BrowseFileButton"
                 Grid.Row="0"
                 Grid.Column="2"
                 Width="80"
-                Text="Browse"
-                Click="BrowseFileButton_Click" />
+                Click="BrowseFileButton_Click"
+                Style="{DynamicResource PrimaryButton}"
+                Text="Browse" />
             <!--  Name and other elements shown if path is valid  -->
             <Grid
                 Grid.Row="1"
@@ -120,22 +102,18 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="*" />
-                    <RowDefinition
-                        Height="30" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <!--  Icon/name preview  -->
                 <Grid
                     Grid.Row="0"
-                    Visibility="{Binding DoesFileExist, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Margin="50,15,0,30"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Top"
+                    Visibility="{Binding DoesFileExist, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="Auto" />
-                        <ColumnDefinition
-                            Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Image
                         Grid.Column="0"
@@ -150,9 +128,9 @@
                         FontSize="14"
                         FontWeight="Bold"
                         Foreground="{DynamicResource AppForegroundBrush}"
+                        Text="{Binding Path=FileName}"
                         TextTrimming="CharacterEllipsis"
-                        TextWrapping="NoWrap"
-                        Text="{Binding Path=FileName}" />
+                        TextWrapping="NoWrap" />
                 </Grid>
                 <!--  Save/Cancel controls  -->
                 <Grid
@@ -161,50 +139,41 @@
                     Margin="50,0,0,0"
                     VerticalAlignment="Bottom">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <userControls:StoreCardButton
-                        Style="{DynamicResource PrimaryButton}"
                         Grid.Column="2"
                         Margin="0,0,5,0"
-                        Text="Save"
+                        Click="SaveFileButton_Click"
                         IsEnabled="{Binding Path=DoesFileExist}"
-                        Click="SaveFileButton_Click" />
+                        Style="{DynamicResource PrimaryButton}"
+                        Text="Save" />
                     <userControls:StoreCardButton
-                        Style="{DynamicResource SecondaryButton}"
                         Grid.Column="3"
                         Margin="5,0,0,0"
-                        Text="Cancel"
-                        Click="CancelButton_Click" />
+                        Click="CancelButton_Click"
+                        Style="{DynamicResource SecondaryButton}"
+                        Text="Cancel" />
                 </Grid>
             </Grid>
         </Grid>
         <!--  "Folder" item type  -->
         <Grid
-            Visibility="{Binding IsChecked, ElementName=FolderRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}"
             Grid.Row="1"
             Margin="15,0,15,15"
-            VerticalAlignment="Stretch">
+            VerticalAlignment="Stretch"
+            Visibility="{Binding IsChecked, ElementName=FolderRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
-                <RowDefinition
-                    Height="30" />
-                <RowDefinition
-                    Height="*" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="50" />
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="Auto" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock
                 Grid.Column="0"
@@ -218,18 +187,18 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Margin="0,0,10,0"
-                InactivePlaceholder="Enter path to folder..."
                 ActivePlaceholder="Enter path to folder..."
+                InactivePlaceholder="Enter path to folder..."
                 TextChanged="FolderPathBox_TextChanged" />
             <!--  "Browse" button for folders  -->
             <userControls:StoreCardButton
-                Style="{DynamicResource PrimaryButton}"
                 x:Name="BrowseFolderButton"
                 Grid.Row="0"
                 Grid.Column="2"
                 Width="80"
-                Text="Browse"
-                Click="BrowseFolderButton_Click" />
+                Click="BrowseFolderButton_Click"
+                Style="{DynamicResource PrimaryButton}"
+                Text="Browse" />
             <!--  Name and other elements shown if path is valid  -->
             <Grid
                 Grid.Row="1"
@@ -239,22 +208,18 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="*" />
-                    <RowDefinition
-                        Height="30" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <!--  Icon/name preview  -->
                 <Grid
                     Grid.Row="0"
-                    Visibility="{Binding DoesFolderExist, Converter={StaticResource BooleanToVisibilityConverter}}"
                     Margin="50,15,0,30"
-                    VerticalAlignment="Top">
+                    VerticalAlignment="Top"
+                    Visibility="{Binding DoesFolderExist, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="Auto" />
-                        <ColumnDefinition
-                            Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Image
                         Width="40"
@@ -268,9 +233,9 @@
                         FontSize="14"
                         FontWeight="Bold"
                         Foreground="{DynamicResource AppForegroundBrush}"
+                        Text="{Binding FolderName}"
                         TextTrimming="CharacterEllipsis"
-                        TextWrapping="NoWrap"
-                        Text="{Binding FolderName}" />
+                        TextWrapping="NoWrap" />
                 </Grid>
                 <Grid
                     Grid.Row="1"
@@ -278,29 +243,25 @@
                     Margin="50,0,0,0"
                     VerticalAlignment="Bottom">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <userControls:StoreCardButton
-                        Style="{DynamicResource PrimaryButton}"
                         Grid.Column="2"
                         Margin="0,0,5,0"
-                        Text="Save"
+                        Click="SaveFolderButton_Click"
                         IsEnabled="{Binding Path=DoesFolderExist}"
-                        Click="SaveFolderButton_Click" />
+                        Style="{DynamicResource PrimaryButton}"
+                        Text="Save" />
                     <!--  "Cancel" button for applications  -->
                     <userControls:StoreCardButton
-                        Style="{DynamicResource SecondaryButton}"
                         Grid.Column="3"
                         Margin="5,0,0,0"
-                        Text="Cancel"
-                        Click="CancelButton_Click" />
+                        Click="CancelButton_Click"
+                        Style="{DynamicResource SecondaryButton}"
+                        Text="Cancel" />
                 </Grid>
             </Grid>
         </Grid>
