@@ -30,7 +30,7 @@ public class IconUtils
     {
         var shinfo = new Shell32.Shfileinfo();
 
-        // Call function with the path to the folder you want the icon for
+        // Pass in folder path
         Shell32.SHGetFileInfo(
             path,
             0,
@@ -38,12 +38,7 @@ public class IconUtils
             (uint)Marshal.SizeOf(shinfo),
             Shell32.ShgfiIcon | Shell32.ShgfiLargeicon);
 
-        using var i = Icon.FromHandle(shinfo.hIcon);
-
-        // Convert icon to a bitmap source
-        return Imaging.CreateBitmapSourceFromHIcon(
-            i.Handle,
-            new Int32Rect(0, 0, i.Width, i.Height),
-            BitmapSizeOptions.FromEmptyOptions());
+        using var hIcon = Icon.FromHandle(shinfo.hIcon);
+        return CreateBitmapSourceFromHIcon(hIcon);
     }
 }
