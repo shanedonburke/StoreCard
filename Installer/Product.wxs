@@ -117,14 +117,8 @@
 					  Name="Ookii.Dialogs.Wpf.dll"
 					  Source="$(var.StoreCard_TargetDir)Ookii.Dialogs.Wpf.dll" />
 			</Component>
-			<Component Id="SteamKit2.dll"
-					   Guid="bfb72fd0-fc4b-4d00-928f-776b5aa613d4">
-				<File Id="SteamKit2.dll"
-					  Name="SteamKit2.dll"
-					  Source="$(var.StoreCard_TargetDir)SteamKit2.dll" />
-			</Component>
 			<Component Id="Hardcodet.NotifyIcon.Wpf.dll"
-					   Guid="912037ef-a045-4596-bd21-e740c8d715ca">
+			           Guid="912037ef-a045-4596-bd21-e740c8d715ca">
 				<File Id="Hardcodet.NotifyIcon.Wpf.dll"
 					  Name="Hardcodet.NotifyIcon.Wpf.dll"
 					  Source="$(var.StoreCard_TargetDir)Hardcodet.NotifyIcon.Wpf.dll" />
