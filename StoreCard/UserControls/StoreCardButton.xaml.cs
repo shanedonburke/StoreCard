@@ -48,10 +48,8 @@ public partial class StoreCardButton
 
     static StoreCardButton()
     {
-        // Button is a tab stop unless overriden with `IsTabStop="False"`
-        IsTabStopProperty.OverrideMetadata(
-            typeof(StoreCardButton),
-            new FrameworkPropertyMetadata(true));
+        // Button is a tab stop unless overriden with IsTabStop="False"
+        IsTabStopProperty.OverrideMetadata(typeof(StoreCardButton), new FrameworkPropertyMetadata(true));
     }
 
     public StoreCardButton()

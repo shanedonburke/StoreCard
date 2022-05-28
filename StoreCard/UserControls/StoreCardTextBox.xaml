@@ -2,65 +2,47 @@
     x:Class="StoreCard.UserControls.StoreCardTextBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
-    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=userControls:StoreCardTextBox,
+                                     IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    d:DataContext="{d:DesignInstance Type=userControls:StoreCardTextBox, IsDesignTimeCreatable=False}">
+    mc:Ignorable="d">
     <Border
         Padding="5,0,5,0"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"
         Background="{DynamicResource LightBrush}"
         CornerRadius="5">
-        <Grid
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TextBlock
-                FontSize="14"
-                Foreground="{DynamicResource TextBoxPlaceholderBrush}"
                 Padding="2,0,0,0"
-                VerticalAlignment="Center">
+                VerticalAlignment="Center"
+                FontSize="14"
+                Foreground="{DynamicResource TextBoxPlaceholderBrush}">
                 <TextBlock.Style>
-                    <Style
-                        TargetType="TextBlock">
+                    <Style TargetType="TextBlock">
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition
-                                        Binding="{Binding ElementName=CustomTextBox, Path=IsFocused}"
-                                        Value="False" />
-                                    <Condition
-                                        Binding="{Binding Text}"
-                                        Value="" />
+                                    <Condition Binding="{Binding ElementName=CustomTextBox, Path=IsFocused}" Value="False" />
+                                    <Condition Binding="{Binding Text}" Value="" />
                                 </MultiDataTrigger.Conditions>
                                 <MultiDataTrigger.Setters>
-                                    <Setter
-                                        Property="Text"
-                                        Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardTextBox}}, Path=InactivePlaceholder}" />
-                                    <Setter
-                                        Property="Foreground"
-                                        Value="{DynamicResource TextBoxPlaceholderBrush}" />
+                                    <Setter Property="Text" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardTextBox}}, Path=InactivePlaceholder}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource TextBoxPlaceholderBrush}" />
                                 </MultiDataTrigger.Setters>
                             </MultiDataTrigger>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition
-                                        Binding="{Binding ElementName=CustomTextBox, Path=IsFocused}"
-                                        Value="True" />
-                                    <Condition
-                                        Binding="{Binding Text}"
-                                        Value="" />
+                                    <Condition Binding="{Binding ElementName=CustomTextBox, Path=IsFocused}" Value="True" />
+                                    <Condition Binding="{Binding Text}" Value="" />
                                 </MultiDataTrigger.Conditions>
                                 <MultiDataTrigger.Setters>
-                                    <Setter
-                                        Property="Text"
-                                        Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardTextBox}}, Path=ActivePlaceholder}" />
-                                    <Setter
-                                        Property="Foreground"
-                                        Value="{DynamicResource TextBoxPlaceholderBrush}" />
+                                    <Setter Property="Text" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardTextBox}}, Path=ActivePlaceholder}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource TextBoxPlaceholderBrush}" />
                                 </MultiDataTrigger.Setters>
                             </MultiDataTrigger>
                         </Style.Triggers>
@@ -71,25 +53,20 @@
                 Name="CustomTextBox"
                 VerticalContentAlignment="Stretch"
                 Background="Transparent"
-                CaretBrush="{DynamicResource AppForegroundBrush}"
                 BorderBrush="Transparent"
                 BorderThickness="0,0,0,0"
+                CaretBrush="{DynamicResource AppForegroundBrush}"
                 FontSize="14"
+                KeyUp="CustomTextBox_KeyUp"
                 MaxLines="1"
                 PreviewKeyDown="CustomTextBox_PreviewKeyDown"
-                KeyUp="CustomTextBox_KeyUp"
-                TextChanged="CustomTextBox_TextChanged"
                 SelectionBrush="{DynamicResource TextBoxSelectionBrush}"
+                TextChanged="CustomTextBox_TextChanged"
                 TextWrapping="NoWrap">
                 <TextBox.Style>
-                    <Style
-                        TargetType="{x:Type TextBox}">
-                        <Setter
-                            Property="Text"
-                            Value="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" />
-                        <Setter
-                            Property="Foreground"
-                            Value="{DynamicResource AppForegroundBrush}" />
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Text" Value="{Binding Path=Text, UpdateSourceTrigger=PropertyChanged}" />
+                        <Setter Property="Foreground" Value="{DynamicResource AppForegroundBrush}" />
                     </Style>
                 </TextBox.Style>
             </TextBox>

@@ -144,8 +144,7 @@ public partial class ExecutableSelector : INotifyPropertyChanged
     {
         string? base64Icon = ExecutableIcon != null ? ImageUtils.ImageToBase64((BitmapSource)ExecutableIcon) : null;
 
-        // Instead of updating the item we're editing, replace it entirely in the list.
-        // We are changing almost every property, so this makes more sense.
+        // Instead of updating the item we're editing (if applicable), replace it entirely in the list
         var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != Executable?.Id).ToList();
 
         savedItems.Add(new SavedExecutable(

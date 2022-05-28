@@ -117,15 +117,18 @@ public partial class LinkSelector : INotifyPropertyChanged
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {
-        string base64Icon = ImageUtils.ImageToBase64((BitmapSource)Favicon);
+        string base64Icon = ImageUtils.ImageToBase64(Favicon as BitmapSource ?? (BitmapSource)DefaultIcon);
 
-        // Instead of updating the link we're editing, create a new list with only the new link
+        // Instead of updating the item we're editing (if applicable), replace it entirely in the list
         var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != Link?.Id).ToList();
 
         bool shouldOpenPrivate = OpenPrivateCheckBox.IsChecked == true;
-        savedItems.Add(new SavedLink(Guid.NewGuid().ToString(), LinkTitle, base64Icon,
+        savedItems.Add(new SavedLink(
+            Link?.Id ?? Guid.NewGuid().ToString(),
+            LinkTitle, base64Icon,
             LinkUtils.NormalizeUrl(UrlBox.Text),
-            TimeUtils.UnixTimeMillis, shouldOpenPrivate));
+            Link?.LastOpened ?? TimeUtils.UnixTimeMillis,
+            shouldOpenPrivate));
         AppData.SaveItemsToFile(savedItems);
         Finish();
     }

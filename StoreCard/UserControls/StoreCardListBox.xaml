@@ -2,47 +2,37 @@
     x:Class="StoreCard.UserControls.StoreCardListBox"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:items="clr-namespace:StoreCard.Models.Items"
-    xmlns:userControls="clr-namespace:StoreCard.UserControls"
     xmlns:effects="clr-namespace:StoreCard.Effects"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-    mc:Ignorable="d"
+    xmlns:items="clr-namespace:StoreCard.Models.Items"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:userControls="clr-namespace:StoreCard.UserControls"
+    d:DataContext="{d:DesignInstance Type=userControls:StoreCardListBox,
+                                     IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    d:DataContext="{d:DesignInstance Type=userControls:StoreCardListBox, IsDesignTimeCreatable=False}">
+    mc:Ignorable="d">
     <ListBox
         Name="CustomListBox"
         Background="Transparent"
         BorderThickness="0,0,0,0"
         Foreground="{DynamicResource AppForegroundBrush}"
-        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-        PreviewKeyDown="CustomListBox_PreviewKeyDown"
         KeyUp="CustomListBox_KeyUp"
+        PreviewKeyDown="CustomListBox_PreviewKeyDown"
+        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
         SelectionChanged="CustomListBox_SelectionChanged">
         <!--  Style items to take up whole horizontal space  -->
         <ListBox.ItemContainerStyle>
-            <Style
-                TargetType="ListBoxItem">
-                <Setter
-                    Property="HorizontalAlignment"
-                    Value="Stretch" />
-                <Setter
-                    Property="HorizontalContentAlignment"
-                    Value="Stretch" />
-                <Setter
-                    Property="SnapsToDevicePixels"
-                    Value="True" />
-                <Setter
-                    Property="FocusVisualStyle"
-                    Value="{DynamicResource FocusVisual}" />
+            <Style TargetType="ListBoxItem">
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="FocusVisualStyle" Value="{DynamicResource FocusVisual}" />
                 <!--  Override mouse-over/selection style (from https://stackoverflow.com/a/66207005)  -->
-                <Setter
-                    Property="Template">
+                <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate
-                            TargetType="ListBoxItem">
+                        <ControlTemplate TargetType="ListBoxItem">
                             <Border
                                 Name="ItemTemplateInner"
                                 Padding="{TemplateBinding Control.Padding}"
@@ -63,65 +53,32 @@
                             </Border>
                             <ControlTemplate.Triggers>
                                 <!--  Mouse over item  -->
-                                <Trigger
-                                    Property="UIElement.IsMouseOver"
-                                    Value="True">
-                                    <Setter
-                                        TargetName="ItemTemplateInner"
-                                        Property="Panel.Background"
-                                        Value="{DynamicResource ListBoxItemBrush_Hover}" />
-                                    <Setter
-                                        TargetName="ItemTemplateInner"
-                                        Property="Border.BorderBrush"
-                                        Value="Transparent" />
+                                <Trigger Property="UIElement.IsMouseOver" Value="True">
+                                    <Setter TargetName="ItemTemplateInner" Property="Panel.Background" Value="{DynamicResource ListBoxItemBrush_Hover}" />
+                                    <Setter TargetName="ItemTemplateInner" Property="Border.BorderBrush" Value="Transparent" />
                                 </Trigger>
                                 <!--  Active selected item  -->
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
-                                        <Condition
-                                            Property="Selector.IsSelectionActive"
-                                            Value="True" />
-                                        <Condition
-                                            Property="Selector.IsSelected"
-                                            Value="True" />
+                                        <Condition Property="Selector.IsSelectionActive" Value="True" />
+                                        <Condition Property="Selector.IsSelected" Value="True" />
                                     </MultiTrigger.Conditions>
-                                    <Setter
-                                        TargetName="ItemTemplateInner"
-                                        Property="Panel.Background"
-                                        Value="{DynamicResource SelectedBackgroundBrush}" />
-                                    <Setter
-                                        TargetName="ItemTemplateInner"
-                                        Property="Border.BorderBrush"
-                                        Value="{DynamicResource SelectedBorderBrush}" />
+                                    <Setter TargetName="ItemTemplateInner" Property="Panel.Background" Value="{DynamicResource SelectedBackgroundBrush}" />
+                                    <Setter TargetName="ItemTemplateInner" Property="Border.BorderBrush" Value="{DynamicResource SelectedBorderBrush}" />
                                 </MultiTrigger>
                                 <!--  Inactive selected item  -->
                                 <MultiTrigger>
                                     <MultiTrigger.Conditions>
-                                        <Condition
-                                            Property="Selector.IsSelectionActive"
-                                            Value="False" />
-                                        <Condition
-                                            Property="Selector.IsSelected"
-                                            Value="True" />
+                                        <Condition Property="Selector.IsSelectionActive" Value="False" />
+                                        <Condition Property="Selector.IsSelected" Value="True" />
                                     </MultiTrigger.Conditions>
-                                    <Setter
-                                        TargetName="ItemTemplateInner"
-                                        Property="Panel.Background"
-                                        Value="{DynamicResource SelectedBackgroundBrush}" />
-                                    <Setter
-                                        TargetName="ItemTemplateInner"
-                                        Property="Border.BorderBrush"
-                                        Value="{DynamicResource SelectedBorderBrush}" />
+                                    <Setter TargetName="ItemTemplateInner" Property="Panel.Background" Value="{DynamicResource SelectedBackgroundBrush}" />
+                                    <Setter TargetName="ItemTemplateInner" Property="Border.BorderBrush" Value="{DynamicResource SelectedBorderBrush}" />
                                 </MultiTrigger>
-                                <Trigger
-                                    Property="UIElement.IsEnabled"
-                                    Value="False">
-                                    <Setter
-                                        TargetName="ItemTemplateInner"
-                                        Property="TextElement.Foreground">
+                                <Trigger Property="UIElement.IsEnabled" Value="False">
+                                    <Setter TargetName="ItemTemplateInner" Property="TextElement.Foreground">
                                         <Setter.Value>
-                                            <StaticResource
-                                                ResourceKey="{x:Static SystemColors.GrayTextBrushKey}" />
+                                            <StaticResource ResourceKey="{x:Static SystemColors.GrayTextBrushKey}" />
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>
@@ -133,21 +90,14 @@
         </ListBox.ItemContainerStyle>
         <!--  List box item template  -->
         <ListBox.ItemTemplate>
-            <DataTemplate
-                DataType="items:IListBoxItem">
-                <Grid
-                    HorizontalAlignment="Stretch">
+            <DataTemplate DataType="items:IListBoxItem">
+                <Grid HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition
-                            Width="Auto" />
-                        <ColumnDefinition
-                            Width="Auto" />
-                        <ColumnDefinition
-                            Width="*" />
-                        <ColumnDefinition
-                            Width="Auto" />
-                        <ColumnDefinition
-                            Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Image
                         Grid.Column="0"
@@ -157,22 +107,14 @@
                         RenderOptions.BitmapScalingMode="HighQuality"
                         Source="{Binding PrefixIcon}">
                         <Image.Effect>
-                            <effects:ColorChangeEffect
-                                TargetBrush="{DynamicResource SecondaryTextBrush_Active}" />
+                            <effects:ColorChangeEffect TargetBrush="{DynamicResource SecondaryTextBrush_Active}" />
                         </Image.Effect>
                         <Image.Style>
-                            <Style
-                                TargetType="Image">
-                                <Setter
-                                    Property="Visibility"
-                                    Value="Collapsed" />
+                            <Style TargetType="Image">
+                                <Setter Property="Visibility" Value="Collapsed" />
                                 <Style.Triggers>
-                                    <DataTrigger
-                                        Binding="{Binding ShouldShowPrefixIcons, RelativeSource={RelativeSource AncestorType=userControls:StoreCardListBox}}"
-                                        Value="True">
-                                        <Setter
-                                            Property="Visibility"
-                                            Value="{Binding PrefixIcon, Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}" />
+                                    <DataTrigger Binding="{Binding ShouldShowPrefixIcons, RelativeSource={RelativeSource AncestorType=userControls:StoreCardListBox}}" Value="True">
+                                        <Setter Property="Visibility" Value="{Binding PrefixIcon, Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -184,24 +126,24 @@
                         Height="24"
                         Margin="5,5,10,5"
                         RenderOptions.BitmapScalingMode="HighQuality"
-                        Visibility="{Binding BitmapIcon, Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}"
-                        Source="{Binding BitmapIcon}" />
+                        Source="{Binding BitmapIcon}"
+                        Visibility="{Binding BitmapIcon, Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}" />
                     <fa:IconBlock
                         Grid.Column="1"
-                        Foreground="{DynamicResource SecondaryTextBrush_Active}"
-                        Visibility="{Binding BitmapIcon, Converter={StaticResource InverseNullToVisibilityConverter}, FallbackValue=Visible}"
-                        Icon="QuestionCircle"
+                        Margin="5,5,10,5"
                         FontSize="24"
-                        Margin="5,5,10,5" />
+                        Foreground="{DynamicResource SecondaryTextBrush_Active}"
+                        Icon="QuestionCircle"
+                        Visibility="{Binding BitmapIcon, Converter={StaticResource InverseNullToVisibilityConverter}, FallbackValue=Visible}" />
                     <TextBlock
                         Grid.Column="2"
                         Margin="3"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Center"
                         FontSize="12"
+                        Text="{Binding Name}"
                         TextTrimming="CharacterEllipsis"
-                        TextWrapping="NoWrap"
-                        Text="{Binding Name}" />
+                        TextWrapping="NoWrap" />
                     <!--  Secondary text  -->
                     <Label
                         Grid.Column="3"
@@ -209,42 +151,23 @@
                         VerticalContentAlignment="Center"
                         Content="{Binding SecondaryText}">
                         <Label.Style>
-                            <Style
-                                TargetType="Label">
-                                <Setter
-                                    Property="Foreground"
-                                    Value="{DynamicResource SecondaryTextBrush_Inactive}" />
-                                <Setter
-                                    Property="Visibility"
-                                    Value="Collapsed" />
+                            <Style TargetType="Label">
+                                <Setter Property="Foreground" Value="{DynamicResource SecondaryTextBrush_Inactive}" />
+                                <Setter Property="Visibility" Value="Collapsed" />
                                 <Style.Triggers>
-                                    <DataTrigger
-                                        Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}"
-                                        Value="True">
-                                        <Setter
-                                            Property="Foreground"
-                                            Value="{DynamicResource SecondaryTextBrush_Active}" />
+                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True">
+                                        <Setter Property="Foreground" Value="{DynamicResource SecondaryTextBrush_Active}" />
                                     </DataTrigger>
-                                    <DataTrigger
-                                        Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=userControls:StoreCardListBox}, Path=ShowSecondaryText, Converter={StaticResource ValueToStringConverter}}"
-                                        Value="Always">
-                                        <Setter
-                                            Property="Visibility"
-                                            Value="Visible" />
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=userControls:StoreCardListBox}, Path=ShowSecondaryText, Converter={StaticResource ValueToStringConverter}}" Value="Always">
+                                        <Setter Property="Visibility" Value="Visible" />
                                     </DataTrigger>
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
-                                            <Condition
-                                                Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=userControls:StoreCardListBox}, Path=ShowSecondaryText, Converter={StaticResource ValueToStringConverter}}"
-                                                Value="WhenActive" />
-                                            <Condition
-                                                Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
-                                                Value="True" />
+                                            <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=userControls:StoreCardListBox}, Path=ShowSecondaryText, Converter={StaticResource ValueToStringConverter}}" Value="WhenActive" />
+                                            <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}" Value="True" />
                                         </MultiDataTrigger.Conditions>
                                         <MultiDataTrigger.Setters>
-                                            <Setter
-                                                Property="Visibility"
-                                                Value="Visible" />
+                                            <Setter Property="Visibility" Value="Visible" />
                                         </MultiDataTrigger.Setters>
                                     </MultiDataTrigger>
                                 </Style.Triggers>
@@ -258,32 +181,22 @@
                         Width="60"
                         Height="26"
                         Margin="5,0,5,0"
-                        FontSize="12"
-                        Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=ActionButtonText}"
                         Click="ActionButton_Click"
-                        IsTabStop="False">      
+                        FontSize="12"
+                        IsTabStop="False"
+                        Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=ActionButtonText}">
                         <userControls:StoreCardButton.Style>
-                            <Style
-                                TargetType="{x:Type userControls:StoreCardButton}"
-                                BasedOn="{StaticResource PrimaryButton}">
-                                <Setter
-                                    Property="Visibility"
-                                    Value="Collapsed" />
+                            <Style BasedOn="{StaticResource PrimaryButton}" TargetType="{x:Type userControls:StoreCardButton}">
+                                <Setter Property="Visibility" Value="Collapsed" />
                                 <Style.Triggers>
                                     <!--  Only show when the list item is selected  -->
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
-                                            <Condition
-                                                Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}"
-                                                Value="True" />
-                                            <Condition
-                                                Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=ShowActionButton}"
-                                                Value="True" />
+                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True" />
+                                            <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=ShowActionButton}" Value="True" />
                                         </MultiDataTrigger.Conditions>
                                         <MultiDataTrigger.Setters>
-                                            <Setter
-                                                Property="Visibility"
-                                                Value="Visible" />
+                                            <Setter Property="Visibility" Value="Visible" />
                                         </MultiDataTrigger.Setters>
                                     </MultiDataTrigger>
                                 </Style.Triggers>

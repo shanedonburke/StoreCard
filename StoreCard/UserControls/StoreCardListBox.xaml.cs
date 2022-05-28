@@ -89,7 +89,8 @@ public partial class StoreCardListBox
         set
         {
             CustomListBox.ItemsSource = value;
-            if (value.Any()) {
+            if (value.Any())
+            {
                 SelectedIndex = 0;
             }
         }
@@ -97,25 +98,25 @@ public partial class StoreCardListBox
 
     public ContextMenu ItemContextMenu
     {
-        get => (ContextMenu) GetValue(ItemContextMenuProperty);
+        get => (ContextMenu)GetValue(ItemContextMenuProperty);
         set => SetValue(ItemContextMenuProperty, value);
     }
 
     public bool ShowActionButton
     {
-        get => (bool) GetValue(ShowActionButtonProperty);
+        get => (bool)GetValue(ShowActionButtonProperty);
         set => SetValue(ShowActionButtonProperty, value);
     }
 
     public SecondaryTextVisibility ShowSecondaryText
     {
-        get => (SecondaryTextVisibility) GetValue(ShowSecondaryTextProperty);
+        get => (SecondaryTextVisibility)GetValue(ShowSecondaryTextProperty);
         set => SetValue(ShowSecondaryTextProperty, value);
     }
 
     public string ActionButtonText
     {
-        get => (string) GetValue(ActionButtonTextProperty);
+        get => (string)GetValue(ActionButtonTextProperty);
         set => SetValue(ActionButtonTextProperty, value);
     }
 
@@ -131,7 +132,8 @@ public partial class StoreCardListBox
         remove => RemoveHandler(PreviewKeyDownEvent, value);
     }
 
-    public new event KeyEventHandler KeyUp {
+    public new event KeyEventHandler KeyUp
+    {
         add => AddHandler(KeyUpEvent, value);
         remove => RemoveHandler(KeyUpEvent, value);
     }
@@ -171,13 +173,19 @@ public partial class StoreCardListBox
     {
         if (e.ClickCount == 2)
         {
-            RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, Environment.TickCount, MouseButton.Left) { RoutedEvent = ItemDoubleClickEvent });
+            RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, Environment.TickCount, MouseButton.Left)
+            {
+                RoutedEvent = ItemDoubleClickEvent
+            });
         }
     }
 
     private void CustomListBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key) { RoutedEvent = PreviewKeyDownEvent });
+        RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key)
+        {
+            RoutedEvent = PreviewKeyDownEvent
+        });
     }
 
     private void ActionButton_Click(object sender, RoutedEventArgs e)
@@ -192,6 +200,9 @@ public partial class StoreCardListBox
 
     private void CustomListBox_KeyUp(object sender, KeyEventArgs e)
     {
-        RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key) { RoutedEvent = KeyUpEvent });
+        RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key)
+        {
+            RoutedEvent = KeyUpEvent
+        });
     }
 }

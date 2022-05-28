@@ -24,13 +24,13 @@ public partial class StoreCardTextBox : INotifyPropertyChanged
         typeof(StoreCardTextBox),
         new FrameworkPropertyMetadata(""));
 
-    public new static readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
+    public static new readonly RoutedEvent PreviewKeyDownEvent = EventManager.RegisterRoutedEvent(
         nameof(PreviewKeyDown),
         RoutingStrategy.Bubble,
         typeof(KeyEventHandler),
         typeof(StoreCardTextBox));
 
-    public new static readonly RoutedEvent KeyUpEvent = EventManager.RegisterRoutedEvent(
+    public static new readonly RoutedEvent KeyUpEvent = EventManager.RegisterRoutedEvent(
         nameof(KeyUpEvent),
         RoutingStrategy.Bubble,
         typeof(KeyEventHandler),

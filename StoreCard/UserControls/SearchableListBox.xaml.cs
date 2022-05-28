@@ -35,6 +35,7 @@ public partial class SearchableListBox : INotifyPropertyChanged
     }
 
     private List<IListBoxItem> _items = new();
+
     private readonly ObservableCollection<IListBoxItem> _filteredItems = new();
 
     private bool _areItemsLoaded;
@@ -121,6 +122,7 @@ public partial class SearchableListBox : INotifyPropertyChanged
         Application.Current.Dispatcher.Invoke(() =>
         {
             _filteredItems.Clear();
+
             foreach (IListBoxItem item in items)
             {
                 _filteredItems.Add(item);
@@ -152,8 +154,10 @@ public partial class SearchableListBox : INotifyPropertyChanged
     {
         if (CustomListBox.SelectedIndex != -1)
         {
-            RaiseEvent(new ItemActivatedEventArgs((IListBoxItem) CustomListBox.SelectedItem)
-                {RoutedEvent = ItemActivatedEvent});
+            RaiseEvent(new ItemActivatedEventArgs((IListBoxItem)CustomListBox.SelectedItem)
+            {
+                RoutedEvent = ItemActivatedEvent
+            });
         }
     }
 
@@ -163,27 +167,31 @@ public partial class SearchableListBox : INotifyPropertyChanged
         {
             case Key.Up:
                 if (!CustomListBox.ItemsSource.Any()) return;
-                switch (CustomListBox.SelectedIndex)
+                CustomListBox.SelectedIndex = CustomListBox.SelectedIndex switch
                 {
-                    case 0:
-                    case -1:
-                        CustomListBox.SelectedIndex = CustomListBox.ItemsSource.Count() - 1;
-                        break;
-                    default:
-                        CustomListBox.SelectedIndex =
-                            (CustomListBox.SelectedIndex - 1) % CustomListBox.ItemsSource.Count();
-                        break;
-                }
+                    0 => CustomListBox.ItemsSource.Count() - 1,
+                    -1 => CustomListBox.ItemsSource.Count() - 1,
+                    _ => (CustomListBox.SelectedIndex - 1) % CustomListBox.ItemsSource.Count()
+                };
 
                 CustomListBox.ScrollIntoView(CustomListBox.SelectedItem);
                 break;
             case Key.Down:
-                if (!CustomListBox.ItemsSource.Any()) return;
+                if (!CustomListBox.ItemsSource.Any())
+                {
+                    return;
+                }
+
                 if (CustomListBox.SelectedIndex == -1)
+                {
                     CustomListBox.SelectedIndex = 0;
+                }
                 else
-                    CustomListBox.SelectedIndex =
-                        (CustomListBox.SelectedIndex + 1) % CustomListBox.ItemsSource.Count();
+                {
+                    CustomListBox.SelectedIndex = (CustomListBox.SelectedIndex + 1) %
+                                                  CustomListBox.ItemsSource.Count();
+                }
+
                 CustomListBox.ScrollIntoView(CustomListBox.SelectedItem);
                 break;
         }
@@ -206,13 +214,17 @@ public partial class SearchableListBox : INotifyPropertyChanged
 
     private void HandleKeyUpEvent(KeyEventArgs e)
     {
-        if (e.Key != Key.Enter) return;
+        if (e.Key != Key.Enter)
+        {
+            return;
+        }
+
         ActivateSelectedItem();
         e.Handled = true;
     }
 }
 
-public class ItemActivatedEventArgs : RoutedEventArgs
+public sealed class ItemActivatedEventArgs : RoutedEventArgs
 {
     public ItemActivatedEventArgs(IListBoxItem item)
     {
