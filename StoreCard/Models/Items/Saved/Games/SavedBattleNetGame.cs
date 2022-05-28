@@ -58,7 +58,7 @@ internal sealed class SavedBattleNetGame : SavedGame
         if (!File.Exists(battleNetExecPath))
         {
             Logger.Log($"The Battle.net executable does not exist (at {battleNetExecPath}).");
-            return
+            return;
         }
 
         Process.Start(battleNetExecPath, $"--exec=\"launch {GameId}\"");

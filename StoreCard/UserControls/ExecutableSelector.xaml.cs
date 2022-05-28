@@ -48,26 +48,6 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         remove => RemoveHandler(FinishedEvent, value);
     }
 
-    public SavedExecutable? Executable
-    {
-        get => _executable;
-        set
-        {
-            _executable = value;
-            OnPropertyChanged(nameof(ShouldShowDeleteButton));
-            if (value != null)
-            {
-                PathBox.Text = value.Path;
-                NameBox.Text = value.Name;
-            }
-            else
-            {
-                PathBox.Text = string.Empty;
-                NameBox.Text = string.Empty;
-            }
-        }
-    }
-
     public string ExecutableName
     {
         get => _executableName;
@@ -99,6 +79,26 @@ public partial class ExecutableSelector : INotifyPropertyChanged
     }
 
     public bool ShouldShowDeleteButton => Executable != null;
+
+    internal SavedExecutable? Executable
+    {
+        get => _executable;
+        set
+        {
+            _executable = value;
+            OnPropertyChanged(nameof(ShouldShowDeleteButton));
+            if (value != null)
+            {
+                PathBox.Text = value.Path;
+                NameBox.Text = value.Name;
+            }
+            else
+            {
+                PathBox.Text = string.Empty;
+                NameBox.Text = string.Empty;
+            }
+        }
+    }
 
     [NotifyPropertyChangedInvocator]
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

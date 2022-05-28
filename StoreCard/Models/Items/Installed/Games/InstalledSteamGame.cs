@@ -5,7 +5,7 @@ using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Installed.Games;
 
-public class InstalledSteamGame : InstalledGame
+internal sealed class InstalledSteamGame : InstalledGame
 {
     public readonly string AppId;
 
