@@ -1,11 +1,7 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary
-            Source="PrimaryButton.xaml" />
-        <ResourceDictionary
-            Source="SecondaryButton.xaml" />
-        <ResourceDictionary
-            Source="DeleteButton.xaml" />
+        <ResourceDictionary Source="PrimaryButton.xaml" />
+        <ResourceDictionary Source="SecondaryButton.xaml" />
+        <ResourceDictionary Source="DeleteButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Interop;
+using StoreCard.Models;
 using StoreCard.Native;
 using StoreCard.Utils;
 
 namespace StoreCard.Services;
 
-public class HotKeyService
+public sealed class HotKeyService
 {
     public static readonly HotKeyService Instance = new();
 
     private const int HotKeyId = 9000;
-
-    public event Action<string> HotKeyRegistered = delegate { };
-
-    private event Action HotKeyPressed = delegate { };
 
     private Window? _registeredWindow;
 
@@ -28,15 +25,22 @@ public class HotKeyService
     {
     }
 
+    public event Action<string> HotKeyRegistered = delegate { };
+
+    private event Action HotKeyPressed = delegate { };
+
     // See https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerhotkey
     // and https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
     // for key codes
     public bool RegisterHotKey(Window window, Action hotKeyPressed)
     {
-        if (!RegisterHotKey(window)) return false;
+        if (!RegisterHotKey(window))
+        {
+            return false;
+        }
+
         HotKeyPressed += hotKeyPressed;
         return true;
-
     }
 
     public void UnregisterHotKey(Action hotKeyPressed)
@@ -47,7 +51,11 @@ public class HotKeyService
 
     public void UpdateHotKey()
     {
-        if (_registeredWindow == null) return;
+        if (_registeredWindow == null)
+        {
+            return;
+        }
+
         UnregisterHotKey();
         RegisterHotKey(_registeredWindow);
     }
@@ -60,7 +68,7 @@ public class HotKeyService
         _source = HwndSource.FromHwnd(helper.Handle);
         _source?.AddHook(HwndHook);
 
-        var config = AppData.ReadConfigFromFile();
+        UserConfig config = AppData.ReadConfigFromFile();
         HotKeyRegistered(HotKeyUtils.KeyStringFromConfig(config));
 
         return User32.RegisterHotKey(helper.Handle, HotKeyId, config.HotKeyModifiers, config.VirtualHotKey);
@@ -68,7 +76,11 @@ public class HotKeyService
 
     private void UnregisterHotKey()
     {
-        if (_registeredWindow == null) return;
+        if (_registeredWindow == null)
+        {
+            return;
+        }
+
         var helper = new WindowInteropHelper(_registeredWindow);
 
         _source?.RemoveHook(HwndHook);
@@ -77,17 +89,16 @@ public class HotKeyService
         User32.UnregisterHotKey(helper.Handle, HotKeyId);
     }
 
-    private IntPtr HwndHook(
-        IntPtr hwnd,
-        int msg,
-        IntPtr wParam,
-        IntPtr lParam,
-        ref bool handled) {
+    private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    {
         const int wmHotkey = 0x0312;
-        switch (msg) {
+
+        switch (msg)
+        {
             case wmHotkey:
-                switch (wParam.ToInt32()) {
-                    case HotKeyService.HotKeyId:
+                switch (wParam.ToInt32())
+                {
+                    case HotKeyId:
                         HotKeyPressed();
                         handled = true;
                         break;

@@ -2,5 +2,5 @@
 
 public static class CommandLineOptions
 {
-    public static readonly string StartMinimized = "-startminimized";
+    public const string StartMinimized = "-startminimized";
 }

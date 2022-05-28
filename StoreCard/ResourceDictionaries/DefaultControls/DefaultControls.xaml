@@ -1,18 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary
-            Source="CheckBox.xaml" />
-        <ResourceDictionary
-            Source="ComboBox.xaml" />
-        <ResourceDictionary
-            Source="RadioButton.xaml" />
-        <ResourceDictionary
-            Source="ScrollBar.xaml" />
-        <ResourceDictionary
-            Source="Separator.xaml" />
-        <ResourceDictionary
-            Source="ContextMenu.xaml" />
-        <ResourceDictionary
-            Source="MenuItem.xaml" />
+        <ResourceDictionary Source="CheckBox.xaml" />
+        <ResourceDictionary Source="ComboBox.xaml" />
+        <ResourceDictionary Source="RadioButton.xaml" />
+        <ResourceDictionary Source="ScrollBar.xaml" />
+        <ResourceDictionary Source="Separator.xaml" />
+        <ResourceDictionary Source="ContextMenu.xaml" />
+        <ResourceDictionary Source="MenuItem.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -2,20 +2,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:StoreCard.Converters">
-    <converters:NotBlankToBooleanConverter
-        x:Key="NotBlankToBooleanConverter" />
-    <converters:NullToVisibilityConverter
-        x:Key="NullToVisibilityConverter" />
-    <converters:InverseNullToVisibilityConverter
-        x:Key="InverseNullToVisibilityConverter" />
-    <BooleanToVisibilityConverter
-        x:Key="BooleanToVisibilityConverter" />
-    <converters:InverseBooleanToVisibilityConverter
-        x:Key="InverseBooleanToVisibilityConverter" />
-    <converters:NotBlankToVisibilityConverter
-        x:Key="NotBlankToVisibilityConverter" />
-    <converters:ValueToStringConverter
-        x:Key="ValueToStringConverter" />
-    <converters:MultiValueEqualityConverter
-        x:Key="MultiValueEqualityConverter" />
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converters:NotBlankToBooleanConverter x:Key="NotBlankToBooleanConverter" />
+    <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+    <converters:InverseNullToVisibilityConverter x:Key="InverseNullToVisibilityConverter" />
+    <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
+    <converters:NotBlankToVisibilityConverter x:Key="NotBlankToVisibilityConverter" />
+    <converters:ValueToStringConverter x:Key="ValueToStringConverter" />
+    <converters:MultiValueEqualityConverter x:Key="MultiValueEqualityConverter" />
 </ResourceDictionary>
