@@ -8,7 +8,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
 
-internal sealed class SavedApp : SavedItem
+public sealed class SavedApp : SavedItem
 {
     public readonly string AppUserModelId;
 

@@ -4,7 +4,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models;
 
-internal class UserConfig
+public class UserConfig
 {
     public static readonly uint DefaultHotKeyModifiers = HotKeyUtils.ModifiersToHotKeyByte(Key.LWin, Key.LeftShift);
 

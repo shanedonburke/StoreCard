@@ -6,7 +6,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-internal class ShowPrivilegeAlertCommand : IStoreCardCommand<bool>
+public class ShowPrivilegeAlertCommand : IStoreCardCommand<bool>
 {
     private readonly SavedFileSystemItem _item;
 

@@ -4,7 +4,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-internal class ShowMissingItemAlertCommand : IStoreCardCommand<bool>
+public class ShowMissingItemAlertCommand : IStoreCardCommand<bool>
 {
     private readonly SavedItem _item;
 

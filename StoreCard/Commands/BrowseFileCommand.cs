@@ -3,7 +3,7 @@ using StoreCard.Static;
 
 namespace StoreCard.Commands;
 
-internal class BrowseFileCommand : IStoreCardCommand<string?>
+public class BrowseFileCommand : IStoreCardCommand<string?>
 {
     public string? Execute()
     {

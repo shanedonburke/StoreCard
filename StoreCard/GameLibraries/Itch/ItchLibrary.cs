@@ -10,7 +10,7 @@ using SystemIcons = System.Drawing.SystemIcons;
 
 namespace StoreCard.GameLibraries.Itch;
 
-internal sealed class ItchLibrary : GameLibrary
+public sealed class ItchLibrary : GameLibrary
 {
     private static bool IsInstalled => ButlerPaths.ButlerExecutable != null && File.Exists(ButlerPaths.ButlerDatabase);
 

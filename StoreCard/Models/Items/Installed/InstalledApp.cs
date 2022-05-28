@@ -3,7 +3,7 @@ using System.Windows.Media.Imaging;
 
 namespace StoreCard.Models.Items.Installed;
 
-internal sealed class InstalledApp : IListBoxItem
+public sealed class InstalledApp : IListBoxItem
 {
     public InstalledApp(string name, string appUserModelId, string? executablePath, BitmapSource icon)
     {

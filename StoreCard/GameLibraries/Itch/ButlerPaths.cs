@@ -4,7 +4,7 @@ using StoreCard.Static;
 
 namespace StoreCard.GameLibraries.Itch;
 
-internal static class ButlerPaths
+public static class ButlerPaths
 {
     private static readonly string s_itchDataFolder =
         Path.Combine(FolderPaths.ApplicationData, "itch");

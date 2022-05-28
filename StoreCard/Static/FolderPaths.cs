@@ -5,7 +5,7 @@ using System;
 
 namespace StoreCard.Static;
 
-internal static class FolderPaths
+public static class FolderPaths
 {
     public static readonly string UserProfile =
         Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);

@@ -5,7 +5,7 @@ using System.Windows.Media.Imaging;
 
 namespace StoreCard.Utils;
 
-internal static class Extensions
+public static class Extensions
 {
     public static void BringToFront(this Window window)
     {

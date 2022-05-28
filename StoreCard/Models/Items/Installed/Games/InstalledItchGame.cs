@@ -5,7 +5,7 @@ using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Installed.Games;
 
-internal sealed class InstalledItchGame : InstalledGame
+public sealed class InstalledItchGame : InstalledGame
 {
     public readonly string CaveId;
 

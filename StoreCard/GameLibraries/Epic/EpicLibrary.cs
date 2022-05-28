@@ -9,7 +9,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Epic;
 
-internal sealed class EpicLibrary : GameLibrary
+public sealed class EpicLibrary : GameLibrary
 {
     private static readonly string s_launcherInstalledPath = Path.Combine(
         FolderPaths.CommonApplicationData,

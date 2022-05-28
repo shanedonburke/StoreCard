@@ -6,7 +6,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.BattleNet;
 
-internal sealed class BattleNetLibrary : GameLibrary
+public sealed class BattleNetLibrary : GameLibrary
 {
     public static readonly string? BattleNetInstallFolder = Registry.GetValue(
         RegUtils.BuildRegistryPath(

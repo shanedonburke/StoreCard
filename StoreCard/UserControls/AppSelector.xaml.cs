@@ -39,7 +39,7 @@ public partial class AppSelector : INotifyPropertyChanged
 
     public ImageSource? SelectedAppIcon => (AppListBox.SelectedItem as InstalledApp)?.BitmapIcon;
 
-    internal InstalledApp? SelectedApp => AppListBox.SelectedItem as InstalledApp;
+    public InstalledApp? SelectedApp => AppListBox.SelectedItem as InstalledApp;
 
     public event RoutedEventHandler SaveButtonClick
     {

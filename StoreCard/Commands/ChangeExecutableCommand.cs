@@ -3,7 +3,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-internal class ChangeExecutableCommand : IStoreCardCommand<bool>
+public class ChangeExecutableCommand : IStoreCardCommand<bool>
 {
     private readonly SavedFileSystemItem _item;
 

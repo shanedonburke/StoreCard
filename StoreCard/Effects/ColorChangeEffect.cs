@@ -6,7 +6,7 @@ using Color = System.Windows.Media.Color;
 
 namespace StoreCard.Effects;
 
-internal sealed class ColorChangeEffect : ShaderEffect
+public sealed class ColorChangeEffect : ShaderEffect
 {
     public static readonly DependencyProperty InputProperty = RegisterPixelShaderSamplerProperty(
         "Input",

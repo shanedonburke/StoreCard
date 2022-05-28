@@ -5,7 +5,7 @@ using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Installed.Games;
 
-internal sealed class InstalledBattleNetGame : InstalledGame
+public sealed class InstalledBattleNetGame : InstalledGame
 {
     public readonly string GameId;
 

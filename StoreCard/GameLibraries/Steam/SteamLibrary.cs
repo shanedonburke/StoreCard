@@ -8,7 +8,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Steam;
 
-internal sealed class SteamLibrary : GameLibrary
+public sealed class SteamLibrary : GameLibrary
 {
     public static readonly string? SteamInstallFolder =
         Registry.GetValue(

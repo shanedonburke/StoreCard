@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace StoreCard.Native;
 
-internal class Shell32
+public class Shell32
 {
     // Constant flags for SHGetFileInfo 
     public const uint ShgfiIcon = 0x100;

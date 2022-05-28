@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StoreCard.Native;
 
-internal class User32
+public class User32
 {
     [DllImport("User32.dll")]
     public static extern int ToAscii(uint uVirtKey, uint uScanCode,

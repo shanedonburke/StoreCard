@@ -4,7 +4,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-internal class CreateTaskbarIconCommand : IStoreCardCommand<bool>
+public class CreateTaskbarIconCommand : IStoreCardCommand<bool>
 {
     public bool Execute()
     {

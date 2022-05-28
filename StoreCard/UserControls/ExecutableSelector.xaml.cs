@@ -80,7 +80,7 @@ public partial class ExecutableSelector : INotifyPropertyChanged
 
     public bool ShouldShowDeleteButton => Executable != null;
 
-    internal SavedExecutable? Executable
+    public SavedExecutable? Executable
     {
         get => _executable;
         set

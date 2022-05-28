@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace StoreCard.Utils;
 
-internal class ProcessUtils
+public class ProcessUtils
 {
     public static void KillOtherStoreCardProcesses() {
         var otherProcesses = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);

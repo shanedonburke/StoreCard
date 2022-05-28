@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace StoreCard.Utils;
 
-internal sealed class Logger
+public sealed class Logger
 {
     public static void Log(string message)
     {

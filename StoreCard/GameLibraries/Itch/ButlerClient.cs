@@ -9,7 +9,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Itch;
 
-internal sealed class ButlerClient
+public sealed class ButlerClient
 {
     private static class Methods
     {

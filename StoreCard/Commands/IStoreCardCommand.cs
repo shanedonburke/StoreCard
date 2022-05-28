@@ -1,6 +1,6 @@
 ﻿namespace StoreCard.Commands;
 
-internal interface IStoreCardCommand<out TResult>
+public interface IStoreCardCommand<out TResult>
 {
     public TResult Execute();
 }

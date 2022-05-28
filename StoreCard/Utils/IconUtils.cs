@@ -8,7 +8,7 @@ using StoreCard.Native;
 
 namespace StoreCard.Utils;
 
-internal class IconUtils
+public class IconUtils
 {
     public static BitmapSource CreateBitmapSourceFromHIcon(Icon icon)
     {

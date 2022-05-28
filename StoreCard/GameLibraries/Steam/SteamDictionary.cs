@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace StoreCard.GameLibraries.Steam;
 
-internal sealed class SteamDictionary
+public sealed class SteamDictionary
 {
     private static readonly Regex s_keyRegex = new(@"^\s*""(?<key>[^<>""/|?*]+)""\s*$");
 

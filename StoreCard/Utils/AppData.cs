@@ -11,7 +11,7 @@ using StoreCard.Static;
 
 namespace StoreCard.Utils;
 
-internal class AppData
+public class AppData
 {
     private static readonly string s_itemsFilePath = Path.Combine(
         FolderPaths.ApplicationData,

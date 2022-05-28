@@ -11,7 +11,7 @@ using File = System.IO.File;
 
 namespace StoreCard.Models.Items.Saved.Games;
 
-internal sealed class SavedBattleNetGame : SavedGame
+public sealed class SavedBattleNetGame : SavedGame
 {
     public readonly string GameId;
 

@@ -3,7 +3,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-internal class EditLinkCommand : IStoreCardCommand<bool>
+public class EditLinkCommand : IStoreCardCommand<bool>
 {
     private readonly SavedLink _link;
 

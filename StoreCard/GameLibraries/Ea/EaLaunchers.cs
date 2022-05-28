@@ -3,9 +3,9 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Ea;
 
-internal sealed class EaLaunchers
+public sealed class EaLaunchers
 {
-    internal sealed class Launcher
+    public sealed class Launcher
     {
         public readonly string DisplayName;
         public readonly string ProcessName;

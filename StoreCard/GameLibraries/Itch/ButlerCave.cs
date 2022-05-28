@@ -2,7 +2,7 @@
 
 namespace StoreCard.GameLibraries.Itch;
 
-internal sealed class ButlerCave
+public sealed class ButlerCave
 {
     [JsonProperty("id")]
     public string Id;

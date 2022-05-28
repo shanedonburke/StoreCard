@@ -2,9 +2,9 @@
 
 namespace StoreCard.GameLibraries.Epic;
 
-internal sealed class EpicLauncherInstalled
+public sealed class EpicLauncherInstalled
 {
-    internal sealed class InstalledApp
+    public sealed class InstalledApp
     {
         public string AppName;
 

@@ -10,7 +10,7 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class EditExecutableWindow
 {
-    internal EditExecutableWindow(SavedExecutable executable)
+    public EditExecutableWindow(SavedExecutable executable)
     {
         DataContext = this;
         InitializeComponent();

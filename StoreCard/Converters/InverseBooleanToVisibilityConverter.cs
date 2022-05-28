@@ -7,7 +7,7 @@ namespace StoreCard.Converters;
 
 // From https://stackoverflow.com/a/1039681
 [ValueConversion(typeof(bool), typeof(Visibility))]
-internal sealed class InverseBooleanToVisibilityConverter : IValueConverter
+public sealed class InverseBooleanToVisibilityConverter : IValueConverter
 {
     #region IValueConverter Members
 

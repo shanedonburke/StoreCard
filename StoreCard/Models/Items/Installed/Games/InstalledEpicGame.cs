@@ -5,7 +5,7 @@ using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Installed.Games;
 
-internal sealed class InstalledEpicGame : InstalledGame
+public sealed class InstalledEpicGame : InstalledGame
 {
     public readonly string AppName;
 

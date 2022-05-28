@@ -3,7 +3,7 @@
 
 namespace StoreCard.Utils;
 
-internal static class RegUtils
+public static class RegUtils
 {
     public static class Keys
     {

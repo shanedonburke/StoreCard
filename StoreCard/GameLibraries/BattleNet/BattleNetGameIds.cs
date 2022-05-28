@@ -2,7 +2,7 @@
 
 namespace StoreCard.GameLibraries.BattleNet;
 
-internal static class BattleNetGameIds
+public static class BattleNetGameIds
 {
     private static readonly Dictionary<string, string> s_gameIds = new();
 

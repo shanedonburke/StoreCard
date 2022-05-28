@@ -6,7 +6,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.Services;
 
-internal class HotKeyService
+public class HotKeyService
 {
     public static readonly HotKeyService Instance = new();
 

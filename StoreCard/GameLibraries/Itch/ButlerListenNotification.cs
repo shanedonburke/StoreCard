@@ -1,8 +1,8 @@
 ﻿namespace StoreCard.GameLibraries.Itch;
 
-internal sealed class ButlerListenNotification
+public sealed class ButlerListenNotification
 {
-    internal sealed class TcpInfo
+    public sealed class TcpInfo
     {
         public readonly string Address;
 

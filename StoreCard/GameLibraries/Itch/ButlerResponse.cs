@@ -2,7 +2,7 @@
 
 namespace StoreCard.GameLibraries.Itch;
 
-internal sealed class ButlerResponse<TResult>
+public sealed class ButlerResponse<TResult>
 {
     [JsonProperty("jsonrpc")]
     public string JsonRpc;

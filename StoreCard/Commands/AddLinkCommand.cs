@@ -2,7 +2,7 @@
 
 namespace StoreCard.Commands;
 
-internal class AddLinkCommand : IStoreCardCommand<bool>
+public class AddLinkCommand : IStoreCardCommand<bool>
 {
     public bool Execute()
     {

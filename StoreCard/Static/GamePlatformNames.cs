@@ -1,6 +1,6 @@
 ﻿namespace StoreCard.Static;
 
-internal static class GamePlatformNames
+public static class GamePlatformNames
 {
     public const string Ea = "EA";
     public const string EpicGames = "Epic Games";

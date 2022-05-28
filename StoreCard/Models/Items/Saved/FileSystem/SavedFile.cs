@@ -6,7 +6,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.FileSystem;
 
-internal sealed class SavedFile : SavedFileSystemItem
+public sealed class SavedFile : SavedFileSystemItem
 {
     public SavedFile(
         string id,

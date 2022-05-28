@@ -4,7 +4,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Services;
 
-internal class MessageBoxService
+public class MessageBoxService
 {
     public static readonly MessageBoxService Instance = new();
 

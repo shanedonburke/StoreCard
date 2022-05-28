@@ -13,7 +13,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.Games;
 
-internal sealed class SavedEaGame : SavedGame
+public sealed class SavedEaGame : SavedGame
 {
     public readonly string AppId;
 

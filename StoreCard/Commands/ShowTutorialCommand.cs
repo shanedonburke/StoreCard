@@ -2,7 +2,7 @@
 
 namespace StoreCard.Commands;
 
-internal class ShowTutorialCommand : IStoreCardCommand<bool>
+public class ShowTutorialCommand : IStoreCardCommand<bool>
 {
     public bool Execute()
     {

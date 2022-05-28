@@ -7,7 +7,7 @@ namespace StoreCard.Converters;
 
 [ValueConversion(typeof(string), typeof(Visibility))]
 
-internal sealed class NotBlankToVisibilityConverter : IValueConverter
+public sealed class NotBlankToVisibilityConverter : IValueConverter
 {
     #region IValueConverter Members
 

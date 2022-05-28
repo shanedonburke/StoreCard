@@ -5,7 +5,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Ea;
 
-internal sealed class EaLibrary : GameLibrary
+public sealed class EaLibrary : GameLibrary
 {
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {

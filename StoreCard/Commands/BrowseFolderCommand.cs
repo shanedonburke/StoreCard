@@ -3,7 +3,7 @@ using Ookii.Dialogs.Wpf;
 
 namespace StoreCard.Commands;
 
-internal class BrowseFolderCommand : IStoreCardCommand<string?>
+public class BrowseFolderCommand : IStoreCardCommand<string?>
 {
     public string? Execute()
     {

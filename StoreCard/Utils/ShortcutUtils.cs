@@ -7,7 +7,7 @@ using File = System.IO.File;
 
 namespace StoreCard.Utils;
 
-internal class ShortcutUtils
+public class ShortcutUtils
 {
     private static string StartupShortcutPath => Path.Join(FolderPaths.Startup, "StoreCard.lnk");
 

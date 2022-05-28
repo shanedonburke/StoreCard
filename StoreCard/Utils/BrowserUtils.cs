@@ -3,7 +3,7 @@ using Microsoft.Win32;
 
 namespace StoreCard.Utils;
 
-internal class BrowserUtils
+public class BrowserUtils
 {
     private const string UserChoicePath = @"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice";
     private const string ExeSuffix = ".exe";

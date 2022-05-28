@@ -7,7 +7,7 @@ namespace StoreCard.Converters;
 
 [ValueConversion(typeof(object[]), typeof(bool))]
 
-internal sealed class MultiValueEqualityConverter : IMultiValueConverter
+public sealed class MultiValueEqualityConverter : IMultiValueConverter
 {
     #region IValueConverter Members
 

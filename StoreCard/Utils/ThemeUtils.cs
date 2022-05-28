@@ -4,22 +4,22 @@ using System.Windows;
 
 namespace StoreCard.Utils;
 
-internal class ThemeUtils
+public class ThemeUtils
 {
     public static void SetTheme(string theme)
     {
-        if (SetThemeInternal(theme))
+        if (SetThemepublic(theme))
         {
             return;
         }
 
-        if (!SetThemeInternal("Lake (Dark)"))
+        if (!SetThemepublic("Lake (Dark)"))
         {
-            SetThemeInternal(ThemeFinder.FindThemes()[0]);
+            SetThemepublic(ThemeFinder.FindThemes()[0]);
         }
     }
 
-    private static bool SetThemeInternal(string theme)
+    private static bool SetThemepublic(string theme)
     {
         try
         {

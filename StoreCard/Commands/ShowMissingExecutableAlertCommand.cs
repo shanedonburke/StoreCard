@@ -6,7 +6,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-internal class ShowMissingExecutableAlertCommand : IStoreCardCommand<bool>
+public class ShowMissingExecutableAlertCommand : IStoreCardCommand<bool>
 {
     private readonly SavedFileSystemItem _item;
 

@@ -6,7 +6,7 @@ using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Saved;
 
-internal sealed class SavedExecutable : SavedItem
+public sealed class SavedExecutable : SavedItem
 {
     public readonly string Path;
 
