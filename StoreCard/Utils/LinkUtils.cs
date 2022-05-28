@@ -19,14 +19,18 @@ public class LinkUtils
     public static async Task<string> GetPageTitle(string url)
     {
         string title = string.Empty;
-
         string fullUrl = NormalizeUrl(url);
-        if (!s_urlRegex.Match(fullUrl).Success) return title;
+
+        if (!s_urlRegex.Match(fullUrl).Success)
+        {
+            return title;
+        }
 
         try
         {
             string responseBody = await s_httpClient.GetStringAsync(fullUrl);
             Match m = s_titleRegex.Match(responseBody);
+
             if (m.Success)
             {
                 title = m.Groups[1].Captures[0].ToString();
@@ -43,15 +47,19 @@ public class LinkUtils
     public static async Task<BitmapImage?> GetPageIcon(string url)
     {
         BitmapImage? image = null;
-
         Match m = s_urlRegex.Match(url);
-        if (!m.Success) return image;
+
+        if (!m.Success)
+        {
+            return image;
+        }
 
         string domain = m.Groups[4].Captures[0].ToString();
+
         try
         {
-            byte[] bytes =
-                await s_httpClient.GetByteArrayAsync(@"https://icons.duckduckgo.com/ip3/" + domain + ".ico");
+            byte[] bytes = await s_httpClient.GetByteArrayAsync(
+                @"https://icons.duckduckgo.com/ip3/" + domain + ".ico");
             image = ImageUtils.BytesToBitmapImage(bytes);
             image.Freeze();
         }
