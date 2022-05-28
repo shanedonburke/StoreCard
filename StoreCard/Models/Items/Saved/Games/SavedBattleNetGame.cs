@@ -16,8 +16,8 @@ internal class SavedBattleNetGame : SavedGame
     public readonly string GameId;
 
     [JsonConstructor]
-    public SavedBattleNetGame(string id, string name, string? base64Icon, long lastOpened, string gameId) : base(id,
-        name, base64Icon, lastOpened)
+    public SavedBattleNetGame(string id, string name, string? base64Icon, long lastOpened, string gameId)
+        : base(id, name, base64Icon, lastOpened)
     {
         GameId = gameId;
     }
@@ -37,20 +37,29 @@ internal class SavedBattleNetGame : SavedGame
     {
         if (BattleNetLibrary.BattleNetInstallFolder == null)
         {
-            MessageBoxService.Instance.ShowMessageBox("The Battle.net installation folder could not be found.", "Error", MessageBoxButton.OK,
+            MessageBoxService.Instance.ShowMessageBox(
+                "The Battle.net installation folder could not be found.", "Error",
+                MessageBoxButton.OK,
                 MessageBoxImage.Error);
             return;
         }
 
         if (!ProcessUtils.IsProcessWithNameRunning("Battle.net"))
         {
-            MessageBoxService.Instance.ShowMessageBox("The Battle.net launcher is not running. Please open it, then try again.", "Warning",
-                MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBoxService.Instance.ShowMessageBox(
+                "The Battle.net launcher is not running. Please open it, then try again.", "Warning",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
             return;
         }
 
         string battleNetExecPath = Path.Combine(BattleNetLibrary.BattleNetInstallFolder, "Battle.net.exe");
-        if (!File.Exists(battleNetExecPath)) return;
+
+        if (!File.Exists(battleNetExecPath))
+        {
+            Logger.Log($"The Battle.net launcher executable does not exist (at {battleNetExecPath}).");
+            return;
+        }
 
         Process.Start(battleNetExecPath, $"--exec=\"launch {GameId}\"");
     }

@@ -65,8 +65,8 @@ internal sealed class SteamLibrary : GameLibrary
 
             var manifest = SteamDictionary.Parse(File.ReadAllText(manifestPath));
 
-            string? name = manifest.Pairs["name"];
-            string? appId = manifest.Pairs["appid"];
+            string name = manifest.Pairs["name"];
+            string appId = manifest.Pairs["appid"];
 
             string iconPath = $"{libraryCacheFolder}\\{appId}_icon.jpg";
 

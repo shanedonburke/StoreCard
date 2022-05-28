@@ -6,7 +6,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.FileSystem;
 
-internal class SavedFile : SavedFileSystemItem
+internal sealed class SavedFile : SavedFileSystemItem
 {
     public SavedFile(
         string id,
@@ -19,7 +19,7 @@ internal class SavedFile : SavedFileSystemItem
     {
     }
 
-    public override BitmapSource? PrefixIcon => Icons.FileIcon;
+    public override BitmapSource PrefixIcon => Icons.FileIcon;
 
     public override ItemCategory Category => ItemCategory.File;
 

@@ -23,7 +23,8 @@ public abstract class InstalledGame : IListBoxItem
 
     public abstract SavedItem SavedItem { get; }
 
-    public int CompareTo(IListBoxItem? other) {
+    public int CompareTo(IListBoxItem? other)
+    {
         return string.Compare(Name, other?.Name, StringComparison.Ordinal);
     }
 }

@@ -9,10 +9,7 @@ public class InstalledSteamGame : InstalledGame
 {
     public readonly string AppId;
 
-    public InstalledSteamGame(
-        string name,
-        BitmapSource bitmapIcon,
-        string appId) : base(name, bitmapIcon)
+    public InstalledSteamGame(string name, BitmapSource bitmapIcon, string appId) : base(name, bitmapIcon)
     {
         AppId = appId;
     }

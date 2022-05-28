@@ -18,7 +18,7 @@ internal class SavedFolder : SavedFileSystemItem
     {
     }
 
-    public override BitmapSource? PrefixIcon => Icons.FolderIcon;
+    public override BitmapSource PrefixIcon => Icons.FolderIcon;
 
     public override ItemCategory Category => ItemCategory.Folder;
 

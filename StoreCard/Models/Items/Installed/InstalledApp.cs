@@ -3,7 +3,7 @@ using System.Windows.Media.Imaging;
 
 namespace StoreCard.Models.Items.Installed;
 
-public class InstalledApp : IListBoxItem
+internal sealed class InstalledApp : IListBoxItem
 {
     public InstalledApp(string name, string appUserModelId, string? executablePath, BitmapSource icon)
     {
@@ -16,12 +16,17 @@ public class InstalledApp : IListBoxItem
     public string SecondaryText => string.Empty;
 
     public string Name { get; }
+
     public string AppUserModelId { get; }
+
     public string? ExecutablePath { get; }
+
     public BitmapSource BitmapIcon { get; }
+
     public BitmapSource? PrefixIcon => null;
 
-    public int CompareTo(IListBoxItem? other) {
+    public int CompareTo(IListBoxItem? other)
+    {
         return string.Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);
     }
 }

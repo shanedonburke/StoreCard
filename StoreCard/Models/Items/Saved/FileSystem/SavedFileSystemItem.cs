@@ -45,12 +45,12 @@ public abstract class SavedFileSystemItem : SavedItem
         ? "Default"
         : ExecutablePath.Split(@"\").Last();
 
+    public abstract bool Exists();
+
     public void SetExecutablePath(string path)
     {
         ExecutablePath = path.StartsWith("::") ? DefaultExecutable : path;
     }
-
-    public abstract bool Exists();
 
     protected override void OpenProtected()
     {
