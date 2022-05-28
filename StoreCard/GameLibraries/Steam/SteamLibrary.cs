@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
-using SteamKit2;
 using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Utils;
@@ -64,16 +63,11 @@ internal class SteamLibrary : GameLibrary
             yield break;
         }
 
-        var libraryFolders = KeyValue.LoadFromString(File.ReadAllText(libraryFoldersPath));
-
-        if (libraryFolders == null)
-        {
-            yield break;
-        }
+        var libraryFolders = SteamDictionary.Parse(File.ReadAllText(libraryFoldersPath));
 
         var steamAppsFolderPaths = libraryFolders.Children
-            .Where(child => int.TryParse(child.Name, out _))
-            .Select(kv => $"{kv["path"].Value}\\steamapps")
+            .Where(c => int.TryParse(c.Key, out _))
+            .Select(c => $"{c.Value.Pairs["path"]}\\steamapps")
             .ToList();
 
         IEnumerable<string> manifestPaths = steamAppsFolderPaths.SelectMany(appsFolderPath =>
@@ -86,12 +80,10 @@ internal class SteamLibrary : GameLibrary
                 continue;
             }
 
-            var manifest = KeyValue.LoadFromString(File.ReadAllText(manifestPath));
-            if (manifest == null) continue;
+            var manifest = SteamDictionary.Parse(File.ReadAllText(manifestPath));
 
-            string? name = manifest["name"].Value;
-            string? appId = manifest["appid"].Value;
-            if (name == null || appId == null) continue;
+            string? name = manifest.Pairs["name"];
+            string? appId = manifest.Pairs["appid"];
 
             string iconPath = $"{libraryCacheFolder}\\{appId}_icon.jpg";
 
