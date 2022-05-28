@@ -22,7 +22,7 @@ public class IconUtils
 
     public static BitmapSource? GetFileIconByPath(string path)
     {
-        var hIcon = Icon.ExtractAssociatedIcon(path);
+        using var hIcon = Icon.ExtractAssociatedIcon(path);
         return hIcon == null ? null : CreateBitmapSourceFromHIcon(hIcon);
     }
 
