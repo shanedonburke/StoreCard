@@ -23,6 +23,9 @@ public class AppData
         "StoreCard",
         "Config.json");
 
+    private static readonly JsonSerializerSettings s_serializerSettings =
+        new() {TypeNameHandling = TypeNameHandling.All};
+
     public static List<SavedItem> ReadItemsFromFile()
     {
         if (!File.Exists(s_itemsFilePath))
@@ -35,14 +38,11 @@ public class AppData
 
         try
         {
-            savedItems = JsonConvert.DeserializeObject<List<SavedItem>>(
-                json,
-                new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
+            savedItems = JsonConvert.DeserializeObject<List<SavedItem>>(json, s_serializerSettings);
         }
         catch (JsonSerializationException e)
         {
-            Debug.WriteLine("Failed to deserialize list of saved items:");
-            Debug.WriteLine(e.Message);
+            Logger.LogExceptionMessage("Failed to deserialize list of saved items", e);
         }
 
         return savedItems ?? new List<SavedItem>();
@@ -64,8 +64,7 @@ public class AppData
         }
         catch (JsonSerializationException e)
         {
-            Debug.WriteLine("Failed to deserialize user config:");
-            Debug.WriteLine(e.Message);
+            Logger.LogExceptionMessage("Failed to deserialize user config", e);
         }
 
         return config ?? new UserConfig();
@@ -101,7 +100,7 @@ public class AppData
             return item;
         }
 
-        Debug.WriteLine($"Tried to update saved item with ID {id}, but the item was not found.");
+        Logger.Log($"Tried to update saved item with ID {id}, but the item was not found.");
         return null;
     }
 
@@ -114,8 +113,7 @@ public class AppData
     {
         Directory.CreateDirectory(Path.GetDirectoryName(filePath) ??
                                   throw new InvalidOperationException($"Could not get directory name for {filePath}"));
-        string json = JsonConvert.SerializeObject(objectToSave,
-            new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All});
+        string json = JsonConvert.SerializeObject(objectToSave, s_serializerSettings);
         File.WriteAllText(filePath, json);
     }
 }
