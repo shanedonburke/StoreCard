@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Input;
 using StoreCard.Models;
 using StoreCard.Properties;
-using StoreCard.Services;
 using StoreCard.Utils;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using StoreCard.Commands;
 using StoreCard.Models;
-using StoreCard.Services;
 using StoreCard.Static;
 using StoreCard.Utils;
 

@@ -1,17 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using StoreCard.Commands;
-using StoreCard.Models.Items.Saved;
 using StoreCard.Models.Items.Saved.FileSystem;
 using StoreCard.Properties;
 using StoreCard.Utils;

@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Windows;
 using Newtonsoft.Json;
 using StoreCard.GameLibraries.Ea;
-using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Services;
 using StoreCard.Static;

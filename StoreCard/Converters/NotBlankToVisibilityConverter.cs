@@ -5,14 +5,19 @@ using System.Windows.Data;
 
 namespace StoreCard.Converters;
 
+[ValueConversion(typeof(string), typeof(Visibility))]
+
 internal class NotBlankToVisibilityConverter : IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    #region IValueConverter Members
+
+    public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
     {
         if (value is string str)
         {
             return str.Trim() == string.Empty ? Visibility.Collapsed : Visibility.Visible;
         }
+
         return Visibility.Collapsed;
     }
 
@@ -20,4 +25,6 @@ internal class NotBlankToVisibilityConverter : IValueConverter
     {
         throw new NotImplementedException();
     }
+
+    #endregion
 }

@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using StoreCard.Static;
 using StoreCard.Utils;

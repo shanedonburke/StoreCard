@@ -4,7 +4,6 @@ using System.IO;
 using System.Windows;
 using Newtonsoft.Json;
 using StoreCard.GameLibraries.Steam;
-using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Services;
 using StoreCard.Static;

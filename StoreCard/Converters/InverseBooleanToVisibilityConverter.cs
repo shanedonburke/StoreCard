@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
@@ -10,25 +11,22 @@ public class InverseBooleanToVisibilityConverter : IValueConverter
 {
     #region IValueConverter Members
 
-    public object Convert(
-        object value,
-        Type targetType,
-        object parameter,
-        System.Globalization.CultureInfo culture)
+    public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
     {
         if (targetType != typeof(Visibility))
         {
             throw new InvalidOperationException("The target must be a visibility setting.");
         }
 
-        return (bool)value ? Visibility.Hidden : Visibility.Visible;
+        if (value is not bool b)
+        {
+            throw new InvalidOperationException("The given value is not a bool.");
+        }
+
+        return b ? Visibility.Hidden : Visibility.Visible;
     }
 
-    public object ConvertBack(
-        object value,
-        Type targetType,
-        object parameter,
-        System.Globalization.CultureInfo culture)
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotSupportedException();
     }

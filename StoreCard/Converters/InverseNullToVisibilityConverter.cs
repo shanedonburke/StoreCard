@@ -5,8 +5,11 @@ using System.Windows.Data;
 
 namespace StoreCard.Converters;
 
+[ValueConversion(typeof(object), typeof(Visibility))]
 public class InverseNullToVisibilityConverter : IValueConverter
 {
+    #region IValueConverter Members
+
     public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
     {
         return value == null ? Visibility.Visible : Visibility.Collapsed;
@@ -16,4 +19,6 @@ public class InverseNullToVisibilityConverter : IValueConverter
     {
         throw new NotImplementedException();
     }
+
+    #endregion
 }

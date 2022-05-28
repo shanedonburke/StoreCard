@@ -2,15 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Drawing;
 using System.Text.RegularExpressions;
-using System.Windows;
-using System.Windows.Interop;
-using System.Windows.Media.Imaging;
 using Microsoft.Win32;
-using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Installed.Games;
-using StoreCard.Static;
 using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.BattleNet;

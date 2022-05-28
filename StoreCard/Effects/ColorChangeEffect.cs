@@ -8,16 +8,22 @@ namespace StoreCard.Effects;
 
 public class ColorChangeEffect : ShaderEffect
 {
-    public static readonly DependencyProperty InputProperty =
-        RegisterPixelShaderSamplerProperty("Input", typeof(ColorChangeEffect), 0);
+    public static readonly DependencyProperty InputProperty = RegisterPixelShaderSamplerProperty(
+        "Input",
+        typeof(ColorChangeEffect),
+        0);
 
-    public static readonly DependencyProperty TargetBrushProperty =
-        DependencyProperty.Register("TargetBrush", typeof(SolidColorBrush), typeof(ColorChangeEffect),
-            new UIPropertyMetadata(new SolidColorBrush(Colors.White), OnTargetBrushChanged));
+    public static readonly DependencyProperty TargetBrushProperty = DependencyProperty.Register(
+        nameof(TargetBrush),
+        typeof(SolidColorBrush),
+        typeof(ColorChangeEffect),
+        new UIPropertyMetadata(new SolidColorBrush(Colors.White), OnTargetBrushChanged));
 
-    private static readonly DependencyProperty s_targetColorProperty =
-        DependencyProperty.Register("s_targetColor", typeof(Color), typeof(ColorChangeEffect),
-            new UIPropertyMetadata(Colors.White, PixelShaderConstantCallback(0)));
+    private static readonly DependencyProperty s_targetColorProperty = DependencyProperty.Register(
+        "s_targetColor",
+        typeof(Color),
+        typeof(ColorChangeEffect),
+        new UIPropertyMetadata(Colors.White, PixelShaderConstantCallback(0)));
 
     private static readonly PixelShader s_pixelShader = new();
 

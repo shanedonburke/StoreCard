@@ -1,7 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Newtonsoft.Json;
-using StoreCard.Services;
 using StoreCard.Utils;
 
 namespace StoreCard.Models;

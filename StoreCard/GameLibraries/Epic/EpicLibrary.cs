@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
-using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Static;
 using StoreCard.Utils;

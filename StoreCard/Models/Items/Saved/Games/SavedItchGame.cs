@@ -5,7 +5,6 @@ using System;
 using System.Windows;
 using Newtonsoft.Json;
 using StoreCard.GameLibraries.Itch;
-using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Services;
 using StoreCard.Static;

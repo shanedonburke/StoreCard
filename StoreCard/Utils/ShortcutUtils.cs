@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Windows.Forms;
 using IWshRuntimeLibrary;
 using Microsoft.Win32;

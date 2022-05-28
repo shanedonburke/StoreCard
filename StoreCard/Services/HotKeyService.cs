@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Text;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Interop;
 using StoreCard.Native;
 using StoreCard.Utils;

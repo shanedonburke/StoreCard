@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using Microsoft.Win32;
-using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Utils;
 
