@@ -18,7 +18,7 @@ public partial class RecordHotKeyWindow : INotifyPropertyChanged
     private readonly UserConfig _config;
     private uint _modifiers;
     private uint _virtualKey;
-    private string _hotKeyText = "";
+    private string _hotKeyText = string.Empty;
 
     public string HotKeyText
     {
@@ -40,7 +40,7 @@ public partial class RecordHotKeyWindow : INotifyPropertyChanged
 
     private void RecordHotKeyWindow_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        var key = e.Key == Key.System ? e.SystemKey : e.Key;
+        Key key = e.Key == Key.System ? e.SystemKey : e.Key;
 
         // Ignore modifier keys.
         if (key is Key.LeftShift or Key.RightShift or Key.LeftCtrl or Key.RightCtrl or Key.LeftAlt or Key.RightAlt

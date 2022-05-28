@@ -7,8 +7,8 @@ namespace StoreCard.Utils;
 public class ProcessUtils
 {
     public static void KillOtherStoreCardProcesses() {
-        var otherProcesses = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
-        foreach (var process in otherProcesses) {
+        Process[]? otherProcesses = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
+        foreach (Process? process in otherProcesses) {
             if (process.Id != Environment.ProcessId) {
                 process.Kill();
             }

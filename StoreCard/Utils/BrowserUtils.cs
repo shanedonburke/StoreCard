@@ -10,7 +10,7 @@ public class BrowserUtils
 
     public static string? GetDefaultBrowserExecutable()
     {
-        using var userChoiceKey = Registry.CurrentUser.OpenSubKey(UserChoicePath);
+        using RegistryKey? userChoiceKey = Registry.CurrentUser.OpenSubKey(UserChoicePath);
         string? progId = userChoiceKey?.GetValue("Progid")?.ToString();
 
         if (progId == null)
@@ -19,7 +19,7 @@ public class BrowserUtils
         }
 
         string openCommandPath = progId + @"\shell\open\command";
-        using var openCommandPathKey = Registry.ClassesRoot.OpenSubKey(openCommandPath);
+        using RegistryKey? openCommandPathKey = Registry.ClassesRoot.OpenSubKey(openCommandPath);
 
         if (openCommandPathKey == null)
         {

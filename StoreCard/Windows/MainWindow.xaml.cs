@@ -75,7 +75,7 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private IEnumerable<SavedItem> FilterItems()
     {
-        var items = Category switch
+        IEnumerable<SavedItem>? items = Category switch
         {
             ItemCategory.None => _savedItems,
             ItemCategory.Recent => GetRecentItems(),

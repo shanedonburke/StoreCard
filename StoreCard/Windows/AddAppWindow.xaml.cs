@@ -73,7 +73,7 @@ public partial class AddAppWindow : INotifyPropertyChanged
 
     private ImageSource? _executableIcon;
 
-    private string _executableName = "";
+    private string _executableName = string.Empty;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 

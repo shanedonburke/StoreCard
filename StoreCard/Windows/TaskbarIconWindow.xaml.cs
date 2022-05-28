@@ -34,7 +34,7 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
         }
     }
 
-    private string _hotKeyText = "";
+    private string _hotKeyText = string.Empty;
 
     protected override void OnSourceInitialized(EventArgs e)
     {

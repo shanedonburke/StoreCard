@@ -91,9 +91,9 @@ public class AppData
 
     public static T? UpdateSavedItemById<T>(string id, Action<T> updateAction) where T : SavedItem
     {
-        var savedItems = ReadItemsFromFile();
+        List<SavedItem>? savedItems = ReadItemsFromFile();
 
-        var item = FindSavedItemById<T>(savedItems, id);
+        T? item = FindSavedItemById<T>(savedItems, id);
         if (item != null)
         {
             updateAction(item);

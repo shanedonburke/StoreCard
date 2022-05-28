@@ -63,10 +63,11 @@ public partial class AppSelector : INotifyPropertyChanged
 
     private void LoadApps()
     {
-        foreach (var app in InstalledAppUtils.GetInstalledApps())
+        foreach (InstalledApp app in InstalledAppUtils.GetInstalledApps())
         {
             AppListBox.AddItem(app);
         }
+
         AppListBox.FinishAddingItems();
     }
 

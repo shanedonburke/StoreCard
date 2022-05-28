@@ -113,7 +113,7 @@ public partial class SearchableListBox : INotifyPropertyChanged
 
     public void FilterItems()
     {
-        var items = _items
+        IEnumerable<IListBoxItem>? items = _items
             .Where(DoesItemNameStartWithSearchText);
         items = items.Concat(ItemsSource.Where(item =>
             !DoesItemNameStartWithSearchText(item) && DoesItemNameContainSearchText(item)));

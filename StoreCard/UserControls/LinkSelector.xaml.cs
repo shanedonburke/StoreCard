@@ -27,7 +27,7 @@ public partial class LinkSelector : INotifyPropertyChanged
 
     private SavedLink? _link;
 
-    private string _linkTitle = "";
+    private string _linkTitle = string.Empty;
 
     private ImageSource? _favicon;
 

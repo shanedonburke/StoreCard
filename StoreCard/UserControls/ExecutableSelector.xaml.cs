@@ -32,7 +32,7 @@ public partial class ExecutableSelector : INotifyPropertyChanged
 
     private ImageSource? _executableIcon;
 
-    private string _executableName = "";
+    private string _executableName = string.Empty;
 
     public ExecutableSelector()
     {
@@ -108,10 +108,14 @@ public partial class ExecutableSelector : INotifyPropertyChanged
 
     private void PathBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var text = PathBox.Text;
+        string text = PathBox.Text;
 
         IsExecutableValid = File.Exists(text) && text.EndsWith(".exe");
-        if (!IsExecutableValid) return;
+
+        if (!IsExecutableValid)
+        {
+            return;
+        }
 
         // Take file name without '.exe'
         ExecutableName = text.Split(@"\").Last().Split(".")[0];
@@ -138,13 +142,18 @@ public partial class ExecutableSelector : INotifyPropertyChanged
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {
-        var base64Icon = ExecutableIcon != null ? ImageUtils.ImageToBase64((BitmapSource) ExecutableIcon) : null;
+        string? base64Icon = ExecutableIcon != null ? ImageUtils.ImageToBase64((BitmapSource)ExecutableIcon) : null;
 
-        // Instead of updating the item we're editing, create a new list with only the new item
+        // Instead of updating the item we're editing, replace it entirely in the list.
+        // We are changing almost every property, so this makes more sense.
         var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != Executable?.Id).ToList();
 
-        savedItems.Add(new SavedExecutable(Guid.NewGuid().ToString(), ExecutableName, base64Icon, PathBox.Text,
-            TimeUtils.UnixTimeMillis));
+        savedItems.Add(new SavedExecutable(
+            Executable?.Id ?? Guid.NewGuid().ToString(),
+            ExecutableName,
+            base64Icon,
+            PathBox.Text,
+            Executable?.LastOpened ?? TimeUtils.UnixTimeMillis));
         AppData.SaveItemsToFile(savedItems);
         Finish();
     }
@@ -162,7 +171,7 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         }
         else
         {
-            Debug.WriteLine("Tried to delete executable, but no executable was being edited.");
+            Logger.Log("Tried to delete executable, but no executable was being edited.");
         }
 
         Finish();

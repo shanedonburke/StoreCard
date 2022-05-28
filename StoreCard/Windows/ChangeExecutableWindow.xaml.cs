@@ -25,9 +25,9 @@ public partial class ChangeExecutableWindow : INotifyPropertyChanged
 
     private ImageSource? _executableIcon;
 
-    private string _executableName = "";
+    private string _executableName = string.Empty;
 
-    private bool _isDialog = false;
+    private bool _isDialog;
 
     public string ExecutableName
     {
@@ -129,7 +129,7 @@ public partial class ChangeExecutableWindow : INotifyPropertyChanged
 
     private void SetExecPathAndSave(string path)
     {
-        var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(
+        SavedFileSystemItem? updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(
             _item.Id,
             i => i.SetExecutablePath(path));
 

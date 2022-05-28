@@ -70,7 +70,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
             return;
         }
 
-        var item = AppData.FindSavedItemById<SavedFileSystemItem>(AppData.ReadItemsFromFile(), _item.Id);
+        SavedFileSystemItem? item = AppData.FindSavedItemById<SavedFileSystemItem>(AppData.ReadItemsFromFile(), _item.Id);
 
         if (item == null)
         {
@@ -117,9 +117,9 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     private void SavePath()
     {
-        var path = PathBox.Text;
+        string? path = PathBox.Text;
 
-        var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i =>
+        SavedFileSystemItem? updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i =>
         {
             i.ItemPath = path;
         });
@@ -137,9 +137,9 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     private void SaveName()
     {
-        var name = NameBox.Text;
+        string? name = NameBox.Text;
 
-        var updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.Name = name);
+        SavedFileSystemItem? updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.Name = name);
 
         if (updatedItem != null)
         {

@@ -42,7 +42,7 @@ public partial class StoreCardTextBox : INotifyPropertyChanged
         typeof(TextChangedEventHandler),
         typeof(StoreCardTextBox));
 
-    private string _text = "";
+    private string _text = string.Empty;
 
     public string Text
     {
