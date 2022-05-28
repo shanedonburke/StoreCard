@@ -60,7 +60,7 @@ internal sealed class ItchLibrary : GameLibrary
 
             foreach (string exePath in Directory.EnumerateFiles(installFolder, "*.exe", SearchOption.AllDirectories))
             {
-                Icon? hIcon = Icon.ExtractAssociatedIcon(exePath);
+                var hIcon = Icon.ExtractAssociatedIcon(exePath);
 
                 if (hIcon == SystemIcons.Application)
                 {

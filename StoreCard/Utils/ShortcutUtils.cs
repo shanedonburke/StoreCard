@@ -36,10 +36,10 @@ internal class ShortcutUtils
     }
 
     private static void CreateShortcut(string folder, string arguments = "") {
-        WshShell wshShell = new WshShell();
+        var wshShell = new WshShell();
 
         // Create the shortcut
-        IWshShortcut? shortcut = (IWshShortcut)wshShell.CreateShortcut(
+        var shortcut = (IWshShortcut)wshShell.CreateShortcut(
             Path.Join(folder, Application.ProductName + ".lnk"));
 
         shortcut.TargetPath = Application.ExecutablePath;

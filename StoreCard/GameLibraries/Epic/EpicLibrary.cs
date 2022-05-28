@@ -49,7 +49,7 @@ internal sealed class EpicLibrary : GameLibrary
             yield break;
         }
 
-        List<string> appNames = launcherInstalled.InstallationList
+        var appNames = launcherInstalled.InstallationList
             .Select(app => app.AppName)
             .ToList();
 
