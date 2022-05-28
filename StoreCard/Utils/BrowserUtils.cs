@@ -5,7 +5,9 @@ namespace StoreCard.Utils;
 
 public class BrowserUtils
 {
-    private const string UserChoicePath = @"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice";
+    private const string UserChoicePath =
+        @"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice";
+
     private const string ExeSuffix = ".exe";
 
     public static string? GetDefaultBrowserExecutable()
@@ -28,19 +30,21 @@ public class BrowserUtils
 
         string? executable = null;
 
-        // Trim parameters
+        // The value may contain the exe path plus arguments
         try
         {
             executable = openCommandPathKey.GetValue(null)?.ToString()?.ToLower().Replace("\"", "");
 
             if (executable != null && !executable.EndsWith(ExeSuffix))
             {
-                executable = executable[..(executable.LastIndexOf(ExeSuffix, StringComparison.Ordinal) + ExeSuffix.Length)];
+                // Get file path only
+                executable =
+                    executable[..(executable.LastIndexOf(ExeSuffix, StringComparison.Ordinal) + ExeSuffix.Length)];
             }
         }
         catch
         {
-            // Assume the registry value is set incorrectly
+            Logger.Log("Failed to get the default browser's executable path. The registry value may be set incorrectly.");
         }
 
         return executable;
