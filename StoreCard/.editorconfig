@@ -24,6 +24,7 @@ dotnet_style_collection_initializer = true:suggestion
 dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
 dotnet_style_prefer_conditional_expression_over_assignment = true:silent
 dotnet_style_prefer_conditional_expression_over_return = true:silent
+dotnet_style_namespace_match_folder = true:suggestion
 
 [project.json]
 indent_size = 2
@@ -169,7 +170,7 @@ csharp_space_between_square_brackets = false
 
 # License header
 file_header_template = Licensed to the .NET Foundation under one or more agreements.\nThe .NET Foundation licenses this file to you under the MIT license.
-csharp_style_namespace_declarations = block_scoped:silent
+csharp_style_namespace_declarations = file_scoped:suggestion
 csharp_style_deconstructed_variable_declaration = true:suggestion
 
 # C++ Files

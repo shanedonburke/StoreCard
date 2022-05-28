@@ -66,10 +66,7 @@ public abstract class SavedItem : IListBoxItem
         OpenProtected();
     }
 
-    public int CompareTo(IListBoxItem? other)
-    {
-        return Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);
-    }
+    public int CompareTo(IListBoxItem? other) => Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);
 
     protected abstract void OpenProtected();
 }
