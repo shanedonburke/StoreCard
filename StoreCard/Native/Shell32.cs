@@ -13,7 +13,9 @@ public class Shell32
     public struct Shfileinfo
     {
         public IntPtr hIcon;
+
         public int iIcon;
+
         public uint dwAttributes;
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
@@ -25,7 +27,9 @@ public class Shell32
 
     // Import SHGetFileInfo function
     [DllImport("shell32.dll")]
-    public static extern IntPtr SHGetFileInfo(string pszPath, uint dwFileAttributes,
+    public static extern IntPtr SHGetFileInfo(
+        string pszPath,
+        uint dwFileAttributes,
         ref Shfileinfo psfi,
         uint cbSizeFileInfo, uint uFlags);
 }
