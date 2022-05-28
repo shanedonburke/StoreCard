@@ -11,7 +11,7 @@ using File = System.IO.File;
 
 namespace StoreCard.Models.Items.Saved.Games;
 
-internal class SavedBattleNetGame : SavedGame
+internal sealed class SavedBattleNetGame : SavedGame
 {
     public readonly string GameId;
 
@@ -57,8 +57,8 @@ internal class SavedBattleNetGame : SavedGame
 
         if (!File.Exists(battleNetExecPath))
         {
-            Logger.Log($"The Battle.net launcher executable does not exist (at {battleNetExecPath}).");
-            return;
+            Logger.Log($"The Battle.net executable does not exist (at {battleNetExecPath}).");
+            return
         }
 
         Process.Start(battleNetExecPath, $"--exec=\"launch {GameId}\"");

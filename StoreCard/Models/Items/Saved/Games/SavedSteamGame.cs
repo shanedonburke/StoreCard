@@ -11,7 +11,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.Games;
 
-internal class SavedSteamGame : SavedGame
+internal sealed class SavedSteamGame : SavedGame
 {
     [JsonConstructor]
     public SavedSteamGame(
@@ -56,6 +56,7 @@ internal class SavedSteamGame : SavedGame
 
         if (!File.Exists(steamExecPath))
         {
+            Logger.Log($"The Steam executable does not exist (at {steamExecPath}).");
             return;
         }
 

@@ -7,7 +7,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.Games;
 
-internal class SavedEpicGame : SavedGame
+internal sealed class SavedEpicGame : SavedGame
 {
     [JsonConstructor]
     public SavedEpicGame(

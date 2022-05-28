@@ -8,13 +8,13 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
 
-internal class SavedApp : SavedItem
+internal sealed class SavedApp : SavedItem
 {
     public readonly string AppUserModelId;
 
     [JsonConstructor]
-    public SavedApp(string id, string name, string base64Icon, string appUserModelId, long lastOpened) : base(
-        id, name, base64Icon, lastOpened)
+    public SavedApp(string id, string name, string base64Icon, string appUserModelId, long lastOpened)
+        : base(id, name, base64Icon, lastOpened)
     {
         AppUserModelId = appUserModelId;
     }

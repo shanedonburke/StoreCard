@@ -12,7 +12,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.Games;
 
-internal class SavedItchGame : SavedGame
+internal sealed class SavedItchGame : SavedGame
 {
     public readonly string CaveId;
 

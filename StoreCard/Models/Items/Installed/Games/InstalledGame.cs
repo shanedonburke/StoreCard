@@ -5,7 +5,7 @@ using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Installed.Games;
 
-public abstract class InstalledGame : IListBoxItem
+internal abstract class InstalledGame : IListBoxItem
 {
     protected InstalledGame(string name, BitmapSource? bitmapIcon)
     {

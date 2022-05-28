@@ -6,11 +6,12 @@ using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Saved;
 
-public class SavedExecutable : SavedItem
+internal sealed class SavedExecutable : SavedItem
 {
     public readonly string Path;
 
-    public SavedExecutable(string id, string name, string? base64Icon, string path, long lastOpened) : base(id, name, base64Icon, lastOpened)
+    public SavedExecutable(string id, string name, string? base64Icon, string path, long lastOpened)
+        : base(id, name, base64Icon, lastOpened)
     {
         Path = path;
     }
