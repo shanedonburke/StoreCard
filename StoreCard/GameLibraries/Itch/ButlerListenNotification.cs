@@ -2,7 +2,7 @@
 
 internal sealed class ButlerListenNotification
 {
-    public class TcpInfo
+    internal sealed class TcpInfo
     {
         public readonly string Address;
 
@@ -10,8 +10,11 @@ internal sealed class ButlerListenNotification
     }
 
     public readonly string Secret;
+
     public readonly TcpInfo Tcp;
+
     public readonly long Time;
+
     public readonly string Type;
 
     public ButlerListenNotification(string secret, TcpInfo tcp, long time, string type)

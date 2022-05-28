@@ -1,7 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -13,13 +10,16 @@ using SystemIcons = System.Drawing.SystemIcons;
 
 namespace StoreCard.GameLibraries.Itch;
 
-internal class ItchLibrary : GameLibrary
+internal sealed class ItchLibrary : GameLibrary
 {
-    public bool IsInstalled => ButlerPaths.ButlerExecutable != null && File.Exists(ButlerPaths.ButlerDatabase);
+    private static bool IsInstalled => ButlerPaths.ButlerExecutable != null && File.Exists(ButlerPaths.ButlerDatabase);
 
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
-        if (!IsInstalled) yield break;
+        if (!IsInstalled)
+        {
+            yield break;
+        }
 
         Process butlerProc = new()
         {
@@ -42,13 +42,13 @@ internal class ItchLibrary : GameLibrary
 
         if (!client.Authenticate())
         {
-            Debug.WriteLine("Failed to authenticate with Butler client.");
+            Logger.Log("Failed to authenticate with Butler client.");
             yield break;
         }
 
         if (client.FetchCaves() is not { } caves)
         {
-            Debug.WriteLine("Failed to fetch caves.");
+            Logger.Log("Failed to fetch caves.");
             yield break;
         }
 
