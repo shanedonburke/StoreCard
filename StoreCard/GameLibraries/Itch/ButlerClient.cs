@@ -1,17 +1,15 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
+using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Itch;
 
-internal class ButlerClient
+internal sealed class ButlerClient
 {
     private static class Methods
     {
@@ -22,7 +20,7 @@ internal class ButlerClient
         public const string Launch = "Launch";
     }
 
-    private class AuthenticateResult
+    private sealed class AuthenticateResult
     {
         [JsonProperty("ok")] public readonly bool Ok;
 
@@ -32,7 +30,7 @@ internal class ButlerClient
         }
     }
 
-    private class FetchCavesResult
+    private sealed class FetchCavesResult
     {
         [JsonProperty("items")] public List<ButlerCave> Items;
 
@@ -41,6 +39,9 @@ internal class ButlerClient
             Items = items;
         }
     }
+
+    private static readonly JsonSerializerSettings s_deserializeResponseSettings =
+        new() {MissingMemberHandling = MissingMemberHandling.Ignore};
 
     private readonly Socket _socket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
@@ -73,7 +74,10 @@ internal class ButlerClient
         {
             string? jsonLine = butlerProc.StandardOutput.ReadLine();
 
-            if (jsonLine == null) continue;
+            if (jsonLine == null)
+            {
+                continue;
+            }
 
             try
             {
@@ -103,20 +107,22 @@ internal class ButlerClient
         }
 
         Dictionary<string, object> parameters = new() {{"secret", _secret!}};
-        return SendRequest<AuthenticateResult>(Methods.MetaAuthenticate, parameters) != null;
+        return SendRequest<AuthenticateResult>(
+            Methods.MetaAuthenticate, parameters) != null;
     }
 
     public List<ButlerCave>? FetchCaves()
     {
-        return SendRequest<FetchCavesResult>(Methods.FetchCaves, new Dictionary<string, object>())?.Items;
+        return SendRequest<FetchCavesResult>(
+            Methods.FetchCaves,
+            new Dictionary<string, object>())?.Items;
     }
 
     public void Launch(string caveId)
     {
         Dictionary<string, object> parameters = new()
         {
-            {"caveId", caveId},
-            {"prereqsDir", ButlerPaths.ButlerPrereqsFolder}
+            {"caveId", caveId}, {"prereqsDir", ButlerPaths.ButlerPrereqsFolder}
         };
         SendRequest<object>(Methods.Launch, parameters);
     }
@@ -145,20 +151,18 @@ internal class ButlerClient
         } while (response.Trim() == string.Empty);
 
         // The buffer may contain multiple lines of JSON objects (e.g., logs)
-        string resJson = response.Split("\n")[0];
+        string resJson = response.Split('\n')[0];
 
         try
         {
             return JsonConvert.DeserializeObject<ButlerResponse<TResult>>(
-                resJson,
-                new JsonSerializerSettings {MissingMemberHandling = MissingMemberHandling.Ignore}) is { } res
+                resJson, s_deserializeResponseSettings) is { } res
                 ? res.Result
                 : default;
         }
         catch (JsonSerializationException e)
         {
-            Debug.WriteLine("Failed to deserialize Butler response:");
-            Debug.WriteLine(e.Message);
+            Logger.LogExceptionMessage("Failed to deserialize Butler response", e);
             return default;
         }
     }
