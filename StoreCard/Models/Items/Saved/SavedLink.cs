@@ -11,6 +11,8 @@ public class SavedLink : SavedItem
 
     public bool ShouldOpenPrivate;
 
+    private const string PrivateWindowArgs = @" -private -incognito -private-window -inprivate";
+
     public SavedLink(
         string id,
         string name,
@@ -43,7 +45,7 @@ public class SavedLink : SavedItem
             psi = new ProcessStartInfo
             {
                 FileName = defaultBrowserExe,
-                Arguments = Url + (ShouldOpenPrivate ? " -private -incognito -private-window -inprivate" : ""),
+                Arguments = Url + (ShouldOpenPrivate ? PrivateWindowArgs : string.Empty),
                 UseShellExecute = true
             };
         }
