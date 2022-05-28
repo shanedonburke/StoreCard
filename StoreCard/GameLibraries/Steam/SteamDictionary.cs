@@ -1,18 +1,13 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace StoreCard.GameLibraries.Steam;
 
-internal class SteamDictionary
+internal sealed class SteamDictionary
 {
     private static readonly Regex s_keyRegex = new(@"^\s*""(?<key>[^<>""/|?*]+)""\s*$");
 
     private static readonly Regex s_pairRegex = new(@"^\s*""(?<key>[^<>""/|?*]+)""\s+""(?<value>[^<>""/|?*]+)""$");
-
-    private static readonly Regex s_openChildRegex = new(@"^\s*{\s*$");
 
     private static readonly Regex s_closeChildRegex = new(@"^\s*}\s*$");
 
@@ -64,15 +59,12 @@ internal class SteamDictionary
                 continue;
             }
 
-            if (s_openChildRegex.IsMatch(lines[i]))
-            {
-                continue;
-            }
-
             if (s_closeChildRegex.IsMatch(lines[i]))
             {
                 stack.Pop();
             }
+
+            // Ignore the line if it's an opening bracket
         }
 
         return root;
