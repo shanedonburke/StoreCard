@@ -92,8 +92,12 @@ public class HotKeyUtils
     private static char ToAscii(Key key)
     {
         var outputBuilder = new StringBuilder(2);
-        int result = User32.ToAscii(KeyToVirtualKey(key), 0, new byte[256],
-            outputBuilder, 0);
+        int result = User32.ToAscii(
+            KeyToVirtualKey(key),
+            0,
+            new byte[256],
+            outputBuilder,
+            0);
         return result == 1 ? outputBuilder[0] : ' ';
     }
 }
