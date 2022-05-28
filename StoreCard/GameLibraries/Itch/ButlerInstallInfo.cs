@@ -2,7 +2,7 @@
 
 namespace StoreCard.GameLibraries.Itch;
 
-internal class ButlerInstallInfo
+internal sealed class ButlerInstallInfo
 {
     [JsonProperty("installFolder")]
     public readonly string InstallFolder;

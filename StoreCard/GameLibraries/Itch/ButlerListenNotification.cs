@@ -1,9 +1,6 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
+﻿namespace StoreCard.GameLibraries.Itch;
 
-namespace StoreCard.GameLibraries.Itch;
-
-internal class ButlerListenNotification
+internal sealed class ButlerListenNotification
 {
     public class TcpInfo
     {

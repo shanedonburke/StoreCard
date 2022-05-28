@@ -2,7 +2,7 @@
 
 namespace StoreCard.GameLibraries.Itch;
 
-internal class ButlerGame
+internal sealed class ButlerGame
 {
     [JsonProperty("title")]
     public readonly string Title;
