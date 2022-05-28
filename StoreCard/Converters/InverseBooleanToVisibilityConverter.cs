@@ -10,7 +10,8 @@ public class InverseBooleanToVisibilityConverter : IValueConverter
 {
     #region IValueConverter Members
 
-    public object Convert(object value,
+    public object Convert(
+        object value,
         Type targetType,
         object parameter,
         System.Globalization.CultureInfo culture)
@@ -23,7 +24,8 @@ public class InverseBooleanToVisibilityConverter : IValueConverter
         return (bool)value ? Visibility.Hidden : Visibility.Visible;
     }
 
-    public object ConvertBack(object value,
+    public object ConvertBack(
+        object value,
         Type targetType,
         object parameter,
         System.Globalization.CultureInfo culture)
