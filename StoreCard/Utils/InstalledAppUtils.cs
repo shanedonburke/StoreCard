@@ -8,12 +8,15 @@ namespace StoreCard.Utils;
 
 public class InstalledAppUtils
 {
-    public static IEnumerable<InstalledApp> GetInstalledApps() {
-        // From https://stackoverflow.com/a/57195200
-        var appsFolderId = new Guid("{1e87508d-89c2-42f0-8a7e-645a0f50ca58}");
-        var appsFolder = (ShellObject)KnownFolderHelper.FromKnownFolderId(appsFolderId);
+    private static readonly Guid s_appsFolderId = new("{1e87508d-89c2-42f0-8a7e-645a0f50ca58}");
 
-        foreach (ShellObject? app in (IKnownFolder)appsFolder) {
+    public static IEnumerable<InstalledApp> GetInstalledApps()
+    {
+        // From https://stackoverflow.com/a/57195200
+        var appsFolder = (ShellObject)KnownFolderHelper.FromKnownFolderId(s_appsFolderId);
+
+        foreach (ShellObject? app in (IKnownFolder)appsFolder)
+        {
             // The friendly app name
             string? name = app.Name;
             // Path to executable
