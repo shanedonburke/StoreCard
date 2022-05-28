@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Media.Imaging;
@@ -10,7 +9,7 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Epic;
 
-internal class EpicLibrary : GameLibrary
+internal sealed class EpicLibrary : GameLibrary
 {
     private static readonly string s_launcherInstalledPath = Path.Combine(
         FolderPaths.CommonApplicationData,
@@ -20,10 +19,14 @@ internal class EpicLibrary : GameLibrary
         FolderPaths.CommonApplicationData,
         @"Epic\EpicGamesLauncher\Data\Manifests");
 
+    private static bool IsInstalled => File.Exists(s_launcherInstalledPath) &&
+                                       Directory.Exists(s_manifestFolderPath);
+
     public override IEnumerable<InstalledGame> GetInstalledGames()
     {
-        if (!File.Exists(s_launcherInstalledPath) || !Directory.Exists(s_manifestFolderPath))
+        if (!IsInstalled)
         {
+            Logger.Log("The Epic Games launcher is not installed.");
             yield break;
         }
 
@@ -36,17 +39,19 @@ internal class EpicLibrary : GameLibrary
         }
         catch (JsonSerializationException e)
         {
-            Debug.WriteLine("Failed to deserialize Epic Games data file:");
-            Debug.WriteLine(e.Message);
+            Logger.LogExceptionMessage("Failed to deserialize Epic Games data file", e);
             yield break;
         }
 
         if (launcherInstalled == null)
         {
+            Logger.Log("Failed to deserialize Epic Games data file.");
             yield break;
         }
 
-        var appNames = launcherInstalled.InstallationList.Select(app => app.AppName).ToList();
+        List<string> appNames = launcherInstalled.InstallationList
+            .Select(app => app.AppName)
+            .ToList();
 
         IEnumerable<string> manifestPaths = Directory.EnumerateFiles(
             s_manifestFolderPath,
@@ -57,6 +62,7 @@ internal class EpicLibrary : GameLibrary
         {
             if (!File.Exists(manifestPath))
             {
+                Logger.Log($"The Epic Games manifest at {manifestPath} does not exist.");
                 continue;
             }
 
@@ -68,20 +74,31 @@ internal class EpicLibrary : GameLibrary
             }
             catch (JsonSerializationException e)
             {
-                Debug.WriteLine("Failed to deserialize Epic Games manifest:");
-                Debug.WriteLine(e.Message);
+                Logger.LogExceptionMessage($"Failed to deserialize Epic Games manifest at {manifestPath}", e);
                 yield break;
             }
 
             if (manifest == null)
             {
+                Logger.Log($"Failed to deserialize Epic Games manifest at {manifestPath}");
                 continue;
             }
 
-            if (!appNames.Contains(manifest.AppName)) continue;
+            string appName = manifest.AppName;
+
+            if (!appNames.Contains(appName))
+            {
+                Logger.Log($"An unexpected Epic Games manifest was found for {appName}.");
+                continue;
+            }
 
             string execPath = Path.Combine(manifest.InstallLocation, manifest.LaunchExecutable);
-            if (!File.Exists(execPath)) continue;
+
+            if (!File.Exists(execPath))
+            {
+                Logger.Log($"The executable for {appName} from Epic Games could not be found.");
+                continue;
+            }
 
             BitmapSource icon = IconUtils.GetFileIconByPath(execPath)!;
 

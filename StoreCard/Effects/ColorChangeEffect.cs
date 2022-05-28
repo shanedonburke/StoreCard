@@ -6,7 +6,7 @@ using Color = System.Windows.Media.Color;
 
 namespace StoreCard.Effects;
 
-public class ColorChangeEffect : ShaderEffect
+internal sealed class ColorChangeEffect : ShaderEffect
 {
     public static readonly DependencyProperty InputProperty = RegisterPixelShaderSamplerProperty(
         "Input",
@@ -45,7 +45,7 @@ public class ColorChangeEffect : ShaderEffect
     {
         ((ColorChangeEffect)sender).SetValue(
             s_targetColorProperty,
-            (e.NewValue as SolidColorBrush)!.Color);
+            ((SolidColorBrush)e.NewValue).Color);
     }
 
     public SolidColorBrush TargetBrush

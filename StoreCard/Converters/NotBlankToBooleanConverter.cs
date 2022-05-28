@@ -6,7 +6,7 @@ using System.Windows.Data;
 namespace StoreCard.Converters;
 
 [ValueConversion(typeof(string), typeof(bool))]
-internal class NotBlankToBooleanConverter : IValueConverter
+internal sealed class NotBlankToBooleanConverter : IValueConverter
 {
     #region IValueConverter Members
 

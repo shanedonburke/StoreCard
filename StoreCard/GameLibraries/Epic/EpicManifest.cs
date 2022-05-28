@@ -9,11 +9,16 @@ public class EpicManifest
     public string InstallLocation;
     public string AppName;
 
-    public EpicManifest(int formatVersion, bool bIsIncompleteInstall, string launchExecutable, string displayName,
-        string installLocation, string appName)
+    public EpicManifest(
+        int formatVersion,
+        bool bIsIncompleteInstall,
+        string launchExecutable,
+        string displayName,
+        string installLocation,
+        string appName)
     {
         FormatVersion = formatVersion;
-        this.BIsIncompleteInstall = bIsIncompleteInstall;
+        BIsIncompleteInstall = bIsIncompleteInstall;
         LaunchExecutable = launchExecutable;
         DisplayName = displayName;
         InstallLocation = installLocation;

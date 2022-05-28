@@ -19,9 +19,10 @@ internal static class BattleNetGameIds
 
     private static void PopulateDictionary()
     {
-        foreach (string line in Properties.Resources.BattleNetGameIds.Split("\n"))
+        foreach (string line in Properties.Resources.BattleNetGameIds.Split('\n'))
         {
-            string[] parts = line.Split("=");
+            string[] parts = line.Split('=');
+
             if (parts.Length == 2)
             {
                 s_gameIds[parts[0]] = parts[1].Trim();

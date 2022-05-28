@@ -5,7 +5,7 @@ using System.Windows.Data;
 namespace StoreCard.Converters;
 
 [ValueConversion(typeof(object), typeof(string))]
-public class ValueToStringConverter : IValueConverter
+internal sealed class ValueToStringConverter : IValueConverter
 {
     #region IValueConverter Members
 

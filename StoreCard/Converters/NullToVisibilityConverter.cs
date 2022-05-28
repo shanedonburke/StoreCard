@@ -6,7 +6,7 @@ using System.Windows.Data;
 namespace StoreCard.Converters;
 
 [ValueConversion(typeof(object), typeof(Visibility))]
-public class NullToVisibilityConverter : IValueConverter
+internal sealed class NullToVisibilityConverter : IValueConverter
 {
     #region IValueConverter Members
 

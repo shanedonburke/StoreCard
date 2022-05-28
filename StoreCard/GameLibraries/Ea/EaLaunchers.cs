@@ -3,15 +3,15 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Ea;
 
-internal class EaLaunchers
+internal sealed class EaLaunchers
 {
-    public class Launcher
+    internal sealed class Launcher
     {
         public readonly string DisplayName;
         public readonly string ProcessName;
         public readonly string? LauncherPath;
 
-        internal Launcher(string displayName, string processName, string? launcherPath)
+        public Launcher(string displayName, string processName, string? launcherPath)
         {
             DisplayName = displayName;
             ProcessName = processName;
@@ -64,11 +64,6 @@ internal class EaLaunchers
             return Desktop;
         }
 
-        if (Origin.IsInstalled)
-        {
-            return Origin;
-        }
-
-        return null;
+        return Origin.IsInstalled ? Origin : null;
     }
 }
