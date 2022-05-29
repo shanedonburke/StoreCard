@@ -37,6 +37,10 @@ public sealed partial class MissingItemWindow : INotifyPropertyChanged
 
     public bool ShouldShowEditButton => _editAction != null;
 
+    [NotifyPropertyChangedInvocator]
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
     private void DeleteButton_Click(object sender, RoutedEventArgs e)
     {
         AppData.DeleteItemAndSave(_item);
@@ -57,8 +61,4 @@ public sealed partial class MissingItemWindow : INotifyPropertyChanged
             new ShowSearchCommand().Execute();
         }
     }
-
-    [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 }
