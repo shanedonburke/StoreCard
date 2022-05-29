@@ -1,6 +1,5 @@
 ﻿#region
 
-using System;
 using System.IO;
 using System.Windows;
 
@@ -33,7 +32,7 @@ public class ThemeUtils
             }
 
             Application.Current.Resources.MergedDictionaries[0].Source =
-                new Uri($"pack://application:,,,/ResourceDictionaries/Themes/{theme}.xaml");
+                UriUtils.BuildPackUri($"ResourceDictionaries/Themes/{theme}.xaml");
 
             return true;
         }

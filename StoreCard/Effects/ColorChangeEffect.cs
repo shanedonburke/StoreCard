@@ -1,9 +1,9 @@
 ﻿#region
 
-using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using StoreCard.Utils;
 
 #endregion
 
@@ -31,7 +31,7 @@ public sealed class ColorChangeEffect : ShaderEffect
     private static readonly PixelShader s_pixelShader = new();
 
     static ColorChangeEffect() =>
-        s_pixelShader.UriSource = new Uri("pack://application:,,,/Effects/bin/ColorChange.ps");
+        s_pixelShader.UriSource = UriUtils.BuildPackUri("Effects/bin/ColorChange.ps");
 
     public ColorChangeEffect()
     {
