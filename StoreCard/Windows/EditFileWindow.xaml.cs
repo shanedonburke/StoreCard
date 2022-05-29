@@ -82,10 +82,8 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
     }
 
     [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
     private void BrowseFile()
     {
@@ -103,15 +101,9 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         }
     }
 
-    private void OnNameChanged()
-    {
-        OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
-    }
+    private void OnNameChanged() => OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
 
-    private void OnPathChanged()
-    {
-        OnPropertyChanged(nameof(ShouldEnableSavePathButton));
-    }
+    private void OnPathChanged() => OnPropertyChanged(nameof(ShouldEnableSavePathButton));
 
     private void SavePath()
     {
@@ -155,10 +147,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         SaveName();
     }
 
-    private void Window_Closed(object? sender, EventArgs e)
-    {
-        new ShowSearchCommand().Execute();
-    }
+    private void Window_Closed(object? sender, EventArgs e) => new ShowSearchCommand().Execute();
 
     private void BrowseButton_Click(object sender, RoutedEventArgs e)
     {
@@ -173,25 +162,13 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         }
     }
 
-    private void SavePathButton_Click(object sender, RoutedEventArgs e)
-    {
-        SavePath();
-    }
+    private void SavePathButton_Click(object sender, RoutedEventArgs e) => SavePath();
 
-    private void SaveNameButton_Click(object sender, RoutedEventArgs e)
-    {
-        SaveName();
-    }
+    private void SaveNameButton_Click(object sender, RoutedEventArgs e) => SaveName();
 
-    private void PathBox_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        OnPathChanged();
-    }
+    private void PathBox_TextChanged(object sender, TextChangedEventArgs e) => OnPathChanged();
 
-    private void NameBox_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        OnNameChanged();
-    }
+    private void NameBox_TextChanged(object sender, TextChangedEventArgs e) => OnNameChanged();
 
     private void DeleteButton_Click(object sender, RoutedEventArgs e)
     {
@@ -199,10 +176,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         Close();
     }
 
-    private void CloseButton_Click(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
+    private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
 
     private void Window_Closing(object? sender, CancelEventArgs e)
     {
