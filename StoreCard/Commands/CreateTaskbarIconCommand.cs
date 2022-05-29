@@ -8,12 +8,22 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
+/// <summary>
+/// Opens the invisible window for the taskbar icon if it isn't already open.
+/// </summary>
 public sealed class CreateTaskbarIconCommand : IStoreCardCommand<bool>
 {
+    /// <summary>
+    /// Whether the taskbar icon window is already open.
+    /// </summary>
     private static bool DoesTaskbarIconExist => Application.Current.Windows
         .Cast<Window>()
         .Any(w => w is TaskbarIconWindow);
 
+    /// <summary>
+    /// Opens the window if it isn't already open.
+    /// </summary>
+    /// <returns>True if a new window was opened, false if the window was already open</returns>
     public bool Execute()
     {
         if (DoesTaskbarIconExist)

@@ -12,7 +12,7 @@ namespace StoreCard.Commands;
 public sealed class AddAppCommand : IStoreCardCommand<bool>
 {
     /// <summary>
-    /// Opens the window.
+    /// Opens the window without waiting for it to close.
     /// </summary>
     /// <returns>True</returns>
     public bool Execute()
