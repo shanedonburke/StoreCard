@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -6,7 +8,8 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Utils;
-using SystemIcons = System.Drawing.SystemIcons;
+
+#endregion
 
 namespace StoreCard.GameLibraries.Itch;
 

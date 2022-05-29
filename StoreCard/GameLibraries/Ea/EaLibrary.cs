@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using Microsoft.Win32;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.GameLibraries.Ea;
 

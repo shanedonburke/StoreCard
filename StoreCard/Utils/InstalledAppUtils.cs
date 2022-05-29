@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using Microsoft.WindowsAPICodePack.Shell;
 using StoreCard.Models.Items.Installed;
+
+#endregion
 
 namespace StoreCard.Utils;
 

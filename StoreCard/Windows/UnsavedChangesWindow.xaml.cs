@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿#region
+
+using System.Windows;
+
+#endregion
 
 namespace StoreCard.Windows;
 
@@ -7,19 +11,19 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class UnsavedChangesWindow
 {
+    public enum Result
+    {
+        CloseWithoutSaving,
+        Cancel,
+        SaveAndClose
+    }
+
     public new Result DialogResult = Result.Cancel;
 
     public UnsavedChangesWindow()
     {
         DataContext = this;
         InitializeComponent();
-    }
-
-    public enum Result
-    {
-        CloseWithoutSaving,
-        Cancel,
-        SaveAndClose
     }
 
     private void CloseWithoutSaving_Click(object sender, RoutedEventArgs e)

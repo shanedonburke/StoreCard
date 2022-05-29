@@ -1,6 +1,10 @@
-﻿using System.Windows.Input;
+﻿#region
+
+using System.Windows.Input;
 using Newtonsoft.Json;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.Models;
 
@@ -10,13 +14,13 @@ public class UserConfig
 
     public static readonly uint DefaultVirtualHotKey = HotKeyUtils.KeyToVirtualKey(Key.Z);
 
-    public uint HotKeyModifiers;
+    private string _theme = "Lake (Dark)";
 
-    public uint VirtualHotKey;
+    public uint HotKeyModifiers;
 
     public bool ShouldShowPrefixIcons = false;
 
-    private string _theme = "Lake (Dark)";
+    public uint VirtualHotKey;
 
     public UserConfig()
     {
@@ -50,8 +54,5 @@ public class UserConfig
         VirtualHotKey = DefaultVirtualHotKey;
     }
 
-    public void DisableTutorial()
-    {
-        ShouldShowTutorial = false;
-    }
+    public void DisableTutorial() => ShouldShowTutorial = false;
 }

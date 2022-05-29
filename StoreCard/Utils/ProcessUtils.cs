@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
 using System.Linq;
+
+#endregion
 
 namespace StoreCard.Utils;
 
@@ -19,8 +23,5 @@ public class ProcessUtils
         }
     }
 
-    public static bool IsProcessWithNameRunning(string name)
-    {
-        return Process.GetProcessesByName(name).Any();
-    }
+    public static bool IsProcessWithNameRunning(string name) => Process.GetProcessesByName(name).Any();
 }

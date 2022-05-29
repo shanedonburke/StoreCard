@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 using StoreCard.Utils;
 using static System.String;
+
+#endregion
 
 namespace StoreCard.Models.Items.Saved;
 
@@ -35,12 +39,6 @@ public abstract class SavedItem : IListBoxItem
 {
     public readonly string Id;
 
-    public string Name { get; set; }
-
-    public string? Base64Icon { get; set; }
-
-    public long LastOpened { get; private set; }
-
     protected SavedItem(string id, string name, string? base64Icon, long lastOpened)
     {
         Id = id;
@@ -49,9 +47,15 @@ public abstract class SavedItem : IListBoxItem
         LastOpened = lastOpened;
     }
 
+    public string? Base64Icon { get; set; }
+
+    public long LastOpened { get; private set; }
+
     public abstract ItemCategory Category { get; }
 
     public abstract SpecificItemCategory SpecificCategory { get; }
+
+    public string Name { get; set; }
 
     [JsonIgnore] public BitmapSource? BitmapIcon => Base64Icon != null ? ImageUtils.Base64ToImage(Base64Icon) : null;
 
@@ -59,14 +63,14 @@ public abstract class SavedItem : IListBoxItem
 
     [JsonIgnore] public virtual string SecondaryText => Empty;
 
+    public int CompareTo(IListBoxItem? other) => Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);
+
     public void Open()
     {
         LastOpened = TimeUtils.UnixTimeMillis;
         AppData.UpdateSavedItemById<SavedItem>(Id, i => i.LastOpened = LastOpened);
         OpenProtected();
     }
-
-    public int CompareTo(IListBoxItem? other) => Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);
 
     protected abstract void OpenProtected();
 }

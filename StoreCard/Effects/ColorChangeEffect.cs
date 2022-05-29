@@ -1,8 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
-using Color = System.Windows.Media.Color;
+
+#endregion
 
 namespace StoreCard.Effects;
 
@@ -27,10 +30,8 @@ public sealed class ColorChangeEffect : ShaderEffect
 
     private static readonly PixelShader s_pixelShader = new();
 
-    static ColorChangeEffect()
-    {
+    static ColorChangeEffect() =>
         s_pixelShader.UriSource = new Uri("pack://application:,,,/Effects/bin/ColorChange.ps");
-    }
 
     public ColorChangeEffect()
     {
@@ -39,18 +40,16 @@ public sealed class ColorChangeEffect : ShaderEffect
         UpdateShaderValue(s_targetColorProperty);
     }
 
-    private static void OnTargetBrushChanged(
-        DependencyObject sender,
-        DependencyPropertyChangedEventArgs e)
-    {
-        ((ColorChangeEffect)sender).SetValue(
-            s_targetColorProperty,
-            ((SolidColorBrush)e.NewValue).Color);
-    }
-
     public SolidColorBrush TargetBrush
     {
         get => (SolidColorBrush)GetValue(TargetBrushProperty);
         set => SetValue(s_targetColorProperty, value.Color);
     }
+
+    private static void OnTargetBrushChanged(
+        DependencyObject sender,
+        DependencyPropertyChangedEventArgs e) =>
+        ((ColorChangeEffect)sender).SetValue(
+            s_targetColorProperty,
+            ((SolidColorBrush)e.NewValue).Color);
 }

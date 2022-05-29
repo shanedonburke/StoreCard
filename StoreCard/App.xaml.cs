@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Linq;
 using System.Windows;
 using StoreCard.Commands;
 using StoreCard.Models;
 using StoreCard.Static;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard;
 
@@ -15,12 +19,9 @@ public partial class App
 {
     private readonly UserConfig _config = AppData.ReadConfigFromFile();
 
-    public App()
-    {
-        FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata {
-            DefaultValue = FindResource(typeof(Window))
-        });
-    }
+    public App() =>
+        FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window),
+            new FrameworkPropertyMetadata {DefaultValue = FindResource(typeof(Window))});
 
     private void App_Startup(object sender, StartupEventArgs e)
     {

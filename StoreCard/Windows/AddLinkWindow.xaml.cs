@@ -1,6 +1,10 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Windows;
 using StoreCard.Commands;
+
+#endregion
 
 namespace StoreCard.Windows;
 
@@ -15,13 +19,7 @@ public partial class AddLinkWindow
         DataContext = this;
     }
 
-    private void Window_Closed(object? sender, EventArgs e)
-    {
-        new ShowSearchCommand().Execute();
-    }
+    private void Window_Closed(object? sender, EventArgs e) => new ShowSearchCommand().Execute();
 
-    private void LinkSelector_Finished(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
+    private void LinkSelector_Finished(object sender, RoutedEventArgs e) => Close();
 }

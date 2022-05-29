@@ -1,17 +1,19 @@
-﻿using System.Diagnostics;
+﻿#region
+
+using System.Diagnostics;
 using System.Windows.Media.Imaging;
 using StoreCard.Static;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.Models.Items.Saved;
 
 public class SavedLink : SavedItem
 {
-    public string Url { get; }
+    private const string PrivateWindowArgs = @" -private -incognito -private-window -inprivate";
 
     public bool ShouldOpenPrivate;
-
-    private const string PrivateWindowArgs = @" -private -incognito -private-window -inprivate";
 
     public SavedLink(
         string id,
@@ -25,6 +27,8 @@ public class SavedLink : SavedItem
         Url = url;
         ShouldOpenPrivate = shouldOpenPrivate;
     }
+
+    public string Url { get; }
 
     public override ItemCategory Category => ItemCategory.Link;
 

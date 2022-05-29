@@ -1,7 +1,11 @@
-﻿using System.Windows.Media.Imaging;
+﻿#region
+
+using System.Windows.Media.Imaging;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Models.Items.Saved.Games;
 using StoreCard.Static;
+
+#endregion
 
 namespace StoreCard.Models.Items.Installed.Games;
 
@@ -9,10 +13,8 @@ public sealed class InstalledBattleNetGame : InstalledGame
 {
     public readonly string GameId;
 
-    public InstalledBattleNetGame(string name, BitmapSource? bitmapIcon, string gameId) : base(name, bitmapIcon)
-    {
+    public InstalledBattleNetGame(string name, BitmapSource? bitmapIcon, string gameId) : base(name, bitmapIcon) =>
         GameId = gameId;
-    }
 
     public override string SecondaryText => GamePlatformNames.BattleNet;
 

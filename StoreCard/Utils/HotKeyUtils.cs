@@ -1,22 +1,23 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using StoreCard.Models;
 using StoreCard.Native;
 
+#endregion
+
 namespace StoreCard.Utils;
 
 public class HotKeyUtils
 {
-    public static uint ModifiersToHotKeyByte(params Key[] modifiers)
-    {
-        return modifiers.Aggregate<Key, uint>(0, (current, key) => current | ModifierToHotKeyByte(key));
-    }
+    public static uint ModifiersToHotKeyByte(params Key[] modifiers) =>
+        modifiers.Aggregate<Key, uint>(0, (current, key) => current | ModifierToHotKeyByte(key));
 
-    public static uint ModifierToHotKeyByte(Key modifier)
-    {
-        return modifier switch
+    public static uint ModifierToHotKeyByte(Key modifier) =>
+        modifier switch
         {
             Key.LeftAlt => (uint)ModifierKeys.Alt,
             Key.RightAlt => (uint)ModifierKeys.Alt,
@@ -28,7 +29,6 @@ public class HotKeyUtils
             Key.RWin => (uint)ModifierKeys.Windows,
             _ => 0
         };
-    }
 
     public static List<Key> HotKeyByteToModifiers(uint mod)
     {
@@ -57,15 +57,9 @@ public class HotKeyUtils
         return keys;
     }
 
-    public static uint KeyToVirtualKey(Key key)
-    {
-        return (uint)KeyInterop.VirtualKeyFromKey(key);
-    }
+    public static uint KeyToVirtualKey(Key key) => (uint)KeyInterop.VirtualKeyFromKey(key);
 
-    public static Key VirtualKeyToKey(uint virtualKey)
-    {
-        return KeyInterop.KeyFromVirtualKey((int)virtualKey);
-    }
+    public static Key VirtualKeyToKey(uint virtualKey) => KeyInterop.KeyFromVirtualKey((int)virtualKey);
 
     public static string KeyStringFromConfig(UserConfig config)
     {
@@ -75,9 +69,8 @@ public class HotKeyUtils
         return string.Join("+", allKeys.Select(KeyToString));
     }
 
-    public static string KeyToString(Key key)
-    {
-        return key switch
+    public static string KeyToString(Key key) =>
+        key switch
         {
             Key.LeftCtrl => "Ctrl",
             Key.LeftAlt => "Alt",
@@ -86,7 +79,6 @@ public class HotKeyUtils
             Key.Tab => "Tab",
             _ => ToAscii(key).ToString().ToUpper()
         };
-    }
 
     // From https://stackoverflow.com/a/736509
     private static char ToAscii(Key key)

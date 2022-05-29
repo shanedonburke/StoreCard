@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
@@ -7,6 +9,8 @@ using System.Windows.Media;
 using StoreCard.Models.Items.Installed;
 using StoreCard.Properties;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.UserControls;
 
@@ -41,6 +45,8 @@ public partial class AppSelector : INotifyPropertyChanged
 
     public InstalledApp? SelectedApp => AppListBox.SelectedItem as InstalledApp;
 
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     public event RoutedEventHandler SaveButtonClick
     {
         add => AddHandler(SaveButtonClickEvent, value);
@@ -53,13 +59,9 @@ public partial class AppSelector : INotifyPropertyChanged
         remove => RemoveHandler(CancelButtonClickEvent, value);
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
     private void LoadApps()
     {
@@ -78,23 +80,14 @@ public partial class AppSelector : INotifyPropertyChanged
         OnPropertyChanged(nameof(SelectedAppIcon));
     }
 
-    private void AppListBox_ItemActivated(object sender, ItemActivatedEventArgs e)
-    {
+    private void AppListBox_ItemActivated(object sender, ItemActivatedEventArgs e) =>
         RaiseEvent(new RoutedEventArgs(SaveButtonClickEvent));
-    }
 
-    private void SaveButton_Click(object sender, RoutedEventArgs e)
-    {
+    private void SaveButton_Click(object sender, RoutedEventArgs e) =>
         RaiseEvent(new RoutedEventArgs(SaveButtonClickEvent));
-    }
 
-    private void CancelButton_Click(object sender, RoutedEventArgs e)
-    {
+    private void CancelButton_Click(object sender, RoutedEventArgs e) =>
         RaiseEvent(new RoutedEventArgs(CancelButtonClickEvent));
-    }
 
-    private void ApplicationSelector_Loaded(object sender, RoutedEventArgs e)
-    {
-        Task.Run(LoadApps);
-    }
+    private void ApplicationSelector_Loaded(object sender, RoutedEventArgs e) => Task.Run(LoadApps);
 }

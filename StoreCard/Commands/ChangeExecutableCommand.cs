@@ -1,5 +1,9 @@
-﻿using StoreCard.Models.Items.Saved.FileSystem;
+﻿#region
+
+using StoreCard.Models.Items.Saved.FileSystem;
 using StoreCard.Windows;
+
+#endregion
 
 namespace StoreCard.Commands;
 

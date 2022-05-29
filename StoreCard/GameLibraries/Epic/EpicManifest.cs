@@ -2,12 +2,12 @@
 
 public class EpicManifest
 {
-    public int FormatVersion;
-    public bool BIsIncompleteInstall;
-    public string LaunchExecutable;
-    public string DisplayName;
-    public string InstallLocation;
     public string AppName;
+    public bool BIsIncompleteInstall;
+    public string DisplayName;
+    public int FormatVersion;
+    public string InstallLocation;
+    public string LaunchExecutable;
 
     public EpicManifest(
         int formatVersion,

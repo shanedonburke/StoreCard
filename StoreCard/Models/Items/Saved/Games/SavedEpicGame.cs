@@ -1,9 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
 using Newtonsoft.Json;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Static;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.Models.Items.Saved.Games;
 
@@ -15,19 +19,15 @@ public sealed class SavedEpicGame : SavedGame
         string name,
         string base64Icon,
         string appName,
-        long lastOpened) : base(id, name, base64Icon, lastOpened)
-    {
+        long lastOpened) : base(id, name, base64Icon, lastOpened) =>
         AppName = appName;
-    }
 
     public SavedEpicGame(InstalledEpicGame game) : base(
         Guid.NewGuid().ToString(),
         game.Name,
         game.BitmapIcon?.ToBase64(),
-        TimeUtils.UnixTimeMillis)
-    {
+        TimeUtils.UnixTimeMillis) =>
         AppName = game.AppName;
-    }
 
     public string AppName { get; }
 
@@ -35,8 +35,6 @@ public sealed class SavedEpicGame : SavedGame
 
     public override string SecondaryText => GamePlatformNames.EpicGames;
 
-    protected override void OpenProtected()
-    {
-        Process.Start("CMD.exe", $"/c START com.epicgames.launcher://apps/{AppName}?action=launch&silent=true ");
-    }
+    protected override void OpenProtected() => Process.Start("CMD.exe",
+        $"/c START com.epicgames.launcher://apps/{AppName}?action=launch&silent=true ");
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Media.Imaging;
@@ -6,6 +8,8 @@ using Newtonsoft.Json;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Static;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.GameLibraries.Epic;
 

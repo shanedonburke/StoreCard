@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +9,8 @@ using StoreCard.Models;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Services;
 using StoreCard.Static;
+
+#endregion
 
 namespace StoreCard.Utils;
 
@@ -103,10 +107,8 @@ public class AppData
         return null;
     }
 
-    public static T? FindSavedItemById<T>(List<SavedItem> items, string id) where T : SavedItem
-    {
-        return items.FirstOrDefault(i => i.Id == id) as T;
-    }
+    public static T? FindSavedItemById<T>(List<SavedItem> items, string id) where T : SavedItem =>
+        items.FirstOrDefault(i => i.Id == id) as T;
 
     private static void SerializeObjectToFile(object objectToSave, string filePath)
     {

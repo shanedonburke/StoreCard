@@ -1,17 +1,20 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Windows;
 using System.Windows.Interop;
 using StoreCard.Models;
 using StoreCard.Native;
 using StoreCard.Utils;
 
+#endregion
+
 namespace StoreCard.Services;
 
 public sealed class HotKeyService
 {
-    public static readonly HotKeyService Instance = new();
-
     private const int HotKeyId = 9000;
+    public static readonly HotKeyService Instance = new();
 
     private Window? _registeredWindow;
 

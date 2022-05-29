@@ -1,10 +1,14 @@
-﻿using System.Drawing;
+﻿#region
+
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using StoreCard.Native;
+
+#endregion
 
 namespace StoreCard.Utils;
 

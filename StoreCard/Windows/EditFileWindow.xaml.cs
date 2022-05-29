@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -13,6 +15,8 @@ using StoreCard.Models.Items.Saved.FileSystem;
 using StoreCard.Properties;
 using StoreCard.Utils;
 
+#endregion
+
 namespace StoreCard.Windows;
 
 /// <summary>
@@ -20,6 +24,8 @@ namespace StoreCard.Windows;
 /// </summary>
 public sealed partial class EditFileWindow : INotifyPropertyChanged
 {
+    private SavedFileSystemItem _item;
+
     public EditFileWindow(SavedFileSystemItem item)
     {
         _item = item;
@@ -30,8 +36,6 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         PathBox.Text = item.ItemPath;
         NameBox.Text = item.Name;
     }
-
-    private SavedFileSystemItem _item;
 
     public bool ShouldEnableSavePathButton => PathBox.Text != _item.ItemPath && File.Exists(PathBox.Text);
 

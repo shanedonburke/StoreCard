@@ -2,13 +2,6 @@
 
 public sealed class ButlerListenNotification
 {
-    public sealed class TcpInfo
-    {
-        public readonly string Address;
-
-        public TcpInfo(string address) => Address = address;
-    }
-
     public readonly string Secret;
 
     public readonly TcpInfo Tcp;
@@ -23,5 +16,12 @@ public sealed class ButlerListenNotification
         Tcp = tcp;
         Time = time;
         Type = type;
+    }
+
+    public sealed class TcpInfo
+    {
+        public readonly string Address;
+
+        public TcpInfo(string address) => Address = address;
     }
 }

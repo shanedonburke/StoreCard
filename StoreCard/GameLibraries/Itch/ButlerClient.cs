@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Sockets;
@@ -7,47 +9,20 @@ using System.Threading;
 using Newtonsoft.Json;
 using StoreCard.Utils;
 
+#endregion
+
 namespace StoreCard.GameLibraries.Itch;
 
 public sealed class ButlerClient
 {
-    private static class Methods
-    {
-        public const string MetaAuthenticate = "Meta.Authenticate";
-
-        public const string FetchCaves = "Fetch.Caves";
-
-        public const string Launch = "Launch";
-    }
-
-    private sealed class AuthenticateResult
-    {
-        [JsonProperty("ok")] public readonly bool Ok;
-
-        public AuthenticateResult(bool ok)
-        {
-            Ok = ok;
-        }
-    }
-
-    private sealed class FetchCavesResult
-    {
-        [JsonProperty("items")] public List<ButlerCave> Items;
-
-        public FetchCavesResult(List<ButlerCave> items)
-        {
-            Items = items;
-        }
-    }
-
     private static readonly JsonSerializerSettings s_deserializeResponseSettings =
         new() {MissingMemberHandling = MissingMemberHandling.Ignore};
 
-    private readonly Socket _socket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+    private readonly string _dbPath = ButlerPaths.ButlerDatabase;
 
     private readonly string _execPath = ButlerPaths.ButlerExecutable!;
 
-    private readonly string _dbPath = ButlerPaths.ButlerDatabase;
+    private readonly Socket _socket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
     private string? _secret;
 
@@ -111,12 +86,10 @@ public sealed class ButlerClient
             Methods.MetaAuthenticate, parameters) != null;
     }
 
-    public List<ButlerCave>? FetchCaves()
-    {
-        return SendRequest<FetchCavesResult>(
+    public List<ButlerCave>? FetchCaves() =>
+        SendRequest<FetchCavesResult>(
             Methods.FetchCaves,
             new Dictionary<string, object>())?.Items;
-    }
 
     public void Launch(string caveId)
     {
@@ -165,5 +138,28 @@ public sealed class ButlerClient
             Logger.LogExceptionMessage("Failed to deserialize Butler response", e);
             return default;
         }
+    }
+
+    private static class Methods
+    {
+        public const string MetaAuthenticate = "Meta.Authenticate";
+
+        public const string FetchCaves = "Fetch.Caves";
+
+        public const string Launch = "Launch";
+    }
+
+    private sealed class AuthenticateResult
+    {
+        [JsonProperty("ok")] public readonly bool Ok;
+
+        public AuthenticateResult(bool ok) => Ok = ok;
+    }
+
+    private sealed class FetchCavesResult
+    {
+        [JsonProperty("items")] public List<ButlerCave> Items;
+
+        public FetchCavesResult(List<ButlerCave> items) => Items = items;
     }
 }

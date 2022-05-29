@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Media.Imaging;
+
+#endregion
 
 namespace StoreCard.Utils;
 

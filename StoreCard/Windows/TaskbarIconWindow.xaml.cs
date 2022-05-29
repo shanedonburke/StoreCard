@@ -1,10 +1,14 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using StoreCard.Commands;
 using StoreCard.Properties;
 using StoreCard.Services;
+
+#endregion
 
 namespace StoreCard.Windows;
 
@@ -13,12 +17,10 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class TaskbarIconWindow : INotifyPropertyChanged
 {
-    private static void OnHotKeyPressed()
-    {
-        new ShowSearchCommand().Execute();
-    }
+    private string _hotKeyText = string.Empty;
 
-    public TaskbarIconWindow() {
+    public TaskbarIconWindow()
+    {
         DataContext = this;
         InitializeComponent();
         TaskbarIcon.Icon = Properties.Resources.StoreCardIcon;
@@ -34,7 +36,9 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
         }
     }
 
-    private string _hotKeyText = string.Empty;
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private static void OnHotKeyPressed() => new ShowSearchCommand().Execute();
 
     protected override void OnSourceInitialized(EventArgs e)
     {
@@ -49,31 +53,15 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
         base.OnClosed(e);
     }
 
-    private void OnHotKeyRegistered(string hotKeyText)
-    {
-        HotKeyText = hotKeyText;
-    }
+    private void OnHotKeyRegistered(string hotKeyText) => HotKeyText = hotKeyText;
 
-    private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
-    {
-        new ShowSearchCommand().Execute();
-    }
+    private void OpenMenuItem_Click(object sender, RoutedEventArgs e) => new ShowSearchCommand().Execute();
 
-    private void ExitMenuItem_Click(object sender, RoutedEventArgs e)
-    {
-        Application.Current.Shutdown();
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
+    private void ExitMenuItem_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
 
     [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
-    private void TaskbarIcon_TrayLeftMouseUp(object sender, RoutedEventArgs e)
-    {
-        new ShowSearchCommand().Execute();
-    }
+    private void TaskbarIcon_TrayLeftMouseUp(object sender, RoutedEventArgs e) => new ShowSearchCommand().Execute();
 }

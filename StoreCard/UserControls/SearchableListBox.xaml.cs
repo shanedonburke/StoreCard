@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -9,6 +11,8 @@ using System.Windows.Input;
 using StoreCard.Models.Items;
 using StoreCard.Properties;
 
+#endregion
+
 namespace StoreCard.UserControls;
 
 /// <summary>
@@ -16,6 +20,8 @@ namespace StoreCard.UserControls;
 /// </summary>
 public partial class SearchableListBox : INotifyPropertyChanged
 {
+    public delegate void ItemActivatedEventHandler(object sender, ItemActivatedEventArgs e);
+
     public static readonly RoutedEvent ItemActivatedEvent = EventManager.RegisterRoutedEvent(
         nameof(ItemActivated),
         RoutingStrategy.Bubble,
@@ -28,17 +34,17 @@ public partial class SearchableListBox : INotifyPropertyChanged
         typeof(SelectionChangedEventHandler),
         typeof(SearchableListBox));
 
+    private readonly ObservableCollection<IListBoxItem> _filteredItems = new();
+
+    private bool _areItemsLoaded;
+
+    private List<IListBoxItem> _items = new();
+
     public SearchableListBox()
     {
         InitializeComponent();
         CustomListBox.ItemsSource = _filteredItems;
     }
-
-    private List<IListBoxItem> _items = new();
-
-    private readonly ObservableCollection<IListBoxItem> _filteredItems = new();
-
-    private bool _areItemsLoaded;
 
     public IEnumerable<IListBoxItem> ItemsSource
     {
@@ -69,7 +75,7 @@ public partial class SearchableListBox : INotifyPropertyChanged
         set => CustomListBox.SelectedIndex = value;
     }
 
-    public delegate void ItemActivatedEventHandler(object sender, ItemActivatedEventArgs e);
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public event ItemActivatedEventHandler ItemActivated
     {
@@ -83,10 +89,7 @@ public partial class SearchableListBox : INotifyPropertyChanged
         remove => RemoveHandler(SelectionChangedEvent, value);
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public void AddItem(IListBoxItem item)
-    {
+    public void AddItem(IListBoxItem item) =>
         Application.Current.Dispatcher.Invoke(() =>
         {
             _filteredItems.Add(item);
@@ -98,7 +101,6 @@ public partial class SearchableListBox : INotifyPropertyChanged
                 SelectedIndex = 0;
             }
         });
-    }
 
     public void FinishAddingItems()
     {
@@ -130,25 +132,16 @@ public partial class SearchableListBox : INotifyPropertyChanged
     }
 
     [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
-    private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        FilterItems();
-    }
+    private void SearchBox_TextChanged(object sender, TextChangedEventArgs e) => FilterItems();
 
-    private bool DoesItemNameStartWithSearchText(IListBoxItem item)
-    {
-        return item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper());
-    }
+    private bool DoesItemNameStartWithSearchText(IListBoxItem item) =>
+        item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper());
 
-    private bool DoesItemNameContainSearchText(IListBoxItem item)
-    {
-        return item.Name.ToUpper().Contains(SearchBox.Text.ToUpper());
-    }
+    private bool DoesItemNameContainSearchText(IListBoxItem item) =>
+        item.Name.ToUpper().Contains(SearchBox.Text.ToUpper());
 
     private void ActivateSelectedItem()
     {
@@ -166,7 +159,11 @@ public partial class SearchableListBox : INotifyPropertyChanged
         switch (e.Key)
         {
             case Key.Up:
-                if (!CustomListBox.ItemsSource.Any()) return;
+                if (!CustomListBox.ItemsSource.Any())
+                {
+                    return;
+                }
+
                 CustomListBox.SelectedIndex = CustomListBox.SelectedIndex switch
                 {
                     0 => CustomListBox.ItemsSource.Count() - 1,
@@ -197,20 +194,12 @@ public partial class SearchableListBox : INotifyPropertyChanged
         }
     }
 
-    private void CustomListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
+    private void CustomListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
         RaiseEvent(new SelectionChangedEventArgs(SelectionChangedEvent, e.RemovedItems, e.AddedItems));
-    }
 
-    private void SearchBox_KeyUp(object sender, KeyEventArgs e)
-    {
-        HandleKeyUpEvent(e);
-    }
+    private void SearchBox_KeyUp(object sender, KeyEventArgs e) => HandleKeyUpEvent(e);
 
-    private void CustomListBox_KeyUp(object sender, KeyEventArgs e)
-    {
-        HandleKeyUpEvent(e);
-    }
+    private void CustomListBox_KeyUp(object sender, KeyEventArgs e) => HandleKeyUpEvent(e);
 
     private void HandleKeyUpEvent(KeyEventArgs e)
     {
@@ -226,10 +215,7 @@ public partial class SearchableListBox : INotifyPropertyChanged
 
 public sealed class ItemActivatedEventArgs : RoutedEventArgs
 {
-    public ItemActivatedEventArgs(IListBoxItem item)
-    {
-        Item = item;
-    }
-
     public IListBoxItem Item;
+
+    public ItemActivatedEventArgs(IListBoxItem item) => Item = item;
 }

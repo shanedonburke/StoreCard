@@ -1,6 +1,10 @@
-﻿using System.IO;
+﻿#region
+
+using System.IO;
 using System.Linq;
 using StoreCard.Static;
+
+#endregion
 
 namespace StoreCard.GameLibraries.Itch;
 

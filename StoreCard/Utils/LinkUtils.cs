@@ -1,9 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Media.Imaging;
+
+#endregion
 
 namespace StoreCard.Utils;
 

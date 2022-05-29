@@ -7,18 +7,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                    Source="ResourceDictionaries/Themes/Lake (Dark).xaml" />
-                <ResourceDictionary
-                    Source="ResourceDictionaries/Fonts.xaml" />
-                <ResourceDictionary
-                    Source="ResourceDictionaries/Converters.xaml" />
-                <ResourceDictionary
-                    Source="ResourceDictionaries/DefaultControls/DefaultControls.xaml" />
-                <ResourceDictionary
-                    Source="ResourceDictionaries/CustomControls/CustomControls.xaml" />
-                <ResourceDictionary
-                    Source="ResourceDictionaries/FocusVisual.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Themes/Lake (Dark).xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Fonts.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Converters.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/DefaultControls/DefaultControls.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/CustomControls/CustomControls.xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/FocusVisual.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

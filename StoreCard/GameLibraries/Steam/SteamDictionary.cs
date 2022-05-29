@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
+
+#endregion
 
 namespace StoreCard.GameLibraries.Steam;
 
@@ -11,9 +15,9 @@ public sealed class SteamDictionary
 
     private static readonly Regex s_closeChildRegex = new(@"^\s*}\s*$");
 
-    private readonly Dictionary<string, string> _pairs = new();
-
     private readonly Dictionary<string, SteamDictionary> _children = new();
+
+    private readonly Dictionary<string, string> _pairs = new();
 
     public IReadOnlyDictionary<string, string> Pairs => _pairs;
 
@@ -70,13 +74,7 @@ public sealed class SteamDictionary
         return root;
     }
 
-    public void AddPair(string key, string value)
-    {
-        _pairs[key] = value;
-    }
+    public void AddPair(string key, string value) => _pairs[key] = value;
 
-    public void AddChild(string key, SteamDictionary child)
-    {
-        _children[key] = child;
-    }
+    public void AddChild(string key, SteamDictionary child) => _children[key] = child;
 }

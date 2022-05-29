@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -20,6 +22,8 @@ using StoreCard.Properties;
 using StoreCard.UserControls;
 using StoreCard.Utils;
 
+#endregion
+
 namespace StoreCard.Windows;
 
 /// <summary>
@@ -27,6 +31,12 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class AddAppWindow : INotifyPropertyChanged
 {
+    private bool _doesExecutableExist;
+
+    private ImageSource? _executableIcon;
+
+    private string _executableName = string.Empty;
+
     public AddAppWindow()
     {
         InitializeComponent();
@@ -69,24 +79,13 @@ public partial class AddAppWindow : INotifyPropertyChanged
 
     public ImageSource? SelectedGameIcon => (GameListBox.SelectedItem as InstalledGame)?.BitmapIcon;
 
-    private bool _doesExecutableExist;
-
-    private ImageSource? _executableIcon;
-
-    private string _executableName = string.Empty;
-
     public event PropertyChangedEventHandler? PropertyChanged;
 
     [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
-    private void SaveGameButton_Click(object sender, RoutedEventArgs e)
-    {
-        SaveSelectedGameAndClose();
-    }
+    private void SaveGameButton_Click(object sender, RoutedEventArgs e) => SaveSelectedGameAndClose();
 
     private void SaveSelectedAppAndClose()
     {
@@ -148,20 +147,17 @@ public partial class AddAppWindow : INotifyPropertyChanged
         Task.Run(LoadGames);
     }
 
-    private void Window_Closed(object sender, EventArgs e)
-    {
-        new ShowSearchCommand().Execute();
-    }
+    private void Window_Closed(object sender, EventArgs e) => new ShowSearchCommand().Execute();
 
     private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Escape) Close();
+        if (e.Key == Key.Escape)
+        {
+            Close();
+        }
     }
 
-    private void CancelButton_Click(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
+    private void CancelButton_Click(object sender, RoutedEventArgs e) => Close();
 
     private void GameListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -176,18 +172,9 @@ public partial class AddAppWindow : INotifyPropertyChanged
         e.Handled = true;
     }
 
-    private void ExecutableSelector_Finished(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
+    private void ExecutableSelector_Finished(object sender, RoutedEventArgs e) => Close();
 
-    private void AppSelector_SaveButtonClick(object sender, RoutedEventArgs e)
-    {
-        SaveSelectedAppAndClose();
-    }
+    private void AppSelector_SaveButtonClick(object sender, RoutedEventArgs e) => SaveSelectedAppAndClose();
 
-    private void AppSelector_CancelButtonClick(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
+    private void AppSelector_CancelButtonClick(object sender, RoutedEventArgs e) => Close();
 }

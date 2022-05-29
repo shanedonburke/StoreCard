@@ -1,28 +1,14 @@
-﻿using Microsoft.Win32;
+﻿#region
+
+using Microsoft.Win32;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.GameLibraries.Ea;
 
 public sealed class EaLaunchers
 {
-    public sealed class Launcher
-    {
-        public readonly string DisplayName;
-        public readonly string ProcessName;
-        public readonly string? LauncherPath;
-
-        public Launcher(string displayName, string processName, string? launcherPath)
-        {
-            DisplayName = displayName;
-            ProcessName = processName;
-            LauncherPath = launcherPath;
-        }
-
-        public bool IsInstalled => LauncherPath != null;
-
-        public bool IsRunning => ProcessUtils.IsProcessWithNameRunning(ProcessName);
-    }
-
     public static Launcher Desktop = new(
         "EA Desktop",
         "EADesktop",
@@ -65,5 +51,23 @@ public sealed class EaLaunchers
         }
 
         return Origin.IsInstalled ? Origin : null;
+    }
+
+    public sealed class Launcher
+    {
+        public readonly string DisplayName;
+        public readonly string? LauncherPath;
+        public readonly string ProcessName;
+
+        public Launcher(string displayName, string processName, string? launcherPath)
+        {
+            DisplayName = displayName;
+            ProcessName = processName;
+            LauncherPath = launcherPath;
+        }
+
+        public bool IsInstalled => LauncherPath != null;
+
+        public bool IsRunning => ProcessUtils.IsProcessWithNameRunning(ProcessName);
     }
 }

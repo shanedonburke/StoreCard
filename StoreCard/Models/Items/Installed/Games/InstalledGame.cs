@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Windows.Media.Imaging;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Static;
+
+#endregion
 
 namespace StoreCard.Models.Items.Installed.Games;
 
@@ -13,6 +17,8 @@ public abstract class InstalledGame : IListBoxItem
         BitmapIcon = bitmapIcon;
     }
 
+    public abstract SavedItem SavedItem { get; }
+
     public virtual string SecondaryText => string.Empty;
 
     public string Name { get; }
@@ -21,10 +27,5 @@ public abstract class InstalledGame : IListBoxItem
 
     public BitmapSource PrefixIcon => Icons.GameIcon;
 
-    public abstract SavedItem SavedItem { get; }
-
-    public int CompareTo(IListBoxItem? other)
-    {
-        return string.Compare(Name, other?.Name, StringComparison.Ordinal);
-    }
+    public int CompareTo(IListBoxItem? other) => string.Compare(Name, other?.Name, StringComparison.Ordinal);
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -12,6 +14,8 @@ using StoreCard.Models.Items.Saved;
 using StoreCard.Models.Items.Saved.FileSystem;
 using StoreCard.Properties;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.Windows;
 

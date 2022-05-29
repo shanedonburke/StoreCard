@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region
+
+using System;
 using Microsoft.Win32;
+
+#endregion
 
 namespace StoreCard.Utils;
 
@@ -44,7 +48,8 @@ public class BrowserUtils
         }
         catch
         {
-            Logger.Log("Failed to get the default browser's executable path. The registry value may be set incorrectly.");
+            Logger.Log(
+                "Failed to get the default browser's executable path. The registry value may be set incorrectly.");
         }
 
         return executable;

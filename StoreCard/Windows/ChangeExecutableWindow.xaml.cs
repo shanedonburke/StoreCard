@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
@@ -11,6 +13,8 @@ using StoreCard.Commands;
 using StoreCard.Models.Items.Saved.FileSystem;
 using StoreCard.Properties;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.Windows;
 
@@ -28,6 +32,13 @@ public partial class ChangeExecutableWindow : INotifyPropertyChanged
     private string _executableName = string.Empty;
 
     private bool _isDialog;
+
+    public ChangeExecutableWindow(SavedFileSystemItem item)
+    {
+        _item = item;
+        InitializeComponent();
+        DataContext = this;
+    }
 
     public string ExecutableName
     {
@@ -59,13 +70,6 @@ public partial class ChangeExecutableWindow : INotifyPropertyChanged
         }
     }
 
-    public ChangeExecutableWindow(SavedFileSystemItem item)
-    {
-        _item = item;
-        InitializeComponent();
-        DataContext = this;
-    }
-
     public event PropertyChangedEventHandler? PropertyChanged;
 
     public new bool? ShowDialog()
@@ -91,10 +95,8 @@ public partial class ChangeExecutableWindow : INotifyPropertyChanged
     }
 
     [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
     private void SaveExecutableButton_Click(object sender, RoutedEventArgs e)
     {
@@ -158,15 +160,9 @@ public partial class ChangeExecutableWindow : INotifyPropertyChanged
         }
     }
 
-    private void AppSelector_SaveButtonClick(object sender, RoutedEventArgs e)
-    {
-        SaveSelectedAppAndClose();
-    }
+    private void AppSelector_SaveButtonClick(object sender, RoutedEventArgs e) => SaveSelectedAppAndClose();
 
-    private void AppSelector_CancelButtonClick(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
+    private void AppSelector_CancelButtonClick(object sender, RoutedEventArgs e) => Close();
 
     private void Window_Closed(object? sender, EventArgs e)
     {

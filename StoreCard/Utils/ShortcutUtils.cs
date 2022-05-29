@@ -1,9 +1,13 @@
-﻿using System.IO;
+﻿#region
+
+using System.IO;
 using System.Windows.Forms;
 using IWshRuntimeLibrary;
 using Microsoft.Win32;
 using StoreCard.Static;
 using File = System.IO.File;
+
+#endregion
 
 namespace StoreCard.Utils;
 
@@ -11,10 +15,8 @@ public class ShortcutUtils
 {
     private static string StartupShortcutPath => Path.Join(FolderPaths.Startup, "StoreCard.lnk");
 
-    public static void CreateStartupShortcut()
-    {
+    public static void CreateStartupShortcut() =>
         CreateShortcut(FolderPaths.Startup, CommandLineOptions.StartMinimized);
-    }
 
     public static void RemoveStartupShortcut()
     {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -7,6 +9,8 @@ using System.Windows.Input;
 using StoreCard.Models;
 using StoreCard.Models.Items;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.UserControls;
 
@@ -120,6 +124,20 @@ public partial class StoreCardListBox
         set => SetValue(ActionButtonTextProperty, value);
     }
 
+    public int SelectedIndex
+    {
+        get => CustomListBox.SelectedIndex;
+        set => CustomListBox.SelectedIndex = value;
+    }
+
+    public object SelectedItem
+    {
+        get => CustomListBox.SelectedItem;
+        set => CustomListBox.SelectedItem = value;
+    }
+
+    public bool ShouldShowPrefixIcons => _userConfig.ShouldShowPrefixIcons;
+
     public event MouseButtonEventHandler ItemDoubleClick
     {
         add => AddHandler(ItemDoubleClickEvent, value);
@@ -150,24 +168,7 @@ public partial class StoreCardListBox
         remove => RemoveHandler(SelectionChangedEvent, value);
     }
 
-    public int SelectedIndex
-    {
-        get => CustomListBox.SelectedIndex;
-        set => CustomListBox.SelectedIndex = value;
-    }
-
-    public object SelectedItem
-    {
-        get => CustomListBox.SelectedItem;
-        set => CustomListBox.SelectedItem = value;
-    }
-
-    public bool ShouldShowPrefixIcons => _userConfig.ShouldShowPrefixIcons;
-
-    public void ScrollIntoView(object item)
-    {
-        CustomListBox.ScrollIntoView(item);
-    }
+    public void ScrollIntoView(object item) => CustomListBox.ScrollIntoView(item);
 
     private void Item_MouseDown(object sender, MouseButtonEventArgs e)
     {
@@ -180,29 +181,21 @@ public partial class StoreCardListBox
         }
     }
 
-    private void CustomListBox_PreviewKeyDown(object sender, KeyEventArgs e)
-    {
+    private void CustomListBox_PreviewKeyDown(object sender, KeyEventArgs e) =>
         RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key)
         {
             RoutedEvent = PreviewKeyDownEvent
         });
-    }
 
-    private void ActionButton_Click(object sender, RoutedEventArgs e)
-    {
+    private void ActionButton_Click(object sender, RoutedEventArgs e) =>
         RaiseEvent(new RoutedEventArgs(ActionButtonClickEvent));
-    }
 
-    private void CustomListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
+    private void CustomListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
         RaiseEvent(new SelectionChangedEventArgs(SelectionChangedEvent, e.RemovedItems, e.AddedItems));
-    }
 
-    private void CustomListBox_KeyUp(object sender, KeyEventArgs e)
-    {
+    private void CustomListBox_KeyUp(object sender, KeyEventArgs e) =>
         RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key)
         {
             RoutedEvent = KeyUpEvent
         });
-    }
 }

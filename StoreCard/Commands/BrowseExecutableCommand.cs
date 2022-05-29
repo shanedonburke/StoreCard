@@ -1,9 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using Microsoft.Win32;
+
+#endregion
 
 namespace StoreCard.Commands;
 
-class BrowseExecutableCommand : IStoreCardCommand<string?>
+internal class BrowseExecutableCommand : IStoreCardCommand<string?>
 {
     public string? Execute()
     {
@@ -17,5 +21,4 @@ class BrowseExecutableCommand : IStoreCardCommand<string?>
 
         return dialog.ShowDialog() == true ? dialog.FileName : null;
     }
-
 }

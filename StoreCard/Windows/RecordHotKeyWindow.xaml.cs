@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
@@ -6,7 +8,8 @@ using System.Windows.Input;
 using StoreCard.Models;
 using StoreCard.Properties;
 using StoreCard.Utils;
-using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+
+#endregion
 
 namespace StoreCard.Windows;
 
@@ -16,9 +19,17 @@ namespace StoreCard.Windows;
 public partial class RecordHotKeyWindow : INotifyPropertyChanged
 {
     private readonly UserConfig _config;
+    private string _hotKeyText = string.Empty;
     private uint _modifiers;
     private uint _virtualKey;
-    private string _hotKeyText = string.Empty;
+
+    public RecordHotKeyWindow()
+    {
+        InitializeComponent();
+        _config = AppData.ReadConfigFromFile();
+        HotKeyText = HotKeyUtils.KeyStringFromConfig(_config);
+        DataContext = this;
+    }
 
     public string HotKeyText
     {
@@ -30,13 +41,7 @@ public partial class RecordHotKeyWindow : INotifyPropertyChanged
         }
     }
 
-    public RecordHotKeyWindow()
-    {
-        InitializeComponent();
-        _config = AppData.ReadConfigFromFile();
-        HotKeyText = HotKeyUtils.KeyStringFromConfig(_config);
-        DataContext = this;
-    }
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     private void RecordHotKeyWindow_PreviewKeyDown(object sender, KeyEventArgs e)
     {
@@ -91,18 +96,12 @@ public partial class RecordHotKeyWindow : INotifyPropertyChanged
         HotKeyText = text.ToString();
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
-    private void ClearButton_Click(object sender, RoutedEventArgs e)
-    {
+    private void ClearButton_Click(object sender, RoutedEventArgs e) =>
         HotKeyText = HotKeyUtils.KeyStringFromConfig(_config);
-    }
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {

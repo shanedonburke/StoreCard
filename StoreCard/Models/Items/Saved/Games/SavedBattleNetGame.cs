@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -7,7 +9,8 @@ using StoreCard.GameLibraries.BattleNet;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Services;
 using StoreCard.Utils;
-using File = System.IO.File;
+
+#endregion
 
 namespace StoreCard.Models.Items.Saved.Games;
 
@@ -17,10 +20,8 @@ public sealed class SavedBattleNetGame : SavedGame
 
     [JsonConstructor]
     public SavedBattleNetGame(string id, string name, string? base64Icon, long lastOpened, string gameId)
-        : base(id, name, base64Icon, lastOpened)
-    {
+        : base(id, name, base64Icon, lastOpened) =>
         GameId = gameId;
-    }
 
     public SavedBattleNetGame(InstalledBattleNetGame game) : this(
         Guid.NewGuid().ToString(),

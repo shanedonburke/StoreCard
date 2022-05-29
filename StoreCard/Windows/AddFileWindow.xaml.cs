@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -14,6 +16,8 @@ using StoreCard.Models.Items.Saved.FileSystem;
 using StoreCard.Properties;
 using StoreCard.Utils;
 
+#endregion
+
 namespace StoreCard.Windows;
 
 /// <summary>
@@ -28,6 +32,12 @@ public partial class AddFileWindow : INotifyPropertyChanged
     private ImageSource? _fileIcon;
 
     private ImageSource? _folderIcon;
+
+    public AddFileWindow()
+    {
+        InitializeComponent();
+        DataContext = this;
+    }
 
     public string FileName => FilePathBox.Text.Split(@"\").Last();
 
@@ -75,17 +85,9 @@ public partial class AddFileWindow : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public AddFileWindow()
-    {
-        InitializeComponent();
-        DataContext = this;
-    }
-
     [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
     private void BrowseFileButton_Click(object sender, RoutedEventArgs e)
     {
@@ -105,7 +107,7 @@ public partial class AddFileWindow : INotifyPropertyChanged
 
     private void SaveFileButton_Click(object sender, RoutedEventArgs e)
     {
-        string? base64Icon = FileIcon != null ? ImageUtils.ImageToBase64((BitmapSource) FileIcon) : null;
+        string? base64Icon = FileIcon != null ? ImageUtils.ImageToBase64((BitmapSource)FileIcon) : null;
 
         List<SavedItem> savedItems = AppData.ReadItemsFromFile();
 
@@ -123,7 +125,7 @@ public partial class AddFileWindow : INotifyPropertyChanged
 
     private void SaveFolderButton_Click(object sender, RoutedEventArgs e)
     {
-        string? base64Icon = FolderIcon != null ? ImageUtils.ImageToBase64((BitmapSource) FolderIcon) : null;
+        string? base64Icon = FolderIcon != null ? ImageUtils.ImageToBase64((BitmapSource)FolderIcon) : null;
 
         List<SavedItem> savedItems = AppData.ReadItemsFromFile();
 
@@ -139,15 +141,9 @@ public partial class AddFileWindow : INotifyPropertyChanged
         Close();
     }
 
-    private void Window_Closed(object? sender, EventArgs e)
-    {
-        new ShowSearchCommand().Execute();
-    }
+    private void Window_Closed(object? sender, EventArgs e) => new ShowSearchCommand().Execute();
 
-    private void CancelButton_Click(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
+    private void CancelButton_Click(object sender, RoutedEventArgs e) => Close();
 
     private void FilePathBox_TextChanged(object sender, TextChangedEventArgs e)
     {

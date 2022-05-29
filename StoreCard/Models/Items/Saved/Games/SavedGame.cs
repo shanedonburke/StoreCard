@@ -1,5 +1,9 @@
-﻿using System.Windows.Media.Imaging;
+﻿#region
+
+using System.Windows.Media.Imaging;
 using StoreCard.Static;
+
+#endregion
 
 namespace StoreCard.Models.Items.Saved.Games;
 

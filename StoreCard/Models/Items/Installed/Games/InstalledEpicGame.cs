@@ -1,7 +1,11 @@
-﻿using System.Windows.Media.Imaging;
+﻿#region
+
+using System.Windows.Media.Imaging;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Models.Items.Saved.Games;
 using StoreCard.Static;
+
+#endregion
 
 namespace StoreCard.Models.Items.Installed.Games;
 
@@ -9,10 +13,8 @@ public sealed class InstalledEpicGame : InstalledGame
 {
     public readonly string AppName;
 
-    public InstalledEpicGame(string name, BitmapSource bitmapIcon, string appName) : base(name, bitmapIcon)
-    {
+    public InstalledEpicGame(string name, BitmapSource bitmapIcon, string appName) : base(name, bitmapIcon) =>
         AppName = appName;
-    }
 
     public override string SecondaryText => GamePlatformNames.EpicGames;
 

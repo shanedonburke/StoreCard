@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿#region
+
+using System.Windows;
 using System.Windows.Media;
+
+#endregion
 
 namespace StoreCard.UserControls;
 
@@ -46,22 +50,11 @@ public partial class StoreCardButton
         typeof(RoutedEventHandler),
         typeof(StoreCardButton));
 
-    static StoreCardButton()
-    {
+    static StoreCardButton() =>
         // Button is a tab stop unless overriden with IsTabStop="False"
         IsTabStopProperty.OverrideMetadata(typeof(StoreCardButton), new FrameworkPropertyMetadata(true));
-    }
 
-    public StoreCardButton()
-    {
-        InitializeComponent();
-    }
-
-    public event RoutedEventHandler Click
-    {
-        add => AddHandler(ClickEvent, value);
-        remove => RemoveHandler(ClickEvent, value);
-    }
+    public StoreCardButton() => InitializeComponent();
 
     public new bool IsEnabled
     {
@@ -99,8 +92,12 @@ public partial class StoreCardButton
         set => SetValue(PressedBackgroundBrushProperty, value);
     }
 
-    private void CustomButton_Click(object sender, RoutedEventArgs e)
+    public event RoutedEventHandler Click
     {
-        RaiseEvent(new RoutedEventArgs(ClickEvent) {RoutedEvent = ClickEvent});
+        add => AddHandler(ClickEvent, value);
+        remove => RemoveHandler(ClickEvent, value);
     }
+
+    private void CustomButton_Click(object sender, RoutedEventArgs e) =>
+        RaiseEvent(new RoutedEventArgs(ClickEvent) {RoutedEvent = ClickEvent});
 }

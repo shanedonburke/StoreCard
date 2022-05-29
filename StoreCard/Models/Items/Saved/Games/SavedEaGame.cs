@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
 using System.Windows;
 using Newtonsoft.Json;
@@ -8,6 +10,8 @@ using StoreCard.Services;
 using StoreCard.Static;
 using StoreCard.Utils;
 
+#endregion
+
 namespace StoreCard.Models.Items.Saved.Games;
 
 public sealed class SavedEaGame : SavedGame
@@ -15,10 +19,8 @@ public sealed class SavedEaGame : SavedGame
     public readonly string AppId;
 
     [JsonConstructor]
-    public SavedEaGame(string id, string name, long lastOpened, string appId) : base(id, name, null, lastOpened)
-    {
+    public SavedEaGame(string id, string name, long lastOpened, string appId) : base(id, name, null, lastOpened) =>
         AppId = appId;
-    }
 
     public SavedEaGame(InstalledEaGame game) : this(
         Guid.NewGuid().ToString(),

@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.GameLibraries.Steam;
 

@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media.Imaging;
+
+#endregion
 
 namespace StoreCard.Utils;
 
@@ -16,10 +20,7 @@ public static class Extensions
         window.Focus();
     }
 
-    public static string ToBase64(this BitmapSource bitmap)
-    {
-        return ImageUtils.ImageToBase64(bitmap);
-    }
+    public static string ToBase64(this BitmapSource bitmap) => ImageUtils.ImageToBase64(bitmap);
 
     public static void Deconstruct<T>(this IEnumerable<T> seq, out T? first, out IEnumerable<T> rest)
     {

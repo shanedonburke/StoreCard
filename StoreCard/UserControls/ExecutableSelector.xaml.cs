@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -11,6 +13,8 @@ using StoreCard.Commands;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.UserControls;
 
@@ -27,24 +31,16 @@ public partial class ExecutableSelector : INotifyPropertyChanged
 
     private SavedExecutable? _executable;
 
-    private bool _isExecutableValid;
-
     private ImageSource? _executableIcon;
 
     private string _executableName = string.Empty;
+
+    private bool _isExecutableValid;
 
     public ExecutableSelector()
     {
         DataContext = this;
         InitializeComponent();
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public event RoutedEventHandler Finished
-    {
-        add => AddHandler(FinishedEvent, value);
-        remove => RemoveHandler(FinishedEvent, value);
     }
 
     public string ExecutableName
@@ -99,11 +95,17 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         }
     }
 
-    [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public event RoutedEventHandler Finished
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        add => AddHandler(FinishedEvent, value);
+        remove => RemoveHandler(FinishedEvent, value);
     }
+
+    [NotifyPropertyChangedInvocator]
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     private void PathBox_TextChanged(object sender, TextChangedEventArgs e)
     {
@@ -126,10 +128,7 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         }
     }
 
-    private void NameBox_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        ExecutableName = NameBox.Text;
-    }
+    private void NameBox_TextChanged(object sender, TextChangedEventArgs e) => ExecutableName = NameBox.Text;
 
     private void BrowseButton_Click(object sender, RoutedEventArgs e)
     {
@@ -156,10 +155,7 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         Finish();
     }
 
-    private void CancelButton_Click(object sender, RoutedEventArgs e)
-    {
-        Finish();
-    }
+    private void CancelButton_Click(object sender, RoutedEventArgs e) => Finish();
 
     private void DeleteButton_Click(object sender, RoutedEventArgs e)
     {
@@ -175,8 +171,5 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         Finish();
     }
 
-    private void Finish()
-    {
-        RaiseEvent(new RoutedEventArgs(FinishedEvent));
-    }
+    private void Finish() => RaiseEvent(new RoutedEventArgs(FinishedEvent));
 }

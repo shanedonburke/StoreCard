@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -8,6 +10,8 @@ using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Services;
 using StoreCard.Static;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.Models.Items.Saved.Games;
 
@@ -19,20 +23,16 @@ public sealed class SavedSteamGame : SavedGame
         string name,
         string base64Icon,
         string appId,
-        long lastOpened) : base(id, name, base64Icon, lastOpened)
-    {
+        long lastOpened) : base(id, name, base64Icon, lastOpened) =>
         AppId = appId;
-    }
 
     public SavedSteamGame(InstalledSteamGame game) : base(
         Guid.NewGuid().ToString(),
         game.Name,
         game.BitmapIcon?.ToBase64(),
         TimeUtils.UnixTimeMillis
-    )
-    {
+    ) =>
         AppId = game.AppId;
-    }
 
     public string AppId { get; }
 

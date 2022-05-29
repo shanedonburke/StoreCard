@@ -1,4 +1,8 @@
-﻿using StoreCard.Windows;
+﻿#region
+
+using StoreCard.Windows;
+
+#endregion
 
 namespace StoreCard.Commands;
 

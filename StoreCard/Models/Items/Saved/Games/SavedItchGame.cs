@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Windows;
 using Newtonsoft.Json;
 using StoreCard.GameLibraries.Itch;
@@ -6,6 +8,8 @@ using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Services;
 using StoreCard.Static;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.Models.Items.Saved.Games;
 
@@ -20,10 +24,8 @@ public sealed class SavedItchGame : SavedGame
         string? base64Icon,
         long lastOpened,
         string caveId)
-        : base(id, name, base64Icon, lastOpened)
-    {
+        : base(id, name, base64Icon, lastOpened) =>
         CaveId = caveId;
-    }
 
     public SavedItchGame(InstalledItchGame game) : this(
         Guid.NewGuid().ToString(),

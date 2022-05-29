@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -11,6 +13,8 @@ using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
 using StoreCard.Static;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.UserControls;
 
@@ -25,11 +29,11 @@ public partial class LinkSelector : INotifyPropertyChanged
         typeof(RoutedEventHandler),
         typeof(LinkSelector));
 
+    private ImageSource? _favicon;
+
     private SavedLink? _link;
 
     private string _linkTitle = string.Empty;
-
-    private ImageSource? _favicon;
 
     public LinkSelector()
     {
@@ -89,19 +93,17 @@ public partial class LinkSelector : INotifyPropertyChanged
 
     public bool ShouldEnableSaveButton => UrlBox.Text != string.Empty && LinkTitle != string.Empty;
 
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     public event RoutedEventHandler Finished
     {
         add => AddHandler(FinishedEvent, value);
         remove => RemoveHandler(FinishedEvent, value);
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
     private async void GetWebsiteDetails()
     {
@@ -133,10 +135,7 @@ public partial class LinkSelector : INotifyPropertyChanged
         Finish();
     }
 
-    private void CancelButton_Click(object sender, RoutedEventArgs e)
-    {
-        Finish();
-    }
+    private void CancelButton_Click(object sender, RoutedEventArgs e) => Finish();
 
     private void UrlBox_TextChanged(object sender, TextChangedEventArgs e)
     {
@@ -144,15 +143,9 @@ public partial class LinkSelector : INotifyPropertyChanged
         GetWebsiteDetails();
     }
 
-    private void LinkTitleBox_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        LinkTitle = LinkTitleBox.Text;
-    }
+    private void LinkTitleBox_TextChanged(object sender, TextChangedEventArgs e) => LinkTitle = LinkTitleBox.Text;
 
-    private void Finish()
-    {
-        RaiseEvent(new RoutedEventArgs(FinishedEvent));
-    }
+    private void Finish() => RaiseEvent(new RoutedEventArgs(FinishedEvent));
 
     private void DeleteButton_Click(object sender, RoutedEventArgs e)
     {

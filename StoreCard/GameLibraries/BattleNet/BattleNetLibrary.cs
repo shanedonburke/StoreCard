@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Microsoft.Win32;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.GameLibraries.BattleNet;
 

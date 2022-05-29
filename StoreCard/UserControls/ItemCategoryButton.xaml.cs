@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿#region
+
+using System.Windows;
 using StoreCard.Models.Items.Saved;
+
+#endregion
 
 namespace StoreCard.UserControls;
 
@@ -35,12 +39,6 @@ public partial class ItemCategoryButton
         InitializeComponent();
     }
 
-    public event RoutedEventHandler Click
-    {
-        add => AddHandler(ClickEvent, value);
-        remove => RemoveHandler(ClickEvent, value);
-    }
-
     public string CategoryName
     {
         get => (string)GetValue(CategoryNameProperty);
@@ -59,8 +57,12 @@ public partial class ItemCategoryButton
         set => SetValue(TextProperty, value);
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    public event RoutedEventHandler Click
     {
-        RaiseEvent(new RoutedEventArgs(ClickEvent) {RoutedEvent = ClickEvent});
+        add => AddHandler(ClickEvent, value);
+        remove => RemoveHandler(ClickEvent, value);
     }
+
+    private void Button_Click(object sender, RoutedEventArgs e) =>
+        RaiseEvent(new RoutedEventArgs(ClickEvent) {RoutedEvent = ClickEvent});
 }

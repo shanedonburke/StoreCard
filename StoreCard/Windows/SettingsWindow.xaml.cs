@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -8,6 +10,8 @@ using StoreCard.Commands;
 using StoreCard.Models;
 using StoreCard.Properties;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.Windows;
 
@@ -36,6 +40,8 @@ public partial class SettingsWindow : INotifyPropertyChanged
 
     public bool IsStartupShortcutDisabled => ShortcutUtils.IsStartupShortcutEnabled() == false;
 
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     private void SettingsWindow_Closed(object? sender, EventArgs e)
     {
         AppData.SaveConfigToFile(_userConfig);
@@ -45,18 +51,18 @@ public partial class SettingsWindow : INotifyPropertyChanged
 
     private void RecordHotKeyButton_Click(object sender, RoutedEventArgs e)
     {
-        if (new RecordHotKeyWindow().ShowDialog() != true) return;
+        if (new RecordHotKeyWindow().ShowDialog() != true)
+        {
+            return;
+        }
+
         _userConfig = AppData.ReadConfigFromFile();
         OnPropertyChanged(nameof(HotKeyText));
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
     private void RunOnStartupCheckBox_Checked(object sender, RoutedEventArgs e)
     {

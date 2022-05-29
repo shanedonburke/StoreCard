@@ -1,8 +1,12 @@
-﻿using System.IO;
+﻿#region
+
+using System.IO;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using StoreCard.Static;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.Models.Items.Saved.FileSystem;
 
@@ -26,13 +30,7 @@ public class SavedFolder : SavedFileSystemItem
 
     public override string SecondaryText => ItemCategory.Folder.ToString();
 
-    public override bool Exists()
-    {
-        return Directory.Exists(ItemPath);
-    }
+    public override bool Exists() => Directory.Exists(ItemPath);
 
-    protected override ImageSource GetSystemIcon()
-    {
-        return IconUtils.GetFolderIconByPath(ItemPath);
-    }
+    protected override ImageSource GetSystemIcon() => IconUtils.GetFolderIconByPath(ItemPath);
 }

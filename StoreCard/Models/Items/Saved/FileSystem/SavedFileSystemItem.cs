@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -8,13 +10,13 @@ using StoreCard.Commands;
 using StoreCard.Static;
 using StoreCard.Utils;
 
+#endregion
+
 namespace StoreCard.Models.Items.Saved.FileSystem;
 
 public abstract class SavedFileSystemItem : SavedItem
 {
     public static readonly string DefaultExecutable = Path.Combine(FolderPaths.Windows, "explorer.exe");
-
-    public string ExecutablePath { get; private set; }
 
     private string _itemItemPath;
 
@@ -30,6 +32,8 @@ public abstract class SavedFileSystemItem : SavedItem
         _itemItemPath = itemItemPath;
         ExecutablePath = executablePath;
     }
+
+    public string ExecutablePath { get; private set; }
 
     public string ItemPath
     {
@@ -47,10 +51,7 @@ public abstract class SavedFileSystemItem : SavedItem
 
     public abstract bool Exists();
 
-    public void SetExecutablePath(string path)
-    {
-        ExecutablePath = path.StartsWith("::") ? DefaultExecutable : path;
-    }
+    public void SetExecutablePath(string path) => ExecutablePath = path.StartsWith("::") ? DefaultExecutable : path;
 
     protected override void OpenProtected()
     {

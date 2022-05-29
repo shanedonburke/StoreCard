@@ -1,9 +1,13 @@
-﻿using System.ComponentModel;
+﻿#region
+
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using StoreCard.Properties;
+
+#endregion
 
 namespace StoreCard.UserControls;
 
@@ -44,6 +48,12 @@ public partial class StoreCardTextBox : INotifyPropertyChanged
 
     private string _text = string.Empty;
 
+    public StoreCardTextBox()
+    {
+        InitializeComponent();
+        DataContext = this;
+    }
+
     public string Text
     {
         get => _text;
@@ -56,15 +66,17 @@ public partial class StoreCardTextBox : INotifyPropertyChanged
 
     public string ActivePlaceholder
     {
-        get => (string) GetValue(ActivePlaceholderProperty);
+        get => (string)GetValue(ActivePlaceholderProperty);
         set => SetValue(ActivePlaceholderProperty, value);
     }
 
     public string InactivePlaceholder
     {
-        get => (string) GetValue(InactivePlaceholderProperty);
+        get => (string)GetValue(InactivePlaceholderProperty);
         set => SetValue(InactivePlaceholderProperty, value);
     }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public new event KeyEventHandler PreviewKeyDown
     {
@@ -84,41 +96,29 @@ public partial class StoreCardTextBox : INotifyPropertyChanged
         remove => RemoveHandler(TextChangedEvent, value);
     }
 
-    public StoreCardTextBox()
-    {
-        InitializeComponent();
-        DataContext = this;
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    public new bool Focus()
-    {
-        return CustomTextBox.Focus();
-    }
+    public new bool Focus() => CustomTextBox.Focus();
 
     [NotifyPropertyChangedInvocator]
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
-    private void CustomTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
-    {
+    private void CustomTextBox_PreviewKeyDown(object sender, KeyEventArgs e) =>
         RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key)
-            {RoutedEvent = PreviewKeyDownEvent});
-    }
+        {
+            RoutedEvent = PreviewKeyDownEvent
+        });
 
-    private void CustomTextBox_TextChanged(object sender, TextChangedEventArgs e)
-    {
+    private void CustomTextBox_TextChanged(object sender, TextChangedEventArgs e) =>
         RaiseEvent(new TextChangedEventArgs(TextChangedEvent, e.UndoAction));
-    }
 
     private void CustomTextBox_KeyUp(object sender, KeyEventArgs e)
     {
         if (e.Key == Key.Enter)
         {
-            RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key) {RoutedEvent = KeyUpEvent});
+            RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key)
+            {
+                RoutedEvent = KeyUpEvent
+            });
         }
     }
 }

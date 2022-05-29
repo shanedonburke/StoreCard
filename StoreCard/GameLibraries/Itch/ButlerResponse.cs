@@ -1,17 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿#region
+
+using Newtonsoft.Json;
+
+#endregion
 
 namespace StoreCard.GameLibraries.Itch;
 
 public sealed class ButlerResponse<TResult>
 {
-    [JsonProperty("jsonrpc")]
-    public string JsonRpc;
+    [JsonProperty("id")] public int Id;
 
-    [JsonProperty("id")]
-    public int Id;
+    [JsonProperty("jsonrpc")] public string JsonRpc;
 
-    [JsonProperty("result")]
-    public TResult Result;
+    [JsonProperty("result")] public TResult Result;
 
     public ButlerResponse(string jsonRpc, int id, TResult result)
     {

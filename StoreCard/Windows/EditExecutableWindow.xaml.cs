@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Windows;
 using StoreCard.Commands;
 using StoreCard.Models.Items.Saved;
+
+#endregion
 
 namespace StoreCard.Windows;
 
@@ -17,13 +21,7 @@ public partial class EditExecutableWindow
         ExecutableSelector.Executable = executable;
     }
 
-    private void ExecutableSelector_Finished(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
+    private void ExecutableSelector_Finished(object sender, RoutedEventArgs e) => Close();
 
-    private void Window_Closed(object? sender, EventArgs e)
-    {
-        new ShowSearchCommand().Execute();
-    }
+    private void Window_Closed(object? sender, EventArgs e) => new ShowSearchCommand().Execute();
 }

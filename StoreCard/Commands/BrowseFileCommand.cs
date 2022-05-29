@@ -1,5 +1,9 @@
-﻿using Microsoft.Win32;
+﻿#region
+
+using Microsoft.Win32;
 using StoreCard.Static;
+
+#endregion
 
 namespace StoreCard.Commands;
 
@@ -9,9 +13,7 @@ public class BrowseFileCommand : IStoreCardCommand<string?>
     {
         var dialog = new OpenFileDialog
         {
-            Filter = "All Files (*.*)|*.*",
-            InitialDirectory = FolderPaths.UserProfile,
-            Title = "Select File"
+            Filter = "All Files (*.*)|*.*", InitialDirectory = FolderPaths.UserProfile, Title = "Select File"
         };
 
         return dialog.ShowDialog() == true ? dialog.FileName : null;

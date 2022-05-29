@@ -1,8 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Windows;
 using StoreCard.Commands;
 using StoreCard.Models;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.Windows;
 
@@ -29,13 +33,7 @@ public partial class TutorialWindow
         Close();
     }
 
-    private void CloseButton_Click(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
+    private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
 
-    private void Window_Closed(object? sender, EventArgs e)
-    {
-        new ShowSearchCommand().Execute();
-    }
+    private void Window_Closed(object? sender, EventArgs e) => new ShowSearchCommand().Execute();
 }

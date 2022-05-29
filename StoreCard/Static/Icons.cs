@@ -1,5 +1,10 @@
-﻿using System.Windows.Media.Imaging;
+﻿#region
+
+using System.Windows.Media.Imaging;
+using StoreCard.Properties;
 using StoreCard.Utils;
+
+#endregion
 
 namespace StoreCard.Static;
 
@@ -17,10 +22,10 @@ public static class Icons
 
     static Icons()
     {
-        AppIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.AppIcon);
-        GameIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.GameIcon);
-        FileIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.FileIcon);
-        FolderIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.FolderIcon);
-        LinkIcon = ImageUtils.BitmapToBitmapImage(Properties.Resources.LinkIcon);
+        AppIcon = ImageUtils.BitmapToBitmapImage(Resources.AppIcon);
+        GameIcon = ImageUtils.BitmapToBitmapImage(Resources.GameIcon);
+        FileIcon = ImageUtils.BitmapToBitmapImage(Resources.FileIcon);
+        FolderIcon = ImageUtils.BitmapToBitmapImage(Resources.FolderIcon);
+        LinkIcon = ImageUtils.BitmapToBitmapImage(Resources.LinkIcon);
     }
 }

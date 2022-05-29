@@ -1,5 +1,9 @@
-﻿using StoreCard.Models.Items.Saved;
+﻿#region
+
+using StoreCard.Models.Items.Saved;
 using StoreCard.Windows;
+
+#endregion
 
 namespace StoreCard.Commands;
 
@@ -7,10 +11,7 @@ public class EditExecutableCommand : IStoreCardCommand<bool>
 {
     private readonly SavedExecutable _executable;
 
-    public EditExecutableCommand(SavedExecutable executable)
-    {
-        _executable = executable;
-    }
+    public EditExecutableCommand(SavedExecutable executable) => _executable = executable;
 
     public bool Execute()
     {

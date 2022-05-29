@@ -1,7 +1,11 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+
+#endregion
 
 namespace StoreCard.Converters;
 
@@ -26,10 +30,8 @@ public sealed class InverseBooleanToVisibilityConverter : IValueConverter
         return b ? Visibility.Hidden : Visibility.Visible;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
         throw new NotSupportedException();
-    }
 
     #endregion
 }
