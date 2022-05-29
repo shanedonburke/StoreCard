@@ -11,12 +11,9 @@ public sealed class BrowseFileCommand : IStoreCardCommand<string?>
 {
     public string? Execute()
     {
-        const string dialogFilter = "All Files (*.*)|*.*";
-        const string dialogTitle = "Select File";
-
         var dialog = new OpenFileDialog
         {
-            Filter = dialogFilter, InitialDirectory = FolderPaths.UserProfile, Title = dialogTitle
+            Filter = "All Files (*.*)|*.*", InitialDirectory = FolderPaths.UserProfile, Title = "Select File"
         };
 
         return dialog.ShowDialog() == true ? dialog.FileName : null;

@@ -9,11 +9,9 @@ public sealed class ShowSearchCommand : IStoreCardCommand<bool>
 {
     public bool Execute()
     {
-        const string adornerWindowClass = "AdornerWindow";
-
         var windows = Application.Current.Windows
             .Cast<Window>()
-            .Where(w => w is not TaskbarIconWindow && w.GetType().Name != adornerWindowClass)
+            .Where(w => w is not TaskbarIconWindow && w.GetType().Name != "AdornerWindow")
             .ToList();
 
         // If any windows are open, activate them instead of opening a new main window

@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Data;
+using StoreCard.Utils;
 
 #endregion
 
@@ -21,7 +22,7 @@ public sealed class NotBlankToBooleanConverter : IValueConverter
             return str.Trim() != string.Empty;
         }
 
-        Debug.WriteLine("Tried to convert non-string value as a string.");
+        Logger.Log("Tried to convert non-string value as a string.");
         return false;
     }
 
