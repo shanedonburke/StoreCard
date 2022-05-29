@@ -9,7 +9,8 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class AddLinkWindow
 {
-    public AddLinkWindow() {
+    public AddLinkWindow()
+    {
         InitializeComponent();
         DataContext = this;
     }

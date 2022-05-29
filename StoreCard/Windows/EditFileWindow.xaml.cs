@@ -214,10 +214,9 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
             return;
         }
 
-        var unsavedChangesWindow = new UnsavedChangesWindow();
-        unsavedChangesWindow.ShowDialog();
+        UnsavedChangesWindow.Result result = new ShowUnsavedChangesAlertCommand().Execute();
 
-        switch (unsavedChangesWindow.DialogResult)
+        switch (result)
         {
             case UnsavedChangesWindow.Result.SaveAndClose:
                 SaveAll();

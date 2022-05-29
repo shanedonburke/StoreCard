@@ -3,23 +3,22 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
+    xmlns:windows="clr-namespace:StoreCard.Windows"
     Title="Edit Executable"
     Width="800"
     Height="600"
+    d:DataContext="{d:DesignInstance Type=windows:EditExecutableWindow,
+                                     IsDesignTimeCreatable=False}"
     Background="{DynamicResource AppBackgroundBrush}"
-    WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d"
     Closed="Window_Closed"
-    d:DataContext="{d:DesignInstance Type=windows:EditExecutableWindow, IsDesignTimeCreatable=False}">
-    <Grid
-        Margin="15"
-        VerticalAlignment="Stretch">
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid Margin="15" VerticalAlignment="Stretch">
         <userControls:ExecutableSelector
             x:Name="ExecutableSelector"
-            Finished="ExecutableSelector_Finished"
-            VerticalAlignment="Stretch" />
+            VerticalAlignment="Stretch"
+            Finished="ExecutableSelector_Finished" />
     </Grid>
 </Window>

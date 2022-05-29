@@ -4,26 +4,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
-    mc:Ignorable="d"
-    Closed="Window_Closed"
+    xmlns:windows="clr-namespace:StoreCard.Windows"
+    Title="Open With"
     Width="800"
     Height="605"
+    d:DataContext="{d:DesignInstance Type=windows:ChangeExecutableWindow,
+                                     IsDesignTimeCreatable=False}"
     Background="{DynamicResource AppBackgroundBrush}"
+    Closed="Window_Closed"
     WindowStartupLocation="CenterScreen"
-    Title="Open With"
-    d:DataContext="{d:DesignInstance Type=windows:ChangeExecutableWindow, IsDesignTimeCreatable=False}">
+    mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition
-                Height="Auto" />
-            <RowDefinition
-                Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--  Radio buttons  -->
-        <StackPanel
-            Margin="10">
+        <StackPanel Margin="10">
             <Label
                 Margin="0,0,0,10"
                 FontSize="14"
@@ -31,13 +29,11 @@
                 Choose which program will be used to open this item:
             </Label>
             <!--  "Default"  -->
-            <StackPanel
-                Margin="5,0,0,10"
-                Orientation="Horizontal">
+            <StackPanel Margin="5,0,0,10" Orientation="Horizontal">
                 <RadioButton
                     Name="DefaultRadioButton"
-                    IsChecked="True"
-                    GroupName="ExecutableType" />
+                    GroupName="ExecutableType"
+                    IsChecked="True" />
                 <TextBlock
                     Height="20"
                     VerticalAlignment="Stretch"
@@ -47,12 +43,8 @@
                 </TextBlock>
             </StackPanel>
             <!--  "Installed application"  -->
-            <StackPanel
-                Margin="5,0,0,10"
-                Orientation="Horizontal">
-                <RadioButton
-                    Name="InstalledApplicationRadioButton"
-                    GroupName="ExecutableType" />
+            <StackPanel Margin="5,0,0,10" Orientation="Horizontal">
+                <RadioButton Name="InstalledApplicationRadioButton" GroupName="ExecutableType" />
                 <TextBlock
                     Height="20"
                     VerticalAlignment="Stretch"
@@ -62,12 +54,8 @@
                 </TextBlock>
             </StackPanel>
             <!--  "Other executable"  -->
-            <StackPanel
-                Margin="5,0,0,0"
-                Orientation="Horizontal">
-                <RadioButton
-                    Name="OtherExecutableRadioButton"
-                    GroupName="ExecutableType" />
+            <StackPanel Margin="5,0,0,0" Orientation="Horizontal">
+                <RadioButton Name="OtherExecutableRadioButton" GroupName="ExecutableType" />
                 <TextBlock
                     Height="20"
                     VerticalAlignment="Stretch"
@@ -79,79 +67,66 @@
         </StackPanel>
         <!--  "Default" content  -->
         <Grid
-            Grid.Row="1"
             x:Name="DefaultContent"
+            Grid.Row="1"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Visibility="{Binding IsChecked, ElementName=DefaultRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.RowDefinitions>
-                <RowDefinition
-                    Height="*" />
-                <RowDefinition
-                    Height="60" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="60" />
             </Grid.RowDefinitions>
             <TextBlock
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Text="The default program will be used."
+                FontSize="14"
                 Foreground="{DynamicResource AppForegroundBrush}"
-                FontSize="14" />
+                Text="The default program will be used." />
             <Grid
                 Grid.Row="1"
                 Height="30"
                 Margin="15,0,15,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <userControls:StoreCardButton
-                    Style="{DynamicResource PrimaryButton}"
                     Grid.Column="2"
                     Margin="0,0,5,0"
-                    Text="Save"
-                    Click="SaveDefaultButton_Click" />
+                    Click="SaveDefaultButton_Click"
+                    Style="{DynamicResource PrimaryButton}"
+                    Text="Save" />
                 <userControls:StoreCardButton
-                    Style="{DynamicResource SecondaryButton}"
                     Grid.Column="3"
                     Margin="5,0,0,0"
-                    Text="Cancel"
-                    Click="CancelButton_Click" />
+                    Click="CancelButton_Click"
+                    Style="{DynamicResource SecondaryButton}"
+                    Text="Cancel" />
             </Grid>
         </Grid>
         <!--  "Installed application" content  -->
         <userControls:AppSelector
             x:Name="AppSelector"
             Grid.Row="1"
-            Visibility="{Binding IsChecked, ElementName=InstalledApplicationRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}"
+            CancelButtonClick="AppSelector_CancelButtonClick"
             SaveButtonClick="AppSelector_SaveButtonClick"
-            CancelButtonClick="AppSelector_CancelButtonClick" />
+            Visibility="{Binding IsChecked, ElementName=InstalledApplicationRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
         <Grid
             x:Name="OtherExecutableContent"
             Grid.Row="1"
             VerticalAlignment="Stretch"
             Visibility="{Binding IsChecked, ElementName=OtherExecutableRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Grid
-                Margin="15,10,15,0"
-                VerticalAlignment="Stretch">
+            <Grid Margin="15,10,15,0" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
-                    <RowDefinition
-                        Height="30" />
-                    <RowDefinition
-                        Height="*" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="50" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="Auto" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock
                     Grid.Column="0"
@@ -165,18 +140,18 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     Margin="0,0,10,0"
-                    TextChanged="ExecutablePathBox_TextChanged"
+                    ActivePlaceholder="Enter path to executable..."
                     InactivePlaceholder="Enter path to executable..."
-                    ActivePlaceholder="Enter path to executable..." />
+                    TextChanged="ExecutablePathBox_TextChanged" />
                 <!--  "Browse" button  -->
                 <userControls:StoreCardButton
-                    Style="{DynamicResource PrimaryButton}"
                     x:Name="BrowseButton"
                     Grid.Row="0"
                     Grid.Column="2"
                     Width="80"
-                    Text="Browse"
-                    Click="BrowseButton_Click" />
+                    Click="BrowseButton_Click"
+                    Style="{DynamicResource PrimaryButton}"
+                    Text="Browse" />
                 <!--  Other elements shown if path is valid  -->
                 <Grid
                     Grid.Row="1"
@@ -186,21 +161,17 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
-                        <RowDefinition
-                            Height="Auto" />
-                        <RowDefinition
-                            Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <!--  Icon/name preview  -->
                     <Grid
                         Grid.Row="0"
-                        Visibility="{Binding DoesExecutableExist, Converter={StaticResource BooleanToVisibilityConverter}}"
-                        Margin="50,30,0,30">
+                        Margin="50,30,0,30"
+                        Visibility="{Binding DoesExecutableExist, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition
-                                Width="Auto" />
-                            <ColumnDefinition
-                                Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Image
                             Grid.Column="0"
@@ -215,38 +186,32 @@
                             FontSize="14"
                             FontWeight="Bold"
                             Foreground="{DynamicResource AppForegroundBrush}"
+                            Text="{Binding ExecutableName}"
                             TextTrimming="CharacterEllipsis"
-                            TextWrapping="NoWrap"
-                            Text="{Binding ExecutableName}" />
+                            TextWrapping="NoWrap" />
                     </Grid>
-                    <Grid
-                        Grid.Row="1"
-                        VerticalAlignment="Bottom">
+                    <Grid Grid.Row="1" VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition
-                                Width="*" />
-                            <ColumnDefinition
-                                Width="*" />
-                            <ColumnDefinition
-                                Width="*" />
-                            <ColumnDefinition
-                                Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <userControls:StoreCardButton
-                            Style="{DynamicResource PrimaryButton}"
                             Grid.Column="2"
                             Height="30"
                             Margin="0,15,5,15"
-                            Text="Save"
+                            Click="SaveExecutableButton_Click"
                             IsEnabled="{Binding Path=DoesExecutableExist}"
-                            Click="SaveExecutableButton_Click" />
+                            Style="{DynamicResource PrimaryButton}"
+                            Text="Save" />
                         <userControls:StoreCardButton
-                            Style="{DynamicResource SecondaryButton}"
                             Grid.Column="3"
-                            Margin="5,15,0,15"
                             Height="30"
-                            Text="Cancel"
-                            Click="CancelButton_Click" />
+                            Margin="5,15,0,15"
+                            Click="CancelButton_Click"
+                            Style="{DynamicResource SecondaryButton}"
+                            Text="Cancel" />
                     </Grid>
                 </Grid>
             </Grid>
