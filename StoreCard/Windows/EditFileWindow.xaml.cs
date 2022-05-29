@@ -46,6 +46,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         get
         {
             string execPath = _item.ExecutablePath;
+
             if (!File.Exists(execPath))
             {
                 execPath = SavedFileSystemItem.DefaultExecutable;
@@ -66,7 +67,8 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
             return;
         }
 
-        SavedFileSystemItem? item = AppData.FindSavedItemById<SavedFileSystemItem>(AppData.ReadItemsFromFile(), _item.Id);
+        SavedFileSystemItem? item =
+            AppData.FindSavedItemById<SavedFileSystemItem>(AppData.ReadItemsFromFile(), _item.Id);
 
         if (item == null)
         {
@@ -115,10 +117,8 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
     {
         string path = PathBox.Text;
 
-        SavedFileSystemItem? updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i =>
-        {
-            i.ItemPath = path;
-        });
+        SavedFileSystemItem? updatedItem =
+            AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => { i.ItemPath = path; });
 
         if (updatedItem != null)
         {
@@ -135,7 +135,8 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
     {
         string name = NameBox.Text;
 
-        SavedFileSystemItem? updatedItem = AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.Name = name);
+        SavedFileSystemItem? updatedItem =
+            AppData.UpdateSavedItemById<SavedFileSystemItem>(_item.Id, i => i.Name = name);
 
         if (updatedItem != null)
         {
@@ -217,10 +218,10 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
             case UnsavedChangesWindow.Result.SaveAndClose:
                 SaveAll();
                 break;
-            case UnsavedChangesWindow.Result.CloseWithoutSaving: 
-                break;
             case UnsavedChangesWindow.Result.Cancel:
                 e.Cancel = true;
+                break;
+            case UnsavedChangesWindow.Result.CloseWithoutSaving:
                 break;
         }
     }
