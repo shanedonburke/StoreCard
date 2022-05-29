@@ -4,30 +4,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
-    mc:Ignorable="d"
+    xmlns:windows="clr-namespace:StoreCard.Windows"
+    Title="Edit Saved File"
     Width="800"
     Height="600"
+    d:DataContext="{d:DesignInstance windows:EditFileWindow,
+                                     IsDesignTimeCreatable=False}"
     Background="{DynamicResource AppBackgroundBrush}"
-    WindowStartupLocation="CenterScreen"
-    Closing="Window_Closing"
     Closed="Window_Closed"
-    Title="Edit Saved File"
-    d:DataContext="{d:DesignInstance windows:EditFileWindow, IsDesignTimeCreatable=False}">
-    <Grid
-        Margin="15,15,15,15">
+    Closing="Window_Closing"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid Margin="15,15,15,15">
         <Grid.RowDefinitions>
-            <RowDefinition
-                Height="Auto" />
-            <RowDefinition
-                Height="45" />
-            <RowDefinition
-                Height="Auto" />
-            <RowDefinition
-                Height="*" />
-            <RowDefinition
-                Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="45" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid
             Grid.Row="0"
@@ -35,25 +30,21 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="50" />
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="Auto" />
-                <ColumnDefinition
-                    Width="Auto" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Column="0"
                 Padding="0"
                 HorizontalAlignment="Left"
-                HorizontalContentAlignment="Left"
                 VerticalAlignment="Stretch"
+                HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Center"
-                Foreground="{DynamicResource AppForegroundBrush}"
+                Content="Path:"
                 FontSize="14"
-                Content="Path:" />
+                Foreground="{DynamicResource AppForegroundBrush}" />
             <userControls:StoreCardTextBox
                 x:Name="PathBox"
                 Grid.Column="1"
@@ -61,24 +52,24 @@
                 InactivePlaceholder="Enter path..."
                 TextChanged="PathBox_TextChanged" />
             <userControls:StoreCardButton
-                Style="{DynamicResource SecondaryButton}"
                 Grid.Column="2"
-                Height="30"
-                Margin="10,0,0,0"
-                HorizontalAlignment="Stretch"
                 Width="70"
-                Text="Browse"
-                Click="BrowseButton_Click" />
-            <userControls:StoreCardButton
-                Style="{DynamicResource PrimaryButton}"
-                Grid.Column="3"
                 Height="30"
                 Margin="10,0,0,0"
                 HorizontalAlignment="Stretch"
+                Click="BrowseButton_Click"
+                Style="{DynamicResource SecondaryButton}"
+                Text="Browse" />
+            <userControls:StoreCardButton
+                Grid.Column="3"
                 Width="50"
+                Height="30"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Stretch"
+                Click="SavePathButton_Click"
                 IsEnabled="{Binding Path=ShouldEnableSavePathButton}"
-                Text="Save"
-                Click="SavePathButton_Click" />
+                Style="{DynamicResource PrimaryButton}"
+                Text="Save" />
         </Grid>
         <Grid
             Grid.Row="1"
@@ -86,23 +77,20 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="50" />
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="Auto" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Label
                 Grid.Column="0"
                 Padding="0"
                 HorizontalAlignment="Left"
-                HorizontalContentAlignment="Left"
                 VerticalAlignment="Stretch"
+                HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Center"
-                Foreground="{DynamicResource AppForegroundBrush}"
+                Content="Name:"
                 FontSize="14"
-                Content="Name:" />
+                Foreground="{DynamicResource AppForegroundBrush}" />
             <userControls:StoreCardTextBox
                 x:Name="NameBox"
                 Grid.Column="1"
@@ -110,89 +98,77 @@
                 InactivePlaceholder="Enter a name..."
                 TextChanged="NameBox_TextChanged" />
             <userControls:StoreCardButton
-                Style="{DynamicResource PrimaryButton}"
                 Grid.Column="2"
+                Width="50"
                 Height="30"
                 Margin="10,0,0,0"
                 HorizontalAlignment="Stretch"
-                Width="50"
+                Click="SaveNameButton_Click"
                 IsEnabled="{Binding Path=ShouldEnableSaveNameButton}"
-                Text="Save"
-                Click="SaveNameButton_Click" />
+                Style="{DynamicResource PrimaryButton}"
+                Text="Save" />
         </Grid>
-        <StackPanel
-            Grid.Row="2">
+        <StackPanel Grid.Row="2">
             <Label
                 Padding="0"
                 HorizontalAlignment="Left"
-                HorizontalContentAlignment="Left"
                 VerticalAlignment="Stretch"
+                HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Center"
-                Foreground="{DynamicResource AppForegroundBrush}"
+                Content="Open with:"
                 FontSize="14"
-                Content="Open with:" />
-            <Grid
-                Margin="0,10,0,10"
-                Height="30">
+                Foreground="{DynamicResource AppForegroundBrush}" />
+            <Grid Height="30" Margin="0,10,0,10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition
-                        Width="Auto" />
-                    <ColumnDefinition
-                        Width="*" />
-                    <ColumnDefinition
-                        Width="80" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="80" />
                 </Grid.ColumnDefinitions>
                 <Image
                     Grid.Column="0"
-                    Source="{Binding ExecutableIcon}"
-                    Margin="0,0,10,0"
+                    Width="24"
                     Height="24"
-                    Width="24" />
+                    Margin="0,0,10,0"
+                    Source="{Binding ExecutableIcon}" />
                 <Label
                     Grid.Column="1"
                     Padding="0"
                     HorizontalAlignment="Left"
-                    HorizontalContentAlignment="Left"
                     VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Left"
                     VerticalContentAlignment="Center"
-                    Foreground="{DynamicResource AppForegroundBrush}"
+                    Content="{Binding ExecutableName}"
                     FontSize="14"
-                    Content="{Binding ExecutableName}" />
+                    Foreground="{DynamicResource AppForegroundBrush}" />
                 <userControls:StoreCardButton
                     Grid.Column="2"
-                    Style="{DynamicResource PrimaryButton}"
                     HorizontalAlignment="Stretch"
-                    Text="Change"
-                    Click="ChangeExecutableButton_Click" />
+                    Click="ChangeExecutableButton_Click"
+                    Style="{DynamicResource PrimaryButton}"
+                    Text="Change" />
             </Grid>
         </StackPanel>
-        <Grid
-            Grid.Row="4"
-            Height="30">
+        <Grid Grid.Row="4" Height="30">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <userControls:StoreCardButton
                 Grid.Column="0"
-                Style="{DynamicResource DeleteButton}"
                 Height="30"
                 HorizontalAlignment="Stretch"
-                Text="Delete"
-                Click="DeleteButton_Click" />
+                Click="DeleteButton_Click"
+                Style="{DynamicResource DeleteButton}"
+                Text="Delete" />
             <userControls:StoreCardButton
                 Grid.Column="3"
-                Style="{DynamicResource SecondaryButton}"
                 Height="30"
                 HorizontalAlignment="Stretch"
-                Text="Close"
-                Click="CloseButton_Click" />
+                Click="CloseButton_Click"
+                Style="{DynamicResource SecondaryButton}"
+                Text="Close" />
         </Grid>
     </Grid>
 </Window>

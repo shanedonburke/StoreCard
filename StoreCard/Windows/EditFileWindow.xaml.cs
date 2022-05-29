@@ -29,17 +29,13 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
         PathBox.Text = item.ItemPath;
         NameBox.Text = item.Name;
-        OnPropertyChanged(nameof(IsPathValid));
-        OnPropertyChanged(nameof(ShouldEnableSavePathButton));
     }
 
     private SavedFileSystemItem _item;
 
-    public bool IsPathValid => _item.Exists();
+    public bool ShouldEnableSavePathButton => PathBox.Text != _item.ItemPath && File.Exists(PathBox.Text);
 
-    public bool ShouldEnableSavePathButton => IsPathValid && PathBox.Text != _item.ItemPath;
-
-    public bool ShouldEnableSaveNameButton => NameBox.Text.Trim() != "" && NameBox.Text != _item.Name;
+    public bool ShouldEnableSaveNameButton => NameBox.Text.Trim() != string.Empty && NameBox.Text != _item.Name;
 
     public string ExecutableName => _item.ExecutableName;
 
