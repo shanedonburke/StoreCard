@@ -95,7 +95,7 @@ public sealed partial class MainWindow : INotifyPropertyChanged
 
     private void AddApplication_Click(object sender, RoutedEventArgs e)
     {
-        new AddApplicationCommand().Execute();
+        new AddAppCommand().Execute();
         Close();
     }
 
