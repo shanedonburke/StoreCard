@@ -7,7 +7,7 @@ using Microsoft.Win32;
 
 namespace StoreCard.Commands;
 
-internal class BrowseExecutableCommand : IStoreCardCommand<string?>
+public sealed class BrowseExecutableCommand : IStoreCardCommand<string?>
 {
     public string? Execute()
     {

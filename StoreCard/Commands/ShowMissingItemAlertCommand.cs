@@ -8,7 +8,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-public class ShowMissingItemAlertCommand : IStoreCardCommand<bool>
+public sealed class ShowMissingItemAlertCommand : IStoreCardCommand<bool>
 {
     private readonly Action? _editAction;
     private readonly SavedItem _item;

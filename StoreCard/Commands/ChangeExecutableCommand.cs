@@ -7,7 +7,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-public class ChangeExecutableCommand : IStoreCardCommand<bool>
+public sealed class ChangeExecutableCommand : IStoreCardCommand<bool>
 {
     private readonly SavedFileSystemItem _item;
 

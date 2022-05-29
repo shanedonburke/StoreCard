@@ -7,7 +7,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-public class EditLinkCommand : IStoreCardCommand<bool>
+public sealed class EditLinkCommand : IStoreCardCommand<bool>
 {
     private readonly SavedLink _link;
 

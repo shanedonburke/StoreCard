@@ -7,13 +7,16 @@ using StoreCard.Static;
 
 namespace StoreCard.Commands;
 
-public class BrowseFileCommand : IStoreCardCommand<string?>
+public sealed class BrowseFileCommand : IStoreCardCommand<string?>
 {
     public string? Execute()
     {
+        const string dialogFilter = "All Files (*.*)|*.*";
+        const string dialogTitle = "Select File";
+
         var dialog = new OpenFileDialog
         {
-            Filter = "All Files (*.*)|*.*", InitialDirectory = FolderPaths.UserProfile, Title = "Select File"
+            Filter = dialogFilter, InitialDirectory = FolderPaths.UserProfile, Title = dialogTitle
         };
 
         return dialog.ShowDialog() == true ? dialog.FileName : null;

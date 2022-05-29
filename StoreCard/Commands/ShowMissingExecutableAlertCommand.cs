@@ -7,7 +7,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-public class ShowMissingExecutableAlertCommand : IStoreCardCommand<bool>
+public sealed class ShowMissingExecutableAlertCommand : IStoreCardCommand<bool>
 {
     private readonly SavedFileSystemItem _item;
 
@@ -15,7 +15,10 @@ public class ShowMissingExecutableAlertCommand : IStoreCardCommand<bool>
 
     public bool Execute()
     {
-        new InvalidExecutableWindow(_item, "Missing Executable", "could not be found").Show();
+        const string windowTitle = "Missing Executable";
+        const string explanation = "could not be found";
+
+        new InvalidExecutableWindow(_item, windowTitle, explanation).Show();
         return true;
     }
 }

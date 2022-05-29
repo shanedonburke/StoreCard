@@ -9,7 +9,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-internal class ShowUnsavedChangesAlertCommand : IStoreCardCommand<UnsavedChangesWindow.Result>
+public sealed class ShowUnsavedChangesAlertCommand : IStoreCardCommand<UnsavedChangesWindow.Result>
 {
     public UnsavedChangesWindow.Result Execute()
     {

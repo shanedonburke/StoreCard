@@ -6,7 +6,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-public class ShowSettingsCommand : IStoreCardCommand<bool>
+public sealed class ShowSettingsCommand : IStoreCardCommand<bool>
 {
     public bool Execute()
     {

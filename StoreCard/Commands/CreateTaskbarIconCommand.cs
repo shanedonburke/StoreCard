@@ -8,11 +8,15 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-public class CreateTaskbarIconCommand : IStoreCardCommand<bool>
+public sealed class CreateTaskbarIconCommand : IStoreCardCommand<bool>
 {
+    private static bool DoesTaskbarIconExist => Application.Current.Windows
+        .Cast<Window>()
+        .Any(w => w is TaskbarIconWindow);
+
     public bool Execute()
     {
-        if (Application.Current.Windows.Cast<Window>().Any(w => w is TaskbarIconWindow))
+        if (DoesTaskbarIconExist)
         {
             return false;
         }

@@ -6,7 +6,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-public class AddLinkCommand : IStoreCardCommand<bool>
+public sealed class AddLinkCommand : IStoreCardCommand<bool>
 {
     public bool Execute()
     {

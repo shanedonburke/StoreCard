@@ -7,7 +7,7 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
-public class ShowPrivilegeAlertCommand : IStoreCardCommand<bool>
+public sealed class ShowPrivilegeAlertCommand : IStoreCardCommand<bool>
 {
     private readonly SavedFileSystemItem _item;
 
@@ -15,8 +15,10 @@ public class ShowPrivilegeAlertCommand : IStoreCardCommand<bool>
 
     public bool Execute()
     {
-        new InvalidExecutableWindow(_item, "Administrative Privileges Required", "requires administrative privileges")
-            .Show();
+        const string windowTitle = "Administrative Privileges Required";
+        const string explanation = "requires administrative privileges";
+
+        new InvalidExecutableWindow(_item, windowTitle, explanation).Show();
         return true;
     }
 }
