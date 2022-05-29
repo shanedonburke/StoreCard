@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -18,6 +19,18 @@ namespace StoreCard.Windows;
 /// </summary>
 public partial class RecordHotKeyWindow : INotifyPropertyChanged
 {
+    private static readonly List<Key> s_modifierKeys = new()
+    {
+        Key.LeftShift,
+        Key.RightShift,
+        Key.LeftCtrl,
+        Key.RightCtrl,
+        Key.LeftAlt,
+        Key.RightAlt,
+        Key.LWin,
+        Key.RWin
+    };
+
     private readonly UserConfig _config;
     private string _hotKeyText = string.Empty;
     private uint _modifiers;
@@ -47,9 +60,8 @@ public partial class RecordHotKeyWindow : INotifyPropertyChanged
     {
         Key key = e.Key == Key.System ? e.SystemKey : e.Key;
 
-        // Ignore modifier keys.
-        if (key is Key.LeftShift or Key.RightShift or Key.LeftCtrl or Key.RightCtrl or Key.LeftAlt or Key.RightAlt
-            or Key.LWin or Key.RWin)
+        // A new hot key isn't registered until a non-modifier key is pressed
+        if (s_modifierKeys.Contains(key))
         {
             return;
         }
@@ -58,6 +70,7 @@ public partial class RecordHotKeyWindow : INotifyPropertyChanged
         _virtualKey = 0;
 
         StringBuilder text = new();
+
         if ((Keyboard.Modifiers & ModifierKeys.Control) != 0)
         {
             text.Append("Ctrl+");
