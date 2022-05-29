@@ -12,7 +12,7 @@ namespace StoreCard.Windows;
 /// <summary>
 /// Interaction logic for EditExecutableWindow.xaml
 /// </summary>
-public partial class EditExecutableWindow
+public sealed partial class EditExecutableWindow
 {
     public EditExecutableWindow(SavedExecutable executable)
     {

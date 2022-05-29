@@ -13,7 +13,7 @@ namespace StoreCard.Windows;
 /// <summary>
 /// Interaction logic for MissingExecutableWindow.xaml
 /// </summary>
-public partial class InvalidExecutableWindow
+public sealed partial class InvalidExecutableWindow
 {
     private readonly SavedFileSystemItem _item;
 

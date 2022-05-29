@@ -13,7 +13,7 @@ namespace StoreCard.Windows;
 /// <summary>
 /// Interaction logic for TutorialWindow.xaml
 /// </summary>
-public partial class TutorialWindow
+public sealed partial class TutorialWindow
 {
     private readonly UserConfig _config;
 

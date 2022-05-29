@@ -11,7 +11,7 @@ namespace StoreCard.Windows;
 /// <summary>
 /// Interaction logic for AddLinkWindow.xaml
 /// </summary>
-public partial class AddLinkWindow
+public sealed partial class AddLinkWindow
 {
     public AddLinkWindow()
     {

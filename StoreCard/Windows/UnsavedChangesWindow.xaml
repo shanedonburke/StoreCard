@@ -4,59 +4,53 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
-    mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance windows:UnsavedChangesWindow, IsDesignTimeCreatable=False}"
-    Background="{DynamicResource AppBackgroundBrush}"
+    xmlns:windows="clr-namespace:StoreCard.Windows"
     Title="UnsavedChangesWindow"
-    Height="200"
     Width="450"
-    WindowStartupLocation="CenterScreen">
-    <Grid
-        Margin="15">
+    Height="200"
+    d:DataContext="{d:DesignInstance windows:UnsavedChangesWindow,
+                                     IsDesignTimeCreatable=False}"
+    Background="{DynamicResource AppBackgroundBrush}"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid Margin="15">
         <Grid.RowDefinitions>
-            <RowDefinition
-                Height="*" />
-            <RowDefinition
-                Height="30" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <TextBlock
             Grid.Row="0"
-            Text="There are unsaved changes. Save them before closing?"
+            FontSize="14"
             Foreground="{DynamicResource AppForegroundBrush}"
-            FontSize="14" />
+            Text="There are unsaved changes. Save them before closing?" />
         <Grid
             Grid.Row="1"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="2*" />
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <userControls:StoreCardButton
-                Click="CloseWithoutSaving_Click"
                 Grid.Column="0"
+                Click="CloseWithoutSaving_Click"
                 Style="{DynamicResource DeleteButton}"
                 Text="Close without saving" />
             <userControls:StoreCardButton
-                Click="Cancel_Click"
                 Grid.Column="2"
+                Margin="0,0,5,0"
+                Click="Cancel_Click"
                 Style="{DynamicResource SecondaryButton}"
-                Text="Cancel"
-                Margin="0,0,5,0" />
+                Text="Cancel" />
             <userControls:StoreCardButton
-                Click="Save_Click"
                 Grid.Column="3"
+                Margin="5,0,0,0"
+                Click="Save_Click"
                 Style="{DynamicResource PrimaryButton}"
-                Text="Save"
-                Margin="5,0,0,0" />
+                Text="Save" />
         </Grid>
     </Grid>
 </Window>

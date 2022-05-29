@@ -17,7 +17,7 @@ namespace StoreCard.Windows;
 /// <summary>
 /// Interaction logic for RecordHotKeyWindow.xaml
 /// </summary>
-public partial class RecordHotKeyWindow : INotifyPropertyChanged
+public sealed partial class RecordHotKeyWindow : INotifyPropertyChanged
 {
     private static readonly List<Key> s_modifierKeys = new()
     {

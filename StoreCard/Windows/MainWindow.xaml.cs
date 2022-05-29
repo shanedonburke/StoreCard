@@ -22,7 +22,7 @@ namespace StoreCard.Windows;
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : INotifyPropertyChanged
+public sealed partial class MainWindow : INotifyPropertyChanged
 {
     private ItemCategory _category = ItemCategory.None;
 

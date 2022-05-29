@@ -23,7 +23,7 @@ namespace StoreCard.Windows;
 /// <summary>
 /// Interaction logic for AddFileWindow.xaml
 /// </summary>
-public partial class AddFileWindow : INotifyPropertyChanged
+public sealed partial class AddFileWindow : INotifyPropertyChanged
 {
     private bool _doesFileExist;
 

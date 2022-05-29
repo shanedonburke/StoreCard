@@ -8,7 +8,7 @@ namespace StoreCard.Windows;
 /// <summary>
 /// Interaction logic for EditLinkWindow.xaml
 /// </summary>
-public partial class EditLinkWindow
+public sealed partial class EditLinkWindow
 {
     public EditLinkWindow(SavedLink link)
     {

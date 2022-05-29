@@ -15,7 +15,7 @@ namespace StoreCard.Windows;
 /// <summary>
 ///     Interaction logic for TaskbarIconWindow.xaml
 /// </summary>
-public partial class TaskbarIconWindow : INotifyPropertyChanged
+public sealed partial class TaskbarIconWindow : INotifyPropertyChanged
 {
     private string _hotKeyText = string.Empty;
 
@@ -53,15 +53,15 @@ public partial class TaskbarIconWindow : INotifyPropertyChanged
         base.OnClosed(e);
     }
 
+    [NotifyPropertyChangedInvocator]
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
     private void OnHotKeyRegistered(string hotKeyText) => HotKeyText = hotKeyText;
 
     private void OpenMenuItem_Click(object sender, RoutedEventArgs e) => new ShowSearchCommand().Execute();
 
     private void ExitMenuItem_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
-
-    [NotifyPropertyChangedInvocator]
-    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     private void TaskbarIcon_TrayLeftMouseUp(object sender, RoutedEventArgs e) => new ShowSearchCommand().Execute();
 }

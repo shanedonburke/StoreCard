@@ -18,14 +18,13 @@ namespace StoreCard.Windows;
 /// <summary>
 /// Interaction logic for SettingsWindow.xaml
 /// </summary>
-public partial class SettingsWindow : INotifyPropertyChanged
+public sealed partial class SettingsWindow : INotifyPropertyChanged
 {
     private UserConfig _userConfig;
 
     public SettingsWindow()
     {
         _userConfig = AppData.ReadConfigFromFile();
-
         DataContext = this;
         InitializeComponent();
 

@@ -19,16 +19,14 @@ public partial class App
 {
     private readonly UserConfig _config = AppData.ReadConfigFromFile();
 
-    public App() =>
-        FrameworkElement.StyleProperty.OverrideMetadata(typeof(Window),
-            new FrameworkPropertyMetadata {DefaultValue = FindResource(typeof(Window))});
+    public App() => FrameworkElement.StyleProperty.OverrideMetadata(
+        typeof(Window),
+        new FrameworkPropertyMetadata {DefaultValue = FindResource(typeof(Window))});
 
     private void App_Startup(object sender, StartupEventArgs e)
     {
         ProcessUtils.KillOtherStoreCardProcesses();
-
         new CreateTaskbarIconCommand().Execute();
-
         ThemeUtils.SetTheme(_config.Theme);
 
         if (!Environment.GetCommandLineArgs().Contains(CommandLineOptions.StartMinimized))

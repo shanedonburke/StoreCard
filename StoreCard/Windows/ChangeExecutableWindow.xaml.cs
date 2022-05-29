@@ -21,7 +21,7 @@ namespace StoreCard.Windows;
 /// <summary>
 /// Interaction logic for ChangeExecutableWindow.xaml
 /// </summary>
-public partial class ChangeExecutableWindow : INotifyPropertyChanged
+public sealed partial class ChangeExecutableWindow : INotifyPropertyChanged
 {
     private readonly SavedFileSystemItem _item;
 

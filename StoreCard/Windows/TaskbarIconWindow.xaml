@@ -6,28 +6,29 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tb="http://www.hardcodet.net/taskbar"
     xmlns:windows="clr-namespace:StoreCard.Windows"
-    mc:Ignorable="d"
-    ShowActivated="True"
-    ShowInTaskbar="False"
+    Title="TaskbarIconWindow"
     Width="0"
     Height="0"
+    d:DataContext="{d:DesignInstance Type=windows:TaskbarIconWindow,
+                                     IsDesignTimeCreatable=False}"
+    ShowActivated="True"
+    ShowInTaskbar="False"
     WindowStyle="None"
-    Title="TaskbarIconWindow"
-    d:DataContext="{d:DesignInstance Type=windows:TaskbarIconWindow, IsDesignTimeCreatable=False}">
+    mc:Ignorable="d">
     <tb:TaskbarIcon
         x:Name="TaskbarIcon"
-        Visibility="Visible"
-        ToolTipText="StoreCard"
         MenuActivation="RightClick"
+        PopupActivation="DoubleClick"
+        ToolTipText="StoreCard"
         TrayLeftMouseUp="TaskbarIcon_TrayLeftMouseUp"
-        PopupActivation="DoubleClick">
+        Visibility="Visible">
         <tb:TaskbarIcon.ContextMenu>
             <ContextMenu>
                 <MenuItem
                     x:Name="OpenMenuItem"
                     Click="OpenMenuItem_Click"
-                    InputGestureText="{Binding Path=HotKeyText}"
-                    Header="Open" />
+                    Header="Open"
+                    InputGestureText="{Binding Path=HotKeyText}" />
                 <MenuItem
                     x:Name="ExitMenuItem"
                     Click="ExitMenuItem_Click"

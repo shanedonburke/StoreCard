@@ -9,7 +9,7 @@ namespace StoreCard.Windows;
 /// <summary>
 /// Interaction logic for UnsavedChangesWindow.xaml
 /// </summary>
-public partial class UnsavedChangesWindow
+public sealed partial class UnsavedChangesWindow
 {
     public enum Result
     {

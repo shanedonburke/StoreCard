@@ -29,7 +29,7 @@ namespace StoreCard.Windows;
 /// <summary>
 ///     Interaction logic for AddAppWindow.xaml
 /// </summary>
-public partial class AddAppWindow : INotifyPropertyChanged
+public sealed partial class AddAppWindow : INotifyPropertyChanged
 {
     private bool _doesExecutableExist;
 
