@@ -4,57 +4,49 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:windows="clr-namespace:StoreCard.Windows"
     xmlns:userControls="clr-namespace:StoreCard.UserControls"
-    mc:Ignorable="d"
+    xmlns:windows="clr-namespace:StoreCard.Windows"
+    Title="Missing Item"
     Width="400"
     Height="300"
+    d:DataContext="{d:DesignInstance Type=windows:MissingItemWindow,
+                                     IsDesignTimeCreatable=False}"
     Background="{DynamicResource AppBackgroundBrush}"
-    WindowStartupLocation="CenterScreen"
-    Title="Missing Item"
     Closed="Window_Closed"
-    d:DataContext="{d:DesignInstance Type=windows:MissingItemWindow, IsDesignTimeCreatable=False}">
-    <Grid
-        Margin="15">
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid Margin="15">
         <Grid.RowDefinitions>
-            <RowDefinition
-                Height="*" />
-            <RowDefinition
-                Height="30" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <TextBlock
             Grid.Row="0"
-            Foreground="{DynamicResource AppForegroundBrush}"
             FontSize="14"
+            Foreground="{DynamicResource AppForegroundBrush}"
             TextWrapping="Wrap">
-            The item you are trying to open does not exist.
+            The item you are trying to open does not exist.<LineBreak />
             <LineBreak />
-            <LineBreak />
-            Please edit the item or delete it.
-        </TextBlock>
-        <Grid
-            Grid.Row="1">
+            Please edit the item or delete it.</TextBlock>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="*" />
-                <ColumnDefinition
-                    Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <userControls:StoreCardButton
-                Style="{DynamicResource DeleteButton}"
                 Grid.Column="0"
                 HorizontalAlignment="Stretch"
-                Text="Delete"
-                Click="DeleteButton_Click" />
+                Click="DeleteButton_Click"
+                Style="{DynamicResource DeleteButton}"
+                Text="Delete" />
             <userControls:StoreCardButton
-                Style="{DynamicResource PrimaryButton}"
                 Grid.Column="2"
                 HorizontalAlignment="Stretch"
+                Click="EditButton_Click"
+                Style="{DynamicResource PrimaryButton}"
                 Text="Edit"
-                Visibility="{Binding ShouldShowEditButton, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Click="EditButton_Click" />
+                Visibility="{Binding ShouldShowEditButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
     </Grid>
 </Window>

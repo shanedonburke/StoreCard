@@ -106,12 +106,6 @@ public partial class SearchableListBox : INotifyPropertyChanged
         AreItemsLoaded = true;
     }
 
-    [NotifyPropertyChangedInvocator]
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
     public void FilterItems()
     {
         IEnumerable<IListBoxItem> items = _items
@@ -133,6 +127,12 @@ public partial class SearchableListBox : INotifyPropertyChanged
                 SelectedIndex = 0;
             }
         });
+    }
+
+    [NotifyPropertyChangedInvocator]
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)

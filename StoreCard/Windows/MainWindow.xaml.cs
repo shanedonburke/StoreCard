@@ -27,9 +27,8 @@ public partial class MainWindow : INotifyPropertyChanged
     public MainWindow()
     {
         _savedItems = AppData.ReadItemsFromFile();
-
-        InitializeComponent();
         DataContext = this;
+        InitializeComponent();
 
         // Without this, opening the context menu for the first time results
         // in a small delay that looks strange; the button's BG color flashes
@@ -39,7 +38,6 @@ public partial class MainWindow : INotifyPropertyChanged
         AddButtonContextMenu.IsOpen = false;
 
         RefreshItems();
-
         SelectFirstItem();
     }
 
@@ -56,10 +54,7 @@ public partial class MainWindow : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    private static uint Nfmod(float a, float b)
-    {
-        return (uint)(a - b * Math.Floor(a / b));
-    }
+    private static uint Nfmod(float a, float b) => (uint)(a - b * Math.Floor(a / b));
 
     public void RefreshSavedItems()
     {
@@ -68,10 +63,8 @@ public partial class MainWindow : INotifyPropertyChanged
     }
 
     [NotifyPropertyChangedInvocator]
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
+    private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
     private IEnumerable<SavedItem> FilterItems()
     {
@@ -94,10 +87,7 @@ public partial class MainWindow : INotifyPropertyChanged
         return recentItems.Take(Range.EndAt(20));
     }
 
-    private void RefreshItems()
-    {
-        ItemListBox.ItemsSource = FilterItems();
-    }
+    private void RefreshItems() => ItemListBox.ItemsSource = FilterItems();
 
     private void AddApplication_Click(object sender, RoutedEventArgs e)
     {
@@ -117,17 +107,18 @@ public partial class MainWindow : INotifyPropertyChanged
         Close();
     }
 
-    private void OpenButton_Click(object sender, RoutedEventArgs e)
-    {
-        OpenSelectedItem();
-    }
+    private void OpenButton_Click(object sender, RoutedEventArgs e) => OpenSelectedItem();
 
     private void SearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
         switch (e.Key)
         {
             case Key.Up:
-                if (!ItemListBox.ItemsSource.Any()) return;
+                if (!ItemListBox.ItemsSource.Any())
+                {
+                    return;
+                }
+
                 switch (ItemListBox.SelectedIndex)
                 {
                     case 0:
@@ -142,7 +133,11 @@ public partial class MainWindow : INotifyPropertyChanged
                 ItemListBox.ScrollIntoView(ItemListBox.SelectedItem);
                 break;
             case Key.Down:
-                if (!ItemListBox.ItemsSource.Any()) return;
+                if (!ItemListBox.ItemsSource.Any())
+                {
+                    return;
+                }
+
                 if (ItemListBox.SelectedIndex == -1)
                 {
                     SelectFirstItem();
@@ -169,7 +164,11 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void ItemListBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key != Key.Enter) return;
+        if (e.Key != Key.Enter)
+        {
+            return;
+        }
+
         OpenSelectedItem();
         e.Handled = true;
     }
@@ -192,15 +191,9 @@ public partial class MainWindow : INotifyPropertyChanged
         }
     }
 
-    private void MainWindow_Activated(object? sender, EventArgs e)
-    {
-        SearchBox.Focus();
-    }
+    private void MainWindow_Activated(object? sender, EventArgs e) => SearchBox.Focus();
 
-    private void Window_Deactivated(object sender, EventArgs e)
-    {
-        Deactivate();
-    }
+    private void Window_Deactivated(object sender, EventArgs e) => Deactivate();
 
     private void Deactivate()
     {
@@ -220,22 +213,20 @@ public partial class MainWindow : INotifyPropertyChanged
         AddButtonContextMenu.IsOpen = true;
     }
 
-    private void OpenMenuItem_Click(object sender, RoutedEventArgs e)
-    {
-        OpenSelectedItem();
-    }
+    private void OpenMenuItem_Click(object sender, RoutedEventArgs e) => OpenSelectedItem();
 
     private void DeleteMenuItem_Click(object sender, RoutedEventArgs e)
     {
-        if (ItemListBox.SelectedIndex == -1) return;
+        if (ItemListBox.SelectedIndex == -1)
+        {
+            return;
+        }
+
         AppData.DeleteItemAndSave((SavedItem)ItemListBox.SelectedItem);
         RefreshSavedItems();
     }
 
-    private void ListBoxItem_DoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        OpenSelectedItem();
-    }
+    private void ListBoxItem_DoubleClick(object sender, MouseButtonEventArgs e) => OpenSelectedItem();
 
     private void EditFileMenuItem_Click(object sender, RoutedEventArgs e)
     {
@@ -245,7 +236,7 @@ public partial class MainWindow : INotifyPropertyChanged
         }
         else
         {
-            Debug.WriteLine("Tried to edit the selected item as a file, but the item is not a file or folder.");
+            Logger.Log("Tried to edit the selected item as a file, but the item is not a file or folder.");
         }
 
         Close();
@@ -259,7 +250,7 @@ public partial class MainWindow : INotifyPropertyChanged
         }
         else
         {
-            Debug.WriteLine("Tried to edit the selected item as an executable, but the item is not an executable.");
+            Logger.Log("Tried to edit the selected item as an executable, but the item is not an executable.");
         }
 
         Close();
@@ -273,7 +264,7 @@ public partial class MainWindow : INotifyPropertyChanged
         }
         else
         {
-            Debug.WriteLine("Tried to edit the selected item as a link, but the item is not a link.");
+            Logger.Log("Tried to edit the selected item as a link, but the item is not a link.");
         }
 
         Close();
@@ -296,41 +287,23 @@ public partial class MainWindow : INotifyPropertyChanged
 
     private void SelectFirstItem()
     {
-        if (ItemListBox.ItemsSource.Any()) ItemListBox.SelectedIndex = 0;
+        if (ItemListBox.ItemsSource.Any())
+        {
+            ItemListBox.SelectedIndex = 0;
+        }
     }
 
-    private void AllCategoryButton_Click(object sender, RoutedEventArgs e)
-    {
-        Category = ItemCategory.None;
-    }
+    private void AllCategoryButton_Click(object sender, RoutedEventArgs e) => Category = ItemCategory.None;
 
-    private void RecentCategoryButton_Click(object sender, RoutedEventArgs e)
-    {
-        Category = ItemCategory.Recent;
-    }
+    private void RecentCategoryButton_Click(object sender, RoutedEventArgs e) => Category = ItemCategory.Recent;
 
-    private void AppsCategoryButton_Click(object sender, RoutedEventArgs e)
-    {
-        Category = ItemCategory.App;
-    }
+    private void AppsCategoryButton_Click(object sender, RoutedEventArgs e) => Category = ItemCategory.App;
 
-    private void GamesCategoryButton_Click(object sender, RoutedEventArgs e)
-    {
-        Category = ItemCategory.Game;
-    }
+    private void GamesCategoryButton_Click(object sender, RoutedEventArgs e) => Category = ItemCategory.Game;
 
-    private void FilesCategoryButton_Click(object sender, RoutedEventArgs e)
-    {
-        Category = ItemCategory.File;
-    }
+    private void FilesCategoryButton_Click(object sender, RoutedEventArgs e) => Category = ItemCategory.File;
 
-    private void FoldersCategoryButton_Click(object sender, RoutedEventArgs e)
-    {
-        Category = ItemCategory.Folder;
-    }
+    private void FoldersCategoryButton_Click(object sender, RoutedEventArgs e) => Category = ItemCategory.Folder;
 
-    private void LinksCategoryButton_Click(object sender, RoutedEventArgs e)
-    {
-        Category = ItemCategory.Link;
-    }
+    private void LinksCategoryButton_Click(object sender, RoutedEventArgs e) => Category = ItemCategory.Link;
 }
