@@ -40,7 +40,7 @@ public sealed class ShowMissingItemAlertCommand : IStoreCardCommand<bool>
 
     /// <summary>
     /// Opens the window. If the "Edit" button is available, the window is shown as a modal dialog,
-    /// and the command waits for the window to be closed. If there is no "Edit" button, the window is
+    /// and the command waits for the window to be closed.If there is no "Edit" button, the window is
     /// opened normally without waiting for it to close.
     /// </summary>
     /// <returns>True</returns>
