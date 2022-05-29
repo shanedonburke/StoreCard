@@ -111,14 +111,8 @@
 					  Name="Newtonsoft.Json.dll"
 					  Source="$(var.StoreCard_TargetDir)Newtonsoft.Json.dll" />
 			</Component>
-			<Component Id="Ookii.Dialogs.Wpf.dll"
-					   Guid="5228df2c-1a69-43be-9ef7-eec33a6bc828">
-				<File Id="Ookii.Dialogs.Wpf.dll"
-					  Name="Ookii.Dialogs.Wpf.dll"
-					  Source="$(var.StoreCard_TargetDir)Ookii.Dialogs.Wpf.dll" />
-			</Component>
 			<Component Id="Hardcodet.NotifyIcon.Wpf.dll"
-					   Guid="912037ef-a045-4596-bd21-e740c8d715ca">
+			           Guid="912037ef-a045-4596-bd21-e740c8d715ca">
 				<File Id="Hardcodet.NotifyIcon.Wpf.dll"
 					  Name="Hardcodet.NotifyIcon.Wpf.dll"
 					  Source="$(var.StoreCard_TargetDir)Hardcodet.NotifyIcon.Wpf.dll" />

@@ -6,8 +6,15 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
+/// <summary>
+/// Opens the window to add a new file item.
+/// </summary>
 public sealed class AddFileCommand : IStoreCardCommand<bool>
 {
+    /// <summary>
+    /// Opens the window.
+    /// </summary>
+    /// <returns>True</returns>
     public bool Execute()
     {
         new AddFileWindow().Show();
