@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -7,6 +9,8 @@ using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
 using StoreCard.Utils;
 
+#endregion
+
 namespace StoreCard.Windows;
 
 /// <summary>
@@ -14,9 +18,8 @@ namespace StoreCard.Windows;
 /// </summary>
 public sealed partial class MissingItemWindow : INotifyPropertyChanged
 {
-    private readonly SavedItem _item;
-
     private readonly Action? _editAction;
+    private readonly SavedItem _item;
 
     private bool _shouldShowSearchOnClose = true;
 
@@ -33,9 +36,9 @@ public sealed partial class MissingItemWindow : INotifyPropertyChanged
         InitializeComponent();
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
-
     public bool ShouldShowEditButton => _editAction != null;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     [NotifyPropertyChangedInvocator]
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
