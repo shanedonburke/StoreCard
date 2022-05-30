@@ -13,22 +13,47 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Itch;
 
+/// <summary>
+/// An interface for interacting with the Butler daemon, which is used by the itch launcher
+/// for various purposes. We use it to get info about and launch installed games.
+/// See http://docs.itch.ovh/butlerd/master/#/ for documentation.
+/// </summary>
 public sealed class ButlerClient
 {
+    /// <summary>
+    /// The classes we've created for responses aren't complete, but that's okay
+    /// </summary>
     private static readonly JsonSerializerSettings s_deserializeResponseSettings =
         new() {MissingMemberHandling = MissingMemberHandling.Ignore};
 
+    /// <summary>
+    /// Path to the DB created by Butler.
+    /// </summary>
     private readonly string _dbPath = ButlerPaths.ButlerDatabase;
 
+    /// <summary>
+    /// Path to the Butler executable.
+    /// </summary>
     private readonly string _execPath = ButlerPaths.ButlerExecutable!;
 
+    /// <summary>
+    /// Socket used to connect to the daemon.
+    /// </summary>
     private readonly Socket _socket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
+    /// <summary>
+    /// A secret value is printed when the daemon starts. We use it to authenticate in our first request.
+    /// </summary>
     private string? _secret;
+
+    /// <summary>
+    /// The Butler system process.
+    /// </summary>
+    private Process _butlerProc;
 
     public void Start()
     {
-        Process butlerProc = new()
+        _butlerProc = new Process
         {
             StartInfo = new ProcessStartInfo
             {
@@ -41,13 +66,13 @@ public sealed class ButlerClient
                 CreateNoWindow = true
             }
         };
-        butlerProc.Start();
+        _butlerProc.Start();
 
         ButlerListenNotification? listenNotif = null;
 
         while (listenNotif == null)
         {
-            string? jsonLine = butlerProc.StandardOutput.ReadLine();
+            string? jsonLine = _butlerProc.StandardOutput.ReadLine();
 
             if (jsonLine == null)
             {
@@ -98,6 +123,11 @@ public sealed class ButlerClient
             {"caveId", caveId}, {"prereqsDir", ButlerPaths.ButlerPrereqsFolder}
         };
         SendRequest<object>(Methods.Launch, parameters);
+    }
+
+    public void KillDaemon()
+    {
+        _butlerProc.Kill();
     }
 
     private TResult? SendRequest<TResult>(string method, Dictionary<string, object> parameters)

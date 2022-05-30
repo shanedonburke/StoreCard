@@ -1,8 +1,6 @@
 ﻿#region
 
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Media.Imaging;
@@ -27,34 +25,17 @@ public sealed class ItchLibrary : GameLibrary
             yield break;
         }
 
-        // Start the Butler daemon. Requests are sent to this service to obtain info about installed games.
-        // See http://docs.itch.ovh/butlerd/master/#/
-        Process butlerProc = new()
-        {
-            StartInfo = new ProcessStartInfo
-            {
-                FileName = ButlerPaths.ButlerExecutable,
-                Arguments =
-                    // destiny-pid makes the Butler daemon exit when StoreCard does
-                    $"daemon --keep-alive --json --transport tcp --dbpath \"{ButlerPaths.ButlerDatabase}\" --destiny-pid {Environment.ProcessId}",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                CreateNoWindow = true
-            }
-        };
-
-        butlerProc.Start();
-
         ButlerClient client = new();
         client.Start();
 
+        // Must authenticate before sending any other request
         if (!client.Authenticate())
         {
             Logger.Log("Failed to authenticate with Butler client.");
             yield break;
         }
 
+        // "Caves" are installed games/programsa
         if (client.FetchCaves() is not { } caves)
         {
             Logger.Log("Failed to fetch caves.");
@@ -67,6 +48,8 @@ public sealed class ItchLibrary : GameLibrary
 
             BitmapSource? icon = null;
 
+            // We don't have a good way to find the actual executable (we don't need it to launch the game), so we'll
+            // use the first exe we find with a non-default icon. It may or may not be the right one... ¯\_(ツ)_/¯
             foreach (string exePath in Directory.EnumerateFiles(installFolder, "*.exe", SearchOption.AllDirectories))
             {
                 var hIcon = Icon.ExtractAssociatedIcon(exePath);
@@ -82,6 +65,6 @@ public sealed class ItchLibrary : GameLibrary
             yield return new InstalledItchGame(cave.Game.Title, icon, cave.Id);
         }
 
-        butlerProc.Kill();
+        client.KillDaemon();
     }
 }
