@@ -10,6 +10,11 @@ using static System.String;
 
 namespace StoreCard.Models.Items.Saved;
 
+/// <summary>
+/// Represents the category of an item. Used to filter
+/// items when searching as well as to provide item-specific
+/// context menus.
+/// </summary>
 public enum ItemCategory : uint
 {
     None,
@@ -21,6 +26,10 @@ public enum ItemCategory : uint
     Link
 }
 
+/// <summary>
+/// Represents the specific category of an item. Used when distinctions
+/// must be made between files and folders, apps and executables, etc.
+/// </summary>
 public enum SpecificItemCategory : uint
 {
     App,
@@ -39,6 +48,13 @@ public abstract class SavedItem : IListBoxItem
 {
     public readonly string Id;
 
+    /// <summary>
+    /// Creates the item.
+    /// </summary>
+    /// <param name="id">Item ID</param>
+    /// <param name="name">Item name</param>
+    /// <param name="base64Icon">Item icon as a Base64 string</param>
+    /// <param name="lastOpened">Epoch time in milliseconds when the item was last opened</param>
     protected SavedItem(string id, string name, string? base64Icon, long lastOpened)
     {
         Id = id;
@@ -47,8 +63,14 @@ public abstract class SavedItem : IListBoxItem
         LastOpened = lastOpened;
     }
 
+    /// <summary>
+    /// Item icon as a Base64 string.
+    /// </summary>
     public string? Base64Icon { get; set; }
 
+    /// <summary>
+    /// Epoch time in milliseconds when the item was last opened.
+    /// </summary>
     public long LastOpened { get; private set; }
 
     public abstract ItemCategory Category { get; }
@@ -65,6 +87,9 @@ public abstract class SavedItem : IListBoxItem
 
     public int CompareTo(IListBoxItem? other) => Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);
 
+    /// <summary>
+    /// Opens the item and updates <see cref="LastOpened"/>.
+    /// </summary>
     public void Open()
     {
         LastOpened = TimeUtils.UnixTimeMillis;
@@ -72,5 +97,8 @@ public abstract class SavedItem : IListBoxItem
         OpenProtected();
     }
 
+    /// <summary>
+    /// Item type-specific logic for opening this item.
+    /// </summary>
     protected abstract void OpenProtected();
 }
