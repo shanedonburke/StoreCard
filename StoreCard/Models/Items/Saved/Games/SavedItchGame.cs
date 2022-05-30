@@ -13,8 +13,14 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.Games;
 
+/// <summary>
+/// Represents a saved itch game.
+/// </summary>
 public sealed class SavedItchGame : SavedGame
 {
+    /// <summary>
+    /// Cave ID used to launch the game.
+    /// </summary>
     public readonly string CaveId;
 
     [JsonConstructor]
@@ -23,8 +29,11 @@ public sealed class SavedItchGame : SavedGame
         string name,
         string? base64Icon,
         long lastOpened,
-        string caveId)
-        : base(id, name, base64Icon, lastOpened) =>
+        string caveId) : base(
+        id,
+        name,
+        base64Icon,
+        lastOpened) =>
         CaveId = caveId;
 
     public SavedItchGame(InstalledItchGame game) : this(

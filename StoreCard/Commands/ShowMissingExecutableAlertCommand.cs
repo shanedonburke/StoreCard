@@ -22,10 +22,6 @@ public sealed class ShowMissingExecutableAlertCommand : IStoreCardCommand<bool>
     /// </summary>
     private readonly SavedFileSystemItem _item;
 
-    /// <summary>
-    /// Creates the command.
-    /// </summary>
-    /// <param name="item">The item we are trying to open</param>
     public ShowMissingExecutableAlertCommand(SavedFileSystemItem item) => _item = item;
 
     /// <summary>

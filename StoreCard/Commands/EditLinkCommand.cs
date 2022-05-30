@@ -17,10 +17,6 @@ public sealed class EditLinkCommand : IStoreCardCommand<bool>
     /// </summary>
     private readonly SavedLink _link;
 
-    /// <summary>
-    /// Creates the command.
-    /// </summary>
-    /// <param name="link">The link to be edited</param>
     public EditLinkCommand(SavedLink link) => _link = link;
 
     /// <summary>

@@ -17,10 +17,6 @@ public sealed class EditExecutableCommand : IStoreCardCommand<bool>
     /// </summary>
     private readonly SavedExecutable _executable;
 
-    /// <summary>
-    /// Creates the command.
-    /// </summary>
-    /// <param name="executable">The executable to be edited</param>
     public EditExecutableCommand(SavedExecutable executable) => _executable = executable;
 
     /// <summary>

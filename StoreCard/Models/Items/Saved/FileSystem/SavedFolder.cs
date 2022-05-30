@@ -10,15 +10,23 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.FileSystem;
 
+/// <summary>
+/// Represents a saved folder.
+/// </summary>
 public class SavedFolder : SavedFileSystemItem
 {
-    public SavedFolder(string id,
+    public SavedFolder(
+        string id,
         string name,
         string? base64Icon,
         string itemPath,
         string executablePath,
-        long lastOpened)
-        : base(id, name, base64Icon, itemPath, executablePath, lastOpened)
+        long lastOpened) : base(id,
+        name,
+        base64Icon,
+        itemPath,
+        executablePath,
+        lastOpened)
     {
     }
 

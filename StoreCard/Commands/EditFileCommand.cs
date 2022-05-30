@@ -17,10 +17,6 @@ public sealed class EditFileCommand : IStoreCardCommand<bool>
     /// </summary>
     private readonly SavedFileSystemItem _item;
 
-    /// <summary>
-    /// Creates the command.
-    /// </summary>
-    /// <param name="item">The item to be edited</param>
     public EditFileCommand(SavedFileSystemItem item) => _item = item;
 
     /// <summary>

@@ -14,11 +14,6 @@ namespace StoreCard.Models.Items.Installed.Games;
 /// </summary>
 public abstract class InstalledGame : IListBoxItem
 {
-    /// <summary>
-    /// Creates the game.
-    /// </summary>
-    /// <param name="name">Game name</param>
-    /// <param name="bitmapIcon">Game icon</param>
     protected InstalledGame(string name, BitmapSource? bitmapIcon)
     {
         Name = name;

@@ -15,25 +15,35 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.Games;
 
+/// <summary>
+/// Represents a saved Steam game.
+/// </summary>
 public sealed class SavedSteamGame : SavedGame
 {
+    /// <summary>
+    /// App ID used to launch the game.
+    /// </summary>
+    public readonly string AppId;
+
     [JsonConstructor]
     public SavedSteamGame(
         string id,
         string name,
         string? base64Icon,
         string appId,
-        long lastOpened) : base(id, name, base64Icon, lastOpened) => AppId = appId;
+        long lastOpened) : base(
+        id,
+        name,
+        base64Icon,
+        lastOpened) =>
+        AppId = appId;
 
     public SavedSteamGame(InstalledSteamGame game) : base(
         Guid.NewGuid().ToString(),
         game.Name,
         game.BitmapIcon?.ToBase64(),
         TimeUtils.UnixTimeMillis
-    ) =>
-        AppId = game.AppId;
-
-    public string AppId { get; }
+    ) => AppId = game.AppId;
 
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.SteamGame;
 
@@ -59,6 +69,7 @@ public sealed class SavedSteamGame : SavedGame
             return;
         }
 
+        // Ex. C:\...\steam.exe steam://rungameid://[id]
         Process.Start(steamExecPath, $"steam://rungameid/{AppId}");
     }
 }

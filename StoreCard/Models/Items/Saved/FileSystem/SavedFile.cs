@@ -10,6 +10,9 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.FileSystem;
 
+/// <summary>
+/// Represents a saved file.
+/// </summary>
 public sealed class SavedFile : SavedFileSystemItem
 {
     public SavedFile(
@@ -18,8 +21,12 @@ public sealed class SavedFile : SavedFileSystemItem
         string? base64Icon,
         string itemPath,
         string executablePath,
-        long lastOpened)
-        : base(id, name, base64Icon, itemPath, executablePath, lastOpened)
+        long lastOpened) : base(id,
+        name,
+        base64Icon,
+        itemPath,
+        executablePath,
+        lastOpened)
     {
     }
 

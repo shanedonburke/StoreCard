@@ -14,13 +14,26 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.Games;
 
+/// <summary>
+/// Represents a saved Battle.net game.
+/// </summary>
 public sealed class SavedBattleNetGame : SavedGame
 {
+    /// <summary>
+    /// Game ID used to launch the game.
+    /// </summary>
     public readonly string GameId;
 
     [JsonConstructor]
-    public SavedBattleNetGame(string id, string name, string? base64Icon, long lastOpened, string gameId)
-        : base(id, name, base64Icon, lastOpened) =>
+    public SavedBattleNetGame(
+        string id,
+        string name,
+        string? base64Icon,
+        long lastOpened,
+        string gameId) : base(id,
+        name,
+        base64Icon,
+        lastOpened) =>
         GameId = gameId;
 
     public SavedBattleNetGame(InstalledBattleNetGame game) : this(
@@ -39,7 +52,8 @@ public sealed class SavedBattleNetGame : SavedGame
         if (BattleNetLibrary.BattleNetInstallFolder == null)
         {
             MessageBoxService.Instance.ShowMessageBox(
-                "The Battle.net installation folder could not be found.", "Error",
+                "The Battle.net installation folder could not be found.",
+                "Error",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
             return;
@@ -48,7 +62,8 @@ public sealed class SavedBattleNetGame : SavedGame
         if (!ProcessUtils.IsProcessWithNameRunning("Battle.net"))
         {
             MessageBoxService.Instance.ShowMessageBox(
-                "The Battle.net launcher is not running. Please open it, then try again.", "Warning",
+                "The Battle.net launcher is not running. Please open it, then try again.",
+                "Warning",
                 MessageBoxButton.OK,
                 MessageBoxImage.Warning);
             return;
@@ -62,6 +77,7 @@ public sealed class SavedBattleNetGame : SavedGame
             return;
         }
 
+        // Ex. C:\...\Battle.net.exe --exec="launch W3"
         Process.Start(battleNetExecPath, $"--exec=\"launch {GameId}\"");
     }
 }

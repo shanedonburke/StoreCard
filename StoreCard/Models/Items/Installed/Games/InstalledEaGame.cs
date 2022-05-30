@@ -19,12 +19,6 @@ public sealed class InstalledEaGame : InstalledGame
     /// </summary>
     public readonly string AppId;
 
-    /// <summary>
-    /// Creates the game.
-    /// </summary>
-    /// <param name="name">Game name</param>
-    /// <param name="bitmapIcon">Game icon</param>
-    /// <param name="appId">App ID used to launch the game</param>
     public InstalledEaGame(
         string name,
         BitmapSource? bitmapIcon,

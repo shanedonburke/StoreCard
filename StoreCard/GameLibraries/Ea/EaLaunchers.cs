@@ -92,12 +92,6 @@ public sealed class EaLaunchers
         /// </summary>
         public readonly string ProcessName;
 
-        /// <summary>
-        /// Creates the launcher.
-        /// </summary>
-        /// <param name="displayName">An arbitrary name to use for the launcher</param>
-        /// <param name="processName">The path to the launcher executable</param>
-        /// <param name="launcherPath">The name of the launcher's system process when it's running</param>
         public Launcher(string displayName, string processName, string? launcherPath)
         {
             DisplayName = displayName;

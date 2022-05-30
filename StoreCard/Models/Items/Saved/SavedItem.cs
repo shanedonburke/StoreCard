@@ -48,13 +48,6 @@ public abstract class SavedItem : IListBoxItem
 {
     public readonly string Id;
 
-    /// <summary>
-    /// Creates the item.
-    /// </summary>
-    /// <param name="id">Item ID</param>
-    /// <param name="name">Item name</param>
-    /// <param name="base64Icon">Item icon as a Base64 string</param>
-    /// <param name="lastOpened">Epoch time in milliseconds when the item was last opened</param>
     protected SavedItem(string id, string name, string? base64Icon, long lastOpened)
     {
         Id = id;

@@ -7,10 +7,19 @@ using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Saved.Games;
 
+/// <summary>
+/// Represents a saved game.
+/// </summary>
 public abstract class SavedGame : SavedItem
 {
-    protected SavedGame(string id, string name, string? base64Icon, long lastOpened)
-        : base(id, name, base64Icon, lastOpened)
+    protected SavedGame(
+        string id,
+        string name,
+        string? base64Icon,
+        long lastOpened) : base(id,
+        name,
+        base64Icon,
+        lastOpened)
     {
     }
 

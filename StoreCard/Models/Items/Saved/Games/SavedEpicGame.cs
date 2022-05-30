@@ -11,15 +11,26 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.Games;
 
+/// <summary>
+/// Represents a saved Epic Games game.
+/// </summary>
 public sealed class SavedEpicGame : SavedGame
 {
+    /// <summary>
+    /// App name used to launch the game.
+    /// </summary>
+    public readonly string AppName;
+
     [JsonConstructor]
     public SavedEpicGame(
         string id,
         string name,
         string base64Icon,
         string appName,
-        long lastOpened) : base(id, name, base64Icon, lastOpened) =>
+        long lastOpened) : base(id,
+        name,
+        base64Icon,
+        lastOpened) =>
         AppName = appName;
 
     public SavedEpicGame(InstalledEpicGame game) : base(
@@ -28,8 +39,6 @@ public sealed class SavedEpicGame : SavedGame
         game.BitmapIcon?.ToBase64(),
         TimeUtils.UnixTimeMillis) =>
         AppName = game.AppName;
-
-    public string AppName { get; }
 
     public override SpecificItemCategory SpecificCategory => SpecificItemCategory.EpicGame;
 

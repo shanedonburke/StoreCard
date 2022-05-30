@@ -19,12 +19,6 @@ public sealed class InstalledBattleNetGame : InstalledGame
     /// </summary>
     public readonly string GameId;
 
-    /// <summary>
-    /// Creates the game.
-    /// </summary>
-    /// <param name="name">Game name</param>
-    /// <param name="bitmapIcon">Game icon</param>
-    /// <param name="gameId">Game ID used to launch the game</param>
     public InstalledBattleNetGame(
         string name,
         BitmapSource? bitmapIcon,

@@ -13,13 +13,6 @@ namespace StoreCard.Models.Items.Installed;
 /// </summary>
 public sealed class InstalledApp : IListBoxItem
 {
-    /// <summary>
-    /// Creates the app.
-    /// </summary>
-    /// <param name="name">App name</param>
-    /// <param name="appUserModelId">AUMID used to launch the app.</param>
-    /// <param name="executablePath">Path to the app's executable</param>
-    /// <param name="icon">App icon</param>
     public InstalledApp(string name, string appUserModelId, string? executablePath, BitmapSource icon)
     {
         Name = name;

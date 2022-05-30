@@ -14,8 +14,14 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved.Games;
 
+/// <summary>
+/// Represents a saved EA (EA Desktop or Origin) game.
+/// </summary>
 public sealed class SavedEaGame : SavedGame
 {
+    /// <summary>
+    /// App ID used to launch the game.
+    /// </summary>
     public readonly string AppId;
 
     [JsonConstructor]
@@ -23,7 +29,11 @@ public sealed class SavedEaGame : SavedGame
         string id,
         string name,
         long lastOpened,
-        string appId) : base(id, name, null, lastOpened) => AppId = appId;
+        string appId) : base(id,
+        name,
+        null,
+        lastOpened) =>
+        AppId = appId;
 
     public SavedEaGame(InstalledEaGame game) : this(
         Guid.NewGuid().ToString(),
@@ -61,7 +71,8 @@ public sealed class SavedEaGame : SavedGame
             return;
         }
 
-        // If `LauncherPath` is null, `GetLauncher()` will have already returned null
+        // If LauncherPath is null, GetLauncher() will have already returned null.
+        // Ex. C:\...\Origin.exe origin://LaunchGame/[id]
         Process.Start(launcher.LauncherPath!, $"origin://LaunchGame/{AppId}");
     }
 }

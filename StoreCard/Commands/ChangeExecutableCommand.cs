@@ -23,13 +23,6 @@ public sealed class ChangeExecutableCommand : IStoreCardCommand<bool>
     /// </summary>
     private readonly bool _shouldShowAsDialog;
 
-    /// <summary>
-    /// Creates the command.
-    /// </summary>
-    /// <param name="item">The item for which a new executable will be selected</param>
-    /// <param name="shouldShowAsDialog">
-    /// Whether the window should be shown as a modal dialog instead of a normal window
-    /// </param>
     public ChangeExecutableCommand(SavedFileSystemItem item, bool shouldShowAsDialog)
     {
         _item = item;
