@@ -16,8 +16,8 @@ public enum ItemCategory : uint
     Recent,
     App,
     Game,
-    Folder,
     File,
+    Folder,
     Link
 }
 
