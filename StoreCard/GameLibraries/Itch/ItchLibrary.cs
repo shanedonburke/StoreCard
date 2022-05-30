@@ -13,6 +13,9 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Itch;
 
+/// <summary>
+/// Represents the library for the itch (i.e., itch.io) game launcher.
+/// </summary>
 public sealed class ItchLibrary : GameLibrary
 {
     private static bool IsInstalled => ButlerPaths.ButlerExecutable != null && File.Exists(ButlerPaths.ButlerDatabase);
@@ -24,12 +27,15 @@ public sealed class ItchLibrary : GameLibrary
             yield break;
         }
 
+        // Start the Butler daemon. Requests are sent to this service to obtain info about installed games.
+        // See http://docs.itch.ovh/butlerd/master/#/
         Process butlerProc = new()
         {
             StartInfo = new ProcessStartInfo
             {
                 FileName = ButlerPaths.ButlerExecutable,
                 Arguments =
+                    // destiny-pid makes the Butler daemon exit when StoreCard does
                     $"daemon --keep-alive --json --transport tcp --dbpath \"{ButlerPaths.ButlerDatabase}\" --destiny-pid {Environment.ProcessId}",
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
@@ -75,5 +81,7 @@ public sealed class ItchLibrary : GameLibrary
 
             yield return new InstalledItchGame(cave.Game.Title, icon, cave.Id);
         }
+
+        butlerProc.Kill();
     }
 }
