@@ -9,13 +9,14 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Button Click="Button_Click">
+    <Button Margin="0,0,15,0" Click="Button_Click">
         <Button.Style>
-            <Style TargetType="Button">
+            <Style TargetType="{x:Type Button}">
                 <Setter Property="OverridesDefaultStyle" Value="True" />
+                <Setter Property="FocusVisualStyle" Value="{DynamicResource FocusVisual}" />
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="Button">
+                        <ControlTemplate TargetType="{x:Type Button}">
                             <ContentPresenter />
                         </ControlTemplate>
                     </Setter.Value>
@@ -23,7 +24,7 @@
             </Style>
         </Button.Style>
         <TextBlock
-            Margin="0,0,15,0"
+            Margin="0"
             VerticalAlignment="Center"
             FontSize="18"
             Text="{Binding Text}">
