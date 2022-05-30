@@ -7,19 +7,15 @@ using System.Runtime.InteropServices;
 
 namespace StoreCard.Native;
 
+/// <summary>
+/// Wrapper for <c>Shell32.dll</c>.
+/// Used to get file information.
+/// </summary>
 public class Shell32
 {
     // Constant flags for SHGetFileInfo 
     public const uint ShgfiIcon = 0x100;
     public const uint ShgfiLargeicon = 0x0;
-
-    // Import SHGetFileInfo function
-    [DllImport("shell32.dll")]
-    public static extern IntPtr SHGetFileInfo(
-        string pszPath,
-        uint dwFileAttributes,
-        ref Shfileinfo psfi,
-        uint cbSizeFileInfo, uint uFlags);
 
     [StructLayout(LayoutKind.Sequential)]
     public struct Shfileinfo
@@ -36,4 +32,12 @@ public class Shell32
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
         public string szTypeName;
     }
+
+    [DllImport("shell32.dll")]
+    public static extern IntPtr SHGetFileInfo(
+        string pszPath,
+        uint dwFileAttributes,
+        ref Shfileinfo psfi,
+        uint cbSizeFileInfo,
+        uint uFlags);
 }

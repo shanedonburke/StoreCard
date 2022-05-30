@@ -8,6 +8,10 @@ using System.Text;
 
 namespace StoreCard.Native;
 
+/// <summary>
+/// Wrapper for <c>User32.dll</c>.
+/// Used to interact with key and hot key APIs.
+/// </summary>
 public class User32
 {
     [DllImport("User32.dll")]
