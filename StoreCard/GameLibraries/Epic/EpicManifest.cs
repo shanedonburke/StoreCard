@@ -1,5 +1,9 @@
 ﻿namespace StoreCard.GameLibraries.Epic;
 
+/// <summary>
+/// Represents a JSON file used by the Epic Games launcher
+/// that includes details about a specific game.
+/// </summary>
 public class EpicManifest
 {
     public string AppName;

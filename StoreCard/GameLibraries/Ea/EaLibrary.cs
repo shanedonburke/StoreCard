@@ -9,6 +9,10 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Ea;
 
+/// <summary>
+/// Represents the library for the EA Desktop and Origin game launchers. The logic
+/// for both launchers is the same.
+/// </summary>
 public sealed class EaLibrary : GameLibrary
 {
     public override IEnumerable<InstalledGame> GetInstalledGames()
@@ -19,6 +23,7 @@ public sealed class EaLibrary : GameLibrary
             yield break;
         }
 
+        // Both launchers use the same key for installed games
         using RegistryKey? gameListKey = Registry.LocalMachine.OpenSubKey(
             RegUtils.BuildRegistryPath(RegUtils.Paths.Software32, "Origin Games"));
 
@@ -28,6 +33,7 @@ public sealed class EaLibrary : GameLibrary
             yield break;
         }
 
+        // The sub-keys are app IDs with a display name property. We need both
         foreach (string appId in gameListKey.GetSubKeyNames())
         {
             using RegistryKey? gameKey = gameListKey.OpenSubKey(appId);

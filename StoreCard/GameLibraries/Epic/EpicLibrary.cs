@@ -13,12 +13,21 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Epic;
 
+/// <summary>
+/// Represents the library for the Epic Games launcher.
+/// </summary>
 public sealed class EpicLibrary : GameLibrary
 {
+    /// <summary>
+    /// A JSON file that lists every installed game.
+    /// </summary>
     private static readonly string s_launcherInstalledPath = Path.Combine(
         FolderPaths.CommonApplicationData,
         @"Epic\UnrealEngineLauncher\LauncherInstalled.dat");
 
+    /// <summary>
+    /// A folder that includes manifest files for each installed game.
+    /// </summary>
     private static readonly string s_manifestFolderPath = Path.Combine(
         FolderPaths.CommonApplicationData,
         @"Epic\EpicGamesLauncher\Data\Manifests");
@@ -53,6 +62,7 @@ public sealed class EpicLibrary : GameLibrary
             yield break;
         }
 
+        // The names of each installed game
         var appNames = launcherInstalled.InstallationList
             .Select(app => app.AppName)
             .ToList();
@@ -90,9 +100,9 @@ public sealed class EpicLibrary : GameLibrary
 
             string appName = manifest.AppName;
 
+            // The game isn't installed (since it wasn't in the LauncherInstalled manifest's list)
             if (!appNames.Contains(appName))
             {
-                Logger.Log($"An unexpected Epic Games manifest was found for {appName}.");
                 continue;
             }
 

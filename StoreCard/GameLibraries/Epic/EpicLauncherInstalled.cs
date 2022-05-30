@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace StoreCard.GameLibraries.Epic;
 
+/// <summary>
+/// Represents the JSON file used by the Epic Games launcher that lists the currently installed games.
+/// </summary>
 public sealed class EpicLauncherInstalled
 {
     public List<InstalledApp> InstallationList;
