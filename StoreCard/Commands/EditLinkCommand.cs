@@ -26,7 +26,7 @@ public sealed class EditLinkCommand : IStoreCardCommand<bool>
     /// <summary>
     /// Opens the window without waiting for it to close.
     /// </summary>
-    /// <returns>True</returns>
+    /// <returns><c>true</c></returns>
     public bool Execute()
     {
         new EditLinkWindow(_link).Show();

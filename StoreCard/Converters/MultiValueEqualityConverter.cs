@@ -10,8 +10,8 @@ using System.Windows.Data;
 namespace StoreCard.Converters;
 
 /// <summary>
-/// Converts an array of values to "true" if all values equal each other, or if all values arae null.
-/// If any element differs from any other element, "false" is returned.
+/// Converts an array of values to <c>true</c> if all values equal each other, or if all values are <c>null</c>.
+/// If any element differs from any other element, <c>false</c> is returned.
 /// </summary>
 [ValueConversion(typeof(object[]), typeof(bool))]
 public sealed class MultiValueEqualityConverter : IMultiValueConverter

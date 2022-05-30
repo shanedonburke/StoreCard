@@ -50,7 +50,7 @@ public sealed class ColorChangeEffect : ShaderEffect
 
     /// <summary>
     /// Obtain the compiled shader. The shader is compiled in a pre-build event using
-    /// "CompileShaders.bat" in this directory.
+    /// <c>CompileShaders.bat></c> in this directory.
     /// </summary>
     static ColorChangeEffect() =>
         s_pixelShader.UriSource = UriUtils.BuildPackUri("Effects/bin/ColorChange.ps");

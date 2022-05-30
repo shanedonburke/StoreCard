@@ -26,7 +26,7 @@ public sealed class EditExecutableCommand : IStoreCardCommand<bool>
     /// <summary>
     /// Opens the window without waiting for it to close.
     /// </summary>
-    /// <returns></returns>
+    /// <returns><c>true</c></returns>
     public bool Execute()
     {
         new EditExecutableWindow(_executable).Show();

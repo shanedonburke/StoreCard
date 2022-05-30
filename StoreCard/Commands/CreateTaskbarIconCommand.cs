@@ -23,7 +23,7 @@ public sealed class CreateTaskbarIconCommand : IStoreCardCommand<bool>
     /// <summary>
     /// Opens the window if it isn't already open.
     /// </summary>
-    /// <returns>True if a new window was opened, false if the window was already open</returns>
+    /// <returns><c>true</c> if a new window was opened, <c>false</c> if the window was already open</returns>
     public bool Execute()
     {
         if (DoesTaskbarIconExist)

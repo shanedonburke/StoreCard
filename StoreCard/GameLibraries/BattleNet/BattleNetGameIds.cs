@@ -8,7 +8,7 @@ using StoreCard.Properties;
 namespace StoreCard.GameLibraries.BattleNet;
 
 /// <summary>
-/// Parses "BattleNetGameIds.txt" into a dictionary that maps Battle.net game UIDs
+/// Parses <c>BattleNetGameIds.txt</c> into a dictionary that maps Battle.net game UIDs
 /// to the (slightly different) game IDs that are used internally by the launcher.
 /// There is no good way to obtain these dynamically, so they are hard-coded in that file.
 /// </summary>
@@ -23,7 +23,7 @@ public static class BattleNetGameIds
     /// Gets the internal game ID for the given game UID.
     /// </summary>
     /// <param name="uid">A game UID, probably from the registry</param>
-    /// <returns>The game ID, or null if the ID isn't known</returns>
+    /// <returns>The game ID, or <c>null</c> if the ID isn't known</returns>
     public static string? GetGameId(string uid)
     {
         if (s_gameIds.Count == 0)
@@ -37,7 +37,7 @@ public static class BattleNetGameIds
 
     /// <summary>
     /// Populates the dictionary by parsing the text file. The format
-    /// is one game on each line, "{uid}={internal ID}".
+    /// is one game on each line, <c>{uid}={internal ID}</c>.
     /// </summary>
     private static void PopulateDictionary()
     {

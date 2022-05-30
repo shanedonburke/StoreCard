@@ -11,8 +11,8 @@ namespace StoreCard.Converters;
 
 /// <summary>
 /// Converts a value to a <see cref="Visibility"/>.
-/// If the value is null, "Visible" is returned.
-/// Otherwise, "Collapsed is returned.
+/// If the value is <c>null</c>, <c>Visible</c> is returned.
+/// Otherwise, <c>Collapsed</c> is returned.
 /// </summary>
 [ValueConversion(typeof(object), typeof(Visibility))]
 public sealed class InverseNullToVisibilityConverter : IValueConverter

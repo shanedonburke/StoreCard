@@ -10,8 +10,8 @@ using StoreCard.Utils;
 namespace StoreCard.Converters;
 
 /// <summary>
-/// If the given value is a string that contains non-whitespace characters, "true" is returned.
-/// Otherwise, "false" is returned.
+/// If the given value is a string that contains non-whitespace characters, <c>true</c> is returned.
+/// Otherwise, <c>false</c> is returned.
 /// </summary>
 [ValueConversion(typeof(string), typeof(bool))]
 public sealed class NotBlankToBooleanConverter : IValueConverter

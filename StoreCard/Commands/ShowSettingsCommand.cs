@@ -14,7 +14,7 @@ public sealed class ShowSettingsCommand : IStoreCardCommand<bool>
     /// <summary>
     /// Shows the settings window.
     /// </summary>
-    /// <returns>True</returns>
+    /// <returns><c>true</c></returns>
     public bool Execute()
     {
         var window = new SettingsWindow();

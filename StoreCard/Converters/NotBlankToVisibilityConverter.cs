@@ -11,8 +11,8 @@ namespace StoreCard.Converters;
 
 /// <summary>
 /// Converts a value to a <see cref="Visibility"/>.
-/// If the given value is a string that contains non-whitespace characters, "Visible" is returned.
-/// Otherwise, "Collapsed" is returned.
+/// If the given value is a string that contains non-whitespace characters, <c>Visible</c> is returned.
+/// Otherwise, <c>Collapsed</c> is returned.
 /// </summary>
 [ValueConversion(typeof(string), typeof(Visibility))]
 public sealed class NotBlankToVisibilityConverter : IValueConverter

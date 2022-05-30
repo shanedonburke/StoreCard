@@ -50,7 +50,7 @@ public sealed class ShowPrivilegeAlertCommand : IStoreCardCommand<bool>
     /// <summary>
     /// Opens the alert window.
     /// </summary>
-    /// <returns>True</returns>
+    /// <returns><c>true</c></returns>
     public bool Execute()
     {
         new InvalidExecutableWindow(_item, _executableName, WindowTitle, Explanation, _editAction).Show();

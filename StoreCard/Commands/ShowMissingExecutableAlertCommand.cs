@@ -31,15 +31,16 @@ public sealed class ShowMissingExecutableAlertCommand : IStoreCardCommand<bool>
     /// <summary>
     /// Opens the window without waiting for it to close.
     /// </summary>
-    /// <returns>True</returns>
+    /// <returns><c>true</c></returns>
     public bool Execute()
     {
         new InvalidExecutableWindow(
-            _item,
-            _item.ExecutableName,
-            WindowTitle,
-            Explanation,
-            () => new ChangeExecutableCommand(_item, false).Execute()).Show();
+                _item,
+                _item.ExecutableName,
+                WindowTitle,
+                Explanation,
+                () => new ChangeExecutableCommand(_item, false).Execute())
+            .Show();
         return true;
     }
 }

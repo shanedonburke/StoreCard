@@ -47,7 +47,7 @@ public sealed class EaLaunchers
             null) as string);
 
     /// <summary>
-    /// Gets an installed launcher, or null if there isn't one.
+    /// Gets an installed launcher, or <c>null</c> if there isn't one.
     /// The EA Desktop launcher is preferred, as this one will likely
     /// be more widely supported in the future.
     /// </summary>
@@ -88,12 +88,12 @@ public sealed class EaLaunchers
         public readonly string? LauncherPath;
 
         /// <summary>
-        /// The name of the launcher's system process when it's running
+        /// The name of the launcher's system process when it's running.
         /// </summary>
         public readonly string ProcessName;
 
         /// <summary>
-        /// Creates the launcher
+        /// Creates the launcher.
         /// </summary>
         /// <param name="displayName">An arbitrary name to use for the launcher</param>
         /// <param name="processName">The path to the launcher executable</param>

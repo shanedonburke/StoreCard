@@ -15,7 +15,7 @@ public sealed class BrowseFolderCommand : IStoreCardCommand<string?>
     /// <summary>
     /// Opens the dialog and waits for it to close.
     /// </summary>
-    /// <returns>The selected folder path, or null if the dialog was closed without a selection</returns>
+    /// <returns>The selected folder path, or <c>null</c> if the dialog was closed without a selection</returns>
     public string? Execute()
     {
         var dialog = new FolderBrowserDialog {InitialDirectory = FolderPaths.UserProfile};

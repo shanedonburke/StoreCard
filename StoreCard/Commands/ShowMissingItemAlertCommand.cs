@@ -16,7 +16,7 @@ public sealed class ShowMissingItemAlertCommand : IStoreCardCommand<bool>
 {
     /// <summary>
     /// The action invoked if the user chooses to edit the item.
-    /// If this is null, there will be no option to edit the item.
+    /// If this is <c>null</c>, there will be no option to edit the item.
     /// </summary>
     private readonly Action? _editAction;
 
@@ -43,7 +43,7 @@ public sealed class ShowMissingItemAlertCommand : IStoreCardCommand<bool>
     /// and the command waits for the window to be closed. If there is no "Edit" button, the window is
     /// opened normally without waiting for it to close.
     /// </summary>
-    /// <returns>True</returns>
+    /// <returns><c>true</c></returns>
     public bool Execute()
     {
         if (_editAction != null)

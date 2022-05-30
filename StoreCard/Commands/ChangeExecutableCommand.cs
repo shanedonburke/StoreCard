@@ -40,7 +40,7 @@ public sealed class ChangeExecutableCommand : IStoreCardCommand<bool>
     /// If the window is a modal dialog, opens the window and waits for it to close.
     /// Otherwise, the window is opened without waiting for it to close.
     /// </summary>
-    /// <returns>False if the window was a modal dialog and no new executable was chosen, true otherwise</returns>
+    /// <returns><c>false</c> if the window was a modal dialog and no new executable was chosen, <c>true</c> otherwise</returns>
     public bool Execute()
     {
         if (_shouldShowAsDialog)

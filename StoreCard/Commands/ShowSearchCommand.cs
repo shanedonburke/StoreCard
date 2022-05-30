@@ -14,7 +14,7 @@ public sealed class ShowSearchCommand : IStoreCardCommand<bool>
     /// Shows the main window if no other windows are open. If another window
     /// is open, it is brought to the front.
     /// </summary>
-    /// <returns>True</returns>
+    /// <returns><c>true</c></returns>
     public bool Execute()
     {
         // Windows besides the taskbar icon window and any adorners added by Visual Studio

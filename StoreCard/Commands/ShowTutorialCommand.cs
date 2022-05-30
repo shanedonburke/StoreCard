@@ -14,7 +14,7 @@ public sealed class ShowTutorialCommand : IStoreCardCommand<bool>
     /// <summary>
     /// Shows the tutorial window.
     /// </summary>
-    /// <returns>True</returns>
+    /// <returns><c>true</c></returns>
     public bool Execute()
     {
         new TutorialWindow().Show();

@@ -94,6 +94,7 @@ public sealed class SteamLibrary : GameLibrary
 
             if (!File.Exists(iconPath))
             {
+                // The cache doesn't have an icon for this game, c'est la vie
                 yield return new InstalledSteamGame(name, null, appId);
                 continue;
             }
