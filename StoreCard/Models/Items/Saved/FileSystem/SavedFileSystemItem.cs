@@ -78,7 +78,10 @@ public abstract class SavedFileSystemItem : SavedItem
         }
         catch (Win32Exception)
         {
-            new ShowPrivilegeAlertCommand(this).Execute();
+            new ShowPrivilegeAlertCommand(
+                this,
+                ExecutableName,
+                () => new ChangeExecutableCommand(this, false).Execute()).Execute();
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Media.Imaging;
@@ -34,6 +35,16 @@ public sealed class SavedExecutable : SavedItem
             return;
         }
 
-        Process.Start(Path);
+        try
+        {
+            Process.Start(Path);
+        }
+        catch (Win32Exception)
+        {
+            new ShowPrivilegeAlertCommand(
+                this,
+                Name,
+                () => new EditExecutableCommand(this).Execute()).Execute();
+        }
     }
 }

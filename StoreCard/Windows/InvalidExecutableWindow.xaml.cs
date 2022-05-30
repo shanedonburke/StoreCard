@@ -3,6 +3,7 @@
 using System;
 using System.Windows;
 using StoreCard.Commands;
+using StoreCard.Models.Items.Saved;
 using StoreCard.Models.Items.Saved.FileSystem;
 using StoreCard.Utils;
 
@@ -15,15 +16,24 @@ namespace StoreCard.Windows;
 /// </summary>
 public sealed partial class InvalidExecutableWindow
 {
-    private readonly SavedFileSystemItem _item;
+    private readonly SavedItem _item;
+
+    private readonly Action _editAction;
 
     private bool _shouldShowSearchOnClose = true;
 
-    public InvalidExecutableWindow(SavedFileSystemItem item, string windowTitle, string explanation)
+    public InvalidExecutableWindow(
+        SavedItem item,
+        string executableName,
+        string windowTitle,
+        string explanation,
+        Action editAction)
     {
         _item = item;
+        ExecutableName = executableName;
         WindowTitle = windowTitle;
         Explanation = explanation;
+        _editAction = editAction;
         DataContext = this;
         InitializeComponent();
     }
@@ -32,7 +42,7 @@ public sealed partial class InvalidExecutableWindow
 
     public string Explanation { get; }
 
-    public string ExecutableName => _item.ExecutableName;
+    public string ExecutableName { get; }
 
     private void Window_Closed(object? sender, EventArgs e)
     {
@@ -51,7 +61,7 @@ public sealed partial class InvalidExecutableWindow
     private void EditButton_Click(object sender, RoutedEventArgs e)
     {
         _shouldShowSearchOnClose = false;
-        new ChangeExecutableCommand(_item, false).Execute();
+        _editAction.Invoke();
         Close();
     }
 }

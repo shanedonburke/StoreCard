@@ -40,7 +40,12 @@ public sealed class ShowMissingExecutableAlertCommand : IStoreCardCommand<bool>
     /// <returns>True</returns>
     public bool Execute()
     {
-        new InvalidExecutableWindow(_item, WindowTitle, Explanation).Show();
+        new InvalidExecutableWindow(
+            _item,
+            _item.ExecutableName,
+            WindowTitle,
+            Explanation,
+            () => new ChangeExecutableCommand(_item, false).Execute()).Show();
         return true;
     }
 }
