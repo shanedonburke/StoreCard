@@ -11,11 +11,21 @@ using StoreCard.Utils;
 
 namespace StoreCard.Services;
 
+/// <summary>
+/// A service to manage hot keys and related functions.
+/// </summary>
 public sealed class HotKeyService
 {
-    private const int HotKeyId = 9000;
     public static readonly HotKeyService Instance = new();
 
+    /// <summary>
+    /// Parameter representing a hot key press.
+    /// </summary>
+    private const int HotKeyId = 9000;
+
+    /// <summary>
+    /// The window that registered the global hot key.
+    /// </summary>
     private Window? _registeredWindow;
 
     private HwndSource? _source;
@@ -28,13 +38,25 @@ public sealed class HotKeyService
     {
     }
 
+    /// <summary>
+    /// Event handler that accepts a hot key string when a hot key is registered.
+    /// </summary>
     public event Action<string> HotKeyRegistered = delegate { };
 
+    /// <summary>
+    /// Event handler that is triggered when the global hot key is pressed.
+    /// </summary>
     private event Action HotKeyPressed = delegate { };
 
-    // See https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerhotkey
-    // and https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
-    // for key codes
+    /// <summary>
+    /// Registers a global hot key.
+    /// See <see href="https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerhotkey">here</see>
+    /// and <see href="https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes">here</see>
+    /// for key codes.
+    /// </summary>
+    /// <param name="window">The window registering the hot key</param>
+    /// <param name="hotKeyPressed">An action to be invoked when the hot key is pressed.</param>
+    /// <returns><c>true</c> if the hot key was registered, otherwise <c>false</c>.</returns>
     public bool RegisterHotKey(Window window, Action hotKeyPressed)
     {
         if (!RegisterHotKey(window))
@@ -44,12 +66,6 @@ public sealed class HotKeyService
 
         HotKeyPressed += hotKeyPressed;
         return true;
-    }
-
-    public void UnregisterHotKey(Action hotKeyPressed)
-    {
-        UnregisterHotKey();
-        HotKeyPressed -= hotKeyPressed;
     }
 
     public void UpdateHotKey()
@@ -77,7 +93,7 @@ public sealed class HotKeyService
         return User32.RegisterHotKey(helper.Handle, HotKeyId, config.HotKeyModifiers, config.VirtualHotKey);
     }
 
-    private void UnregisterHotKey()
+    public void UnregisterHotKey()
     {
         if (_registeredWindow == null)
         {
@@ -90,6 +106,11 @@ public sealed class HotKeyService
         _source = null;
 
         User32.UnregisterHotKey(helper.Handle, HotKeyId);
+
+        foreach (Delegate d in HotKeyPressed.GetInvocationList())
+        {
+            HotKeyPressed -= (Action)d;
+        }
     }
 
     private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)

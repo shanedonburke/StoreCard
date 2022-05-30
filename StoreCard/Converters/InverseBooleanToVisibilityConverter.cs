@@ -11,7 +11,7 @@ namespace StoreCard.Converters;
 
 /// <summary>
 /// Converts <c>true</c> to a hidden element, and <c>false</c> to a visible element.
-/// From https://stackoverflow.com/a/1039681
+/// From <see href="https://stackoverflow.com/a/1039681">this post.</see>
 /// </summary>
 [ValueConversion(typeof(bool), typeof(Visibility))]
 public sealed class InverseBooleanToVisibilityConverter : IValueConverter

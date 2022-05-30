@@ -49,7 +49,7 @@ public sealed partial class TaskbarIconWindow : INotifyPropertyChanged
 
     protected override void OnClosed(EventArgs e)
     {
-        HotKeyService.Instance.UnregisterHotKey(OnHotKeyPressed);
+        HotKeyService.Instance.UnregisterHotKey();
         base.OnClosed(e);
     }
 
