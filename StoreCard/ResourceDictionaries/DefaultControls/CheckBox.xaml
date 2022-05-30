@@ -15,11 +15,11 @@
                                 BorderThickness="1"
                                 CornerRadius="1">
                                 <Border.Style>
-                                    <Style TargetType="Border">
+                                    <Style TargetType="{x:Type Border}">
                                         <Setter Property="Background" Value="{DynamicResource CheckBoxBackgroundBrush}" />
                                         <Setter Property="BorderBrush" Value="{DynamicResource CheckBoxBorderBrush}" />
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=CheckBox}, Path=IsMouseOver}" Value="True">
+                                            <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=CheckBox}}" Value="True">
                                                 <Setter Property="Background" Value="{DynamicResource CheckBoxBackgroundBrush_Hover}" />
                                             </DataTrigger>
                                         </Style.Triggers>
@@ -34,7 +34,7 @@
                                         SnapsToDevicePixels="False"
                                         Stroke="{DynamicResource PrimaryBrush}"
                                         StrokeThickness="2"
-                                        Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=CheckBox}, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        Visibility="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=CheckBox}, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                 </Grid>
                             </Border>
                         </BulletDecorator.Bullet>
