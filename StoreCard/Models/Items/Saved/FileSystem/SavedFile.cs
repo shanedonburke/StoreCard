@@ -16,10 +16,10 @@ public sealed class SavedFile : SavedFileSystemItem
         string id,
         string name,
         string? base64Icon,
-        string itemItemPath,
+        string itemPath,
         string executablePath,
         long lastOpened)
-        : base(id, name, base64Icon, itemItemPath, executablePath, lastOpened)
+        : base(id, name, base64Icon, itemPath, executablePath, lastOpened)
     {
     }
 
