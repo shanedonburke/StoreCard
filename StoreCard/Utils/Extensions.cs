@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
@@ -21,6 +22,13 @@ public static class Extensions
     }
 
     public static string ToBase64(this BitmapSource bitmap) => ImageUtils.ImageToBase64(bitmap);
+
+    public static byte[] ToAsciiBytes(this string str)
+    {
+        byte[] utf8Bytes = Encoding.UTF8.GetBytes(str);
+        string asciiStr = Encoding.ASCII.GetString(utf8Bytes);
+        return Encoding.ASCII.GetBytes(asciiStr);
+    }
 
     public static void Deconstruct<T>(this IEnumerable<T> seq, out T? first, out IEnumerable<T> rest)
     {
