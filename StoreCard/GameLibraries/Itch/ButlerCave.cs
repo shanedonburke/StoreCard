@@ -6,6 +6,9 @@ using Newtonsoft.Json;
 
 namespace StoreCard.GameLibraries.Itch;
 
+/// <summary>
+/// Represents a Butler "cave", which is the details of a single installed game.
+/// </summary>
 public sealed class ButlerCave
 {
     [JsonProperty("game")] public ButlerGame Game;
