@@ -6,6 +6,9 @@ using System;
 
 namespace StoreCard.Static;
 
+/// <summary>
+/// Paths to common system folders.
+/// </summary>
 public static class FolderPaths
 {
     public static readonly string UserProfile =

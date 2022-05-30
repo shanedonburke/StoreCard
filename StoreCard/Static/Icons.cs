@@ -8,6 +8,9 @@ using StoreCard.Utils;
 
 namespace StoreCard.Static;
 
+/// <summary>
+/// Icons derived from project resources.
+/// </summary>
 public static class Icons
 {
     public static readonly BitmapSource AppIcon;

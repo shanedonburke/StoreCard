@@ -1,5 +1,8 @@
 ﻿namespace StoreCard.Static;
 
+/// <summary>
+/// Display names of game platforms.
+/// </summary>
 public static class GamePlatformNames
 {
     public const string Ea = "EA";
