@@ -18,13 +18,14 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
+        <!--  Path field  -->
         <TextBlock
+            Grid.Row="0"
             Grid.Column="0"
             VerticalAlignment="Center"
             FontSize="14"
             Foreground="{DynamicResource AppForegroundBrush}"
             Text="Path:" />
-        <!--  Path box  -->
         <userControls:StoreCardTextBox
             x:Name="PathBox"
             Grid.Row="0"
@@ -67,6 +68,7 @@
                         <Setter Property="Visibility" Value="Collapsed" />
                         <Style.Triggers>
                             <MultiDataTrigger>
+                                <!--  Invalid executable, but not because the path box is empty  -->
                                 <MultiDataTrigger.Conditions>
                                     <Condition Binding="{Binding IsExecutableValid}" Value="False" />
                                     <Condition Binding="{Binding Text, ElementName=PathBox, Converter={StaticResource NotBlankToBooleanConverter}}" Value="True" />
@@ -125,6 +127,7 @@
                     TextTrimming="CharacterEllipsis"
                     TextWrapping="NoWrap" />
             </Grid>
+            <!--  Buttons  -->
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />

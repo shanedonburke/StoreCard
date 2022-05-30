@@ -19,7 +19,10 @@ using StoreCard.Utils;
 namespace StoreCard.UserControls;
 
 /// <summary>
-/// Interaction logic for ExecutableSelector.xaml
+/// Control for specifying an executable path and name. A preview is shown as well
+/// as Save/Edit/Delete buttons. This may be used to create a new executable or to
+/// edit an existing one. To edit an existing executable, set <see cref="Executable"/>
+/// through code.
 /// </summary>
 public partial class ExecutableSelector : INotifyPropertyChanged
 {
@@ -43,6 +46,9 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         InitializeComponent();
     }
 
+    /// <summary>
+    /// The executable name entered by the user
+    /// </summary>
     public string ExecutableName
     {
         get => _executableName;
@@ -53,6 +59,9 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// Whether the executable is valid (such that saving is allowed)
+    /// </summary>
     public bool IsExecutableValid
     {
         get => _isExecutableValid;
@@ -63,6 +72,9 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// The executable's icon, set automatically based on the selected file.
+    /// </summary>
     public ImageSource? ExecutableIcon
     {
         get => _executableIcon;
@@ -73,8 +85,14 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// The Delete button is only shown when editing an existing executable.
+    /// </summary>
     public bool ShouldShowDeleteButton => Executable != null;
 
+    /// <summary>
+    /// The executable being edited, if there is one.
+    /// </summary>
     public SavedExecutable? Executable
     {
         get => _executable;
@@ -82,6 +100,8 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         {
             _executable = value;
             OnPropertyChanged(nameof(ShouldShowDeleteButton));
+
+            // Set text box values
             if (value != null)
             {
                 PathBox.Text = value.Path;
@@ -97,6 +117,9 @@ public partial class ExecutableSelector : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    /// <summary>
+    /// Event triggered when the user cancels/saves/deletes.
+    /// </summary>
     public event RoutedEventHandler Finished
     {
         add => AddHandler(FinishedEvent, value);
@@ -140,11 +163,12 @@ public partial class ExecutableSelector : INotifyPropertyChanged
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {
-        string? base64Icon = ExecutableIcon != null ? ImageUtils.ImageToBase64((BitmapSource)ExecutableIcon) : null;
+        string? base64Icon = (ExecutableIcon as BitmapSource)?.ToBase64();
 
         // Instead of updating the item we're editing (if applicable), replace it entirely in the list
         var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != Executable?.Id).ToList();
 
+        // Use details of executable being edited if available
         savedItems.Add(new SavedExecutable(
             Executable?.Id ?? Guid.NewGuid().ToString(),
             ExecutableName,
