@@ -5,10 +5,19 @@ using StoreCard.Windows;
 
 namespace StoreCard.Commands;
 
+/// <summary>
+/// Shows the main window, i.e., the searchable item list.
+/// </summary>
 public sealed class ShowSearchCommand : IStoreCardCommand<bool>
 {
+    /// <summary>
+    /// Shows the main window if no other windows are open. If another window
+    /// is open, it is brought to the front.
+    /// </summary>
+    /// <returns>True</returns>
     public bool Execute()
     {
+        // Windows besides the taskbar icon window and any adorners added by Visual Studio
         var windows = Application.Current.Windows
             .Cast<Window>()
             .Where(w => w is not TaskbarIconWindow && w.GetType().Name != "AdornerWindow")
