@@ -7,9 +7,19 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.Ea;
 
+/// <summary>
+/// Includes logic for the EA game launchers.
+/// There is significant overlap between the functionality of
+/// the Origin launcher and the new EA Desktop launcher. Either one,
+/// both, or neither may be installed. For opening an EA game,
+/// either one will do.
+/// </summary>
 public sealed class EaLaunchers
 {
-    public static Launcher Desktop = new(
+    /// <summary>
+    /// The EA Desktop launcher.
+    /// </summary>
+    private static readonly Launcher s_desktop = new(
         "EA Desktop",
         "EADesktop",
         Registry.GetValue(
@@ -21,7 +31,10 @@ public sealed class EaLaunchers
             "LauncherAppPath",
             null) as string);
 
-    public static Launcher Origin = new(
+    /// <summary>
+    /// The Origin launcher.
+    /// </summary>
+    private static readonly Launcher s_origin = new(
         "Origin",
         "Origin",
         Registry.GetValue(
@@ -33,32 +46,58 @@ public sealed class EaLaunchers
             "OriginPath",
             null) as string);
 
+    /// <summary>
+    /// Gets an installed launcher, or null if there isn't one.
+    /// The EA Desktop launcher is preferred, as this one will likely
+    /// be more widely supported in the future.
+    /// </summary>
+    /// <returns>An installed launcher</returns>
     public static Launcher? GetLauncher()
     {
-        if (Desktop.IsInstalled && Desktop.IsRunning)
+        if (s_desktop.IsInstalled && s_desktop.IsRunning)
         {
-            return Desktop;
+            return s_desktop;
         }
 
-        if (Origin.IsInstalled && Origin.IsRunning)
+        if (s_origin.IsInstalled && s_origin.IsRunning)
         {
-            return Origin;
+            return s_origin;
         }
 
-        if (Desktop.IsInstalled)
+        if (s_desktop.IsInstalled)
         {
-            return Desktop;
+            return s_desktop;
         }
 
-        return Origin.IsInstalled ? Origin : null;
+        return s_origin.IsInstalled ? s_origin : null;
     }
 
+    /// <summary>
+    /// Represents an EA game launcher.
+    /// </summary>
     public sealed class Launcher
     {
+        /// <summary>
+        /// An arbitrary name to use for the launcher.
+        /// </summary>
         public readonly string DisplayName;
+
+        /// <summary>
+        /// The path to the launcher executable.
+        /// </summary>
         public readonly string? LauncherPath;
+
+        /// <summary>
+        /// The name of the launcher's system process when it's running
+        /// </summary>
         public readonly string ProcessName;
 
+        /// <summary>
+        /// Creates the launcher
+        /// </summary>
+        /// <param name="displayName">An arbitrary name to use for the launcher</param>
+        /// <param name="processName">The path to the launcher executable</param>
+        /// <param name="launcherPath">The name of the launcher's system process when it's running</param>
         public Launcher(string displayName, string processName, string? launcherPath)
         {
             DisplayName = displayName;
