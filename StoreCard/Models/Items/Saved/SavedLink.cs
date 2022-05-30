@@ -9,11 +9,22 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
 
+/// <summary>
+/// Represents a saved internet link.
+/// </summary>
 public class SavedLink : SavedItem
 {
+    /// <summary>
+    /// Args that cover launching in private/incognito for most browsers
+    /// </summary>
     private const string PrivateWindowArgs = @" -private -incognito -private-window -inprivate";
 
+    /// <summary>
+    /// Whether the link should be opened in a private/incognito window.
+    /// </summary>
     public bool ShouldOpenPrivate;
+
+    public readonly string Url;
 
     public SavedLink(
         string id,
@@ -21,14 +32,14 @@ public class SavedLink : SavedItem
         string? base64Icon,
         string url,
         long lastOpened,
-        bool shouldOpenPrivate)
-        : base(id, name, base64Icon, lastOpened)
+        bool shouldOpenPrivate) : base(
+        id, name,
+        base64Icon,
+        lastOpened)
     {
         Url = url;
         ShouldOpenPrivate = shouldOpenPrivate;
     }
-
-    public string Url { get; }
 
     public override ItemCategory Category => ItemCategory.Link;
 

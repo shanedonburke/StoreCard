@@ -12,8 +12,14 @@ using StoreCard.Utils;
 
 namespace StoreCard.Models.Items.Saved;
 
+/// <summary>
+/// Represents a saved app.
+/// </summary>
 public sealed class SavedApp : SavedItem
 {
+    /// <summary>
+    /// AUMID used to launch the app.
+    /// </summary>
     public readonly string AppUserModelId;
 
     [JsonConstructor]
@@ -43,7 +49,7 @@ public sealed class SavedApp : SavedItem
 
     public override string SecondaryText => ItemCategory.App.ToString();
 
+    // From https://stackoverflow.com/a/57195200
     protected override void OpenProtected() =>
-        // From https://stackoverflow.com/a/57195200
         Process.Start("explorer.exe", @"shell:appsFolder\" + AppUserModelId);
 }

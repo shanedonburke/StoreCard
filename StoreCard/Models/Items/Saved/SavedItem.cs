@@ -44,6 +44,9 @@ public enum SpecificItemCategory : uint
     Link
 }
 
+/// <summary>
+/// Represents a saved item of any kind.
+/// </summary>
 public abstract class SavedItem : IListBoxItem
 {
     public readonly string Id;

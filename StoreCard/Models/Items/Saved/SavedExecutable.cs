@@ -11,12 +11,25 @@ using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Saved;
 
+/// <summary>
+/// Represents a saved executable (as an app).
+/// </summary>
 public sealed class SavedExecutable : SavedItem
 {
+    /// <summary>
+    /// Path to the .exe file.
+    /// </summary>
     public readonly string Path;
 
-    public SavedExecutable(string id, string name, string? base64Icon, string path, long lastOpened)
-        : base(id, name, base64Icon, lastOpened) =>
+    public SavedExecutable(
+        string id,
+        string name,
+        string? base64Icon,
+        string path,
+        long lastOpened) : base(id,
+        name,
+        base64Icon,
+        lastOpened) =>
         Path = path;
 
     public override BitmapSource PrefixIcon => Icons.AppIcon;
@@ -41,6 +54,7 @@ public sealed class SavedExecutable : SavedItem
         }
         catch (Win32Exception)
         {
+            // Admin privileges required
             new ShowPrivilegeAlertCommand(
                 this,
                 Name,
