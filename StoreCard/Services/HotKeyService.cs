@@ -68,10 +68,14 @@ public sealed class HotKeyService
         return true;
     }
 
+    /// <summary>
+    /// Update the global hot key to reflect the <see cref="UserConfig"/>.
+    /// </summary>
     public void UpdateHotKey()
     {
         if (_registeredWindow == null)
         {
+            Logger.Log("Tried to update the global hot key before it was registered.");
             return;
         }
 
@@ -79,6 +83,11 @@ public sealed class HotKeyService
         RegisterHotKey(_registeredWindow);
     }
 
+    /// <summary>
+    /// Register the global hot key.
+    /// </summary>
+    /// <param name="window">The window registering the hot key (should be the taskbar icon window).</param>
+    /// <returns><c>true</c> if the hot key was registered, otherwise <c>false</c></returns>
     private bool RegisterHotKey(Window window)
     {
         _registeredWindow = window;
@@ -88,11 +97,22 @@ public sealed class HotKeyService
         _source?.AddHook(HwndHook);
 
         UserConfig config = AppData.ReadConfigFromFile();
-        HotKeyRegistered(HotKeyUtils.KeyStringFromConfig(config));
 
-        return User32.RegisterHotKey(helper.Handle, HotKeyId, config.HotKeyModifiers, config.VirtualHotKey);
+
+        if (!User32.RegisterHotKey(helper.Handle, HotKeyId, config.HotKeyModifiers, config.VirtualHotKey))
+        {
+            return false;
+        }
+
+        // Call event handler
+        HotKeyRegistered(HotKeyUtils.KeyStringFromConfig(config));
+        return true;
+
     }
 
+    /// <summary>
+    /// Unregister the current global hot key.
+    /// </summary>
     public void UnregisterHotKey()
     {
         if (_registeredWindow == null)
@@ -107,6 +127,7 @@ public sealed class HotKeyService
 
         User32.UnregisterHotKey(helper.Handle, HotKeyId);
 
+        // Remove all event handlers
         foreach (Delegate d in HotKeyPressed.GetInvocationList())
         {
             HotKeyPressed -= (Action)d;
@@ -123,6 +144,7 @@ public sealed class HotKeyService
                 switch (wParam.ToInt32())
                 {
                     case HotKeyId:
+                        // Call event handler
                         HotKeyPressed();
                         handled = true;
                         break;
