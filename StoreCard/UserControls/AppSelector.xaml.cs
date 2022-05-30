@@ -15,7 +15,8 @@ using StoreCard.Utils;
 namespace StoreCard.UserControls;
 
 /// <summary>
-/// Interaction logic for AppSelector.xaml
+/// A control that includes a searchable list box with all installed apps,
+/// a preview of the selected app, and Save/Cancel buttons.
 /// </summary>
 public partial class AppSelector : INotifyPropertyChanged
 {
@@ -37,6 +38,7 @@ public partial class AppSelector : INotifyPropertyChanged
         InitializeComponent();
     }
 
+    // Enable the Save button when an item has been selected
     public bool ShouldEnableSaveButton => AppListBox.SelectedItem != null;
 
     public string? SelectedAppName => (AppListBox.SelectedItem as InstalledApp)?.Name;
@@ -47,12 +49,18 @@ public partial class AppSelector : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    /// <summary>
+    /// Event triggered when the Save button is clicked.
+    /// </summary>
     public event RoutedEventHandler SaveButtonClick
     {
         add => AddHandler(SaveButtonClickEvent, value);
         remove => RemoveHandler(SaveButtonClickEvent, value);
     }
 
+    /// <summary>
+    /// Event triggered when the Cancel button is clicked.
+    /// </summary>
     public event RoutedEventHandler CancelButtonClick
     {
         add => AddHandler(CancelButtonClickEvent, value);
@@ -63,6 +71,9 @@ public partial class AppSelector : INotifyPropertyChanged
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
+    /// <summary>
+    /// Loads the installed apps into the list box.
+    /// </summary>
     private void LoadApps()
     {
         foreach (InstalledApp app in InstalledAppUtils.GetInstalledApps())

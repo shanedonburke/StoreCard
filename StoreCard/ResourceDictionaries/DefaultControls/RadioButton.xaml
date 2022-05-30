@@ -8,12 +8,11 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <!--  Radio button template  -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
-                    <!--  Radio button bullet  -->
                     <BulletDecorator Background="Transparent">
+                        <!--  The button  -->
                         <BulletDecorator.Bullet>
                             <Grid Width="15" Height="15">
                                 <Ellipse x:Name="Border" StrokeThickness="1">
@@ -50,6 +49,7 @@
                                         </Style>
                                     </Ellipse.Style>
                                 </Ellipse>
+                                <!--  The bullet itself  -->
                                 <Ellipse
                                     x:Name="CheckMark"
                                     Margin="4"
@@ -57,6 +57,7 @@
                                     Visibility="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=RadioButton}, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             </Grid>
                         </BulletDecorator.Bullet>
+                        <!--  Text shown next to button  -->
                         <ContentPresenter
                             Margin="0"
                             HorizontalAlignment="Left"

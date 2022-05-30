@@ -15,6 +15,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
+        <!--  List box  -->
         <local:SearchableListBox
             x:Name="AppListBox"
             Grid.Row="0"
