@@ -9,7 +9,6 @@
                     <BulletDecorator Background="Transparent">
                         <BulletDecorator.Bullet>
                             <Border
-                                x:Name="Border"
                                 Width="16"
                                 Height="16"
                                 BorderThickness="1"
@@ -38,6 +37,7 @@
                                 </Grid>
                             </Border>
                         </BulletDecorator.Bullet>
+                        <!--  Text or other elements shown next to box  -->
                         <ContentPresenter
                             Margin="4,0,0,0"
                             HorizontalAlignment="Left"

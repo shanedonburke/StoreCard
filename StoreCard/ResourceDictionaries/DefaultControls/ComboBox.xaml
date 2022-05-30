@@ -6,11 +6,11 @@
                 <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
             <Border
-                x:Name="Border"
+                Grid.Column="0"
                 Grid.ColumnSpan="2"
                 CornerRadius="2">
                 <Border.Style>
-                    <Style TargetType="Border">
+                    <Style TargetType="{x:Type Border}">
                         <Setter Property="Background" Value="{DynamicResource LightBrush_Pressed}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">

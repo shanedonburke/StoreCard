@@ -126,12 +126,6 @@ public sealed class HotKeyService
         _source = null;
 
         User32.UnregisterHotKey(helper.Handle, HotKeyId);
-
-        // Remove all event handlers
-        foreach (Delegate d in HotKeyPressed.GetInvocationList())
-        {
-            HotKeyPressed -= (Action)d;
-        }
     }
 
     private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
