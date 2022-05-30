@@ -205,9 +205,9 @@ public sealed partial class MainWindow : INotifyPropertyChanged
         {
             Close();
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            Debug.WriteLine(ex.Message);
+            Logger.LogExceptionMessage("Failed to close main window", e);
         }
     }
 

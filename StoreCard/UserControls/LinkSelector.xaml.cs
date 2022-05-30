@@ -155,7 +155,7 @@ public partial class LinkSelector : INotifyPropertyChanged
         }
         else
         {
-            Debug.WriteLine("Tried to delete link, but no link was being edited.");
+            Logger.Log("Tried to delete link, but no link was being edited.");
         }
 
         Finish();

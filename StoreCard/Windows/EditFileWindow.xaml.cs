@@ -76,7 +76,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
         if (item == null)
         {
-            Debug.WriteLine("Failed to find matching item for edit file window.");
+            Logger.Log("Failed to find matching item for edit file window.");
             return;
         }
 
@@ -123,7 +123,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         }
         else
         {
-            Debug.WriteLine("Tried to change item path, but no matching stored item was found.");
+            Logger.Log("Tried to change item path, but no matching stored item was found.");
         }
     }
 
@@ -141,7 +141,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         }
         else
         {
-            Debug.WriteLine("Tried to change item name, but no matching stored item was found.");
+            Logger.Log("Tried to change item name, but no matching stored item was found.");
         }
     }
 

@@ -117,7 +117,7 @@ public sealed partial class ChangeExecutableWindow : INotifyPropertyChanged
     {
         if (AppSelector.SelectedApp == null)
         {
-            Debug.WriteLine("Tried to save app, but no app was selected.");
+            Logger.Log("Tried to save app, but no app was selected.");
             DialogResult = false;
         }
         else
