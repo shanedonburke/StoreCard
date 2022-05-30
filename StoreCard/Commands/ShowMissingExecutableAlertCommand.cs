@@ -13,14 +13,8 @@ namespace StoreCard.Commands;
 /// </summary>
 public sealed class ShowMissingExecutableAlertCommand : IStoreCardCommand<bool>
 {
-    /// <summary>
-    /// The window title.
-    /// </summary>
     private const string WindowTitle = "Missing Executable";
 
-    /// <summary>
-    /// A snippet explaining the alert.
-    /// </summary>
     private const string Explanation = "could not be found";
 
     /// <summary>

@@ -4,7 +4,6 @@ using System;
 using System.Windows;
 using StoreCard.Commands;
 using StoreCard.Models.Items.Saved;
-using StoreCard.Models.Items.Saved.FileSystem;
 using StoreCard.Utils;
 
 #endregion
