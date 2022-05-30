@@ -13,8 +13,10 @@ public sealed class InstalledEaGame : InstalledGame
 {
     public readonly string AppId;
 
-    public InstalledEaGame(string name, BitmapSource? bitmapIcon, string appId) : base(name, bitmapIcon) =>
-        AppId = appId;
+    public InstalledEaGame(
+        string name,
+        BitmapSource? bitmapIcon,
+        string appId) : base(name, bitmapIcon) => AppId = appId;
 
     public override SavedItem SavedItem => new SavedEaGame(this);
 

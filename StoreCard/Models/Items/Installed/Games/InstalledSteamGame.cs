@@ -13,8 +13,10 @@ public sealed class InstalledSteamGame : InstalledGame
 {
     public readonly string AppId;
 
-    public InstalledSteamGame(string name, BitmapSource bitmapIcon, string appId) : base(name, bitmapIcon) =>
-        AppId = appId;
+    public InstalledSteamGame(
+        string name,
+        BitmapSource? bitmapIcon,
+        string appId) : base(name, bitmapIcon) => AppId = appId;
 
     public override string SecondaryText => GamePlatformNames.Steam;
 

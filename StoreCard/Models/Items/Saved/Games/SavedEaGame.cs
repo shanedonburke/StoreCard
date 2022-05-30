@@ -19,8 +19,11 @@ public sealed class SavedEaGame : SavedGame
     public readonly string AppId;
 
     [JsonConstructor]
-    public SavedEaGame(string id, string name, long lastOpened, string appId) : base(id, name, null, lastOpened) =>
-        AppId = appId;
+    public SavedEaGame(
+        string id,
+        string name,
+        long lastOpened,
+        string appId) : base(id, name, null, lastOpened) => AppId = appId;
 
     public SavedEaGame(InstalledEaGame game) : this(
         Guid.NewGuid().ToString(),

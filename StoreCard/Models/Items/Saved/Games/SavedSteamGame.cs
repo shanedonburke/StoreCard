@@ -21,10 +21,9 @@ public sealed class SavedSteamGame : SavedGame
     public SavedSteamGame(
         string id,
         string name,
-        string base64Icon,
+        string? base64Icon,
         string appId,
-        long lastOpened) : base(id, name, base64Icon, lastOpened) =>
-        AppId = appId;
+        long lastOpened) : base(id, name, base64Icon, lastOpened) => AppId = appId;
 
     public SavedSteamGame(InstalledSteamGame game) : base(
         Guid.NewGuid().ToString(),
