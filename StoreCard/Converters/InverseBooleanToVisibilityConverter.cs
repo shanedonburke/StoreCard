@@ -9,7 +9,10 @@ using System.Windows.Data;
 
 namespace StoreCard.Converters;
 
-// From https://stackoverflow.com/a/1039681
+/// <summary>
+/// Converts "true" to a hidden element, and "false" to a visible element.
+/// From https://stackoverflow.com/a/1039681
+/// </summary>
 [ValueConversion(typeof(bool), typeof(Visibility))]
 public sealed class InverseBooleanToVisibilityConverter : IValueConverter
 {

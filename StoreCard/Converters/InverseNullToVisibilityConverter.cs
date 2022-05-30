@@ -9,6 +9,11 @@ using System.Windows.Data;
 
 namespace StoreCard.Converters;
 
+/// <summary>
+/// Converts a value to a <see cref="Visibility"/>.
+/// If the value is null, "Visible" is returned.
+/// Otherwise, "Collapsed is returned.
+/// </summary>
 [ValueConversion(typeof(object), typeof(Visibility))]
 public sealed class InverseNullToVisibilityConverter : IValueConverter
 {
