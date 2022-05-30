@@ -17,8 +17,15 @@ public sealed class SavedApp : SavedItem
     public readonly string AppUserModelId;
 
     [JsonConstructor]
-    public SavedApp(string id, string name, string base64Icon, string appUserModelId, long lastOpened)
-        : base(id, name, base64Icon, lastOpened) =>
+    public SavedApp(
+        string id,
+        string name,
+        string base64Icon,
+        string appUserModelId,
+        long lastOpened) : base(id,
+        name,
+        base64Icon,
+        lastOpened) =>
         AppUserModelId = appUserModelId;
 
     public SavedApp(InstalledApp installedApp) : base(

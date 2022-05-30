@@ -9,11 +9,27 @@ using StoreCard.Static;
 
 namespace StoreCard.Models.Items.Installed.Games;
 
+/// <summary>
+/// Represents an installed Battle.net game.
+/// </summary>
 public sealed class InstalledBattleNetGame : InstalledGame
 {
+    /// <summary>
+    /// Game ID used to launch the game.
+    /// </summary>
     public readonly string GameId;
 
-    public InstalledBattleNetGame(string name, BitmapSource? bitmapIcon, string gameId) : base(name, bitmapIcon) =>
+    /// <summary>
+    /// Creates the game.
+    /// </summary>
+    /// <param name="name">Game name</param>
+    /// <param name="bitmapIcon">Game icon</param>
+    /// <param name="gameId">Game ID used to launch the game</param>
+    public InstalledBattleNetGame(
+        string name,
+        BitmapSource? bitmapIcon,
+        string gameId) : base(name,
+        bitmapIcon) =>
         GameId = gameId;
 
     public override string SecondaryText => GamePlatformNames.BattleNet;

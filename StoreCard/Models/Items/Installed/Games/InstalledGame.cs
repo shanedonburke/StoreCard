@@ -17,8 +17,8 @@ public abstract class InstalledGame : IListBoxItem
     /// <summary>
     /// Creates the game.
     /// </summary>
-    /// <param name="name">Display name of the game</param>
-    /// <param name="bitmapIcon">Icon to show for the game</param>
+    /// <param name="name">Game name</param>
+    /// <param name="bitmapIcon">Game icon</param>
     protected InstalledGame(string name, BitmapSource? bitmapIcon)
     {
         Name = name;
@@ -35,19 +35,10 @@ public abstract class InstalledGame : IListBoxItem
     /// </summary>
     public virtual string SecondaryText => string.Empty;
 
-    /// <summary>
-    /// Name of the game.
-    /// </summary>
     public string Name { get; }
 
-    /// <summary>
-    /// Icon to show for the game.
-    /// </summary>
     public BitmapSource? BitmapIcon { get; }
 
-    /// <summary>
-    /// Icon to show next to the main icon, representing the type of item.
-    /// </summary>
     public BitmapSource PrefixIcon => Icons.GameIcon;
 
     public int CompareTo(IListBoxItem? other) => string.Compare(Name, other?.Name, StringComparison.Ordinal);
