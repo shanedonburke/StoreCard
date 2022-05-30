@@ -10,8 +10,14 @@ using StoreCard.Utils;
 
 namespace StoreCard.GameLibraries.BattleNet;
 
+/// <summary>
+/// Represents the library for the Battle.net game launcher.
+/// </summary>
 public sealed class BattleNetLibrary : GameLibrary
 {
+    /// <summary>
+    /// The folder in which the launcher is installed.
+    /// </summary>
     public static readonly string? BattleNetInstallFolder = Registry.GetValue(
         RegUtils.BuildRegistryPath(
             RegUtils.Keys.HkeyLocalMachine,
@@ -20,6 +26,9 @@ public sealed class BattleNetLibrary : GameLibrary
         "InstallLocation",
         null) as string;
 
+    /// <summary>
+    /// Finds the UID of a game from a registry value that includes the UID as an argument.
+    /// </summary>
     private static readonly Regex s_uidRegex = new(@"--uid=(?<uid>.*?)\s");
 
     private static bool IsInstalled => BattleNetInstallFolder != null;
@@ -32,6 +41,7 @@ public sealed class BattleNetLibrary : GameLibrary
             yield break;
         }
 
+        // A key that includes info on most installed programs (not just Battle.net games)
         using RegistryKey? uninstallKey = Registry.LocalMachine.OpenSubKey(
             RegUtils.Paths.Uninstall32);
 
@@ -43,19 +53,25 @@ public sealed class BattleNetLibrary : GameLibrary
 
         foreach (string programKeyName in uninstallKey.GetSubKeyNames())
         {
+            // The key for a given program
             using RegistryKey? programKey = uninstallKey.OpenSubKey(programKeyName);
 
+            // All Battle.net games have this as the "Publisher" value. This is a pretty
+            // reliable way to find them
             if (programKey?.GetValue("Publisher") is not "Blizzard Entertainment")
             {
                 continue;
             }
 
+            // All programs should have this key
             if (programKey.GetValue("DisplayName") is not string displayName)
             {
                 Logger.Log("Failed to get the display name of a Battle.net game.");
                 continue;
             }
 
+            // A command that invokes the Battle.net uninstaller to uninstall the game.
+            // This can be used to obtain the game UID
             if (programKey.GetValue("UninstallString") is not string uninstallString)
             {
                 Logger.Log($"Failed to get uninstall string for {displayName}.");
