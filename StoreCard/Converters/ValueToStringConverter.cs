@@ -8,6 +8,9 @@ using System.Windows.Data;
 
 namespace StoreCard.Converters;
 
+/// <summary>
+/// Converts a value to a string. If the value is null, an empty string is returned.
+/// </summary>
 [ValueConversion(typeof(object), typeof(string))]
 public sealed class ValueToStringConverter : IValueConverter
 {
