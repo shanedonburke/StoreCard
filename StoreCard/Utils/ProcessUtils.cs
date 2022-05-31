@@ -8,8 +8,14 @@ using System.Linq;
 
 namespace StoreCard.Utils;
 
+/// <summary>
+/// Utilities for working with system processes.
+/// </summary>
 public static class ProcessUtils
 {
+    /// <summary>
+    /// Kill all other StoreCard processes, if any are running.
+    /// </summary>
     public static void KillOtherStoreCardProcesses()
     {
         Process[] otherProcesses = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
@@ -23,5 +29,10 @@ public static class ProcessUtils
         }
     }
 
+    /// <summary>
+    /// Check if one or more processes with the given name are running.
+    /// </summary>
+    /// <param name="name">Process name</param>
+    /// <returns><c>true</c> if any process with that name is running</returns>
     public static bool IsProcessWithNameRunning(string name) => Process.GetProcessesByName(name).Any();
 }
