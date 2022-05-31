@@ -26,7 +26,7 @@ using StoreCard.Utils;
 namespace StoreCard.Windows;
 
 /// <summary>
-///     Interaction logic for AddAppWindow.xaml
+/// A window that allows the user to select and save a new app, game, or executable (as an app).
 /// </summary>
 public sealed partial class AddAppWindow : INotifyPropertyChanged
 {
@@ -42,6 +42,9 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
         DataContext = this;
     }
 
+    /// <summary>
+    /// For executables, the display name of the new executable.
+    /// </summary>
     public string ExecutableName
     {
         get => _executableName;
@@ -52,6 +55,9 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// For executables, whether the current path refers to a real file.
+    /// </summary>
     public bool DoesExecutableExist
     {
         get => _doesExecutableExist;
@@ -62,6 +68,9 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// For executables, the icon derived from the executable file.
+    /// </summary>
     public ImageSource? ExecutableIcon
     {
         get => _executableIcon;
@@ -72,10 +81,19 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// For games, enable the Save button if a selection has been made.
+    /// </summary>
     public bool ShouldEnableSaveGameButton => GameListBox.SelectedIndex != -1;
 
+    /// <summary>
+    /// For games, the name of the currently selected game.
+    /// </summary>
     public string? SelectedGameName => GameListBox.SelectedItem?.Name;
 
+    /// <summary>
+    /// For games, the icon for the currently selected game.
+    /// </summary>
     public ImageSource? SelectedGameIcon => GameListBox.SelectedItem?.BitmapIcon;
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -84,8 +102,9 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-    private void SaveGameButton_Click(object sender, RoutedEventArgs e) => SaveSelectedGameAndClose();
-
+    /// <summary>
+    /// For apps, save the selected app and close the window.
+    /// </summary>
     private void SaveSelectedAppAndClose()
     {
         if (AppSelector.SelectedApp == null)
@@ -102,6 +121,9 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
         Close();
     }
 
+    /// <summary>
+    /// For games, save the selected game and close the window.
+    /// </summary>
     private void SaveSelectedGameAndClose()
     {
         List<SavedItem> savedItems = AppData.ReadItemsFromFile();
@@ -110,6 +132,9 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
         Close();
     }
 
+    /// <summary>
+    /// Load the list of installed games into the game list box.
+    /// </summary>
     private void LoadGames()
     {
         foreach (InstalledGame game in new SteamLibrary().GetInstalledGames())
@@ -132,6 +157,7 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
             GameListBox.AddItem(game);
         }
 
+        // Battle.net games are detected as apps
         foreach (InstalledApp game in InstalledAppUtils.GetBattleNetGames())
         {
             GameListBox.AddItem(game);
@@ -146,15 +172,16 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
         Task.Run(LoadGames);
     }
 
-    private void Window_Closed(object sender, EventArgs e) => new ShowSearchCommand().Execute();
-
     private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
     {
+        // Close the window if Escape is pressed
         if (e.Key == Key.Escape)
         {
             Close();
         }
     }
+
+    private void Window_Closed(object sender, EventArgs e) => new ShowSearchCommand().Execute();
 
     private void CancelButton_Click(object sender, RoutedEventArgs e) => Close();
 
@@ -170,6 +197,8 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
         SaveSelectedGameAndClose();
         e.Handled = true;
     }
+
+    private void SaveGameButton_Click(object sender, RoutedEventArgs e) => SaveSelectedGameAndClose();
 
     private void ExecutableSelector_Finished(object sender, RoutedEventArgs e) => Close();
 

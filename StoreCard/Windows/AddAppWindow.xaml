@@ -30,7 +30,7 @@
                 Foreground="{DynamicResource AppForegroundBrush}">
                 Select an application to save:
             </Label>
-            <!--  "Installed application"  -->
+            <!--  "Installed app or Xbox game"  -->
             <StackPanel Margin="5,0,0,10" Orientation="Horizontal">
                 <RadioButton
                     Name="InstalledApplicationRadioButton"
@@ -67,7 +67,7 @@
                 </TextBlock>
             </StackPanel>
         </StackPanel>
-        <!--  "Installed application" content  -->
+        <!--  "Installed app" content  -->
         <userControls:AppSelector
             x:Name="AppSelector"
             Grid.Row="1"
