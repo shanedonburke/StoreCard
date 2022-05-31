@@ -17,7 +17,7 @@ namespace StoreCard.Utils;
 /// <summary>
 /// Utilities for interacting with stored application data, e.g., user config and saved items.
 /// </summary>
-public class AppData
+public static class AppData
 {
     /// <summary>
     /// Path to saved items JSON file.

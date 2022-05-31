@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace StoreCard.Utils;
 
-public class ThemeUtils
+public static class ThemeUtils
 {
     public static void SetTheme(string theme)
     {

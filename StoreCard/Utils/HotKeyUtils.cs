@@ -14,7 +14,7 @@ namespace StoreCard.Utils;
 /// <summary>
 /// Utilities for working with system hot keys.
 /// </summary>
-public class HotKeyUtils
+public static class HotKeyUtils
 {
     /// <summary>
     /// Converts the given modifier keys to a <c>uint</c> representing their combination,

@@ -10,7 +10,10 @@ using System.Windows.Media.Imaging;
 
 namespace StoreCard.Utils;
 
-public class ImageUtils
+/// <summary>
+/// Utilities for working with images.
+/// </summary>
+public static class ImageUtils
 {
     public static string ImageToBase64(BitmapSource bitmap)
     {

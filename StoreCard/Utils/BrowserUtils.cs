@@ -10,7 +10,7 @@ namespace StoreCard.Utils;
 /// <summary>
 /// Utilities for detecting the system's default browser.
 /// </summary>
-public class BrowserUtils
+public static class BrowserUtils
 {
     /// <summary>
     /// Registry key where the default browser can be found.

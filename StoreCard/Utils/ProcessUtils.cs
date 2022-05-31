@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace StoreCard.Utils;
 
-public class ProcessUtils
+public static class ProcessUtils
 {
     public static void KillOtherStoreCardProcesses()
     {

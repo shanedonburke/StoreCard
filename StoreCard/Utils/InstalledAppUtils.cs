@@ -11,7 +11,7 @@ using StoreCard.Models.Items.Installed;
 
 namespace StoreCard.Utils;
 
-public class InstalledAppUtils
+public static class InstalledAppUtils
 {
     private static readonly Guid s_appsFolderId = new("{1e87508d-89c2-42f0-8a7e-645a0f50ca58}");
 

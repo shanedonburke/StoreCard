@@ -12,8 +12,16 @@ using StoreCard.Native;
 
 namespace StoreCard.Utils;
 
-public class IconUtils
+/// <summary>
+/// Utilities for working with icons.
+/// </summary>
+public static class IconUtils
 {
+    /// <summary>
+    /// Converts an <c>Icon</c> to a <c>BitmapSource</c>.
+    /// </summary>
+    /// <param name="icon"></param>
+    /// <returns>Bitmap source</returns>
     public static BitmapSource CreateBitmapSourceFromHIcon(Icon icon)
     {
         BitmapSource bitmapSource = Imaging.CreateBitmapSourceFromHIcon(
@@ -24,12 +32,24 @@ public class IconUtils
         return bitmapSource;
     }
 
+    /// <summary>
+    /// Returns the icon of the file at the given path. The path must be to a file,
+    /// not a folder. For folders, use <see cref="GetFolderIconByPath"/>.
+    /// </summary>
+    /// <param name="path">Absolute file path</param>
+    /// <returns>Icon as a bitmap source</returns>
     public static BitmapSource? GetFileIconByPath(string path)
     {
         using var hIcon = Icon.ExtractAssociatedIcon(path);
         return hIcon == null ? null : CreateBitmapSourceFromHIcon(hIcon);
     }
 
+    /// <summary>
+    /// Returns the icon of the folder at the given path. The path must be to a folder,
+    /// not a file. For files, see <see cref="GetFileIconByPath"/>.
+    /// </summary>
+    /// <param name="path">Absolute file path</param>
+    /// <returns>Icon as a bitmap source</returns>
     public static ImageSource GetFolderIconByPath(string path)
     {
         var shinfo = new Shell32.Shfileinfo();

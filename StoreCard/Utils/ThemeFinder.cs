@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace StoreCard.Utils;
 
-public class ThemeFinder
+public static class ThemeFinder
 {
     private static readonly Regex s_themePathRegex =
         new(@"^[a-zA-Z]:\\.+\\(?<themeName>.+)\.xaml$", RegexOptions.Compiled);
