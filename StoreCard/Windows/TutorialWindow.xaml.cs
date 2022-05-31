@@ -11,7 +11,7 @@ using StoreCard.Utils;
 namespace StoreCard.Windows;
 
 /// <summary>
-/// Interaction logic for TutorialWindow.xaml
+/// Tutorial window that shows on startup until the user presses "Don't show again".
 /// </summary>
 public sealed partial class TutorialWindow
 {
@@ -24,6 +24,9 @@ public sealed partial class TutorialWindow
         InitializeComponent();
     }
 
+    /// <summary>
+    /// Display string for hot key.
+    /// </summary>
     public string HotKeyText => HotKeyUtils.KeyStringFromConfig(_config);
 
     private void DontShowAgainButton_Click(object sender, RoutedEventArgs e)

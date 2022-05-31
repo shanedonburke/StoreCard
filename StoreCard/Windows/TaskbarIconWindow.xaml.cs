@@ -13,7 +13,8 @@ using StoreCard.Services;
 namespace StoreCard.Windows;
 
 /// <summary>
-///     Interaction logic for TaskbarIconWindow.xaml
+/// Invisible window for the taskbar icon. Handles hot key registration,
+/// because some window must be continuously open for a hot key to be registered.
 /// </summary>
 public sealed partial class TaskbarIconWindow : INotifyPropertyChanged
 {
@@ -26,6 +27,9 @@ public sealed partial class TaskbarIconWindow : INotifyPropertyChanged
         TaskbarIcon.Icon = Properties.Resources.StoreCardIcon;
     }
 
+    /// <summary>
+    /// Display string for the hot key
+    /// </summary>
     public string HotKeyText
     {
         get => _hotKeyText;

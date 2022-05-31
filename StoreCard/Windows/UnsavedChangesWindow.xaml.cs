@@ -7,10 +7,14 @@ using System.Windows;
 namespace StoreCard.Windows;
 
 /// <summary>
-/// Interaction logic for UnsavedChangesWindow.xaml
+/// Window shown when closing a window that has unsaved changes, e.g.,
+/// the "Edit file" window.
 /// </summary>
 public sealed partial class UnsavedChangesWindow
 {
+    /// <summary>
+    /// Represents the button pressed by the user.
+    /// </summary>
     public enum Result
     {
         CloseWithoutSaving,
