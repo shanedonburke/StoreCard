@@ -13,6 +13,7 @@
                                      IsDesignTimeCreatable=False}"
     Background="{DynamicResource AppBackgroundBrush}"
     Closed="Window_Closed"
+    PreviewKeyDown="Window_PreviewKeyDown"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid Margin="15" VerticalAlignment="Stretch">

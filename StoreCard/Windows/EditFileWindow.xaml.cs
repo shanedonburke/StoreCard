@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using StoreCard.Commands;
 using StoreCard.Models.Items.Saved;
@@ -19,7 +20,7 @@ using StoreCard.Utils;
 namespace StoreCard.Windows;
 
 /// <summary>
-/// A window for editing an existing saved file/folder.
+/// A window that allows the user to edit a saved file/folder.
 /// </summary>
 public sealed partial class EditFileWindow : INotifyPropertyChanged
 {
@@ -36,14 +37,23 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         NameBox.Text = item.Name;
     }
 
+    /// <summary>
+    /// Enable the Save button for the file path if the path has changed and refers to a real file.
+    /// </summary>
     public bool ShouldEnableSavePathButton => PathBox.Text != _item.ItemPath && File.Exists(PathBox.Text);
 
+    /// <summary>
+    /// Enable the Save button for the name if a name has been entered that's different from the existing one.
+    /// </summary>
     public bool ShouldEnableSaveNameButton => NameBox.Text.Trim() != string.Empty && NameBox.Text != _item.Name;
 
     public string ExecutableName => _item.ExecutableName;
 
     private bool HasUnsavedChanges => ShouldEnableSavePathButton || ShouldEnableSaveNameButton;
 
+    /// <summary>
+    /// Icon for the "Open with" executable.
+    /// </summary>
     public ImageSource ExecutableIcon
     {
         get
@@ -55,6 +65,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
                 execPath = SavedFileSystemItem.DefaultExecutable;
             }
 
+            // Use the icon for the default executable if we can't get a specific one
             Icon? hIcon = System.Drawing.Icon.ExtractAssociatedIcon(execPath) ??
                           System.Drawing.Icon.ExtractAssociatedIcon(SavedFileSystemItem.DefaultExecutable);
             return IconUtils.CreateBitmapSourceFromHIcon(hIcon!);
@@ -63,31 +74,13 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    private void ChangeExecutableButton_Click(object sender, RoutedEventArgs e)
-    {
-        if (!new ChangeExecutableCommand(_item, true).Execute())
-        {
-            return;
-        }
-
-        SavedFileSystemItem? item =
-            AppData.FindSavedItemById<SavedFileSystemItem>(AppData.ReadItemsFromFile(), _item.Id);
-
-        if (item == null)
-        {
-            Logger.Log("Failed to find matching item for edit file window.");
-            return;
-        }
-
-        _item = item;
-        OnPropertyChanged(nameof(ExecutableName));
-        OnPropertyChanged(nameof(ExecutableIcon));
-    }
-
     [NotifyPropertyChangedInvocator]
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
+    /// <summary>
+    /// For files, browse for a new path.
+    /// </summary>
     private void BrowseFile()
     {
         if (new BrowseFileCommand().Execute() is { } filePath)
@@ -96,6 +89,9 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// For folders, browse for a new path.
+    /// </summary>
     private void BrowseFolder()
     {
         if (new BrowseFolderCommand().Execute() is { } folderPath)
@@ -104,12 +100,13 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         }
     }
 
-    private void OnNameChanged() => OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
-
-    private void OnPathChanged() => OnPropertyChanged(nameof(ShouldEnableSavePathButton));
-
     private void SavePath()
     {
+        if (!ShouldEnableSavePathButton)
+        {
+            return;
+        }
+
         string path = PathBox.Text;
 
         SavedFileSystemItem? updatedItem =
@@ -128,6 +125,11 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     private void SaveName()
     {
+        if (!ShouldEnableSaveNameButton)
+        {
+            return;
+        }
+
         string name = NameBox.Text;
 
         SavedFileSystemItem? updatedItem =
@@ -144,13 +146,46 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// Save all changes.
+    /// </summary>
     private void SaveAll()
     {
         SavePath();
         SaveName();
     }
 
-    private void Window_Closed(object? sender, EventArgs e) => new ShowSearchCommand().Execute();
+    /// <summary>
+    /// Changes to the name may change the status of the Save button.
+    /// </summary>
+    private void OnNameChanged() => OnPropertyChanged(nameof(ShouldEnableSaveNameButton));
+
+    /// <summary>
+    /// Changes to the path may change the status of the Save button.
+    /// </summary>
+    private void OnPathChanged() => OnPropertyChanged(nameof(ShouldEnableSavePathButton));
+
+    private void ChangeExecutableButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (!new ChangeExecutableCommand(_item, true).Execute())
+        {
+            return;
+        }
+
+        // The item may have been updated, so get it from the file system
+        SavedFileSystemItem? item =
+            AppData.FindSavedItemById<SavedFileSystemItem>(AppData.ReadItemsFromFile(), _item.Id);
+
+        if (item == null)
+        {
+            Logger.Log("Failed to find matching item for edit file window.");
+            return;
+        }
+
+        _item = item;
+        OnPropertyChanged(nameof(ExecutableName));
+        OnPropertyChanged(nameof(ExecutableIcon));
+    }
 
     private void BrowseButton_Click(object sender, RoutedEventArgs e)
     {
@@ -181,6 +216,7 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
 
     private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
 
+    // Handle closing the window when there are unsaved changes.
     private void Window_Closing(object? sender, CancelEventArgs e)
     {
         if (!HasUnsavedChanges)
@@ -202,4 +238,16 @@ public sealed partial class EditFileWindow : INotifyPropertyChanged
                 break;
         }
     }
+
+    private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        // Close the window if Escape is pressed
+        if (e.Key == Key.Escape)
+        {
+            Close();
+        }
+    }
+
+    private void Window_Closed(object? sender, EventArgs e) => new ShowSearchCommand().Execute();
+
 }
