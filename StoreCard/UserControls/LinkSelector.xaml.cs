@@ -18,7 +18,9 @@ using StoreCard.Utils;
 namespace StoreCard.UserControls;
 
 /// <summary>
-/// Interaction logic for LinkSelector.xaml
+/// A control that lets the user enter the URL and title of a link.
+/// It may be used to create a new link item or to edit an existing one.
+/// A preview of the link is shown alongside Save/Cancel/Delete buttons.
 /// </summary>
 public partial class LinkSelector : INotifyPropertyChanged
 {
@@ -40,6 +42,9 @@ public partial class LinkSelector : INotifyPropertyChanged
         InitializeComponent();
     }
 
+    /// <summary>
+    /// The link being edited, if one has been provided.
+    /// </summary>
     public SavedLink? Link
     {
         get => _link;
@@ -64,6 +69,9 @@ public partial class LinkSelector : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// Only show Delete button if we are editing an existing link.
+    /// </summary>
     public bool ShouldShowDeleteButton => Link != null;
 
     public string LinkTitle
@@ -78,6 +86,9 @@ public partial class LinkSelector : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// Favicon obtained using the URL.
+    /// </summary>
     public ImageSource? Favicon
     {
         get => _favicon;
@@ -90,10 +101,16 @@ public partial class LinkSelector : INotifyPropertyChanged
 
     public ImageSource DefaultIcon => Icons.LinkIcon;
 
+    /// <summary>
+    /// Enable the Save button if a URL and title have been set.
+    /// </summary>
     public bool ShouldEnableSaveButton => UrlBox.Text != string.Empty && LinkTitle != string.Empty;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    /// <summary>
+    /// Event triggered when the user clicks Save/Cancel/Delete.
+    /// </summary>
     public event RoutedEventHandler Finished
     {
         add => AddHandler(FinishedEvent, value);
@@ -104,6 +121,9 @@ public partial class LinkSelector : INotifyPropertyChanged
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
+    /// <summary>
+    /// Gets the favicon and title of a website.
+    /// </summary>
     private async void GetWebsiteDetails()
     {
         string title = await LinkUtils.GetPageTitle(UrlBox.Text);
@@ -124,9 +144,12 @@ public partial class LinkSelector : INotifyPropertyChanged
         var savedItems = AppData.ReadItemsFromFile().Where(i => i.Id != Link?.Id).ToList();
 
         bool shouldOpenPrivate = OpenPrivateCheckBox.IsChecked == true;
+
+        // Create the new item using the details of the one being edited, if available
         savedItems.Add(new SavedLink(
             Link?.Id ?? Guid.NewGuid().ToString(),
-            LinkTitle, base64Icon,
+            LinkTitle,
+            base64Icon,
             LinkUtils.NormalizeUrl(UrlBox.Text),
             Link?.LastOpened ?? TimeUtils.UnixTimeMillis,
             shouldOpenPrivate));
