@@ -44,13 +44,13 @@
             </StackPanel>
             <!--  "Installed application"  -->
             <StackPanel Margin="5,0,0,10" Orientation="Horizontal">
-                <RadioButton Name="InstalledApplicationRadioButton" GroupName="ExecutableType" />
+                <RadioButton Name="InstalledAppRadioButton" GroupName="ExecutableType" />
                 <TextBlock
                     Height="20"
                     VerticalAlignment="Stretch"
                     FontSize="14"
                     Foreground="{DynamicResource AppForegroundBrush}">
-                    Installed application
+                    Installed app
                 </TextBlock>
             </StackPanel>
             <!--  "Other executable"  -->
@@ -106,13 +106,13 @@
                     Text="Cancel" />
             </Grid>
         </Grid>
-        <!--  "Installed application" content  -->
+        <!--  "Installed app" content  -->
         <userControls:AppSelector
             x:Name="AppSelector"
             Grid.Row="1"
             CancelButtonClick="AppSelector_CancelButtonClick"
             SaveButtonClick="AppSelector_SaveButtonClick"
-            Visibility="{Binding IsChecked, ElementName=InstalledApplicationRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            Visibility="{Binding IsChecked, ElementName=InstalledAppRadioButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
         <Grid
             x:Name="OtherExecutableContent"
             Grid.Row="1"
