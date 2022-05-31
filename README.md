@@ -19,6 +19,10 @@ StoreCard detects games from:
 ### Wish you could find files, folders, and links with ease?
 With StoreCard, you can!
 
+## Download
+
+[Download here.](https://github.com/shanedonburke/StoreCard/releases/latest/download/StoreCard.msi)
+
 ## Screenshots
 
 ![Light theme screenshots](Screenshots/StoreCard_LightThemes.png)
