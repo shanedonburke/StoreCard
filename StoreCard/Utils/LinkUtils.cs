@@ -11,19 +11,33 @@ using System.Windows.Media.Imaging;
 
 namespace StoreCard.Utils;
 
+/// <summary>
+/// Utilities for working with links.
+/// </summary>
 public static class LinkUtils
 {
     private static readonly HttpClient s_httpClient = new();
 
+    /// <summary>
+    /// Expression that matches any valid URL.
+    /// </summary>
     private static readonly Regex s_urlRegex =
         new(@"(http(s)?:\/\/)?(www\.)?([-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6})\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)");
 
+    /// <summary>
+    /// Expression that matches the <c>title</c> HTML tag, capturing its value.
+    /// </summary>
     private static readonly Regex s_titleRegex = new(@"<title>(.+)</title>");
 
+    /// <summary>
+    /// Get the title of a page, as it would be displayed in a browser.
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns>Page title</returns>
     public static async Task<string> GetPageTitle(string url)
     {
-        string title = string.Empty;
         string fullUrl = NormalizeUrl(url);
+        string title = string.Empty;
 
         if (!s_urlRegex.Match(fullUrl).Success)
         {
@@ -32,6 +46,7 @@ public static class LinkUtils
 
         try
         {
+            // Get the HTML response, and grab the <title> tag's value.
             string responseBody = await s_httpClient.GetStringAsync(fullUrl);
             Match m = s_titleRegex.Match(responseBody);
 
@@ -48,6 +63,11 @@ public static class LinkUtils
         return HttpUtility.HtmlDecode(title);
     }
 
+    /// <summary>
+    /// Get the favicon for the given URL, as it would be displayed in a browser.
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
     public static async Task<BitmapImage?> GetPageIcon(string url)
     {
         BitmapImage? image = null;
@@ -55,6 +75,7 @@ public static class LinkUtils
 
         if (!m.Success)
         {
+            // Not a valid URL
             return image;
         }
 
@@ -62,9 +83,10 @@ public static class LinkUtils
 
         try
         {
-            byte[] bytes = await s_httpClient.GetByteArrayAsync(
-                @"https://icons.duckduckgo.com/ip3/" + domain + ".ico");
+            // DuckDuckGo provides a service for getting site favicons by domain
+            byte[] bytes = await s_httpClient.GetByteArrayAsync($"https://icons.duckduckgo.com/ip3/{domain}.ico");
             image = ImageUtils.BytesToBitmapImage(bytes);
+            // Must freeeze to access in other threads
             image.Freeze();
         }
         catch
@@ -75,6 +97,11 @@ public static class LinkUtils
         return image;
     }
 
+    /// <summary>
+    /// Normalize the given URL by prepending it with <c>http://</c> if it is absent.
+    /// </summary>
+    /// <param name="url"></param>
+    /// <returns></returns>
     public static string NormalizeUrl(string url)
     {
         bool includesScheme = url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
