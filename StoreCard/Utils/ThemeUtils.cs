@@ -7,22 +7,43 @@ using System.Windows;
 
 namespace StoreCard.Utils;
 
+/// <summary>
+/// Utilities for working with themes.
+/// </summary>
 public static class ThemeUtils
 {
+    /// <summary>
+    /// The default theme name.
+    /// </summary>
+    public const string DefaultThemeName = "Lake (Dark)";
+
+    /// <summary>
+    /// Set the theme to the file with the given name.
+    /// E.g., pass in "Lake (Dark)" for "Lake (Dark).xaml".
+    /// If the theme isn't found, a default is used.
+    /// </summary>
+    /// <param name="theme">Theme name without path or extension</param>
     public static void SetTheme(string theme)
     {
-        if (SetThemepublic(theme))
+        if (SetThemeInternal(theme))
         {
             return;
         }
 
-        if (!SetThemepublic("Lake (Dark)"))
+        // Default to Lake (Dark)
+        if (!SetThemeInternal(DefaultThemeName))
         {
-            SetThemepublic(ThemeFinder.FindThemes()[0]);
+            SetThemeInternal(ThemeFinder.FindThemes()[0]);
         }
     }
 
-    private static bool SetThemepublic(string theme)
+    /// <summary>
+    /// Set the theme to the file with the given name.
+    /// E.g., pass in "Lake (Dark)" for "Lake (Dark).xaml".
+    /// </summary>
+    /// <param name="theme">Theme name without path or extension</param>
+    /// <returns><c>true</c> if the theme was set successfully, otherwise <c>false</c></returns>
+    private static bool SetThemeInternal(string theme)
     {
         try
         {
@@ -31,6 +52,7 @@ public static class ThemeUtils
                 return false;
             }
 
+            // Replace theme dictionary, which is the first entry in App.xaml
             Application.Current.Resources.MergedDictionaries[0].Source =
                 UriUtils.BuildPackUri($"ResourceDictionaries/Themes/{theme}.xaml");
 

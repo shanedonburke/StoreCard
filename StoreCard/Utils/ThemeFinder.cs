@@ -10,11 +10,21 @@ using System.Text.RegularExpressions;
 
 namespace StoreCard.Utils;
 
+/// <summary>
+/// A class that detects theme files in the StoreCard installation folder.
+/// </summary>
 public static class ThemeFinder
 {
+    /// <summary>
+    /// Matches absolute theme file paths, capturing the theme name.
+    /// </summary>
     private static readonly Regex s_themePathRegex =
         new(@"^[a-zA-Z]:\\.+\\(?<themeName>.+)\.xaml$", RegexOptions.Compiled);
 
+    /// <summary>
+    /// Find all themes located in the StoreCard installation directory.
+    /// </summary>
+    /// <returns>List of theme names</returns>
     public static List<string> FindThemes()
     {
         string themeFolder = Path.Combine(
