@@ -7,13 +7,23 @@ using Microsoft.Win32;
 
 namespace StoreCard.Utils;
 
-public class BrowserUtils
+/// <summary>
+/// Utilities for detecting the system's default browser.
+/// </summary>
+public static class BrowserUtils
 {
+    /// <summary>
+    /// Registry key where the default browser can be found.
+    /// </summary>
     private const string UserChoicePath =
         @"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice";
 
     private const string ExeSuffix = ".exe";
 
+    /// <summary>
+    /// Gets the .exe file for the default browser.
+    /// </summary>
+    /// <returns></returns>
     public static string? GetDefaultBrowserExecutable()
     {
         using RegistryKey? userChoiceKey = Registry.CurrentUser.OpenSubKey(UserChoicePath);
@@ -24,8 +34,8 @@ public class BrowserUtils
             return null;
         }
 
-        string openCommandPath = progId + @"\shell\open\command";
-        using RegistryKey? openCommandPathKey = Registry.ClassesRoot.OpenSubKey(openCommandPath);
+        // Key whose value is the browser executable
+        using RegistryKey? openCommandPathKey = Registry.ClassesRoot.OpenSubKey(progId + @"\shell\open\command");
 
         if (openCommandPathKey == null)
         {
@@ -41,7 +51,7 @@ public class BrowserUtils
 
             if (executable != null && !executable.EndsWith(ExeSuffix))
             {
-                // Get file path only
+                // Get file path only (no arguments)
                 executable =
                     executable[..(executable.LastIndexOf(ExeSuffix, StringComparison.Ordinal) + ExeSuffix.Length)];
             }

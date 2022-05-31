@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace StoreCard.Utils;
 
-public class LinkUtils
+public static class LinkUtils
 {
     private static readonly HttpClient s_httpClient = new();
 

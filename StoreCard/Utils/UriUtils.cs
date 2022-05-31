@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace StoreCard.Utils;
-public class UriUtils
+public static class UriUtils
 {
     public static Uri BuildPackUri(string path)
     {

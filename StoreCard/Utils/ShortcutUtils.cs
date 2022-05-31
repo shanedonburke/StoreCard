@@ -11,7 +11,7 @@ using File = System.IO.File;
 
 namespace StoreCard.Utils;
 
-public class ShortcutUtils
+public static class ShortcutUtils
 {
     private static string StartupShortcutPath => Path.Join(FolderPaths.Startup, "StoreCard.lnk");
 

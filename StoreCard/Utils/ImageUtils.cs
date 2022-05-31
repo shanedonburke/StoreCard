@@ -10,8 +10,16 @@ using System.Windows.Media.Imaging;
 
 namespace StoreCard.Utils;
 
-public class ImageUtils
+/// <summary>
+/// Utilities for working with images.
+/// </summary>
+public static class ImageUtils
 {
+    /// <summary>
+    /// Convert an image to its Base64 representation
+    /// </summary>
+    /// <param name="bitmap"></param>
+    /// <returns></returns>
     public static string ImageToBase64(BitmapSource bitmap)
     {
         var encoder = new PngBitmapEncoder();
@@ -22,7 +30,12 @@ public class ImageUtils
         return Convert.ToBase64String(stream.ToArray());
     }
 
-    // From https://stackoverflow.com/a/593406
+    /// <summary>
+    /// Convert the Base64 representation of a bitmap image to an actual image.
+    /// From <see href="https://stackoverflow.com/a/593406">this post</see>.
+    /// </summary>
+    /// <param name="base64"></param>
+    /// <returns></returns>
     public static BitmapImage Base64ToImage(string base64)
     {
         byte[] binaryData = Convert.FromBase64String(base64);
@@ -35,6 +48,11 @@ public class ImageUtils
         return bi;
     }
 
+    /// <summary>
+    /// Converts a <see cref="Bitmap"/> to a <see cref="BitmapImage"/>.
+    /// </summary>
+    /// <param name="bitmap"></param>
+    /// <returns></returns>
     public static BitmapImage BitmapToBitmapImage(Bitmap bitmap)
     {
         using var memory = new MemoryStream();
@@ -46,11 +64,18 @@ public class ImageUtils
         bitmapImage.StreamSource = memory;
         bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
         bitmapImage.EndInit();
+
+        // Must freeze image to access in other threads
         bitmapImage.Freeze();
 
         return bitmapImage;
     }
 
+    /// <summary>
+    /// Converts an array of bytes representing a <see cref="BitmapImage"/> to an actual iamge.
+    /// </summary>
+    /// <param name="bytes"></param>
+    /// <returns></returns>
     public static BitmapImage BytesToBitmapImage(byte[] bytes)
     {
         var ms = new MemoryStream(bytes);
