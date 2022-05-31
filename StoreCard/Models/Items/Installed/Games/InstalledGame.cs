@@ -36,5 +36,5 @@ public abstract class InstalledGame : IListBoxItem
 
     public BitmapSource PrefixIcon => Icons.GameIcon;
 
-    public int CompareTo(IListBoxItem? other) => string.Compare(Name, other?.Name, StringComparison.Ordinal);
+    public int CompareTo(IListBoxItem? other) => string.Compare(Name, other?.Name, StringComparison.OrdinalIgnoreCase);
 }
