@@ -19,7 +19,7 @@ using StoreCard.Utils;
 namespace StoreCard.Windows;
 
 /// <summary>
-///     Interaction logic for MainWindow.xaml
+/// The main window that shows the search bar and other controls.
 /// </summary>
 public sealed partial class MainWindow : INotifyPropertyChanged
 {
@@ -40,10 +40,13 @@ public sealed partial class MainWindow : INotifyPropertyChanged
         AddButtonContextMenu.IsOpen = true;
         AddButtonContextMenu.IsOpen = false;
 
-        RefreshItems();
+        ApplyFilter();
         SelectFirstItem();
     }
 
+    /// <summary>
+    /// The currently selected item category. Filters displayed items.
+    /// </summary>
     public ItemCategory Category
     {
         get => _category;
@@ -51,38 +54,60 @@ public sealed partial class MainWindow : INotifyPropertyChanged
         {
             _category = value;
             OnPropertyChanged(nameof(Category));
-            RefreshItems();
+            ApplyFilter();
         }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
+    /// <summary>
+    /// A modulo function that always returns a positive number.<br/>
+    /// Ex. <c>Nfmod(-1, 3) == 2</c><br/>
+    /// Ex. <c>Nfmod(3, 3) == 0</c>
+    /// </summary>
+    /// <param name="a">First operand of modulo</param>
+    /// <param name="b">Second operand of modulo</param>
+    /// <returns></returns>
     private static uint Nfmod(float a, float b) => (uint)(a - b * Math.Floor(a / b));
 
+    /// <summary>
+    /// Refresh the list of saved items from the file system.
+    /// </summary>
     public void RefreshSavedItems()
     {
         _savedItems = AppData.ReadItemsFromFile();
-        RefreshItems();
+        ApplyFilter();
     }
 
     [NotifyPropertyChangedInvocator]
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
+    /// <summary>
+    /// Filter the items in the list by the search text and <see cref="Category"/>.
+    /// </summary>
+    /// <returns>The new list of items</returns>
     private IEnumerable<SavedItem> FilterItems()
     {
+        // Filter first by category
         IEnumerable<SavedItem> items = Category switch
         {
             ItemCategory.None => _savedItems,
             ItemCategory.Recent => GetRecentItems(),
             _ => _savedItems.Where(item => item.Category == Category)
         };
+        // Show items whose names begin with the search text, then items whose names contain the text elsewhere
         items = items.Where(item => item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()));
+        // The first condition ensures we don't include items from above
         items = items.Concat(_savedItems.Where(item => !item.Name.ToUpper().StartsWith(SearchBox.Text.ToUpper()) &&
                                                        item.Name.ToUpper().Contains(SearchBox.Text.ToUpper())));
         return items;
     }
 
+    /// <summary>
+    /// Get the first 20 items in the order in which they were last opened (recent first).
+    /// </summary>
+    /// <returns>The list of items</returns>
     private IEnumerable<SavedItem> GetRecentItems()
     {
         var recentItems = _savedItems.ToList();
@@ -90,7 +115,24 @@ public sealed partial class MainWindow : INotifyPropertyChanged
         return recentItems.Take(Range.EndAt(20));
     }
 
-    private void RefreshItems() => ItemListBox.ItemsSource = FilterItems();
+    /// <summary>
+    /// Apply the current filter to the items in the list box.
+    /// </summary>
+    private void ApplyFilter() => ItemListBox.ItemsSource = FilterItems();
+
+    private void OpenSelectedItem()
+    {
+        (ItemListBox.SelectedItem as SavedItem)?.Open();
+        Close();
+    }
+
+    private void SelectFirstItem()
+    {
+        if (ItemListBox.ItemsSource.Any())
+        {
+            ItemListBox.SelectedIndex = 0;
+        }
+    }
 
     private void AddApplication_Click(object sender, RoutedEventArgs e)
     {
@@ -112,57 +154,51 @@ public sealed partial class MainWindow : INotifyPropertyChanged
 
     private void OpenButton_Click(object sender, RoutedEventArgs e) => OpenSelectedItem();
 
+    /// <summary>
+    /// Handle keys pressed while the search box is focused
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void SearchBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
+        if (!ItemListBox.ItemsSource.Any())
+        {
+            return;
+        }
+
         switch (e.Key)
         {
+            // Move list selection with arrow keys. This happens already when the list box is focused
             case Key.Up:
-                if (!ItemListBox.ItemsSource.Any())
+                if (ItemListBox.SelectedIndex == -1)
                 {
-                    return;
+                    ItemListBox.SelectedIndex = ItemListBox.ItemsSource.Count() - 1;
                 }
-
-                switch (ItemListBox.SelectedIndex)
+                else
                 {
-                    case 0:
-                    case -1:
-                        ItemListBox.SelectedIndex = ItemListBox.ItemsSource.Count() - 1;
-                        break;
-                    default:
-                        ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex - 1) % ItemListBox.ItemsSource.Count();
-                        break;
+                    ItemListBox.SelectedIndex = (int)Nfmod(ItemListBox.SelectedIndex - 1, ItemListBox.ItemsSource.Count());
                 }
 
                 ItemListBox.ScrollIntoView(ItemListBox.SelectedItem);
                 break;
             case Key.Down:
-                if (!ItemListBox.ItemsSource.Any())
-                {
-                    return;
-                }
-
                 if (ItemListBox.SelectedIndex == -1)
                 {
                     SelectFirstItem();
                 }
                 else
                 {
-                    ItemListBox.SelectedIndex = (ItemListBox.SelectedIndex + 1) % ItemListBox.ItemsSource.Count();
+                    ItemListBox.SelectedIndex = (int)Nfmod(ItemListBox.SelectedIndex + 1, ItemListBox.ItemsSource.Count());
                 }
 
                 ItemListBox.ScrollIntoView(ItemListBox.SelectedItem);
                 break;
+            // Open selected item with Enter key
             case Key.Enter:
                 OpenSelectedItem();
                 e.Handled = true;
                 break;
         }
-    }
-
-    private void OpenSelectedItem()
-    {
-        (ItemListBox.SelectedItem as SavedItem)?.Open();
-        Close();
     }
 
     private void ItemListBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -180,9 +216,11 @@ public sealed partial class MainWindow : INotifyPropertyChanged
     {
         switch (e.Key)
         {
+            // Close window
             case Key.Escape:
                 Deactivate();
                 break;
+            // Switch category with arrow keys
             case Key.Left:
                 Category = (ItemCategory)Nfmod((int)Category - 1, Enum.GetNames(typeof(ItemCategory)).Length);
                 SelectFirstItem();
@@ -281,18 +319,11 @@ public sealed partial class MainWindow : INotifyPropertyChanged
 
     private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        RefreshItems();
+        ApplyFilter();
+
         if (ItemListBox.SelectedIndex == -1)
         {
             SelectFirstItem();
-        }
-    }
-
-    private void SelectFirstItem()
-    {
-        if (ItemListBox.ItemsSource.Any())
-        {
-            ItemListBox.SelectedIndex = 0;
         }
     }
 

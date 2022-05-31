@@ -49,7 +49,10 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid Grid.ColumnSpan="2">
+            <Grid
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
@@ -171,12 +174,13 @@
                         Icon="Wrench" />
                 </Button>
             </Grid>
+            <!--  Item categories  -->
             <Border
                 Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Margin="0,10,0,0"
-                Padding="10,0,10,0"
+                Padding="10,0"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
                 <StackPanel
