@@ -3,6 +3,8 @@ StoreCard
 
 StoreCard is a Windows app that acts as an enhanced version of the built-in search bar.
 
+![Light theme screenshots](Screenshots/StoreCard_LightThemes.png)
+![Dark theme screenshots](Screenshots/StoreCard_DarkThemes.png)
 
 ### Tired of the Windows search bringing up things you don't care about?
 StoreCard only shows items you've added yourself.
