@@ -11,11 +11,27 @@ using StoreCard.Native;
 
 namespace StoreCard.Utils;
 
+/// <summary>
+/// Utilities for working with system hot keys.
+/// </summary>
 public class HotKeyUtils
 {
+    /// <summary>
+    /// Converts the given modifier keys to a <c>uint</c> representing their combination,
+    /// used by Windows APIs. Non-modifier keys are ignored
+    /// </summary>
+    /// <param name="modifiers">Array of modifier keys</param>
+    /// <returns>Modifier key number</returns>
     public static uint ModifiersToHotKeyByte(params Key[] modifiers) =>
+        // Each key is a bit
         modifiers.Aggregate<Key, uint>(0, (current, key) => current | ModifierToHotKeyByte(key));
 
+    /// <summary>
+    /// Converts the given modifier key to a <c>uint</c> that represents it,
+    /// used by Windows APIs.
+    /// </summary>
+    /// <param name="modifier">A modifier key</param>
+    /// <returns>Modifier key number</returns>
     public static uint ModifierToHotKeyByte(Key modifier) =>
         modifier switch
         {
@@ -27,13 +43,21 @@ public class HotKeyUtils
             Key.RightShift => (uint)ModifierKeys.Shift,
             Key.LWin => (uint)ModifierKeys.Windows,
             Key.RWin => (uint)ModifierKeys.Windows,
+            // Not a modifier key
             _ => 0
         };
 
+    /// <summary>
+    /// Converts a <c>uint</c> representing some combination of modifier keys
+    /// (used by Windows APIs) to a list of <c>Key</c> objects.
+    /// </summary>
+    /// <param name="mod"></param>
+    /// <returns></returns>
     public static List<Key> HotKeyByteToModifiers(uint mod)
     {
         List<Key> keys = new();
 
+        // Each key is a bit
         if ((mod & (uint)ModifierKeys.Control) != 0)
         {
             keys.Add(Key.LeftCtrl);
@@ -57,10 +81,26 @@ public class HotKeyUtils
         return keys;
     }
 
+    /// <summary>
+    /// Converts a <c>Key</c> to a <c>uint</c> representing its virtual key
+    /// (needed for some Windows APIs).
+    /// </summary>
+    /// <param name="key">Key to convert</param>
+    /// <returns>Virtual key</returns>
     public static uint KeyToVirtualKey(Key key) => (uint)KeyInterop.VirtualKeyFromKey(key);
 
+    /// <summary>
+    /// Converts a virtual key to its <c>Key</c> equivalent.
+    /// </summary>
+    /// <param name="virtualKey">Virtual key</param>
+    /// <returns><c>Key</c> equivalent</returns>
     public static Key VirtualKeyToKey(uint virtualKey) => KeyInterop.KeyFromVirtualKey((int)virtualKey);
 
+    /// <summary>
+    /// Reads the configured hot key from the given config, then converts it to a display string.
+    /// </summary>
+    /// <param name="config"></param>
+    /// <returns></returns>
     public static string KeyStringFromConfig(UserConfig config)
     {
         List<Key> allKeys = new();
@@ -69,6 +109,11 @@ public class HotKeyUtils
         return string.Join("+", allKeys.Select(KeyToString));
     }
 
+    /// <summary>
+    /// Converts a <c>Key</c> to a friendly display string.
+    /// </summary>
+    /// <param name="key">Key to convert</param>
+    /// <returns>Equivalent string</returns>
     public static string KeyToString(Key key) =>
         key switch
         {
@@ -80,7 +125,12 @@ public class HotKeyUtils
             _ => ToAscii(key).ToString().ToUpper()
         };
 
-    // From https://stackoverflow.com/a/736509
+    /// <summary>
+    /// Converts a <c>Key</c> to its ASCII equivalent, e.g., "/" instead of "OemSlash".
+    /// From <see href="https://stackoverflow.com/a/736509">this post</see>.
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     private static char ToAscii(Key key)
     {
         var outputBuilder = new StringBuilder(2);
