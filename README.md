@@ -1,5 +1,4 @@
-StoreCard
-====
+# <image src="https://github.com/shanedonburke/StoreCard/blob/master/StoreCard/Icons/StoreCard.png" width="30" height="30" /> StoreCard
 
 StoreCard is a Windows app that acts as an enhanced version of the built-in search bar.
 
