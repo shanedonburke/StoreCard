@@ -21,7 +21,8 @@ public enum SecondaryTextVisibility
 }
 
 /// <summary>
-/// Interaction logic for StoreCardListBox.xaml
+/// A custom list box that supports item context menus and an action button
+/// shown when an item is selected.
 /// </summary>
 public partial class StoreCardListBox
 {
@@ -87,12 +88,17 @@ public partial class StoreCardListBox
         InitializeComponent();
     }
 
+    /// <summary>
+    /// Items source for the list box.
+    /// </summary>
     public IEnumerable<IListBoxItem> ItemsSource
     {
         get => CustomListBox.ItemsSource?.Cast<IListBoxItem>() ?? new List<IListBoxItem>();
         set
         {
             CustomListBox.ItemsSource = value;
+
+            // Select first item automatically
             if (value.Any())
             {
                 SelectedIndex = 0;
@@ -100,30 +106,46 @@ public partial class StoreCardListBox
         }
     }
 
+    /// <summary>
+    /// The context menu for items.
+    /// </summary>
     public ContextMenu ItemContextMenu
     {
         get => (ContextMenu)GetValue(ItemContextMenuProperty);
         set => SetValue(ItemContextMenuProperty, value);
     }
 
+    /// <summary>
+    /// Whether the action button should be shown when an item is selected.
+    /// </summary>
     public bool ShowActionButton
     {
         get => (bool)GetValue(ShowActionButtonProperty);
         set => SetValue(ShowActionButtonProperty, value);
     }
 
+
+    /// <summary>
+    /// When secondary text (e.g., the platform name for games) should be shown.
+    /// </summary>
     public SecondaryTextVisibility ShowSecondaryText
     {
         get => (SecondaryTextVisibility)GetValue(ShowSecondaryTextProperty);
         set => SetValue(ShowSecondaryTextProperty, value);
     }
 
+    /// <summary>
+    /// Text to show for the action button.
+    /// </summary>
     public string ActionButtonText
     {
         get => (string)GetValue(ActionButtonTextProperty);
         set => SetValue(ActionButtonTextProperty, value);
     }
 
+    /// <summary>
+    /// Index of the selected item.
+    /// </summary>
     public int SelectedIndex
     {
         get => CustomListBox.SelectedIndex;
@@ -136,6 +158,9 @@ public partial class StoreCardListBox
         set => CustomListBox.SelectedItem = value;
     }
 
+    /// <summary>
+    /// Whether prefix icons should be shown (defined by user config).
+    /// </summary>
     public bool ShouldShowPrefixIcons => _userConfig.ShouldShowPrefixIcons;
 
     public event MouseButtonEventHandler ItemDoubleClick
@@ -168,10 +193,15 @@ public partial class StoreCardListBox
         remove => RemoveHandler(SelectionChangedEvent, value);
     }
 
+    /// <summary>
+    /// Scroll to show the given item.
+    /// </summary>
+    /// <param name="item">Item to show</param>
     public void ScrollIntoView(object item) => CustomListBox.ScrollIntoView(item);
 
     private void Item_MouseDown(object sender, MouseButtonEventArgs e)
     {
+        // Raise ItemDoubleClickEvent if this was a double click
         if (e.ClickCount == 2)
         {
             RaiseEvent(new MouseButtonEventArgs(Mouse.PrimaryDevice, Environment.TickCount, MouseButton.Left)

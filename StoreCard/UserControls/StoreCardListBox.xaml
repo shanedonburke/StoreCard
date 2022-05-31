@@ -39,7 +39,7 @@
                                 Background="{TemplateBinding Panel.Background}"
                                 BorderBrush="{TemplateBinding Border.BorderBrush}"
                                 BorderThickness="{TemplateBinding Border.BorderThickness}"
-                                ContextMenu="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=ItemContextMenu}"
+                                ContextMenu="{Binding ItemContextMenu, RelativeSource={RelativeSource AncestorType={x:Type userControls:StoreCardListBox}}}"
                                 CornerRadius="5"
                                 MouseDown="Item_MouseDown"
                                 SnapsToDevicePixels="True">
@@ -57,30 +57,10 @@
                                     <Setter TargetName="ItemTemplateInner" Property="Panel.Background" Value="{DynamicResource ListBoxItemBrush_Hover}" />
                                     <Setter TargetName="ItemTemplateInner" Property="Border.BorderBrush" Value="Transparent" />
                                 </Trigger>
-                                <!--  Active selected item  -->
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="Selector.IsSelectionActive" Value="True" />
-                                        <Condition Property="Selector.IsSelected" Value="True" />
-                                    </MultiTrigger.Conditions>
+                                <!--  Selected item  -->
+                                <Trigger Property="Selector.IsSelected" Value="True">
                                     <Setter TargetName="ItemTemplateInner" Property="Panel.Background" Value="{DynamicResource SelectedBackgroundBrush}" />
                                     <Setter TargetName="ItemTemplateInner" Property="Border.BorderBrush" Value="{DynamicResource SelectedBorderBrush}" />
-                                </MultiTrigger>
-                                <!--  Inactive selected item  -->
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="Selector.IsSelectionActive" Value="False" />
-                                        <Condition Property="Selector.IsSelected" Value="True" />
-                                    </MultiTrigger.Conditions>
-                                    <Setter TargetName="ItemTemplateInner" Property="Panel.Background" Value="{DynamicResource SelectedBackgroundBrush}" />
-                                    <Setter TargetName="ItemTemplateInner" Property="Border.BorderBrush" Value="{DynamicResource SelectedBorderBrush}" />
-                                </MultiTrigger>
-                                <Trigger Property="UIElement.IsEnabled" Value="False">
-                                    <Setter TargetName="ItemTemplateInner" Property="TextElement.Foreground">
-                                        <Setter.Value>
-                                            <StaticResource ResourceKey="{x:Static SystemColors.GrayTextBrushKey}" />
-                                        </Setter.Value>
-                                    </Setter>
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -90,7 +70,7 @@
         </ListBox.ItemContainerStyle>
         <!--  List box item template  -->
         <ListBox.ItemTemplate>
-            <DataTemplate DataType="items:IListBoxItem">
+            <DataTemplate DataType="{x:Type items:IListBoxItem}">
                 <Grid HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -113,6 +93,7 @@
                             <Style TargetType="Image">
                                 <Setter Property="Visibility" Value="Collapsed" />
                                 <Style.Triggers>
+                                    <!--  Visibility if prefix icons are enabled  -->
                                     <DataTrigger Binding="{Binding ShouldShowPrefixIcons, RelativeSource={RelativeSource AncestorType=userControls:StoreCardListBox}}" Value="True">
                                         <Setter Property="Visibility" Value="{Binding PrefixIcon, Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}" />
                                     </DataTrigger>
@@ -120,6 +101,7 @@
                             </Style>
                         </Image.Style>
                     </Image>
+                    <!--  Icon is not null  -->
                     <Image
                         Grid.Column="1"
                         Width="24"
@@ -128,6 +110,7 @@
                         RenderOptions.BitmapScalingMode="HighQuality"
                         Source="{Binding BitmapIcon}"
                         Visibility="{Binding BitmapIcon, Converter={StaticResource NullToVisibilityConverter}, FallbackValue=Collapsed}" />
+                    <!--  Icon is null (show question mark icon)  -->
                     <fa:IconBlock
                         Grid.Column="1"
                         Margin="5,5,10,5"
@@ -152,19 +135,23 @@
                         Content="{Binding SecondaryText}">
                         <Label.Style>
                             <Style TargetType="Label">
+                                <!--  Secondary text color when inactive  -->
                                 <Setter Property="Foreground" Value="{DynamicResource SecondaryTextBrush_Inactive}" />
                                 <Setter Property="Visibility" Value="Collapsed" />
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True">
+                                    <!--  Make secondary text bolder when the item is active  -->
+                                    <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="True">
                                         <Setter Property="Foreground" Value="{DynamicResource SecondaryTextBrush_Active}" />
                                     </DataTrigger>
-                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=userControls:StoreCardListBox}, Path=ShowSecondaryText, Converter={StaticResource ValueToStringConverter}}" Value="Always">
+                                    <!--  If ShowSecondaryText == Always, show secondary text  -->
+                                    <DataTrigger Binding="{Binding ShowSecondaryText, RelativeSource={RelativeSource AncestorType=userControls:StoreCardListBox}, Converter={StaticResource ValueToStringConverter}}" Value="Always">
                                         <Setter Property="Visibility" Value="Visible" />
                                     </DataTrigger>
+                                    <!--  If ShowSecondaryText == WhenActive and the item is active, show secondary text  -->
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=userControls:StoreCardListBox}, Path=ShowSecondaryText, Converter={StaticResource ValueToStringConverter}}" Value="WhenActive" />
-                                            <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}" Value="True" />
+                                            <Condition Binding="{Binding ShowSecondaryText, RelativeSource={RelativeSource AncestorType=userControls:StoreCardListBox}, Converter={StaticResource ValueToStringConverter}}" Value="WhenActive" />
+                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True" />
                                         </MultiDataTrigger.Conditions>
                                         <MultiDataTrigger.Setters>
                                             <Setter Property="Visibility" Value="Visible" />
@@ -192,8 +179,8 @@
                                     <!--  Only show when the list item is selected  -->
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
-                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" Value="True" />
-                                            <Condition Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type userControls:StoreCardListBox}}, Path=ShowActionButton}" Value="True" />
+                                            <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" Value="True" />
+                                            <Condition Binding="{Binding ShowActionButton, RelativeSource={RelativeSource AncestorType={x:Type userControls:StoreCardListBox}}}" Value="True" />
                                         </MultiDataTrigger.Conditions>
                                         <MultiDataTrigger.Setters>
                                             <Setter Property="Visibility" Value="Visible" />

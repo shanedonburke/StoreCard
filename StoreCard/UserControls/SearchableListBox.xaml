@@ -25,6 +25,7 @@
             KeyUp="SearchBox_KeyUp"
             PreviewKeyDown="SearchBox_PreviewKeyDown"
             TextChanged="SearchBox_TextChanged" />
+        <!--  Always show secondary text, e.g., platform names in the game list box  -->
         <userControls:StoreCardListBox
             x:Name="CustomListBox"
             Grid.Row="1"
