@@ -21,7 +21,7 @@ With StoreCard, you can!
 
 ## Download
 
-[Download here.](https://github.com/shanedonburke/StoreCard/releases/latest/download/StoreCard.msi)
+[Download the installer here.](https://github.com/shanedonburke/StoreCard/releases/latest/download/StoreCard.msi)
 
 ## Screenshots
 
