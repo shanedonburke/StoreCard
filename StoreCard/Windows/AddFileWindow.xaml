@@ -13,6 +13,7 @@
                                      IsDesignTimeCreatable=False}"
     Background="{DynamicResource AppBackgroundBrush}"
     Closed="Window_Closed"
+    PreviewKeyDown="Window_PreviewKeyDown"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
@@ -144,6 +145,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
+                    <!--  Save button for files  -->
                     <userControls:StoreCardButton
                         Grid.Column="2"
                         Margin="0,0,5,0"
@@ -151,6 +153,7 @@
                         IsEnabled="{Binding Path=DoesFileExist}"
                         Style="{DynamicResource PrimaryButton}"
                         Text="Save" />
+                    <!--  Cancel button for files  -->
                     <userControls:StoreCardButton
                         Grid.Column="3"
                         Margin="5,0,0,0"
@@ -248,6 +251,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
+                    <!--  Savae button for folders  -->
                     <userControls:StoreCardButton
                         Grid.Column="2"
                         Margin="0,0,5,0"
@@ -255,7 +259,7 @@
                         IsEnabled="{Binding Path=DoesFolderExist}"
                         Style="{DynamicResource PrimaryButton}"
                         Text="Save" />
-                    <!--  "Cancel" button for applications  -->
+                    <!--  Cancel button for folders  -->
                     <userControls:StoreCardButton
                         Grid.Column="3"
                         Margin="5,0,0,0"

@@ -2,6 +2,7 @@
 
 using System;
 using System.Windows;
+using System.Windows.Input;
 using StoreCard.Commands;
 
 #endregion
@@ -17,6 +18,15 @@ public sealed partial class AddLinkWindow
     {
         InitializeComponent();
         DataContext = this;
+    }
+
+    private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        // Close the window if Escape is pressed
+        if (e.Key == Key.Escape)
+        {
+            Close();
+        }
     }
 
     private void Window_Closed(object? sender, EventArgs e) => new ShowSearchCommand().Execute();

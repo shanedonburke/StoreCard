@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using StoreCard.Commands;
@@ -21,7 +22,7 @@ using StoreCard.Utils;
 namespace StoreCard.Windows;
 
 /// <summary>
-/// Interaction logic for AddFileWindow.xaml
+/// A window that allows the user to select a new file or folder to save.
 /// </summary>
 public sealed partial class AddFileWindow : INotifyPropertyChanged
 {
@@ -39,10 +40,19 @@ public sealed partial class AddFileWindow : INotifyPropertyChanged
         DataContext = this;
     }
 
+    /// <summary>
+    /// For files, display name of the selected file.
+    /// </summary>
     public string FileName => FilePathBox.Text.Split(@"\").Last();
 
+    /// <summary>
+    /// For folders, display name of the selected folder.
+    /// </summary>
     public string FolderName => FolderPathBox.Text.Split(@"\").Last();
 
+    /// <summary>
+    /// For files, whether the selected file exists.
+    /// </summary>
     public bool DoesFileExist
     {
         get => _doesFileExist;
@@ -53,6 +63,9 @@ public sealed partial class AddFileWindow : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// For folders, whether the selected folder exists.
+    /// </summary>
     public bool DoesFolderExist
     {
         get => _doesFolderExist;
@@ -63,6 +76,9 @@ public sealed partial class AddFileWindow : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// For files, icon derived from the selected file.
+    /// </summary>
     public ImageSource? FileIcon
     {
         get => _fileIcon;
@@ -73,6 +89,9 @@ public sealed partial class AddFileWindow : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// For folders, icon derived from the selected folder.
+    /// </summary>
     public ImageSource? FolderIcon
     {
         get => _folderIcon;
@@ -93,6 +112,7 @@ public sealed partial class AddFileWindow : INotifyPropertyChanged
     {
         if (new BrowseFileCommand().Execute() is { } filePath)
         {
+            // Set the path to the selected file, triggering the TextChanged handler
             FilePathBox.Text = filePath;
         }
     }
@@ -101,13 +121,14 @@ public sealed partial class AddFileWindow : INotifyPropertyChanged
     {
         if (new BrowseFolderCommand().Execute() is { } folderPath)
         {
+            // Set the path to the selected folder, triggering the TextChanged handler
             FolderPathBox.Text = folderPath;
         }
     }
 
     private void SaveFileButton_Click(object sender, RoutedEventArgs e)
     {
-        string? base64Icon = FileIcon != null ? ImageUtils.ImageToBase64((BitmapSource)FileIcon) : null;
+        string? base64Icon = (FileIcon as BitmapSource)?.ToBase64();
 
         List<SavedItem> savedItems = AppData.ReadItemsFromFile();
 
@@ -125,7 +146,7 @@ public sealed partial class AddFileWindow : INotifyPropertyChanged
 
     private void SaveFolderButton_Click(object sender, RoutedEventArgs e)
     {
-        string? base64Icon = FolderIcon != null ? ImageUtils.ImageToBase64((BitmapSource)FolderIcon) : null;
+        string? base64Icon = (FolderIcon as BitmapSource)?.ToBase64();
 
         List<SavedItem> savedItems = AppData.ReadItemsFromFile();
 
@@ -139,6 +160,15 @@ public sealed partial class AddFileWindow : INotifyPropertyChanged
 
         AppData.SaveItemsToFile(savedItems);
         Close();
+    }
+
+    private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        // Close the window if Escape is pressed
+        if (e.Key == Key.Escape)
+        {
+            Close();
+        }
     }
 
     private void Window_Closed(object? sender, EventArgs e) => new ShowSearchCommand().Execute();
