@@ -10,7 +10,7 @@ using StoreCard.Commands;
 namespace StoreCard.Windows;
 
 /// <summary>
-/// Interaction logic for AddLinkWindow.xaml
+/// A window that allows the user to select a new link to save.
 /// </summary>
 public sealed partial class AddLinkWindow
 {
@@ -31,5 +31,6 @@ public sealed partial class AddLinkWindow
 
     private void Window_Closed(object? sender, EventArgs e) => new ShowSearchCommand().Execute();
 
+    // Close the window when the user presses Save/Cancel
     private void LinkSelector_Finished(object sender, RoutedEventArgs e) => Close();
 }

@@ -16,7 +16,7 @@
     PreviewKeyDown="Window_PreviewKeyDown"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid Margin="15,15,15,15" VerticalAlignment="Stretch">
+    <Grid Margin="15" VerticalAlignment="Stretch">
         <userControls:LinkSelector Finished="LinkSelector_Finished" />
     </Grid>
 </Window>
