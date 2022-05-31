@@ -12,7 +12,7 @@ using StoreCard.Properties;
 namespace StoreCard.UserControls;
 
 /// <summary>
-/// Interaction logic for StoreCardTextBox.xaml
+/// A custom text box that supports placeholder text.
 /// </summary>
 public partial class StoreCardTextBox : INotifyPropertyChanged
 {
@@ -34,12 +34,6 @@ public partial class StoreCardTextBox : INotifyPropertyChanged
         typeof(KeyEventHandler),
         typeof(StoreCardTextBox));
 
-    public static new readonly RoutedEvent KeyUpEvent = EventManager.RegisterRoutedEvent(
-        nameof(KeyUpEvent),
-        RoutingStrategy.Bubble,
-        typeof(KeyEventHandler),
-        typeof(StoreCardTextBox));
-
     public static readonly RoutedEvent TextChangedEvent = EventManager.RegisterRoutedEvent(
         nameof(TextChanged),
         RoutingStrategy.Bubble,
@@ -54,6 +48,9 @@ public partial class StoreCardTextBox : INotifyPropertyChanged
         DataContext = this;
     }
 
+    /// <summary>
+    /// The user-entered text.
+    /// </summary>
     public string Text
     {
         get => _text;
@@ -64,12 +61,18 @@ public partial class StoreCardTextBox : INotifyPropertyChanged
         }
     }
 
+    /// <summary>
+    /// The placeholder text shown when the text box is focused, e.g., "Start typing to search...".
+    /// </summary>
     public string ActivePlaceholder
     {
         get => (string)GetValue(ActivePlaceholderProperty);
         set => SetValue(ActivePlaceholderProperty, value);
     }
 
+    /// <summary>
+    /// The placeholder text shown when the text box is not focused, e.g., "Click to search...".
+    /// </summary>
     public string InactivePlaceholder
     {
         get => (string)GetValue(InactivePlaceholderProperty);
@@ -110,15 +113,4 @@ public partial class StoreCardTextBox : INotifyPropertyChanged
 
     private void CustomTextBox_TextChanged(object sender, TextChangedEventArgs e) =>
         RaiseEvent(new TextChangedEventArgs(TextChangedEvent, e.UndoAction));
-
-    private void CustomTextBox_KeyUp(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Enter)
-        {
-            RaiseEvent(new KeyEventArgs(Keyboard.PrimaryDevice, e.InputSource, e.Timestamp, e.Key)
-            {
-                RoutedEvent = KeyUpEvent
-            });
-        }
-    }
 }
