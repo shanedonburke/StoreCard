@@ -32,6 +32,7 @@
                 <Style TargetType="{x:Type TextBlock}">
                     <Setter Property="Foreground" Value="{DynamicResource InactiveTextBrush}" />
                     <Style.Triggers>
+                        <!--  Highlight text if the selected category matches this one  -->
                         <DataTrigger Value="True">
                             <DataTrigger.Binding>
                                 <MultiBinding Converter="{StaticResource MultiValueEqualityConverter}">

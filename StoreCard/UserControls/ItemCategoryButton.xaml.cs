@@ -8,7 +8,9 @@ using StoreCard.Models.Items.Saved;
 namespace StoreCard.UserControls;
 
 /// <summary>
-/// Interaction logic for ItemCategoryButton.xaml
+/// A special button that represents an item category. If the "selected" category
+/// (in reference to the main window) is the same as this one, the button is highlighted.
+/// Clicking the button triggers an event that selects the represented category.
 /// </summary>
 public partial class ItemCategoryButton
 {
@@ -39,18 +41,27 @@ public partial class ItemCategoryButton
         InitializeComponent();
     }
 
+    /// <summary>
+    /// Name of the category this button represents.
+    /// </summary>
     public string CategoryName
     {
         get => (string)GetValue(CategoryNameProperty);
         set => SetValue(CategoryNameProperty, value);
     }
 
+    /// <summary>
+    /// The currently selected item category.
+    /// </summary>
     public ItemCategory SelectedCategory
     {
         get => (ItemCategory)GetValue(SelectedCategoryProperty);
         set => SetValue(SelectedCategoryProperty, value);
     }
 
+    /// <summary>
+    /// The text to show for the button.
+    /// </summary>
     public string Text
     {
         get => (string)GetValue(TextProperty);

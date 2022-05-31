@@ -16,7 +16,7 @@
     Closing="Window_Closing"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <Grid Margin="15,15,15,15">
+    <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="45" />
@@ -24,6 +24,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        <!--  Path field  -->
         <Grid
             Grid.Row="0"
             Margin="0,0,0,15"
@@ -71,6 +72,7 @@
                 Style="{DynamicResource PrimaryButton}"
                 Text="Save" />
         </Grid>
+        <!--  Name field  -->
         <Grid
             Grid.Row="1"
             Margin="0,0,0,15"
@@ -108,6 +110,7 @@
                 Style="{DynamicResource PrimaryButton}"
                 Text="Save" />
         </Grid>
+        <!--  "Open with" elements  -->
         <StackPanel Grid.Row="2">
             <Label
                 Padding="0"
@@ -148,6 +151,7 @@
                     Text="Change" />
             </Grid>
         </StackPanel>
+        <!--  Buttons  -->
         <Grid Grid.Row="4" Height="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

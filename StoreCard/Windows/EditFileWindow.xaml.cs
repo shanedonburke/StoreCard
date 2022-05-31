@@ -19,7 +19,7 @@ using StoreCard.Utils;
 namespace StoreCard.Windows;
 
 /// <summary>
-/// Interaction logic for EditFileWindow.xaml
+/// A window for editing an existing saved file/folder.
 /// </summary>
 public sealed partial class EditFileWindow : INotifyPropertyChanged
 {
