@@ -19,6 +19,12 @@ StoreCard detects games from:
 ### Wish you could find files, folders, and links with ease?
 With StoreCard, you can!
 
+## Screenshots
+
+![Light theme screenshots](Screenshots/StoreCard_LightThemes.png)
+----
+![Dark theme screenshots](Screenshots/StoreCard_DarkThemes.png)
+
 ## Features
 
 * Add apps, games, files, folders, and links to the search list.
@@ -26,9 +32,3 @@ With StoreCard, you can!
 * Filter your search by category, or choose an item you've opened recently.
 * Customize items you've added to change their names, which app is used to open them, and more.
 * Choose from a variety of themes.
-
-## Screenshots
-
-![Light theme screenshots](Screenshots/StoreCard_LightThemes.png)
-----
-![Dark theme screenshots](Screenshots/StoreCard_DarkThemes.png)
