@@ -15,10 +15,15 @@ using StoreCard.Utils;
 namespace StoreCard.Windows;
 
 /// <summary>
-/// Interaction logic for RecordHotKeyWindow.xaml
+/// A window that allows the user to record a new hot key by pressing it
+/// while the window is focused. There are buttons to clear the new hot key
+/// and save it.
 /// </summary>
 public sealed partial class RecordHotKeyWindow : INotifyPropertyChanged
 {
+    /// <summary>
+    /// Valid modifier keys
+    /// </summary>
     private static readonly List<Key> s_modifierKeys = new()
     {
         Key.LeftShift,
@@ -32,8 +37,16 @@ public sealed partial class RecordHotKeyWindow : INotifyPropertyChanged
     };
 
     private readonly UserConfig _config;
+
     private string _hotKeyText = string.Empty;
+
+    /// <summary>
+    /// Represents the modifiers of the recorded hot key, used by Windows APIs.
+    /// Each key is a bit.
+    /// </summary>
     private uint _modifiers;
+
+    // Virtual key for the main recorded key (not modifiers)
     private uint _virtualKey;
 
     public RecordHotKeyWindow()
@@ -44,6 +57,9 @@ public sealed partial class RecordHotKeyWindow : INotifyPropertyChanged
         DataContext = this;
     }
 
+    /// <summary>
+    /// Display string for the recorded hot key.
+    /// </summary>
     public string HotKeyText
     {
         get => _hotKeyText;
@@ -113,6 +129,7 @@ public sealed partial class RecordHotKeyWindow : INotifyPropertyChanged
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null) =>
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
+    // Reset the hot key to the config
     private void ClearButton_Click(object sender, RoutedEventArgs e) =>
         HotKeyText = HotKeyUtils.KeyStringFromConfig(_config);
 

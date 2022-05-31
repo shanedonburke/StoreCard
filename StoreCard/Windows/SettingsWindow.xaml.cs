@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using StoreCard.Commands;
 using StoreCard.Models;
 using StoreCard.Properties;
@@ -16,7 +17,7 @@ using StoreCard.Utils;
 namespace StoreCard.Windows;
 
 /// <summary>
-/// Interaction logic for SettingsWindow.xaml
+/// A window that allows the user to configure StoreCard.
 /// </summary>
 public sealed partial class SettingsWindow : INotifyPropertyChanged
 {
@@ -28,15 +29,26 @@ public sealed partial class SettingsWindow : INotifyPropertyChanged
         DataContext = this;
         InitializeComponent();
 
+        // Check box if the startup shortcut file exists (may be disabled in Task Manager)
         RunOnStartupCheckBox.IsChecked = ShortcutUtils.IsStartupShortcutEnabled() != null;
+
         ShowPrefixIconsCheckBox.IsChecked = _userConfig.ShouldShowPrefixIcons;
         ThemeComboBox.SelectedItem = _userConfig.Theme;
     }
 
+    /// <summary>
+    /// Known theme names.
+    /// </summary>
     public static IEnumerable<string> Themes => ThemeFinder.FindThemes();
 
+    /// <summary>
+    /// Display string for the hot key.
+    /// </summary>
     public string HotKeyText => HotKeyUtils.KeyStringFromConfig(_userConfig);
 
+    /// <summary>
+    /// Whether the startup shortcut exists but is disabled.
+    /// </summary>
     public bool IsStartupShortcutDisabled => ShortcutUtils.IsStartupShortcutEnabled() == false;
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -55,6 +67,7 @@ public sealed partial class SettingsWindow : INotifyPropertyChanged
             return;
         }
 
+        // Refresh config with new hot key if one was set
         _userConfig = AppData.ReadConfigFromFile();
         OnPropertyChanged(nameof(HotKeyText));
     }
@@ -92,5 +105,14 @@ public sealed partial class SettingsWindow : INotifyPropertyChanged
     {
         _userConfig.ShouldShowPrefixIcons = ShowPrefixIconsCheckBox.IsChecked == true;
         AppData.SaveConfigToFile(_userConfig);
+    }
+
+    private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+    {
+        // Close the window if Escape is pressed
+        if (e.Key == Key.Escape)
+        {
+            Close();
+        }
     }
 }

@@ -55,14 +55,6 @@ public sealed partial class InvalidExecutableWindow
     /// </summary>
     public string ExecutableName { get; }
 
-    private void Window_Closed(object? sender, EventArgs e)
-    {
-        if (_shouldShowSearchOnClose)
-        {
-            new ShowSearchCommand().Execute();
-        }
-    }
-
     private void DeleteButton_Click(object sender, RoutedEventArgs e)
     {
         AppData.DeleteItemAndSave(_item);
@@ -82,6 +74,14 @@ public sealed partial class InvalidExecutableWindow
         if (e.Key == Key.Escape)
         {
             Close();
+        }
+    }
+
+    private void Window_Closed(object? sender, EventArgs e)
+    {
+        if (_shouldShowSearchOnClose)
+        {
+            new ShowSearchCommand().Execute();
         }
     }
 }
