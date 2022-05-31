@@ -18,7 +18,7 @@ namespace StoreCard.Utils;
 public static class IconUtils
 {
     /// <summary>
-    /// Converts an <c>Icon</c> to a <c>BitmapSource</c>.
+    /// Converts an <see cref="Icon"/> to a <c>BitmapSource</c>.
     /// </summary>
     /// <param name="icon"></param>
     /// <returns>Bitmap source</returns>
@@ -28,7 +28,10 @@ public static class IconUtils
             icon.Handle,
             Int32Rect.Empty,
             BitmapSizeOptions.FromEmptyOptions());
+
+        // Must freeze image to access in other threads
         bitmapSource.Freeze();
+
         return bitmapSource;
     }
 

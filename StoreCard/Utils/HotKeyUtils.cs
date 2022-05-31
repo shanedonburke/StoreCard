@@ -49,7 +49,7 @@ public static class HotKeyUtils
 
     /// <summary>
     /// Converts a <c>uint</c> representing some combination of modifier keys
-    /// (used by Windows APIs) to a list of <c>Key</c> objects.
+    /// (used by Windows APIs) to a list of <see cref="Key"/> objects.
     /// </summary>
     /// <param name="mod"></param>
     /// <returns></returns>
@@ -82,7 +82,7 @@ public static class HotKeyUtils
     }
 
     /// <summary>
-    /// Converts a <c>Key</c> to a <c>uint</c> representing its virtual key
+    /// Converts a <see cref="Key"/> to a <c>uint</c> representing its virtual key
     /// (needed for some Windows APIs).
     /// </summary>
     /// <param name="key">Key to convert</param>
@@ -90,10 +90,10 @@ public static class HotKeyUtils
     public static uint KeyToVirtualKey(Key key) => (uint)KeyInterop.VirtualKeyFromKey(key);
 
     /// <summary>
-    /// Converts a virtual key to its <c>Key</c> equivalent.
+    /// Converts a virtual key to its <see cref="Key"/> equivalent.
     /// </summary>
     /// <param name="virtualKey">Virtual key</param>
-    /// <returns><c>Key</c> equivalent</returns>
+    /// <returns><see cref="Key"/> equivalent</returns>
     public static Key VirtualKeyToKey(uint virtualKey) => KeyInterop.KeyFromVirtualKey((int)virtualKey);
 
     /// <summary>
@@ -110,7 +110,7 @@ public static class HotKeyUtils
     }
 
     /// <summary>
-    /// Converts a <c>Key</c> to a friendly display string.
+    /// Converts a <see cref="Key"/> to a friendly display string.
     /// </summary>
     /// <param name="key">Key to convert</param>
     /// <returns>Equivalent string</returns>
@@ -126,7 +126,7 @@ public static class HotKeyUtils
         };
 
     /// <summary>
-    /// Converts a <c>Key</c> to its ASCII equivalent, e.g., "/" instead of "OemSlash".
+    /// Converts a <see cref="Key"/> to its ASCII equivalent, e.g., "/" instead of "OemSlash".
     /// From <see href="https://stackoverflow.com/a/736509">this post</see>.
     /// </summary>
     /// <param name="key"></param>
