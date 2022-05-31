@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media.Imaging;
 using Microsoft.WindowsAPICodePack.Shell;
 using StoreCard.Models.Items.Installed;
@@ -15,6 +16,16 @@ public class InstalledAppUtils
     private static readonly Guid s_appsFolderId = new("{1e87508d-89c2-42f0-8a7e-645a0f50ca58}");
 
     public static IEnumerable<InstalledApp> GetInstalledApps()
+    {
+        return _getInstalledApps().Where(a => !a.IsBattleNetGame);
+    }
+
+    public static IEnumerable<InstalledApp> GetBattleNetGames()
+    {
+        return _getInstalledApps().Where(a => a.IsBattleNetGame);
+    }
+
+    private static IEnumerable<InstalledApp> _getInstalledApps()
     {
         // From https://stackoverflow.com/a/57195200
         var appsFolder = (ShellObject)KnownFolderHelper.FromKnownFolderId(s_appsFolderId);

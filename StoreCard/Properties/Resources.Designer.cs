@@ -22,21 +22,21 @@ namespace StoreCard.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public Resources() {
+        internal Resources() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("StoreCard.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace StoreCard.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace StoreCard.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap AppIcon {
+        internal static System.Drawing.Bitmap AppIcon {
             get {
                 object obj = ResourceManager.GetObject("AppIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -71,36 +71,9 @@ namespace StoreCard.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to wow=WoW
-        ///diablo3=D3
-        ///s2=S2
-        ///s1=S1
-        ///hs_beta=WTCG
-        ///heroes=Hero
-        ///prometheus=Pro
-        ///Diablo II=D2
-        ///Warcraft III=W3
-        ///viper=VIPR
-        ///odin=ODIN
-        ///w3=W3
-        ///lazarus=LAZR
-        ///zeus=ZEUS
-        ///wlby=WLBY
-        ///osi=OSI
-        ///rtro=RTRO
-        ///fore=FORE
-        ///.
-        /// </summary>
-        public static string BattleNetGameIds {
-            get {
-                return ResourceManager.GetString("BattleNetGameIds", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap FileIcon {
+        internal static System.Drawing.Bitmap FileIcon {
             get {
                 object obj = ResourceManager.GetObject("FileIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -110,7 +83,7 @@ namespace StoreCard.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap FolderIcon {
+        internal static System.Drawing.Bitmap FolderIcon {
             get {
                 object obj = ResourceManager.GetObject("FolderIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -120,7 +93,7 @@ namespace StoreCard.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap GameIcon {
+        internal static System.Drawing.Bitmap GameIcon {
             get {
                 object obj = ResourceManager.GetObject("GameIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -130,7 +103,7 @@ namespace StoreCard.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap LinkIcon {
+        internal static System.Drawing.Bitmap LinkIcon {
             get {
                 object obj = ResourceManager.GetObject("LinkIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -140,7 +113,7 @@ namespace StoreCard.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        public static System.Drawing.Icon StoreCardIcon {
+        internal static System.Drawing.Icon StoreCardIcon {
             get {
                 object obj = ResourceManager.GetObject("StoreCardIcon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));

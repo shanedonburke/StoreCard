@@ -10,11 +10,11 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using StoreCard.Commands;
-using StoreCard.GameLibraries.BattleNet;
 using StoreCard.GameLibraries.Ea;
 using StoreCard.GameLibraries.Epic;
 using StoreCard.GameLibraries.Itch;
 using StoreCard.GameLibraries.Steam;
+using StoreCard.Models.Items.Installed;
 using StoreCard.Models.Items.Installed.Games;
 using StoreCard.Models.Items.Saved;
 using StoreCard.Properties;
@@ -74,9 +74,9 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
 
     public bool ShouldEnableSaveGameButton => GameListBox.SelectedIndex != -1;
 
-    public string? SelectedGameName => (GameListBox.SelectedItem as InstalledGame)?.Name;
+    public string? SelectedGameName => GameListBox.SelectedItem?.Name;
 
-    public ImageSource? SelectedGameIcon => (GameListBox.SelectedItem as InstalledGame)?.BitmapIcon;
+    public ImageSource? SelectedGameIcon => GameListBox.SelectedItem?.BitmapIcon;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -95,7 +95,7 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
         else
         {
             List<SavedItem> savedItems = AppData.ReadItemsFromFile();
-            savedItems.Add(new SavedApp(AppSelector.SelectedApp!));
+            savedItems.Add(AppSelector.SelectedApp!.SavedItem);
             AppData.SaveItemsToFile(savedItems);
         }
 
@@ -105,7 +105,7 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
     private void SaveSelectedGameAndClose()
     {
         List<SavedItem> savedItems = AppData.ReadItemsFromFile();
-        savedItems.Add((GameListBox.SelectedItem as InstalledGame)!.SavedItem);
+        savedItems.Add((GameListBox.SelectedItem as IInstalledItem)!.SavedItem);
         AppData.SaveItemsToFile(savedItems);
         Close();
     }
@@ -127,12 +127,12 @@ public sealed partial class AddAppWindow : INotifyPropertyChanged
             GameListBox.AddItem(game);
         }
 
-        foreach (InstalledGame game in new BattleNetLibrary().GetInstalledGames())
+        foreach (InstalledGame game in new ItchLibrary().GetInstalledGames())
         {
             GameListBox.AddItem(game);
         }
 
-        foreach (InstalledGame game in new ItchLibrary().GetInstalledGames())
+        foreach (InstalledApp game in InstalledAppUtils.GetBattleNetGames())
         {
             GameListBox.AddItem(game);
         }

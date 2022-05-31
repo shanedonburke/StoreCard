@@ -12,7 +12,7 @@ namespace StoreCard.Models.Items.Installed.Games;
 /// <summary>
 /// Represents an installed game to be displayed when selecting a new game to store.
 /// </summary>
-public abstract class InstalledGame : IListBoxItem
+public abstract class InstalledGame : IListBoxItem, IInstalledItem
 {
     protected InstalledGame(string name, BitmapSource? bitmapIcon)
     {
