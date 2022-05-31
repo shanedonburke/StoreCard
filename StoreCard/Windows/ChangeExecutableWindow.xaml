@@ -13,6 +13,7 @@
                                      IsDesignTimeCreatable=False}"
     Background="{DynamicResource AppBackgroundBrush}"
     Closed="Window_Closed"
+    PreviewKeyDown="Window_PreviewKeyDown"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
@@ -42,7 +43,7 @@
                     Default
                 </TextBlock>
             </StackPanel>
-            <!--  "Installed application"  -->
+            <!--  "Installed app"  -->
             <StackPanel Margin="5,0,0,10" Orientation="Horizontal">
                 <RadioButton Name="InstalledAppRadioButton" GroupName="ExecutableType" />
                 <TextBlock
