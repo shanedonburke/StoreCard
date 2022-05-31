@@ -8,7 +8,7 @@ using System.Windows.Media;
 namespace StoreCard.UserControls;
 
 /// <summary>
-/// Interaction logic for StoreCardButton.xaml
+/// A custom button that can be styled in various ways.
 /// </summary>
 public partial class StoreCardButton
 {
