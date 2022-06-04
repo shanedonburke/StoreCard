@@ -2,6 +2,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -33,9 +34,9 @@ public sealed partial class TaskbarIconWindow : INotifyPropertyChanged
         InitializeComponent();
         TaskbarIcon.Icon = Properties.Resources.StoreCardIcon;
 
-        // This makes sure that the window is never visible.
-        // See https://stackoverflow.com/a/2575839
-        User32.SetParent(new WindowInteropHelper(this).Handle, (IntPtr)HwndMessage);
+        // The window has no icon in the taskbar to unminimize it, so the user won't
+        // even know the window is there.
+        WindowState = WindowState.Minimized;
     }
 
     /// <summary>
