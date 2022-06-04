@@ -11,8 +11,10 @@
     Height="0"
     d:DataContext="{d:DesignInstance Type=windows:TaskbarIconWindow,
                                      IsDesignTimeCreatable=False}"
+    ResizeMode="NoResize"
     ShowActivated="True"
     ShowInTaskbar="False"
+    Visibility="Collapsed"
     WindowStyle="None"
     mc:Ignorable="d">
     <tb:TaskbarIcon
