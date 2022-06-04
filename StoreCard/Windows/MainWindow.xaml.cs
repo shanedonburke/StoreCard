@@ -40,6 +40,7 @@ public sealed partial class MainWindow : INotifyPropertyChanged
         AddButtonContextMenu.IsOpen = true;
         AddButtonContextMenu.IsOpen = false;
 
+        OnPropertyChanged(nameof(NoSavedItems));
         ApplyFilter();
         SelectFirstItem();
     }
@@ -57,6 +58,12 @@ public sealed partial class MainWindow : INotifyPropertyChanged
             ApplyFilter();
         }
     }
+
+    /// <summary>
+    /// Whether the user has saved any items (before filtering).
+    /// Used to control when the "You haven't added any items" text is shown.
+    /// </summary>
+    public bool NoSavedItems => _savedItems.Count == 0;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -77,6 +84,7 @@ public sealed partial class MainWindow : INotifyPropertyChanged
     {
         _savedItems = AppData.ReadItemsFromFile();
         ApplyFilter();
+        OnPropertyChanged(nameof(NoSavedItems));
     }
 
     [NotifyPropertyChangedInvocator]

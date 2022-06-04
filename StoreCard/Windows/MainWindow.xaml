@@ -287,6 +287,31 @@
                     </ContextMenu>
                 </userControls:StoreCardListBox.ItemContextMenu>
             </userControls:StoreCardListBox>
+            <Border
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Padding="20"
+                Visibility="{Binding NoSavedItems, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="16"
+                    Foreground="{DynamicResource AppForegroundBrush}"
+                    TextAlignment="Center">
+                    <Run Text="You haven't added any items yet." />
+                    <LineBreak />
+                    <Run Text="Click the" />
+                    <InlineUIContainer>
+                        <fa:IconBlock
+                            Margin="2,0"
+                            FontSize="16"
+                            Foreground="{DynamicResource AppForegroundBrush}"
+                            Icon="Plus" />
+                    </InlineUIContainer>
+                    <Run Text="button to add an item." />
+                </TextBlock>
+            </Border>
         </Grid>
     </Border>
 </Window>
