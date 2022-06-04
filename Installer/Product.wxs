@@ -81,20 +81,8 @@
 		<ComponentGroup Id="Dlls"
 						Directory="APPLICATIONROOTDIRECTORY"
 						Source="$(var.StoreCard_TargetDir)">
-			<Component Id="protobuf.Core.dll"
-					   Guid="4ceff80b-bbe0-4533-9ae8-780c721ef2a2">
-				<File Id="protobuf.Core.dll"
-					  Name="protobuf-net.Core.dll"
-					  Source="$(var.StoreCard_TargetDir)protobuf-net.Core.dll" />
-			</Component>
-			<Component Id="protobuf.dll"
-					   Guid="774a7995-2a06-4dbc-91a9-fd83bf595d86">
-				<File Id="protobuf.dll"
-					  Name="protobuf-net.dll"
-					  Source="$(var.StoreCard_TargetDir)protobuf-net.dll" />
-			</Component>
 			<Component Id="Microsoft.WindowsAPICodePack.dll"
-					   Guid="42624746-ca79-456e-84c0-c12cbb90d2c0">
+			           Guid="42624746-ca79-456e-84c0-c12cbb90d2c0">
 				<File Id="Microsoft.WindowsAPICodePack.dll"
 					  Name="Microsoft.WindowsAPICodePack.dll"
 					  Source="$(var.StoreCard_TargetDir)Microsoft.WindowsAPICodePack.dll" />
