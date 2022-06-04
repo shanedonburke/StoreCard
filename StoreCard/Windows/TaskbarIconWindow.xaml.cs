@@ -4,7 +4,9 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Interop;
 using StoreCard.Commands;
+using StoreCard.Native;
 using StoreCard.Properties;
 using StoreCard.Services;
 
@@ -20,11 +22,20 @@ public sealed partial class TaskbarIconWindow : INotifyPropertyChanged
 {
     private string _hotKeyText = string.Empty;
 
+    /// <summary>
+    /// HWND of message windows.
+    /// </summary>
+    private const int HwndMessage = -3;
+
     public TaskbarIconWindow()
     {
         DataContext = this;
         InitializeComponent();
         TaskbarIcon.Icon = Properties.Resources.StoreCardIcon;
+
+        // This makes sure that the window is never visible.
+        // See https://stackoverflow.com/a/2575839
+        User32.SetParent(new WindowInteropHelper(this).Handle, (IntPtr)HwndMessage);
     }
 
     /// <summary>

@@ -34,4 +34,7 @@ public class User32
     public static extern bool UnregisterHotKey(
         [In] IntPtr hWnd,
         [In] int id);
+
+    [DllImport("user32.dll")]
+    public static extern IntPtr SetParent(IntPtr hwnd, IntPtr hwndNewParent);
 }
