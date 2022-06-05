@@ -11,8 +11,9 @@
     Height="0"
     d:DataContext="{d:DesignInstance Type=windows:TaskbarIconWindow,
                                      IsDesignTimeCreatable=False}"
+    Loaded="Window_Loaded"
     ResizeMode="NoResize"
-    ShowActivated="True"
+    ShowActivated="False"
     ShowInTaskbar="False"
     Visibility="Collapsed"
     WindowStyle="None"

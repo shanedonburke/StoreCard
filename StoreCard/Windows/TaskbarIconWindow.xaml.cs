@@ -25,10 +25,6 @@ public sealed partial class TaskbarIconWindow : INotifyPropertyChanged
         DataContext = this;
         InitializeComponent();
         TaskbarIcon.Icon = Properties.Resources.StoreCardIcon;
-
-        // The window has no icon in the taskbar to unminimize it, so the user won't
-        // even know the window is there.
-        WindowState = WindowState.Minimized;
     }
 
     /// <summary>
@@ -72,4 +68,9 @@ public sealed partial class TaskbarIconWindow : INotifyPropertyChanged
     private void ExitMenuItem_Click(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
 
     private void TaskbarIcon_TrayLeftMouseUp(object sender, RoutedEventArgs e) => new ShowSearchCommand().Execute();
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        Hide();
+    }
 }
