@@ -2,12 +2,9 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Interop;
 using StoreCard.Commands;
-using StoreCard.Native;
 using StoreCard.Properties;
 using StoreCard.Services;
 
@@ -22,11 +19,6 @@ namespace StoreCard.Windows;
 public sealed partial class TaskbarIconWindow : INotifyPropertyChanged
 {
     private string _hotKeyText = string.Empty;
-
-    /// <summary>
-    /// HWND of message windows.
-    /// </summary>
-    private const int HwndMessage = -3;
 
     public TaskbarIconWindow()
     {
