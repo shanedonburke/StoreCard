@@ -122,6 +122,7 @@ public static class HotKeyUtils
             Key.LWin => "Win",
             Key.LeftShift => "Shift",
             Key.Tab => "Tab",
+            Key.Space =>"Space",
             _ => ToAscii(key).ToString().ToUpper()
         };
 

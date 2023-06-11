@@ -3,6 +3,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Timers;
 using System.Windows;
 using StoreCard.Commands;
 using StoreCard.Properties;
@@ -19,6 +20,7 @@ namespace StoreCard.Windows;
 public sealed partial class TaskbarIconWindow : INotifyPropertyChanged
 {
     private string _hotKeyText = string.Empty;
+    private bool _justPressedHotkey;
 
     public TaskbarIconWindow()
     {
@@ -42,7 +44,25 @@ public sealed partial class TaskbarIconWindow : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    private static void OnHotKeyPressed() => new ShowSearchCommand().Execute();
+    // private static void OnHotKeyPressed() => new ShowSearchCommand().Execute();
+    private void OnHotKeyPressed()
+    {
+        if (_justPressedHotkey)
+        {
+            _justPressedHotkey = false;
+            new ShowSearchCommand().Execute();
+        }
+        else
+        {
+            _justPressedHotkey = true;
+
+            var timer = new Timer();
+            timer.Interval = 300;
+            timer.AutoReset = false;
+            timer.Elapsed += (_, _) => _justPressedHotkey = false;
+            timer.Start();
+        }
+    }
 
     protected override void OnSourceInitialized(EventArgs e)
     {

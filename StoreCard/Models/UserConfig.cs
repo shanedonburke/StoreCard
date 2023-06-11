@@ -16,12 +16,12 @@ public class UserConfig
     /// <summary>
     /// The modifier keys of the default hot key (Win+Shift+Z).
     /// </summary>
-    public static readonly uint DefaultHotKeyModifiers = HotKeyUtils.ModifiersToHotKeyByte(Key.LWin, Key.LeftShift);
+    public static readonly uint DefaultHotKeyModifiers = HotKeyUtils.ModifiersToHotKeyByte(Key.LeftShift);
 
     /// <summary>
     /// The action key of the default hot key (Win+Shift+Z).
     /// </summary>
-    public static readonly uint DefaultVirtualHotKey = HotKeyUtils.KeyToVirtualKey(Key.Z);
+    public static readonly uint DefaultVirtualHotKey = HotKeyUtils.KeyToVirtualKey(Key.Space);
 
     private string _theme = "Lake (Dark)";
 
