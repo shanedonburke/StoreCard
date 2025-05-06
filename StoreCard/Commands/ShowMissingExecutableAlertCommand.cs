@@ -1,6 +1,7 @@
 ﻿#region
 
 using StoreCard.Models.Items.Saved.FileSystem;
+using StoreCard.Utils;
 using StoreCard.Windows;
 
 #endregion
@@ -36,7 +37,7 @@ public sealed class ShowMissingExecutableAlertCommand : IStoreCardCommand<bool>
                 WindowTitle,
                 Explanation,
                 () => new ChangeExecutableCommand(_item, false).Execute())
-            .Show();
+        { ShowActivated = true }.ShowForeground();
         return true;
     }
 }

@@ -14,14 +14,14 @@ namespace StoreCard.Models;
 public class UserConfig
 {
     /// <summary>
-    /// The modifier keys of the default hot key (Win+Shift+Z).
+    /// The modifier keys of the default hot key (Alt+Q).
     /// </summary>
-    public static readonly uint DefaultHotKeyModifiers = HotKeyUtils.ModifiersToHotKeyByte(Key.LeftShift);
+    public static readonly uint DefaultHotKeyModifiers = HotKeyUtils.ModifiersToHotKeyByte(Key.LeftAlt);
 
     /// <summary>
-    /// The action key of the default hot key (Win+Shift+Z).
+    /// The action key of the default hot key (Alt+Q).
     /// </summary>
-    public static readonly uint DefaultVirtualHotKey = HotKeyUtils.KeyToVirtualKey(Key.Space);
+    public static readonly uint DefaultVirtualHotKey = HotKeyUtils.KeyToVirtualKey(Key.Q);
 
     private string _theme = "Lake (Dark)";
 

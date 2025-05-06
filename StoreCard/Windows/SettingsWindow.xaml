@@ -42,7 +42,7 @@
                     VerticalAlignment="Top"
                     HorizontalContentAlignment="Left"
                     VerticalContentAlignment="Center"
-                    Content="Shortcut"
+                    Content="Shortcut (press twice)"
                     FontSize="14"
                     Foreground="{DynamicResource AppForegroundBrush}" />
                 <Label

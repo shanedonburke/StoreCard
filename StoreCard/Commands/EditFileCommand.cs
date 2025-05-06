@@ -1,6 +1,7 @@
 ﻿#region
 
 using StoreCard.Models.Items.Saved.FileSystem;
+using StoreCard.Utils;
 using StoreCard.Windows;
 
 #endregion
@@ -25,7 +26,7 @@ public sealed class EditFileCommand : IStoreCardCommand<bool>
     /// <returns><c>true</c></returns>
     public bool Execute()
     {
-        new EditFileWindow(_item).Show();
+        new EditFileWindow(_item) { ShowActivated = true }.ShowForeground();
         return true;
     }
 }

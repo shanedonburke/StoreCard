@@ -37,7 +37,6 @@ public sealed class ShowSearchCommand : IStoreCardCommand<bool>
         MainWindow newWindow = new();
         newWindow.Show();
         newWindow.Activate();
-
         return true;
     }
 }

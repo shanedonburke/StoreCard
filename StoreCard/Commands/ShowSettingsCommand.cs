@@ -1,5 +1,6 @@
 ﻿#region
 
+using StoreCard.Utils;
 using StoreCard.Windows;
 
 #endregion
@@ -17,9 +18,7 @@ public sealed class ShowSettingsCommand : IStoreCardCommand<bool>
     /// <returns><c>true</c></returns>
     public bool Execute()
     {
-        var window = new SettingsWindow();
-        window.Show();
-        window.Activate();
+        new SettingsWindow() { ShowActivated = true }.ShowForeground();
         return true;
     }
 }

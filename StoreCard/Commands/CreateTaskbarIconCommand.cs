@@ -2,6 +2,7 @@
 
 using System.Linq;
 using System.Windows;
+using StoreCard.Utils;
 using StoreCard.Windows;
 
 #endregion
@@ -31,7 +32,7 @@ public sealed class CreateTaskbarIconCommand : IStoreCardCommand<bool>
             return false;
         }
 
-        new TaskbarIconWindow().Show();
+        new TaskbarIconWindow().ShowForeground();
         return true;
     }
 }

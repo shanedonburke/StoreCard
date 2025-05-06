@@ -39,7 +39,7 @@
                         <Paragraph>
                             <Run>Press</Run>
                             <Run FontWeight="Bold" Text="{Binding HotKeyText, Mode=OneWay}" />
-                            <Run>to open the search window.</Run>
+                            <Run>twice rapidly to open the search window.</Run>
                         </Paragraph>
                     </ListItem>
                     <ListItem Margin="0,15">

@@ -32,6 +32,8 @@ public partial class ExecutableSelector : INotifyPropertyChanged
         typeof(RoutedEventHandler),
         typeof(ExecutableSelector));
 
+    public bool IsEditingExisting { get; set; } = false;
+
     private SavedExecutable? _executable;
 
     private ImageSource? _executableIcon;
@@ -141,9 +143,12 @@ public partial class ExecutableSelector : INotifyPropertyChanged
             return;
         }
 
-        // Take file name without '.exe'
-        ExecutableName = text.Split(@"\").Last().Split(".")[0];
-        NameBox.Text = ExecutableName;
+        if (!IsEditingExisting)
+        {
+            // Take file name without '.exe'
+            ExecutableName = text.Split(@"\").Last().Split(".")[0];
+            NameBox.Text = ExecutableName;
+        }
 
         if (IconUtils.GetFileIconByPath(text) is { } icon)
         {

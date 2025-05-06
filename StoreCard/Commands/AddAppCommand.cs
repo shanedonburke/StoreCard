@@ -1,5 +1,6 @@
 ﻿#region
 
+using StoreCard.Utils;
 using StoreCard.Windows;
 
 #endregion
@@ -17,7 +18,7 @@ public sealed class AddAppCommand : IStoreCardCommand<bool>
     /// <returns><c>true</c></returns>
     public bool Execute()
     {
-        new AddAppWindow().Show();
+        new AddAppWindow() { ShowActivated = true }.ShowForeground();
         return true;
     }
 }

@@ -1,6 +1,7 @@
 ﻿#region
 
 using StoreCard.Models.Items.Saved.FileSystem;
+using StoreCard.Utils;
 using StoreCard.Windows;
 
 #endregion
@@ -41,7 +42,7 @@ public sealed class ChangeExecutableCommand : IStoreCardCommand<bool>
             return new ChangeExecutableWindow(_item).ShowDialog() ?? false;
         }
 
-        new ChangeExecutableWindow(_item).Show();
+        new ChangeExecutableWindow(_item) { ShowActivated = true }.ShowForeground();
         return true;
     }
 }

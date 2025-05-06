@@ -1,6 +1,7 @@
 ﻿#region
 
 using StoreCard.Models.Items.Saved;
+using StoreCard.Utils;
 using StoreCard.Windows;
 
 #endregion
@@ -25,7 +26,7 @@ public sealed class EditLinkCommand : IStoreCardCommand<bool>
     /// <returns><c>true</c></returns>
     public bool Execute()
     {
-        new EditLinkWindow(_link).Show();
+        new EditLinkWindow(_link) { ShowActivated = true }.ShowForeground();
         return true;
     }
 }

@@ -20,6 +20,7 @@ public sealed partial class EditExecutableWindow
         DataContext = this;
         InitializeComponent();
         // Must set executable to let the selector know we're editing an existing item
+        ExecutableSelector.IsEditingExisting = true;
         ExecutableSelector.Executable = executable;
     }
 

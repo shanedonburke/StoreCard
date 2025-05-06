@@ -2,6 +2,7 @@
 
 using System;
 using StoreCard.Models.Items.Saved;
+using StoreCard.Utils;
 using StoreCard.Windows;
 
 #endregion
@@ -53,7 +54,7 @@ public sealed class ShowPrivilegeAlertCommand : IStoreCardCommand<bool>
     /// <returns><c>true</c></returns>
     public bool Execute()
     {
-        new InvalidExecutableWindow(_item, _executableName, WindowTitle, Explanation, _editAction).Show();
+        new InvalidExecutableWindow(_item, _executableName, WindowTitle, Explanation, _editAction) { ShowActivated = true }.ShowForeground();
         return true;
     }
 }
