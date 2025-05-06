@@ -23,7 +23,7 @@ public class UserConfig
     /// </summary>
     public static readonly uint DefaultVirtualHotKey = HotKeyUtils.KeyToVirtualKey(Key.Q);
 
-    private string _theme = "Lake (Dark)";
+    private string _theme = "Deep Sea (Dark)";
 
     /// <summary>
     /// Modifier keys for the current hot key.

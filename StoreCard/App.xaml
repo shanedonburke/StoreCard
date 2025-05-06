@@ -7,7 +7,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ResourceDictionaries/Themes/Lake (Dark).xaml" />
+                <ResourceDictionary Source="ResourceDictionaries/Themes/Deep Sea (Dark).xaml" />
                 <ResourceDictionary Source="ResourceDictionaries/Fonts.xaml" />
                 <ResourceDictionary Source="ResourceDictionaries/Converters.xaml" />
                 <ResourceDictionary Source="ResourceDictionaries/DefaultControls/DefaultControls.xaml" />

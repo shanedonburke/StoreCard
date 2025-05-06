@@ -15,7 +15,7 @@ public static class ThemeUtils
     /// <summary>
     /// The default theme name.
     /// </summary>
-    public const string DefaultThemeName = "Lake (Dark)";
+    public const string DefaultThemeName = "Deep Sea (Dark)";
 
     /// <summary>
     /// Set the theme to the file with the given name.
@@ -30,7 +30,7 @@ public static class ThemeUtils
             return;
         }
 
-        // Default to Lake (Dark)
+        // Default to Deep Sea (Dark)
         if (!SetThemeInternal(DefaultThemeName))
         {
             SetThemeInternal(ThemeFinder.FindThemes()[0]);
